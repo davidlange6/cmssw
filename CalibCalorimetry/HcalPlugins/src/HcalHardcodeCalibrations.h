@@ -13,7 +13,7 @@
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
 #include "CondFormats/HcalObjects/interface/AllObjects.h"
 #include "HERecalibration.h"
-#include "HFRecalibration.h"
+#include "DataFormats/HcalCalibObjects/interface/HFRecalibration.h"
 
 class ParameterSet;
 

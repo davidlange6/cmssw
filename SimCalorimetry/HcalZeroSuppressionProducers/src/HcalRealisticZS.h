@@ -10,8 +10,7 @@
 
 #include "HcalZSAlgoRealistic.h"
 
-//#include "CalibFormats/HcalObjects/interface/HcalDbService.h"
-//#include "CalibFormats/HcalObjects/interface/HcalDbRecord.h"
+#include <string>
 
 /** \class HcalSimpleRealisticZS
 	
@@ -26,7 +25,7 @@ public:
   virtual void produce(edm::Event& e, const edm::EventSetup& c);
 private:
   std::auto_ptr<HcalZSAlgoRealistic> algo_;
-  edm::InputTag inputLabel_;
+  std::string inputLabel_;
 };
 
 #endif
