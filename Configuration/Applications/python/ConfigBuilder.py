@@ -418,6 +418,10 @@ class ConfigBuilder(object):
                 self.process.source.inputCommands = cms.untracked.vstring('drop *','keep *_generator_*_*','keep *_g4SimHits_*_*')
                 self.process.source.dropDescendantsOfDroppedBranches=cms.untracked.bool(False)
 
+	if 'DIGI' in self.stepMap.keys():
+                self.process.source.inputCommands = cms.untracked.vstring('keep *','drop *_recoGenParticles_*_*','drop recoGenJets_*_*_*', 'drop recoGenMETs_*_*_*')
+	
+
 	# modify source in case of run-dependent MC
 	self.runsAndWeights=None
 	if self._options.runsAndWeightsForMC or self._options.runsScenarioForMC :

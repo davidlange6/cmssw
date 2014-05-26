@@ -24,6 +24,31 @@ from SimMuon.Configuration.SimMuon_cff import *
 # it is no longer run here.
 #
 from SimGeneral.Configuration.SimGeneral_cff import *
+
+#
+# Gen particle stuff now goes here
+from PhysicsTools.HepMCCandAlgos.genParticles_cfi import *
+from RecoJets.Configuration.RecoGenJets_cff import *
+from RecoMET.Configuration.RecoGenMET_cff import *
+from RecoJets.Configuration.GenJetParticles_cff import *
+from RecoMET.Configuration.GenMETParticles_cff import *
+
+GeneInfo = cms.Sequence(genParticles)
+genJetMET = cms.Sequence(genJetParticles*recoGenJets+genMETParticles*recoGenMET)
+
+genInfo = cms.Sequence(GeneInfo * genJetMET)
+
 doAllDigi = cms.Sequence(calDigi+muonDigi)
-pdigi = cms.Sequence(cms.SequencePlaceholder("randomEngineStateProducer")*cms.SequencePlaceholder("mix")*doAllDigi*addPileupInfo)
+pdigi = cms.Sequence(genInfo+cms.SequencePlaceholder("randomEngineStateProducer")*cms.SequencePlaceholder("mix")*doAllDigi*addPileupInfo)
 pdigi_valid = cms.Sequence(pdigi)
+
+# for heavy ions
+#
+#hiGenJets = cms.Sequence(hiGenParticlesForJets*hiRecoGenJets)
+#
+#from PhysicsTools.HepMCCandAlgos.HiGenParticles_cfi import *
+#
+#from SimGeneral.MixingModule.MatchVtx_cfi import *
+#
+#pgen_himix = cms.Sequence(cms.SequencePlaceholder("randomEngineStateProducer")+matchVtx+hiGenParticles+hiGenJets)
+
