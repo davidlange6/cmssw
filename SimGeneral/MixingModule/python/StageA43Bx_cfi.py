@@ -6,6 +6,7 @@ import FWCore.ParameterSet.Config as cms
 
 #  this is the configuration to model pileup in StageA with 43x43 bunchcrossings
 from SimGeneral.MixingModule.mixObjects_cfi import *
+from SimGeneral.MixingModule.commonInputCommands_cfi import cIC
 mix = cms.EDProducer("MixingModule",
     LabelPlayback = cms.string(''),
     maxBunch = cms.int32(3),
@@ -18,6 +19,7 @@ mix = cms.EDProducer("MixingModule",
     
     playback = cms.untracked.bool(False),
     input = cms.SecSource("PoolSource",
+        inputCommands = cIC,
         nbPileupEvents = cms.PSet(
             sigmaInel = cms.double(80.0),
             Lumi = cms.double(0.0061)

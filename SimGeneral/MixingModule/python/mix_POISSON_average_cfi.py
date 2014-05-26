@@ -5,6 +5,7 @@ from SimGeneral.MixingModule.mixObjects_cfi import theMixObjects
 from SimGeneral.MixingModule.mixPoolSource_cfi import *
 from SimGeneral.MixingModule.digitizers_cfi import *
 
+from SimGeneral.MixingModule.commonInputCommands_cfi import cIC
 mix = cms.EDProducer("MixingModule",
     digitizers = cms.PSet(theDigitizers),
     LabelPlayback = cms.string(''),
@@ -19,6 +20,7 @@ mix = cms.EDProducer("MixingModule",
     useCurrentProcessOnly = cms.bool(False),
 
     input = cms.SecSource("PoolSource",
+        inputCommands = cIC,
         nbPileupEvents = cms.PSet(
             averageNumber = cms.double(1.0)
         ),

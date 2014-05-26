@@ -50,11 +50,13 @@ genEventEmbeddingMixParameters = cms.PSet(
     )
 )
 
+from SimGeneral.MixingModule.commonInputCommands_cfi import cIC
 mixSim = cms.EDProducer("MixingModule",
                         simEventEmbeddingMixParameters,
                         input = cms.SecSource("PoolRASource",
                                               eventEmbeddingSourceParameters,
-                                              fileNames = cms.untracked.vstring('rfio:/castor/cern.ch/cms/store/cmshi/mc/sim/hydjet_sim_x2_c10_d20080425/hydjet_sim_x2_c10_d20080425_r000002.root')
+                                              fileNames = cms.untracked.vstring('rfio:/castor/cern.ch/cms/store/cmshi/mc/sim/hydjet_sim_x2_c10_d20080425/hydjet_sim_x2_c10_d20080425_r000002.root'),
+                                              inputCommands = cIC
                                               )
                              )
 
@@ -63,7 +65,8 @@ mixGen = cms.EDProducer("MixingModule",
                         genEventEmbeddingMixParameters,
                         input = cms.SecSource("PoolRASource",
                                               eventEmbeddingSourceParameters,
-                                              fileNames = cms.untracked.vstring('rfio:/castor/cern.ch/cms/store/cmshi/mc/sim/hydjet_sim_x2_c10_d20080425/hydjet_sim_x2_c10_d20080425_r000002.root')
+                                              fileNames = cms.untracked.vstring('rfio:/castor/cern.ch/cms/store/cmshi/mc/sim/hydjet_sim_x2_c10_d20080425/hydjet_sim_x2_c10_d20080425_r000002.root'),
+                                              inputCommands = cIC
                                               )
                         )
 
