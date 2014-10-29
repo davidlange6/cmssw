@@ -770,7 +770,7 @@ steps['AMPT_PPb_5020GeV_MinimumBias']=merge([{'-n':10},step1PPbDefaults,genS('AM
 U2000by1={'--relval': '2000,1'}
 U80by1={'--relval': '80,1'}
 
-hiDefaults={'--conditions':'auto:run2_mc_HIon',
+hiDefaults={'-n':2,'--conditions':'auto:run2_mc_HIon',
            '--scenario':'HeavyIons'}
 
 steps['HydjetQ_MinBias_2760GeV']=merge([{'-n':1},hiDefaults,genS('Hydjet_Quenched_MinBias_2760GeV_cfi',U2000by1)])
@@ -1107,6 +1107,7 @@ steps['REPACKHID']=merge([{'--scenario':'HeavyIons',
                          '--eventcontent':'REPACKRAW'},
                         steps['RECOD']])
 steps['RECOHID10']=merge([{'--scenario':'HeavyIons',
+                           '-n':30, #too slow for 100 events 
                          '-s':'RAW2DIGI,L1Reco,RECO,ALCA:SiStripCalZeroBias+SiStripCalMinBias+TkAlMinBiasHI+HcalCalMinBias,DQM',
                          '--datatier':'RECO,DQMIO',
                          '--eventcontent':'RECO,DQM'},
@@ -1134,7 +1135,7 @@ steps['RECOCOSD']=merge([{'--scenario':'cosmics',
                           '--customise':'Configuration/DataProcessing/RecoTLR.customiseCosmicData'
                           },dataReco])
 
-step2HImixDefaults=merge([{'-n':'10',
+step2HImixDefaults=merge([{'-n':'2', #too slow for 10 events in an hour... 
                            '--himix':'',
                            '--filein':'file.root',
                            '--process':'HISIGNAL'
