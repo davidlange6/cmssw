@@ -544,5 +544,10 @@ namespace edm
 
   }
 
+  void DataMixingModule::beginLuminosityBlock(LuminosityBlock const& l1, EventSetup const& c) {
+    EcalDigiWorkerProd_->beginLuminosityBlock(l1,c);
+  }
+
+
 
 } //edm

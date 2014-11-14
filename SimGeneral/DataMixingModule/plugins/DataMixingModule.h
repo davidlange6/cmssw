@@ -69,7 +69,7 @@ namespace edm {
       void pileWorker(const edm::EventPrincipal&, int bcr, int EventId,const edm::EventSetup& ES, ModuleCallingContext const*);
       //virtual void beginJob();
       //virtual void endJob();
-      //virtual void beginLuminosityBlock(LuminosityBlock const& l1, EventSetup const& c) override;
+      virtual void beginLuminosityBlock(LuminosityBlock const& l1, EventSetup const& c) override;
       //virtual void endLuminosityBlock(LuminosityBlock const& l1, EventSetup const& c) override;
       //virtual void endRun(const edm::Run& r, const edm::EventSetup& setup) override;
 

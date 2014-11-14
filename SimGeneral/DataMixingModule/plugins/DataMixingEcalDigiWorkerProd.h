@@ -62,6 +62,7 @@ namespace edm
 
     void beginRun(const edm::EventSetup& ES);
     void initializeEvent(const edm::Event &e, const edm::EventSetup& ES);
+    void beginLuminosityBlock(edm::LuminosityBlock const& lumi, edm::EventSetup const& setup);
 
     private:
       // data specifiers
