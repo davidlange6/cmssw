@@ -28,14 +28,14 @@ runTest "${INPUT} --select-events HLT:path1,HLT:path2 --lfn /store/whatever"
 INPUT=${LOCAL_TEST_DIR}/RunPromptReco.py
 
 runTest "${INPUT} --scenario=cosmics --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-runTest "${INPUT} --scenario=pp --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+runTest "${INPUT} --scenario=pp --reco --aod --miniaod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
 runTest "${INPUT} --scenario=cosmicsRun2 --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-runTest "${INPUT} --scenario=ppRun2 --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-runTest "${INPUT} --scenario=HeavyIons --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-runTest "${INPUT} --scenario=AlCaLumiPixels --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-#runTest "${INPUT} --scenario=AlCaP0 --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-#runTest "${INPUT} --scenario=AlCaPhiSymEcal --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
-runTest "${INPUT} --scenario=AlCaTestEnable --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+runTest "${INPUT} --scenario=ppRun2 --reco --aod --miniaod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+runTest "${INPUT} --scenario=HeavyIons --reco --aod  --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+runTest "${INPUT} --scenario=AlCaLumiPixels --reco --aod  --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+#runTest "${INPUT} --scenario=AlCaP0 --reco --aod --miniaod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+#runTest "${INPUT} --scenario=AlCaPhiSymEcal --reco --aod --miniaod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
+runTest "${INPUT} --scenario=AlCaTestEnable --reco --aod  --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
 runTest "${INPUT} --scenario=hcalnzs --reco --aod --alcareco --dqm --global-tag GLOBALTAG::ALL --lfn=/store/whatever"
 
 INPUT=${LOCAL_TEST_DIR}/RunAlcaSkimming.py

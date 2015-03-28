@@ -14,9 +14,6 @@ import FWCore.ParameterSet.Config as cms
 from Configuration.DataProcessing.RecoTLR import customisePromptRun2,customiseExpressRun2
 
 class ppRun2(Reco):
-    def __init__(self):
-        self.recoSeq=''
-        self.cbSc='pp'
     """
     _ppRun2_
 
@@ -24,6 +21,11 @@ class ppRun2(Reco):
     collision data taking for Run2
 
     """
+
+    def __init__(self):
+        self.recoSeq=''
+        self.runPat=True
+        self.cbSc='pp'
 
 
     def promptReco(self, globalTag, **args):

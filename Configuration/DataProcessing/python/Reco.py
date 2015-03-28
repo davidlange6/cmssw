@@ -38,7 +38,11 @@ class Reco(Scenario):
         options = Options()
         options.__dict__.update(defaultOptions.__dict__)
         options.scenario = self.cbSc
-        options.step = 'RAW2DIGI,L1Reco,RECO'+self.recoSeq+step+',DQM'+dqmStep+',ENDJOB'
+        options.step = 'RAW2DIGI,L1Reco,RECO'+self.recoSeq
+        if hasattr(self,'runPat') and self.runPat:
+            options.step=options.step+',PAT'
+            options.runUnscheduled= True
+        options.step = options.step+',DQM'+dqmStep+',ENDJOB'
         dictIO(options,args)
         options.conditions = gtNameAndConnect(globalTag, args)
         

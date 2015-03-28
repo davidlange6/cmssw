@@ -24,6 +24,7 @@ class RunPromptReco:
         self.writeAod = False
 	self.writeDqm = False
 	self.writeDqmio = False
+        self.writeMiniAod = False
         self.noOutput = False
         self.globalTag = None
         self.inputLFN = None
@@ -60,6 +61,9 @@ class RunPromptReco:
         if self.writeAod:
             dataTiers.append("AOD")
             print "Configuring to Write out AOD..."
+        if self.writeMiniAod:
+            dataTiers.append("MINIAOD")
+            print "Configuring to Write out MiniAOD..."
 	if self.writeDqm:
             dataTiers.append("DQM")
             print "Configuring to Write out Dqm..."
@@ -100,7 +104,7 @@ class RunPromptReco:
 
 
 if __name__ == '__main__':
-    valid = ["scenario=", "reco", "alcareco", "aod", "dqm", "dqmio",
+    valid = ["scenario=", "reco", "alcareco", "aod", "dqm", "dqmio","miniaod",
              "no-output", "global-tag=", "lfn="]
     usage = \
 """
@@ -141,6 +145,8 @@ python RunPromptReco.py --scenario=cosmics --reco --aod --alcareco --dqm --globa
             recoinator.writeAlcareco = True
         if opt == "--aod":
             recoinator.writeAod = True
+        if opt == "--miniaod":
+            recoinator.writeMiniAod = True
         if opt == "--dqm":
             recoinator.writeDqm = True
         if opt == "--dqmio":

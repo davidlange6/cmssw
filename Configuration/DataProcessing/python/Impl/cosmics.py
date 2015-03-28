@@ -21,6 +21,11 @@ class cosmics(Reco):
 
     """
 
+    def __init__(self):
+        self.runPat=False
+        self.recoSeq=''
+        self.cbSc='cosmics'
+
 
     def promptReco(self, globalTag, **args):
         """

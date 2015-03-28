@@ -21,6 +21,10 @@ class pp(Reco):
     collision data taking
 
     """
+    def __init__(self):
+        self.recoSeq=''
+        self.runPat=True
+        self.cbSc='pp'
 
 
     def promptReco(self, globalTag, **args):

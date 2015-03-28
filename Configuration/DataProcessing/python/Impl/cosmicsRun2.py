@@ -13,9 +13,6 @@ from Configuration.DataProcessing.Reco import Reco
 from Configuration.DataProcessing.RecoTLR import customiseCosmicDataRun2
 
 class cosmicsRun2(Reco):
-    def __init__(self):
-        self.recoSeq=''
-        self.cbSc='cosmics'
     """
     _cosmicsRun2_
 
@@ -24,6 +21,11 @@ class cosmicsRun2(Reco):
 
     """
 
+    def __init__(self):
+        self.runPat=False
+        self.recoSeq=''
+        self.cbSc='cosmics'
+        
 
     def promptReco(self, globalTag, **args):
         """
