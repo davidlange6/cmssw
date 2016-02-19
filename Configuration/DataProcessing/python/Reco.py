@@ -55,9 +55,12 @@ class Reco(Scenario):
         """
         options.runUnscheduled=True
                     
-
+        era=None
         if 'customs' in args:
             options.customisation_file=args['customs']
+
+        if 'era' in args:
+            options.era=args['era']
 
         eiStep=''
         if self.cbSc == 'pp':

@@ -51,6 +51,7 @@ class HeavyIonsRun2(Reco):
         else:
             args['customs'].append(customsFunction)
 
+        args['era']='Run2_HI'
         process = Reco.promptReco(self,globalTag, **args)
 
         return process

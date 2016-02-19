@@ -36,6 +36,7 @@ class hcalnzsRun2(pp):
             args['customs']=['Configuration/DataProcessing/RecoTLR.customisePromptRun2']
         else:
             args['customs'].append('Configuration/DataProcessing/RecoTLR.customisePromptRun2')
+        args['era']=['Run2_25ns']
 
         process = pp.promptReco(self,globalTag,**args)
         

@@ -39,6 +39,7 @@ class cosmicsRun2(Reco):
             args['customs'].append('Configuration/DataProcessing/RecoTLR.customiseCosmicDataRun2')
         process = Reco.promptReco(self,globalTag, **args)
 
+        args['era']='Run2_50ns'
         return process
 
 

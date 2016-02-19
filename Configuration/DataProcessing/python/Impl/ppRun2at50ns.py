@@ -40,6 +40,7 @@ class ppRun2at50ns(Reco):
         else:
             args['customs'].append('Configuration/DataProcessing/RecoTLR.customisePromptRun2_50ns')
 
+        args['era']='Run2_50ns'
         process = Reco.promptReco(self,globalTag, **args)
 
         return process
