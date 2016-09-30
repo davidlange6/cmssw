@@ -328,7 +328,7 @@ g4SimHits = cms.EDProducer("OscarMTProducer",
         ParametrizeLast   = cms.untracked.bool(False)
     ),
     HFShowerLibrary = cms.PSet(
-        FileName        = cms.FileInPath('SimG4CMS/Calo/data/HFShowerLibrary_oldpmt_noatt_eta4_16en_v4.root'),
+        FileName        = cms.FileInPath('SimG4CMS/Calo/data/HFShowerLibrary_oldpmt_noatt_eta4_16en_v3.root'),
         BackProbability = cms.double(0.2),
         TreeEMID        = cms.string('emParticles'),
         TreeHadID       = cms.string('hadParticles'),
@@ -461,4 +461,4 @@ g4SimHits = cms.EDProducer("OscarMTProducer",
 ##
 ## Change the HFShowerLibrary file used for Run 2
 ##
-eras.run2_common.toModify( g4SimHits.HFShowerLibrary, FileName = 'SimG4CMS/Calo/data/HFShowerLibrary_npmt_noatt_eta4_16en_v3.root' )
+eras.run2_common.toModify( g4SimHits.HFShowerLibrary, FileName = 'SimG4CMS/Calo/data/HFShowerLibrary_npmt_noatt_eta4_16en_v4.root' )
