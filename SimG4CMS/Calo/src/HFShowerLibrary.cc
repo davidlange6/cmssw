@@ -484,7 +484,7 @@ void HFShowerLibrary::interpolate(int type, double pin) {
 		       << " GeV with " << nMomBin << " momentum bins and " 
 		       << evtPerBin << " entries/bin -- total " << totEvents;
 #endif
-  int irc[2];
+  int irc[2]={0,0};
   double w = 0.;
   double r = G4UniformRand();
 
