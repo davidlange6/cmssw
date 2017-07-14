@@ -15,6 +15,7 @@ import re
 import collections
 from subprocess import Popen,PIPE
 import FWCore.ParameterSet.DictTypes as DictTypes
+
 class Options:
         pass
 
@@ -2066,11 +2067,12 @@ class ConfigBuilder(object):
         self.pythonCfgCode += "# with command line options: "+self._options.arguments+'\n'
         self.pythonCfgCode += "import FWCore.ParameterSet.Config as cms\n\n"
         if hasattr(self._options,"era") and self._options.era :
-            self.pythonCfgCode += "from Configuration.StandardSequences.Eras import eras\n\n"
+            for requestedEra in self._options.era.split(","):
+	       mod = "Configuration.Eras.Era_"+requestedEra+"_cff"	    
+	       self.pythonCfgCode += "from "+mod+" import "+requestedEra+'\n'
             self.pythonCfgCode += "process = cms.Process('"+self.process.name_()+"'" # Start of the line, finished after the loop
-            # Multiple eras can be specified in a comma seperated list
-            for requestedEra in self._options.era.split(",") :
-                self.pythonCfgCode += ",eras."+requestedEra
+            for requestedEra in self._options.era.split(","):
+	       self.pythonCfgCode += ', '+requestedEra
             self.pythonCfgCode += ")\n\n" # end of the line
         else :
             self.pythonCfgCode += "process = cms.Process('"+self.process.name_()+"')\n\n"

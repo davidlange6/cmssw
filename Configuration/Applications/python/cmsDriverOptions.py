@@ -3,6 +3,7 @@
 # A Pyrelval Wrapper
 
 import optparse
+import importlib
 import sys
 import os
 import re
@@ -240,19 +241,17 @@ def OptionsFromItems(items):
         
     # If an "era" argument was supplied make sure it is one of the valid possibilities
     if options.era :
-        from Configuration.StandardSequences.Eras import eras
-        from FWCore.ParameterSet.Config import Modifier, ModifierChain
         # Split the string by commas to check individual eras
         requestedEras = options.era.split(",")
         # Check that the entry is a valid era
         for eraName in requestedEras :
-            if not hasattr( eras, eraName ) : # Not valid, so print a helpful message
-                validOptions="" # Create a stringified list of valid options to print to the user
-                for key in eras.__dict__ :
-                    if isinstance( eras.__dict__[key], Modifier ) or isinstance( eras.__dict__[key], ModifierChain ) :
-                        if validOptions!="" : validOptions+=", " 
-                        validOptions+="'"+key+"'"
-                raise Exception( "'%s' is not a valid option for '--era'. Valid options are %s." % (eraName, validOptions) )
+            try:
+	       fToImport='Configuration.Eras.Era_'+eraName+'_cff'
+               mod=importlib.import_module(fToImport)  
+               break
+            except ImportError:
+               raise Exception( "'%s' is not a valid option for '--era'. Valid options are in %s." % (eraName, "Configuration/Eras/python/Era*cff.py") )
+
     # If the "--fast" option was supplied automatically enable the fastSim era
     if options.fast :
         if options.era:
