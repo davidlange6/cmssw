@@ -21,7 +21,8 @@
 #include "TGaxis.h"
 #include "TLatex.h"
 #include "TArrow.h"
-
+#include "TLegend.h"
+#include "TH1F.h"
 
 /**********************************************************
 Allocate all the modules in a map of TmModule
@@ -800,6 +801,7 @@ void TrackerMap::save(bool print_total,float minval, float maxval,std::string s,
     double x[4],y[4];
     std::ifstream tempfile(tempfilename.c_str(),std::ios::in);
     TCanvas *MyC = new TCanvas("MyC", "TrackerMap",width,height);
+
     gPad->SetFillColor(38);
     
     if(addPixelFlag) {gPad->Range(0,0,3800,1600);}
@@ -847,6 +849,7 @@ void TrackerMap::save(bool print_total,float minval, float maxval,std::string s,
         pline->SetFillColor(colorList[colindex]);
         pline->SetLineWidth(0);
         pline->Draw("f");
+
       }
     }
     if (printflag) {
@@ -910,6 +913,7 @@ void TrackerMap::save(bool print_total,float minval, float maxval,std::string s,
     ary.Draw();
     arz.Draw();
     arphi.Draw();
+    TLegend *MyL = buildLegend();
     MyC->Update();
     if(filetype=="png"){
       
@@ -931,6 +935,7 @@ void TrackerMap::save(bool print_total,float minval, float maxval,std::string s,
     system(command1);
     MyC->Clear();
     delete MyC;
+    delete MyL;
     if (printflag)delete axis;
     for(std::vector<TPolyLine*>::iterator pos1=vp.begin();pos1!=vp.end();pos1++){
       delete (*pos1);}
@@ -1529,6 +1534,7 @@ void TrackerMap::save_as_fectrackermap(bool print_total,float minval, float maxv
     if(tkMapLog && (fulltitle.find("Log10 scale") == std::string::npos)) fulltitle += ": Log10 scale";
     l.DrawLatex(50,1530,fulltitle.c_str());
        }
+    TLegend *MyL = buildLegend();
     MyC->Update();
     std::cout << "Filetype " << filetype << std::endl;
     if(filetype=="png"){
@@ -1549,6 +1555,7 @@ void TrackerMap::save_as_fectrackermap(bool print_total,float minval, float maxv
     system(command1);
     MyC->Clear();
     delete MyC;
+    delete MyL;
     if (printflag&&!saveWebInterface)delete axis;
     for(std::vector<TPolyLine*>::iterator pos1=vp.begin();pos1!=vp.end();pos1++){
          delete (*pos1);}
@@ -1812,6 +1819,8 @@ void TrackerMap::save_as_HVtrackermap(bool print_total,float minval, float maxva
     if(tkMapLog && (fulltitle.find("Log10 scale") == std::string::npos)) fulltitle += ": Log10 scale";
     l.DrawLatex(50,1530,fulltitle.c_str());
        }
+
+    TLegend *MyL = buildLegend();
     MyC->Update();
     std::cout << "Filetype " << filetype << std::endl;
     if(filetype=="png"){
@@ -1832,6 +1841,7 @@ void TrackerMap::save_as_HVtrackermap(bool print_total,float minval, float maxva
     system(command1);
     MyC->Clear();
     delete MyC;
+    delete MyL;
      if (printflag&&!saveWebInterface)delete axis;
     for(std::vector<TPolyLine*>::iterator pos1=vp.begin();pos1!=vp.end();pos1++){
          delete (*pos1);}
@@ -2096,6 +2106,8 @@ void TrackerMap::save_as_psutrackermap(bool print_total,float minval, float maxv
     if(tkMapLog && (fulltitle.find("Log10 scale") == std::string::npos)) fulltitle += ": Log10 scale";
     l.DrawLatex(50,rangey-200,fulltitle.c_str());
        }
+
+    TLegend *MyL = buildLegend();
     MyC->Update();
     std::cout << "Filetype " << filetype << std::endl;
     if(filetype=="png"){
@@ -2116,6 +2128,7 @@ void TrackerMap::save_as_psutrackermap(bool print_total,float minval, float maxv
     system(command1);
     MyC->Clear();
     delete MyC;
+    delete MyL;
      if (printflag&&!saveWebInterface)delete axis;
     for(std::vector<TPolyLine*>::iterator pos1=vp.begin();pos1!=vp.end();pos1++){
          delete (*pos1);}
@@ -2367,7 +2380,9 @@ void TrackerMap::save_as_fedtrackermap(bool print_total,float minval, float maxv
     if(tkMapLog && (fulltitle.find("Log10 scale") == std::string::npos)) fulltitle += ": Log10 scale";
     l.DrawLatex(50,rangey-200,fulltitle.c_str());
        }
+    TLegend *MyL = buildLegend();
     MyC->Update();
+
     std::cout << "Filetype " << filetype << std::endl;
     if(filetype=="png"){
       std::string filename = outputfilename + ".png";
@@ -2387,6 +2402,7 @@ void TrackerMap::save_as_fedtrackermap(bool print_total,float minval, float maxv
     system(command1);
     MyC->Clear();
     delete MyC;
+    delete MyL;
      if (printflag&&!saveWebInterface)delete axis;
     for(std::vector<TPolyLine*>::iterator pos1=vp.begin();pos1!=vp.end();pos1++){
          delete (*pos1);}
@@ -3610,4 +3626,37 @@ for (int layer=1; layer < 44; layer++){
     xmlfile->close();delete xmlfile;
   }
 saveAsSingleLayer=false;
+}
+
+
+TLegend* TrackerMap::buildLegend() {
+  if ( legInfos_.empty() ) {
+    legInfos_.reserve(8);
+    legInfos_.push_back(new TH1F("green","green",1,0.,1.));
+    legInfos_.back()->SetFillColor(kGreen);
+    legInfos_.push_back(new TH1F("blue","blue",1,0.,1.));
+    legInfos_.back()->SetFillColor(kBlue);
+    legInfos_.push_back(new TH1F("dark red","dark red",1,0.,1.));
+    legInfos_.back()->SetFillColor(kCyan);
+    legInfos_.push_back(new TH1F("magenta","magenta",1,0.,1.));
+    legInfos_.back()->SetFillColor(kMagenta);
+    legInfos_.push_back(new TH1F("orange","orange",1,0.,1.));
+    legInfos_.back()->SetFillColor(kOrange);
+    legInfos_.push_back(new TH1F("yellow","yellow",1,0.,1.));
+    legInfos_.back()->SetFillColor(kYellow);
+    legInfos_.push_back(new TH1F("red","red",1,0.,1.));
+    legInfos_.back()->SetFillColor(kRed);
+    legInfos_.push_back(new TH1F("purple","purple",1,0.,1.));
+    legInfos_.back()->SetFillColor(kViolet);
+    legKeys_ = { "Good Modules","Excluded FED","FED errors", "# Clusters", 
+		 "# Digis", "PCL bad", "# Clusters & Digis", "DCS Error"};
+  }
+
+  TLegend* myL=new TLegend(0.56,0.87,0.95,0.99);
+  myL->SetNColumns(2);
+  for ( unsigned int i=0; i< legInfos_.size(); i++ ) {
+    myL->AddEntry((TObject*)legInfos_[i],legKeys_[i].c_str(),"f");
+  }
+  myL->Draw();
+  return myL;
 }
