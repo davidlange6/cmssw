@@ -33,15 +33,12 @@ namespace edm {
 
   class PathsAndConsumesOfModulesBase {
   public:
-
     virtual ~PathsAndConsumesOfModulesBase();
 
     std::vector<std::string> const& paths() const { return doPaths(); }
     std::vector<std::string> const& endPaths() const { return doEndPaths(); }
 
-    std::vector<ModuleDescription const*> const& allModules() const {
-      return doAllModules();
-    }
+    std::vector<ModuleDescription const*> const& allModules() const { return doAllModules(); }
 
     ModuleDescription const* moduleDescription(unsigned int moduleID) const {
       return doModuleDescription(moduleID);
@@ -65,7 +62,8 @@ namespace edm {
     // it consumes a module label that is an EDAlias, the corresponding module
     // description will be included in the returned vector (but the label in the
     // module description is not the EDAlias label).
-    std::vector<ModuleDescription const*> const& modulesWhoseProductsAreConsumedBy(unsigned int moduleID) const {
+    std::vector<ModuleDescription const*> const& modulesWhoseProductsAreConsumedBy(
+        unsigned int moduleID) const {
       return doModulesWhoseProductsAreConsumedBy(moduleID);
     }
 
@@ -81,14 +79,16 @@ namespace edm {
     }
 
   private:
-
     virtual std::vector<std::string> const& doPaths() const = 0;
     virtual std::vector<std::string> const& doEndPaths() const = 0;
     virtual std::vector<ModuleDescription const*> const& doAllModules() const = 0;
     virtual ModuleDescription const* doModuleDescription(unsigned int moduleID) const = 0;
-    virtual std::vector<ModuleDescription const*> const& doModulesOnPath(unsigned int pathIndex) const = 0;
-    virtual std::vector<ModuleDescription const*> const& doModulesOnEndPath(unsigned int endPathIndex) const = 0;
-    virtual std::vector<ModuleDescription const*> const& doModulesWhoseProductsAreConsumedBy(unsigned int moduleID) const = 0;
+    virtual std::vector<ModuleDescription const*> const& doModulesOnPath(
+        unsigned int pathIndex) const = 0;
+    virtual std::vector<ModuleDescription const*> const& doModulesOnEndPath(
+        unsigned int endPathIndex) const = 0;
+    virtual std::vector<ModuleDescription const*> const& doModulesWhoseProductsAreConsumedBy(
+        unsigned int moduleID) const = 0;
     virtual std::vector<ConsumesInfo> doConsumesInfo(unsigned int moduleID) const = 0;
   };
 }

@@ -14,9 +14,8 @@ namespace edm {
 
   class CurrentModuleOnThread {
   public:
-    static ModuleCallingContext const* getCurrentModuleOnThread() {
-      return currentModuleOnThread_;
-    }
+    static ModuleCallingContext const* getCurrentModuleOnThread() { return currentModuleOnThread_; }
+
   private:
     friend class ModuleContextSentry;
     static void setCurrentModuleOnThread(ModuleCallingContext const* v) {

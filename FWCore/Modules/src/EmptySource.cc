@@ -10,30 +10,26 @@ namespace edm {
     explicit EmptySource(ParameterSet const&, InputSourceDescription const&);
     ~EmptySource();
     static void fillDescriptions(ConfigurationDescriptions& descriptions);
+
   private:
-    virtual bool setRunAndEventInfo(EventID& id, TimeValue_t& time, edm::EventAuxiliary::ExperimentType&) override;
-    virtual void produce(Event &) override;
+    virtual bool setRunAndEventInfo(EventID& id, TimeValue_t& time,
+                                    edm::EventAuxiliary::ExperimentType&) override;
+    virtual void produce(Event&) override;
   };
 
-  EmptySource::EmptySource(ParameterSet const& pset,
-				       InputSourceDescription const& desc) :
-    ProducerSourceBase(pset, desc, false)
-  { }
+  EmptySource::EmptySource(ParameterSet const& pset, InputSourceDescription const& desc)
+      : ProducerSourceBase(pset, desc, false) {}
 
-  EmptySource::~EmptySource() {
-  }
+  EmptySource::~EmptySource() {}
 
-  bool
-  EmptySource::setRunAndEventInfo(EventID&, TimeValue_t&, edm::EventAuxiliary::ExperimentType&) {
+  bool EmptySource::setRunAndEventInfo(EventID&, TimeValue_t&,
+                                       edm::EventAuxiliary::ExperimentType&) {
     return true;
   }
 
-  void
-  EmptySource::produce(edm::Event&) {
-  }
+  void EmptySource::produce(edm::Event&) {}
 
-  void
-  EmptySource::fillDescriptions(ConfigurationDescriptions& descriptions) {
+  void EmptySource::fillDescriptions(ConfigurationDescriptions& descriptions) {
     ParameterSetDescription desc;
     desc.setComment("Creates runs, lumis and events containing no products.");
     ProducerSourceBase::fillDescription(desc);

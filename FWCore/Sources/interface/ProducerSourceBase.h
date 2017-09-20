@@ -19,29 +19,30 @@ namespace edm {
   class ParameterSetDescription;
   class ProducerSourceBase : public InputSource {
   public:
-    explicit ProducerSourceBase(ParameterSet const& pset, InputSourceDescription const& desc, bool realData);
+    explicit ProducerSourceBase(ParameterSet const& pset, InputSourceDescription const& desc,
+                                bool realData);
     ~ProducerSourceBase() noexcept(false) override;
 
-    unsigned int numberEventsInRun() const {return numberEventsInRun_;} 
-    unsigned int numberEventsInLumi() const {return numberEventsInLumi_;} 
-    TimeValue_t presentTime() const {return presentTime_;}
-    unsigned int timeBetweenEvents() const {return timeBetweenEvents_;}
-    unsigned int eventCreationDelay() const {return eventCreationDelay_;}
-    unsigned int numberEventsInThisRun() const {return numberEventsInThisRun_;}
-    unsigned int numberEventsInThisLumi() const {return numberEventsInThisLumi_;}
-    EventID const& eventID() const {return eventID_;}
-    RunNumber_t run() const {return eventID_.run();}
-    EventNumber_t event() const {return eventID_.event();}
-    LuminosityBlockNumber_t luminosityBlock() const {return eventID_.luminosityBlock();}
+    unsigned int numberEventsInRun() const { return numberEventsInRun_; }
+    unsigned int numberEventsInLumi() const { return numberEventsInLumi_; }
+    TimeValue_t presentTime() const { return presentTime_; }
+    unsigned int timeBetweenEvents() const { return timeBetweenEvents_; }
+    unsigned int eventCreationDelay() const { return eventCreationDelay_; }
+    unsigned int numberEventsInThisRun() const { return numberEventsInThisRun_; }
+    unsigned int numberEventsInThisLumi() const { return numberEventsInThisLumi_; }
+    EventID const& eventID() const { return eventID_; }
+    RunNumber_t run() const { return eventID_.run(); }
+    EventNumber_t event() const { return eventID_.event(); }
+    LuminosityBlockNumber_t luminosityBlock() const { return eventID_.luminosityBlock(); }
 
     static void fillDescription(ParameterSetDescription& desc);
 
   protected:
-
   private:
     ItemType getNextItemType() final;
     virtual void initialize(EventID& id, TimeValue_t& time, TimeValue_t& interval);
-    virtual bool setRunAndEventInfo(EventID& id, TimeValue_t& time, EventAuxiliary::ExperimentType& etype) = 0;
+    virtual bool setRunAndEventInfo(EventID& id, TimeValue_t& time,
+                                    EventAuxiliary::ExperimentType& etype) = 0;
     virtual void produce(Event& e) = 0;
     virtual bool noFiles() const;
     virtual size_t fileIndex() const;
@@ -64,7 +65,7 @@ namespace edm {
     TimeValue_t presentTime_;
     TimeValue_t origTime_;
     TimeValue_t timeBetweenEvents_;
-    unsigned int eventCreationDelay_;  /* microseconds */
+    unsigned int eventCreationDelay_; /* microseconds */
 
     unsigned int numberEventsInThisRun_;
     unsigned int numberEventsInThisLumi_;

@@ -7,18 +7,16 @@
 
 namespace edm {
 
-  LuminosityBlockForOutput::LuminosityBlockForOutput(LuminosityBlockPrincipal const& lbp, ModuleDescription const& md,
-                                   ModuleCallingContext const* moduleCallingContext) :
-        OccurrenceForOutput(lbp, md, moduleCallingContext),
+  LuminosityBlockForOutput::LuminosityBlockForOutput(
+      LuminosityBlockPrincipal const& lbp, ModuleDescription const& md,
+      ModuleCallingContext const* moduleCallingContext)
+      : OccurrenceForOutput(lbp, md, moduleCallingContext),
         aux_(lbp.aux()),
-        run_(new RunForOutput(lbp.runPrincipal(), md, moduleCallingContext)) {
-  }
+        run_(new RunForOutput(lbp.runPrincipal(), md, moduleCallingContext)) {}
 
-  LuminosityBlockForOutput::~LuminosityBlockForOutput() {
-  }
+  LuminosityBlockForOutput::~LuminosityBlockForOutput() {}
 
-  LuminosityBlockPrincipal const&
-  LuminosityBlockForOutput::luminosityBlockPrincipal() const {
+  LuminosityBlockPrincipal const& LuminosityBlockForOutput::luminosityBlockPrincipal() const {
     return dynamic_cast<LuminosityBlockPrincipal const&>(principal());
   }
 }

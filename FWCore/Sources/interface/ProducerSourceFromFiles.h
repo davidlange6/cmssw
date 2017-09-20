@@ -16,17 +16,16 @@ namespace edm {
 
   class ProducerSourceFromFiles : public ProducerSourceBase, private FromFiles {
   public:
-    ProducerSourceFromFiles(ParameterSet const& pset, InputSourceDescription const& desc, bool realData);
+    ProducerSourceFromFiles(ParameterSet const& pset, InputSourceDescription const& desc,
+                            bool realData);
     ~ProducerSourceFromFiles() override;
 
     using FromFiles::logicalFileNames;
     using FromFiles::fileNames;
     using FromFiles::catalog;
 
-    bool noFiles() const override {
-      return fileNames().empty();
-    }
-    
+    bool noFiles() const override { return fileNames().empty(); }
+
     static void fillDescription(ParameterSetDescription& desc);
 
   protected:

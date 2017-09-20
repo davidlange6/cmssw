@@ -2,7 +2,7 @@
 //
 // Package:     FWCore/Framework
 // Class  :     outputmoduleImplementors
-// 
+//
 // Implementation:
 //     Explicitly instantiate implementor templates for OutputModuleBase
 //
@@ -25,25 +25,19 @@ namespace edm {
       template class SharedResourcesUser<edm::one::OutputModuleBase>;
     }
     namespace outputmodule {
-      void RunWatcher::doBeginRun_(RunForOutput const& r) {
-        beginRun(r);
-      }
-      void RunWatcher::doEndRun_(RunForOutput const& r) {
-        endRun(r);
-      }
-      
+      void RunWatcher::doBeginRun_(RunForOutput const& r) { beginRun(r); }
+      void RunWatcher::doEndRun_(RunForOutput const& r) { endRun(r); }
+
       void LuminosityBlockWatcher::doBeginLuminosityBlock_(LuminosityBlockForOutput const& lb) {
         beginLuminosityBlock(lb);
       }
       void LuminosityBlockWatcher::doEndLuminosityBlock_(LuminosityBlockForOutput const& lb) {
         endLuminosityBlock(lb);
       }
-      void InputFileWatcher::doRespondToOpenInputFile_(FileBlock const& iB)
-      {
+      void InputFileWatcher::doRespondToOpenInputFile_(FileBlock const& iB) {
         respondToOpenInputFile(iB);
       }
-      void InputFileWatcher::doRespondToCloseInputFile_(FileBlock const& iB)
-      {
+      void InputFileWatcher::doRespondToCloseInputFile_(FileBlock const& iB) {
         respondToCloseInputFile(iB);
       }
     }

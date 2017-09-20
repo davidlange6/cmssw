@@ -82,32 +82,30 @@ namespace edm {
 
     class Evaluator {
     public:
-      virtual ~Evaluator() { }
+      virtual ~Evaluator() {}
 
       enum EvaluatorType { Name, Not, And, Or, BeginParen };
       virtual EvaluatorType type() const = 0;
 
-      virtual void setLeft(std::unique_ptr<Evaluator> &&) {}
-      virtual void setRight(std::unique_ptr<Evaluator> &&) {}
+      virtual void setLeft(std::unique_ptr<Evaluator>&&) {}
+      virtual void setRight(std::unique_ptr<Evaluator>&&) {}
 
-      virtual void print(std::ostream & out, unsigned int indentation) const {}
-      virtual void init(ConsumesCollector &) {}
+      virtual void print(std::ostream& out, unsigned int indentation) const {}
+      virtual void init(ConsumesCollector&) {}
       virtual bool evaluate(Event const& event) const { return true; };
     };
 
     class Operand : public Evaluator {
     public:
-      Operand(std::vector<char> const& pathName) :
-        pathName_(pathName.begin(), pathName.end()) {
-      }
+      Operand(std::vector<char> const& pathName) : pathName_(pathName.begin(), pathName.end()) {}
 
       EvaluatorType type() const override { return Name; }
 
-      void print(std::ostream & out, unsigned int indentation) const override {
-        out << std::string( indentation, ' ' ) << pathName_ << "\n";
+      void print(std::ostream& out, unsigned int indentation) const override {
+        out << std::string(indentation, ' ') << pathName_ << "\n";
       }
 
-      void init(ConsumesCollector & iC) override {
+      void init(ConsumesCollector& iC) override {
         token_ = iC.consumes<PathStatus>(InputTag(pathName_));
       }
 
@@ -126,20 +124,16 @@ namespace edm {
     public:
       EvaluatorType type() const override { return Not; }
 
-      virtual void setLeft(std::unique_ptr<Evaluator> && v) override { operand_ = std::move(v); }
+      virtual void setLeft(std::unique_ptr<Evaluator>&& v) override { operand_ = std::move(v); }
 
-      void print(std::ostream & out, unsigned int indentation) const override {
-        out << std::string( indentation, ' ' ) << "not\n";
+      void print(std::ostream& out, unsigned int indentation) const override {
+        out << std::string(indentation, ' ') << "not\n";
         operand_->print(out, indentation + 4);
       }
 
-      void init(ConsumesCollector & iC) override {
-        operand_->init(iC);
-      }
+      void init(ConsumesCollector& iC) override { operand_->init(iC); }
 
-      bool evaluate(Event const& event) const override {
-        return !operand_->evaluate(event);
-      }
+      bool evaluate(Event const& event) const override { return !operand_->evaluate(event); }
 
     private:
       edm::propagate_const<std::unique_ptr<Evaluator>> operand_;
@@ -150,12 +144,12 @@ namespace edm {
     public:
       EvaluatorType type() const override;
 
-      virtual void setLeft(std::unique_ptr<Evaluator> && v) override { left_ = std::move(v); }
-      virtual void setRight(std::unique_ptr<Evaluator> && v) override { right_ = std::move(v); }
+      virtual void setLeft(std::unique_ptr<Evaluator>&& v) override { left_ = std::move(v); }
+      virtual void setRight(std::unique_ptr<Evaluator>&& v) override { right_ = std::move(v); }
 
-      void print(std::ostream & out, unsigned int indentation) const override;
+      void print(std::ostream& out, unsigned int indentation) const override;
 
-      void init(ConsumesCollector & iC) override {
+      void init(ConsumesCollector& iC) override {
         left_->init(iC);
         right_->init(iC);
       }
@@ -171,26 +165,26 @@ namespace edm {
     };
 
     template <>
-    inline Evaluator::EvaluatorType
-    BinaryOperator<std::logical_and<bool>>::type() const { return And; }
+    inline Evaluator::EvaluatorType BinaryOperator<std::logical_and<bool>>::type() const {
+      return And;
+    }
 
     template <>
-    inline Evaluator::EvaluatorType
-    BinaryOperator<std::logical_or<bool>>::type() const { return Or; }
+    inline Evaluator::EvaluatorType BinaryOperator<std::logical_or<bool>>::type() const {
+      return Or;
+    }
 
     template <>
-    void
-    BinaryOperator<std::logical_and<bool>>::print(std::ostream & out,
-                                                  unsigned int indentation) const {
-      out << std::string( indentation, ' ' ) << "and\n";
+    void BinaryOperator<std::logical_and<bool>>::print(std::ostream& out,
+                                                       unsigned int indentation) const {
+      out << std::string(indentation, ' ') << "and\n";
       left_->print(out, indentation + 4);
       right_->print(out, indentation + 4);
     }
     template <>
-    void
-    BinaryOperator<std::logical_or<bool>>::print(std::ostream & out,
-                                                 unsigned int indentation) const {
-      out << std::string( indentation, ' ' ) << "or\n";
+    void BinaryOperator<std::logical_or<bool>>::print(std::ostream& out,
+                                                      unsigned int indentation) const {
+      out << std::string(indentation, ' ') << "or\n";
       left_->print(out, indentation + 4);
       right_->print(out, indentation + 4);
     }
@@ -209,7 +203,6 @@ namespace edm {
     // internet for a description of this algorithm)
     class ShuntingYardAlgorithm {
     public:
-
       void addPathName(std::vector<char> const& s) {
         operandStack.push_back(std::make_unique<Operand>(s));
       }
@@ -269,9 +262,7 @@ namespace edm {
         operatorStack.push_back(std::make_unique<OrOperator>());
       }
 
-      void addBeginParenthesis() {
-        operatorStack.push_back(std::make_unique<BeginParenthesis>());
-      }
+      void addBeginParenthesis() { operatorStack.push_back(std::make_unique<BeginParenthesis>()); }
 
       void addEndParenthesis() {
         while (!operatorStack.empty()) {
@@ -295,7 +286,7 @@ namespace edm {
           // should catch any errors of this type before we get here.
           if (backEvaluator->type() == Evaluator::BeginParen) {
             throw cms::Exception("LogicError")
-              << "Should be impossible to get this error. Contact a Framework developer";
+                << "Should be impossible to get this error. Contact a Framework developer";
           }
           if (backEvaluator->type() == Evaluator::And || backEvaluator->type() == Evaluator::Or) {
             moveBinaryOperator();
@@ -307,7 +298,7 @@ namespace edm {
         // should catch any errors of this type before we get here.
         if (!operatorStack.empty() || operandStack.size() != 1U) {
           throw cms::Exception("LogicError")
-            << "Should be impossible to get this error. Contact a Framework developer";
+              << "Should be impossible to get this error. Contact a Framework developer";
         }
         std::unique_ptr<Evaluator> temp = std::move(operandStack.back());
         operandStack.pop_back();
@@ -323,36 +314,34 @@ namespace edm {
     template <typename Iterator>
     class Grammar : public qi::grammar<Iterator, ascii::space_type> {
     public:
-
-      Grammar(ShuntingYardAlgorithm* algorithm) :
-        Grammar::base_type(expression),
-        algorithm_(algorithm) {
-
+      Grammar(ShuntingYardAlgorithm* algorithm)
+          : Grammar::base_type(expression), algorithm_(algorithm) {
         // setup functors that call into shunting algorithm while parsing the logical expression
         auto addPathName = phoenix::bind(&ShuntingYardAlgorithm::addPathName, algorithm_, qi::_1);
         auto addOperatorNot = phoenix::bind(&ShuntingYardAlgorithm::addOperatorNot, algorithm_);
         auto addOperatorAnd = phoenix::bind(&ShuntingYardAlgorithm::addOperatorAnd, algorithm_);
         auto addOperatorOr = phoenix::bind(&ShuntingYardAlgorithm::addOperatorOr, algorithm_);
-        auto addBeginParenthesis = phoenix::bind(&ShuntingYardAlgorithm::addBeginParenthesis, algorithm_);
-        auto addEndParenthesis = phoenix::bind(&ShuntingYardAlgorithm::addEndParenthesis, algorithm_);
+        auto addBeginParenthesis =
+            phoenix::bind(&ShuntingYardAlgorithm::addBeginParenthesis, algorithm_);
+        auto addEndParenthesis =
+            phoenix::bind(&ShuntingYardAlgorithm::addEndParenthesis, algorithm_);
 
         // Define the syntax allowed in the logical expressions
         pathName = !unaryOperator >> !binaryOperatorTest >> (+qi::char_("a-zA-Z0-9_"))[addPathName];
-        binaryOperand = (qi::lit('(')[addBeginParenthesis] >> expression >> qi::lit(')')[addEndParenthesis]) |
-                        (unaryOperator[addOperatorNot] >> binaryOperand) |
-                        pathName;
+        binaryOperand =
+            (qi::lit('(')[addBeginParenthesis] >> expression >> qi::lit(')')[addEndParenthesis]) |
+            (unaryOperator[addOperatorNot] >> binaryOperand) | pathName;
         afterOperator = ascii::space | &qi::lit('(') | &qi::eoi;
         unaryOperator = qi::lit("not") >> afterOperator;
-        // The only difference in the next two is that one calls a functor and the other does not
-        binaryOperatorTest = (qi::lit("and") >> afterOperator) |
-                             (qi::lit("or") >> afterOperator);
+        // The only difference in the next two is that one calls a functor and the other does
+        // not
+        binaryOperatorTest = (qi::lit("and") >> afterOperator) | (qi::lit("or") >> afterOperator);
         binaryOperator = (qi::lit("and") >> afterOperator)[addOperatorAnd] |
                          (qi::lit("or") >> afterOperator)[addOperatorOr];
         expression = binaryOperand % binaryOperator;
       }
 
     private:
-
       qi::rule<Iterator> pathName;
       qi::rule<Iterator, ascii::space_type> binaryOperand;
       qi::rule<Iterator> afterOperator;
@@ -365,14 +354,12 @@ namespace edm {
     };
   }
 
-  PathStatusFilter::PathStatusFilter(ParameterSet const& pset) :
-    evaluator_(nullptr),
-    verbose_(pset.getUntrackedParameter<bool>("verbose")) {
-
+  PathStatusFilter::PathStatusFilter(ParameterSet const& pset)
+      : evaluator_(nullptr), verbose_(pset.getUntrackedParameter<bool>("verbose")) {
     std::string const logicalExpression = pset.getParameter<std::string>("logicalExpression");
     if (verbose_) {
-      LogAbsolute("PathStatusFilter") << "PathStatusFilter logicalExpression = "
-                                      << logicalExpression;
+      LogAbsolute("PathStatusFilter")
+          << "PathStatusFilter logicalExpression = " << logicalExpression;
     }
 
     if (logicalExpression.empty()) {
@@ -387,22 +374,22 @@ namespace edm {
     if (!qi::phrase_parse(it, logicalExpression.cend(), grammar, ascii::space) ||
         (it != logicalExpression.cend())) {
       throw cms::Exception("Configuration")
-        << "Syntax error in logical expression. Here is an example of how\n"
-        << "the syntax should look:\n"
-        << "    \"path1 and not (path2 or not path3)\"\n"
-        << "The expression must contain alternating appearances of operands\n"
-        << "which are path names and binary operators which can be \'and\'\n"
-        << "or \'or\', with a path name at the beginning and end. There\n"
-        << "must be at least one path name. In addition to the alternating\n"
-        << "path names and binary operators, the unary operator \'not\' can\n"
-        << "be inserted before a path name or a begin parenthesis.\n"
-        << "Parentheses are allowed. Parentheses must come in matching pairs.\n"
-        << "Matching begin and end parentheses must contain a complete and\n"
-        << "syntactically correct logical expression. There must be at least\n"
-        << "one space or parenthesis between operators and path names. Extra\n"
-        << "space is ignored and OK. Path names can only contain upper and\n"
-        << "lower case letters, numbers, and underscores. A path name cannot\n"
-        << "be the same as an operator name.\n";
+          << "Syntax error in logical expression. Here is an example of how\n"
+          << "the syntax should look:\n"
+          << "    \"path1 and not (path2 or not path3)\"\n"
+          << "The expression must contain alternating appearances of operands\n"
+          << "which are path names and binary operators which can be \'and\'\n"
+          << "or \'or\', with a path name at the beginning and end. There\n"
+          << "must be at least one path name. In addition to the alternating\n"
+          << "path names and binary operators, the unary operator \'not\' can\n"
+          << "be inserted before a path name or a begin parenthesis.\n"
+          << "Parentheses are allowed. Parentheses must come in matching pairs.\n"
+          << "Matching begin and end parentheses must contain a complete and\n"
+          << "syntactically correct logical expression. There must be at least\n"
+          << "one space or parenthesis between operators and path names. Extra\n"
+          << "space is ignored and OK. Path names can only contain upper and\n"
+          << "lower case letters, numbers, and underscores. A path name cannot\n"
+          << "be the same as an operator name.\n";
     }
 
     evaluator_ = shuntingYardAlgorithm.finish();
@@ -415,14 +402,13 @@ namespace edm {
     evaluator_->init(iC);
   }
 
-  void
-  PathStatusFilter::fillDescriptions(ConfigurationDescriptions& descriptions) {
+  void PathStatusFilter::fillDescriptions(ConfigurationDescriptions& descriptions) {
     ParameterSetDescription desc;
     desc.add<std::string>("logicalExpression", std::string())
-      ->setComment("Operands are path names. Operators in precedence order "
-                   "\'not\', \'and\', and \'or\'. Parentheses allowed.");
-    desc.addUntracked<bool>("verbose", false)
-      ->setComment("For debugging only");
+        ->setComment(
+            "Operands are path names. Operators in precedence order "
+            "\'not\', \'and\', and \'or\'. Parentheses allowed.");
+    desc.addUntracked<bool>("verbose", false)->setComment("For debugging only");
     descriptions.add("pathStatusFilter", desc);
   }
 

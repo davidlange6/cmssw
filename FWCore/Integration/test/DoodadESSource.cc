@@ -2,7 +2,7 @@
 //
 // Package:     Integration
 // Class  :     DoodadESSource
-// 
+//
 // Implementation:
 //     <Notes on implementation>
 //
@@ -24,102 +24,93 @@
 #include "FWCore/Utilities/interface/EDMException.h"
 
 namespace edmtest {
-class DoodadESSource :
-   public edm::EventSetupRecordIntervalFinder, 
-   public edm::ESProducer
-{
-   
-public:
-   DoodadESSource(edm::ParameterSet const& pset);
-   
-   std::unique_ptr<Doodad> produce(const GadgetRcd&) ;
+  class DoodadESSource : public edm::EventSetupRecordIntervalFinder, public edm::ESProducer {
+  public:
+    DoodadESSource(edm::ParameterSet const& pset);
 
-   static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+    std::unique_ptr<Doodad> produce(const GadgetRcd&);
 
-protected:
-   
-   virtual void setIntervalFor(const edm::eventsetup::EventSetupRecordKey&,
-                                const edm::IOVSyncValue& iTime, 
-                                edm::ValidityInterval& iInterval);
-   
-private:
-   DoodadESSource(const DoodadESSource&); // stop default
-   
-   const DoodadESSource& operator=(const DoodadESSource&); // stop default
-   
-   // ---------- member data --------------------------------
-   unsigned int nCalls_;
-};
+    static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
-//
-// constants, enums and typedefs
-//
+  protected:
+    virtual void setIntervalFor(const edm::eventsetup::EventSetupRecordKey&,
+                                const edm::IOVSyncValue& iTime, edm::ValidityInterval& iInterval);
 
-//
-// static data member definitions
-//
+  private:
+    DoodadESSource(const DoodadESSource&);  // stop default
 
-//
-// constructors and destructor
-//
-DoodadESSource::DoodadESSource(edm::ParameterSet const& pset)
-: nCalls_(0) {
+    const DoodadESSource& operator=(const DoodadESSource&);  // stop default
 
-  if (pset.getUntrackedParameter<bool>("test", true)) {
-     throw edm::Exception(edm::errors::Configuration, "Something is wrong with ESSource validation\n")
-       << "Or the test configuration parameter was set true (it should never be true unless you want this exception)\n";
-   }
+    // ---------- member data --------------------------------
+    unsigned int nCalls_;
+  };
 
-   this->findingRecord<GadgetRcd>();
-   setWhatProduced(this);
-}
+  //
+  // constants, enums and typedefs
+  //
 
-//DoodadESSource::~DoodadESSource()
-//{
-//}
+  //
+  // static data member definitions
+  //
 
-//
-// member functions
-//
+  //
+  // constructors and destructor
+  //
+  DoodadESSource::DoodadESSource(edm::ParameterSet const& pset) : nCalls_(0) {
+    if (pset.getUntrackedParameter<bool>("test", true)) {
+      throw edm::Exception(edm::errors::Configuration,
+                           "Something is wrong with ESSource validation\n")
+          << "Or the test configuration parameter was set true (it should never be true unless "
+             "you want this exception)\n";
+    }
 
-std::unique_ptr<Doodad> 
-DoodadESSource::produce(const GadgetRcd&) {
-   auto data = std::make_unique<Doodad>();
-   data->a = nCalls_;
-   ++nCalls_;
-   return data;
-}
+    this->findingRecord<GadgetRcd>();
+    setWhatProduced(this);
+  }
 
-void
-DoodadESSource::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
-  edm::ParameterSetDescription desc;
-  desc.addOptional<std::string>("appendToDataLabel");
-  desc.addOptionalUntracked<std::string>("test2");
-  desc.addUntracked<bool>("test", false)->
-    setComment("This parameter exists only to test the parameter set validation for ESSources"); 
-  descriptions.add("DoodadESSource", desc);
-}
+  // DoodadESSource::~DoodadESSource()
+  //{
+  //}
 
-void 
-DoodadESSource::setIntervalFor(const edm::eventsetup::EventSetupRecordKey&,
-                                const edm::IOVSyncValue& iTime, 
-                                edm::ValidityInterval& iInterval) {
-   //Be valid for 3 runs 
-   edm::EventID newTime = edm::EventID((iTime.eventID().run() - 1) - ((iTime.eventID().run() - 1) %3) +1, 1, 1);
-   edm::EventID endTime = newTime.nextRun(1).nextRun(1).nextRun(1).previousRunLastEvent(1);
-   iInterval = edm::ValidityInterval(edm::IOVSyncValue(newTime),
-                                      edm::IOVSyncValue(endTime));
-}
+  //
+  // member functions
+  //
 
-//
-// const member functions
-//
+  std::unique_ptr<Doodad> DoodadESSource::produce(const GadgetRcd&) {
+    auto data = std::make_unique<Doodad>();
+    data->a = nCalls_;
+    ++nCalls_;
+    return data;
+  }
 
-//
-// static member functions
-//
+  void DoodadESSource::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+    edm::ParameterSetDescription desc;
+    desc.addOptional<std::string>("appendToDataLabel");
+    desc.addOptionalUntracked<std::string>("test2");
+    desc.addUntracked<bool>("test", false)
+        ->setComment(
+            "This parameter exists only to test the parameter set validation for ESSources");
+    descriptions.add("DoodadESSource", desc);
+  }
+
+  void DoodadESSource::setIntervalFor(const edm::eventsetup::EventSetupRecordKey&,
+                                      const edm::IOVSyncValue& iTime,
+                                      edm::ValidityInterval& iInterval) {
+    // Be valid for 3 runs
+    edm::EventID newTime =
+        edm::EventID((iTime.eventID().run() - 1) - ((iTime.eventID().run() - 1) % 3) + 1, 1, 1);
+    edm::EventID endTime = newTime.nextRun(1).nextRun(1).nextRun(1).previousRunLastEvent(1);
+    iInterval = edm::ValidityInterval(edm::IOVSyncValue(newTime), edm::IOVSyncValue(endTime));
+  }
+
+  //
+  // const member functions
+  //
+
+  //
+  // static member functions
+  //
 }
 using namespace edmtest;
 
 DEFINE_FWK_EVENTSETUP_SOURCE(DoodadESSource);
-

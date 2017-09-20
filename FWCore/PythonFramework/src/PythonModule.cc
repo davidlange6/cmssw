@@ -22,15 +22,14 @@ namespace {
   }
 }
 
-BOOST_PYTHON_MODULE(libFWCorePythonFramework)
-{
+BOOST_PYTHON_MODULE(libFWCorePythonFramework) {
   boost::python::register_exception_translator<cms::Exception>(translator);
 
-  boost::python::class_<PythonEventProcessor, boost::noncopyable>("PythonEventProcessor", boost::python::init<PythonProcessDesc const&>())
-    .def("run", &PythonEventProcessor::run)
-    .def("totalEvents", &PythonEventProcessor::totalEvents)
-    .def("totalEventsPassed", &PythonEventProcessor::totalEventsPassed)
-    .def("totalEventsFailed", &PythonEventProcessor::totalEventsFailed)
-  ;
+  boost::python::class_<PythonEventProcessor, boost::noncopyable>(
+      "PythonEventProcessor", boost::python::init<PythonProcessDesc const&>())
+      .def("run", &PythonEventProcessor::run)
+      .def("totalEvents", &PythonEventProcessor::totalEvents)
+      .def("totalEventsPassed", &PythonEventProcessor::totalEventsPassed)
+      .def("totalEventsFailed", &PythonEventProcessor::totalEventsFailed);
 }
 #endif

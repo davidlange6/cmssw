@@ -4,7 +4,7 @@
 //
 // Package:     FWCore/Framework
 // Class  :     moduleAbilities
-// 
+//
 /**\file moduleAbilities moduleAbilities.h "FWCore/Framework/interface/one/moduleAbilities.h"
 
  Description: Template arguments which only apply to one::{Module} classes
@@ -28,21 +28,20 @@
 namespace edm {
   namespace one {
     struct SharedResources {
-      static constexpr module::Abilities kAbilities=module::Abilities::kOneSharedResources;
+      static constexpr module::Abilities kAbilities = module::Abilities::kOneSharedResources;
       typedef module::Empty Type;
     };
 
     struct WatchRuns {
-      static constexpr module::Abilities kAbilities=module::Abilities::kOneWatchRuns;
+      static constexpr module::Abilities kAbilities = module::Abilities::kOneWatchRuns;
       typedef module::Empty Type;
     };
 
     struct WatchLuminosityBlocks {
-      static constexpr module::Abilities kAbilities=module::Abilities::kOneWatchLuminosityBlocks;
+      static constexpr module::Abilities kAbilities = module::Abilities::kOneWatchLuminosityBlocks;
       typedef module::Empty Type;
     };
   }
 }
-
 
 #endif

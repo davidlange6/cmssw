@@ -4,8 +4,9 @@
 //
 // Package:     Framework
 // Class  :     ProxyArgumentFactoryTemplate
-// 
-/**\class ProxyArgumentFactoryTemplate ProxyArgumentFactoryTemplate.h FWCore/Framework/interface/ProxyArgumentFactoryTemplate.h
+//
+/**\class ProxyArgumentFactoryTemplate ProxyArgumentFactoryTemplate.h
+ FWCore/Framework/interface/ProxyArgumentFactoryTemplate.h
 
  Description: <one line class summary>
 
@@ -28,40 +29,36 @@
 
 // forward declarations
 namespace edm {
-   namespace eventsetup {
-      
-template <class T, class ArgT>
-class ProxyArgumentFactoryTemplate : public ProxyFactoryBase
-{
+  namespace eventsetup {
 
-   public:
+    template <class T, class ArgT>
+    class ProxyArgumentFactoryTemplate : public ProxyFactoryBase {
+    public:
       typedef typename T::record_type record_type;
 
       ProxyArgumentFactoryTemplate(ArgT iArg) : arg_(iArg) {}
-      //virtual ~ProxyArgumentFactoryTemplate()
+      // virtual ~ProxyArgumentFactoryTemplate()
 
       // ---------- const member functions ---------------------
-      virtual std::unique_ptr<DataProxy> makeProxy() const {
-         return std::make_unique<T>(arg_);
-      }
-            
+      virtual std::unique_ptr<DataProxy> makeProxy() const { return std::make_unique<T>(arg_); }
+
       virtual DataKey makeKey(const std::string& iName) const {
-         return DataKey(DataKey::makeTypeTag< typename T::value_type>(),iName.c_str());
+        return DataKey(DataKey::makeTypeTag<typename T::value_type>(), iName.c_str());
       }
-      
+
       // ---------- static member functions --------------------
 
       // ---------- member functions ---------------------------
 
-   private:
-      ProxyArgumentFactoryTemplate(const ProxyArgumentFactoryTemplate&); // stop default
+    private:
+      ProxyArgumentFactoryTemplate(const ProxyArgumentFactoryTemplate&);  // stop default
 
-      const ProxyArgumentFactoryTemplate& operator=(const ProxyArgumentFactoryTemplate&); // stop default
+      const ProxyArgumentFactoryTemplate& operator=(
+          const ProxyArgumentFactoryTemplate&);  // stop default
 
       // ---------- member data --------------------------------
       mutable ArgT arg_;
-};
-
-   }
+    };
+  }
 }
 #endif

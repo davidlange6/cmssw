@@ -4,7 +4,7 @@
 //
 // Package:     FWCore/Framework
 // Class  :     one::EDAnalyzerBase
-// 
+//
 /**\class one::EDAnalyzerBase EDAnalyzerBase.h "FWCore/Framework/interface/one/EDAnalyzerBase.h"
 
  Description: Base class for edm::one::EDAnalyzer<>
@@ -38,24 +38,24 @@ namespace edm {
   class WaitingTask;
 
   namespace maker {
-    template<typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace one {
 
-    class EDAnalyzerBase : public EDConsumerBase
-    {
-      
+    class EDAnalyzerBase : public EDConsumerBase {
     public:
-      template <typename T> friend class edm::WorkerT;
-      template <typename T> friend class edm::maker::ModuleHolderT;
-      
+      template <typename T>
+      friend class edm::WorkerT;
+      template <typename T>
+      friend class edm::maker::ModuleHolderT;
+
       typedef EDAnalyzerBase ModuleType;
 
-      
       EDAnalyzerBase();
       virtual ~EDAnalyzerBase();
-      
+
       static void fillDescriptions(ConfigurationDescriptions& descriptions);
       static void prevalidate(ConfigurationDescriptions& descriptions);
       static const std::string& baseType();
@@ -66,42 +66,39 @@ namespace edm {
       void callWhenNewProductsRegistered(std::function<void(BranchDescription const&)> const& func);
 
     private:
-      bool doEvent(EventPrincipal const& ep, EventSetup const& c,
-                   ActivityRegistry*,
+      bool doEvent(EventPrincipal const& ep, EventSetup const& c, ActivityRegistry*,
                    ModuleCallingContext const*);
-      //For now this is a placeholder
-      /*virtual*/ void preActionBeforeRunEventAsync(WaitingTask* iTask, ModuleCallingContext const& iModuleCallingContext, Principal const& iPrincipal) const {}
+      // For now this is a placeholder
+      /*virtual*/ void preActionBeforeRunEventAsync(
+          WaitingTask* iTask, ModuleCallingContext const& iModuleCallingContext,
+          Principal const& iPrincipal) const {}
 
       void doPreallocate(PreallocationConfiguration const&) {}
       void doBeginJob();
       void doEndJob();
-      
-      void doBeginRun(RunPrincipal const& rp, EventSetup const& c,
-                      ModuleCallingContext const*);
-      void doEndRun(RunPrincipal const& rp, EventSetup const& c,
-                    ModuleCallingContext const*);
+
+      void doBeginRun(RunPrincipal const& rp, EventSetup const& c, ModuleCallingContext const*);
+      void doEndRun(RunPrincipal const& rp, EventSetup const& c, ModuleCallingContext const*);
       void doBeginLuminosityBlock(LuminosityBlockPrincipal const& lbp, EventSetup const& c,
                                   ModuleCallingContext const*);
       void doEndLuminosityBlock(LuminosityBlockPrincipal const& lbp, EventSetup const& c,
                                 ModuleCallingContext const*);
-      
-      //For now, the following are just dummy implemenations with no ability for users to override
+
+      // For now, the following are just dummy implemenations with no ability for users to
+      // override
       void doRespondToOpenInputFile(FileBlock const& fb);
       void doRespondToCloseInputFile(FileBlock const& fb);
-      void doRegisterThinnedAssociations(ProductRegistry const&,
-                                         ThinnedAssociationsHelper&) { }
+      void doRegisterThinnedAssociations(ProductRegistry const&, ThinnedAssociationsHelper&) {}
 
       void registerProductsAndCallbacks(EDAnalyzerBase const* module, ProductRegistry* reg);
-      std::string workerType() const {return "WorkerT<EDAnalyzer>";}
-      
-      SharedResourcesAcquirer& sharedResourcesAcquirer() {
-        return resourcesAcquirer_;
-      }
-      
+      std::string workerType() const { return "WorkerT<EDAnalyzer>"; }
+
+      SharedResourcesAcquirer& sharedResourcesAcquirer() { return resourcesAcquirer_; }
+
       virtual void analyze(Event const&, EventSetup const&) = 0;
       virtual void beginJob() {}
-      virtual void endJob(){}
-      
+      virtual void endJob() {}
+
       virtual void doBeginRun_(Run const& rp, EventSetup const& c);
       virtual void doEndRun_(Run const& rp, EventSetup const& c);
       virtual void doBeginLuminosityBlock_(LuminosityBlock const& lbp, EventSetup const& c);
@@ -109,12 +106,10 @@ namespace edm {
 
       virtual SharedResourcesAcquirer createAcquirer();
 
-      void setModuleDescription(ModuleDescription const& md) {
-        moduleDescription_ = md;
-      }
+      void setModuleDescription(ModuleDescription const& md) { moduleDescription_ = md; }
       ModuleDescription moduleDescription_;
       std::function<void(BranchDescription const&)> callWhenNewProductsRegistered_;
-      
+
       SharedResourcesAcquirer resourcesAcquirer_;
     };
   }

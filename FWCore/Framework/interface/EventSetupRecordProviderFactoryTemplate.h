@@ -4,8 +4,9 @@
 //
 // Package:     Framework
 // Class  :     EventSetupRecordProviderFactoryTemplate
-// 
-/**\class EventSetupRecordProviderFactoryTemplate EventSetupRecordProviderFactoryTemplate.h FWCore/Framework/interface/EventSetupRecordProviderFactoryTemplate.h
+//
+/**\class EventSetupRecordProviderFactoryTemplate EventSetupRecordProviderFactoryTemplate.h
+ FWCore/Framework/interface/EventSetupRecordProviderFactoryTemplate.h
 
  Description: <one line class summary>
 
@@ -29,38 +30,35 @@
 
 // forward declarations
 namespace edm {
-   namespace eventsetup {
+  namespace eventsetup {
 
-template<class T>
-class EventSetupRecordProviderFactoryTemplate : public EventSetupRecordProviderFactory
-{
-
-   public:
+    template <class T>
+    class EventSetupRecordProviderFactoryTemplate : public EventSetupRecordProviderFactory {
+    public:
       EventSetupRecordProviderFactoryTemplate() {
-         EventSetupRecordProviderFactoryManager::instance().addFactory(
-               *this,
-               EventSetupRecordKey::makeKey<T>());
+        EventSetupRecordProviderFactoryManager::instance().addFactory(
+            *this, EventSetupRecordKey::makeKey<T>());
       }
-      //virtual ~EventSetupRecordProviderFactoryTemplate();
+      // virtual ~EventSetupRecordProviderFactoryTemplate();
 
       // ---------- const member functions ---------------------
       virtual std::unique_ptr<EventSetupRecordProvider> makeRecordProvider() const {
-         return std::unique_ptr<EventSetupRecordProvider>(
-                     new EventSetupRecordProviderTemplate<T>());
+        return std::unique_ptr<EventSetupRecordProvider>(new EventSetupRecordProviderTemplate<T>());
       }
 
       // ---------- static member functions --------------------
 
       // ---------- member functions ---------------------------
 
-   private:
-      EventSetupRecordProviderFactoryTemplate(const EventSetupRecordProviderFactoryTemplate&); // stop default
+    private:
+      EventSetupRecordProviderFactoryTemplate(
+          const EventSetupRecordProviderFactoryTemplate&);  // stop default
 
-      const EventSetupRecordProviderFactoryTemplate& operator=(const EventSetupRecordProviderFactoryTemplate&); // stop default
+      const EventSetupRecordProviderFactoryTemplate& operator=(
+          const EventSetupRecordProviderFactoryTemplate&);  // stop default
 
       // ---------- member data --------------------------------
-
-};
-   }
+    };
+  }
 }
 #endif

@@ -22,7 +22,8 @@
  that supports insertion operations (e.g.):
 
  \code
- std::cout << col1 << col2 << '\n'; // Print column titles with the widths associated for col1 and col2.
+ std::cout << col1 << col2 << '\n'; // Print column titles with the widths associated for col1 and
+ col2.
  for (auto const& name : names)
    std::cout << col1(name.first()) << col2(name.last()) << '\n';
  \endcode
@@ -56,8 +57,7 @@ namespace edm {
     explicit OStreamColumn(std::string const& t, std::size_t const w);
 
     template <typename T>
-    auto operator()(T const& t) const
-    {
+    auto operator()(T const& t) const {
       return OStreamColumnEntry<T>{*this, t};
     }
 
@@ -76,12 +76,10 @@ namespace edm {
   std::ostream& operator<<(std::ostream& t, OStreamColumn const& c);
 
   template <typename E>
-  std::ostream& operator<<(std::ostream& t, OStreamColumnEntry<E> const& ce)
-  {
+  std::ostream& operator<<(std::ostream& t, OStreamColumnEntry<E> const& ce) {
     t << std::setw(ce.col.width_) << ce.t;
     return t;
   }
-
 }
 
 #endif

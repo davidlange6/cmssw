@@ -143,10 +143,8 @@ namespace edm {
   class LuminosityBlockIndex;
   class StreamID;
 
-  class RandomNumberGenerator
-  {
+  class RandomNumberGenerator {
   public:
-
     RandomNumberGenerator() {}
     virtual ~RandomNumberGenerator();
 
@@ -182,7 +180,8 @@ namespace edm {
     virtual void postEventRead(Event const& event) = 0;
 
     virtual std::vector<RandomEngineState> const& getEventCache(StreamID const&) const = 0;
-    virtual std::vector<RandomEngineState> const& getLumiCache(LuminosityBlockIndex const&) const = 0;
+    virtual std::vector<RandomEngineState> const& getLumiCache(
+        LuminosityBlockIndex const&) const = 0;
 
     virtual void consumes(ConsumesCollector&& iC) const = 0;
 
@@ -190,7 +189,6 @@ namespace edm {
     virtual void print(std::ostream& os) const = 0;
 
   private:
-
     RandomNumberGenerator(RandomNumberGenerator const&) = delete;
     RandomNumberGenerator const& operator=(RandomNumberGenerator const&) = delete;
   };

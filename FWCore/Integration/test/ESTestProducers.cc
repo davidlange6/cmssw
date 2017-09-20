@@ -5,7 +5,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Framework/interface/ModuleFactory.h"
 
-#include<memory>
+#include <memory>
 
 namespace edmtest {
 
@@ -13,6 +13,7 @@ namespace edmtest {
   public:
     ESTestProducerA(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataA> produce(ESTestRecordA const&);
+
   private:
     std::shared_ptr<ESTestDataA> data_;
   };
@@ -32,6 +33,7 @@ namespace edmtest {
   public:
     ESTestProducerB(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataB> produce(ESTestRecordB const&);
+
   private:
     std::shared_ptr<ESTestDataB> data_;
   };
@@ -51,6 +53,7 @@ namespace edmtest {
   public:
     ESTestProducerC(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataC> produce(ESTestRecordC const&);
+
   private:
     std::shared_ptr<ESTestDataC> data_;
   };
@@ -70,6 +73,7 @@ namespace edmtest {
   public:
     ESTestProducerD(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataD> produce(ESTestRecordD const&);
+
   private:
     std::shared_ptr<ESTestDataD> data_;
   };
@@ -89,6 +93,7 @@ namespace edmtest {
   public:
     ESTestProducerE(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataE> produce(ESTestRecordE const&);
+
   private:
     std::shared_ptr<ESTestDataE> data_;
   };
@@ -108,6 +113,7 @@ namespace edmtest {
   public:
     ESTestProducerF(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataF> produce(ESTestRecordF const&);
+
   private:
     std::shared_ptr<ESTestDataF> data_;
   };
@@ -127,6 +133,7 @@ namespace edmtest {
   public:
     ESTestProducerG(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataG> produce(ESTestRecordG const&);
+
   private:
     std::shared_ptr<ESTestDataG> data_;
   };
@@ -146,6 +153,7 @@ namespace edmtest {
   public:
     ESTestProducerH(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataH> produce(ESTestRecordH const&);
+
   private:
     std::shared_ptr<ESTestDataH> data_;
   };
@@ -165,6 +173,7 @@ namespace edmtest {
   public:
     ESTestProducerI(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataI> produce(ESTestRecordI const&);
+
   private:
     std::shared_ptr<ESTestDataI> data_;
   };
@@ -184,6 +193,7 @@ namespace edmtest {
   public:
     ESTestProducerJ(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataJ> produce(ESTestRecordJ const&);
+
   private:
     std::shared_ptr<ESTestDataJ> data_;
   };
@@ -203,6 +213,7 @@ namespace edmtest {
   public:
     ESTestProducerK(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataK> produce(ESTestRecordK const&);
+
   private:
     std::shared_ptr<ESTestDataK> data_;
   };
@@ -223,14 +234,14 @@ namespace edmtest {
     ESTestProducerAZ(edm::ParameterSet const&);
     std::shared_ptr<ESTestDataA> produceA(ESTestRecordA const&);
     std::shared_ptr<ESTestDataZ> produceZ(ESTestRecordZ const&);
+
   private:
     std::shared_ptr<ESTestDataA> dataA_;
     std::shared_ptr<ESTestDataZ> dataZ_;
   };
 
-  ESTestProducerAZ::ESTestProducerAZ(edm::ParameterSet const&) :
-    dataA_(new ESTestDataA(0)),
-    dataZ_(new ESTestDataZ(0)) {
+  ESTestProducerAZ::ESTestProducerAZ(edm::ParameterSet const&)
+      : dataA_(new ESTestDataA(0)), dataZ_(new ESTestDataZ(0)) {
     setWhatProduced(this, &edmtest::ESTestProducerAZ::produceA, edm::es::Label("foo"));
     setWhatProduced(this, &edmtest::ESTestProducerAZ::produceZ, edm::es::Label("foo"));
   }
@@ -244,7 +255,6 @@ namespace edmtest {
     ++dataZ_->value();
     return dataZ_;
   }
-
 }
 
 using namespace edmtest;

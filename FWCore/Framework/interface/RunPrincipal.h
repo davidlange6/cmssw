@@ -32,71 +32,45 @@ namespace edm {
     typedef RunAuxiliary Auxiliary;
     typedef Principal Base;
 
-    RunPrincipal(
-        std::shared_ptr<RunAuxiliary> aux,
-        std::shared_ptr<ProductRegistry const> reg,
-        ProcessConfiguration const& pc,
-        HistoryAppender* historyAppender,
-        unsigned int iRunIndex,
-        bool isForPrimaryProcess=true);
+    RunPrincipal(std::shared_ptr<RunAuxiliary> aux, std::shared_ptr<ProductRegistry const> reg,
+                 ProcessConfiguration const& pc, HistoryAppender* historyAppender,
+                 unsigned int iRunIndex, bool isForPrimaryProcess = true);
     ~RunPrincipal() override {}
 
-    void fillRunPrincipal(ProcessHistoryRegistry const& processHistoryRegistry, DelayedReader* reader = nullptr);
+    void fillRunPrincipal(ProcessHistoryRegistry const& processHistoryRegistry,
+                          DelayedReader* reader = nullptr);
 
     /** Multiple Runs may be processed simultaneously. The
      return value can be used to identify a particular Run.
      The value will range from 0 to one less than
      the maximum number of allowed simultaneous Runs. A particular
-     value will be reused once the processing of the previous Run 
+     value will be reused once the processing of the previous Run
      using that index has been completed.
      */
-    RunIndex index() const {
-      return index_;
-    }
-    
-    RunAuxiliary const& aux() const {
-      return *aux_;
-    }
+    RunIndex index() const { return index_; }
 
-    RunNumber_t run() const {
-      return aux().run();
-    }
-    
-    ProcessHistoryID const& reducedProcessHistoryID() const {
-      return m_reducedHistoryID;
-    }
+    RunAuxiliary const& aux() const { return *aux_; }
 
-    RunID const& id() const {
-      return aux().id();
-    }
+    RunNumber_t run() const { return aux().run(); }
 
-    Timestamp const& beginTime() const {
-      return aux().beginTime();
-    }
+    ProcessHistoryID const& reducedProcessHistoryID() const { return m_reducedHistoryID; }
 
-    Timestamp const& endTime() const {
-      return aux().endTime();
-    }
+    RunID const& id() const { return aux().id(); }
 
-    void setEndTime(Timestamp const& time) {
-      aux_->setEndTime(time);
-    }
+    Timestamp const& beginTime() const { return aux().beginTime(); }
 
-    void mergeAuxiliary(RunAuxiliary const& aux) {
-      return aux_->mergeAuxiliary(aux);
-    }
+    Timestamp const& endTime() const { return aux().endTime(); }
 
-    void put(
-        BranchDescription const& bd,
-        std::unique_ptr<WrapperBase> edp) const;
+    void setEndTime(Timestamp const& time) { aux_->setEndTime(time); }
 
-    void setComplete() {
-      complete_ = true;
-    }
+    void mergeAuxiliary(RunAuxiliary const& aux) { return aux_->mergeAuxiliary(aux); }
+
+    void put(BranchDescription const& bd, std::unique_ptr<WrapperBase> edp) const;
+
+    void setComplete() { complete_ = true; }
 
   private:
-
-    bool isComplete_() const override {return complete_;}
+    bool isComplete_() const override { return complete_; }
 
     unsigned int transitionIndex_() const override;
 
@@ -108,4 +82,3 @@ namespace edm {
   };
 }
 #endif
-

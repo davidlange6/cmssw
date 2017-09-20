@@ -20,8 +20,7 @@ namespace edm {
   class TypeID;
   class TypeWithDict;
 
-  bool checkDictionary(std::vector<std::string>& missingDictionaries,
-                       TypeID const& typeID);
+  bool checkDictionary(std::vector<std::string>& missingDictionaries, TypeID const& typeID);
 
   bool checkDictionaryOfWrappedType(std::vector<std::string>& missingDictionaries,
                                     TypeID const& unwrappedTypeID);
@@ -29,16 +28,13 @@ namespace edm {
   bool checkDictionaryOfWrappedType(std::vector<std::string>& missingDictionaries,
                                     std::string const& unwrappedName);
 
-  bool checkDictionary(std::vector<std::string>& missingDictionaries,
-                       std::string const& name,
+  bool checkDictionary(std::vector<std::string>& missingDictionaries, std::string const& name,
                        TypeWithDict const& typeWithDict);
 
-  bool checkClassDictionaries(std::vector<std::string>& missingDictionaries,
-                              TypeID const& typeID);
+  bool checkClassDictionaries(std::vector<std::string>& missingDictionaries, TypeID const& typeID);
 
   bool checkClassDictionaries(std::vector<std::string>& missingDictionaries,
-                              std::string const& name,
-                              TypeWithDict const& typeWithDict);
+                              std::string const& name, TypeWithDict const& typeWithDict);
 
   void addToMissingDictionariesException(edm::Exception& exception,
                                          std::vector<std::string>& missingDictionaries,
@@ -62,9 +58,8 @@ namespace edm {
                                          std::set<std::string>& producedTypes,
                                          bool consumedWithView);
 
-  bool public_base_classes(std::vector<std::string>& missingDictionaries,
-                           TypeID const& typeID,
+  bool public_base_classes(std::vector<std::string>& missingDictionaries, TypeID const& typeID,
                            std::vector<TypeWithDict>& baseTypes);
-} // namespace edm
+}  // namespace edm
 
-#endif // FWCore_Utilities_DictionaryTools_h
+#endif  // FWCore_Utilities_DictionaryTools_h

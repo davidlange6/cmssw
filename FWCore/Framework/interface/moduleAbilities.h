@@ -10,7 +10,8 @@
  Description: Template arguments for stream::{Module}, global::{Module}, one::{Module} classes
 
  Usage:
-    These classes are used the declare the 'abilities' a developer wants to make use of in their module.
+    These classes are used the declare the 'abilities' a developer wants to make use of in their
+ module.
 
 */
 //
@@ -28,89 +29,91 @@
 
 namespace edm {
   namespace module {
-    //Used in the case where ability is not available
-    struct Empty{};
+    // Used in the case where ability is not available
+    struct Empty {};
   }
 
-  template<typename T>
+  template <typename T>
   struct GlobalCache {
-    static constexpr module::Abilities kAbilities=module::Abilities::kGlobalCache;
+    static constexpr module::Abilities kAbilities = module::Abilities::kGlobalCache;
     typedef T Type;
   };
 
-  template<typename T>
+  template <typename T>
   struct StreamCache {
-    static constexpr module::Abilities kAbilities=module::Abilities::kStreamCache;
+    static constexpr module::Abilities kAbilities = module::Abilities::kStreamCache;
     typedef T Type;
   };
 
-  template<typename T>
+  template <typename T>
   struct RunCache {
-    static constexpr module::Abilities kAbilities=module::Abilities::kRunCache;
+    static constexpr module::Abilities kAbilities = module::Abilities::kRunCache;
     typedef T Type;
   };
 
-  template<typename T>
+  template <typename T>
   struct LuminosityBlockCache {
-    static constexpr module::Abilities kAbilities=module::Abilities::kLuminosityBlockCache;
+    static constexpr module::Abilities kAbilities = module::Abilities::kLuminosityBlockCache;
     typedef T Type;
   };
 
-  template<typename T>
+  template <typename T>
   struct RunSummaryCache {
-    static constexpr module::Abilities kAbilities=module::Abilities::kRunSummaryCache;
+    static constexpr module::Abilities kAbilities = module::Abilities::kRunSummaryCache;
     typedef T Type;
   };
 
-  template<typename T>
+  template <typename T>
   struct LuminosityBlockSummaryCache {
-    static constexpr module::Abilities kAbilities=module::Abilities::kLuminosityBlockSummaryCache;
+    static constexpr module::Abilities kAbilities = module::Abilities::kLuminosityBlockSummaryCache;
     typedef T Type;
   };
 
   struct BeginRunProducer {
-    static constexpr module::Abilities kAbilities=module::Abilities::kBeginRunProducer;
+    static constexpr module::Abilities kAbilities = module::Abilities::kBeginRunProducer;
     typedef module::Empty Type;
   };
 
   struct EndRunProducer {
-    static constexpr module::Abilities kAbilities=module::Abilities::kEndRunProducer;
+    static constexpr module::Abilities kAbilities = module::Abilities::kEndRunProducer;
     typedef module::Empty Type;
   };
 
   struct BeginLuminosityBlockProducer {
-    static constexpr module::Abilities kAbilities=module::Abilities::kBeginLuminosityBlockProducer;
+    static constexpr module::Abilities kAbilities =
+        module::Abilities::kBeginLuminosityBlockProducer;
     typedef module::Empty Type;
   };
 
   struct EndLuminosityBlockProducer {
-    static constexpr module::Abilities kAbilities=module::Abilities::kEndLuminosityBlockProducer;
+    static constexpr module::Abilities kAbilities = module::Abilities::kEndLuminosityBlockProducer;
     typedef module::Empty Type;
   };
 
   struct WatchInputFiles {
-    static constexpr module::Abilities kAbilities=module::Abilities::kWatchInputFiles;
+    static constexpr module::Abilities kAbilities = module::Abilities::kWatchInputFiles;
     typedef module::Empty Type;
   };
 
-  //Recursively checks VArgs template arguments looking for the ABILITY
-  template<module::Abilities ABILITY, typename... VArgs> struct CheckAbility;
+  // Recursively checks VArgs template arguments looking for the ABILITY
+  template <module::Abilities ABILITY, typename... VArgs>
+  struct CheckAbility;
 
-  template<module::Abilities ABILITY, typename T, typename... VArgs>
-  struct CheckAbility<ABILITY,T,VArgs...> {
-    static constexpr bool kHasIt = (T::kAbilities==ABILITY) | CheckAbility<ABILITY,VArgs...>::kHasIt;
-    typedef std::conditional_t<(T::kAbilities==ABILITY),
-                               typename T::Type,
-                               typename CheckAbility<ABILITY,VArgs...>::Type> Type;
+  template <module::Abilities ABILITY, typename T, typename... VArgs>
+  struct CheckAbility<ABILITY, T, VArgs...> {
+    static constexpr bool kHasIt =
+        (T::kAbilities == ABILITY) | CheckAbility<ABILITY, VArgs...>::kHasIt;
+    typedef std::conditional_t<(T::kAbilities == ABILITY), typename T::Type,
+                               typename CheckAbility<ABILITY, VArgs...>::Type>
+        Type;
   };
 
-  //End of the recursion
-  template<module::Abilities ABILITY>
+  // End of the recursion
+  template <module::Abilities ABILITY>
   struct CheckAbility<ABILITY> {
-    static constexpr bool kHasIt=false;
+    static constexpr bool kHasIt = false;
     typedef edm::module::Empty Type;
   };
-
 }
 
 #endif

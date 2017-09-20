@@ -3,7 +3,7 @@
 
 /** \class ThingProducer
  *
- * \version   1st Version Apr. 6, 2005  
+ * \version   1st Version Apr. 6, 2005
 
  *
  ************************************************************/
@@ -13,12 +13,10 @@
 #include "FWCore/Integration/test/ThingAlgorithm.h"
 
 namespace edmtest {
-  class ThingProducer : public edm::global::EDProducer<edm::BeginRunProducer,
-  edm::EndRunProducer,
-  edm::EndLuminosityBlockProducer,
-  edm::BeginLuminosityBlockProducer> {
+  class ThingProducer : public edm::global::EDProducer<edm::BeginRunProducer, edm::EndRunProducer,
+                                                       edm::EndLuminosityBlockProducer,
+                                                       edm::BeginLuminosityBlockProducer> {
   public:
-
     explicit ThingProducer(edm::ParameterSet const& ps);
 
     ~ThingProducer() override;
@@ -29,9 +27,11 @@ namespace edmtest {
 
     void globalEndRunProduce(edm::Run& r, edm::EventSetup const& c) const override;
 
-    void globalBeginLuminosityBlockProduce(edm::LuminosityBlock& lb, edm::EventSetup const& c) const override;
+    void globalBeginLuminosityBlockProduce(edm::LuminosityBlock& lb,
+                                           edm::EventSetup const& c) const override;
 
-    void globalEndLuminosityBlockProduce(edm::LuminosityBlock& lb, edm::EventSetup const& c) const override;
+    void globalEndLuminosityBlockProduce(edm::LuminosityBlock& lb,
+                                         edm::EventSetup const& c) const override;
 
     static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 

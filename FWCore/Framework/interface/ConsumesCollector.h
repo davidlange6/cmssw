@@ -4,8 +4,9 @@
 //
 // Package:     FWCore/Framework
 // Class  :     edm::ConsumesCollector
-// 
-/**\class edm::ConsumesCollector ConsumesCollector.h "FWCore/Framework/interface/ConsumesCollector.h"
+//
+/**\class edm::ConsumesCollector ConsumesCollector.h
+"FWCore/Framework/interface/ConsumesCollector.h"
 
  Description: Helper class to gather consumes information for EDConsumerBase class.
 
@@ -35,12 +36,9 @@ a functor passed to the Framework with a call to callWhenNewProductsRegistered.
 // forward declarations
 namespace edm {
   class EDConsumerBase;
-  
-  class ConsumesCollector
-  {
-    
-  public:
 
+  class ConsumesCollector {
+  public:
     ConsumesCollector() = delete;
     ConsumesCollector(ConsumesCollector const&) = default;
     ConsumesCollector(ConsumesCollector&&) = default;
@@ -48,63 +46,55 @@ namespace edm {
     ConsumesCollector& operator=(ConsumesCollector&&) = default;
 
     // ---------- member functions ---------------------------
-    template <typename ProductType, BranchType B=InEvent>
+    template <typename ProductType, BranchType B = InEvent>
     EDGetTokenT<ProductType> consumes(edm::InputTag const& tag) {
-      return m_consumer->consumes<ProductType,B>(tag);
+      return m_consumer->consumes<ProductType, B>(tag);
     }
-    
+
     EDGetToken consumes(const TypeToGet& id, edm::InputTag const& tag) {
-      return m_consumer->consumes(id,tag);
+      return m_consumer->consumes(id, tag);
     }
-    
+
     template <BranchType B>
     EDGetToken consumes(TypeToGet const& id, edm::InputTag const& tag) {
-      return m_consumer->consumes<B>(id,tag);
+      return m_consumer->consumes<B>(id, tag);
     }
-    
-    template <typename ProductType, BranchType B=InEvent>
+
+    template <typename ProductType, BranchType B = InEvent>
     EDGetTokenT<ProductType> mayConsume(edm::InputTag const& tag) {
-      return m_consumer->mayConsume<ProductType,B>(tag);
+      return m_consumer->mayConsume<ProductType, B>(tag);
     }
-    
-    
+
     EDGetToken mayConsume(const TypeToGet& id, edm::InputTag const& tag) {
-      return m_consumer->mayConsume(id,tag);
+      return m_consumer->mayConsume(id, tag);
     }
-    
+
     template <BranchType B>
     EDGetToken mayConsume(const TypeToGet& id, edm::InputTag const& tag) {
-      return m_consumer->mayConsume<B>(id,tag);
+      return m_consumer->mayConsume<B>(id, tag);
     }
-    
-    template <typename ProductType, BranchType B=InEvent>
+
+    template <typename ProductType, BranchType B = InEvent>
     void consumesMany() {
-      m_consumer->consumesMany<ProductType,B>();
+      m_consumer->consumesMany<ProductType, B>();
     }
-    
-    
-    void consumesMany(const TypeToGet& id) {
-      m_consumer->consumesMany(id);
-    }
-    
+
+    void consumesMany(const TypeToGet& id) { m_consumer->consumesMany(id); }
+
     template <BranchType B>
     void consumesMany(const TypeToGet& id) {
       m_consumer->consumesMany<B>(id);
     }
-    
 
   private:
-    //only EDConsumerBase is allowed to make an instance of this class
+    // only EDConsumerBase is allowed to make an instance of this class
     friend class EDConsumerBase;
-    
-    ConsumesCollector(EDConsumerBase* iConsumer):
-    m_consumer(iConsumer) {}
+
+    ConsumesCollector(EDConsumerBase* iConsumer) : m_consumer(iConsumer) {}
 
     // ---------- member data --------------------------------
     edm::propagate_const<EDConsumerBase*> m_consumer;
-    
   };
 }
-
 
 #endif

@@ -3,7 +3,7 @@
 
 /** \class ThingExtSource
  *
- * \version   1st Version Dec. 27, 2005  
+ * \version   1st Version Dec. 27, 2005
 
  *
  ************************************************************/
@@ -15,7 +15,6 @@
 namespace edmtest {
   class ThingExtSource : public edm::ProducerSourceFromFiles {
   public:
-
     // The following is not yet used, but will be the primary
     // constructor when the parameter set system is available.
     //
@@ -23,7 +22,8 @@ namespace edmtest {
 
     virtual ~ThingExtSource();
 
-    virtual bool setRunAndEventInfo(edm::EventID&, edm::TimeValue_t&, edm::EventAuxiliary::ExperimentType&);
+    virtual bool setRunAndEventInfo(edm::EventID&, edm::TimeValue_t&,
+                                    edm::EventAuxiliary::ExperimentType&);
 
     virtual void produce(edm::Event& e);
 

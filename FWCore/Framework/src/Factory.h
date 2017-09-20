@@ -13,10 +13,9 @@
 #include "FWCore/Utilities/interface/propagate_const.h"
 
 namespace edm {
-  typedef edmplugin::PluginFactory<Maker* ()> MakerPluginFactory;
-  
-  class Factory  
-  {
+  typedef edmplugin::PluginFactory<Maker*()> MakerPluginFactory;
+
+  class Factory {
   public:
     typedef std::map<std::string, edm::propagate_const<Maker*>> MakerMap;
 
@@ -24,12 +23,11 @@ namespace edm {
 
     static Factory const* get();
 
-    std::shared_ptr<maker::ModuleHolder> makeModule(const MakeModuleParams&,
-                                                    signalslot::Signal<void(const ModuleDescription&)>& pre,
-                                                    signalslot::Signal<void(const ModuleDescription&)>& post) const;
+    std::shared_ptr<maker::ModuleHolder> makeModule(
+        const MakeModuleParams&, signalslot::Signal<void(const ModuleDescription&)>& pre,
+        signalslot::Signal<void(const ModuleDescription&)>& post) const;
 
     std::shared_ptr<maker::ModuleHolder> makeReplacementModule(const edm::ParameterSet&) const;
-
 
   private:
     Factory();
@@ -37,6 +35,5 @@ namespace edm {
     static Factory const singleInstance_;
     mutable MakerMap makers_;
   };
-
 }
 #endif

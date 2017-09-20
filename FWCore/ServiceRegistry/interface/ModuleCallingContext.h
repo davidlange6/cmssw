@@ -26,10 +26,8 @@ namespace edm {
   class PlaceInPathContext;
   class StreamContext;
 
-
   class ModuleCallingContext {
   public:
-
     typedef ParentContext::Type Type;
 
     enum class State {
@@ -40,13 +38,10 @@ namespace edm {
 
     ModuleCallingContext(ModuleDescription const* moduleDescription);
 
-    ModuleCallingContext(ModuleDescription const* moduleDescription,
-                         State state,
-                         ParentContext const& parent,
-                         ModuleCallingContext const* previousOnThread);
+    ModuleCallingContext(ModuleDescription const* moduleDescription, State state,
+                         ParentContext const& parent, ModuleCallingContext const* previousOnThread);
 
-    void setContext(State state,
-                    ParentContext const& parent,
+    void setContext(State state, ParentContext const& parent,
                     ModuleCallingContext const* previousOnThread);
 
     void setState(State state) { state_ = state; }
@@ -55,7 +50,9 @@ namespace edm {
     State state() const { return state_; }
     Type type() const { return parent_.type(); }
     ParentContext const& parent() const { return parent_; }
-    ModuleCallingContext const* moduleCallingContext() const { return parent_.moduleCallingContext(); }
+    ModuleCallingContext const* moduleCallingContext() const {
+      return parent_.moduleCallingContext();
+    }
     PlaceInPathContext const* placeInPathContext() const { return parent_.placeInPathContext(); }
     StreamContext const* streamContext() const { return parent_.streamContext(); }
     GlobalContext const* globalContext() const { return parent_.globalContext(); }

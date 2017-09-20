@@ -4,8 +4,9 @@
 //
 // Package:     Framework
 // Class  :     getAllTriggerNames
-// 
-/**\function getAllTriggerNames getAllTriggerNames.h "FWCore/Framework/interface/getAllTriggerNames.h"
+//
+/**\function getAllTriggerNames getAllTriggerNames.h
+ "FWCore/Framework/interface/getAllTriggerNames.h"
 
  Description: Returns a list of all the trigger names in the current process
  Usage:

@@ -28,22 +28,25 @@ namespace edm {
 
   class PathsAndConsumesOfModules : public PathsAndConsumesOfModulesBase {
   public:
-
     ~PathsAndConsumesOfModules() override;
 
     void initialize(Schedule const*, std::shared_ptr<ProductRegistry const>);
 
   private:
-
     std::vector<std::string> const& doPaths() const override { return paths_; }
     std::vector<std::string> const& doEndPaths() const override { return endPaths_; }
 
-    std::vector<ModuleDescription const*> const& doAllModules() const override { return allModuleDescriptions_; }
+    std::vector<ModuleDescription const*> const& doAllModules() const override {
+      return allModuleDescriptions_;
+    }
     ModuleDescription const* doModuleDescription(unsigned int moduleID) const override;
 
-    std::vector<ModuleDescription const*> const& doModulesOnPath(unsigned int pathIndex) const override;
-    std::vector<ModuleDescription const*> const& doModulesOnEndPath(unsigned int endPathIndex) const override;
-    std::vector<ModuleDescription const*> const& doModulesWhoseProductsAreConsumedBy(unsigned int moduleID) const override;
+    std::vector<ModuleDescription const*> const& doModulesOnPath(
+        unsigned int pathIndex) const override;
+    std::vector<ModuleDescription const*> const& doModulesOnEndPath(
+        unsigned int endPathIndex) const override;
+    std::vector<ModuleDescription const*> const& doModulesWhoseProductsAreConsumedBy(
+        unsigned int moduleID) const override;
 
     std::vector<ConsumesInfo> doConsumesInfo(unsigned int moduleID) const override;
 
@@ -68,9 +71,8 @@ namespace edm {
     Schedule const* schedule_;
     std::shared_ptr<ProductRegistry const> preg_;
   };
-  
-  void
-  checkForModuleDependencyCorrectness(edm::PathsAndConsumesOfModulesBase const& iPnC,
-                                      bool iPrintDependencies);
+
+  void checkForModuleDependencyCorrectness(edm::PathsAndConsumesOfModulesBase const& iPnC,
+                                           bool iPrintDependencies);
 }
 #endif

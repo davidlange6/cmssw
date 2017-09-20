@@ -24,21 +24,22 @@ namespace edm {
   class LuminosityBlockIndex;
   class StreamID;
 
-  template <class T> class RandomEngineSentry {
+  template <class T>
+  class RandomEngineSentry {
   public:
-
-    explicit RandomEngineSentry(T* t, CLHEP::HepRandomEngine* engine): t_(t), engine_(engine) {
-      if(t) {
+    explicit RandomEngineSentry(T* t, CLHEP::HepRandomEngine* engine) : t_(t), engine_(engine) {
+      if (t) {
         t->setRandomEngine(engine);
       }
     }
 
-    explicit RandomEngineSentry(T* t, StreamID const& streamID): t_(t), engine_(nullptr) {
-      if(t) {
+    explicit RandomEngineSentry(T* t, StreamID const& streamID) : t_(t), engine_(nullptr) {
+      if (t) {
         Service<RandomNumberGenerator> rng;
         if (!rng.isAvailable()) {
           throw cms::Exception("Configuration")
-              << "Attempt to get a random engine when the RandomNumberGeneratorService is not configured.\n"
+              << "Attempt to get a random engine when the RandomNumberGeneratorService is not "
+                 "configured.\n"
                  "You must configure the service if you want an engine.\n";
         }
         engine_ = &rng->getEngine(streamID);
@@ -46,12 +47,13 @@ namespace edm {
       }
     }
 
-    explicit RandomEngineSentry(T* t, LuminosityBlockIndex const& lumi): t_(t), engine_(nullptr) {
-      if(t) {
+    explicit RandomEngineSentry(T* t, LuminosityBlockIndex const& lumi) : t_(t), engine_(nullptr) {
+      if (t) {
         Service<RandomNumberGenerator> rng;
         if (!rng.isAvailable()) {
           throw cms::Exception("Configuration")
-              << "Attempt to get a random engine when the RandomNumberGeneratorService is not configured.\n"
+              << "Attempt to get a random engine when the RandomNumberGeneratorService is not "
+                 "configured.\n"
                  "You must configure the service if you want an engine.\n";
         }
         engine_ = &rng->getEngine(lumi);
@@ -59,10 +61,12 @@ namespace edm {
       }
     }
 
-    ~RandomEngineSentry() { if(t_) t_->setRandomEngine(nullptr); }
+    ~RandomEngineSentry() {
+      if (t_) t_->setRandomEngine(nullptr);
+    }
 
-    CLHEP::HepRandomEngine const* randomEngine() const {return get_underlying_safe(engine_);}
-    CLHEP::HepRandomEngine*& randomEngine() {return get_underlying_safe(engine_);}
+    CLHEP::HepRandomEngine const* randomEngine() const { return get_underlying_safe(engine_); }
+    CLHEP::HepRandomEngine*& randomEngine() { return get_underlying_safe(engine_); }
 
   private:
     edm::propagate_const<T*> t_;

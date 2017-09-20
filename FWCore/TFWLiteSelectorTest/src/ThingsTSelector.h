@@ -13,24 +13,24 @@
 #include "FWCore/Utilities/interface/propagate_const.h"
 
 namespace tfwliteselectortest {
-class ThingsTSelector : public TFWLiteSelectorBasic {
-public :
-      ThingsTSelector() : h_a(nullptr), h_refA(nullptr) {}
-      void begin(TList*&);
-      void preProcessing(const TList*, TList&);
-      void process(const edm::Event&);
-      void postProcessing(TList&);
-      void terminate(TList&);
+  class ThingsTSelector : public TFWLiteSelectorBasic {
+  public:
+    ThingsTSelector() : h_a(nullptr), h_refA(nullptr) {}
+    void begin(TList*&);
+    void preProcessing(const TList*, TList&);
+    void process(const edm::Event&);
+    void postProcessing(TList&);
+    void terminate(TList&);
 
-private:
-  /// histograms
-  edm::propagate_const<TH1F*> h_a;
-  edm::propagate_const<TH1F*> h_refA;
+  private:
+    /// histograms
+    edm::propagate_const<TH1F*> h_a;
+    edm::propagate_const<TH1F*> h_refA;
 
-  ThingsTSelector(ThingsTSelector const&);
-  ThingsTSelector operator=(ThingsTSelector const&);
-  
-  ClassDef(ThingsTSelector,2)
-};
+    ThingsTSelector(ThingsTSelector const&);
+    ThingsTSelector operator=(ThingsTSelector const&);
+
+    ClassDef(ThingsTSelector, 2)
+  };
 }
 #endif
