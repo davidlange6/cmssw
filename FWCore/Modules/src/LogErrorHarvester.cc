@@ -43,14 +43,11 @@ namespace edm {
     void endJob() override;
   };
 
-  LogErrorHarvester::LogErrorHarvester(ParameterSet const&) {
-    produces<std::vector<ErrorSummaryEntry>>();
-  }
+  LogErrorHarvester::LogErrorHarvester(ParameterSet const&) { produces<std::vector<ErrorSummaryEntry>>(); }
 
-  void
-  LogErrorHarvester::produce(StreamID const sid, Event& iEvent, EventSetup const&) const {
+  void LogErrorHarvester::produce(StreamID const sid, Event& iEvent, EventSetup const&) const {
     const auto index = sid.value();
-    if(!FreshErrorsExist(index)) {
+    if (!FreshErrorsExist(index)) {
       iEvent.put(std::make_unique<std::vector<ErrorSummaryEntry>>());
     } else {
       iEvent.put(std::make_unique<std::vector<ErrorSummaryEntry>>(LoggedErrorsSummary(index)));
@@ -58,26 +55,18 @@ namespace edm {
   }
 
   // ------------ method called once each job just before starting event loop  ------------
-  void
-  LogErrorHarvester::beginJob() {
-    EnableLoggedErrorsSummary();
-  }
+  void LogErrorHarvester::beginJob() { EnableLoggedErrorsSummary(); }
 
   // ------------ method called once each job just after ending the event loop  ------------
-  void
-  LogErrorHarvester::endJob() {
-    DisableLoggedErrorsSummary();
-  }
-
+  void LogErrorHarvester::endJob() { DisableLoggedErrorsSummary(); }
 
   // ------------ method called once each job for validation  ------------
-  void
-  LogErrorHarvester::fillDescriptions(ConfigurationDescriptions& descriptions) {
+  void LogErrorHarvester::fillDescriptions(ConfigurationDescriptions& descriptions) {
     ParameterSetDescription desc;
     descriptions.add("logErrorHarvester", desc);
   }
 }
 
-//define this as a plug-in
+// define this as a plug-in
 using edm::LogErrorHarvester;
 DEFINE_FWK_MODULE(LogErrorHarvester);

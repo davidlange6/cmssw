@@ -5,10 +5,10 @@
 //
 
 // Class  :     PrincipalGetAdapter
-// 
+//
 /**\class PrincipalGetAdapter PrincipalGetAdapter.h FWCore/Framework/interface/PrincipalGetAdapter.h
 
-Description: This is the implementation for accessing EDProducts and 
+Description: This is the implementation for accessing EDProducts and
 inserting new EDProducts.
 
 Usage:
@@ -16,7 +16,7 @@ Usage:
 Getting Data
 
 The edm::PrincipalGetAdapter class provides many 'get*" methods for getting data
-it contains.  
+it contains.
 
 The primary method for getting data is to use getByLabel(). The labels are
 the label of the module assigned in the configuration file and the 'product
@@ -41,7 +41,7 @@ event.getByLabel("market", "apple", fruits);
 Putting Data
 
 \code
-  
+
 //fill the collection
 ...
 event.put(std::make_unique<AppleCollection>());
@@ -69,7 +69,7 @@ edm::RefProd<AppleCollection> refApples = event.getRefBeforePut<AppleCollection>
 for(unsigned int index = 0; .....) {
 ....
 apples->push_back(Apple(...));
-  
+
 //create an edm::Ref to the new object
 edm::Ref<AppleCollection> ref(refApples, index);
 ....
@@ -106,64 +106,50 @@ edm::Ref<AppleCollection> ref(refApples, index);
 #include "FWCore/Utilities/interface/ProductLabels.h"
 #include "FWCore/Utilities/interface/propagate_const.h"
 
-
 namespace edm {
 
   class ModuleCallingContext;
   class SharedResourcesAcquirer;
 
   namespace principal_get_adapter_detail {
-    void
-    throwOnPutOfNullProduct(char const* principalType, TypeID const& productType, std::string const& productInstanceName);
-    void
-    throwOnPrematureRead(char const* principalType, TypeID const& productType, std::string const& moduleLabel, std::string const& productInstanceName);
-    void
-    throwOnPrematureRead(char const* principalType, TypeID const& productType);
+    void throwOnPutOfNullProduct(char const* principalType, TypeID const& productType,
+                                 std::string const& productInstanceName);
+    void throwOnPrematureRead(char const* principalType, TypeID const& productType, std::string const& moduleLabel,
+                              std::string const& productInstanceName);
+    void throwOnPrematureRead(char const* principalType, TypeID const& productType);
 
-    void
-    throwOnPrematureRead(char const* principalType, TypeID const& productType, EDGetToken);
-
+    void throwOnPrematureRead(char const* principalType, TypeID const& productType, EDGetToken);
   }
   class PrincipalGetAdapter {
   public:
-    PrincipalGetAdapter(Principal const& pcpl,
-		 ModuleDescription const& md);
+    PrincipalGetAdapter(Principal const& pcpl, ModuleDescription const& md);
 
     ~PrincipalGetAdapter();
 
-    PrincipalGetAdapter(PrincipalGetAdapter const&) = delete; // Disallow copying and moving
-    PrincipalGetAdapter& operator=(PrincipalGetAdapter const&) = delete; // Disallow copying and moving
+    PrincipalGetAdapter(PrincipalGetAdapter const&) = delete;             // Disallow copying and moving
+    PrincipalGetAdapter& operator=(PrincipalGetAdapter const&) = delete;  // Disallow copying and moving
 
-    //size_t size() const;
-    
-    void setConsumer(EDConsumerBase const* iConsumer) {
-      consumer_ = iConsumer;
-    }
-    
-    void setSharedResourcesAcquirer(SharedResourcesAcquirer* iSra) {
-      resourcesAcquirer_ = iSra;
-    }
+    // size_t size() const;
 
+    void setConsumer(EDConsumerBase const* iConsumer) { consumer_ = iConsumer; }
+
+    void setSharedResourcesAcquirer(SharedResourcesAcquirer* iSra) { resourcesAcquirer_ = iSra; }
 
     bool isComplete() const;
 
     template <typename PROD>
-    bool 
-    checkIfComplete() const;
+    bool checkIfComplete() const;
 
     template <typename PROD>
-    void 
-    getManyByType(std::vector<Handle<PROD> >& results, ModuleCallingContext const* mcc) const;
+    void getManyByType(std::vector<Handle<PROD> >& results, ModuleCallingContext const* mcc) const;
 
-    ProcessHistory const&
-    processHistory() const;
+    ProcessHistory const& processHistory() const;
 
-    Principal const& principal() const {return principal_;}
+    Principal const& principal() const { return principal_; }
 
-    BranchDescription const&
-    getBranchDescription(TypeID const& type, std::string const& productInstanceName) const;
+    BranchDescription const& getBranchDescription(TypeID const& type, std::string const& productInstanceName) const;
 
-    typedef std::vector<BasicHandle>  BasicHandleVec;
+    typedef std::vector<BasicHandle> BasicHandleVec;
 
     //------------------------------------------------------------
     // Protected functions.
@@ -172,37 +158,21 @@ namespace edm {
     // The following 'get' functions serve to isolate the PrincipalGetAdapter class
     // from the Principal class.
 
-    BasicHandle 
-    getByLabel_(TypeID const& tid, InputTag const& tag,
-                ModuleCallingContext const* mcc) const;
+    BasicHandle getByLabel_(TypeID const& tid, InputTag const& tag, ModuleCallingContext const* mcc) const;
 
-    BasicHandle 
-    getByLabel_(TypeID const& tid,
-                std::string const& label,
-                std::string const& instance,
-                std::string const& process,
-                ModuleCallingContext const* mcc) const;
+    BasicHandle getByLabel_(TypeID const& tid, std::string const& label, std::string const& instance,
+                            std::string const& process, ModuleCallingContext const* mcc) const;
 
-    BasicHandle
-    getByToken_(TypeID const& id, KindOfType kindOfType, EDGetToken token,
-                ModuleCallingContext const* mcc) const;
+    BasicHandle getByToken_(TypeID const& id, KindOfType kindOfType, EDGetToken token,
+                            ModuleCallingContext const* mcc) const;
 
-    BasicHandle
-    getMatchingSequenceByLabel_(TypeID const& typeID,
-                                InputTag const& tag,
-                                ModuleCallingContext const* mcc) const;
+    BasicHandle getMatchingSequenceByLabel_(TypeID const& typeID, InputTag const& tag,
+                                            ModuleCallingContext const* mcc) const;
 
-    BasicHandle
-    getMatchingSequenceByLabel_(TypeID const& typeID,
-                                std::string const& label,
-                                std::string const& instance,
-                                std::string const& process,
-                                ModuleCallingContext const* mcc) const;
-    
-    void 
-    getManyByType_(TypeID const& tid, 
-		   BasicHandleVec& results,
-                   ModuleCallingContext const* mcc) const;
+    BasicHandle getMatchingSequenceByLabel_(TypeID const& typeID, std::string const& label, std::string const& instance,
+                                            std::string const& process, ModuleCallingContext const* mcc) const;
+
+    void getManyByType_(TypeID const& tid, BasicHandleVec& results, ModuleCallingContext const* mcc) const;
 
     // Also isolates the PrincipalGetAdapter class
     // from the Principal class.
@@ -214,11 +184,9 @@ namespace edm {
     // Is this an Event, a LuminosityBlock, or a Run.
     BranchType const& branchType() const;
 
-    BasicHandle
-    makeFailToGetException(KindOfType,TypeID const&,EDGetToken) const;
+    BasicHandle makeFailToGetException(KindOfType, TypeID const&, EDGetToken) const;
 
-    void
-    throwAmbiguousException(TypeID const& productType, EDGetToken token) const;
+    void throwAmbiguousException(TypeID const& productType, EDGetToken token) const;
 
   private:
     //------------------------------------------------------------
@@ -232,19 +200,17 @@ namespace edm {
     // Each PrincipalGetAdapter must have a description of the module executing the
     // "transaction" which the PrincipalGetAdapter represents.
     ModuleDescription const& md_;
-    
+
     EDConsumerBase const* consumer_;
-    SharedResourcesAcquirer* resourcesAcquirer_; // We do not use propagate_const because the acquirer is itself mutable.
+    SharedResourcesAcquirer*
+        resourcesAcquirer_;  // We do not use propagate_const because the acquirer is itself mutable.
   };
 
   template <typename PROD>
-  inline
-  std::ostream& 
-  operator<<(std::ostream& os, Handle<PROD> const& h) {
+  inline std::ostream& operator<<(std::ostream& os, Handle<PROD> const& h) {
     os << h.product() << " " << h.provenance() << " " << h.id();
     return os;
   }
-
 
   //------------------------------------------------------------
   // Metafunction support for compile-time selection of code used in
@@ -261,32 +227,31 @@ namespace edm {
   // no such member function.
 
   namespace detail {
-    using no_tag = std::false_type; // type indicating FALSE
-    using yes_tag = std::true_type; // type indicating TRUE
+    using no_tag = std::false_type;  // type indicating FALSE
+    using yes_tag = std::true_type;  // type indicating TRUE
 
     // Definitions forthe following struct and function templates are
     // not needed; we only require the declarations.
-    template <typename T, void (T::*)()>  struct postinsert_function;
-    template <typename T> no_tag  has_postinsert_helper(...);
-    template <typename T> yes_tag has_postinsert_helper(postinsert_function<T, &T::post_insert> * p);
+    template <typename T, void (T::*)()>
+    struct postinsert_function;
+    template <typename T>
+    no_tag has_postinsert_helper(...);
+    template <typename T>
+    yes_tag has_postinsert_helper(postinsert_function<T, &T::post_insert>* p);
 
-
-    template<typename T>
+    template <typename T>
     struct has_postinsert {
       static constexpr bool value = std::is_same<decltype(has_postinsert_helper<T>(nullptr)), yes_tag>::value &&
-	!std::is_base_of<DoNotSortUponInsertion, T>::value;
+                                    !std::is_base_of<DoNotSortUponInsertion, T>::value;
     };
-
 
     // has_donotrecordparents<T>::value is true if we should not
     // record parentage for type T, and false otherwise.
 
     template <typename T>
     struct has_donotrecordparents {
-      static constexpr bool value =
-	std::is_base_of<DoNotRecordParents,T>::value;
+      static constexpr bool value = std::is_base_of<DoNotRecordParents, T>::value;
     };
-
   }
 
   //------------------------------------------------------------
@@ -302,7 +267,7 @@ namespace edm {
 
   template <typename T>
   struct DoNotPostInsert {
-    void operator()(T*) const { }
+    void operator()(T*) const {}
   };
 
   // Implementation of  PrincipalGetAdapter  member templates. See  PrincipalGetAdapter.cc for the
@@ -310,20 +275,16 @@ namespace edm {
   //
 
   template <typename PROD>
-  inline
-  bool 
-  PrincipalGetAdapter::checkIfComplete() const { 
+  inline bool PrincipalGetAdapter::checkIfComplete() const {
     return isComplete() || !detail::has_mergeProduct_function<PROD>::value;
   }
 
   template <typename PROD>
-  inline
-  void 
-  PrincipalGetAdapter::getManyByType(std::vector<Handle<PROD> >& results,
-                                     ModuleCallingContext const* mcc) const { 
+  inline void PrincipalGetAdapter::getManyByType(std::vector<Handle<PROD> >& results,
+                                                 ModuleCallingContext const* mcc) const {
     BasicHandleVec bhv;
     this->getManyByType_(TypeID(typeid(PROD)), bhv, mcc);
-    
+
     // Go through the returned handles; for each element,
     //   1. create a Handle<PROD> and
     //

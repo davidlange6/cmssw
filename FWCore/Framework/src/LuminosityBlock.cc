@@ -10,73 +10,61 @@ namespace edm {
   std::string const LuminosityBlock::emptyString_;
 
   LuminosityBlock::LuminosityBlock(LuminosityBlockPrincipal const& lbp, ModuleDescription const& md,
-                                   ModuleCallingContext const* moduleCallingContext) :
-        provRecorder_(lbp, md),
+                                   ModuleCallingContext const* moduleCallingContext)
+      : provRecorder_(lbp, md),
         aux_(lbp.aux()),
         run_(new Run(lbp.runPrincipal(), md, moduleCallingContext)),
-        moduleCallingContext_(moduleCallingContext) {
+        moduleCallingContext_(moduleCallingContext) {}
+
+  LuminosityBlock::~LuminosityBlock() {}
+
+  LuminosityBlockIndex LuminosityBlock::index() const { return luminosityBlockPrincipal().index(); }
+
+  LuminosityBlock::CacheIdentifier_t LuminosityBlock::cacheIdentifier() const {
+    return luminosityBlockPrincipal().cacheIdentifier();
   }
 
-  LuminosityBlock::~LuminosityBlock() {
-  }
-
-  LuminosityBlockIndex
-  LuminosityBlock::index() const {
-    return luminosityBlockPrincipal().index();
-  }
-
-  LuminosityBlock::CacheIdentifier_t
-  LuminosityBlock::cacheIdentifier() const {return luminosityBlockPrincipal().cacheIdentifier();}
-
-  
-  void
-  LuminosityBlock::setConsumer(EDConsumerBase const* iConsumer) {
+  void LuminosityBlock::setConsumer(EDConsumerBase const* iConsumer) {
     provRecorder_.setConsumer(iConsumer);
-    if(run_) {
+    if (run_) {
       const_cast<Run*>(run_.get())->setConsumer(iConsumer);
     }
   }
-  
-  void
-  LuminosityBlock::setSharedResourcesAcquirer( SharedResourcesAcquirer* iResourceAcquirer) {
+
+  void LuminosityBlock::setSharedResourcesAcquirer(SharedResourcesAcquirer* iResourceAcquirer) {
     provRecorder_.setSharedResourcesAcquirer(iResourceAcquirer);
     const_cast<Run*>(run_.get())->setSharedResourcesAcquirer(iResourceAcquirer);
   }
 
-
-  LuminosityBlockPrincipal const&
-  LuminosityBlock::luminosityBlockPrincipal() const {
+  LuminosityBlockPrincipal const& LuminosityBlock::luminosityBlockPrincipal() const {
     return dynamic_cast<LuminosityBlockPrincipal const&>(provRecorder_.principal());
   }
 
-  Provenance
-  LuminosityBlock::getProvenance(BranchID const& bid) const {
+  Provenance LuminosityBlock::getProvenance(BranchID const& bid) const {
     return luminosityBlockPrincipal().getProvenance(bid, moduleCallingContext_);
   }
 
-  void
-  LuminosityBlock::getAllStableProvenance(std::vector<StableProvenance const*>& provenances) const {
+  void LuminosityBlock::getAllStableProvenance(std::vector<StableProvenance const*>& provenances) const {
     luminosityBlockPrincipal().getAllStableProvenance(provenances);
   }
 
-  void
-  LuminosityBlock::commit_(std::vector<edm::ProductResolverIndex> const& iShouldPut) {
+  void LuminosityBlock::commit_(std::vector<edm::ProductResolverIndex> const& iShouldPut) {
     LuminosityBlockPrincipal const& lbp = luminosityBlockPrincipal();
     ProductPtrVec::iterator pit(putProducts().begin());
     ProductPtrVec::iterator pie(putProducts().end());
 
-    while(pit != pie) {
-        lbp.put(*pit->second, std::move(get_underlying_safe(pit->first)));
-        ++pit;
+    while (pit != pie) {
+      lbp.put(*pit->second, std::move(get_underlying_safe(pit->first)));
+      ++pit;
     }
-    
+
     auto sz = iShouldPut.size();
-    if(sz !=0 and sz != putProducts().size()) {
-      //some were missed
+    if (sz != 0 and sz != putProducts().size()) {
+      // some were missed
       auto& p = provRecorder_.principal();
-      for(auto index: iShouldPut){
+      for (auto index : iShouldPut) {
         auto resolver = p.getProductResolverByIndex(index);
-        if(not resolver->productResolved()) {
+        if (not resolver->productResolved()) {
           resolver->putProduct(std::unique_ptr<WrapperBase>());
         }
       }
@@ -86,18 +74,14 @@ namespace edm {
     putProducts().clear();
   }
 
-  ProcessHistoryID const&
-  LuminosityBlock::processHistoryID() const {
+  ProcessHistoryID const& LuminosityBlock::processHistoryID() const {
     return luminosityBlockPrincipal().processHistoryID();
   }
 
-  ProcessHistory const&
-  LuminosityBlock::processHistory() const {
-    return provRecorder_.processHistory();
-  }
+  ProcessHistory const& LuminosityBlock::processHistory() const { return provRecorder_.processHistory(); }
 
-  BasicHandle
-  LuminosityBlock::getByLabelImpl(std::type_info const&, std::type_info const& iProductType, const InputTag& iTag) const {
+  BasicHandle LuminosityBlock::getByLabelImpl(std::type_info const&, std::type_info const& iProductType,
+                                              const InputTag& iTag) const {
     BasicHandle h = provRecorder_.getByLabel_(TypeID(iProductType), iTag, moduleCallingContext_);
     return h;
   }

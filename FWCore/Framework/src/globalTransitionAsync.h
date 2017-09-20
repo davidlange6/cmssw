@@ -4,7 +4,7 @@
 //
 // Package:     FWCore/Framework
 // Function:    globalTransitionAsync
-// 
+//
 /**\function globalTransitionAsync globalTransitionAsync.h "globalTransitionAsync.h"
 
  Description: Helper functions for handling asynchronous global transitions
@@ -33,78 +33,76 @@ namespace edm {
   class EventSetup;
   class LuminosityBlockPrincipal;
   class RunPrincipal;
-  
-  //This is code in common between beginStreamRun and beginGlobalLuminosityBlock
-  inline void subProcessDoGlobalBeginTransitionAsync(WaitingTaskHolder iHolder,SubProcess& iSubProcess, LuminosityBlockPrincipal& iPrincipal, IOVSyncValue const& iTS) {
-    iSubProcess.doBeginLuminosityBlockAsync(std::move(iHolder),iPrincipal, iTS);
+
+  // This is code in common between beginStreamRun and beginGlobalLuminosityBlock
+  inline void subProcessDoGlobalBeginTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess,
+                                                     LuminosityBlockPrincipal& iPrincipal, IOVSyncValue const& iTS) {
+    iSubProcess.doBeginLuminosityBlockAsync(std::move(iHolder), iPrincipal, iTS);
   }
-  
-  inline void subProcessDoGlobalBeginTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess, RunPrincipal& iPrincipal, IOVSyncValue const& iTS) {
-    iSubProcess.doBeginRunAsync(std::move(iHolder),iPrincipal, iTS);
+
+  inline void subProcessDoGlobalBeginTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess,
+                                                     RunPrincipal& iPrincipal, IOVSyncValue const& iTS) {
+    iSubProcess.doBeginRunAsync(std::move(iHolder), iPrincipal, iTS);
   }
-  
-  inline void subProcessDoGlobalEndTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess, LuminosityBlockPrincipal& iPrincipal, IOVSyncValue const& iTS, bool cleaningUpAfterException) {
-    iSubProcess.doEndLuminosityBlockAsync(std::move(iHolder),iPrincipal, iTS,cleaningUpAfterException);
+
+  inline void subProcessDoGlobalEndTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess,
+                                                   LuminosityBlockPrincipal& iPrincipal, IOVSyncValue const& iTS,
+                                                   bool cleaningUpAfterException) {
+    iSubProcess.doEndLuminosityBlockAsync(std::move(iHolder), iPrincipal, iTS, cleaningUpAfterException);
   }
-  
-  inline void subProcessDoGlobalEndTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess, RunPrincipal& iPrincipal, IOVSyncValue const& iTS, bool cleaningUpAfterException) {
+
+  inline void subProcessDoGlobalEndTransitionAsync(WaitingTaskHolder iHolder, SubProcess& iSubProcess,
+                                                   RunPrincipal& iPrincipal, IOVSyncValue const& iTS,
+                                                   bool cleaningUpAfterException) {
     iSubProcess.doEndRunAsync(std::move(iHolder), iPrincipal, iTS, cleaningUpAfterException);
   }
 
-  template<typename Traits, typename P, typename SC >
-  void beginGlobalTransitionAsync(WaitingTaskHolder iWait,
-                                  Schedule& iSchedule,
-                                  P& iPrincipal,
-                                  IOVSyncValue const & iTS,
-                                  EventSetup const& iES,
-                                  SC& iSubProcesses) {
+  template <typename Traits, typename P, typename SC>
+  void beginGlobalTransitionAsync(WaitingTaskHolder iWait, Schedule& iSchedule, P& iPrincipal, IOVSyncValue const& iTS,
+                                  EventSetup const& iES, SC& iSubProcesses) {
     ServiceToken token = ServiceRegistry::instance().presentToken();
 
-    //When we are done processing the global for this process,
+    // When we are done processing the global for this process,
     // we need to run the global for all SubProcesses
-    auto subs = make_waiting_task(tbb::task::allocate_root(), [&iSubProcesses, iWait,&iPrincipal,iTS,token](std::exception_ptr const* iPtr) mutable {
-      if(iPtr) {
+    auto subs = make_waiting_task(tbb::task::allocate_root(), [&iSubProcesses, iWait, &iPrincipal, iTS,
+                                                               token](std::exception_ptr const* iPtr) mutable {
+      if (iPtr) {
         iWait.doneWaiting(*iPtr);
         return;
       }
       ServiceRegistry::Operate op(token);
-      for_all(iSubProcesses, [&iWait, &iPrincipal, iTS](auto& subProcess){ subProcessDoGlobalBeginTransitionAsync(iWait,subProcess,iPrincipal, iTS); });
+      for_all(iSubProcesses, [&iWait, &iPrincipal, iTS](auto& subProcess) {
+        subProcessDoGlobalBeginTransitionAsync(iWait, subProcess, iPrincipal, iTS);
+      });
     });
-    
+
     WaitingTaskHolder h(subs);
-    iSchedule.processOneGlobalAsync<Traits>(std::move(h),iPrincipal, iES);
+    iSchedule.processOneGlobalAsync<Traits>(std::move(h), iPrincipal, iES);
   }
 
-  
-  template<typename Traits, typename P, typename SC >
-  void endGlobalTransitionAsync(WaitingTaskHolder iWait,
-                                Schedule& iSchedule,
-                                P& iPrincipal,
-                                IOVSyncValue const & iTS,
-                                EventSetup const& iES,
-                                SC& iSubProcesses,
-                                bool cleaningUpAfterException)
-  {
+  template <typename Traits, typename P, typename SC>
+  void endGlobalTransitionAsync(WaitingTaskHolder iWait, Schedule& iSchedule, P& iPrincipal, IOVSyncValue const& iTS,
+                                EventSetup const& iES, SC& iSubProcesses, bool cleaningUpAfterException) {
     ServiceToken token = ServiceRegistry::instance().presentToken();
-    
-    //When we are done processing the global for this process,
-    // we need to run the global for all SubProcesses
-    auto subs = make_waiting_task(tbb::task::allocate_root(), [&iSubProcesses, iWait,&iPrincipal,iTS,token,cleaningUpAfterException](std::exception_ptr const* iPtr) mutable {
-      if(iPtr) {
-        iWait.doneWaiting(*iPtr);
-        return;
-      }
-      ServiceRegistry::Operate op(token);
-      for_all(iSubProcesses, [&iWait, &iPrincipal, iTS,cleaningUpAfterException](auto& subProcess){
-        subProcessDoGlobalEndTransitionAsync(iWait,subProcess,iPrincipal, iTS,cleaningUpAfterException); });
-    });
-    
-    WaitingTaskHolder h(subs);
-    iSchedule.processOneGlobalAsync<Traits>(std::move(h),iPrincipal, iES,cleaningUpAfterException);
-      
-    
-  }
 
+    // When we are done processing the global for this process,
+    // we need to run the global for all SubProcesses
+    auto subs = make_waiting_task(
+        tbb::task::allocate_root(), [&iSubProcesses, iWait, &iPrincipal, iTS, token,
+                                     cleaningUpAfterException](std::exception_ptr const* iPtr) mutable {
+          if (iPtr) {
+            iWait.doneWaiting(*iPtr);
+            return;
+          }
+          ServiceRegistry::Operate op(token);
+          for_all(iSubProcesses, [&iWait, &iPrincipal, iTS, cleaningUpAfterException](auto& subProcess) {
+            subProcessDoGlobalEndTransitionAsync(iWait, subProcess, iPrincipal, iTS, cleaningUpAfterException);
+          });
+        });
+
+    WaitingTaskHolder h(subs);
+    iSchedule.processOneGlobalAsync<Traits>(std::move(h), iPrincipal, iES, cleaningUpAfterException);
+  }
 };
 
 #endif

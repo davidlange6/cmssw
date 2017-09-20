@@ -12,24 +12,17 @@
 #include <vector>
 
 namespace edm {
-  ProductRegistryHelper::~ProductRegistryHelper() { }
+  ProductRegistryHelper::~ProductRegistryHelper() {}
 
-  ProductRegistryHelper::TypeLabelList & ProductRegistryHelper::typeLabelList() {
-    return typeLabelList_;
-  }
+  ProductRegistryHelper::TypeLabelList& ProductRegistryHelper::typeLabelList() { return typeLabelList_; }
 
-  void
-  ProductRegistryHelper::addToRegistry(TypeLabelList::const_iterator const& iBegin,
-                                       TypeLabelList::const_iterator const& iEnd,
-                                       ModuleDescription const& iDesc,
-                                       ProductRegistry& iReg,
-                                       bool iIsListener) {
-
+  void ProductRegistryHelper::addToRegistry(TypeLabelList::const_iterator const& iBegin,
+                                            TypeLabelList::const_iterator const& iEnd, ModuleDescription const& iDesc,
+                                            ProductRegistry& iReg, bool iIsListener) {
     std::vector<std::string> missingDictionaries;
     std::vector<std::string> producedTypes;
 
-    for(TypeLabelList::const_iterator p = iBegin; p != iEnd; ++p) {
-
+    for (TypeLabelList::const_iterator p = iBegin; p != iEnd; ++p) {
       if (!checkDictionary(missingDictionaries, p->typeID_)) {
         checkDictionaryOfWrappedType(missingDictionaries, p->typeID_);
         producedTypes.emplace_back(p->typeID_.className());
@@ -37,17 +30,9 @@ namespace edm {
       }
 
       TypeWithDict type(p->typeID_.typeInfo());
-      BranchDescription pdesc(convertToBranchType(p->transition_),
-                              iDesc.moduleLabel(),
-                              iDesc.processName(),
-                              p->typeID_.userClassName(),
-                              p->typeID_.friendlyClassName(),
-                              p->productInstanceName_,
-                              iDesc.moduleName(),
-                              iDesc.parameterSetID(),
-                              type,
-                              true,
-                              isEndTransition(p->transition_));
+      BranchDescription pdesc(convertToBranchType(p->transition_), iDesc.moduleLabel(), iDesc.processName(),
+                              p->typeID_.userClassName(), p->typeID_.friendlyClassName(), p->productInstanceName_,
+                              iDesc.moduleName(), iDesc.parameterSetID(), type, true, isEndTransition(p->transition_));
 
       if (pdesc.transient()) {
         if (!checkDictionary(missingDictionaries, pdesc.wrappedName(), pdesc.wrappedType())) {
