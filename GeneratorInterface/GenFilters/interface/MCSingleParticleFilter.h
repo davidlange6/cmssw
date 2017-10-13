@@ -42,10 +42,10 @@ namespace edm {
 class MCSingleParticleFilter : public edm::EDFilter {
    public:
       explicit MCSingleParticleFilter(const edm::ParameterSet&);
-      ~MCSingleParticleFilter();
+      ~MCSingleParticleFilter() override;
 
 
-      virtual bool filter(edm::Event&, const edm::EventSetup&);
+      bool filter(edm::Event&, const edm::EventSetup&) override;
    private:
       // ----------memeber function----------------------
       // ----------member data ---------------------------
