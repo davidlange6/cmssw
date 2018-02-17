@@ -39,11 +39,11 @@ produce(edm::Event& e, const edm::EventSetup& es) {
   subtractorCMN->init(es);
 
   std::string label = findInput(inputRawdigis, inputTokensRawDigi, e);
-  if(      "VirginRaw"  == label )  vr_process(*inputRawdigis, *output);
-  else if( "ProcessedRaw" == label )  pr_process(*inputRawdigis, *output);
-  else if( "ZeroSuppressed" == findInput(inputDigis, inputTokensDigi, e) ) zs_process(*inputDigis, *output);
-  else
-    edm::LogError("Input Not Found");
+  if(      "VirginRaw"  == label ) {  vr_process(*inputRawdigis, *output);
+  } else if( "ProcessedRaw" == label ) {  pr_process(*inputRawdigis, *output);
+  } else if( "ZeroSuppressed" == findInput(inputDigis, inputTokensDigi, e) ) { zs_process(*inputDigis, *output);
+  } else {
+    edm::LogError("Input Not Found"); }
 
   e.put(std::move(output));
 }
@@ -104,8 +104,8 @@ common_process(const uint32_t detId, std::vector<float> & digis, edm::DetSetVect
 
   //Apply Gains
   SiStripApvGain::Range detGainRange =  gainHandle->getRange(detId);
-  for(std::vector<float>::iterator it=digis.begin(); it<digis.end(); ++it)
-    (*it)/= (gainHandle->getStripGain(it-digis.begin(), detGainRange));
+  for(std::vector<float>::iterator it=digis.begin(); it<digis.end(); ++it) {
+    (*it)/= (gainHandle->getStripGain(it-digis.begin(), detGainRange)); }
 
   //Insert as DetSet
   edm::DetSet<SiStripProcessedRawDigi> ds(detId);
