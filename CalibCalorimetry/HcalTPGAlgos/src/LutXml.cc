@@ -86,7 +86,7 @@ void LutXml::init( void )
 
 
 std::vector<unsigned int> * LutXml::getLutFast( uint32_t det_id ){
-   if (lut_map.find(det_id) != lut_map.end()) return &(lut_map)[det_id];
+   if (lut_map.find(det_id) != lut_map.end()) { return &(lut_map)[det_id]; }
    edm::LogError("LutXml") << "LUT not found, null pointer is returned";
    return nullptr;
 }
@@ -279,7 +279,7 @@ std::string LutXml::get_checksum( std::vector<unsigned int> & lut )
     exit(-1);
   }
   md5_finish(&md5er,digest);
-  for (int i=0; i<16; i++) result << std::hex << (((int)(digest[i]))&0xFF);
+  for (int i=0; i<16; i++) { result << std::hex << (((int)(digest[i]))&0xFF); }
 
 
   return result . str();
@@ -304,25 +304,25 @@ int LutXml::test_access( std::string filename ){
       HcalDetId det_id(HcalBarrel,row->ieta,row->iphi,row->idepth);
       uint32_t raw_id = det_id.rawId();
       std::vector<unsigned int> * l = getLutFast(raw_id);
-      if (l) _counter++;
+      if (l) { _counter++; }
     }
     if (row->subdet=="HE"){
       HcalDetId det_id(HcalEndcap,row->ieta,row->iphi,row->idepth);
       uint32_t raw_id = det_id.rawId();
       std::vector<unsigned int> * l = getLutFast(raw_id);
-      if (l) _counter++;
+      if (l) { _counter++; }
     }
     if (row->subdet=="HF"){
       HcalDetId det_id(HcalForward,row->ieta,row->iphi,row->idepth);
       uint32_t raw_id = det_id.rawId();
       std::vector<unsigned int> * l = getLutFast(raw_id);
-      if (l) _counter++;
+      if (l) { _counter++; }
     }
     if (row->subdet=="HO"){
       HcalDetId det_id(HcalOuter,row->ieta,row->iphi,row->idepth);
       uint32_t raw_id = det_id.rawId();
       std::vector<unsigned int> * l = getLutFast(raw_id);
-      if (l) _counter++;
+      if (l) { _counter++; }
     }
   }
   gettimeofday( &_t, nullptr );
@@ -340,14 +340,14 @@ HcalSubdetector LutXml::subdet_from_crate(int crate_, int eta, int depth){
   // HO: 3,6,7,13
   int crate=crate_<20? crate_ : crate_-20;
 
-  if (crate==2 || crate==9 || crate==12) result=HcalForward;
-  else if (crate==3 || crate==6 || crate==7 || crate==13) result=HcalOuter;
-  else if (crate==0 || crate==1 || crate==4 || crate==5 || crate==10 || crate==11 || crate==14 || crate==15 || crate==17){
-    if (eta<16) result=HcalBarrel;
-    else if (eta>16) result=HcalEndcap;
-    else if (eta==16 && depth<3)  result=HcalBarrel;
-    else if (eta==16 && depth>=3) result=HcalEndcap;
-    else{
+  if (crate==2 || crate==9 || crate==12) { result=HcalForward;
+  } else if (crate==3 || crate==6 || crate==7 || crate==13) { result=HcalOuter;
+  } else if (crate==0 || crate==1 || crate==4 || crate==5 || crate==10 || crate==11 || crate==14 || crate==15 || crate==17){
+    if (eta<16) { result=HcalBarrel;
+    } else if (eta>16) { result=HcalEndcap;
+    } else if (eta==16 && depth<3) {  result=HcalBarrel;
+    } else if (eta==16 && depth>=3) { result=HcalEndcap;
+    } else{
       edm::LogError("LutXml") << "Impossible to determine HCAL subdetector!!!";
       exit(-1);
     }
@@ -395,12 +395,12 @@ int LutXml::create_lut_map( void ){
       for(int j=0; j!=n_of_par; j++){
 	DOMElement * aPar = (DOMElement *)(par_list->item(j));
 	char * aName = XMLString::transcode( aPar->getAttribute(XMLProcessor::_toXMLCh("name")) );
-	if ( strcmp(aName, "IETA")==0 ) ieta=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue()));
-	if ( strcmp(aName, "IPHI")==0 ) iphi=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue()));
-	if ( strcmp(aName, "DEPTH")==0 ) depth=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue()));
-	if ( strcmp(aName, "CRATE")==0 ) crate=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue()));
-	if ( strcmp(aName, "LUT_TYPE")==0 ) lut_type=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue()));
-	if ( strcmp(aName, "SLB")==0 ) slb=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue()));
+	if ( strcmp(aName, "IETA")==0 ) { ieta=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue())); }
+	if ( strcmp(aName, "IPHI")==0 ) { iphi=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue())); }
+	if ( strcmp(aName, "DEPTH")==0 ) { depth=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue())); }
+	if ( strcmp(aName, "CRATE")==0 ) { crate=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue())); }
+	if ( strcmp(aName, "LUT_TYPE")==0 ) { lut_type=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue())); }
+	if ( strcmp(aName, "SLB")==0 ) { slb=a_to_i(XMLString::transcode(aPar->getFirstChild()->getNodeValue())); }
       }
       subdet=subdet_from_crate(crate,abs(ieta),depth);
       DOMElement * _data = (DOMElement *)(aBrick->getElementsByTagName(XMLString::transcode("Data"))->item(0));
@@ -414,22 +414,22 @@ int LutXml::create_lut_map( void ){
       for (int i=0; i!=_string_length; i++){
 	bool _range = false;
 	char ch_cur = _str[i];
-	if (_base==16) _range = (ch_cur>='0' and ch_cur<='9') || (ch_cur>='a' and ch_cur<='f') || (ch_cur>='A' and ch_cur<='F');
-	else if (_base==10) _range = (ch_cur>='0' and ch_cur<='9');
+	if (_base==16) { _range = (ch_cur>='0' and ch_cur<='9') || (ch_cur>='a' and ch_cur<='f') || (ch_cur>='A' and ch_cur<='F');
+	} else if (_base==10) { _range = (ch_cur>='0' and ch_cur<='9'); }
 	if ( _range ){
-	  if ( ch_cur>='a' and ch_cur<='f' ) ch_cur += 10-'a';
-	  else if ( ch_cur>='A' and ch_cur<='F' ) ch_cur += 10-'A';
-	  else if ( ch_cur>='0' and ch_cur<='9' ) ch_cur += -'0';
+	  if ( ch_cur>='a' and ch_cur<='f' ) { ch_cur += 10-'a';
+	  } else if ( ch_cur>='A' and ch_cur<='F' ) { ch_cur += 10-'A';
+	  } else if ( ch_cur>='0' and ch_cur<='9' ) { ch_cur += -'0'; }
 	  _item = _item*_base;
 	  _item += ch_cur;
 	  bool last_digit = false;
-	  if ( (i+1)==_string_length ) last_digit=true;
-	  else{
+	  if ( (i+1)==_string_length ) { last_digit=true;
+	  } else{
 	    char ch_next = _str[i+1];
 	    bool _range_next = false;
-	    if (_base==16) _range_next = (ch_next>='0' and ch_next<='9') || (ch_next>='a' and ch_next<='f') || (ch_next>='A' and ch_next<='F');
-	    else if (_base==10) _range_next = (ch_next>='0' and ch_next<='9');
-	    if ( !_range_next ) last_digit=true;
+	    if (_base==16) { _range_next = (ch_next>='0' and ch_next<='9') || (ch_next>='a' and ch_next<='f') || (ch_next>='A' and ch_next<='F');
+	    } else if (_base==10) { _range_next = (ch_next>='0' and ch_next<='9'); }
+	    if ( !_range_next ) { last_digit=true; }
 	  }
 	  if (last_digit){
 	    _lut.push_back(_item);
@@ -448,7 +448,7 @@ int LutXml::create_lut_map( void ){
 	HcalTrigTowerDetId _id(ieta,iphi,10*version);
 	_key = _id.rawId();
       }
-      else continue;
+      else { continue; }
       lut_map.insert(std::pair<uint32_t,std::vector<unsigned int> >(_key,_lut));
     }
   }

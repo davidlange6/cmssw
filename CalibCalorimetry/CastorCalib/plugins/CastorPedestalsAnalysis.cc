@@ -34,9 +34,9 @@ CastorPedestalsAnalysis::~CastorPedestalsAnalysis()
    {
       if(bunch_it->usedflag){
 
-      if(verboseflag) std::cout << "Analyzing channel sector= " << bunch_it->detid.sector() 
+      if(verboseflag) { std::cout << "Analyzing channel sector= " << bunch_it->detid.sector() 
         << " module = " << bunch_it->detid.module() 
-        << std::endl;
+        << std::endl; }
       //pedestal constant is the mean
       bunch_it->cap[0] /= bunch_it->num[0][0];
       bunch_it->cap[1] /= bunch_it->num[1][1];
@@ -310,8 +310,8 @@ CastorPedestalsAnalysis::analyze(const edm::Event& e, const edm::EventSetup& iSe
    for(CastorDigiCollection::const_iterator j = castor->begin(); j != castor->end(); ++j)
    {
       const CastorDataFrame digi = (const CastorDataFrame)(*j);
-      for(bunch_it = Bunches.begin(); bunch_it != Bunches.end(); ++bunch_it)
-         if(bunch_it->detid.rawId() == digi.id().rawId()) break;
+      for(bunch_it = Bunches.begin(); bunch_it != Bunches.end(); ++bunch_it) {
+         if(bunch_it->detid.rawId() == digi.id().rawId()) { break; }
       bunch_it->usedflag = true;
       for(int ts = firstTS; ts != lastTS+1; ts++)
       {

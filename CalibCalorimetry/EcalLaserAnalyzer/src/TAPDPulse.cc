@@ -72,7 +72,8 @@ bool TAPDPulse::setPulse(double *adc){
 }
 double TAPDPulse::getMax(){
 
-  if(isMaxFound_) return adcMax_; 
+  if(isMaxFound_) { return adcMax_; 
+}
 
   int iadcmax=0;
   double adcmax=0.0;
@@ -88,7 +89,8 @@ double TAPDPulse::getMax(){
 }
 
 int TAPDPulse::getMaxSample(){
-  if(!isMaxFound_) getMax();
+  if(!isMaxFound_) { getMax();
+}
   return iadcMax_;
 
 }
@@ -106,8 +108,9 @@ double TAPDPulse::getRatio(int n1, int n2){
   assert (n2<_nsamples && n2>=0);
 
   double ped=0;
-  if(isPedCalc_)ped=pedestal_; 
-  else ped=adc_[0];
+  if(isPedCalc_) {ped=pedestal_; 
+  } else { ped=adc_[0];
+}
   
   double ratio=(adc_[n1]-ped)/(adc_[n2]-ped);
   return ratio; 
@@ -116,23 +119,29 @@ double TAPDPulse::getRatio(int n1, int n2){
 bool TAPDPulse::isTimingOK(){
 
   bool ok=true;
-  if(!isMaxFound_) getMax();
-  if(iadcMax_<=_timingcutlow || iadcMax_>=_timingcuthigh) ok=false;
+  if(!isMaxFound_) { getMax();
+}
+  if(iadcMax_<=_timingcutlow || iadcMax_>=_timingcuthigh) { ok=false;
+}
   return ok;
 }
 bool TAPDPulse::isTimingQualOK(){
 
   bool ok=true;
-  if(!isMaxFound_) getMax();
-  if(iadcMax_<=_timingquallow || iadcMax_>=_timingqualhigh) ok=false;
+  if(!isMaxFound_) { getMax();
+}
+  if(iadcMax_<=_timingquallow || iadcMax_>=_timingqualhigh) { ok=false;
+}
   return ok;
 }
 
 bool TAPDPulse::areFitSamplesOK(){
   
   bool ok=true;
-  if(!isMaxFound_) getMax();
-  if ((iadcMax_-_firstsample)<_presample || (iadcMax_+_lastsample)>_nsamples-1) ok=false;
+  if(!isMaxFound_) { getMax();
+}
+  if ((iadcMax_-_firstsample)<_presample || (iadcMax_+_lastsample)>_nsamples-1) { ok=false;
+}
   return ok;
   
 }
@@ -150,16 +159,20 @@ bool TAPDPulse::arePulseRatioOK(){
 
   bool ok=true;
 
-  if(!isMaxFound_) getMax();
-  if(iadcMax_<1 || iadcMax_>=_nsamples-1) return false;
+  if(!isMaxFound_) { getMax();
+}
+  if(iadcMax_<1 || iadcMax_>=_nsamples-1) { return false;
+}
   
   double ratioNm1=getRatio(iadcMax_-1,iadcMax_);
   double ratioNp1=getRatio(iadcMax_+1,iadcMax_);
   double ratioMax=TMath::Max(ratioNm1,ratioNp1);
   double ratioMin=TMath::Min(ratioNm1,ratioNp1);
   
-  if(ratioMax<_ratiomaxcutlow) ok=false;
-  if(ratioMin<_ratiomincutlow || ratioMin>_ratiomincuthigh) ok=false;
+  if(ratioMax<_ratiomaxcutlow) { ok=false;
+}
+  if(ratioMin<_ratiomincutlow || ratioMin>_ratiomincuthigh) { ok=false;
+}
 
   return ok;
 
@@ -168,14 +181,17 @@ bool TAPDPulse::isPulseRatioMaxOK(){
 
   bool ok=true;
 
-  if(!isMaxFound_) getMax();
-  if(iadcMax_<1 || iadcMax_>=_nsamples-1) return false;
+  if(!isMaxFound_) { getMax();
+}
+  if(iadcMax_<1 || iadcMax_>=_nsamples-1) { return false;
+}
   
   double ratioNm1=getRatio(iadcMax_-1,iadcMax_);
   double ratioNp1=getRatio(iadcMax_+1,iadcMax_);
   double ratioMax=TMath::Max(ratioNm1,ratioNp1);
   
-  if(ratioMax<_ratiomaxcutlow) ok=false;
+  if(ratioMax<_ratiomaxcutlow) { ok=false;
+}
   return ok;
 
 }
@@ -183,19 +199,23 @@ bool TAPDPulse::isPulseRatioMinOK(){
 
   bool ok=true;
   
-  if(!isMaxFound_) getMax();
-  if(iadcMax_<1 || iadcMax_>=_nsamples-1) return false;
+  if(!isMaxFound_) { getMax();
+}
+  if(iadcMax_<1 || iadcMax_>=_nsamples-1) { return false;
+}
   
   double ratioNm1=getRatio(iadcMax_-1,iadcMax_);
   double ratioNp1=getRatio(iadcMax_+1,iadcMax_);
   double ratioMin=TMath::Min(ratioNm1,ratioNp1);
   
-  if(ratioMin<_ratiomincutlow || ratioMin>_ratiomincuthigh) ok=false;
+  if(ratioMin<_ratiomincutlow || ratioMin>_ratiomincuthigh) { ok=false;
+}
   return ok;  
 }
 
 double TAPDPulse::getPedestal(){
-  if(isPedCalc_) return pedestal_;
+  if(isPedCalc_) { return pedestal_;
+}
   double ped=0;
   for(int i=0;i<_presample;i++){
     ped+=adc_[i];
@@ -209,8 +229,9 @@ double TAPDPulse::getPedestal(){
 double* TAPDPulse::getAdcWithoutPedestal(){
   
   double ped;
-  if(!isPedCalc_) ped=getPedestal();
-  else ped=pedestal_;
+  if(!isPedCalc_) { ped=getPedestal();
+  } else { ped=pedestal_;
+}
   
   double *adcNoPed= new double[10];
   for (int i=0;i<_nsamples;i++){

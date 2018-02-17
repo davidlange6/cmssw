@@ -42,17 +42,21 @@ void TPN::addEntry(double pn, double pn0, double pn1)
 
   double val[nOutVar];
  
-  if(_nPN==0) val[iPN]=pn0;
-  else val[iPN]=pn1;
+  if(_nPN==0) { val[iPN]=pn0;
+  } else { val[iPN]=pn1;
+}
 
-  if(pn!=0) val[iPNoPN]=val[iPN]/pn;
-  else val[iPNoPN]=0;
+  if(pn!=0) { val[iPNoPN]=val[iPN]/pn;
+  } else { val[iPNoPN]=0;
+}
 
-  if(pn0!=0) val[iPNoPN0]=val[iPN]/pn0;
-  else val[iPNoPN0]=0;
+  if(pn0!=0) { val[iPNoPN0]=val[iPN]/pn0;
+  } else { val[iPNoPN0]=0;
+}
 
-  if(pn1!=0) val[iPNoPN1]=val[iPN]/pn1;
-  else val[iPNoPN1]=0;
+  if(pn1!=0) { val[iPNoPN1]=val[iPN]/pn1;
+  } else { val[iPNoPN1]=0;
+}
   
   for(int ivar=0;ivar<nOutVar;ivar++){
     mom[ivar]->addEntry(val[ivar]);
@@ -64,7 +68,8 @@ void  TPN::setCut(int ivar, double mean, double sig){
 
   cuts[0][ivar]=mean-2.0*sig;
   cuts[1][ivar]=mean+2.0*sig;
-  if(cuts[0][ivar]<0)cuts[0][ivar]=0.0 ;
+  if(cuts[0][ivar]<0) {cuts[0][ivar]=0.0 ;
+}
 
   mom[ivar]->setCut(cuts[0][ivar],cuts[1][ivar]);
 }

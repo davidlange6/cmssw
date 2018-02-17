@@ -166,7 +166,8 @@ double TSFit::fpol3dg ( int nmxul,
       difmx=dif;
     }
   }
-  if(deglib > 0.5) xki2=xki2/deglib;
+  if(deglib > 0.5) { xki2=xki2/deglib;
+}
   /*     amplitude and maximum position                    */
   delta=parom[2]*parom[2]-3.*parom[3]*parom[1];
   if(delta > 0.){
@@ -222,8 +223,10 @@ double TSFit::inverms( int n, double g[matdim][matdim], double ginv[matdim][matd
 	s = s + al[i][k] * al[j][k];
       }
       r= g[i][j] - s;
-      if( j < i )  al[i][j] = r / al[j][j];
-      if( j == i ) al[i][j] = sqrt( r );
+      if( j < i ) {  al[i][j] = r / al[j][j];
+}
+      if( j == i ) { al[i][j] = sqrt( r );
+}
     }
   }
   /*  inversion de la matrice al   */
@@ -282,18 +285,21 @@ double TSFit::fit_third_degree_polynomial(
   double val_max = 0.;
   int imax = 0;
   for(i=0;i<nbs;i++){
-    if( sample_flag[i] == 0 )continue;
+    if( sample_flag[i] == 0 ) {continue;
+}
     if( bdc[i] > val_max ){
       val_max = bdc[i];
       imax = i;
     }
   }
 
-  if( (val_max*val_max) * errmat[imax][imax] < 16. )return -118;
+  if( (val_max*val_max) * errmat[imax][imax] < 16. ) {return -118;
+}
 
   //  if( imax != 9 )printf( "imax : %d !!!!!!!!!!!!!!!!!!!!!!!!!!!\n", imax );
 
-  if( norme == 0. )norme = val_max;
+  if( norme == 0. ) {norme = val_max;
+}
 
   // look for samples above 1/3 of maximum before and 1/2 after
   double val2 = val_max / 2.;
@@ -303,8 +309,10 @@ double TSFit::fit_third_degree_polynomial(
 
   for(i=iinf;i<=isup;i++){
     if( sample_flag[i] >= 1 ){
-      if( ( bdc[i] < val3 ) && ( i < imax ) )ilow = i;
-      if( bdc[i] > val2 )ihig = i;
+      if( ( bdc[i] < val3 ) && ( i < imax ) ) {ilow = i;
+}
+      if( bdc[i] > val2 ) {ihig = i;
+}
     }
   }
 
@@ -314,8 +322,10 @@ double TSFit::fit_third_degree_polynomial(
 
   /*  le test suivant, apparemment idiot, est mis a cause des sequences 0. 2048. qui apparaissent dans certains mauvais evts     JPP 11/09/00 */
  
-  if( ihig == ilow)return -105;
-  if( ilow == imax )ilow = ilow-1;
+  if( ihig == ilow) {return -105;
+}
+  if( ilow == imax ) {ilow = ilow-1;
+}
   //if( ihig - ilow < 3 )ihig = ilow + 3;
   ihig = ilow + 3;
 
@@ -346,7 +356,8 @@ double TSFit::fit_third_degree_polynomial(
   tm = parfp3[4] + (float)ilow;
   amp = parfp3[5];
 
-  if( amp * amp * errmat[0][0] < 2. )return -101.;
+  if( amp * amp * errmat[0][0] < 2. ) {return -101.;
+}
   tmp = parfp3[6] + (float)ilow;
 
   /*

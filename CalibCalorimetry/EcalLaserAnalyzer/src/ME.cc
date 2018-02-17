@@ -208,7 +208,8 @@ ME::Time
 ME::time( float dt, Time t0, int tunit )
 {
   short int sign = 1;
-  if( dt<0 ) sign = -1;
+  if( dt<0 ) { sign = -1;
+}
   float t_ = sign*dt;
   switch( tunit )
     {
@@ -224,8 +225,9 @@ ME::time( float dt, Time t0, int tunit )
     };
   ME::Time it_ = static_cast<ME::Time>(t_);
   std::cout << "dt/it/t0/ " << dt << "/" << it_ << "/" << t0 << std::endl; 
-  if( sign==1 ) return t0+it_;
-  else          return t0-it_;
+  if( sign==1 ) { return t0+it_;
+  } else {          return t0-it_;
+}
 }
 
 ME::Time
@@ -249,11 +251,14 @@ int
 ME::ecalRegion( int ilmr )
 {
   assert( ilmr>0 && ilmr<=92 );
-  if( ilmr<=36 ) return iEBM;
+  if( ilmr<=36 ) { return iEBM;
+}
   ilmr-=36;
-  if( ilmr<=36 ) return iEBP;
+  if( ilmr<=36 ) { return iEBP;
+}
   ilmr-=36;
-  if( ilmr<=10 ) return iEEP;
+  if( ilmr<=10 ) { return iEEP;
+}
   return iEEM;
 }
 
@@ -264,24 +269,26 @@ ME::lmr( int idcc, int side )
   
   assert( side==0 || side==1 );
 
-  if( idcc>600 ) idcc-=600;
+  if( idcc>600 ) { idcc-=600;
+}
   assert( idcc>=1 && idcc<=54 );
   int ireg; 
-  if( idcc<=9 ) ireg = iEEM;
-  else 
+  if( idcc<=9 ) { ireg = iEEM;
+  } else 
     {
       idcc -= 9;
-      if( idcc<=18 ) ireg = iEBM;
-      else
+      if( idcc<=18 ) { ireg = iEBM;
+      } else
 	{
 	  idcc -= 18;
-	  if( idcc<=18 ) ireg = iEBP;
-	  else
+	  if( idcc<=18 ) { ireg = iEBP;
+	  } else
 	    {
 	      idcc -= 18;
-	      if( idcc<=9 ) ireg = iEEP;
-	      else
+	      if( idcc<=9 ) { ireg = iEEP;
+	      } else {
 		abort();
+}
 	    }
 	}
     }
@@ -292,19 +299,23 @@ ME::lmr( int idcc, int side )
 	  return -1;	  
 	}
       ilmr = idcc;
-      if( idcc==9 ) ilmr++;
-      if( idcc==8 && side==1 ) ilmr++;
+      if( idcc==9 ) { ilmr++;
+}
+      if( idcc==8 && side==1 ) { ilmr++;
+}
     }
   else if( ireg==iEBM || ireg==iEBP )
     {
       ilmr = 2*(idcc-1) + side + 1;
     }
-  else
+  else {
     abort();
+}
 
-  if( ireg==iEBP ) ilmr+=36; 
-  else if( ireg==iEEP ) ilmr+=72; 
-  else if( ireg==iEEM ) ilmr+=82; 
+  if( ireg==iEBP ) { ilmr+=36; 
+  } else if( ireg==iEEP ) { ilmr+=72; 
+  } else if( ireg==iEEM ) { ilmr+=82; 
+}
 
   return ilmr;
 }
@@ -316,17 +327,20 @@ ME::dccAndSide( int ilmr )
   int side=0;
 
   int ireg = ecalRegion( ilmr );
-  if( ireg==iEEM ) ilmr-=82; 
-  else if( ireg==iEBP ) ilmr-=36; 
-  else if( ireg==iEEP ) ilmr-=72; 
+  if( ireg==iEEM ) { ilmr-=82; 
+  } else if( ireg==iEBP ) { ilmr-=36; 
+  } else if( ireg==iEEP ) { ilmr-=72; 
+}
 
   if( ireg==iEEM || ireg==iEEP )
     {
       assert( ilmr>=1 && ilmr<=10 );
       side = 0;
       idcc = ilmr;
-      if( ilmr>=9 ) idcc--; 
-      if( ilmr==9 ) side=1;
+      if( ilmr>=9 ) { idcc--; 
+}
+      if( ilmr==9 ) { side=1;
+}
     }
   else 
     {
@@ -335,9 +349,12 @@ ME::dccAndSide( int ilmr )
       side = (ilmr-1)%2;
     }
 
-  if( ireg>iEEM ) idcc+=9; 
-  if( ireg>iEBM ) idcc+=18; 
-  if( ireg>iEBP ) idcc+=18; 
+  if( ireg>iEEM ) { idcc+=9; 
+}
+  if( ireg>iEBM ) { idcc+=18; 
+}
+  if( ireg>iEBP ) { idcc+=18; 
+}
   
   //  idcc += 600;
 
@@ -356,31 +373,38 @@ ME::regionAndSector( int ilmr, int& ireg, int& ism, int& idcc, int& side )
   ism = 0;
   if( ireg==iEEM || ireg==iEEP )
     {
-      if( idcc>600 ) idcc-=600;  // also works with FEDids
+      if( idcc>600 ) { idcc-=600;  // also works with FEDids
+}
       if( idcc>=1 && idcc<=9 )
         {
           ism = 6+idcc;
-	  if( ism>9 ) ism-=9;
+	  if( ism>9 ) { ism-=9;
+}
 	  ism+=9;
         }
       else if( idcc>=46 && idcc<=54 )
         {
           ism = idcc-46+7;
-	  if( ism>9 ) ism-=9;
+	  if( ism>9 ) { ism-=9;
+}
         }
-      else
+      else {
         abort();
+}
     }
   else if( ireg==iEBM || ireg==iEBP )
     {
-      if( idcc>600 ) idcc-=600;  // also works with FEDids
+      if( idcc>600 ) { idcc-=600;  // also works with FEDids
+}
       assert( idcc>=10 && idcc<=45 );
       ism=idcc-9;
-      if( ism>18 ) ism-=18;
-      else         ism+=18;
+      if( ism>18 ) { ism-=18;
+      } else {         ism+=18;
+}
     }
-  else
+  else {
     abort();
+}
 }
 
 TString
@@ -391,8 +415,10 @@ ME::smName( int ireg, int ism )
     {
       assert( ism>=1 && ism<=18 );
       out = "EE+";
-      if( ireg==ME::iEEM ) out = "EE-";
-      if( ism>9 )          ism -= 9;
+      if( ireg==ME::iEEM ) { out = "EE-";
+}
+      if( ism>9 ) {          ism -= 9;
+}
       out += ism;
      }
   else if( ireg==ME::iEBM || ireg==ME::iEBP ) 
@@ -406,8 +432,9 @@ ME::smName( int ireg, int ism )
         }
       out += ism;
     }
-  else
+  else {
     abort();
+}
   return out;
 }
 
@@ -441,7 +468,8 @@ MEChannel*
 ME::regTree( int ireg )
 {
   assert( ireg>=iEEM && ireg<=iEEP );
-  if( _trees[ireg]!=nullptr ) return _trees[ireg];
+  if( _trees[ireg]!=nullptr ) { return _trees[ireg];
+}
 
   int iEcalRegion_      = ireg;
   int iSector_          = 0;
@@ -457,7 +485,8 @@ ME::regTree( int ireg )
       for( int isect=1; isect<=18; isect++ )
 	{
 	  iSector_ = isect;
-	  if( iEcalRegion_==iEBM ) iSector_+=18; 
+	  if( iEcalRegion_==iEBM ) { iSector_+=18; 
+}
 	  if( _trees[iEcalRegion_]==nullptr )
 	    {
 	      //	      std::cout << "Building the tree of crystals -- " 
@@ -505,7 +534,8 @@ ME::regTree( int ireg )
   else if( iEcalRegion_==iEEM || iEcalRegion_==iEEP )
     {
       int iz=1;
-      if( iEcalRegion_==iEEM ) iz=-1;
+      if( iEcalRegion_==iEEM ) { iz=-1;
+}
       if( _trees[iEcalRegion_]==nullptr )
 	{
 	  //	  std::cout << "Building the tree of crystals -- " 
@@ -516,7 +546,8 @@ ME::regTree( int ireg )
 
       for( int ilmr=72; ilmr<=92; ilmr++ )  // force the order of Monitoring Regions
 	{
-	  if( ecalRegion( ilmr )!=iEcalRegion_ ) continue;
+	  if( ecalRegion( ilmr )!=iEcalRegion_ ) { continue;
+}
 	  for( int ilmm=1; ilmm<=19; ilmm++ ) // force the order of Monitoring Modules
 	    {
 	      for( int iXX=1; iXX<=10; iXX++ )
@@ -524,29 +555,35 @@ ME::regTree( int ireg )
 		  for( int iside=1; iside<=2; iside++ )  // symmetrize wrt y-axis
 		    {
 		      int iX=iXX;
-		      if( iside==2 ) iX = 20-iXX+1;
+		      if( iside==2 ) { iX = 20-iXX+1;
+}
 		      for( int iY=1; iY<=20; iY++ )
 			{
 			  //int iSector_   = MEEEGeom::sector( iX, iY );
 			  int iSector_   = MEEEGeom::sm( iX, iY, iz );
-			  if( iSector_<0 ) continue;
+			  if( iSector_<0 ) { continue;
+}
 			  iLMRegion_ = MEEEGeom::lmr( iX, iY, iz );
-			  if( iLMRegion_!=ilmr ) continue;
+			  if( iLMRegion_!=ilmr ) { continue;
+}
 			  iLMModule_ = MEEEGeom::lmmod( iX, iY );
-			  if( iLMModule_!=ilmm ) continue;
+			  if( iLMModule_!=ilmm ) { continue;
+}
 			  iSuperCrystal_ = MEEEGeom::sc( iX, iY );
 
 			  for( int jxx=1; jxx<=5; jxx++ )
 			    {
 			      int jx = jxx;  // symmetrize...
-			      if( iside==2 ) jx = 5-jxx+1;
+			      if( iside==2 ) { jx = 5-jxx+1;
+}
 
 			      for( int jy=1; jy<=5; jy++ )
 				{
 				  int ix = 5*(iX-1)+jx;
 				  int iy = 5*(iY-1)+jy;
 				  iCrystal_ = MEEEGeom::crystal( ix, iy );
-				  if( iCrystal_<0 ) continue;
+				  if( iCrystal_<0 ) { continue;
+}
 				  leaf_ = tree_;		  
 				  leaf_ = leaf_->getDaughter( ix, iy, iSector_       );
 				  leaf_ = leaf_->getDaughter( ix, iy, iLMRegion_     );
@@ -569,38 +606,42 @@ bool
 ME::isBarrel( int ilmr )
 {
   int reg_ = ecalRegion( ilmr );
-  if     ( reg_==iEEM || reg_==iEEP ) return false;
-  else if( reg_==iEBM || reg_==iEBP ) return true;
-  else abort();
+  if     ( reg_==iEEM || reg_==iEEP ) { return false;
+  } else if( reg_==iEBM || reg_==iEBP ) { return true;
+  } else { abort();
+}
   return true;
 }
 
 std::pair<int,int>
 ME::memFromLmr( int ilmr )
 {
-  if( isBarrel( ilmr ) )
+  if( isBarrel( ilmr ) ) {
     return MEEBGeom::memFromLmr( ilmr );
-  else
+  } else {
     return MEEEGeom::memFromLmr( ilmr );
+}
   return std::pair<int,int>();
 }
 std::vector< int>
 ME::apdRefChannels( int ilmmod , int ilmr)
 {
-  if( isBarrel( ilmr ) )
+  if( isBarrel( ilmr ) ) {
     return MEEBGeom::apdRefChannels( ilmmod );
-  else
+  } else {
     return MEEEGeom::apdRefChannels( ilmmod );
+}
   return std::vector< int>();
 }
 
 std::vector<int>
 ME::lmmodFromLmr( int ilmr )
 {
-  if( isBarrel(ilmr) )
+  if( isBarrel(ilmr) ) {
     return MEEBGeom::lmmodFromLmr( ilmr );
-  else
+  } else {
     return MEEEGeom::lmmodFromLmr( ilmr );
+}
   return std::vector<int>();
 }
 
@@ -611,7 +652,8 @@ ME::memFromDcc( int idcc )
   for( int iside=0; iside<=1;  iside++ )
     {
       int ilmr = lmr( idcc, iside );
-      if( ilmr<0 ) continue;
+      if( ilmr<0 ) { continue;
+}
       std::pair< int, int > mem_ = memFromLmr( ilmr );
       vec.push_back( mem_.first  );
       vec.push_back( mem_.second );
@@ -626,7 +668,8 @@ ME::lmmodFromDcc( int idcc )
   for( int iside=0; iside<=1;  iside++ )
     {
       int ilmr = lmr( idcc, iside );
-      if( ilmr<0 ) continue;
+      if( ilmr<0 ) { continue;
+}
       bool isBarrel_ = isBarrel( ilmr );
       std::vector< int > vec_ = lmmodFromLmr( ilmr );
       for( unsigned ii=0; ii<vec_.size(); ii++ )
@@ -635,8 +678,10 @@ ME::lmmodFromDcc( int idcc )
 	  if( !isBarrel_ )
 	    {
 	      // special case for Julie
-	      if( ilmmod_==18 && iside==1 ) ilmmod_=20;
-	      if( ilmmod_==19 && iside==1 ) ilmmod_=21;
+	      if( ilmmod_==18 && iside==1 ) { ilmmod_=20;
+}
+	      if( ilmmod_==19 && iside==1 ) { ilmmod_=21;
+}
 	    }
 	  vec.push_back( ilmmod_ );
 	}

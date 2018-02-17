@@ -87,10 +87,10 @@ namespace {
   void dumpDataset (std::ostream& fOutput, unsigned fVersion = 0, const std::string& fFileName = "", const std::string& fDescription = "") {
     fOutput << "<DATA_SET>" << std::endl;
     fOutput << "   <VERSION>" << fVersion << "</VERSION>" << std::endl;
-    if (!fFileName.empty ()) 
-      fOutput << "      <DATA_FILE_NAME>" << fFileName << "</DATA_FILE_NAME>" << std::endl;
-    if (!fDescription.empty ())
-      fOutput << "      <COMMENT_DESCRIPTION>" << fDescription << "</COMMENT_DESCRIPTION>" << std::endl;
+    if (!fFileName.empty ()) { 
+      fOutput << "      <DATA_FILE_NAME>" << fFileName << "</DATA_FILE_NAME>" << std::endl; }
+    if (!fDescription.empty ()) {
+      fOutput << "      <COMMENT_DESCRIPTION>" << fDescription << "</COMMENT_DESCRIPTION>" << std::endl; }
   }
 
   void endDataset (std::ostream& fOutput) {

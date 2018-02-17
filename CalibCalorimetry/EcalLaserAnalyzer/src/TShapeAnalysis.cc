@@ -162,14 +162,16 @@ void TShapeAnalysis::set_presample(int ps)
 void TShapeAnalysis::set_nch(int nch){
 
   assert (nch<=fNchsel);
-  if(tABinit) assert(nch==nchsel);
+  if(tABinit) { assert(nch==nchsel);
+}
   nchsel=nch;
 
 }
 void TShapeAnalysis::assignChannel(int n, int ch)
 {
-    if(n >= nchsel)
+    if(n >= nchsel) {
          printf(" number of channels exceed maximum allowed\n");
+}
 
     index[n]=ch;
 }
@@ -215,8 +217,9 @@ void TShapeAnalysis::putAllVals(int ch, double* sampl, int ieta, int iphi)
 
   int i,k;
   int n=-1;
-  for(i=0;i<nchsel;i++)
-    if(index[i] == ch) n=i;
+  for(i=0;i<nchsel;i++) {
+    if(index[i] == ch) { n=i;
+}
   
   if(n >= 0) {
     if(npass[n] < nevt) {
@@ -242,11 +245,13 @@ void TShapeAnalysis::computeShape(string namefile, TTree *tAB)
 
   double **dbi ;
   dbi = new double *[200];
-  for(int k=0;k<200;k++) dbi[k] = new double[2];
+  for(int k=0;k<200;k++) { dbi[k] = new double[2];
+}
 
   double **signalu ;
   signalu = new double *[200];
-  for(int k=0 ;k<200;k++) signalu[k] = new double[10];        
+  for(int k=0 ;k<200;k++) { signalu[k] = new double[10];        
+}
 
   TFParams *pjf = new TFParams() ;
 
@@ -308,7 +313,8 @@ void TShapeAnalysis::computeShape(string namefile, TTree *tAB)
     }
   }
   
-  if(tAB) tABinit=tAB->CloneTree();
+  if(tAB) { tABinit=tAB->CloneTree();
+}
   
   // Declaration of leaf types
   Int_t           sidei;
@@ -448,7 +454,8 @@ void TShapeAnalysis::computetmaxVal(int i, double* tm_val)
 	      for(int k=0;k<npass[i]-1;k++) {
 		    if(1. < tm_val[k] && tm_val[k] < 10.) {
                          double ss= (sigtm/npassok[i]-tm/npassok[i]*tm/npassok[i]);
-                         if(ss < 0.) ss=0.;
+                         if(ss < 0.) { ss=0.;
+}
                          //tm_sig=sqrt(ss);
                          tm_mean= tm/npassok[i];
 		    }
@@ -549,7 +556,8 @@ void TShapeAnalysis::printshapeData(int gRunNumber)
      int nev;
      sprintf(filename,"runABW%d.pedestal",gRunNumber); 
      fd = fopen(filename, "w");                                
-     if(fd == nullptr) printf("Error while opening file : %s\n",filename);
+     if(fd == nullptr) { printf("Error while opening file : %s\n",filename);
+}
 
      for(int i=0; i<nchsel;i++) {
         if(index[i] >= 0) {

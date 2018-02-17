@@ -123,7 +123,8 @@ void TMom::addEntry(double val, const std::vector<double>& valcut)
     int passing;
     if( valcut.at(iCut)>_cutLow.at(iCut) && valcut.at(iCut) <=_cutHigh.at(iCut) ){
       passing=1;
-    }else passing=0;
+    }else { passing=0;
+}
     passingAllCuts*=passing; 
   }
   
@@ -133,8 +134,10 @@ void TMom::addEntry(double val, const std::vector<double>& valcut)
     sum+=val;
     sum2+=val*val;
     sum3+=val*val*val;
-    if(val>max) max=val;
-    if(val<min) min=val;
+    if(val>max) { max=val;
+}
+    if(val<min) { min=val;
+}
     
     // for peak stuff 
     _ampl.push_back(val);
@@ -145,19 +148,22 @@ void TMom::addEntry(double val, const std::vector<double>& valcut)
 
 
 double  TMom::getMean(){
-  if(nevt!=0) mean=sum/nevt;
-  else mean=0.0;
+  if(nevt!=0) { mean=sum/nevt;
+  } else { mean=0.0;
+}
   return mean;
 }
 
 double  TMom::getMean2(){
-  if(nevt!=0) mean2=sum2/nevt;
-  else mean2=0.0;
+  if(nevt!=0) { mean2=sum2/nevt;
+  } else { mean2=0.0;
+}
   return mean2;
 }
 double  TMom::getMean3(){
-  if(nevt!=0) mean3=sum3/nevt;
-  else mean3=0.0;
+  if(nevt!=0) { mean3=sum3/nevt;
+  } else { mean3=0.0;
+}
   return mean3;
 }
 
@@ -166,8 +172,9 @@ int  TMom::getNevt(){ return nevt;}
 double  TMom::getRMS(){
   double m=getMean(); 
   double m2=getMean2(); 
-  if(nevt!=0) rms=TMath::Sqrt( m2 - m*m );
-  else rms=0.0;
+  if(nevt!=0) { rms=TMath::Sqrt( m2 - m*m );
+  } else { rms=0.0;
+}
   return rms;
 }
 
@@ -178,8 +185,9 @@ double TMom::getM3(){
   double m3=getMean3();
   double sig = getRMS();
   
-  if(nevt!=0 && sig!=0) M3=( m3 - 3.0*m*(m2-m*m) - m*m*m )/(sig*sig*sig); 
-  else M3=0.0;
+  if(nevt!=0 && sig!=0) { M3=( m3 - 3.0*m*(m2-m*m) - m*m*m )/(sig*sig*sig); 
+  } else { M3=0.0;
+}
   return M3;
 }
 
@@ -193,12 +201,14 @@ std::vector<double> TMom::getPeak(){
   int bung;
   
   for(unsigned int i=0;i<_ampl.size();i++){
-    if(wbin <= 0.0)
+    if(wbin <= 0.0) {
       bung=1;
-    else
+    } else {
       bung= (int) ((_ampl.at(i)-min)/wbin)+1;
-    if(1 <= bung && bung <= 100)
+}
+    if(1 <= bung && bung <= 100) {
       bing[bung]++;
+}
   }
   
   TMarkov *peakM = new TMarkov();

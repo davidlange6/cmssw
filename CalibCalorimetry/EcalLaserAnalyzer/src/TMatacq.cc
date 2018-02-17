@@ -16,14 +16,17 @@ using namespace std;
 
 void TMatacq::init()
 {
-  for(int k=0;k<NMAXSAMP;k++)
+  for(int k=0;k<NMAXSAMP;k++) {
        bong[k]=0.;
+}
 
-  for(int k=0;k<=100;k++)
+  for(int k=0;k<=100;k++) {
        bing[k]=0;
+}
 
-  for(int k=0;k<NSPARAB;k++)
+  for(int k=0;k<NSPARAB;k++) {
        t[k]= (double) k;
+}
 
   return ;
 }
@@ -43,10 +46,12 @@ TMatacq::TMatacq(int Ntot, int Nsamp1, int Nsamp2, int cut, int Nbef, int Naft, 
   nevlasers= nevl;
   slidingmean=0.0;
   nslide=NSlide;
-  for(int k=0;k<nevlasers;k++)
+  for(int k=0;k<nevlasers;k++) {
        status[k]=0;
-  for(int k=0;k<nevlasers;k++)
+}
+  for(int k=0;k<nevlasers;k++) {
        status[k+nevlasers]=0;
+}
 
   nevmtq0=0; nevmtq1=0;
 }
@@ -80,7 +85,8 @@ int TMatacq::rawPulseAnalysis(Int_t Nsamp, Double_t *adc)  // GHM
   }
   bl=dsum/((double) presample);
   double ss= (dsum2/((double) presample)-bl*bl);
-  if(ss<0.) ss=0.;
+  if(ss<0.) { ss=0.;
+}
   sigbl=sqrt(ss);
   for(ithr=0,k=presample;k<endsample;k++) {
 	if(adc[k] > (bl+nsigcut*sigbl) && ithr == 0) {
@@ -88,16 +94,19 @@ int TMatacq::rawPulseAnalysis(Int_t Nsamp, Double_t *adc)  // GHM
 	}
   }
 
-  if(ithr == 0) return 101;
+  if(ithr == 0) { return 101;
+}
 
   for(ithr=0,k=firstsample;k<Nsamp;k++) {
        if(adc[k] < (bl+nsigcut*sigbl) && ithr == 0) {
              ithr=1; lastsample=k;
        }
   }
-  if(ithr == 0) lastsample= Nsamp;
+  if(ithr == 0) { lastsample= Nsamp;
+}
 
-  if(lastsample > firstsample+NMAXSAMP) lastsample= firstsample+NMAXSAMP;
+  if(lastsample > firstsample+NMAXSAMP) { lastsample= firstsample+NMAXSAMP;
+}
 
   val_max=0.; samplemax=0;
   for (Int_t is=firstsample;is<lastsample;is++) {
@@ -106,9 +115,12 @@ int TMatacq::rawPulseAnalysis(Int_t Nsamp, Double_t *adc)  // GHM
 	   val_max= bong[is-firstsample]; samplemax=is;
        }
   }
-  if(samplemax == 0) return 103;
-  if(samplemax > lastsample) return 104;
-  if(samplemax < firstsample) return 105;
+  if(samplemax == 0) { return 103;
+}
+  if(samplemax > lastsample) { return 104;
+}
+  if(samplemax < firstsample) { return 105;
+}
 
   
   int endslide=samplemax -nslide;
@@ -120,7 +132,8 @@ int TMatacq::rawPulseAnalysis(Int_t Nsamp, Double_t *adc)  // GHM
     slidingmean+= adc[i];
     islidingmean+=1;
   }
-  if( islidingmean!=0) slidingmean/=double(islidingmean);
+  if( islidingmean!=0) { slidingmean/=double(islidingmean);
+}
 
   return 0;
 }
@@ -137,7 +150,8 @@ int TMatacq::findPeak()
 	   }
        }
    }
-   if(jfind == 0) nbinf=0;
+   if(jfind == 0) { nbinf=0;
+}
 
    for(k=NMAXSAMP,jfind=0;k>nbinf;k--) {
        if(jfind == 0) {
@@ -146,7 +160,8 @@ int TMatacq::findPeak()
 	    }
        }
    }
-   if(nbsup == 0) nbsup=nbinf;
+   if(nbsup == 0) { nbsup=nbinf;
+}
 
    double sumpkval=1.;
    pkval= 0.;
@@ -154,18 +169,23 @@ int TMatacq::findPeak()
    if(nbsup == nbinf) {
        return 301;
    } else {
-       if(nbinf > 4) nbinf-=3;
-       else nbinf=1;
-       if(nbsup < NMAXSAMP-4) nbsup+=3;
-       else nbsup=NMAXSAMP;
+       if(nbinf > 4) { nbinf-=3;
+       } else { nbinf=1;
+}
+       if(nbsup < NMAXSAMP-4) { nbsup+=3;
+       } else { nbsup=NMAXSAMP;
+}
 
-       for(k=0;k<nbinf;k++)
+       for(k=0;k<nbinf;k++) {
 	    bong[k]=0.;
-       for(k=nbsup;k<NMAXSAMP;k++)
+}
+       for(k=nbsup;k<NMAXSAMP;k++) {
             bong[k]=0.;
+}
 
        for(k=0,jfind=0;k<NMAXSAMP;k++) {
-	    if(bong[k] > 0.) jfind++;
+	    if(bong[k] > 0.) { jfind++;
+}
        }
        if(jfind == 0) {
 	    return 302;
@@ -174,8 +194,9 @@ int TMatacq::findPeak()
        } else {
 
 	    for(k=0;k<NMAXSAMP;k++) {
-              if(k < 100) 
+              if(k < 100) { 
 	          bing[k+1]= (int) bong[k];
+}
 	    }
 
             TMarkov *peak = new TMarkov();
@@ -188,8 +209,9 @@ int TMatacq::findPeak()
 
             sumpkval= 0.0;
         
-            if(sumpkval > 1000.) 
+            if(sumpkval > 1000.) { 
 	         sumpkval=10.;
+}
 
             pkval+= (firstsample -1);
        }
@@ -208,11 +230,14 @@ int TMatacq::doFit()
   int endfit= heresamplemax +  fNum_samp_aft_max;
 
   int nval= endfit-beginfit +1;
-  if(nval != NSPARAB) return 201;
+  if(nval != NSPARAB) { return 201;
+}
   for(int kn=beginfit;kn<=endfit;kn++) {
-      if(bong[kn] <= 0) testneg=1;
+      if(bong[kn] <= 0) { testneg=1;
+}
   }
-  if(testneg == 1) return 202;
+  if(testneg == 1) { return 202;
+}
 
   for(int i=0;i<nval;i++) {
      val[i]= bong[beginfit+i];
@@ -252,10 +277,12 @@ int TMatacq::doFit()
       return 203;
   }
 
-  if((int)timeatmax > NSPARAB)
+  if((int)timeatmax > NSPARAB) {
       return 204;
-  if((int)timeatmax < 0)
+}
+  if((int)timeatmax < 0) {
       return 205;
+}
 
   timeatmax+= (beginfit + firstsample);
 
@@ -310,11 +337,13 @@ int TMatacq::doFit()
   
   
     double timeminus=double(tminus[j])+0.5;
-    if(slopeminus!=0) timeminus=tminus[j]+(xampl[j]-double(bong[tminus[j]]))/slopeminus;
+    if(slopeminus!=0) { timeminus=tminus[j]+(xampl[j]-double(bong[tminus[j]]))/slopeminus;
+}
     
     
     double timeplus=double(tplus[j])+0.5;
-    if(slopeplus!=0) timeplus=tplus[j]+(xampl[j]-double(bong[tplus[j]]))/slopeplus;
+    if(slopeplus!=0) { timeplus=tplus[j]+(xampl[j]-double(bong[tplus[j]]))/slopeplus;
+}
     
     width[j]=timeplus-timeminus;
     
@@ -357,18 +386,23 @@ double TMatacq::interpolate(double amplx)
   int kmax= (int) pkval - firstsample;
 
   int bin_low=0;
-  for(Int_t k=0;k<kmax;k++)
+  for(Int_t k=0;k<kmax;k++) {
       if(0. < bong[k] && bong[k] < amplx) {
           bin_low=k;
       }
-  if(bin_low == 0) return -301.;
+}
+  if(bin_low == 0) { return -301.;
+}
   int bin_high=0;
-  for(Int_t k=kmax;k>=0;k--)
+  for(Int_t k=kmax;k>=0;k--) {
       if(bong[k] > amplx) {
           bin_high=k;
       }
-  if(bin_high == 0) return -302.;
-  if(bin_high < bin_low) return -303.;
+}
+  if(bin_high == 0) { return -302.;
+}
+  if(bin_high < bin_low) { return -303.;
+}
 
 
   if(bin_low == bin_high) {
@@ -418,7 +452,8 @@ void TMatacq::printmatacqData(int gRunNumber, int color, int timestart)
      double ss;
      sprintf(filename,"runMatacq%d.pedestal",gRunNumber);
      fmatacq = fopen(filename, "w");
-     if(fmatacq == nullptr) printf("Error while opening file : %s\n",filename);
+     if(fmatacq == nullptr) { printf("Error while opening file : %s\n",filename);
+}
 
      double sumtrise=0.; double sumtrise2=0.;
      int timestop= timestart+3;
@@ -436,7 +471,8 @@ void TMatacq::printmatacqData(int gRunNumber, int color, int timestart)
      }
      meantrise= sumtrise/((double) nevmtq0);
      ss= (sumtrise2/((double) nevmtq0) - meantrise*meantrise);
-     if(ss < 0.) ss=0.;
+     if(ss < 0.) { ss=0.;
+}
      sigtrise=sqrt(ss);
      fprintf(fmatacq, "%d %d %d %d %f %f %f %f\n",
            nevmtq0,color,timestart,timestop,meantrise,sigtrise,mintrise,maxtrise);
@@ -456,7 +492,8 @@ void TMatacq::printmatacqData(int gRunNumber, int color, int timestart)
      }
      meantrise= sumtrise/((double) nevmtq1);
      ss= (sumtrise2/((double) nevmtq1) - meantrise*meantrise);
-     if(ss < 0.) ss=0.;
+     if(ss < 0.) { ss=0.;
+}
      sigtrise=sqrt(ss);
      fprintf(fmatacq, "%d %d %d %d %f %f %f %f\n",
            nevmtq1,color,timestart,timestop,meantrise,sigtrise,mintrise,maxtrise);
@@ -471,7 +508,8 @@ int TMatacq::countBadPulses(int gRunNumber)
   char filename[80];
   sprintf(filename,"badevtsMatacq%d.dat",gRunNumber);
   fmatacq = fopen(filename, "w");
-  if(fmatacq == nullptr) printf("Error while opening file : %s\n",filename);
+  if(fmatacq == nullptr) { printf("Error while opening file : %s\n",filename);
+}
 
   int nevbad=0;
   for(Int_t i=0;i<nevmtq0+nevmtq1;i++) {
@@ -500,7 +538,8 @@ void TMatacq::printitermatacqData(int gRunNumber, int color, int timestart)
      double ss;
      sprintf(filename,"runiterMatacq%d.pedestal",gRunNumber);
      fmatacq = fopen(filename, "w");
-     if(fmatacq == nullptr) printf("Error while opening file : %s\n",filename);
+     if(fmatacq == nullptr) { printf("Error while opening file : %s\n",filename);
+}
 
      int nevmtqgood=0;
      double sumtrise=0.; double sumtrise2=0.;
@@ -522,7 +561,8 @@ void TMatacq::printitermatacqData(int gRunNumber, int color, int timestart)
      }
      meantrise= sumtrise/((double) nevmtqgood);
      ss= (sumtrise2/((double) nevmtqgood) - meantrise*meantrise);
-     if(ss < 0.) ss=0.;
+     if(ss < 0.) { ss=0.;
+}
      sigtrise=sqrt(ss);
      fprintf(fmatacq, "%d %d %d %d %f %f %f %f\n",
            nevmtqgood,color,timestart,timestop,meantrise,sigtrise,mintrise,maxtrise);
@@ -546,7 +586,8 @@ void TMatacq::printitermatacqData(int gRunNumber, int color, int timestart)
      }
      meantrise= sumtrise/((double) nevmtqgood);
      ss= (sumtrise2/((double) nevmtqgood) - meantrise*meantrise);
-     if(ss < 0.) ss=0.;
+     if(ss < 0.) { ss=0.;
+}
      sigtrise=sqrt(ss);
      fprintf(fmatacq, "%d %d %d %d %f %f %f %f\n",
            nevmtqgood,color,timestart,timestop,meantrise,sigtrise,mintrise,maxtrise);

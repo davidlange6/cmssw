@@ -57,17 +57,22 @@ void TAPD::addEntry(double apd, double pn, double pn0, double pn1, double time, 
   std::vector <double> valcuts[nOutVar];
 
   val[iAPD]=apd;
-  if(pn!=0) val[iAPDoPN]=apd/pn;
-  else val[iAPDoPN]=0.0;
-  if(pn0!=0) val[iAPDoPN0]=apd/pn0;
-  else val[iAPDoPN0]=0.0;
-  if(pn1!=0) val[iAPDoPN1]=apd/pn1;
-  else val[iAPDoPN1]=0.0;
+  if(pn!=0) { val[iAPDoPN]=apd/pn;
+  } else { val[iAPDoPN]=0.0;
+}
+  if(pn0!=0) { val[iAPDoPN0]=apd/pn0;
+  } else { val[iAPDoPN0]=0.0;
+}
+  if(pn1!=0) { val[iAPDoPN1]=apd/pn1;
+  } else { val[iAPDoPN1]=0.0;
+}
   val[iTime]=time;
-  if(apd0!=0.)val[iAPDoAPD0]=apd/apd0;
-  else val[iAPDoAPD0]=0.0;
-  if(apd1!=0.)val[iAPDoAPD1]=apd/apd1;
-  else val[iAPDoAPD1]=0.0;
+  if(apd0!=0.) {val[iAPDoAPD0]=apd/apd0;
+  } else { val[iAPDoAPD0]=0.0;
+}
+  if(apd1!=0.) {val[iAPDoAPD1]=apd/apd1;
+  } else { val[iAPDoAPD1]=0.0;
+}
 
   
   
@@ -104,7 +109,8 @@ void TAPD::setCut(int ivar, double mean, double sig){
   std::vector <double>highcut;
 
   double low=mean-2.0*sig;
-  if (low<0) low=0.0;
+  if (low<0) { low=0.0;
+}
   double high=mean+2.0*sig;
 
   lowcut.push_back(low);
@@ -131,7 +137,8 @@ void TAPD::setCut(int ivar, const std::vector<int>& cutVars, const std::vector<d
     // FINISH THIS
     if(lowCut.at(ic)>0){
       _apdcuts[0][ivar].push_back(lowCut.at(ic));
-    }else _apdcuts[0][ivar].push_back(0.0);
+    }else { _apdcuts[0][ivar].push_back(0.0);
+}
     
     _apdcuts[1][ivar].push_back(highCut.at(ic));
     _cutvars[ivar].push_back(cutVars.at(ic));

@@ -41,7 +41,7 @@ LmfSource::LmfSource(const ParameterSet& pset,
   nSecondsToSleep_(pset.getParameter<int>("nSecondsToSleep")),
   verbosity_(pset.getUntrackedParameter<int>("verbosity"))
 {
-  if(preScale_==0) preScale_ = 1;
+  if(preScale_==0) { preScale_ = 1; }
   produces<FEDRawDataCollection>();
   // open fileListName
   if (watchFileList_) {
@@ -57,21 +57,21 @@ LmfSource::LmfSource(const ParameterSet& pset,
 }
 
 bool LmfSource::readFileHeader(){
-  if(iFile_==-1) return false; //no file open
+  if(iFile_==-1) { return false; //no file open }
 
-  if(verbosity_) cout << "[LmfSource]"
+  if(verbosity_) { cout << "[LmfSource]"
                    << "Opening file #" << (iFile_+1) << " '"
-                   << currentFileName_ << "'\n";
+                   << currentFileName_ << "'\n"; }
   
   in_.read((char*)&fileHeader_[0], fileHeaderSize*sizeof(uint32_t));
 
-  if(in_.eof()) return false;
+  if(in_.eof()) { return false; }
   
   if(verbosity_){
     cout << "[LmfSource]"
          << "File header (in hex):" << hex;
     for(unsigned i=0; i < fileHeaderSize; ++i){ 
-      if(i%8==0) cout << "\n";
+      if(i%8==0) { cout << "\n"; }
       cout << setw(8) << fileHeader_[i] << " ";
     }
     cout << dec << "\n";
@@ -91,8 +91,8 @@ bool LmfSource::readFileHeader(){
       << currentFileName_ << " is not a file in LMF format!";
   }
   dataFormatVers_ = id[3];
-  if(verbosity_) cout << "[LmfSource]"
-                   << "LMF format: " << (int)dataFormatVers_ << "\n";
+  if(verbosity_) { cout << "[LmfSource]"
+                   << "LMF format: " << (int)dataFormatVers_ << "\n"; }
   
   if(dataFormatVers_ > maxDataFormatVersion_
      || dataFormatVers_ < minDataFormatVersion_){
@@ -103,9 +103,9 @@ bool LmfSource::readFileHeader(){
 
   indexTablePos_ = fileHeader_[1];
 
-  if(verbosity_) cout << "[LmfSource] File position of index table: 0x"
+  if(verbosity_) { cout << "[LmfSource] File position of index table: 0x"
                    << setfill('0') << hex << setw(8) << indexTablePos_
-                   << setfill(' ') << dec << "\n";
+                   << setfill(' ') << dec << "\n"; }
   
   if(dataFormatVers_ < 5){
     in_.ignore(4);
@@ -125,7 +125,7 @@ void LmfSource::produce(edm::Event& evt){
   //   }
   auto coll = std::make_unique<FEDRawDataCollection>();
   coll->swap(fedColl_);
-  if(verbosity_) cout << "[LmfSource] Putting FEDRawDataCollection in event\n";
+  if(verbosity_) { cout << "[LmfSource] Putting FEDRawDataCollection in event\n"; }
   evt.put(std::move(coll));
 }
 
@@ -140,8 +140,8 @@ bool LmfSource::openFile(int iFile){
         // skip the rest of the line
         std::string tmp_buffer;
         std::getline(fileList_, tmp_buffer);
-        if(verbosity_) cout << "[LmfSource]"
-          << "Opening file " << currentFileName_ << "\n";
+        if(verbosity_) { cout << "[LmfSource]"
+          << "Opening file " << currentFileName_ << "\n"; }
         in_.open(currentFileName_.c_str());
         if (!in_.fail()) {
           // file was successfully open
@@ -155,16 +155,16 @@ bool LmfSource::openFile(int iFile){
         }
       }
       // if here, no new file is available: sleep and retry later
-      if (verbosity_) std::cout << "[LmfSource]"
-        << " going to sleep 5 seconds\n";
+      if (verbosity_) { std::cout << "[LmfSource]"
+        << " going to sleep 5 seconds\n"; }
       sleep(nSecondsToSleep_);
       fileList_.clear();
     }
   } else {
-    if(iFile > (int)fileNames_.size()-1) return false;
+    if(iFile > (int)fileNames_.size()-1) { return false; }
     currentFileName_ = fileNames_[iFile];
-    if(verbosity_) cout << "[LmfSource]"
-      << "Opening file " << currentFileName_ << "\n";
+    if(verbosity_) { cout << "[LmfSource]"
+      << "Opening file " << currentFileName_ << "\n"; }
     in_.open(currentFileName_.c_str());
     if(in_.fail()){
       throw cms::Exception("FileOpenError")
@@ -175,9 +175,9 @@ bool LmfSource::openFile(int iFile){
 }
 
 bool LmfSource::nextEventWithinFile(){
-  if(iFile_<0) return false; //no file opened.
+  if(iFile_<0) { return false; //no file opened. }
   if(orderedRead_){
-    if(iEventInFile_>=indexTable_.size()) return false;
+    if(iEventInFile_>=indexTable_.size()) { return false; }
     if(verbosity_){
       cout << "[LmfSource] move to event with orbit Id "
            << indexTable_[iEventInFile_].orbit
@@ -208,15 +208,15 @@ bool LmfSource::readEvent(bool doSkip){
     in_.clear();
     bool rcOpen = openFile(++iFile_);
     if(rcOpen==false){//no more files
-      if(verbosity_) cout << "[LmfSource]"
-		       << "No more input file";
+      if(verbosity_) { cout << "[LmfSource]"
+		       << "No more input file"; }
       rcRead_ = false;
       return rcRead_;
     }
     rcRead_ = readFileHeader();
-    if(verbosity_) cout << "File header readout "
-		     << (rcRead_?"succeeded":"failed") << "\n";
-    if(rcRead_ && orderedRead_) readIndexTable();
+    if(verbosity_) { cout << "File header readout "
+		     << (rcRead_?"succeeded":"failed") << "\n"; }
+    if(rcRead_ && orderedRead_) { readIndexTable(); }
   }
   return rcRead_;
 }
@@ -226,8 +226,8 @@ bool LmfSource::setRunAndEventInfo(EventID& id, TimeValue_t& time, edm::EventAux
   if(fedId_>0){
     fedColl_.FEDData(fedId_).resize(0);
   }
-  if(verbosity_) cout << "[LmfSource]"
-		   << "About to read event...\n";
+  if(verbosity_) { cout << "[LmfSource]"
+		   << "About to read event...\n"; }
 
   bool rc;
   for(;;){
@@ -242,13 +242,13 @@ bool LmfSource::setRunAndEventInfo(EventID& id, TimeValue_t& time, edm::EventAux
     }
   }
 
-  if(!rc) return false; //event readout failed
+  if(!rc) { return false; //event readout failed }
     
-  if(verbosity_) cout << "[LmfSource]"
+  if(verbosity_) { cout << "[LmfSource]"
 		   << "Setting event time to "
 		   << /*toString(*/timeStamp_/*)*/ << ", "
 		   << "Run number to " << runNum_ << ","
-		   << "Event number to " << eventNum_ << "\n";
+		   << "Event number to " << eventNum_ << "\n"; }
 
   time = timeStamp_;
   id = EventID(runNum_, lumiBlock_, eventNum_);
@@ -256,7 +256,7 @@ bool LmfSource::setRunAndEventInfo(EventID& id, TimeValue_t& time, edm::EventAux
 }
 
 bool LmfSource::readEventWithinFile(bool doSkip){
-  if(iFile_==-1 || !rcRead_) return false; //no file open
+  if(iFile_==-1 || !rcRead_) { return false; //no file open }
   //                                         or header reading failed
   //number of 32-bit word to read first to get the event size
   //field
@@ -275,24 +275,24 @@ bool LmfSource::readEventWithinFile(bool doSkip){
   const unsigned char iv = dataFormatVers_-minDataFormatVersion_;
   assert(iv<=sizeof(timeStamp32)/sizeof(timeStamp32[0]));
   
-  if((int)header_.size() < evtHeadSize32[iv]) header_.resize(evtHeadSize32[iv]);
+  if((int)header_.size() < evtHeadSize32[iv]) { header_.resize(evtHeadSize32[iv]); }
 
 
-  if(verbosity_) cout << "[LmfSource]"
-		   << "Reading event header\n";
+  if(verbosity_) { cout << "[LmfSource]"
+		   << "Reading event header\n"; }
 
   in_.read((char*)&header_[0], evtHeadSize32[iv]*4);
   if(in_.bad()){//reading error other than eof
     throw cms::Exception("FileReadError")
       << "Error while reading from file " << currentFileName_;
   }
-  if(in_.eof()) return false;
+  if(in_.eof()) { return false; }
 
   if(verbosity_){
     cout << "[LmfSource]"
 	 << "Event header (in hex):" << hex << setfill('0');
     for(int i=0; i < evtHeadSize32[iv]; ++i){ 
-      if(i%8==0) cout << "\n";
+      if(i%8==0) { cout << "\n"; }
       cout << setw(8) << header_[i] << " ";
     }
     cout << dec << setfill(' ') << "\n";
@@ -348,7 +348,7 @@ bool LmfSource::readEventWithinFile(bool doSkip){
     }
         
     
-    if(in_.bad()) return false;
+    if(in_.bad()) { return false; }
     
     const unsigned eventSize64 = buf[dccLenOffset32] &  0x00FFFFFF;
     const unsigned eventSize32 = eventSize64*2;
@@ -378,9 +378,9 @@ bool LmfSource::readEventWithinFile(bool doSkip){
     }
     
     if(doSkip){//event to skip
-      if(verbosity_) cout << "[LmfSource] "
+      if(verbosity_) { cout << "[LmfSource] "
                        << "Skipping on event. Move file pointer "
-                       << toRead8 << " ahead.\n";
+                       << toRead8 << " ahead.\n"; }
       in_.seekg(toRead8, ios::cur);
       if(in_.bad()){//reading error other than eof
         throw cms::Exception("FileReadError")
@@ -406,7 +406,7 @@ bool LmfSource::readEventWithinFile(bool doSkip){
         cout << "[LmfSource]"
              << "Head of DCC data (in hex):" << hex;
         for(int i=0; i < 16; ++i){ 
-          if(i%8==0) cout << "\n";
+          if(i%8==0) { cout << "\n"; }
           cout << setw(8) << ((uint32_t*)data_.data())[i] << " ";
         }
         cout << dec << "\n";
@@ -425,7 +425,7 @@ bool LmfSource::readEventWithinFile(bool doSkip){
         }
       }
     }
-    if(in_.eof()) return false;
+    if(in_.eof()) { return false; }
   }
   ++iEvent_;
   return true;
@@ -477,7 +477,7 @@ void LmfSource::readIndexTable(){
          << currentFileName_ << ". Try to read it with "
          << "option orderedRead disabled.\n";
 
-  if(indexTablePos_==0) throw cms::Exception("LmfSource") << errMsg.str();
+  if(indexTablePos_==0) { throw cms::Exception("LmfSource") << errMsg.str(); }
 
   in_.clear();
   in_.seekg(indexTablePos_);
@@ -493,7 +493,7 @@ void LmfSource::readIndexTable(){
       << "LmfSource module.\n";
   }
   //if(in_.bad()) throw cms::Exception("LmfSource") << errMsg.str();
-  if(in_.bad()) throw cms::Exception("LmfSource") << errMsg.str();
+  if(in_.bad()) { throw cms::Exception("LmfSource") << errMsg.str(); }
   indexTable_.resize(nevts);
   in_.read((char*)&indexTable_[0], nevts*sizeof(IndexRecord));
 }

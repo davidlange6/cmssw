@@ -66,7 +66,7 @@ CastorDbProducer::~CastorDbProducer()
  
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
-  if (mDumpStream != &std::cout) delete mDumpStream;
+  if (mDumpStream != &std::cout) { delete mDumpStream; }
 }
 
 

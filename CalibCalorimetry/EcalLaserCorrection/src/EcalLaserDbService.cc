@@ -248,8 +248,8 @@ float EcalLaserDbService::getLaserCorrection (DetId const & xid, edm::Timestamp 
     float interpolatedLaserResponse = p_i/apdpnref + float(tt-t_i)*(p_f-p_i)/(apdpnref*float(t_f-t_i)); 
     float interpolatedLinearResponse = lp_i/apdpnref + float(tt-lt_i)*(lp_f-lp_i)/(apdpnref*float(lt_f-lt_i)); // FIXED BY FC
     
-    if(interpolatedLinearResponse >2.f || interpolatedLinearResponse <0.1f) 
-		interpolatedLinearResponse=1.f;
+    if(interpolatedLinearResponse >2.f || interpolatedLinearResponse <0.1f) { 
+		interpolatedLinearResponse=1.f; }
     if ( interpolatedLaserResponse <= 0. ) {
 
 		// print message only if it is the first time we see < 0

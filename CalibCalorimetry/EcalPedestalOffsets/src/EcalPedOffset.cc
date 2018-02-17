@@ -73,12 +73,12 @@ EcalPedOffset::~EcalPedOffset ()
 {
   for (std::map<int,TPedValues*>::iterator mapIt = m_pedValues.begin ();
       mapIt != m_pedValues.end ();
-      ++mapIt)
-    delete mapIt->second ; 
+      ++mapIt) {
+    delete mapIt->second ;  }
   for (std::map<int,TPedResult*>::iterator mapIt = m_pedResult.begin ();
       mapIt != m_pedResult.end ();
-      ++mapIt)
-    delete mapIt->second ; 
+      ++mapIt) {
+    delete mapIt->second ;  }
 }
 
 
@@ -113,8 +113,8 @@ void EcalPedOffset::analyze (Event const& event,
 
   std::map <int,int> DACvalues;
 
-  if(m_run==-1)
-    m_run = event.id().run();
+  if(m_run==-1) {
+    m_run = event.id().run(); }
 
   // loop over the headers
   for (EcalRawDataCollection::const_iterator headerItr= DCCHeaders->begin();
@@ -166,12 +166,12 @@ void EcalPedOffset::analyze (Event const& event,
   }
 
   
-  if(barrelDigisFound)
-    readDACs(barrelDigis, DACvalues);
-  if(endcapDigisFound)
-    readDACs(endcapDigis, DACvalues);
-  if(!barrelDigisFound && !endcapDigisFound)
-    edm::LogError ("EcalPedOffset") << "No digis found in the event!";
+  if(barrelDigisFound) {
+    readDACs(barrelDigis, DACvalues); }
+  if(endcapDigisFound) {
+    readDACs(endcapDigis, DACvalues); }
+  if(!barrelDigisFound && !endcapDigisFound) {
+    edm::LogError ("EcalPedOffset") << "No digis found in the event!"; }
   
 }
 
@@ -283,8 +283,8 @@ void EcalPedOffset::endJob ()
     << m_pedResult.size ();
   writeXMLFiles(m_xmlFile);
 
-  if (m_plotting != '0') makePlots ();
-  if (m_dbHostName != '0') writeDb ();       
+  if (m_plotting != '0') { makePlots (); }
+  if (m_dbHostName != '0') { writeDb ();        }
 }
 
 
@@ -317,8 +317,8 @@ void EcalPedOffset::writeDb ()
         return;
       }
     }
-    else
-      return;
+    else {
+      return; }
   }
 
   // define the query for RunIOV to get the right place in the database
@@ -403,8 +403,8 @@ void EcalPedOffset::writeDb ()
           int fedid = result->first;
           int eid = m_pedValues[fedid]->getCrystalNumber(xtal);
           // If eid is zero, that crystal was not present in digis
-          if(eid==0)
-            continue;
+          if(eid==0) {
+            continue; }
 
           if (fedid >= 601 && fedid <= 609)
           {
@@ -428,8 +428,8 @@ void EcalPedOffset::writeDb ()
             eid = eid+10000*(fedid-600);
             ecid = DBconnection->getEcalLogicID("EE_elec_crystal_number", eid);
           }
-          else
-            LogError("EcalPedOffset") << "FEDid is out of range 601-654";
+          else {
+            LogError("EcalPedOffset") << "FEDid is out of range 601-654"; }
 
           DBdataset[ecid] = DBtable ;
         } catch (std::runtime_error &e) {
@@ -443,7 +443,7 @@ void EcalPedOffset::writeDb ()
   if ( DBconnection ) {
     try {
       LogDebug ("EcalPedOffset") << "Inserting dataset ... " << std::flush;
-      if ( !DBdataset.empty() ) DBconnection->insertDataSet (&DBdataset, &moniov);
+      if ( !DBdataset.empty() ) { DBconnection->insertDataSet (&DBdataset, &moniov); }
       LogDebug ("EcalPedOffset") << "done." ;
     } catch (std::runtime_error &e) {
       edm::LogError ("EcalPedOffset") << e.what ();
@@ -486,8 +486,8 @@ void EcalPedOffset::writeXMLFiles(std::string fileName)
     for (int xtal = 0 ; xtal < 1700 ; ++xtal) 
     {
       int crystalNumber = m_pedValues[smRes->first]->getCrystalNumber(xtal);
-      if(crystalNumber==0)
-        continue;
+      if(crystalNumber==0) {
+        continue; }
       xml_outfile << "  <PEDESTAL_OFFSET>\n";
       xml_outfile << "    <HIGH>" << ((smRes->second)->m_DACvalue)[0][xtal] << "</HIGH>\n";
       xml_outfile << "    <MED>" << ((smRes->second)->m_DACvalue)[1][xtal] << "</MED>\n";

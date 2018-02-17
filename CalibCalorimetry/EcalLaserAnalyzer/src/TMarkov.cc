@@ -33,9 +33,12 @@ TMarkov::~TMarkov()
 void TMarkov::init()
 {
   int i;
-  for(i=0;i<fNPeakValues;i++) peak[i]=0.;
-  for(i=0;i<fNbinu;i++) u[i]=0.;
-  for(i=0;i<=fNbinu;i++) binu[i]=0.;
+  for(i=0;i<fNPeakValues;i++) { peak[i]=0.;
+}
+  for(i=0;i<fNbinu;i++) { u[i]=0.;
+}
+  for(i=0;i<=fNbinu;i++) { binu[i]=0.;
+}
   return ;
 }
 
@@ -53,14 +56,16 @@ int TMarkov::computeChain(int *bing)
        uprime[i]=0.;
        for(k=1,jumpToNext=0.,jumpToPrevious=0.;k<=m;k++)
        {
-          if(i+k < 101)
-	    if(bing[i] > 0 || bing[i+k] > 0)	    
+          if(i+k < 101) {
+	    if(bing[i] > 0 || bing[i+k] > 0) {	    
               jumpToNext += exp( (double)(bing[i+k]-bing[i])
 	                        /sqrt((double)(bing[i+k]+bing[i])));
-          if(i-k > 0)
-            if(bing[i] > 0 || bing[i-k] > 0)
+}
+          if(i-k > 0) {
+            if(bing[i] > 0 || bing[i-k] > 0) {
               jumpToPrevious += exp( (double)(bing[i-k]-bing[i])
 	                            /sqrt((double)(bing[i-k]+bing[i])));
+}
 	}
        //printf(" jump %d to %d = %f\n",i,i+1,jumpToNext);
        //printf(" jump %d to %d = %f\n",i,i-1,jumpToPrevious);
@@ -87,11 +92,13 @@ int TMarkov::computeChain(int *bing)
         
     u[1] = -sumUprime;
 
-    for(k=2;k<nuprime+1;k++)
+    for(k=2;k<nuprime+1;k++) {
         u[k] += u[1];
+}
 
-    for(i=1;i<offset+1;i++)
+    for(i=1;i<offset+1;i++) {
        binu[i]=0.;
+}
 
     for(i=1;i<nuprime+1;i++)
     {

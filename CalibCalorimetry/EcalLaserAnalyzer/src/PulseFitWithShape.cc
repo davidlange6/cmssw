@@ -68,7 +68,8 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
   //     [2] = clock phase
 
   bool useCova=true;
-  if(cova==nullptr) useCova=false;
+  if(cova==nullptr) { useCova=false;
+}
 
   double xpar[3]; 
   double chi2;
@@ -115,10 +116,11 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
 
   // 2) compute shape derivative :
     
-    if(is < fNsamplesShape-2)
+    if(is < fNsamplesShape-2) {
       dshape[is]= (pshape[is+2]-pshape[is])*12.5;
-    else
+    } else {
       dshape[is]=dshape[is-1]; 
+}
   }
 
   // 3) compute pol2 max
@@ -132,7 +134,8 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
  
   
   double t_ims=0;
-  if(a2!=0) t_ims=-a1/(2.0*a2);
+  if(a2!=0) { t_ims=-a1/(2.0*a2);
+}
 
 
   // Starting point of the fit : qmax and tmax given by a
@@ -154,7 +157,8 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
 
   double tm;
   if(qm > 5.*noise){
-    if(im >= nsamplef+nsampleo) im=nsampleo+nsamplef-1;
+    if(im >= nsamplef+nsampleo) { im=nsampleo+nsamplef-1;
+}
     double q1=adc[im-1];
     double q2=adc[im];
     double q3=adc[im+1];
@@ -171,11 +175,13 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
   int nsfit=nsamplef;
   int iloop=0;
   int nloop=fNb_iter;
-  if(qm <= 5*noise)nloop=1; // Just one iteration for very low signal
+  if(qm <= 5*noise) {nloop=1; // Just one iteration for very low signal
+}
 
   double *resi;
   resi= new double[fNsamples];  
-  for (int j=0;j<fNsamples;j++) resi[j]=0;
+  for (int j=0;j<fNsamples;j++) { resi[j]=0;
+}
 
   while(std::fabs(chi2old-chi2) > 0.1 && iloop < nloop)
     {
@@ -201,7 +207,8 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
 	  double xbin=t1*25.;
 	  int ibin1=(int)xbin;
 	  
-	  if(ibin1 < 0) ibin1=0;
+	  if(ibin1 < 0) { ibin1=0;
+}
 
 	  double amp1,amp11,amp12,der1,der11,der12;
 
@@ -232,8 +239,10 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
 		t1=(double)jjs+xpar[2];
 		xbin=t1*25.;
 		ibin1=(int)xbin;
-		if(ibin1 < 0) ibin1=0;
-		if(ibin1 > fNsamplesShape-2)ibin1=fNsamplesShape-2;
+		if(ibin1 < 0) { ibin1=0;
+}
+		if(ibin1 > fNsamplesShape-2) {ibin1=fNsamplesShape-2;
+}
 		int ibin2=ibin1+1;
 		double xfrac=xbin-ibin1;
 		amp11=pshape[ibin1];
@@ -274,10 +283,13 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
 	double t1=(double)iis+xpar[2];
 	double xbin=t1*25.;
 	int ibin1=(int)xbin;
-	if(ibin1 < 0) ibin1=0;
+	if(ibin1 < 0) { ibin1=0;
+}
 	
-	if(ibin1 < 0) ibin1=0;
-	if(ibin1 > fNsamplesShape-2)ibin1=fNsamplesShape-2;
+	if(ibin1 < 0) { ibin1=0;
+}
+	if(ibin1 > fNsamplesShape-2) {ibin1=fNsamplesShape-2;
+}
 	int ibin2=ibin1+1;
 	double xfrac=xbin-ibin1;
 	double amp11=xpar[0]*pshape[ibin1];
@@ -298,7 +310,8 @@ double PulseFitWithShape::doFit(double *adc, double *cova)
 	    chi2+=resi[iis]*resi[jjs]*cova[js*fNsamples+is];
 	  }
 
-	}else chi2+=resi[iis]*resi[iis];
+	}else { chi2+=resi[iis]*resi[iis];
+}
       }
     }
   

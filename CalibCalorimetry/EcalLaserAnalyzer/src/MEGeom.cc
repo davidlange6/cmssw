@@ -50,8 +50,9 @@ MEGeom::getHist( int ilmr, int unit )
     {
       hname += MEEBGeom::smName( ism );
     }
-  else
+  else {
     abort();
+}
 
   hname += " ";
   hname += "DCC="; hname += idcc; hname += "/" ; hname += side;
@@ -87,7 +88,8 @@ MEGeom::getHist( int ilmr, int unit )
 	  isect-=9;
 	  rootfile = TFile::Open("eegeom_1.root");
 	}
-      if( ireg==ME::iEEP ) rootfile = TFile::Open("eegeom_2.root");
+      if( ireg==ME::iEEP ) { rootfile = TFile::Open("eegeom_2.root");
+}
       assert( rootfile!=nullptr );
       hn_="eem_S"; hn_+= isect; 
       switch (unit)
@@ -115,8 +117,9 @@ TGraph*
 MEGeom::getBoundary( int ilmr, int histtype )
 {
   // for local pictures, only sector or monitoring region
-  if( histtype!=ME::iSector && histtype!=ME::iLMRegion ) 
+  if( histtype!=ME::iSector && histtype!=ME::iLMRegion ) { 
     histtype = ME::iSector;
+}
 
   int ireg;
   int ism;
@@ -148,11 +151,13 @@ MEGeom::getBoundary( int ilmr, int histtype )
 	  isect-=9;
 	  rootfile = TFile::Open("eegeom_1.root");
 	}
-      if( ireg==ME::iEEP ) rootfile = TFile::Open("eegeom_2.root");
+      if( ireg==ME::iEEP ) { rootfile = TFile::Open("eegeom_2.root");
+}
       assert( rootfile!=nullptr );
       int lmr_= ilmr;
-      if( ireg==ME::iEEP ) lmr_-=72;
-      else if( ireg==ME::iEEM ) lmr_-=82;
+      if( ireg==ME::iEEP ) { lmr_-=72;
+      } else if( ireg==ME::iEEM ) { lmr_-=82;
+}
       switch (histtype)
 	{
 	case ME::iSector:             gn_ = "Sector_"; gn_+=isect; break;

@@ -148,7 +148,7 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
 
   ++iEvent;
   
-  if (_debug==1 )std::cout << "-- debug test -- Entering Analyze -- event= "<<iEvent<< std::endl; 
+  if (_debug==1 ) {std::cout << "-- debug test -- Entering Analyze -- event= "<<iEvent<< std::endl;  }
 
   // retrieving MATACQ :
   edm::Handle<EcalMatacqDigiCollection> pmatacqDigi;
@@ -156,11 +156,11 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
   try {
     e.getByLabel(digiProducer_,digiCollection_, pmatacqDigi); 
     matacqDigi=pmatacqDigi.product();
-    if (_debug==1 )std::cout << "-- debug test -- Matacq Digis Found -- "<< std::endl; 
+    if (_debug==1 ) {std::cout << "-- debug test -- Matacq Digis Found -- "<< std::endl;  }
     
   }catch ( std::exception& ex ) {
     std::cerr << "Error! can't get the product EcalMatacqDigi producer:" << digiProducer_.c_str()<<" collection:"<<digiCollection_.c_str() << std::endl;
-    if (_debug==1 )std::cout << "-- debug test -- No Matacq Digis Found -- "<< std::endl; 
+    if (_debug==1 ) {std::cout << "-- debug test -- No Matacq Digis Found -- "<< std::endl;  }
     return;
   }
   
@@ -180,26 +180,26 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
   // Decode Basic DCCHeader Information 
   // ====================================
   
-  if (_debug==1)  std::cout <<"-- debug test -- Before header -- "<< std::endl; 
+  if (_debug==1) {  std::cout <<"-- debug test -- Before header -- "<< std::endl;  }
   
   for ( EcalRawDataCollection::const_iterator headerItr= DCCHeader->begin();headerItr != DCCHeader->end(); 
 	++headerItr ) {
     
     EcalDCCHeaderBlock::EcalDCCEventSettings settings = headerItr->getEventSettings(); 
     color = (int) settings.wavelength;
-    if( color<0 ) return;
+    if( color<0 ) { return; }
 
     // Get run type and run number 
 
     int fed = headerItr->fedId();  
     
-    if(fed!=_fedid && _fedid!=-999) continue; 
+    if(fed!=_fedid && _fedid!=-999) { continue;  }
     
     runType=headerItr->getRunType();
     runNum=headerItr->getRunNumber();
     event=headerItr->getLV1();
 
-    if (_debug==1)  std::cout <<"-- debug test -- runtype:"<<runType<<" event:"<<event <<" runNum:"<<runNum <<std::endl; 
+    if (_debug==1) {  std::cout <<"-- debug test -- runtype:"<<runType<<" event:"<<event <<" runNum:"<<runNum <<std::endl;  }
 
     dccID=headerItr->getDccInTCCCommand();
     fedID=headerItr->fedId();  
@@ -216,7 +216,7 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
     }
 
     // take event only if the fed corresponds to the DCC in TCC
-    if( 600+dccID != fedID ) continue;
+    if( 600+dccID != fedID ) { continue; }
     
     if (_debug==1) {
       std::cout <<"-- debug test -- Inside header after fed cut -- color="<<color<< ", dcc="<<dccID<<", fed="<< fedID<<",  lightside="<<lightside<<", runType="<<runType<< std::endl;
@@ -224,7 +224,7 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
 
     // Cut on runType
 
-    if ( runType!=EcalDCCHeaderBlock::LASER_STD && runType!=EcalDCCHeaderBlock::LASER_GAP && runType!=EcalDCCHeaderBlock::LASER_POWER_SCAN && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN ) return; 
+    if ( runType!=EcalDCCHeaderBlock::LASER_STD && runType!=EcalDCCHeaderBlock::LASER_GAP && runType!=EcalDCCHeaderBlock::LASER_POWER_SCAN && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN ) { return;  }
     
     
     std::vector<int>::iterator iter= find( colors.begin(), colors.end(), color );
@@ -235,7 +235,7 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
     
   }
   
-  if (_debug==1) std::cout <<"-- debug test -- Before digis -- Event:"<<iEvent<< std::endl; 
+  if (_debug==1) { std::cout <<"-- debug test -- Before digis -- Event:"<<iEvent<< std::endl;  }
 
   // Count laser events
   laserEvents++;
@@ -259,8 +259,8 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
       std::cout <<"-- debug test -- Inside digis -- digi size="<<digis.size()<< std::endl;
     }
 
-    if(digis.size()== 0 ) continue; 
-    else isThereMatacq=true;
+    if(digis.size()== 0 ) { continue; 
+    } else { isThereMatacq=true; }
 
     max=0;
     maxsamp=0;
@@ -281,7 +281,7 @@ void EcalMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup&
     iCh++; 
   }
   
-  if (_debug==1)std::cout <<"-- debug test -- After digis -- Event: "<<iEvent<< std::endl; 
+  if (_debug==1) {std::cout <<"-- debug test -- After digis -- Event: "<<iEvent<< std::endl;  }
   tree->Fill();
   
 } // analyze
@@ -384,7 +384,7 @@ void EcalMatacqAnalyzer::endJob()
     {
       // load the event
       Long64_t ientry = fChain->LoadTree(jentry);
-      if (ientry < 0) break;
+      if (ientry < 0) { break; }
       nb = fChain->GetEntry( jentry );   nbytes += nb;      
 
       status   = 0;
@@ -402,7 +402,7 @@ void EcalMatacqAnalyzer::endJob()
       sliding =  0;
 
 
-      if (_debug==1)std::cout <<"-- debug test -- inside loop 1  -- jentry:"<<jentry<<" over nentries="<<nentries<< std::endl; 
+      if (_debug==1) {std::cout <<"-- debug test -- inside loop 1  -- jentry:"<<jentry<<" over nentries="<<nentries<< std::endl;  }
 
       // create the object for Matacq data analysis
 
@@ -413,7 +413,7 @@ void EcalMatacqAnalyzer::endJob()
 				  _thres, _lowlev, _highlev,
 				  _nevlasers , _slide);
       
-      if (_debug==1)std::cout <<"-- debug test -- inside loop 2  -- "<< std::endl; 
+      if (_debug==1) {std::cout <<"-- debug test -- inside loop 2  -- "<< std::endl;  }
 
       // analyse the Matacq data
       if( mtq->rawPulseAnalysis( nsamples, &matacq[0] )==0 ) 
@@ -422,13 +422,13 @@ void EcalMatacqAnalyzer::endJob()
 	  ped =  mtq->getBaseLine();
 	  pedsig =  mtq->getsigBaseLine();
 
-	  if (_debug==1)std::cout <<"-- debug test -- inside loop 3  -- ped:"<<ped << std::endl; 
+	  if (_debug==1) {std::cout <<"-- debug test -- inside loop 3  -- ped:"<<ped << std::endl;  }
 	  if( mtq->findPeak()==0 ) 
 	    {
 	      peak = mtq->getTimpeak();
 	      sigma = mtq->getsigTimpeak();
 	    }
-	  if (_debug==1)std::cout <<"-- debug test -- inside loop 4  -- peak:"<<peak<< std::endl; 
+	  if (_debug==1) {std::cout <<"-- debug test -- inside loop 4  -- peak:"<<peak<< std::endl;  }
 	  if( mtq->doFit()==0 ) 
 	    {
 	      fit  = mtq->getTimax();
@@ -438,15 +438,15 @@ void EcalMatacqAnalyzer::endJob()
 	      fw80 = mtq->getWidth80();
 	      sliding = mtq->getSlide();
 	    }
-	  if (_debug==1)std::cout <<"-- debug test -- inside loop 4  -- ampl:"<<ampl<< std::endl; 
+	  if (_debug==1) {std::cout <<"-- debug test -- inside loop 4  -- ampl:"<<ampl<< std::endl;  }
 	  if( mtq->compute_trise()==0 ) 
 	    {
 	      trise = mtq->getTrise();
 	    }
-	  if (_debug==1)std::cout <<"-- debug test -- inside loop 5  -- trise:"<<trise<< std::endl; 
+	  if (_debug==1) {std::cout <<"-- debug test -- inside loop 5  -- trise:"<<trise<< std::endl;  }
 	}
       
-      if (_debug==1)std::cout <<"-- debug test -- inside loop 6  -- status:"<<status<< std::endl; 
+      if (_debug==1) {std::cout <<"-- debug test -- inside loop 6  -- status:"<<status<< std::endl;  }
     
       if( status == 1 && mtq->findPeak()==0 ){
 	
@@ -455,7 +455,7 @@ void EcalMatacqAnalyzer::endJob()
 	
 
 	// Fill histo if there are enough samples
-	if (_debug==1)std::cout <<"-- debug test -- inside loop 7  -- firstS:"<<firstS<<", nsamples:"<< nsamples<< std::endl;
+	if (_debug==1) {std::cout <<"-- debug test -- inside loop 7  -- firstS:"<<firstS<<", nsamples:"<< nsamples<< std::endl; }
 
 	if(firstS>=0 && lastS<=nsamples){
 	  
@@ -508,7 +508,7 @@ void EcalMatacqAnalyzer::endJob()
 	}
 	
       }
-      if (_debug==1)std::cout <<"-- debug test -- inside loop 8"<< std::endl;
+      if (_debug==1) {std::cout <<"-- debug test -- inside loop 8"<< std::endl; }
 
       // get back color
  
@@ -519,22 +519,22 @@ void EcalMatacqAnalyzer::endJob()
 	  i=nCol;
 	}
       }
-      if (_debug==1)std::cout <<"-- debug test -- inside loop 8bis color:"<<color<<" iCol:"<<iCol<<" nCol:"<< nCol<< std::endl;
+      if (_debug==1) {std::cout <<"-- debug test -- inside loop 8bis color:"<<color<<" iCol:"<<iCol<<" nCol:"<< nCol<< std::endl; }
       
       // fill TMTQ 
 
-      if(status == 1 && mtq->findPeak()==0 &&  mtq->doFit()==0 &&  mtq->compute_trise()==0 ) MTQ[iCol][lightside]->addEntry(peak, sigma, fit, ampl, trise, fwhm, fw20, fw80, ped, pedsig, sliding);
+      if(status == 1 && mtq->findPeak()==0 &&  mtq->doFit()==0 &&  mtq->compute_trise()==0 ) { MTQ[iCol][lightside]->addEntry(peak, sigma, fit, ampl, trise, fwhm, fw20, fw80, ped, pedsig, sliding); }
       
       // fill the output tree
       
-      if (_debug==1)std::cout <<"-- debug test -- inside loop 9"<< std::endl;
+      if (_debug==1) {std::cout <<"-- debug test -- inside loop 9"<< std::endl; }
       mtqShape->Fill();
       
       // clean up
       delete mtq;
     }
   
-  if (_debug==1)std::cout <<"-- debug test -- after loop "<< std::endl;
+  if (_debug==1) {std::cout <<"-- debug test -- after loop "<< std::endl; }
   sampFile->Close();
   
   double Peak[6], Sigma[6], Fit[6], Ampl[6], Trise[6], Fwhm[6], Fw20[6], Fw80[6], Ped[6], Pedsig[6], Sliding[6];
@@ -601,7 +601,7 @@ void EcalMatacqAnalyzer::endJob()
 	}
       }
       meanTree[iCol]->Fill();
-      if (_debug==1)std::cout <<"-- debug test -- inside final loop  "<< std::endl;
+      if (_debug==1) {std::cout <<"-- debug test -- inside final loop  "<< std::endl; }
     }
   }
   
@@ -629,7 +629,7 @@ void EcalMatacqAnalyzer::endJob()
 
   // Compute and save laser shape
 
-  if (_debug==1)std::cout <<"-- debug test -- computing shape  "<< std::endl;
+  if (_debug==1) {std::cout <<"-- debug test -- computing shape  "<< std::endl; }
 
   int firstBin=0;
   double height=0.0;
@@ -653,7 +653,7 @@ void EcalMatacqAnalyzer::endJob()
   for (unsigned int iColor=0;iColor<nCol;iColor++){
     meanTree[iColor]->Write();
   }
-  if (_debug==1)std::cout <<"-- debug test -- writing  "<< std::endl;
+  if (_debug==1) {std::cout <<"-- debug test -- writing  "<< std::endl; }
   shapeMat->Write();
   
   // close the output file

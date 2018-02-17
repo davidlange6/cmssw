@@ -68,7 +68,7 @@ void testEcalTPGScale::analyze(const edm::Event& evt, const edm::EventSetup& evt
   }
 
 
-  if (!error) cout<<" there is no error with EcalTPGScale internal consistancy "<<endl ;
+  if (!error) { cout<<" there is no error with EcalTPGScale internal consistancy "<<endl ; }
 
 }
 

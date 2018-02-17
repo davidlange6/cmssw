@@ -169,7 +169,7 @@ HcalLuttoDB::writeoutlut1(HcalDetId id, HcalElectronicsId eid, const std::vector
   }
   md5_finish(&md5er,digest);
   os <<" <Parameter name='CHECKSUM' type='string'>";
-  for (int i=0; i<16; i++) os << std::hex << (((int)(digest[i]))&0xFF);
+  for (int i=0; i<16; i++) { os << std::hex << (((int)(digest[i]))&0xFF); }
   os << "</Parameter>\n";
 
   *oc_ << "  <Data crate='" << eid.readoutVMECrateId()
@@ -178,7 +178,7 @@ HcalLuttoDB::writeoutlut1(HcalDetId id, HcalElectronicsId eid, const std::vector
        << "' fiber='" << eid.fiberIndex()
        << "' fiberchan='" << eid.fiberChanId()
        << "' luttype='1' elements='1' encoding='hex'>";
-  for (int i=0; i<16; i++) *oc_ << std::hex << (((int)(digest[i]))&0xFF);    
+  for (int i=0; i<16; i++) { *oc_ << std::hex << (((int)(digest[i]))&0xFF);     }
   *oc_ << "</Data>\n";
 
   os <<" <Data elements='128' encoding='hex'> "<<std::endl;
@@ -223,7 +223,7 @@ HcalLuttoDB::writeoutlut2(HcalTrigTowerDetId id, HcalElectronicsId eid, const st
   md5_append(&md5er,&(lut[0]),1024);
   md5_finish(&md5er,digest);
   os <<" <Parameter name='CHECKSUM' type='string'>";
-  for (int i=0; i<16; i++) os << std::hex << (((int)(digest[i]))&0xFF);
+  for (int i=0; i<16; i++) { os << std::hex << (((int)(digest[i]))&0xFF); }
   os << "</Parameter>\n";
 
   *oc_ << "  <Data crate='" << eid.readoutVMECrateId()
@@ -232,7 +232,7 @@ HcalLuttoDB::writeoutlut2(HcalTrigTowerDetId id, HcalElectronicsId eid, const st
        << "' slb='" << eid.slbSiteNumber()
        << "' slbchan='" << eid.slbChannelIndex()
        << "' luttype='2' elements='1' encoding='hex'>";
-  for (int i=0; i<16; i++) *oc_ << std::hex << (((int)(digest[i]))&0xFF);    
+  for (int i=0; i<16; i++) { *oc_ << std::hex << (((int)(digest[i]))&0xFF);     }
   *oc_ << "</Data>\n";
 
   os <<" <Data elements='1024' encoding='hex'> "<<std::endl;
@@ -285,23 +285,23 @@ HcalLuttoDB::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
     edm::LogInfo("Hcal") << "Beginning crate " << crate;
     for(itreid  = allEID.begin(); itreid != allEID.end(); ++itreid)
       {
-	if (itreid->readoutVMECrateId()!=crate) continue;
+	if (itreid->readoutVMECrateId()!=crate) { continue; }
 	if (itreid->isTriggerChainId()) { // lut2
 	  HcalTrigTowerDetId tid=Map_->lookupTrigger(*itreid);
-	  if (tid.null()) continue;
+	  if (tid.null()) { continue; }
 
-	  if (filePerCrate_ && pfile==nullptr) pfile=openPerCrate(crate);
-	  else if (pfile==nullptr) pfile=openPerLut2(*itreid);
+	  if (filePerCrate_ && pfile==nullptr) { pfile=openPerCrate(crate);
+	  } else if (pfile==nullptr) { pfile=openPerLut2(*itreid); }
 
 	  std::vector<unsigned char> lut=extractOutputLut(*outTranscoder,tid);
 	  writeoutlut2(tid,*itreid,lut,*pfile);
 	  if (!filePerCrate_) { delete pfile; pfile=nullptr; }	  
 	} else { // lut1
 	  HcalGenericDetId gid=Map_->lookup(*itreid);
-	  if (gid.null() || !(gid.genericSubdet()==HcalGenericDetId::HcalGenBarrel || gid.genericSubdet()==HcalGenericDetId::HcalGenEndcap || gid.genericSubdet()==HcalGenericDetId::HcalGenForward)) continue;
+	  if (gid.null() || !(gid.genericSubdet()==HcalGenericDetId::HcalGenBarrel || gid.genericSubdet()==HcalGenericDetId::HcalGenEndcap || gid.genericSubdet()==HcalGenericDetId::HcalGenForward)) { continue; }
 	  
-	  if (filePerCrate_ && pfile==nullptr) pfile=openPerCrate(crate);
-	  else if (pfile==nullptr) pfile=openPerLut1(*itreid);
+	  if (filePerCrate_ && pfile==nullptr) { pfile=openPerCrate(crate);
+	  } else if (pfile==nullptr) { pfile=openPerLut1(*itreid); }
 
 	  std::vector<unsigned short> lut=inputCoder->getLinearizationLUT(HcalDetId(gid));
 	  writeoutlut1(HcalDetId(gid),*itreid,lut,*pfile);
@@ -309,7 +309,7 @@ HcalLuttoDB::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 	}
       }
     if (pfile!=nullptr) {
-      if (filePerCrate_) *pfile << "</CFGBrickSet>\n";
+      if (filePerCrate_) { *pfile << "</CFGBrickSet>\n"; }
       delete pfile;
       pfile=nullptr;
     }

@@ -1535,8 +1535,9 @@ TVectorD TEcnaRead::ReadSampleSigmas(const Int_t & n1StexStin, const Int_t & i0S
 
   if (FileNameLong != fCurrentlyOpenFileName)
     {
-      if( fCurrentlyOpenFileName != fFlagNoFileOpen )
+      if( fCurrentlyOpenFileName != fFlagNoFileOpen ) {
         CloseRootFile(current_file_name);
+}
 
       if(!(OpenRootFile(file_name, "READ")))
 	{

@@ -29,8 +29,8 @@ MiscalibReaderFromXML::MiscalibReaderFromXML(CaloMiscalibMap & caloMap):caloMap_
 	try { 
 		//std::cout << "Xerces-c initialization Number "
 		//<< s_numberOfInstances<<std::endl;
-		if (s_numberOfInstances==0) 
-		cms::concurrency::xercesInitialize();  
+		if (s_numberOfInstances==0) { 
+		cms::concurrency::xercesInitialize();   }
 	}
 	catch (const XMLException& e) {
 		std::cout << "Xerces-c error in initialization \n"
@@ -52,7 +52,7 @@ int MiscalibReaderFromXML::getIntAttribute(DOMNamedNodeMap * attribute, const st
 {
 bool well_formed_string;
 int retval = MiscalibReaderFromXMLDomUtils::getIntAttribute(attribute,attribute_name,well_formed_string);
-if(!well_formed_string) std::cout << "MiscalibReaderFromXML::getIntAttribute PROBLEMS ...!!!" << std::endl;
+if(!well_formed_string) { std::cout << "MiscalibReaderFromXML::getIntAttribute PROBLEMS ...!!!" << std::endl; }
 
   return retval;
 }
@@ -70,7 +70,7 @@ double MiscalibReaderFromXML::getFloatAttribute(DOMNamedNodeMap * attribute, con
 {
 bool well_formed_string;
 double retval = MiscalibReaderFromXMLDomUtils::getFloatAttribute(attribute,attribute_name,well_formed_string);
-if(!well_formed_string) std::cout << "MiscalibReaderFromXML::getFloatAttribute PROBLEMS ...!!!" << std::endl;
+if(!well_formed_string) { std::cout << "MiscalibReaderFromXML::getFloatAttribute PROBLEMS ...!!!" << std::endl; }
   
   return retval;
 }
@@ -90,7 +90,7 @@ bool MiscalibReaderFromXML::parseXMLMiscalibFile(std::string configFile){
         // The following should be on LogInfo
         //std::cout << "Read number of Cells = " << linkTagsNum << std::endl;
 
-        if(linkTagsNum==0) std::cout <<"Number of Cells in file is 0 - probably bad file format"<<std::endl;
+        if(linkTagsNum==0) { std::cout <<"Number of Cells in file is 0 - probably bad file format"<<std::endl; }
 
         int count=0;	
 	for (unsigned int i=0; i<linkTagsNum; i++){

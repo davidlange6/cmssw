@@ -47,14 +47,16 @@ void CastorPulseShapes::Shape::setNBin(int n) {
 }
 
 void CastorPulseShapes::Shape::setShapeBin(int i, float f) {
-  if (i>=0 && i<nbin_) shape_[i]=f;
+  if (i>=0 && i<nbin_) { shape_[i]=f;
+}
 }
 
 float CastorPulseShapes::Shape::operator()(double t) const {
   // shape is in 1 ns steps
   int i=(int)(t+0.5);
   float rv=0;
-  if (i>=0 && i<nbin_) rv=shape_[i];
+  if (i>=0 && i<nbin_) { rv=shape_[i];
+}
   return rv;
 }
 
@@ -62,7 +64,8 @@ float CastorPulseShapes::Shape::at(double t) const {
   // shape is in 1 ns steps
   int i=(int)(t+0.5);
   float rv=0;
-  if (i>=0 && i<nbin_) rv=shape_[i];
+  if (i>=0 && i<nbin_) { rv=shape_[i];
+}
   return rv;
 }
 

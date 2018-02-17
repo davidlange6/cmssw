@@ -57,13 +57,13 @@ void CaloTPGTranscoderULUT::loadHCALCompress(HcalLutMetadata const& lutMetadata,
 	if (not HcalGenericDetId(*i).isHcalTrigTowerDetId()) {
 	  if ((not HcalGenericDetId(*i).isHcalDetId()) and
 	      (not HcalGenericDetId(*i).isHcalZDCDetId()) and
-	      (not HcalGenericDetId(*i).isHcalCastorDetId()))
-	    edm::LogWarning("CaloTPGTranscoderULUT") << "Encountered invalid HcalDetId " << HcalGenericDetId(*i);
+	      (not HcalGenericDetId(*i).isHcalCastorDetId())) {
+	    edm::LogWarning("CaloTPGTranscoderULUT") << "Encountered invalid HcalDetId " << HcalGenericDetId(*i); }
 	  continue; 
 	}
 	
 	HcalTrigTowerDetId id(*i); 
-	if(!theTopology->validHT(id)) continue;
+	if(!theTopology->validHT(id)) { continue; }
 
 	unsigned int index = getOutputLUTId(id); 
 
@@ -77,19 +77,19 @@ void CaloTPGTranscoderULUT::loadHCALCompress(HcalLutMetadata const& lutMetadata,
         unsigned int lutsize = getOutputLUTSize(id);
 	outputLUT_[index].resize(lutsize);
 
-        for (unsigned int i = 0; i < threshold; ++i)
-           outputLUT_[index][i] = 0;
+        for (unsigned int i = 0; i < threshold; ++i) {
+           outputLUT_[index][i] = 0; }
 
         if (isHBHE) {
-           for (unsigned int i = threshold; i < lutsize; ++i)
+           for (unsigned int i = threshold; i < lutsize; ++i) {
               if (allLinear_) {
                  outputLUT_[index][i] = isOnlyQIE11(id) ? linearQIE11LUT[i] : linearQIE8LUT[i];
               } else {
                  outputLUT_[index][i] = analyticalLUT[i];
-              }
+              } }
 	} else {
-           for (unsigned int i = threshold; i < lutsize; ++i)
-              outputLUT_[index][i] = version == 0 ? linearRctLUT[i] : linearNctLUT[i];
+           for (unsigned int i = threshold; i < lutsize; ++i) {
+              outputLUT_[index][i] = version == 0 ? linearRctLUT[i] : linearNctLUT[i]; }
         }
 
 	double eta_low = 0., eta_high = 0.;
@@ -139,12 +139,12 @@ void CaloTPGTranscoderULUT::loadHCALCompress(HcalLutMetadata const& lutMetadata,
 HcalTriggerPrimitiveSample CaloTPGTranscoderULUT::hcalCompress(const HcalTrigTowerDetId& id, unsigned int sample, int fineGrain) const {
   unsigned int itower = getOutputLUTId(id);
 
-  if (sample >= getOutputLUTSize(id))
+  if (sample >= getOutputLUTSize(id)) {
     throw cms::Exception("Out of Range")
-       << "LUT has " << getOutputLUTSize(id) << " entries for " << id << " but " << sample << " was requested.";
+       << "LUT has " << getOutputLUTSize(id) << " entries for " << id << " but " << sample << " was requested."; }
 
-  if(itower >= outputLUT_.size())
-    throw cms::Exception("Out of Range") << "No decompression LUT found for " << id;
+  if(itower >= outputLUT_.size()) {
+    throw cms::Exception("Out of Range") << "No decompression LUT found for " << id; }
 
   return HcalTriggerPrimitiveSample(outputLUT_[itower][sample], fineGrain);
 }
@@ -212,39 +212,39 @@ int CaloTPGTranscoderULUT::getOutputLUTId(const int ieta, const int iphiin, cons
 unsigned int
 CaloTPGTranscoderULUT::getOutputLUTSize(const HcalTrigTowerDetId& id) const
 {
-   if (!theTopology)
+   if (!theTopology) {
       throw cms::Exception("CaloTPGTranscoderULUT")
-         << "Topology not set! Use CaloTPGTranscoderULUT::setup(...) first!";
+         << "Topology not set! Use CaloTPGTranscoderULUT::setup(...) first!"; }
 
    switch (theTopology->triggerMode()) {
       case HcalTopologyMode::TriggerMode_2009:
       case HcalTopologyMode::TriggerMode_2016:
          return QIE8_OUTPUT_LUT_SIZE;
       case HcalTopologyMode::TriggerMode_2017:
-         if (id.ietaAbs() <= theTopology->lastHERing())
+         if (id.ietaAbs() <= theTopology->lastHERing()) {
             return QIE8_OUTPUT_LUT_SIZE;
-         else
-            return QIE10_OUTPUT_LUT_SIZE;
+         } else {
+            return QIE10_OUTPUT_LUT_SIZE; }
       case HcalTopologyMode::TriggerMode_2017plan1:
-         if (plan1_towers_.find(id) != plan1_towers_.end())
+         if (plan1_towers_.find(id) != plan1_towers_.end()) {
             return QIE11_OUTPUT_LUT_SIZE;
-         else if (id.ietaAbs() <= theTopology->lastHERing())
+         } else if (id.ietaAbs() <= theTopology->lastHERing()) {
             return QIE8_OUTPUT_LUT_SIZE;
-         else
-            return QIE10_OUTPUT_LUT_SIZE;
+         } else {
+            return QIE10_OUTPUT_LUT_SIZE; }
       case HcalTopologyMode::TriggerMode_2018legacy:
       case HcalTopologyMode::TriggerMode_2018:
-         if (id.ietaAbs() <= theTopology->lastHBRing())
+         if (id.ietaAbs() <= theTopology->lastHBRing()) {
             return QIE8_OUTPUT_LUT_SIZE;
-         else if (id.ietaAbs() <= theTopology->lastHERing())
+         } else if (id.ietaAbs() <= theTopology->lastHERing()) {
             return QIE11_OUTPUT_LUT_SIZE;
-         else
-            return QIE10_OUTPUT_LUT_SIZE;
+         } else {
+            return QIE10_OUTPUT_LUT_SIZE; }
       case HcalTopologyMode::TriggerMode_2019:
-         if (id.ietaAbs() <= theTopology->lastHERing())
+         if (id.ietaAbs() <= theTopology->lastHERing()) {
             return QIE11_OUTPUT_LUT_SIZE;
-         else
-            return QIE10_OUTPUT_LUT_SIZE;
+         } else {
+            return QIE10_OUTPUT_LUT_SIZE; }
       default:
          throw cms::Exception("CaloTPGTranscoderULUT")
             << "Unknown trigger mode used by the topology!";
@@ -254,19 +254,19 @@ CaloTPGTranscoderULUT::getOutputLUTSize(const HcalTrigTowerDetId& id) const
 bool
 CaloTPGTranscoderULUT::isOnlyQIE11(const HcalTrigTowerDetId& id) const
 {
-   if (!theTopology)
+   if (!theTopology) {
       throw cms::Exception("CaloTPGTranscoderULUT")
-         << "Topology not set! Use CaloTPGTranscoderULUT::setup(...) first!";
+         << "Topology not set! Use CaloTPGTranscoderULUT::setup(...) first!"; }
 
    switch (theTopology->triggerMode()) {
       case HcalTopologyMode::TriggerMode_2017plan1:
-         if (plan1_towers_.find(id) != plan1_towers_.end() and id.ietaAbs() != theTopology->lastHBRing())
-            return true;
+         if (plan1_towers_.find(id) != plan1_towers_.end() and id.ietaAbs() != theTopology->lastHBRing()) {
+            return true; }
          return false;
       case HcalTopologyMode::TriggerMode_2018legacy:
       case HcalTopologyMode::TriggerMode_2018:
-         if (id.ietaAbs() <= theTopology->lastHBRing())
-            return false;
+         if (id.ietaAbs() <= theTopology->lastHBRing()) {
+            return false; }
          return true;
       case HcalTopologyMode::TriggerMode_2019:
          return true;
@@ -302,13 +302,13 @@ void CaloTPGTranscoderULUT::setup(HcalLutMetadata const& lutMetadata, HcalTrigTo
 
     plan1_towers_.clear();
     for (const auto& id: lutMetadata.getAllChannels()) {
-       if (not (id.det() == DetId::Hcal and theTopology->valid(id)))
-          continue;
+       if (not (id.det() == DetId::Hcal and theTopology->valid(id))) {
+          continue; }
        HcalDetId cell(id);
-       if (not theTopology->dddConstants()->isPlan1(cell))
-          continue;
-       for (const auto& tower: theTrigTowerGeometry.towerIds(cell))
-          plan1_towers_.emplace(tower);
+       if (not theTopology->dddConstants()->isPlan1(cell)) {
+          continue; }
+       for (const auto& tower: theTrigTowerGeometry.towerIds(cell)) {
+          plan1_towers_.emplace(tower); }
     }
 
     if (compressionFile_.empty() && decompressionFile_.empty()) {

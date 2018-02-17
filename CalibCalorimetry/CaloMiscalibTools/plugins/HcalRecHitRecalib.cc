@@ -59,7 +59,7 @@ HcalRecHitRecalib::beginRun(const edm::Run&, const edm::EventSetup& iSetup)
   mapHcal_.prefillMap(*topology);
 
   MiscalibReaderFromXMLHcal hcalreader_(mapHcal_);
-  if(!hcalfile_.empty()) hcalreader_.parseXMLMiscalibFile(hcalfile_);
+  if(!hcalfile_.empty()) { hcalreader_.parseXMLMiscalibFile(hcalfile_); }
   mapHcal_.print();
 }
 

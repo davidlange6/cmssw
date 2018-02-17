@@ -19,7 +19,7 @@ namespace CastorDbASCIIIO {
     bool operator () (DetId fFirst, DetId fSecond) const {
       HcalGenericDetId first (fFirst);
       HcalGenericDetId second (fSecond);
-      if (first.genericSubdet () != second.genericSubdet ()) return first.genericSubdet () < second.genericSubdet ();
+      if (first.genericSubdet () != second.genericSubdet ()) { return first.genericSubdet () < second.genericSubdet (); }
       if (first.isHcalDetId ()) {
 	HcalDetId f1 (first);
 	HcalDetId s1 (second);
@@ -59,7 +59,7 @@ std::vector <std::string> splitString (const std::string& fLine) {
       start = i+1;
     }
     else {
-      if (empty) empty = false;
+      if (empty) { empty = false; }
     }
   }
   return result;
@@ -80,12 +80,12 @@ void dumpId (std::ostream& fOutput, DetId id) {
 
 template <class T,class S> 
 bool getCastorObject (std::istream& fInput, T* fObject, S* fCondObject) {
-  if (!fObject) fObject = new T;
+  if (!fObject) { fObject = new T; }
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
+    if (items.empty()) { continue; // blank line }
     if (items.size () < 8) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 8 items: eta, phi, depth, subdet, 4x values" << std::endl;
       continue;
@@ -129,12 +129,12 @@ bool dumpCastorObject (std::ostream& fOutput, const T& fObject) {
 
 template <class T,class S> 
 bool getCastorSingleFloatObject (std::istream& fInput, T* fObject, S* fCondObject) {
-  if (!fObject) fObject = new T;
+  if (!fObject) { fObject = new T; }
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
+    if (items.empty()) { continue; // blank line }
     if (items.size () < 5) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 5 items: eta, phi, depth, subdet, value" << std::endl;
       continue;
@@ -174,12 +174,12 @@ bool dumpCastorSingleFloatObject (std::ostream& fOutput, const T& fObject) {
 
 template <class T,class S> 
 bool getCastorSingleIntObject (std::istream& fInput, T* fObject, S* fCondObject) {
-  if (!fObject) fObject = new T;
+  if (!fObject) { fObject = new T; }
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
+    if (items.empty()) { continue; // blank line }
     if (items.size () < 5) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 5 items: eta, phi, depth, subdet, value" << std::endl;
       continue;
@@ -230,18 +230,18 @@ bool dumpObject (std::ostream& fOutput, const CastorSaturationCorrs& fObject) {r
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool getObject (std::istream& fInput, CastorPedestals* fObject) {
-  if (!fObject) fObject = new CastorPedestals(false);
+  if (!fObject) { fObject = new CastorPedestals(false); }
   char buffer [1024];
 
   while (fInput.getline(buffer, 1024)) {
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
-    else {
+    if (items.empty()) { continue; // blank line
+    } else {
       if (items[0] == "#U")
 	{
-	  if (items[1] == (std::string)"ADC") fObject->setUnitADC(true);
-	    else if (items[1] == (std::string)"fC") fObject->setUnitADC(false);
-	  else 
+	  if (items[1] == (std::string)"ADC") { fObject->setUnitADC(true);
+	    } else if (items[1] == (std::string)"fC") { fObject->setUnitADC(false);
+	  } else 
 	    {
 	      edm::LogWarning("Pedestal Unit Error") << "Unrecognized unit for pedestals. Assuming fC." << std::endl;
 	      fObject->setUnitADC(false);
@@ -256,9 +256,9 @@ bool getObject (std::istream& fInput, CastorPedestals* fObject) {
     }
   }
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue;
+    if (buffer [0] == '#') { continue; }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
+    if (items.empty()) { continue; // blank line }
     if (items.size () < 8) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 8 items: eta, phi, depth, subdet, 4x values" 
 				      << " or 12 items: eta, phi, depth, subdet, 4x values for mean, 4x values for width"
@@ -298,8 +298,8 @@ bool getObject (std::istream& fInput, CastorPedestals* fObject) {
 
 bool dumpObject (std::ostream& fOutput, const CastorPedestals& fObject) {
   char buffer [1024];
-  if (fObject.isADC() ) sprintf (buffer, "#U ADC  << this is the unit \n");
-  else  sprintf (buffer, "#U fC  << this is the unit \n");
+  if (fObject.isADC() ) { sprintf (buffer, "#U ADC  << this is the unit \n");
+  } else {  sprintf (buffer, "#U fC  << this is the unit \n"); }
   fOutput << buffer;
 
   sprintf (buffer, "# %15s %15s %15s %15s %8s %8s %8s %8s %8s %8s %8s %8s %10s\n", "eta", "phi", "dep", "det", "cap0", "cap1", "cap2", "cap3", "widthcap0", "widthcap1", "widthcap2", "widthcap3", "DetId");
@@ -325,12 +325,12 @@ bool dumpObject (std::ostream& fOutput, const CastorPedestals& fObject) {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool getObject (std::istream& fInput, CastorChannelQuality* fObject) 
 {
-  if (!fObject) fObject = new CastorChannelQuality;
+  if (!fObject) { fObject = new CastorChannelQuality; }
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
+    if (items.empty()) { continue; // blank line }
     if (items.size () < 5) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 5 items: eta, phi, depth, subdet, GOOD/BAD/HOT/DEAD" << std::endl;
       continue;
@@ -385,20 +385,20 @@ bool dumpObject (std::ostream& fOutput, const CastorChannelQuality& fObject) {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool getObject (std::istream& fInput, CastorPedestalWidths* fObject) {
-  if (!fObject) fObject = new CastorPedestalWidths(false);
+  if (!fObject) { fObject = new CastorPedestalWidths(false); }
   char buffer [1024];
   int linecounter = 0;
 
   while (fInput.getline(buffer, 1024)) {
     linecounter++;
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
-    else {
+    if (items.empty()) { continue; // blank line
+    } else {
       if (items[0] == (std::string)"#U")
 	{
-	  if (items[1] == (std::string)"ADC") fObject->setUnitADC(true); 
-	  else if (items[1] == (std::string)"fC") fObject->setUnitADC(false);
-	  else 
+	  if (items[1] == (std::string)"ADC") { fObject->setUnitADC(true); 
+	  } else if (items[1] == (std::string)"fC") { fObject->setUnitADC(false);
+	  } else 
 	    {
 	      edm::LogWarning("Pedestal Width Unit Error") << "Unrecognized unit for pedestal widths. Assuming fC." << std::endl;
 	      fObject->setUnitADC(false);
@@ -415,9 +415,9 @@ bool getObject (std::istream& fInput, CastorPedestalWidths* fObject) {
 
   while (fInput.getline(buffer, 1024)) {
     linecounter++;
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue; // blank line
+    if (items.empty()) { continue; // blank line }
     if (items.size () < 14) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line number: " << linecounter << "\n line must contain 14 items: eta, phi, depth, subdet, 10x correlations" 
 				      << " or 20 items: eta, phi, depth, subdet, 16x correlations" 
@@ -481,8 +481,8 @@ bool getObject (std::istream& fInput, CastorPedestalWidths* fObject) {
 
 bool dumpObject (std::ostream& fOutput, const CastorPedestalWidths& fObject) {
   char buffer [1024];
-  if (fObject.isADC() ) sprintf (buffer, "#U ADC  << this is the unit \n");
-  else  sprintf (buffer, "#U fC  << this is the unit \n");
+  if (fObject.isADC() ) { sprintf (buffer, "#U ADC  << this is the unit \n");
+  } else {  sprintf (buffer, "#U fC  << this is the unit \n"); }
   fOutput << buffer;
 
   sprintf (buffer, "# %15s %15s %15s %15s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %8s %10s\n", 
@@ -514,9 +514,9 @@ bool dumpObject (std::ostream& fOutput, const CastorPedestalWidths& fObject) {
 bool getObject (std::istream& fInput, CastorQIEData* fObject) {
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
-    if (items.empty()) continue;
+    if (items.empty()) { continue; }
     if (items [0] == "SHAPE") { // basic shape
       if (items.size () < 33) {
 	edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 33 items: SHAPE  32 x low QIE edges for first 32 bins" << std::endl;
@@ -604,7 +604,7 @@ bool dumpObject (std::ostream& fOutput, const CastorQIEData& fObject) {
 bool getObject (std::istream& fInput, CastorCalibrationQIEData* fObject) {
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
     if (items.size () < 36) {
       edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 36 items: eta, phi, depth, subdet, 32 bin values" << std::endl;
@@ -661,19 +661,19 @@ bool dumpObject (std::ostream& fOutput, const CastorCalibrationQIEData& fObject)
 bool getObject (std::istream& fInput, CastorElectronicsMap* fObject) {
   char buffer [1024];
   while (fInput.getline(buffer, 1024)) {
-    if (buffer [0] == '#') continue; //ignore comment
+    if (buffer [0] == '#') { continue; //ignore comment }
     std::vector <std::string> items = splitString (std::string (buffer));
     if (items.size () < 12) {
-      if (items.empty()) continue; // no warning here
+      if (items.empty()) { continue; // no warning here }
       if (items.size()<9) {
 	edm::LogError("MapFormat") << "CastorElectronicsMap-> line too short: " << buffer;
 	continue;
       }
       if (items[8]=="NA" || items[8]=="NT") {
-	while (items.size()<12) items.push_back(""); // don't worry here
+	while (items.size()<12) { items.push_back(""); // don't worry here }
       } else if (items[8]=="HT") {
-	if (items.size()==11) items.push_back("");
-	else {
+	if (items.size()==11) { items.push_back("");
+	} else {
 	  edm::LogError("MapFormat") << "CastorElectronicsMap-> Bad line: " << buffer 
 				     << "\n HT line must contain at least 11 items: i  cr sl tb dcc spigot fiber fiberchan subdet=HT ieta iphi";
 	  continue;
@@ -688,7 +688,7 @@ bool getObject (std::istream& fInput, CastorElectronicsMap* fObject) {
     int crate = atoi (items [1].c_str());
     int slot = atoi (items [2].c_str());
     int top = 1;
-    if (items [3] == "b") top = 0;
+    if (items [3] == "b") { top = 0; }
     int dcc = atoi (items [4].c_str());
     int spigot = atoi (items [5].c_str());
     CastorElectronicsId elId;
@@ -771,12 +771,12 @@ bool dumpObject (std::ostream& fOutput, const CastorElectronicsMap& fObject) {
 }
 
 bool getObject (std::istream& fInput, CastorRecoParams* fObject) {
-	if (!fObject) fObject = new CastorRecoParams();
+	if (!fObject) { fObject = new CastorRecoParams(); }
 	char buffer [1024];
 	while (fInput.getline(buffer, 1024)) {
-		if (buffer [0] == '#') continue; //ignore comment
+		if (buffer [0] == '#') { continue; //ignore comment }
 		std::vector <std::string> items = splitString (std::string (buffer));
-		if (items.empty()) continue; // blank line
+		if (items.empty()) { continue; // blank line }
 		if (items.size () < 6) {
 			edm::LogWarning("Format Error") << "Bad line: " << buffer << "\n line must contain 6 items: eta, phi, depth, subdet, firstSample, samplesToAdd" << std::endl;
 		    	continue;

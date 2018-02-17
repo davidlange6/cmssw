@@ -143,7 +143,8 @@ Bool_t TEcnaRootFile::OpenR(const Text_t *name) {
       fCnaResultsBranch->SetAddress(&fCnaIndivResult);
       fNbEntries = (Int_t)fCnaResultsTree->GetEntries();
     }
-    else ok = kFALSE;
+    else { ok = kFALSE;
+}
   }
   return ok;
 }
@@ -161,7 +162,8 @@ Bool_t TEcnaRootFile::OpenW(const Text_t *name) {
     fCnaResultsBranch = fCnaResultsTree->
       Branch("Results","TEcnaResultType", &fCnaIndivResult, 64000, 0);
   }
-  else ok = kFALSE;
+  else { ok = kFALSE;
+}
   return ok;
 }
 

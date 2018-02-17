@@ -33,11 +33,13 @@ void TPNFit::init(int nsamples, int firstsample, int lastsample)
   fNum_samp_after_max = lastsample  ;
   //printf("nsamples=%d firstsample=%d lastsample=%d\n",nsamples,firstsample,lastsample);
 
-  if(fNsamples > NMAXSAMP2)
+  if(fNsamples > NMAXSAMP2) {
           printf("number of PN samples exceed maximum\n");
+}
 
-  for(int k=0;k<NMAXSAMP2;k++)
+  for(int k=0;k<NMAXSAMP2;k++) {
        t[k]= (double) k;
+}
 
   return ;
 }
@@ -51,18 +53,23 @@ double TPNFit::doFit(int maxsample, double *adc)
   firstsample= maxsample - fNum_samp_bef_max;
   lastsample= maxsample +  fNum_samp_after_max;
 
-  if(firstsample <= 0) return 101;
-  if(lastsample >= fNsamples) lastsample=fNsamples-1;
-  if(lastsample-firstsample < 1) return 102;
+  if(firstsample <= 0) { return 101;
+}
+  if(lastsample >= fNsamples) { lastsample=fNsamples-1;
+}
+  if(lastsample-firstsample < 1) { return 102;
+}
   int nval= lastsample-firstsample +1;
   //printf("firstsample=%d lastsample=%d nval=%d\n",
   //                        firstsample,lastsample,nval);
   int testneg=0;
   for(int kn=firstsample;kn<=lastsample;kn++) {
     //printf("adc[%d]=%f\n",kn,adc[kn]);
-	  if(adc[kn] < 0.) testneg=1;
+	  if(adc[kn] < 0.) { testneg=1;
+}
   }
-  if(testneg == 1) return 103;
+  if(testneg == 1) { return 103;
+}
 
   for(int i=firstsample;i<=lastsample;i++) {
      val[i-firstsample]= adc[i];
@@ -112,10 +119,12 @@ double TPNFit::doFit(int maxsample, double *adc)
       return 1.;
   }
 
-  if((int)timeatmax > lastsample)
+  if((int)timeatmax > lastsample) {
       return 103;
-  if((int)timeatmax < firstsample)
+}
+  if((int)timeatmax < firstsample) {
       return 103;
+}
 
   return chi2;
 }

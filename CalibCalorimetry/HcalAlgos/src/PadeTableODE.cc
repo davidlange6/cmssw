@@ -7,10 +7,12 @@ PadeTableODE::PadeTableODE(const unsigned padeRow, const unsigned padeColumn)
     : row_(padeRow),
       col_(padeColumn)
 {
-    if (row_ > 2U) throw cms::Exception(
+    if (row_ > 2U) { throw cms::Exception(
       "In PadeTableODE constructor: Pade table row number out of range");
-    if (col_ > 3U) throw cms::Exception(
+}
+    if (col_ > 3U) { throw cms::Exception(
       "In PadeTableODE constructor: Pade table column number out of range");
+}
 }
 
 void PadeTableODE::calculate(const double tau, const double currentIn,
@@ -19,11 +21,14 @@ void PadeTableODE::calculate(const double tau, const double currentIn,
                              const unsigned firstNode, double* derivative) const
 {
     // Check input sanity
-    if (lenX < firstNode + col_) throw cms::Exception(
+    if (lenX < firstNode + col_) { throw cms::Exception(
         "In PadeTableODE::calculate: insufficient number of variables");
-    if (tau <= 0.0) throw cms::Exception(
+}
+    if (tau <= 0.0) { throw cms::Exception(
         "In PadeTableODE::calculate: delay time is not positive");
-    if (col_) assert(x);
+}
+    if (col_) { assert(x);
+}
     assert(derivative);
 
     switch (col_)

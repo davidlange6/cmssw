@@ -256,8 +256,8 @@ LaserSorter::analyze(const edm::Event& event, const edm::EventSetup& es){
     }
 
     if(triggeredFedId<ecalDccFedIdMin_ || triggeredFedId > ecalDccFedIdMax_){
-      if(verbosity_) cout <<  "[LaserSorter " << now() << "] " << "DCC ID (" << dccId
-                          << ") found in trigger type is out of range.";
+      if(verbosity_) { cout <<  "[LaserSorter " << now() << "] " << "DCC ID (" << dccId
+                          << ") found in trigger type is out of range."; }
       ++stats_.nInvalidDccWeak;
       vector<int> ids = getFullyReadoutDccs(*rawdata);
       if(ids.empty()){
@@ -267,18 +267,18 @@ LaserSorter::analyze(const edm::Event& event, const edm::EventSetup& es){
         }
       } else if(ids.size()==1){
         triggeredFedId = ids[0];
-        if(verbosity_) cout << " ID guessed from DCC payloads\n";
+        if(verbosity_) { cout << " ID guessed from DCC payloads\n"; }
         ++stats_.nRestoredDcc;
       } else{ //ids.size()>1
         if(verbosity_){
           cout << " Several fully read-out Dccs:";
-          for(unsigned i=0; i < ids.size(); ++i) cout << " " << ids[i];
+          for(unsigned i=0; i < ids.size(); ++i) { cout << " " << ids[i]; }
           cout << "\n";
         }
       }
     }
   
-    if(verbosity_>1) cout << "\n----------------------------------------------------------------------\n"
+    if(verbosity_>1) { cout << "\n----------------------------------------------------------------------\n"
                           << "Event id: " 
                           << " " << event.id() << "\n"
                           << "Lumin block: " << lumiBlock_ << "\n"
@@ -286,15 +286,15 @@ LaserSorter::analyze(const edm::Event& event, const edm::EventSetup& es){
                           << " Color: " << colorNames[color&0x3]
                           <<  " FED: " << triggeredFedId
                           << " side:" << side << "\n"
-                          << "\n----------------------------------------------------------------------\n";
+                          << "\n----------------------------------------------------------------------\n"; }
     
   } else{ //NO ECAL DATA
-    if(verbosity_>1) cout << "\n----------------------------------------------------------------------\n"
+    if(verbosity_>1) { cout << "\n----------------------------------------------------------------------\n"
                           << "Event id: " 
                           << " " << event.id() << "\n"
                           << "Lumin block: " << lumiBlock_ << "\n"
                           << "No ECAL data\n"
-                          << "\n----------------------------------------------------------------------\n";
+                          << "\n----------------------------------------------------------------------\n"; }
   }
   
   logFile_ << event.id().run() << "\t"
@@ -336,29 +336,29 @@ LaserSorter::analyze(const edm::Event& event, const edm::EventSetup& es){
         assignedLB = out->startingLumiBlock();
         if(out->excludedOrbit().find(orbit_)
            ==out->excludedOrbit().end()){
-          if(verbosity_ > 1) cout << "[LaserSorter " << now() << "] "
+          if(verbosity_ > 1) { cout << "[LaserSorter " << now() << "] "
                               << "Writing out event from FED " << triggeredFedId 
                               << " LB " << lumiBlock_
-                              << " orbit " << orbit_ << "\n";
+                              << " orbit " << orbit_ << "\n"; }
           int dtt = (detailedTrigType_ >=0) ? detailedTrigType_ : -1; //shall we use -1 or 0 for undefined value?
           written = written
             || writeEvent(*out, event, dtt, *rawdata);
           ++stats_.nWritten;
         } else{
-          if(verbosity_) cout << "[LaserSorter " << now() << "] "
+          if(verbosity_) { cout << "[LaserSorter " << now() << "] "
                               << "File " << out->finalFileName() << " "
                               << "already contains calibration event from FED "
                               << triggeredFedId << ", LB = "
                               << lumiBlock_
                               << " with orbit ID "
-                              << orbit_ << ". Event skipped.\n";
+                              << orbit_ << ". Event skipped.\n"; }
         }
       }
     }
     lumiBlockPrev_ = lumiBlock_;
     
     logFile_ << "\t";
-    if(assignedLB>=0) logFile_ << assignedLB; else logFile_ << "-";
+    if(assignedLB>=0) { logFile_ << assignedLB; } else { logFile_ << "-"; }
     logFile_ << "\t" << (written?"Y":"N") << "\n"; 
     logFile_  << "\t" << (detailedTrigType_==-2?"N":"Y") << "\n";
     
@@ -405,7 +405,7 @@ int LaserSorter::dcc2Lme(int dcc, int side){
 int LaserSorter::getOrbitFromDcc(const edm::Handle<FEDRawDataCollection>& rawdata) const{
   const int orbit32 = 6;
   for(int id=ecalDccFedIdMin_; id<=ecalDccFedIdMax_; ++id){
-    if(!FEDNumbering::inRange(id)) continue;
+    if(!FEDNumbering::inRange(id)) { continue; }
     const FEDRawData& data = rawdata->FEDData(id);
     if(data.size() >= 4*(orbit32+1)){
       const uint32_t* pData32 = (const uint32_t*) data.data();
@@ -429,22 +429,22 @@ int LaserSorter::getDetailedTriggerType(const edm::Handle<FEDRawDataCollection>&
   Majority<int> stat;
   bool ecalData = false;
   for(int id=ecalDccFedIdMin_; id<=ecalDccFedIdMax_; ++id){
-    if(!FEDNumbering::inRange(id)) continue;
+    if(!FEDNumbering::inRange(id)) { continue; }
     const FEDRawData& data = rawdata->FEDData(id);
     const int detailedTrigger32 = 5;
-    if(verbosity_>3) cout << "[LaserSorter " << now() << "] " 
+    if(verbosity_>3) { cout << "[LaserSorter " << now() << "] " 
                           << "FED " << id << " data size: "  
-                          << data.size() << "\n"; 
+                          << data.size() << "\n";  }
     if(data.size()>=4*(detailedTrigger32+1)){
       ecalData = true;
       const uint32_t* pData32 = (const uint32_t*) data.data();
       int tType = pData32[detailedTrigger32] & 0xFFF;
-      if(verbosity_>3) cout << "[LaserSorter " << now() << "] "
-                            << "Trigger type " << tType << "\n";
+      if(verbosity_>3) { cout << "[LaserSorter " << now() << "] "
+                            << "Trigger type " << tType << "\n"; }
       stat.add(tType);
     }
   }
-  if(!ecalData) return -2;
+  if(!ecalData) { return -2; }
   double p;
   int tType = stat.result(&p);
   if(p<0){
@@ -461,7 +461,7 @@ int LaserSorter::getDetailedTriggerType(const edm::Handle<FEDRawDataCollection>&
     edm::LogWarning("EventCorruption") << "Inconsitency in detailed trigger type indicated in ECAL DCC data headers\n";
     tType = -1;
   }
-  if(proba) *proba = p;
+  if(proba) { *proba = p; }
   return tType;
 }
 
@@ -483,12 +483,12 @@ void LaserSorter::closeOldStreams(edm::LuminosityBlockNumber_t lumiBlock){
     if(it->startingLumiBlock() < minLumiBlock
        || it->startingLumiBlock() > maxLumiBlock){
       //event older than 2 lumi block => stream can be closed
-      if(verbosity_) cout << "[LaserSorter " << now() << "] "
+      if(verbosity_) { cout << "[LaserSorter " << now() << "] "
                        << "Closing file for "
                        << "FED " 
                        << it->fedId()
                        << " LB " << it->startingLumiBlock()
-                       << "\n";
+                       << "\n"; }
       it = closeOutStream(it);
     } else{
       ++it;
@@ -501,12 +501,12 @@ LaserSorter::getStream(int fedId,
                        edm::LuminosityBlockNumber_t lumiBlock){
 
   if((fedId != -1) &&
-     (fedId < ecalDccFedIdMin_ || fedId > ecalDccFedIdMax_)) fedId = -1;
+     (fedId < ecalDccFedIdMin_ || fedId > ecalDccFedIdMax_)) { fedId = -1; }
   
-  if(verbosity_>1) cout << "[LaserSorter " << now() << "] "
+  if(verbosity_>1) { cout << "[LaserSorter " << now() << "] "
        << "Looking for an opened output file for FED " 
        << fedId << " LB " << lumiBlock
-       << "\n";
+       << "\n"; }
 
   //first look if stream is already open:
   for(OutStreamList::iterator it = outStreamList_.begin();
@@ -520,8 +520,8 @@ LaserSorter::getStream(int fedId,
   }
   //stream was not found. Let's create one
 
-  if(verbosity_) cout << "[LaserSorter " << now() << "] "
-                      << "File not yet opened. Opening it.\n";
+  if(verbosity_) { cout << "[LaserSorter " << now() << "] "
+                      << "File not yet opened. Opening it.\n"; }
 
   OutStreamList::iterator streamRecord = createOutStream(fedId, lumiBlock);
   return streamRecord!=outStreamList_.end()?&(*streamRecord):nullptr;
@@ -538,7 +538,7 @@ bool LaserSorter::writeEvent(OutStreamRecord& outRcd, const edm::Event& event,
   
   out.clear();
   uint32_t evtStart = out.tellp();
-  if(out.bad()) evtStart = 0;
+  if(out.bad()) { evtStart = 0; }
   rc &= writeEventHeader(out, event, dtt, fedIds.size());
   
   if(orbitZeroTime_.tv_sec==0 && data.FEDData(matacqFedId_).size()!=0){
@@ -558,9 +558,9 @@ bool LaserSorter::writeEvent(OutStreamRecord& outRcd, const edm::Event& event,
   }
 
   for(unsigned iFed = 0; iFed < fedIds.size() && rc; ++iFed){
-    if(verbosity_>3) cout << "[LaserSorter " << now() << "] " 
+    if(verbosity_>3) { cout << "[LaserSorter " << now() << "] " 
                           << "Writing data block of FED " << fedIds[iFed] << ". Data size: "  
-                          <<  data.FEDData(fedIds[iFed]).size() << "\n"; 
+                          <<  data.FEDData(fedIds[iFed]).size() << "\n";  }
     rc  &= writeFedBlock(out, data.FEDData(fedIds[iFed]));
   }
 
@@ -597,15 +597,15 @@ bool LaserSorter::writeFedBlock(std::ofstream& out,
         << "for FED ID " <<  ((pData[0] >>8) & 0xFFF) << "!\n";
     }
     
-    if(verbosity_>3) cout << "[LaserSorter " << now() << "] " << "Event fragment size: "
+    if(verbosity_>3) { cout << "[LaserSorter " << now() << "] " << "Event fragment size: "
                           << data.size() << " Byte"
-                          << "\t From Dcc header: " << dccLen64*8 << " Byte\n";
+                          << "\t From Dcc header: " << dccLen64*8 << " Byte\n"; }
     
     const size_t nBytes = data.size();
     //       cout << "[LaserSorter " << now() << "] " 
     //            << "Writing " << nBytes << " byte from adress " 
     //            << (void*) data.data() << " to file.\n";
-    if(out.fail()) cout << "[LaserSorter " << now() << "] " << "Problem with stream!\n";
+    if(out.fail()) { cout << "[LaserSorter " << now() << "] " << "Problem with stream!\n"; }
     out.write((char*)data.data(), nBytes);
     rc = true;
   } else{
@@ -625,7 +625,7 @@ bool LaserSorter::renameAsBackup(const std::string& fileName,
   do{
     newFileName_.str("");
     newFileName_ << fileName << "~";
-    if(i>0) newFileName_ << i;
+    if(i>0) { newFileName_ << i; }
     err = link(fileName.c_str(), newFileName_.str().c_str());
     if(err==0){
       newFileName = newFileName_.str();
@@ -639,8 +639,8 @@ bool LaserSorter::renameAsBackup(const std::string& fileName,
 LaserSorter::OutStreamList::iterator 
 LaserSorter::createOutStream(int fedId, 
                              edm::LuminosityBlockNumber_t lumiBlock){
-  if(verbosity_) cout << "[LaserSorter " << now() << "] " << "Creating a stream for FED " << fedId
-                      << " lumi block " << lumiBlock << ".\n";
+  if(verbosity_) { cout << "[LaserSorter " << now() << "] " << "Creating a stream for FED " << fedId
+                      << " lumi block " << lumiBlock << ".\n"; }
   std::string tmpName;
   std::string finalName;
 
@@ -657,10 +657,10 @@ LaserSorter::createOutStream(int fedId,
         << "Failed to rename file " << tmpName
         << "  to " << newName << "\n";
     }
-    if(verbosity_) cout << "[LaserSorter " << now() << "] "
+    if(verbosity_) { cout << "[LaserSorter " << now() << "] "
                         << "Already existing File " << tmpName
                         << " renamed to "
-                        << newName << "\n";
+                        << newName << "\n"; }
     out->close();
   }
 
@@ -679,9 +679,9 @@ LaserSorter::createOutStream(int fedId,
   ifstream in(finalName.c_str());
   bool newFile = true;
   if(in.good()){//file already exists with final name.
-    if(verbosity_) cout << "[LaserSorter " << now() << "] " << "File "
+    if(verbosity_) { cout << "[LaserSorter " << now() << "] " << "File "
                         << finalName
-                        << " already exists. It will be updated if needed.\n";
+                        << " already exists. It will be updated if needed.\n"; }
     //Copying its contents:
     char buffer[256];
     streamsize nread = -1;
@@ -712,11 +712,11 @@ LaserSorter::createOutStream(int fedId,
         cout << "[LaserSorter " << now() << "] " << "Failed to read offset of index table "
           " in the existing file " << finalName << "\n";
       } else{
-        if(verbosity_>2) cout << "[LaserSorter " << now() << "] " << "Index table offset of "
+        if(verbosity_>2) { cout << "[LaserSorter " << now() << "] " << "Index table offset of "
                            "original file " << finalName << ": 0x"
                               << hex << setfill('0')
                               << setw(8) << indexTableOffsetValue
-                              << dec << setfill(' ') << "\n";
+                              << dec << setfill(' ') << "\n"; }
       }
       in.clear();
       in.seekg(0, ios::beg);
@@ -889,17 +889,17 @@ void LaserSorter::streamFileName(int fedId,
   finalName = dir + "/" + fileName;
   tmpName = dir + "/" + tmpFileName;
 
-  if(verbosity_>3) cout << "[LaserSorter " << now() << "] " << "File path: "
-                        << finalName << "\n";
+  if(verbosity_>3) { cout << "[LaserSorter " << now() << "] " << "File path: "
+                        << finalName << "\n"; }
 }
 
 LaserSorter::OutStreamList::iterator
 LaserSorter::closeOutStream(LaserSorter::OutStreamList::iterator
                             streamRecord){
-  if(streamRecord==outStreamList_.end()) return outStreamList_.end();
+  if(streamRecord==outStreamList_.end()) { return outStreamList_.end(); }
   
-  if(verbosity_) cout << "[LaserSorter " << now() << "] " << "Writing Index table of file "
-                      << streamRecord->finalFileName() << "\n";
+  if(verbosity_) { cout << "[LaserSorter " << now() << "] " << "Writing Index table of file "
+                      << streamRecord->finalFileName() << "\n"; }
   ofstream& out = *streamRecord->out();
   out.clear();
   if(!writeIndexTable(out, *streamRecord->indices())){
@@ -909,15 +909,15 @@ LaserSorter::closeOutStream(LaserSorter::OutStreamList::iterator
          << "The error can be due to a lack of disk space.";
   }
   
-  if(verbosity_) cout << "[LaserSorter " << now() << "] " << "Closing file " 
-                      << streamRecord->finalFileName() << ".\n";
+  if(verbosity_) { cout << "[LaserSorter " << now() << "] " << "Closing file " 
+                      << streamRecord->finalFileName() << ".\n"; }
   out.close();
   
   const std::string& tmpFileName = streamRecord->tmpFileName();
   const std::string& finalFileName = streamRecord->finalFileName();
 
-  if(verbosity_) cout << "[LaserSorter " << now() << "] " << "Renaming " << tmpFileName
-                      << " to "    << finalFileName << ".\n";
+  if(verbosity_) { cout << "[LaserSorter " << now() << "] " << "Renaming " << tmpFileName
+                      << " to "    << finalFileName << ".\n"; }
 
   if(0!=rename(tmpFileName.c_str(), finalFileName.c_str())){
     cout << "[LaserSorter " << now() << "] "
@@ -953,11 +953,11 @@ void LaserSorter::beginJob(){
 
 bool LaserSorter::isDccEventEmpty(const FEDRawData& data, size_t* dccLen,
                                   int* nTowerBlocks) const{
-  if(nTowerBlocks) *nTowerBlocks = 0;
+  if(nTowerBlocks) { *nTowerBlocks = 0; }
   //DCC event is considered empty if it does not contains any Tower block
   //( = FE data)
   bool rc = true;
-  if(dccLen) *dccLen = 0;
+  if(dccLen) { *dccLen = 0; }
   const unsigned nWord32 = data.size()/sizeof(uint32_t);
   if(nWord32==0){
     //cout << "[LaserSorter " << now() << "] " << "FED block completly empty\n";
@@ -973,7 +973,7 @@ bool LaserSorter::isDccEventEmpty(const FEDRawData& data, size_t* dccLen,
     if(0==(dataType>>2)){//in DCC header
       const int dccHeaderId = (data32[1] >>24) & 0x3F;
       if(dccHeaderId==1){
-        if(dccLen) *dccLen=((data32[0] >>0 ) & 0xFFFFFF);
+        if(dccLen) { *dccLen=((data32[0] >>0 ) & 0xFFFFFF); }
       }
     } if((dataType>>2)==3){//Tower block
       rc = false;
@@ -1028,7 +1028,7 @@ LaserSorter::getFullyReadoutDccs(const FEDRawDataCollection& data) const{
   for(int fed = ecalDccFedIdMin_; fed <= ecalDccFedIdMax_; ++fed){
     const FEDRawData& fedData = data.FEDData(fed);
     isDccEventEmpty(fedData, nullptr, &nTowers);
-    if(nTowers>=68) result.push_back(fed);
+    if(nTowers>=68) { result.push_back(fed); }
   }
   return result;
 }
@@ -1044,7 +1044,7 @@ bool LaserSorter::writeIndexTable(std::ofstream& out,
   const uint32_t reserved = 0;
   out.write((const char*)&reserved, sizeof(reserved));
   
-  if(out.bad()) return false;
+  if(out.bad()) { return false; }
 
   sort(indices.begin(), indices.end());
 
@@ -1055,7 +1055,7 @@ bool LaserSorter::writeIndexTable(std::ofstream& out,
     out.write((char*)data, sizeof(data));
   }
 
-  if(out.bad()) return false; //intial 0 valur for index table position
+  if(out.bad()) { return false; //intial 0 valur for index table position }
   //                            is left to indicate corrupted table.
   
   //writes index table position:x
@@ -1063,7 +1063,7 @@ bool LaserSorter::writeIndexTable(std::ofstream& out,
   out.seekp(indexOffset32_*sizeof(uint32_t));
   //   cout << "[LaserSorter] Index table position: 0x" << hex << indexTablePos
   //        << dec << "\n"; 
-  if(!out.bad()) out.write((char*)&indexTablePos, sizeof(uint32_t));
+  if(!out.bad()) { out.write((char*)&indexTablePos, sizeof(uint32_t)); }
 
   bool rc = !out.bad();
   
@@ -1095,7 +1095,7 @@ bool LaserSorter::readIndexTable(std::ifstream& in,
     s->seekg(0);
     errMsg << "Failed to read header of file " << inName
            << ".";
-    if(err) *err = errMsg.str();
+    if(err) { *err = errMsg.str(); }
     return false;
   }
   
@@ -1107,14 +1107,14 @@ bool LaserSorter::readIndexTable(std::ifstream& in,
   if(s->bad()){
     errMsg << "Failed to read index table from file "
            << inName << ".";
-    if(err) *err = errMsg.str();
+    if(err) { *err = errMsg.str(); }
     return false;
   }
   if(nevts>maxEvents_){
     errMsg << "Number of events indicated in event index of file "
            << inName << " (" << nevts << ") "
            << "is unexpectively large.";
-    if(err) *err = errMsg.str();
+    if(err) { *err = errMsg.str(); }
     return false;
   }
   outRcd.indices()->resize(nevts);
@@ -1123,27 +1123,27 @@ bool LaserSorter::readIndexTable(std::ifstream& in,
     outRcd.indices()->clear();
     errMsg << "Failed to read index table from file "
            << inName << ".";
-    if(err) *err = errMsg.str();
+    if(err) { *err = errMsg.str(); }
     return false;
   }
   if(nevts>maxEvents_){
     errMsg << "Number of events indicated in event index of file "
            << inName << " is unexpectively large.";
-    if(err) *err = errMsg.str();
+    if(err) { *err = errMsg.str(); }
     outRcd.indices()->clear();
     return false;
   }
 
-  if(verbosity_ > 1) cout << "[LaserSorter " << now() << "] " << "Orbit IDs of events "
+  if(verbosity_ > 1) { cout << "[LaserSorter " << now() << "] " << "Orbit IDs of events "
                           << "already contained in the file "
-                          << inName << ":";
+                          << inName << ":"; }
   for(unsigned i = 0; i < outRcd.indices()->size(); ++i){
     if(verbosity_>1){
       cout << " "  << setw(9) << (*outRcd.indices())[i].orbit;
     }
     outRcd.excludedOrbit().insert((*outRcd.indices())[i].orbit);
   }
-  if(verbosity_>1) cout << "\n";
+  if(verbosity_>1) { cout << "\n"; }
 
   return true;
 }
@@ -1202,8 +1202,8 @@ void LaserSorter::restoreStreamsOfLumiBlock(int lumiBlock){
   
   for(int fedId = ecalDccFedIdMin_-2; fedId <= ecalDccFedIdMax_; ++fedId){
     int fedId_;
-    if(fedId == ecalDccFedIdMin_-2) fedId_ = -1; //stream for event w/o ECAL data
-    else fedId_ = fedId;
+    if(fedId == ecalDccFedIdMin_-2) { fedId_ = -1; //stream for event w/o ECAL data
+    } else { fedId_ = fedId; }
     streamFileName(fedId_, lumiBlock, dummy, fileName);
     struct stat s;
     //TODO: could be optimized by adding an option to get stream

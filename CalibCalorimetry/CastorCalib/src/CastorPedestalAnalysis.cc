@@ -24,8 +24,8 @@ CastorPedestalAnalysis::CastorPedestalAnalysis(const edm::ParameterSet& ps)
   sample=0;
   m_file=nullptr;
   m_AllPedsOK=0;
-  for(int i=0; i<4; i++) m_stat[i]=0;
-  for(int k=0;k<4;k++) state.push_back(true);
+  for(int i=0; i<4; i++) { m_stat[i]=0; }
+  for(int k=0;k<4;k++) { state.push_back(true); }
 
 // user cfg parameters
   m_outputFileMean = ps.getUntrackedParameter<string>("outputFileMeans", "");
@@ -42,19 +42,19 @@ CastorPedestalAnalysis::CastorPedestalAnalysis(const edm::ParameterSet& ps)
   } 
   m_nevtsample = ps.getUntrackedParameter<int>("nevtsample",0);
 // for compatibility with previous versions
-  if(m_nevtsample==9999999) m_nevtsample=0;
+  if(m_nevtsample==9999999) { m_nevtsample=0; }
   m_pedsinADC = ps.getUntrackedParameter<int>("pedsinADC",0);
   m_hiSaveflag = ps.getUntrackedParameter<int>("hiSaveflag",0);
   m_pedValflag = ps.getUntrackedParameter<int>("pedValflag",0);
-  if(m_pedValflag<0) m_pedValflag=0;
+  if(m_pedValflag<0) { m_pedValflag=0; }
   if (m_nevtsample>0 && m_pedValflag>0) {
     cout<<"WARNING - incompatible cfg options: nevtsample = "<<m_nevtsample<<", pedValflag = "<<m_pedValflag<<endl;
     cout<<"Setting pedValflag = 0"<<endl;
     m_pedValflag=0;
   }
-  if(m_pedValflag>1) m_pedValflag=1;
+  if(m_pedValflag>1) { m_pedValflag=1; }
   m_startTS = ps.getUntrackedParameter<int>("firstTS", 0);
-  if(m_startTS<0) m_startTS=0;
+  if(m_startTS<0) { m_startTS=0; }
   m_endTS = ps.getUntrackedParameter<int>("lastTS", 9);
 
 //  m_logFile.open("CastorPedestalAnalysis.log");
@@ -69,7 +69,7 @@ CastorPedestalAnalysis::CastorPedestalAnalysis(const edm::ParameterSet& ps)
 CastorPedestalAnalysis::~CastorPedestalAnalysis(){
 
   for(_meot=castorHists.PEDTRENDS.begin(); _meot!=castorHists.PEDTRENDS.end(); _meot++){
-    for(int i=0; i<16; i++) _meot->second[i].first->Delete();
+    for(int i=0; i<16; i++) { _meot->second[i].first->Delete(); }
   }
 
   castorHists.ALLPEDS->Delete();
@@ -96,13 +96,13 @@ void CastorPedestalAnalysis::processEvent(const CastorDigiCollection& castor,
   if(m_nevtsample>0) {
     sample = (evt-1)/m_nevtsample +1;
     evt_curr = evt%m_nevtsample;
-    if(evt_curr==0)evt_curr=m_nevtsample;
+    if(evt_curr==0) {evt_curr=m_nevtsample; }
   }
 
   m_shape = cond.getCastorShape();
   // HF
   try{
-    if(castor.empty()) throw (int)castor.size();
+    if(castor.empty()) { throw (int)castor.size(); }
     for (CastorDigiCollection::const_iterator j=castor.begin(); j!=castor.end(); ++j){
       const CastorDataFrame digi = (const CastorDataFrame)(*j);
       m_coder = cond.getCastorCoder(digi.id());
@@ -123,7 +123,7 @@ void CastorPedestalAnalysis::processEvent(const CastorDigiCollection& castor,
   } 
   // Call the function every m_nevtsample events
   if(m_nevtsample>0) {
-    if(evt%m_nevtsample==0) SampleAnalysis();
+    if(evt%m_nevtsample==0) { SampleAnalysis(); }
   }
 }
 
@@ -164,8 +164,8 @@ void CastorPedestalAnalysis::per2CapsHists(int flag, int id, const HcalDetId det
       lo=-0.5;
       // fix from Andy: if you convert to fC and then bin in units of 1, you may 'skip' a bin while
       // filling, since the ADCs are quantized
-      if (m_pedsinADC) hi=9.5;
-      else hi = 11.5;
+      if (m_pedsinADC) { hi=9.5;
+      } else { hi = 11.5; }
       sprintf(name,"%s Pedestal, eta=%d phi=%d d=%d cap=%d",type.c_str(),detid.ieta(),detid.iphi(),detid.depth(),i);  
       insert[i].first =  new TH1F(name,name,bins,lo,hi);
       sprintf(name,"%s Product, eta=%d phi=%d d=%d caps=%d*%d",type.c_str(),detid.ieta(),detid.iphi(),detid.depth(),i,(i+1)%4);  
@@ -206,8 +206,8 @@ void CastorPedestalAnalysis::per2CapsHists(int flag, int id, const HcalDetId det
       }
     }
     if (qie1.adc()<bins){
-      if (m_pedsinADC) _mei[qie1.capid()].first->Fill(qie1.adc());
-      else _mei[qie1.capid()].first->Fill(charge1); 
+      if (m_pedsinADC) { _mei[qie1.capid()].first->Fill(qie1.adc());
+      } else { _mei[qie1.capid()].first->Fill(charge1);  }
     }
     else if(qie1.adc()>=bins){
       _mei[qie1.capid()].first->AddBinContent(bins+1,1);
@@ -275,7 +275,7 @@ void CastorPedestalAnalysis::GetPedConst(map<HcalDetId, map<int,PEDBUNCH> > &too
       for (int i=0; i<4; i++) {
         TF1 *fit = _meot->second[i].first->GetFunction("gaus");
         chi2[i]=0;
-        if(fit->GetNDF()!=0) chi2[i]=fit->GetChisquare()/fit->GetNDF();
+        if(fit->GetNDF()!=0) { chi2[i]=fit->GetChisquare()/fit->GetNDF(); }
         cap[i]=fit->GetParameter(1);
         sig[i][i]=fit->GetParameter(2);
         dcap[i]=fit->GetParError(1);
@@ -300,9 +300,9 @@ void CastorPedestalAnalysis::GetPedConst(map<HcalDetId, map<int,PEDBUNCH> > &too
 
     for (int i=0; i<4; i++) {
       if(m_hiSaveflag>0) {
-        if (m_pedsinADC)
+        if (m_pedsinADC) {
         _meot->second[i].first->GetXaxis()->SetTitle("ADC");
-        else _meot->second[i].first->GetXaxis()->SetTitle("Charge, fC");
+        } else { _meot->second[i].first->GetXaxis()->SetTitle("Charge, fC"); }
         _meot->second[i].first->GetYaxis()->SetTitle("CapID samplings");
         _meot->second[i].first->Write();
       }
@@ -320,9 +320,9 @@ void CastorPedestalAnalysis::GetPedConst(map<HcalDetId, map<int,PEDBUNCH> > &too
 // special histos for Shuichi
     if(m_hiSaveflag==-100){
       for(int i=16; i<19; i++){
-        if (m_pedsinADC)
+        if (m_pedsinADC) {
         _meot->second[i].first->GetXaxis()->SetTitle("ADC");
-        else _meot->second[i].first->GetXaxis()->SetTitle("Charge, fC");
+        } else { _meot->second[i].first->GetXaxis()->SetTitle("Charge, fC"); }
         _meot->second[i].first->GetYaxis()->SetTitle("Events");
         _meot->second[i].first->Write();
       }
@@ -361,19 +361,19 @@ void CastorPedestalAnalysis::GetPedConst(map<HcalDetId, map<int,PEDBUNCH> > &too
       }
 // save product histos if desired
       if(m_hiSaveflag>10) {
-        if (m_pedsinADC)
+        if (m_pedsinADC) {
         _meot->second[i+4].first->GetXaxis()->SetTitle("ADC^2");
-        else _meot->second[i+4].first->GetXaxis()->SetTitle("Charge^2, fC^2");
+        } else { _meot->second[i+4].first->GetXaxis()->SetTitle("Charge^2, fC^2"); }
         _meot->second[i+4].first->GetYaxis()->SetTitle("2-CapID samplings");
         _meot->second[i+4].first->Write();
-        if (m_pedsinADC)
+        if (m_pedsinADC) {
         _meot->second[i+8].first->GetXaxis()->SetTitle("ADC^2");
-        else _meot->second[i+8].first->GetXaxis()->SetTitle("Charge^2, fC^2");
+        } else { _meot->second[i+8].first->GetXaxis()->SetTitle("Charge^2, fC^2"); }
         _meot->second[i+8].first->GetYaxis()->SetTitle("2-CapID samplings");
         _meot->second[i+8].first->Write();
-        if (m_pedsinADC)
+        if (m_pedsinADC) {
         _meot->second[i+12].first->GetXaxis()->SetTitle("ADC^2");
-        else _meot->second[i+12].first->GetXaxis()->SetTitle("Charge^2, fC^2");
+        } else { _meot->second[i+12].first->GetXaxis()->SetTitle("Charge^2, fC^2"); }
         _meot->second[i+12].first->GetYaxis()->SetTitle("2-CapID samplings");
         _meot->second[i+12].first->Write();
       }
@@ -438,9 +438,9 @@ int CastorPedestalAnalysis::done(const CastorPedestals* fInputPedestals,
   }
 
 // compute pedestal constants
-  if(m_nevtsample<1) SampleAnalysis();
+  if(m_nevtsample<1) { SampleAnalysis(); }
   if(m_nevtsample>0) {
-    if(evt%m_nevtsample!=0) SampleAnalysis();
+    if(evt%m_nevtsample!=0) { SampleAnalysis(); }
   }
 
 // trending histos
@@ -458,7 +458,7 @@ int CastorPedestalAnalysis::done(const CastorPedestals* fInputPedestals,
 //                                         int(N/100000) missing channels
     m_AllPedsOK=-1;
     if(m_pedValflag>0) {
-      for (int i=0; i<4; i++) nstat[i]=(int)m_stat[i];
+      for (int i=0; i<4; i++) { nstat[i]=(int)m_stat[i]; }
       int NPedErrors=CastorPedVal(nstat,fRefPedestals,fRefPedestalWidths,
                             fRawPedestals,fRawPedestalWidths,
                             fValPedestals,fValPedestalWidths);
@@ -535,10 +535,10 @@ void CastorPedestalAnalysis::Trendings(map<HcalDetId, map<int,PEDBUNCH> > &toolT
       TF1 *fit = _meot->second[i].second.second[0]->GetFunction("pol0");
       AverageValues[0].push_back(fit->GetParameter(0));
       AverageValues[1].push_back(fit->GetParError(0));
-      if(sample>1)
+      if(sample>1) {
       AverageValues[2].push_back(fit->GetChisquare()/fit->GetNDF());
-      else
-      AverageValues[2].push_back(fit->GetChisquare());
+      } else {
+      AverageValues[2].push_back(fit->GetChisquare()); }
       sprintf(name,"Sample (%d events)",m_nevtsample);
       _meot->second[i].second.second[0]->GetXaxis()->SetTitle(name);
       _meot->second[i].second.second[0]->GetYaxis()->SetTitle("Pedestal value");
@@ -661,7 +661,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
   std::ofstream PedValLog;
   PedValLog.open("CastorPedVal.log");
 
-  if(nstat[0]+nstat[1]+nstat[2]+nstat[3]<2500) PedValLog<<"CastorPedVal: warning - low statistics"<<std::endl;
+  if(nstat[0]+nstat[1]+nstat[2]+nstat[3]<2500) { PedValLog<<"CastorPedVal: warning - low statistics"<<std::endl; }
 // find complete list of channels in current data and reference
   for (int i=0; i<(int)RawChanns.size(); i++){
     isinRef[HcalDetId(RawChanns[i])]=false;
@@ -688,7 +688,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
       RefPedVals[icap]=fRefPedestals->getValues(detid)->getValue(icap);
       for (int icap2=icap; icap2<4; icap2++) {
         RefPedSigs[icap][icap2]=fRefPedestalWidths->getValues(detid)->getSigma(icap,icap2);
-        if(icap2!=icap)RefPedSigs[icap2][icap]=RefPedSigs[icap][icap2];
+        if(icap2!=icap) {RefPedSigs[icap2][icap]=RefPedSigs[icap][icap2]; }
       }
     }
 
@@ -698,15 +698,15 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
         RawPedVals[icap]=fRawPedestals->getValues(detid)->getValue(icap);
         for (int icap2=icap; icap2<4; icap2++) {
           RawPedSigs[icap][icap2]=fRawPedestalWidths->getValues(detid)->getSigma(icap,icap2);
-          if(icap2!=icap)RawPedSigs[icap2][icap]=RawPedSigs[icap][icap2];
+          if(icap2!=icap) {RawPedSigs[icap2][icap]=RawPedSigs[icap][icap2]; }
         }
       }
 
 // first quick check if raw values make sense: if not, the channel is treated like absent
       for (int icap=0; icap<4; icap++) {
-        if(RawPedVals[icap]<1. || RawPedSigs[icap][icap]<0.01) isinRaw[detid]=false;
+        if(RawPedVals[icap]<1. || RawPedSigs[icap][icap]<0.01) { isinRaw[detid]=false; }
         for (int icap2=icap; icap2<4; icap2++){
-          if(fabs(RawPedSigs[icap][icap2]/sqrt(RawPedSigs[icap][icap]*RawPedSigs[icap2][icap2]))>1.) isinRaw[detid]=false;
+          if(fabs(RawPedSigs[icap][icap2]/sqrt(RawPedSigs[icap][icap]*RawPedSigs[icap2][icap2]))>1.) { isinRaw[detid]=false; }
         }
       }
     }
@@ -725,7 +725,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
 
 // validation in 2 TS for HB, HE, HO, in 1 TS for HF
         int nTS=2;
-        if(detid.subdet()==HcalForward) nTS=1;
+        if(detid.subdet()==HcalForward) { nTS=1; }
         if(nTS==1 && fabs(diffof1)>0.5+erof1) { 
           erflag+=1;
           PedValLog<<"HcalPedVal: drift in channel "<<detid<<" cap "<<icap<<": "<<RawPedVals[icap]<<" - "<<RefPedVals[icap]<<" = "<<diffof1<<std::endl;
@@ -749,7 +749,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
       fValPedestals->addValues(item);
       CastorPedestalWidth widthsp(detid);
       for (int icap=0; icap<4; icap++) {
-        for (int icap2=icap; icap2<4; icap2++) widthsp.setSigma(icap2,icap,RefPedSigs[icap2][icap]);
+        for (int icap2=icap; icap2<4; icap2++) { widthsp.setSigma(icap2,icap,RefPedSigs[icap2][icap]); }
       }
       fValPedestalWidths->addValues(widthsp);
     }
@@ -757,7 +757,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
 // end of channel loop
   }
 
-  if(erflag==0) PedValLog<<"HcalPedVal: all pedestals checked OK"<<std::endl;
+  if(erflag==0) { PedValLog<<"HcalPedVal: all pedestals checked OK"<<std::endl; }
 
 // now construct the remaining part of the validated objects
 // if nothing changed outside tolerance, validated set = reference set
@@ -770,7 +770,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
           RefPedVals[icap]=fRefPedestals->getValues(detid)->getValue(icap);
           for (int icap2=icap; icap2<4; icap2++) {
             RefPedSigs[icap][icap2]=fRefPedestalWidths->getValues(detid)->getSigma(icap,icap2);
-            if(icap2!=icap)RefPedSigs[icap2][icap]=RefPedSigs[icap][icap2];
+            if(icap2!=icap) {RefPedSigs[icap2][icap]=RefPedSigs[icap][icap2]; }
             widthsp.setSigma(icap2,icap,RefPedSigs[icap2][icap]);
           }
         }
@@ -791,7 +791,7 @@ int CastorPedestalAnalysis::CastorPedVal(int nstat[4], const CastorPedestals* fR
           RawPedVals[icap]=fRawPedestals->getValues(detid)->getValue(icap);
           for (int icap2=icap; icap2<4; icap2++) {
             RawPedSigs[icap][icap2]=fRawPedestalWidths->getValues(detid)->getSigma(icap,icap2);
-            if(icap2!=icap)RawPedSigs[icap2][icap]=RawPedSigs[icap][icap2];
+            if(icap2!=icap) {RawPedSigs[icap2][icap]=RawPedSigs[icap][icap2]; }
             widthsp.setSigma(icap2,icap,RawPedSigs[icap2][icap]);
           }
         }

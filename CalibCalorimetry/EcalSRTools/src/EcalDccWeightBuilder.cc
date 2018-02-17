@@ -104,9 +104,9 @@ EcalDccWeightBuilder::analyze(const edm::Event& event,
   computeAllWeights(dccWeightsWithIntercalib_);
 
   //Writing out weights.
-  if(writeToAsciiFile_) writeWeightToAsciiFile();
-  if(writeToRootFile_)  writeWeightToRootFile();
-  if(writeToDB_)        writeWeightToDB();
+  if(writeToAsciiFile_) { writeWeightToAsciiFile(); }
+  if(writeToRootFile_) {  writeWeightToRootFile(); }
+  if(writeToDB_) {        writeWeightToDB(); }
 }
 
 void EcalDccWeightBuilder::computeAllWeights(bool withIntercalib){
@@ -196,7 +196,7 @@ void EcalDccWeightBuilder::computeAllWeights(bool withIntercalib){
       }
       for(int i = 0; i < nw; ++i){
 	w[i] = baseWeights[i];
-	if(withIntercalib) w[i]*= intercalib(*it);
+	if(withIntercalib) { w[i]*= intercalib(*it); }
       }
       unbiasWeights(w, &W);
       encodedWeights_[*it] = W;
@@ -277,8 +277,8 @@ void EcalDccWeightBuilder::sort(const std::vector<T>& a,
   //until the list is finally sorted.
   bool changed = false;
   s.resize(a.size());
-  for(unsigned i=0; i<a.size(); ++i) s[i] = i;
-  if(a.empty()) return;
+  for(unsigned i=0; i<a.size(); ++i) { s[i] = i; }
+  if(a.empty()) { return; }
   do {
     changed = false;
     for(unsigned i = 0; i < a.size()-1; ++i){
@@ -345,8 +345,8 @@ void EcalDccWeightBuilder::unbiasWeights(std::vector<double>& weights,
 	sort(dw, iw, true);
       }
     }
-    if(i<0) i = nw-1;
-    if(i>=(int)nw) i = 0;
+    if(i<0) { i = nw-1; }
+    if(i>=(int)nw) { i = 0; }
   }
 
 //   cout << __FILE__ << ":" << __LINE__ << ": "
@@ -358,10 +358,10 @@ void EcalDccWeightBuilder::unbiasWeights(std::vector<double>& weights,
 //   cout << "\n";
   
   //copy result
-  if(encodedWeights!=nullptr) encodedWeights->resize(nw);
+  if(encodedWeights!=nullptr) { encodedWeights->resize(nw); }
   for(unsigned i = 0; i < nw; ++i){
     weights[i] = decodeWeight(W[i]);
-    if(encodedWeights) (*encodedWeights)[i] = W[i];
+    if(encodedWeights) { (*encodedWeights)[i] = W[i]; }
   }
 }
 
@@ -452,15 +452,15 @@ void EcalDccWeightBuilder::writeWeightToAsciiFile(){
 
     char delim = sqlMode_?',':' ';
 
-    if(sqlMode_) file << "-- detId " << detId.rawId() << "\n"
+    if(sqlMode_) { file << "-- detId " << detId.rawId() << "\n"
 		      << "insert into dcc_weights_dat(rec_id,sm_id,fed_id,"
 		   "tt_id, cry_id,\n"
 		   "weight_0,weight_1,weight_2,weight_3,weight_4,weight_5) \n"
 		   "values ("
-		   ":recid";
+		   ":recid"; }
     
     const vector<int>& weights = it->second;
-    if(!sqlMode_) file << setw(10) << detId.rawId();
+    if(!sqlMode_) { file << setw(10) << detId.rawId(); }
     file << delim << setw(2) << smId;
     file << delim << setw(3) << fedId;
     file << delim << setw(2) << ruId;
@@ -469,7 +469,7 @@ void EcalDccWeightBuilder::writeWeightToAsciiFile(){
     for(unsigned i=0; i<weights.size(); ++i){
       file << delim << setw(5) << weights[i];
     }
-    if(sqlMode_) file << ");";
+    if(sqlMode_) { file << ");"; }
     file << "\n";
   }
   if(!file.good()){

@@ -34,11 +34,11 @@ HcalHardcodeParameters::HcalHardcodeParameters(const edm::ParameterSet & p)
 	darkCurrent_(p.getParameter<std::vector<double>>("darkCurrent")),
 	doSipmRadiationDamage_(p.getParameter<bool>("doRadiationDamage"))
 {
-	if(doSipmRadiationDamage_) sipmRadiationDamage_ = HcalSiPMRadiationDamage(darkCurrent_,p.getParameter<edm::ParameterSet>("radiationDamage"));
+	if(doSipmRadiationDamage_) { sipmRadiationDamage_ = HcalSiPMRadiationDamage(darkCurrent_,p.getParameter<edm::ParameterSet>("radiationDamage")); }
 }
 
 const double HcalHardcodeParameters::darkCurrent(unsigned index, double intlumi) const {
-	if(doSipmRadiationDamage_ and intlumi>0) return sipmRadiationDamage_.getDarkCurrent(intlumi,index);
+	if(doSipmRadiationDamage_ and intlumi>0) { return sipmRadiationDamage_.getDarkCurrent(intlumi,index); }
 	return darkCurrent_.at(index);
 }
 

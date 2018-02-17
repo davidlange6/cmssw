@@ -142,8 +142,9 @@ double PulseFitWithFunction::Fit_electronic(int data , double* adc_to_fit , doub
   int num_fit_max =(int)(fValue_tim_max + fNum_samp_after_max) ;
   //
 
-  if( sigmas_sample > 0. ) un_sur_sigma = 1./sigmas_sample;
-  else un_sur_sigma = 1.;
+  if( sigmas_sample > 0. ) { un_sur_sigma = 1./sigmas_sample;
+  } else { un_sur_sigma = 1.;
+}
 
   double func,delta ;
   //          Loop on iterations        
@@ -228,7 +229,8 @@ double  PulseFitWithFunction::Electronic_shape(double tim)
   // electronic function (from simulation) to fit ECAL pulse shape
   double func_electronic,dtsbeta,variable,puiss;
   double albet = fAlpha*fBeta ;
-  if( albet <= 0 ) return( (Double_t)0. );
+  if( albet <= 0 ) { return( (Double_t)0. );
+}
   double dt = tim-fTim_max ;
   if(dt > -albet)  {
     dtsbeta=dt/fBeta ;
@@ -236,7 +238,8 @@ double  PulseFitWithFunction::Electronic_shape(double tim)
 	puiss=TMath::Power(variable,fAlpha);
 	func_electronic=fFunc_max*puiss*TMath::Exp(-dtsbeta);
   }
-  else func_electronic = 0. ;
+  else { func_electronic = 0. ;
+}
   //
   return func_electronic ;
 }

@@ -10,48 +10,58 @@ inline static double interpolateLinear(const double x, const double f0,
 
 double ConstantStepOdeSolver::getPeakTime(const unsigned which) const
 {
-    if (which >= dim_) throw cms::Exception(
+    if (which >= dim_) { throw cms::Exception(
         "In ConstantStepOdeSolver::getPeakTime: index out of range");
-    if (runLen_ < 3) throw cms::Exception(
+}
+    if (runLen_ < 3) { throw cms::Exception(
         "In ConstantStepOdeSolver::getPeakTime: not enough data");
+}
 
     const double* hbuf = &historyBuffer_[which];
     double maxval = hbuf[0];
     unsigned maxind = 0;
-    for (unsigned i=1; i<runLen_; ++i)
+    for (unsigned i=1; i<runLen_; ++i) {
         if (hbuf[dim_*i] > maxval)
         {
             maxval = hbuf[dim_*i];
             maxind = i;
         }
-    if (maxind == 0U)
+}
+    if (maxind == 0U) {
         return 0.0;
-    if (maxind == runLen_-1U)
+}
+    if (maxind == runLen_-1U) {
         return dt_*maxind;
+}
     const double l = hbuf[dim_*(maxind - 1U)];
     const double r = hbuf[dim_*(maxind + 1U)];
-    if (l < maxval || r < maxval)
+    if (l < maxval || r < maxval) {
         return dt_*(maxind + (l - r)/2.0/(l + r - 2.0*maxval));
-    else
+    } else {
         return dt_*maxind;
+}
 }
 
 double ConstantStepOdeSolver::getIntegrated(
     const unsigned which, const unsigned idx) const
 {
-    if (which >= dim_ || idx >= runLen_) throw cms::Exception(
+    if (which >= dim_ || idx >= runLen_) { throw cms::Exception(
         "In ConstantStepOdeSolver::getIntegrated: index out of range");
-    if (lastIntegrated_ != which)
+}
+    if (lastIntegrated_ != which) {
         (const_cast<ConstantStepOdeSolver*>(this))->integrateCoordinate(which);
+}
     return chargeBuffer_[idx];
 }
 
 void ConstantStepOdeSolver::integrateCoordinate(const unsigned which)
 {
-    if (runLen_ < 4) throw cms::Exception(
+    if (runLen_ < 4) { throw cms::Exception(
         "In ConstantStepOdeSolver::integrateCoordinate: not enough data");
-    if (chargeBuffer_.size() < runLen_)
+}
+    if (chargeBuffer_.size() < runLen_) {
         chargeBuffer_.resize(runLen_);
+}
     double* integ = &chargeBuffer_[0];
     const double* coord = &historyBuffer_[which];
 
@@ -75,9 +85,10 @@ void ConstantStepOdeSolver::integrateCoordinate(const unsigned which)
             coord[dim_*(rlenm1-2U)]*(-5.0/24.0) +
             coord[dim_*(rlenm1-3U)]*(1.0/24.0));
     integ[rlenm1] = sum;                                      
-    if (dt_ != 1.0)
-        for (unsigned i=1; i<runLen_; ++i)
+    if (dt_ != 1.0) {
+        for (unsigned i=1; i<runLen_; ++i) {
             integ[i] *= dt_;
+}
     lastIntegrated_ = which;
 }
 
@@ -93,8 +104,9 @@ void ConstantStepOdeSolver::writeHistory(std::ostream& os,
             for (unsigned ipt=0; ipt<runLen_; ++ipt)
             {
                 os << getTime(ipt);
-                for (unsigned which=0; which<dim_; ++which)
+                for (unsigned which=0; which<dim_; ++which) {
                     os << ' ' << getCoordinate(which, ipt);
+}
                 os << '\n';
             }
         }
@@ -104,11 +116,13 @@ void ConstantStepOdeSolver::writeHistory(std::ostream& os,
             for (unsigned i=0; ; ++i)
             {
                 const double t = i*dt;
-                if (t > tmax)
+                if (t > tmax) {
                     break;
+}
                 os << t;
-                for (unsigned which=0; which<dim_; ++which)
+                for (unsigned which=0; which<dim_; ++which) {
                     os << ' ' << interpolateCoordinate(which, t, cubic);
+}
                 os << '\n';
             }
         }
@@ -125,8 +139,9 @@ void ConstantStepOdeSolver::writeIntegrated(std::ostream& os,
     {
         if (dt == dt_)
         {
-            for (unsigned ipt=0; ipt<runLen_; ++ipt)
+            for (unsigned ipt=0; ipt<runLen_; ++ipt) {
                 os << getTime(ipt) << ' ' << getIntegrated(which, ipt) << '\n';
+}
         }
         else
         {
@@ -134,8 +149,9 @@ void ConstantStepOdeSolver::writeIntegrated(std::ostream& os,
             for (unsigned i=0; ; ++i)
             {
                 const double t = i*dt;
-                if (t > tmax)
+                if (t > tmax) {
                     break;
+}
                 os << t << ' ' << interpolateIntegrated(which, t, cubic) << '\n';
             }
         }
@@ -151,8 +167,9 @@ ConstantStepOdeSolver::ConstantStepOdeSolver(const ConstantStepOdeSolver& r)
       historyBuffer_(r.historyBuffer_),
       chargeBuffer_(r.chargeBuffer_)
 {
-    if (r.rhs_)
+    if (r.rhs_) {
         rhs_ = r.rhs_->clone();
+}
 }
 
 ConstantStepOdeSolver& ConstantStepOdeSolver::operator=(
@@ -167,8 +184,9 @@ ConstantStepOdeSolver& ConstantStepOdeSolver::operator=(
         lastIntegrated_ = r.lastIntegrated_;
         historyBuffer_ = r.historyBuffer_;
         chargeBuffer_ = r.chargeBuffer_;
-        if (r.rhs_)
+        if (r.rhs_) {
             rhs_ = r.rhs_->clone();
+}
     }
     return *this;
 }
@@ -177,43 +195,51 @@ void ConstantStepOdeSolver::truncateCoordinate(const unsigned which,
                                                const double minValue,
                                                const double maxValue)
 {
-    if (which >= dim_) throw cms::Exception(
+    if (which >= dim_) { throw cms::Exception(
         "In ConstantStepOdeSolver::truncateCoordinate: index out of range");
-    if (minValue > maxValue) throw cms::Exception(
+}
+    if (minValue > maxValue) { throw cms::Exception(
         "In ConstantStepOdeSolver::truncateCoordinate: invalid truncation range");
+}
 
     double* buf = &historyBuffer_[which];
     for (unsigned i=0; i<runLen_; ++i)
     {
-        if (buf[dim_*i] < minValue)
+        if (buf[dim_*i] < minValue) {
             buf[dim_*i] = minValue;
-        else if (buf[dim_*i] > maxValue)
+        } else if (buf[dim_*i] > maxValue) {
             buf[dim_*i] = maxValue;
+}
     }
 }
 
 double ConstantStepOdeSolver::interpolateCoordinate(
     const unsigned which, const double t, const bool cubic) const
 {
-    if (which >= dim_) throw cms::Exception(
+    if (which >= dim_) { throw cms::Exception(
         "In ConstantStepOdeSolver::interpolateCoordinate: index out of range");
-    if (runLen_ < 2U || (cubic && runLen_ < 4U)) throw cms::Exception(
+}
+    if (runLen_ < 2U || (cubic && runLen_ < 4U)) { throw cms::Exception(
         "In ConstantStepOdeSolver::interpolateCoordinate: not enough data");
+}
     const double maxt = runLen_ ? dt_*(runLen_-1U) : 0.0;
-    if (t < 0.0 || t > maxt) throw cms::Exception(
+    if (t < 0.0 || t > maxt) { throw cms::Exception(
         "In ConstantStepOdeSolver::interpolateCoordinate: time out of range");
+}
 
     const double* arr = &historyBuffer_[0];
-    if (t == 0.0)
+    if (t == 0.0) {
         return arr[which];
-    else if (t == maxt)
+    } else if (t == maxt) {
         return arr[which + dim_*(runLen_-1U)];
+}
 
     // Translate time into timestep units
     const double tSteps = t/dt_;
     unsigned nLow = tSteps;
-    if (nLow >= runLen_ - 1)
+    if (nLow >= runLen_ - 1) {
         nLow = runLen_ - 2;
+}
     double x = tSteps - nLow;
 
     if (cubic)
@@ -234,34 +260,41 @@ double ConstantStepOdeSolver::interpolateCoordinate(
                                  interpolateLinear(x/3.0, base[0], base[dim_*3]),
                                  interpolateLinear(x-1.0, base[dim_], base[dim_*2]));
     }
-    else
+    else {
         return interpolateLinear(x, arr[which+dim_*nLow], arr[which+dim_*(nLow+1U)]);
+}
 }
 
 double ConstantStepOdeSolver::interpolateIntegrated(
     const unsigned which, const double t, const bool cubic) const
 {
-    if (which >= dim_) throw cms::Exception(
+    if (which >= dim_) { throw cms::Exception(
         "In ConstantStepOdeSolver::interpolateIntegrated: index out of range");
-    if (runLen_ < 2U || (cubic && runLen_ < 4U)) throw cms::Exception(
+}
+    if (runLen_ < 2U || (cubic && runLen_ < 4U)) { throw cms::Exception(
         "In ConstantStepOdeSolver::interpolateIntegrated: not enough data");
+}
     const double maxt = runLen_ ? dt_*(runLen_-1U) : 0.0;
-    if (t < 0.0 || t > maxt) throw cms::Exception(
+    if (t < 0.0 || t > maxt) { throw cms::Exception(
         "In ConstantStepOdeSolver::interpolateIntegrated: time out of range");
-    if (lastIntegrated_ != which)
+}
+    if (lastIntegrated_ != which) {
         (const_cast<ConstantStepOdeSolver*>(this))->integrateCoordinate(which);
+}
 
     const double* buf = &chargeBuffer_[0];
-    if (t == 0.0)
+    if (t == 0.0) {
         return buf[0];
-    else if (t == maxt)
+    } else if (t == maxt) {
         return buf[runLen_-1U];
+}
 
     // Translate time into timestep units
     const double tSteps = t/dt_;
     unsigned nLow = tSteps;
-    if (nLow >= runLen_ - 1)
+    if (nLow >= runLen_ - 1) {
         nLow = runLen_ - 2;
+}
     double x = tSteps - nLow;
 
     if (cubic)
@@ -282,54 +315,65 @@ double ConstantStepOdeSolver::interpolateIntegrated(
                                  interpolateLinear(x/3.0, base[0], base[3]),
                                  interpolateLinear(x-1.0, base[1], base[2]));
     }
-    else
+    else {
         return interpolateLinear(x, buf[nLow], buf[nLow+1U]);
+}
 }
 
 void ConstantStepOdeSolver::setHistory(const double dt, const double* data,
                                        const unsigned dim, const unsigned runLen)
 {
     const unsigned len = dim*runLen;
-    if (!len)
+    if (!len) {
         return;
-    if (dt <= 0.0) throw cms::Exception(
+}
+    if (dt <= 0.0) { throw cms::Exception(
         "In ConstantStepOdeSolver::setHistory: can not run backwards in time");
+}
     assert(data);
     const unsigned sz = dim*(runLen + 1U);
-    if (historyBuffer_.size() < sz)
+    if (historyBuffer_.size() < sz) {
         historyBuffer_.resize(sz);
+}
     dt_ = dt;
     dim_ = dim;
     runLen_ = runLen;
     lastIntegrated_ = dim_;
     double* arr = &historyBuffer_[0];
-    for (unsigned i=0; i<len; ++i)
+    for (unsigned i=0; i<len; ++i) {
         *arr++ = *data++;
-    for (unsigned i=0; i<dim; ++i)
+}
+    for (unsigned i=0; i<dim; ++i) {
         *arr++ = 0.0;
+}
 }
 
 void ConstantStepOdeSolver::run(const double* initialConditions,
                                 const unsigned lenInitialConditions,
                                 const double dt, const unsigned nSteps)
 {
-    if (!nSteps || !lenInitialConditions)
+    if (!nSteps || !lenInitialConditions) {
         return;
-    if (!rhs_) throw cms::Exception(
+}
+    if (!rhs_) { throw cms::Exception(
         "In ConstantStepOdeSolver::run: ODE right hand side has not been set");
-    if (dt <= 0.0) throw cms::Exception(
+}
+    if (dt <= 0.0) { throw cms::Exception(
         "In ConstantStepOdeSolver::run: can not run backwards in time");
+}
     assert(initialConditions);
     dt_ = dt;
     dim_ = lenInitialConditions;
     lastIntegrated_ = dim_;
     runLen_ = nSteps + 1U;
     const unsigned sz = (runLen_+1U)*dim_;
-    if (historyBuffer_.size() < sz)
+    if (historyBuffer_.size() < sz) {
         historyBuffer_.resize(sz);
+}
     double* arr = &historyBuffer_[0];
-    for (unsigned i=0; i<lenInitialConditions; ++i)
+    for (unsigned i=0; i<lenInitialConditions; ++i) {
         arr[i] = initialConditions[i];
+}
     double* stepBuffer = arr + runLen_*dim_;
 
     for (unsigned i = 0; i < nSteps; ++i, arr += lenInitialConditions)
@@ -337,8 +381,9 @@ void ConstantStepOdeSolver::run(const double* initialConditions,
         const double t = i*dt;
         this->step(t, dt, arr, lenInitialConditions, stepBuffer);
         double* next = arr + lenInitialConditions;
-        for (unsigned i=0; i<lenInitialConditions; ++i)
+        for (unsigned i=0; i<lenInitialConditions; ++i) {
             next[i] = arr[i] + stepBuffer[i];
+}
     }
 }
 
@@ -347,8 +392,9 @@ void EulerOdeSolver::step(const double t, const double dt,
                           double* coordIncrement) const
 {
     rhs_->calc(t, x, lenX, coordIncrement);
-    for (unsigned i=0; i<lenX; ++i)
+    for (unsigned i=0; i<lenX; ++i) {
         coordIncrement[i] *= dt;
+}
 }
 
 void RK2::step(const double t, const double dt,
@@ -356,8 +402,9 @@ void RK2::step(const double t, const double dt,
                double* coordIncrement) const
 {
     const double halfstep = dt/2.0;
-    if (buf_.size() < lenX)
+    if (buf_.size() < lenX) {
         buf_.resize(lenX);
+}
     double* midpoint = &buf_[0];
     rhs_->calc(t, x, lenX, midpoint);
     for (unsigned i=0; i<lenX; ++i)
@@ -366,8 +413,9 @@ void RK2::step(const double t, const double dt,
         midpoint[i] += x[i];
     }
     rhs_->calc(t + halfstep, midpoint, lenX, coordIncrement);
-    for (unsigned i=0; i<lenX; ++i)
+    for (unsigned i=0; i<lenX; ++i) {
         coordIncrement[i] *= dt;
+}
 }
 
 void RK4::step(const double t, const double dt,
@@ -375,22 +423,27 @@ void RK4::step(const double t, const double dt,
                double* coordIncrement) const
 {
     const double halfstep = dt/2.0;
-    if (buf_.size() < 4*lenX)
+    if (buf_.size() < 4*lenX) {
         buf_.resize(4*lenX);
+}
     double* k1x = &buf_[0];
     double* k2x = k1x + lenX;
     double* k3x = k2x + lenX;
     double* k4x = k3x + lenX;
     rhs_->calc(t, x, lenX, k1x);
-    for (unsigned i=0; i<lenX; ++i)
+    for (unsigned i=0; i<lenX; ++i) {
         coordIncrement[i] = x[i] + halfstep*k1x[i];
+}
     rhs_->calc(t + halfstep, coordIncrement, lenX, k2x);
-    for (unsigned i=0; i<lenX; ++i)
+    for (unsigned i=0; i<lenX; ++i) {
         coordIncrement[i] = x[i] + halfstep*k2x[i];
+}
     rhs_->calc(t + halfstep, coordIncrement, lenX, k3x);
-    for (unsigned i=0; i<lenX; ++i)
+    for (unsigned i=0; i<lenX; ++i) {
         coordIncrement[i] = x[i] + dt*k3x[i];
+}
     rhs_->calc(t + dt, coordIncrement, lenX, k4x);
-    for (unsigned i=0; i<lenX; ++i)
+    for (unsigned i=0; i<lenX; ++i) {
         coordIncrement[i] = dt/6.0*(k1x[i] + 2.0*(k2x[i] + k3x[i]) + k4x[i]);
+}
 }

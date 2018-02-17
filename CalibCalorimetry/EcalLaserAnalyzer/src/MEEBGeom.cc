@@ -15,10 +15,12 @@ int
 MEEBGeom::barrel( EBGlobalCoord ieta, EBGlobalCoord iphi )
 {
   int iz=1;
-  if( ieta<0 ) iz=-1;
+  if( ieta<0 ) { iz=-1;
+}
   ieta *= iz;
   assert( ieta>0 && ieta<=85 );
-  if( iphi<0 ) iphi+=360;
+  if( iphi<0 ) { iphi+=360;
+}
   assert( iphi>0 && iphi<=360 );
   return iz;
 }
@@ -27,19 +29,22 @@ int
 MEEBGeom::sm( EBGlobalCoord ieta, EBGlobalCoord iphi )
 {
   int iz=1;
-  if( ieta<0 ) iz=-1;
+  if( ieta<0 ) { iz=-1;
+}
   ieta *= iz;
   assert( ieta>0 && ieta<=85 );
 
   //  int iphi_ = iphi+10;
   int iphi_ = iphi;
-  if( iphi_>360 ) iphi_-=360;
+  if( iphi_>360 ) { iphi_-=360;
+}
   assert( iphi_>0 && iphi_<=360 );
 
   int ism = (iphi_-1)/20 + 1;
   assert( ism>=1 && ism<=18 );
   //  if( iz==1 ) ism += 18;
-  if( iz==-1 ) ism += 18;
+  if( iz==-1 ) { ism += 18;
+}
 
   return ism;
 }
@@ -56,22 +61,27 @@ MEEBGeom::dccFromSm( int ism )
 {
   assert( ism>=1 && ism<=36 );
   int iz=1;
-  if( ism>18 ) iz=-1;
-  if( iz==-1  ) ism-=18;
+  if( ism>18 ) { iz=-1;
+}
+  if( iz==-1  ) { ism-=18;
+}
   assert( ism>=1 && ism<=18 );
   int idcc = 9+ism;
-  if( iz==+1  ) idcc+=18;
+  if( iz==+1  ) { idcc+=18;
+}
   return idcc;
 }
 
 int
 MEEBGeom::smFromDcc( int idcc )
 {
-  if( idcc>600 ) idcc-=600;  // also works with FEDids
+  if( idcc>600 ) { idcc-=600;  // also works with FEDids
+}
   assert( idcc>=10 && idcc<=45 );
   int ism=idcc-9;
-  if( ism>18 ) ism-=18;
-  else         ism+=18;
+  if( ism>18 ) { ism-=18;
+  } else {         ism+=18;
+}
   return ism;
 }
 
@@ -131,19 +141,22 @@ std::pair< MEEBGeom::EBLocalCoord, MEEBGeom::EBLocalCoord >
 MEEBGeom::localCoord( MEEBGeom::EBGlobalCoord ieta, MEEBGeom::EBGlobalCoord iphi )
 {
   int iz=1;
-  if( ieta<0 ) iz=-1;
+  if( ieta<0 ) { iz=-1;
+}
   ieta *= iz;
   assert( ieta>0 && ieta<=85 );
 
   //  int iphi_ = iphi+10;
   int iphi_ = iphi;
-  if( iphi_>360 ) iphi_-=360;
+  if( iphi_>360 ) { iphi_-=360;
+}
   assert( iphi_>0 && iphi_<=360 );
 
   int ix = ieta-1;
   
   int iy = (iphi_-1)%20;
-  if( iz==-1 ) iy = 19-iy;
+  if( iz==-1 ) { iy = 19-iy;
+}
   // if( iz==1 ) iy = 19-iy;
 
   return std::pair< EBLocalCoord, EBLocalCoord >(ix,iy);  
@@ -171,7 +184,8 @@ MEEBGeom::globalCoord( int ism, MEEBGeom::EBLocalCoord ix, MEEBGeom::EBLocalCoor
       iz=-1;
       ism -= 18;
     }
-  if( iz==-1 ) iy = 19-iy;
+  if( iz==-1 ) { iy = 19-iy;
+}
   // if( iz==1 ) iy = 19-iy;
 
   int ieta = ix+1;
@@ -192,7 +206,8 @@ MEEBGeom::globalCoord( int ism, float x, float y )
       iz=-1;
       ism -= 18;
     }
-  if( iz==-1 ) y = 19-y;
+  if( iz==-1 ) { y = 19-y;
+}
 
   float eta = x+1;
   eta *= iz;
@@ -347,7 +362,8 @@ MEEBGeom::electronic_channel( EBLocalCoord ix, EBLocalCoord iy )
 
   int iVFE = ix%5+1;
   int islot = iy%5+1;
-  if( iVFE%2==1 ) islot = 6-islot;
+  if( iVFE%2==1 ) { islot = 6-islot;
+}
   int icr = 5*(iVFE-1)+(islot-1);
   // rotate for type-1 towers
   if( type==1 )
@@ -370,16 +386,19 @@ MEEBGeom::getGraphBoundary(  int type, int num, bool global )
   else if( type==iLMRegion )
     {
       ism_ = (num-1)/2+1;
-      if( ism_>18 ) 
+      if( ism_>18 ) { 
 	ism_-=18;
-      else
+      } else {
 	ism_+=18;
+}
     }
-  else
+  else {
       abort();
+}
 
   int ism=1;
-  if( global ) ism = ism_;
+  if( global ) { ism = ism_;
+}
 
   //  std::list< std::pair< float, float > > l;
   // getBoundary( l, type, num, global, ism );
@@ -511,7 +530,8 @@ MEEBGeom::lmmodFromLmr( int ilmr )
   std::vector< int > vec;
   for( int ilmmod=1; ilmmod<=9; ilmmod++ )
     {
-      if( (ilmmod+iside)%2==1 )  vec.push_back(ilmmod);
+      if( (ilmmod+iside)%2==1 ) {  vec.push_back(ilmmod);
+}
     }
   return vec;
 }

@@ -233,7 +233,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
     
     int fed = headerItr->fedId();      
 
-    if(fed!=_fedid && _fedid!=-999) continue; 
+    if(fed!=_fedid && _fedid!=-999) { continue;  }
 
     runType=headerItr->getRunType();
     runNum=headerItr->getRunNumber();
@@ -242,10 +242,10 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
     fedID=headerItr->fedId();  
 
     // take event only if the fed corresponds to the DCC in TCC
-    if( 600+dccID != fedID ) continue;
+    if( 600+dccID != fedID ) { continue; }
     
     // Cut on runType
-    if(runType!=EcalDCCHeaderBlock::LASER_STD && runType!=EcalDCCHeaderBlock::LASER_GAP) return; 
+    if(runType!=EcalDCCHeaderBlock::LASER_STD && runType!=EcalDCCHeaderBlock::LASER_GAP) { return;  }
 
     // Define output results files' names
 
@@ -264,7 +264,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
 
       FILE *test; 
       test = fopen(namefile.str().c_str(),"r");
-      if (test) doesRefFileExist=1;
+      if (test) { doesRefFileExist=1; }
       
       if(doesRefFileExist==1){ 
 	matacqFile = new TFile((namefile.str().c_str()));	  
@@ -295,7 +295,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
 
   // cut on fedID
 
-  if(fedID!=_fedid && _fedid!=-999) return; 
+  if(fedID!=_fedid && _fedid!=-999) { return;  }
 
   
   // ======================
@@ -340,8 +340,8 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
     
     chi2pn = pnfit -> doFit(samplemax,&ypnrange[0]); 
     
-    if(chi2pn == 101 || chi2pn == 102 || chi2pn == 103) pnAmpl=0.;
-    else pnAmpl= pnfit -> getAmpl();
+    if(chi2pn == 101 || chi2pn == 102 || chi2pn == 103) { pnAmpl=0.;
+    } else { pnAmpl= pnfit -> getAmpl(); }
 
     allPNAmpl.push_back(pnAmpl);    
 
@@ -356,8 +356,8 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
   
   if(doesRefFileExist==1){ 
     // FIXME 
-    if (color==0) matacqTree->GetEntry(event-1);
-    else if(color==3) matacqTree->GetEntry(matacqTree->GetEntries("color==0")+event-1);
+    if (color==0) { matacqTree->GetEntry(event-1);
+    } else if(color==3) { matacqTree->GetEntry(matacqTree->GetEntries("color==0")+event-1); }
     ttrig=ttMat;
     peak=peakMat;
     
@@ -413,8 +413,8 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
       
       double adcmax=0.0;
       
-      if(towerID!=int(_tower) || channelID!=int(_channel) || dccID!=int(_fedid-600)) continue;
-      else channelNumber=channel;
+      if(towerID!=int(_tower) || channelID!=int(_channel) || dccID!=int(_fedid-600)) { continue;
+      } else { channelNumber=channel; }
       
       for (unsigned int i=0; i< (*digiItr).size() ; ++i ) {  // Loop on adc samples  
 
@@ -422,8 +422,8 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
 	adc[i]=samp_crystal.adc() ;    
 	adcG[i]=samp_crystal.gainId();   
 	
-	if (i==0) adcGain=adcG[i];
-	if (i>0) adcGain=TMath::Max(adcG[i],adcGain);  
+	if (i==0) { adcGain=adcG[i]; }
+	if (i>0) { adcGain=TMath::Max(adcG[i],adcGain);   }
 	
 	if (adc[i]>adcmax) {
 	  adcmax=adc[i];
@@ -432,7 +432,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
       
       for(dsum=0.,dsum1=0.,k=0;k<_presample;k++) {
 	dsum+=adc[k]; 
-	if(k<_presample-1) dsum1+=adc[k];
+	if(k<_presample-1) { dsum1+=adc[k]; }
       }
       
       bl=dsum/((double)_presample);
@@ -459,7 +459,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
       pn0=allPNAmpl[MyPn0];
       pn1=allPNAmpl[MyPn1];
     
-      if(samplemax>=_timingcutlow && samplemax<=_timingcuthigh && lightside==side)  ADCtrees->Fill();  
+      if(samplemax>=_timingcutlow && samplemax<=_timingcuthigh && lightside==side) {  ADCtrees->Fill();   }
       
     }
  
@@ -492,8 +492,8 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
 
       double adcmax=0.0;
 
-      if(towerID!=int(_tower) || channelID!=int(_channel) || dccID!=int(_fedid-600)) continue;
-      else channelNumber=channel;
+      if(towerID!=int(_tower) || channelID!=int(_channel) || dccID!=int(_fedid-600)) { continue;
+      } else { channelNumber=channel; }
 
       for (unsigned int i=0; i< (*digiItr).size() ; ++i ) {  // Loop on adc samples  
 
@@ -501,8 +501,8 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
 	adc[i]=samp_crystal.adc() ;    
 	adcG[i]=samp_crystal.gainId();   
 	
-	if (i==0) adcGain=adcG[i];
-	if (i>0) adcGain=TMath::Max(adcG[i],adcGain);  
+	if (i==0) { adcGain=adcG[i]; }
+	if (i>0) { adcGain=TMath::Max(adcG[i],adcGain);   }
 	
 	if (adc[i]>adcmax) {
 	  adcmax=adc[i];
@@ -511,7 +511,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
 
       for(dsum=0.,dsum1=0.,k=0;k<_presample;k++) {
 	dsum+=adc[k]; 
-	if(k<_presample-1) dsum1+=adc[k];
+	if(k<_presample-1) { dsum1+=adc[k]; }
       }
       
       bl=dsum/((double)_presample);
@@ -538,7 +538,7 @@ void EcalPerEvtLaserAnalyzer:: analyze( const edm::Event & e, const  edm::EventS
       pn0=allPNAmpl[MyPn0];
       pn1=allPNAmpl[MyPn1];
 
-      if(samplemax>=_timingcutlow && samplemax<=_timingcuthigh && lightside==side)  ADCtrees->Fill();  
+      if(samplemax>=_timingcutlow && samplemax<=_timingcuthigh && lightside==side) {  ADCtrees->Fill();   }
     
     }
   }
@@ -671,7 +671,7 @@ void EcalPerEvtLaserAnalyzer::endJob() {
     IsThereDataADC[icol]=1;      
     stringstream cut;
     cut <<"color=="<<colors.at(icol);
-    if(ADCtrees->GetEntries(cut.str().c_str())<10) IsThereDataADC[icol]=0;  
+    if(ADCtrees->GetEntries(cut.str().c_str())<10) { IsThereDataADC[icol]=0;   }
     IsHeaderFilled[icol]=0;
 
   }

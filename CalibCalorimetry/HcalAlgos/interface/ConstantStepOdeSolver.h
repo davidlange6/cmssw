@@ -46,15 +46,17 @@ public:
 
     inline double getTime(const unsigned idx) const
     {
-        if (idx >= runLen_) throw cms::Exception(
-            "In ConstantStepOdeSolver::getTime: index out of range");
+        if (idx >= runLen_) { throw cms::Exception(
+            "In ConstantStepOdeSolver::getTime: index out of range"); }
+}
         return idx*dt_;
     }
 
     inline double getCoordinate(const unsigned which, const unsigned idx) const
     {
-        if (which >= dim_ || idx >= runLen_) throw cms::Exception(
-            "In ConstantStepOdeSolver::getCoordinate: index out of range");
+        if (which >= dim_ || idx >= runLen_) { throw cms::Exception(
+            "In ConstantStepOdeSolver::getCoordinate: index out of range"); }
+}
         return historyBuffer_[dim_*idx + which];
     }
 

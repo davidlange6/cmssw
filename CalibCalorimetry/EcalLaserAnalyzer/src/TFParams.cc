@@ -292,7 +292,8 @@ double TFParams::fitpj(double **adcval , double *parout , double **db_i, double 
 	
 	nborn_min = (int)num_fit_min[nevt] ;
 	nborn_max = (int)num_fit_max[nevt] ;
-        if(k < nborn_min || k > nborn_max ) continue ;
+        if(k < nborn_min || k > nborn_max ) { continue ;
+}
         tsig[0] =(double)k  ;
 
 	
@@ -515,8 +516,9 @@ double TFParams::fitpj(double **adcval , double *parout , double **db_i, double 
     if (debug==1){
       printf(" CHECK croiss coef0: %f  croiss coef1: %f iter %d \n",fabs(A_CROISS.coeff[0][0]),fabs(A_CROISS.coeff[1][0]), iter);
     }
-    if(fabs(A_CROISS.coeff[0][0]) < 0.001 && fabs(A_CROISS.coeff[1][0]) < 0.001)
+    if(fabs(A_CROISS.coeff[0][0]) < 0.001 && fabs(A_CROISS.coeff[1][0]) < 0.001) {
       break;
+}
     
   }
   
@@ -561,7 +563,8 @@ void TFParams::set_const( int n_samples, int sample_min, int sample_max ,
   a3ini = beta ;
   step_shape = .04;
   METHODE = 2;
-  if(ns > SDIM2) printf("warning: NbOfsamples exceed maximum\n");
+  if(ns > SDIM2) { printf("warning: NbOfsamples exceed maximum\n");
+}
 } 
 void TFParams::produit_mat(matrice A , matrice B , matrice M)
 {
@@ -652,8 +655,9 @@ void TFParams::somme_mat_int(matrice A , matrice M)
   M.nb_lignes = A.nb_lignes ;
   M.nb_colonnes = A.nb_colonnes ;
   for(i=0 ; i< M.nb_lignes; i++) {
-    for(j=0 ; j< M.nb_colonnes ; j++) 
+    for(j=0 ; j< M.nb_colonnes ; j++) { 
       M.coeff[i][j] += A.coeff[i][j] ;
+}
   }
   return  ;
 }
@@ -663,7 +667,8 @@ void TFParams::somme_mat_int_scale(matrice A , matrice M , double delta)
   M.nb_lignes = A.nb_lignes ;
   M.nb_colonnes = A.nb_colonnes ;
   for(i=0 ; i< M.nb_lignes; i++) {
-    for(j=0 ; j< M.nb_colonnes ; j++) M.coeff[i][j] += A.coeff[i][j]*delta ;
+    for(j=0 ; j< M.nb_colonnes ; j++) { M.coeff[i][j] += A.coeff[i][j]*delta ;
+}
     }
   return  ;
 }
@@ -686,8 +691,9 @@ matrice cree_mat_prod(matrice A , matrice B)
   M.nb_lignes = A.nb_lignes ;
   M.nb_colonnes = B.nb_colonnes ;
   M.coeff = (double**)malloc(M.nb_lignes*sizeof(double*)) ;
-  for(i=0 ; i< M.nb_lignes; i++) 
+  for(i=0 ; i< M.nb_lignes; i++) { 
     M.coeff[i]=(double*)calloc(M.nb_colonnes,sizeof(double));
+}
   for(i=0 ; i< M.nb_lignes; i++) {
 
     for(j=0 ; j< M.nb_colonnes ; j++) {
@@ -706,8 +712,9 @@ matrice cree_mat(int n_lignes,int n_colonnes)
   M.nb_lignes = n_lignes ;
   M.nb_colonnes = n_colonnes ;
   M.coeff = (double**)malloc(M.nb_lignes*sizeof(double*)) ;
-  for(i=0 ; i< M.nb_lignes; i++) 
+  for(i=0 ; i< M.nb_lignes; i++) { 
     M.coeff[i]=(double*)calloc(M.nb_colonnes,sizeof(double));
+}
   for(i=0 ; i< M.nb_lignes; i++) {
     for(j=0 ; j< M.nb_colonnes ; j++) {
   	M.coeff[i][j] = 0.  ;
@@ -743,8 +750,9 @@ void TFParams::print_mat(matrice M)
   }
   printf(" m_nli %d M_ncol %d \n",M.nb_lignes,M.nb_colonnes) ;
   for(i=0 ; i< M.nb_lignes; i++) {
-    for(j=0 ; j< M.nb_colonnes ; j++) 
+    for(j=0 ; j< M.nb_colonnes ; j++) { 
       printf(" MATRICE i= %d j= %d ---> %e \n",i,j,M.coeff[i][j]) ;
+}
   }
   //printf(" apres passage d'impression \n") ;
   return ;
@@ -753,24 +761,28 @@ void TFParams::zero_mat(matrice M)
 {
   int i,j ;
   for(i=0 ; i< M.nb_lignes; i++) {
-    for(j=0 ; j< M.nb_colonnes ; j++) M.coeff[i][j]=0. ; 
+    for(j=0 ; j< M.nb_colonnes ; j++) { M.coeff[i][j]=0. ; 
+}
   }
   return ;
 }
 void TFParams::zero_mat_nk(matrice M,int nk)
 {
   int j ;
-    for(j=0 ; j< M.nb_colonnes ; j++) M.coeff[nk][j]=0. ;
+    for(j=0 ; j< M.nb_colonnes ; j++) { M.coeff[nk][j]=0. ;
+}
   return ;
 }
 void TFParams::print_mat_nk(matrice M,int nk)
 {
   int j ;
-  if( M.coeff == nullptr)
+  if( M.coeff == nullptr) {
     printf(" erreur : affichage d'une matrice vide \n") ;
+}
   printf(" nk = %d m_nli %d M_ncol %d \n",nk,M.nb_lignes,M.nb_colonnes) ;
-    for(j=0 ; j< M.nb_colonnes ; j++) 
+    for(j=0 ; j< M.nb_colonnes ; j++) { 
       printf(" MATRICE nk= %d j= %d  ---> %e \n",nk,j,M.coeff[nk][j]) ;    
+}
   printf(" apres passage d'impression \n") ;
   return ;
 }
@@ -808,7 +820,8 @@ double  deter=0.  ;
       deter=A.coeff[0][0]*M.coeff[0][0]+A.coeff[1][0]*M.coeff[0][1]
 	+A.coeff[2][0]*M.coeff[0][2] ;
       for ( i=0 ; i<3 ; i++ ) {
-	for ( j=0 ; j<3 ; j++ ) M.coeff[i][j] = M.coeff[i][j]/deter  ;
+	for ( j=0 ; j<3 ; j++ ) { M.coeff[i][j] = M.coeff[i][j]/deter  ;
+}
       }
  }
  else {
@@ -842,8 +855,10 @@ Double_t TFParams::polfit(Int_t ns ,Int_t imax , Double_t par3d[dimout] ,
     }
   }
   ilow=ilow+1   ;
-  if(ilow == imax )ilow=ilow-1 ;
-  if(isup-ilow < 3) isup=ilow+3 ;
+  if(ilow == imax ) {ilow=ilow-1 ;
+}
+  if(isup-ilow < 3) { isup=ilow+3 ;
+}
   nus=0  ;
   for(i=ilow ; i<=isup ; i++){
     
@@ -854,7 +869,8 @@ Double_t TFParams::polfit(Int_t ns ,Int_t imax , Double_t par3d[dimout] ,
       nus=nus+1    ;
     }
   }
-  if(nus < 4) return 10000. ;
+  if(nus < 4) { return 10000. ;
+}
   xki2 =  f3deg (  nus , parfp3 ,  maskp3 , adfmx ,  errpj ) ;
   tm= parfp3[4]  ;
   h=parfp3[5] ;
@@ -929,7 +945,8 @@ double TFParams::f3deg (  int nmxu ,  double parom[dimout] , double mask[dimmat]
 	  difmx=dif ;
 	}
     }
-    if(deglib > 0.5) xki2=xki2/deglib ;
+    if(deglib > 0.5) { xki2=xki2/deglib ;
+}
 /*     amplitude and maximum position                    */
   delta=parom[2]*parom[2]-3.*parom[3]*parom[1]  ;
   if(delta > 0.){
@@ -979,8 +996,10 @@ double al[dimmat][dimmat] , be[dimmat][dimmat]  ;
      s=s+ al[i][k] * al[j][k]  ;
     }
     r= g[i][j] - s   ;
-   if( j < i ) al[i][j] = r/al[j][j]  ;
-   if( j == i ) al[i][j] =  sqrt ( r)  ;
+   if( j < i ) { al[i][j] = r/al[j][j]  ;
+}
+   if( j == i ) { al[i][j] =  sqrt ( r)  ;
+}
    }
  }
 /*  inversion de la matrice al                                       */
@@ -1063,7 +1082,8 @@ double TFParams::pulseShapepj( Double_t *x, Double_t *par )
   dt= x[0] - tm  ;
   //printf(" par %f %f %f %f dt = %f albet = %f",b1,b2,a1,a2,dt,albet) ;
   albet = alpha*beta ;
-  if( albet <= 0 )return( (Double_t)0. );
+  if( albet <= 0 ) {return( (Double_t)0. );
+}
 
   if(dt > -albet)  {
     dtsbeta=dt/beta ;
@@ -1134,7 +1154,8 @@ Double_t TFParams::pulseShapepj2( Double_t *x, Double_t *par )
   beta  =  a2 ;
   dt= x[0]  ;
   albet = alpha*beta ;
-  if( albet <= 0 )return( (Double_t)0. );
+  if( albet <= 0 ) {return( (Double_t)0. );
+}
 
   if(dt > -albet)  {
     dtsbeta=dt/beta ;

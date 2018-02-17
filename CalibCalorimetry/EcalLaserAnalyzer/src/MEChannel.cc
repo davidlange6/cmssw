@@ -96,12 +96,14 @@ MEChannel::getListOfAncestors( std::vector< MEChannel* >& vec )
 MEChannel* 
 MEChannel::getAncestor( int g )
 {
-  if( _ig==g ) return this;
+  if( _ig==g ) { return this;
+}
   
   MEChannel* mother = this->m();
   if( mother!=nullptr )
     {
-      if( mother->_ig==g ) return mother;
+      if( mother->_ig==g ) { return mother;
+}
       return mother->getAncestor( g );
     }
 
@@ -125,7 +127,8 @@ MEChannel::getListOfDescendants( int ig, std::vector< MEChannel* >& vec )
   for( unsigned ii=0; ii<n(); ii++ )
     {
       MEChannel* curLeaf = _d[ii];
-      if( curLeaf->_ig==ig ) vec.push_back(curLeaf);
+      if( curLeaf->_ig==ig ) { vec.push_back(curLeaf);
+}
       curLeaf->getListOfDescendants( ig, vec ); 
     }
   return true;
@@ -136,12 +139,14 @@ MEChannel::getDescendant( int ig, int id_ )
 {
   std::vector< MEChannel* > vec;
   bool OK = getListOfDescendants( ig, vec );
-  if( !OK ) return nullptr;
+  if( !OK ) { return nullptr;
+}
   MEChannel* leaf(nullptr);
   for( unsigned int ii=0; ii<vec.size(); ii++ )
     {
       leaf = vec[ii];
-      if( leaf->id()==id_ ) return leaf;
+      if( leaf->id()==id_ ) { return leaf;
+}
     }
   return leaf;
 }
@@ -151,7 +156,8 @@ MEChannel::getFirstDescendant( int ig )
 {
   std::vector< MEChannel* > vec;
   bool OK = getListOfDescendants( ig, vec );
-  if( !OK ) return nullptr;
+  if( !OK ) { return nullptr;
+}
   return vec[0];
 }
 
@@ -160,7 +166,8 @@ MEChannel::getChannel( int ig, int ix, int iy )
 {
   assert( ig>=0 );
   MEChannel* leaf = getChannel( ix, iy );
-  if( leaf==nullptr ) return nullptr;
+  if( leaf==nullptr ) { return nullptr;
+}
   while( ig!=leaf->_ig )
     {
       leaf = leaf->_m;
@@ -177,14 +184,16 @@ MEChannel::getChannel( int ix, int iy )
 	{
 	  return this;
 	}
-      else
+      else {
 	return nullptr;
+}
     }
   MEChannel* leaf(nullptr);
   for( unsigned ii=0; ii<n(); ii++ )
     {
       leaf =  _d[ii]->getChannel( ix, iy ); 
-      if( leaf!=nullptr ) break;
+      if( leaf!=nullptr ) { break;
+}
     }
   return leaf;
 }
@@ -236,7 +245,8 @@ MEChannel::oneLine( int ig )
   out+="(DCC="; out+=dcc_; out+=","; 
   out+= ME::smName(lmr_);
   out+="/"; out+=side_; out+=")";
-  if( ig>=_ig ) ig=_ig;
+  if( ig>=_ig ) { ig=_ig;
+}
   if( ig>=ME::iLMModule )
     {
       int lmm_=_id[ME::iLMModule]; 
@@ -307,7 +317,8 @@ MEChannel::oneWord( int ig )
   int lmr_ = _id[ME::iLMRegion];
   out+= ME::granularity[ME::iLMRegion]; 
   out+=lmr_;
-  if( ig>=_ig ) ig=_ig;
+  if( ig>=_ig ) { ig=_ig;
+}
   if( ig>=ME::iLMModule )
     {
       int lmm_=_id[ME::iLMModule]; 

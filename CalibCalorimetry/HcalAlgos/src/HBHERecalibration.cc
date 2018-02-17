@@ -24,9 +24,11 @@ void HBHERecalibration::setup(const std::vector<std::vector<int>>& m_segmentatio
 		dsegm_.push_back(m_segmentation[ieta]);
 		//find maximum
 		for(unsigned lay = 0; lay < dsegm_.back().size(); ++lay){
-			if(lay>=meanenergies_[0].size()) break;
+			if(lay>=meanenergies_[0].size()) { break;
+}
 			int depth = dsegm_.back()[lay];
-			if(depth>max_depth_) max_depth_ = depth;
+			if(depth>max_depth_) { max_depth_ = depth;
+}
 		}
 	}
 	
@@ -42,11 +44,14 @@ float HBHERecalibration::getCorr(int ieta, int depth) const {
 	depth -= 1;
 	
 	//bounds check
-	if(ieta<0 or ieta>=int(corr_.size())) return 1.0;
-	if(depth<0 or depth>=int(corr_[ieta].size())) return 1.0;
+	if(ieta<0 or ieta>=int(corr_.size())) { return 1.0;
+}
+	if(depth<0 or depth>=int(corr_[ieta].size())) { return 1.0;
+}
 	
-	if(cutoff_ > 1 and corr_[ieta][depth] > cutoff_) return cutoff_;
-	else return corr_[ieta][depth];
+	if(cutoff_ > 1 and corr_[ieta][depth] > cutoff_) { return cutoff_;
+	} else { return corr_[ieta][depth];
+}
 }
 
 void HBHERecalibration::initialize() {
@@ -66,10 +71,12 @@ void HBHERecalibration::initialize() {
 
 		//compute factors, w/ safety checks
 		for(int depth = 0; depth < max_depth_; ++depth){
-			if(dval[ieta][depth] > 0) corr_[ieta][depth] = nval[ieta][depth]/dval[ieta][depth];
-			else corr_[ieta][depth] = 1.0;
+			if(dval[ieta][depth] > 0) { corr_[ieta][depth] = nval[ieta][depth]/dval[ieta][depth];
+			} else { corr_[ieta][depth] = 1.0;
+}
 			
-			if(corr_[ieta][depth] < 1.0) corr_[ieta][depth] = 1.0;
+			if(corr_[ieta][depth] < 1.0) { corr_[ieta][depth] = 1.0;
+}
 		}
   }
 }

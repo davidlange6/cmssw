@@ -123,7 +123,7 @@ EcnaAnalyzer::EcnaAnalyzer(const edm::ParameterSet& pSet) :
   if( (fLastReqEvent >= fFirstReqEvent) && (fReqNbOfEvts > fLastReqEvent - fFirstReqEvent + 1 ) )
     {fOutcomeError = AnalysisOutcome("ERR_LREQ");}
 
-  if( fOutcomeError == kTRUE )return;
+  if( fOutcomeError == kTRUE ) {return; }
   //===========================================================================================
 
   fRunTypeCounter = nullptr;
@@ -430,7 +430,7 @@ EcnaAnalyzer::~EcnaAnalyzer()
 
   std::cout << "EcnaAnalyzer::~EcnaAnalyzer()> destructor is going to be executed." << std::endl;
 
-  if( fOutcomeError == kTRUE )return;
+  if( fOutcomeError == kTRUE ) {return; }
 
   //-------------------------------------------------------------------------------
 
@@ -654,7 +654,7 @@ void EcnaAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 	  if( fRecNumber ==   1 || fRecNumber ==   50 || fRecNumber == 100 ||
 	      fRecNumber == 500 || fRecNumber == 1000 || fRecNumber%iFreq == 0 ){Int_t n1 =1; CheckMsg(n1);}
   
-	  if( fCurrentEventNumber < fFirstReqEvent )return; // skip events before fFirstReqEvent
+	  if( fCurrentEventNumber < fFirstReqEvent ) {return; // skip events before fFirstReqEvent }
 	}
 
       //.................. Increment Run type and MgpaGain counters
@@ -668,7 +668,7 @@ void EcnaAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 	    ( fRunTypeNumber  == fChozenRunTypeNumber || fChozenRunTypeNumber == fANY_RUN ) &&
 	    ( fMgpaGainNumber == fChozenGainNumber    || fChozenGainNumber    == 0 )
 	    )
-	  ) return;
+	  ) { return; }
       
       //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -686,18 +686,18 @@ void EcnaAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 	    {
 	      if( fStexName == "SM" )
 		{
-		  if( fFedTcc < 10 || fFedTcc > 45 )return;
+		  if( fFedTcc < 10 || fFedTcc > 45 ) {return; }
 		  
 		  if( fSMFromFedTcc[fFedTcc-1] >= 1 && fSMFromFedTcc[fFedTcc-1] <= fMyEBEcal->MaxSMInEB() &&
-		      fStexNbOfTreatedEvents[fSMFromFedTcc[fFedTcc-1]-1] >= fReqNbOfEvts )return;
+		      fStexNbOfTreatedEvents[fSMFromFedTcc[fFedTcc-1]-1] >= fReqNbOfEvts ) {return; }
 		}
 	      
 	      if( fStexName == "Dee" )
 		{
-		  if( fFedTcc >= 10 && fFedTcc <= 45 )return;
+		  if( fFedTcc >= 10 && fFedTcc <= 45 ) {return; }
 		  
 		  if( fESFromFedTcc[fFedTcc-1] >= 1 && fESFromFedTcc[fFedTcc-1] <= fMyEEEcal->MaxDSInEE() &&
-		      fFedNbOfTreatedEvents[fESFromFedTcc[fFedTcc-1]-1] >= fReqNbOfEvts )return;
+		      fFedNbOfTreatedEvents[fESFromFedTcc[fFedTcc-1]-1] >= fReqNbOfEvts ) {return; }
 		}
 	    } // end of if( fFedTcc >= 1 && fFedTcc <= MaxSMAndDS )
 	} // end of if( fAnalysisName == "AdcPeg12"  || fAnalysisName == "AdcSPeg12"  ...)
@@ -708,7 +708,7 @@ void EcnaAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
     } // end of for(EcalRawDataCollection::const_iterator headerItr=myEventHeader->begin();
       // headerItr != myEventHeader->end();++headerItr)
   
-  if( fMemoCutOK == 0 )return;   // return if no event passed the user's analysis cut
+  if( fMemoCutOK == 0 ) {return;   // return if no event passed the user's analysis cut }
 
   //========================== SELECTED EVENTS ================================
   fNbOfSelectedEvents++;

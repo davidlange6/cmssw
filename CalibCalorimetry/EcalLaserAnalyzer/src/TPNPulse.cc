@@ -63,7 +63,8 @@ bool TPNPulse::setPulse(double *adc){
 }
 double TPNPulse::getMax(){
 
-  if(isMaxFound_) return adcMax_; 
+  if(isMaxFound_) { return adcMax_; 
+}
 
   int iadcmax=0;
   double adcmax=0.0;
@@ -79,13 +80,15 @@ double TPNPulse::getMax(){
 }
 
 int TPNPulse::getMaxSample(){
-  if(!isMaxFound_) getMax();
+  if(!isMaxFound_) { getMax();
+}
   return iadcMax_;
 
 }
 
 double TPNPulse::getPedestal(){
-  if(isPedCalc_) return pedestal_;
+  if(isPedCalc_) { return pedestal_;
+}
   double ped=0;
   for(int i=0;i<_presample;i++){
     ped+=adc_[i];
@@ -99,8 +102,9 @@ double TPNPulse::getPedestal(){
 double* TPNPulse::getAdcWithoutPedestal(){
   
   double ped;
-  if(!isPedCalc_) ped=getPedestal();
-  else ped=pedestal_;
+  if(!isPedCalc_) { ped=getPedestal();
+  } else { ped=pedestal_;
+}
   
   double *adcNoPed= new double[50];
   for (int i=0;i<_nsamples;i++){

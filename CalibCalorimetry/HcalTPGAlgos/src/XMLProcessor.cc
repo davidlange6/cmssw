@@ -290,7 +290,8 @@ XMLCh * XMLProcessor::serializeDOM(DOMNode* node, std::string target)
   }
     
   theSerializer->release();
-  if ( myFormTarget ) delete myFormTarget;
+  if ( myFormTarget ) { delete myFormTarget;
+}
   return _string;
 }
 

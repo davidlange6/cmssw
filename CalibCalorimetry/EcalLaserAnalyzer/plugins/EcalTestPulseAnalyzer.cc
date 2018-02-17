@@ -105,7 +105,7 @@ pnID(-1), moduleID(-1), channelIteratorEE(0)
   }
   
   iZ        = 1;
-  if(  _fedid <= 609 ) iZ=-1;
+  if(  _fedid <= 609 ) { iZ=-1; }
   
   dccMEM    = ME::memFromDcc(_fedid);
   modules   = ME::lmmodFromDcc(_fedid);
@@ -275,7 +275,7 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
 
     int fed = headerItr->fedId();  
     
-    if(fed!=_fedid && _fedid!=-999) continue; 
+    if(fed!=_fedid && _fedid!=-999) { continue;  }
     
     runType=headerItr->getRunType();
     runNum=headerItr->getRunNumber();
@@ -285,18 +285,18 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
     fedID=headerItr->fedId();  
 
 
-    if( 600+dccID != fedID ) continue;
+    if( 600+dccID != fedID ) { continue; }
 
     // Cut on runType
 
     if(runType!=EcalDCCHeaderBlock::TESTPULSE_MGPA && runType!=EcalDCCHeaderBlock::TESTPULSE_GAP 
-      && runType!=EcalDCCHeaderBlock::TESTPULSE_SCAN_MEM  ) return;
+      && runType!=EcalDCCHeaderBlock::TESTPULSE_SCAN_MEM  ) { return; }
      
   }
   
   // Cut on fedID
 
-  if(fedID!=_fedid && _fedid!=-999) return; 
+  if(fedID!=_fedid && _fedid!=-999) { return;  }
   
   // Count TP events
   TPEvents++;
@@ -334,15 +334,15 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
     }
     
     // skip mem dcc without relevant data
-    if(!isMemRelevant) continue;
+    if(!isMemRelevant) { continue; }
     
     for ( int samId=0; samId < (*pnItr).size() ; samId++ ) { // Loop on PN samples  
       pn[samId]=(*pnItr).sample(samId).adc(); 
       pnG[samId]=(*pnItr).sample(samId).gainId();
       
-      if(pnG[samId]!=1) std::cout << "PN gain different from 1 for sample "<<samId<< std::endl;
-      if (samId==0) pngain=pnG[samId];
-      if (samId>0) pngain=TMath::Max(pnG[samId],pngain); 
+      if(pnG[samId]!=1) { std::cout << "PN gain different from 1 for sample "<<samId<< std::endl; }
+      if (samId==0) { pngain=pnG[samId]; }
+      if (samId>0) { pngain=TMath::Max(pnG[samId],pngain);  }
     }
     
     for(dsum=0.,k=0;k<_presamplePN;k++) {
@@ -361,8 +361,8 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
     
     chi2pn = pnfit -> doFit(samplemax,&ypnrange[0]); 
     
-    if(chi2pn == 101 || chi2pn == 102 || chi2pn == 103) pnAmpl=0.;
-    else pnAmpl= pnfit -> getAmpl();
+    if(chi2pn == 101 || chi2pn == 102 || chi2pn == 103) { pnAmpl=0.;
+    } else { pnAmpl= pnfit -> getAmpl(); }
 
     allPNAmpl[pnDetId.iDCCId()].push_back(pnAmpl);
     allPNGain[pnDetId.iDCCId()].push_back(pngain); 
@@ -448,14 +448,14 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
 	adc[i]=samp_crystal.adc() ;  
 	adcG[i]=samp_crystal.gainId();   
   
-	if (i==0) adcgain=adcG[i];
-	if (i>0) adcgain=TMath::Max(adcG[i],adcgain);      
+	if (i==0) { adcgain=adcG[i]; }
+	if (i>0) { adcgain=TMath::Max(adcG[i],adcgain);       }
       }
       // Remove pedestal
       //====================
       for(dsum=0.,dsum1=0.,k=0;k<_presample;k++) {
 	dsum+=adc[k]; 
-	if(k<_presample-1) dsum1+=adc[k];
+	if(k<_presample-1) { dsum1+=adc[k]; }
       }
       
       bl=dsum/((double)_presample);
@@ -469,13 +469,13 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
       
       apdGain=adcgain;
       
-      if(allPNAmpl[dccMEM[0]].size()>MyPn0) pnAmpl0=allPNAmpl[dccMEM[0]][MyPn0];
-      else pnAmpl0=0;
-      if(allPNAmpl[dccMEM[0]].size()>MyPn1) pnAmpl1=allPNAmpl[dccMEM[0]][MyPn1];
-      else pnAmpl1=0;
+      if(allPNAmpl[dccMEM[0]].size()>MyPn0) { pnAmpl0=allPNAmpl[dccMEM[0]][MyPn0];
+      } else { pnAmpl0=0; }
+      if(allPNAmpl[dccMEM[0]].size()>MyPn1) { pnAmpl1=allPNAmpl[dccMEM[0]][MyPn1];
+      } else { pnAmpl1=0; }
 
-      if(allPNGain[dccMEM[0]].size()>MyPn0) pnGain=allPNGain[dccMEM[0]][MyPn0];
-      else pnGain=0;
+      if(allPNGain[dccMEM[0]].size()>MyPn0) { pnGain=allPNGain[dccMEM[0]][MyPn0];
+      } else { pnGain=0; }
 
       // Perform the fit on apd samples
       //================================
@@ -526,7 +526,7 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
       channelID=elecid_crystal.channelId()-1;  
       
       int module=MEEEGeom::lmmod( iX, iY );
-      if( module>=18 && side==1 ) module+=2;  // Trick to fix endcap specificity
+      if( module>=18 && side==1 ) { module+=2;  // Trick to fix endcap specificity }
       int iMod = module-1;
 
       assert( module>=*min_element(modules.begin(),modules.end()) && module<=*max_element(modules.begin(),modules.end()) );
@@ -569,8 +569,8 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
 	adc[i]=samp_crystal.adc() ;  
 	adcG[i]=samp_crystal.gainId();      
 
-	if (i==0) adcgain=adcG[i];
-	if (i>0) adcgain=TMath::Max(adcG[i],adcgain); 
+	if (i==0) { adcgain=adcG[i]; }
+	if (i>0) { adcgain=TMath::Max(adcG[i],adcgain);  }
       }
       
 
@@ -578,7 +578,7 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
       //====================
       for(dsum=0.,dsum1=0.,k=0;k<_presample;k++) {
 	dsum+=adc[k]; 
-	if(k<_presample-1) dsum1+=adc[k];
+	if(k<_presample-1) { dsum1+=adc[k]; }
       }
       
       bl=dsum/((double)_presample);
@@ -592,15 +592,15 @@ void EcalTestPulseAnalyzer:: analyze( const edm::Event & e, const  edm::EventSet
       apdGain=adcgain;
       
       int dccMEMIndex=0;
-      if(side==1) dccMEMIndex+=2; // Trick to fix endcap specificity
+      if(side==1) { dccMEMIndex+=2; // Trick to fix endcap specificity }
       
-      if(allPNAmpl[dccMEM[dccMEMIndex]].size()>MyPn0) pnAmpl0=allPNAmpl[dccMEM[dccMEMIndex]][MyPn0];
-      else pnAmpl0=0;
-      if(allPNAmpl[dccMEM[dccMEMIndex+1]].size()>MyPn1) pnAmpl1=allPNAmpl[dccMEM[dccMEMIndex+1]][MyPn1];
-      else pnAmpl1=0;
+      if(allPNAmpl[dccMEM[dccMEMIndex]].size()>MyPn0) { pnAmpl0=allPNAmpl[dccMEM[dccMEMIndex]][MyPn0];
+      } else { pnAmpl0=0; }
+      if(allPNAmpl[dccMEM[dccMEMIndex+1]].size()>MyPn1) { pnAmpl1=allPNAmpl[dccMEM[dccMEMIndex+1]][MyPn1];
+      } else { pnAmpl1=0; }
       
-      if(allPNGain[dccMEM[dccMEMIndex]].size()>MyPn0) pnGain=allPNGain[dccMEM[dccMEMIndex]][MyPn0];
-      else pnGain=0;
+      if(allPNGain[dccMEM[dccMEMIndex]].size()>MyPn0) { pnGain=allPNGain[dccMEM[dccMEMIndex]][MyPn0];
+      } else { pnGain=0; }
 
 
       // Perform the fit on apd samples
@@ -723,7 +723,7 @@ void EcalTestPulseAnalyzer::endJob() {
     unsigned int iMod=iModule[iCry]-1;
   
     moduleID=iMod+1;    
-    if( moduleID>=20 ) moduleID-=2;  // Trick to fix endcap specificity
+    if( moduleID>=20 ) { moduleID-=2;  // Trick to fix endcap specificity }
     
     Long64_t nbytes = 0, nb = 0;
     for (Long64_t jentry=0; jentry< trees[iCry]->GetEntriesFast();jentry++) { 
@@ -748,7 +748,7 @@ void EcalTestPulseAnalyzer::endJob() {
 	APD[j]=0.0;
       }
     }
-    else flag=1;
+    else { flag=1; }
     
     iphi=iPhi[iCry];
     ieta=iEta[iCry];
@@ -782,7 +782,7 @@ void EcalTestPulseAnalyzer::endJob() {
 	
 	pnID=ch;
 	moduleID=iMod;
-	if( moduleID>=20 ) moduleID-=2;  // Trick to fix endcap specificity
+	if( moduleID>=20 ) { moduleID-=2;  // Trick to fix endcap specificity }
 
 	PN[0]= PNAnal[iMod][ch][ig]->getMean();
 	PN[1]= PNAnal[iMod][ch][ig]->getRMS();

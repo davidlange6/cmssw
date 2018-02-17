@@ -80,8 +80,8 @@ CaloMiscalibTools::produce(const EcalIntercalibConstantsRcd& iRecord)
     map.prefillMap();
     MiscalibReaderFromXMLEcalBarrel barrelreader_(map);
     MiscalibReaderFromXMLEcalEndcap endcapreader_(map);
-    if(!barrelfile_.empty()) barrelreader_.parseXMLMiscalibFile(barrelfile_);
-    if(!endcapfile_.empty())endcapreader_.parseXMLMiscalibFile(endcapfile_);
+    if(!barrelfile_.empty()) { barrelreader_.parseXMLMiscalibFile(barrelfile_); }
+    if(!endcapfile_.empty()) {endcapreader_.parseXMLMiscalibFile(endcapfile_); }
     map.print();
     // Added by Zhen, need a new object so to not be deleted at exit
     //    std::cout<<"about to copy"<<std::endl;

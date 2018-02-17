@@ -22,7 +22,7 @@ CastorLedAnalysis::CastorLedAnalysis(const edm::ParameterSet& ps)
   m_file=nullptr;
   char output[100]{0};
   // output files
-  for(int k=0;k<4;k++) state.push_back(true); // 4 cap-ids (do we care?)
+  for(int k=0;k<4;k++) { state.push_back(true); // 4 cap-ids (do we care?) }
   m_outputFileText = ps.getUntrackedParameter<string>("outputFileText", "");
   m_outputFileX = ps.getUntrackedParameter<string>("outputFileXML","");
   if ( !m_outputFileText.empty() ) {
@@ -35,15 +35,15 @@ CastorLedAnalysis::CastorLedAnalysis(const edm::ParameterSet& ps)
   }
 
   m_nevtsample = ps.getUntrackedParameter<int>("nevtsample",9999999);
-  if(m_nevtsample<1)m_nevtsample=9999999;
+  if(m_nevtsample<1) {m_nevtsample=9999999; }
   m_hiSaveflag = ps.getUntrackedParameter<int>("hiSaveflag",0);
-  if(m_hiSaveflag<0)m_hiSaveflag=0;
-  if(m_hiSaveflag>0)m_hiSaveflag=1;
+  if(m_hiSaveflag<0) {m_hiSaveflag=0; }
+  if(m_hiSaveflag>0) {m_hiSaveflag=1; }
   m_fitflag = ps.getUntrackedParameter<int>("analysisflag",2);
-  if(m_fitflag<0)m_fitflag=0;
-  if(m_fitflag>4)m_fitflag=4;
+  if(m_fitflag<0) {m_fitflag=0; }
+  if(m_fitflag>4) {m_fitflag=4; }
   m_startTS = ps.getUntrackedParameter<int>("firstTS", 0);
-  if(m_startTS<0) m_startTS=0;
+  if(m_startTS<0) { m_startTS=0; }
   m_endTS = ps.getUntrackedParameter<int>("lastTS", 9);
   m_usecalib = ps.getUntrackedParameter<bool>("usecalib",false);
   m_logFile.open("CastorLedAnalysis.log");
@@ -135,7 +135,7 @@ CastorLedAnalysis::~CastorLedAnalysis(){
   ///All done, clean up!!
 
   for(_meol=castorHists.LEDTRENDS.begin(); _meol!=castorHists.LEDTRENDS.end(); _meol++){
-    for(int i=0; i<15; i++) _meol->second[i].first->Delete();
+    for(int i=0; i<15; i++) { _meol->second[i].first->Delete(); }
   }
 
   castorHists.ALLLEDS->Delete();
@@ -158,10 +158,10 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
   double dtime2=0; double dtime1=0; double dtime3=0; double dtime4=0;
   char output[100]{0};
 
-  if (m_outputFileText!=""){
-    if(m_fitflag==0 || m_fitflag==2) m_outFile<<"Det Eta,Phi,D   Mean    Error"<<std::endl;
-    else if(m_fitflag==1 || m_fitflag==3) m_outFile<<"Det Eta,Phi,D   Peak    Error"<<std::endl;
-    else if(m_fitflag==4) m_outFile<<"Det Eta,Phi,D   Mean    Error      Peak    Error       MeanEv  Error       PeakEv  Error"<<std::endl;
+  if (!m_outputFileText.empty()){
+    if(m_fitflag==0 || m_fitflag==2) { m_outFile<<"Det Eta,Phi,D   Mean    Error"<<std::endl;
+    } else if(m_fitflag==1 || m_fitflag==3) { m_outFile<<"Det Eta,Phi,D   Peak    Error"<<std::endl;
+    } else if(m_fitflag==4) { m_outFile<<"Det Eta,Phi,D   Mean    Error      Peak    Error       MeanEv  Error       PeakEv  Error"<<std::endl; }
   }
   for(_meol=toolT.begin(); _meol!=toolT.end(); _meol++){
 // scale the LED pulse to 1 event
@@ -172,7 +172,7 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
     }
     if(m_fitflag==1 || m_fitflag==4){
 // put proper errors
-      for(int j=0; j<10; j++) _meol->second[10].first->SetBinError(j+1,_meol->second[j].first->GetRMS()/sqrt((float)evt_curr));
+      for(int j=0; j<10; j++) { _meol->second[10].first->SetBinError(j+1,_meol->second[j].first->GetRMS()/sqrt((float)evt_curr)); }
     }
     if(m_fitflag==1 || m_fitflag==3 || m_fitflag==4){
       _meol->second[10].first->Fit("landau","Q");
@@ -197,27 +197,27 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
     }
     _meol->second[10].first->GetXaxis()->SetTitle("Time slice");
     _meol->second[10].first->GetYaxis()->SetTitle("Averaged pulse (fC)");
-    if(m_hiSaveflag>0)_meol->second[10].first->Write();
+    if(m_hiSaveflag>0) {_meol->second[10].first->Write(); }
     _meol->second[10].second.first[0].push_back(time1);
     _meol->second[10].second.first[1].push_back(dtime1);
     _meol->second[11].second.first[0].push_back(time2);
     _meol->second[11].second.first[1].push_back(dtime2);
     _meol->second[12].first->GetXaxis()->SetTitle("Mean TS");
     _meol->second[12].first->GetYaxis()->SetTitle("Counts");
-    if(m_fitflag==2 && m_hiSaveflag>0)_meol->second[12].first->Write();
+    if(m_fitflag==2 && m_hiSaveflag>0) {_meol->second[12].first->Write(); }
     _meol->second[12].second.first[0].push_back(time3);
     _meol->second[12].second.first[1].push_back(dtime3);
     _meol->second[13].first->GetXaxis()->SetTitle("Peak TS");
     _meol->second[13].first->GetYaxis()->SetTitle("Counts");
-    if(m_fitflag>2 && m_hiSaveflag>0)_meol->second[13].first->Write();
+    if(m_fitflag>2 && m_hiSaveflag>0) {_meol->second[13].first->Write(); }
     _meol->second[13].second.first[0].push_back(time4);
     _meol->second[13].second.first[1].push_back(dtime4);
     _meol->second[14].first->GetXaxis()->SetTitle("Peak TS error");
     _meol->second[14].first->GetYaxis()->SetTitle("Counts");
-    if(m_fitflag>2 && m_hiSaveflag>0)_meol->second[14].first->Write();
+    if(m_fitflag>2 && m_hiSaveflag>0) {_meol->second[14].first->Write(); }
     _meol->second[15].first->GetXaxis()->SetTitle("Chi2/NDF");
     _meol->second[15].first->GetYaxis()->SetTitle("Counts");
-    if(m_fitflag>2 && m_hiSaveflag>0)_meol->second[15].first->Write();
+    if(m_fitflag>2 && m_hiSaveflag>0) {_meol->second[15].first->Write(); }
     _meol->second[16].first->GetXaxis()->SetTitle("Integrated Signal");
     _meol->second[16].first->Write();
 
@@ -225,7 +225,7 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
 // Ascii printout (need to modify to include new info)
     HcalDetId detid = _meol->first;
 
-    if (m_outputFileText!=""){
+    if (!m_outputFileText.empty()){
       if(m_fitflag==0) {
 	m_outFile<<detid<<"   "<<time1<<" "<<dtime1<<std::endl;
         snprintf(output, sizeof output, "  <DATA_SET>");
@@ -244,10 +244,10 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <Z>%2i</Z>", detid.zside() );
         m_outputFileXML << output << endl;
-        if(detid.subdet() == 1) snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>");
-        if(detid.subdet() == 2) snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>");
-        if(detid.subdet() == 3) snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>");
-        if(detid.subdet() == 4) snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>");
+        if(detid.subdet() == 1) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>"); }
+        if(detid.subdet() == 2) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>"); }
+        if(detid.subdet() == 3) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>"); }
+        if(detid.subdet() == 4) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>"); }
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <HCAL_CHANNEL_ID>%10i</HCAL_CHANNEL_ID>", detid.rawId() );
         m_outputFileXML << output << endl;
@@ -289,10 +289,10 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <Z>%2i</Z>", detid.zside() );
         m_outputFileXML << output << endl;
-        if(detid.subdet() == 1) snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>");
-        if(detid.subdet() == 2) snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>");
-        if(detid.subdet() == 3) snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>");
-        if(detid.subdet() == 4) snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>");
+        if(detid.subdet() == 1) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>"); }
+        if(detid.subdet() == 2) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>"); }
+        if(detid.subdet() == 3) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>"); }
+        if(detid.subdet() == 4) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>"); }
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <HCAL_CHANNEL_ID>%10i</HCAL_CHANNEL_ID>", detid.rawId() );
         m_outputFileXML << output << endl;
@@ -334,10 +334,10 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <Z>%2i</Z>", detid.zside() );
         m_outputFileXML << output << endl;
-	if(detid.subdet() == 1) snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>");
-        if(detid.subdet() == 2) snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>");
-        if(detid.subdet() == 3) snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>");
-        if(detid.subdet() == 4) snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>");
+	if(detid.subdet() == 1) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>"); }
+        if(detid.subdet() == 2) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>"); }
+        if(detid.subdet() == 3) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>"); }
+        if(detid.subdet() == 4) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>"); }
         m_outputFileXML << output << endl;
 	snprintf(output, sizeof output, "      <HCAL_CHANNEL_ID>%10i</HCAL_CHANNEL_ID>", detid.rawId() );
         m_outputFileXML << output << endl;
@@ -378,10 +378,10 @@ void CastorLedAnalysis::GetLedConst(map<HcalDetId, map<int,LEDBUNCH> > &toolT){
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <Z>%2i</Z>", detid.zside() );
         m_outputFileXML << output << endl;
-        if(detid.subdet() == 1) snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>");
-        if(detid.subdet() == 2) snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>");
-        if(detid.subdet() == 3) snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>");
-        if(detid.subdet() == 4) snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>");
+        if(detid.subdet() == 1) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HB</DETECTOR_NAME>"); }
+        if(detid.subdet() == 2) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HE</DETECTOR_NAME>"); }
+        if(detid.subdet() == 3) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HO</DETECTOR_NAME>"); }
+        if(detid.subdet() == 4) { snprintf(output, sizeof output, "      <DETECTOR_NAME>HF</DETECTOR_NAME>"); }
         m_outputFileXML << output << endl;
         snprintf(output, sizeof output, "      <HCAL_CHANNEL_ID>%10i</HCAL_CHANNEL_ID>", detid.rawId() );
         m_outputFileXML << output << endl;
@@ -463,7 +463,7 @@ void CastorLedAnalysis::LedDone()
 {
 
 // First process the last sample (remaining events).
-  if(evt%m_nevtsample!=0) LedSampleAnalysis();
+  if(evt%m_nevtsample!=0) { LedSampleAnalysis(); }
 
 // Now do the end of run analysis: trending histos
   if(sample>1 && m_fitflag!=4){
@@ -492,11 +492,11 @@ void CastorLedAnalysis::processLedEvent(const CastorDigiCollection& castor,
   evt++;
   sample = (evt-1)/m_nevtsample +1;
   evt_curr = evt%m_nevtsample;
-  if(evt_curr==0)evt_curr=m_nevtsample;
+  if(evt_curr==0) {evt_curr=m_nevtsample; }
 
   // HF/Castor
   try{
-    if(castor.empty()) throw (int)castor.size();
+    if(castor.empty()) { throw (int)castor.size(); }
     for (CastorDigiCollection::const_iterator j=castor.begin(); j!=castor.end(); ++j){
       const CastorDataFrame digi = (const CastorDataFrame)(*j);
       _meol = castorHists.LEDTRENDS.find(digi.id());
@@ -511,15 +511,15 @@ void CastorLedAnalysis::processLedEvent(const CastorDigiCollection& castor,
   } 
 
   // Call the function every m_nevtsample events
-  if(evt%m_nevtsample==0) LedSampleAnalysis();
+  if(evt%m_nevtsample==0) { LedSampleAnalysis(); }
 
 }
 //----------------------------------------------------------------------------
 void CastorLedAnalysis::SetupLEDHists(int id, const HcalDetId detid, map<HcalDetId, map<int,LEDBUNCH> > &toolT) {
 
   string type = "HBHE";
-  if(id==1) type = "HO";
-  if(id==2) type = "HF";
+  if(id==1) { type = "HO"; }
+  if(id==2) { type = "HF"; }
 
   _meol = toolT.find(detid);
   if (_meol==toolT.end()){
@@ -556,8 +556,8 @@ void CastorLedAnalysis::LedCastorHists(const HcalDetId& detid, const CastorDataF
   _mei = _meol->second;
   // Rest the histos if we're at the end of a 'bunch'
   if((evt-1)%m_nevtsample==0 && state[0]){
-    for(int k=0; k<(int)state.size();k++) state[k]=false;
-    for(int i=0; i<16; i++) _mei[i].first->Reset();
+    for(int k=0; k<(int)state.size();k++) { state[k]=false; }
+    for(int i=0; i<16; i++) { _mei[i].first->Reset(); }
   }
 
   // now we have the signal in fC, let's get rid of that darn pedestal
@@ -582,7 +582,7 @@ void CastorLedAnalysis::LedCastorHists(const HcalDetId& detid, const CastorDataF
     _mei[TS].first->Fill(ta);
     _mei[10].first->AddBinContent(TS+1,ta);  // This is average pulse, could probably do better (Profile?)
     if(m_fitflag>1){
-      if(TS==m_startTS)_mei[11].first->Reset();
+      if(TS==m_startTS) {_mei[11].first->Reset(); }
       _mei[11].first->SetBinContent(TS+1,ta);
     }
 
@@ -598,7 +598,7 @@ void CastorLedAnalysis::LedCastorHists(const HcalDetId& detid, const CastorDataF
   // if we are performing a Landau fit (m_fitflag = 3)
 
   float sum=0.;
-  for(int i=0; i<10; i++)sum=sum+_mei[11].first->GetBinContent(i+1);
+  for(int i=0; i<10; i++) {sum=sum+_mei[11].first->GetBinContent(i+1); }
   if(sum>100){
     if(m_fitflag==2 || m_fitflag==4){
       float timmean=_mei[11].first->GetMean();  // let's use Phil's way instead
@@ -646,12 +646,12 @@ float CastorLedAnalysis::BinsizeCorr(float time) {
      lolim=tsreco[i-1];
      tsdown=tstrue[i-1];
    }
-   else tsdown=tstrue[31]-1.;
+   else { tsdown=tstrue[31]-1.; }
    if(i<32){
      uplim=tsreco[i];
      tsup=tstrue[i];
    }
-   else tsup=tstrue[0]+1.;
+   else { tsup=tstrue[0]+1.; }
    if(restime>=lolim && restime<uplim){
       corrtime=(tsdown*(uplim-restime)+tsup*(restime-lolim)) / (uplim-lolim);
     }

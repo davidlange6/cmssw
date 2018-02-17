@@ -52,7 +52,8 @@ bool TMem::isMemRelevant(int mem){
 int TMem::Mem(int lmr, int n){
   
   std::pair<int,int> mempair=ME::memFromLmr(lmr);
-  if(n==0) return mempair.first;
-  else return mempair.second;
+  if(n==0) { return mempair.first;
+  } else { return mempair.second;
+}
   
 }

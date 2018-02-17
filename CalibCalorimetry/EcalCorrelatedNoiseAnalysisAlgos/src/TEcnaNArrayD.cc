@@ -44,7 +44,8 @@ TEcnaNArrayD::TEcnaNArrayD(const TEcnaNArrayD &orig) {
   fN6 = orig.fN6;
   fNL = orig.fNL;
   fA  = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = orig.fA[i];
+  for (Int_t i=0;i<fNL;i++) { fA[i] = orig.fA[i];
+}
 }
 TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1) {
 //constructor for a 1 dimensional array of size n1. Array is put to 0
@@ -60,7 +61,8 @@ TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1) {
   fN1  = n1;
   fNL  = n1 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2) {
 //constructor for a 2 dimensional array of sizes n1,n2. Array is put to 0
@@ -77,7 +79,8 @@ TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2) {
   fN2 = n2;
   fNL = n1*n2 + 1;
   fA  = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t n3) {
 //constructor 3 dimensional array of sizes n1,n2,n3. Array is put to 0
@@ -95,7 +98,8 @@ TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t 
   fN3  = n3;
   fNL  = n1*n2*n3 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t n3,Int_t n4) {
 //constructor for a 4 dimensional array of sizes n1,n2,n3,n4. Array is put to 0
@@ -114,7 +118,8 @@ TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t 
   fN4  = n4;
   fNL  = n1*n2*n3*n4 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t n3,Int_t n4,Int_t n5) {
 //constructor for a 5 dimensional array of sizes n1,n2,n3,n4,n5. Array is put to 0
@@ -134,7 +139,8 @@ TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t 
   fN5  = n5;
   fNL  = n1*n2*n3*n4*n5 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t n3,Int_t n4,Int_t n5,Int_t n6) {
 //constructor for a 6 dimensional array of sizes n1,n2,n3,n4,n5,n6. Array is put to 0
@@ -155,7 +161,8 @@ TEcnaNArrayD::TEcnaNArrayD(TEcnaObject* pObjectManager, Int_t n1,Int_t n2,Int_t 
   fN6  = n6;
   fNL  = n1*n2*n3*n4*n5*n6 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 
 TEcnaNArrayD::~TEcnaNArrayD() {
@@ -170,7 +177,8 @@ TEcnaNArrayD::~TEcnaNArrayD() {
 
 void TEcnaNArrayD::Clean() {
 //
-  if (fA) delete [] fA;
+  if (fA) { delete [] fA;
+}
   Init();
 }
 void TEcnaNArrayD::Init()
@@ -258,7 +266,8 @@ void TEcnaNArrayD::ReSet(Int_t n1) {
   fN1  = n1;
   fNL  = n1 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2) {
 //Reset this to be 2 dimensional of dimension n1,n2
@@ -269,7 +278,8 @@ void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2) {
   fN2  = n2;
   fNL  = n1*n2 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3) {
 //Reset this to be 3 dimensional of dimension n1,n2,n3
@@ -281,7 +291,8 @@ void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3) {
   fN3  = n3;
   fNL  = n1*n2*n3 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3,Int_t n4) {
 //Reset this to be 4 dimensional of dimension n1,n2,n3,n4
@@ -294,7 +305,8 @@ void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3,Int_t n4) {
   fN4  = n4;
   fNL  = n1*n2*n3*n4 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3,Int_t n4,Int_t n5) {
 //Reset this to be 5 dimensional of dimension n1,n2,n3,n4,n5
@@ -308,7 +320,8 @@ void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3,Int_t n4,Int_t n5) {
   fN5  = n5;
   fNL  = n1*n2*n3*n4*n5 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3,Int_t n4,Int_t n5,Int_t n6) {
 //Reset this to be 6 dimensional of dimension n1,n2,n3,n4,n5,n6
@@ -323,7 +336,8 @@ void TEcnaNArrayD::ReSet(Int_t n1,Int_t n2,Int_t n3,Int_t n4,Int_t n5,Int_t n6) 
   fN6  = n6;
   fNL  = n1*n2*n3*n4*n5*n6 + 1;
   fA   = new Double_t [fNL];
-  for (Int_t i=0;i<fNL;i++) fA[i] = zero;
+  for (Int_t i=0;i<fNL;i++) { fA[i] = zero;
+}
 }
 Double_t &TEcnaNArrayD::operator()(Int_t i1) {
   Int_t i;

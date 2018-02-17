@@ -10,7 +10,7 @@
 
 void reset (double vett[256]) 
 {
-   for (int i=0 ; i<256; ++i) vett[i] = 0. ; 
+   for (int i=0 ; i<256; ++i) { vett[i] = 0. ;  }
 }
 
 
@@ -19,8 +19,8 @@ TPedValues::TPedValues (double RMSmax, int bestPedestal) :
   m_RMSmax (RMSmax) 
 {
   LogDebug ("EcalPedOffset") << "entering TPedValues ctor ..." ;
-  for(int i=0; i<1700;++i)
-    endcapCrystalNumbers[i] = 0;
+  for(int i=0; i<1700;++i) {
+    endcapCrystalNumbers[i] = 0; }
 }
 
 
@@ -30,13 +30,13 @@ TPedValues::TPedValues (const TPedValues & orig)
   m_bestPedestal = orig.m_bestPedestal ;
   m_RMSmax = orig.m_RMSmax ;
 
-  for (int gain = 0 ; gain < 3 ; ++gain)
-    for (int crystal = 0 ; crystal < 1700 ; ++crystal)
-        for (int DAC = 0 ; DAC < 256 ; ++DAC)
-          m_entries[gain][crystal][DAC] = orig.m_entries[gain][crystal][DAC] ;
+  for (int gain = 0 ; gain < 3 ; ++gain) {
+    for (int crystal = 0 ; crystal < 1700 ; ++crystal) {
+        for (int DAC = 0 ; DAC < 256 ; ++DAC) {
+          m_entries[gain][crystal][DAC] = orig.m_entries[gain][crystal][DAC] ; }
 
-  for(int i=0; i<1700;++i)
-    endcapCrystalNumbers[i] = orig.endcapCrystalNumbers[i];
+  for(int i=0; i<1700;++i) {
+    endcapCrystalNumbers[i] = orig.endcapCrystalNumbers[i]; }
 }
 
 
@@ -101,9 +101,9 @@ TPedResult TPedValues::terminate (const int & DACstart, const int & DACend) cons
           for (int DAC = DACstart ; DAC < DACend ; ++DAC)
             {
               double average = m_entries[gainId-1][crystal][DAC].average () ;
-              if (average == -1) continue ;
+              if (average == -1) { continue ; }
               hasDigis = true;
-              if (m_entries[gainId-1][crystal][DAC].RMSSq () > m_RMSmax * m_RMSmax) continue ;
+              if (m_entries[gainId-1][crystal][DAC].RMSSq () > m_RMSmax * m_RMSmax) { continue ; }
               if (fabs (average - m_bestPedestal) < delta &&   average>1 ) 
                 {
                   delta = fabs (average - m_bestPedestal) ;
@@ -116,10 +116,10 @@ TPedResult TPedValues::terminate (const int & DACstart, const int & DACend) cons
 	  if ((dummyBestDAC == (DACend-1) || dummyBestDAC == -1) && hasDigis)
           {
 	    int gainHuman;
-	    if      (gainId ==1) gainHuman =12;
-	    else if (gainId ==2) gainHuman =6;
-	    else if (gainId ==3) gainHuman =1;
-	    else                 gainHuman =-1;
+	    if      (gainId ==1) { gainHuman =12;
+	    } else if (gainId ==2) { gainHuman =6;
+	    } else if (gainId ==3) { gainHuman =1;
+	    } else {                 gainHuman =-1; }
 	    edm::LogError("EcalPedOffset")
               << " TPedValues :  cannot find best DAC value for channel: "
               << endcapCrystalNumbers[crystal]
@@ -217,13 +217,13 @@ int TPedValues::makePlots (TFile * rootFile, const std::string & dirName,
         {
           int lastBin = 0;
           while(lastBin<(int)asseX.size()-1 && asseY[lastBin+1]>0
-              && (asseY[lastBin+1]-asseY[lastBin+2])!=0)
-            lastBin++;
+              && (asseY[lastBin+1]-asseY[lastBin+2])!=0) {
+            lastBin++; }
           
           int fitRangeEnd = (int)asseX[lastBin];
           int kinkPt = 64;
-          if(fitRangeEnd < 66)
-            kinkPt = fitRangeEnd-4;
+          if(fitRangeEnd < 66) {
+            kinkPt = fitRangeEnd-4; }
           TGraphErrors graph(asseX.size(),&(*asseX.begin()),&(*asseY.begin()),
               &(*sigmaX.begin()),&(*sigmaY.begin()));
           char funct[120];
@@ -233,10 +233,10 @@ int TPedValues::makePlots (TFile * rootFile, const std::string & dirName,
           
           char name[120] ;
           int gainHuman;
-          if      (gain ==0) gainHuman =12;
-          else if (gain ==1) gainHuman =6;
-          else if (gain ==2) gainHuman =1;
-          else               gainHuman =-1;
+          if      (gain ==0) { gainHuman =12;
+          } else if (gain ==1) { gainHuman =6;
+          } else if (gain ==2) { gainHuman =1;
+          } else {               gainHuman =-1; }
           sprintf (name,"XTL%04d_GAIN%02d",endcapCrystalNumbers[xtl],gainHuman) ;
           graph.GetXaxis()->SetTitle("DAC value");
           graph.GetYaxis()->SetTitle("Average pedestal ADC");
@@ -262,10 +262,10 @@ int TPedValues::makePlots (TFile * rootFile, const std::string & dirName,
           //LogDebug("EcalPedOffset") << "TPedValues : TGraph for channel:" << xtl+1 << " gain:"
           //  << gainHuman << " has " << asseX.size() << " points...back is:" << asseX.back() 
           //  << " and front+1 is:" << asseX.front()+1;
-          if((asseX.back()-asseX.front()+1)!=asseX.size())
+          if((asseX.back()-asseX.front()+1)!=asseX.size()) {
             edm::LogError("EcalPedOffset") << "TPedValues : Pedestal average not found " <<
               "for all DAC values scanned in channel:" << endcapCrystalNumbers[xtl]
-              << " gain:" << gainHuman;
+              << " gain:" << gainHuman; }
         }
       } // loop over the gains
   }     // (loop over the crystals)

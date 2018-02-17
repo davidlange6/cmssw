@@ -18,11 +18,11 @@ static double two_joined_lines(const double x_in, const double aleft,
 {
     assert(h >= 0.0);
     const double x = x_in - join_location;
-    if (x <= -h)
+    if (x <= -h) {
         return aleft*x + bleft;
-    else if (x >= h)
+    } else if (x >= h) {
         return aright*x + bright;
-    else
+    } else
     {
         const double vleft = -h*aleft + bleft;
         const double vright = aright*h + bright;
@@ -74,15 +74,17 @@ double LowPassFilterTiming::operator()(const double v,
     // What happens for large (in magnitude) negative voltage inputs?
     const double Vbias = exp(logVbias);
     const double shiftedV = v + Vbias;
-    if (shiftedV <= 0.0)
+    if (shiftedV <= 0.0) {
         return tauMax;
+}
 
     const double lg = log(shiftedV);
     const double delta = exp(logDelta);
     const double tauMin = exp(logTauMin);
     double result = two_joined_lines(lg, -exp(slopeLog), tauMin,
                                      0.0, tauMin, logV0, delta);
-    if (result > tauMax)
+    if (result > tauMax) {
         result = tauMax;
+}
     return result;
 }

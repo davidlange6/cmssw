@@ -17,7 +17,8 @@ CastorPedestal CastorDbHardcode::makePedestal (HcalGenericDetId fId, bool fSmear
   if (fSmear) {
     for (int i = 0; i < 4; i++) {
       value [i] = CLHEP::RandGauss::shoot (value0, width.getWidth (i) / 100.); // ignore correlations, assume 10K pedestal run 
-      while (value [i] <= 0) value [i] = CLHEP::RandGauss::shoot (value0, width.getWidth (i));
+      while (value [i] <= 0) { value [i] = CLHEP::RandGauss::shoot (value0, width.getWidth (i));
+}
     }
   }
   CastorPedestal result (fId.rawId (), 
@@ -48,13 +49,15 @@ CastorPedestalWidth CastorDbHardcode::makePedestalWidth (HcalGenericDetId fId) {
 CastorGain CastorDbHardcode::makeGain (HcalGenericDetId fId, bool fSmear) {
   CastorGainWidth width = makeGainWidth (fId);
   float value0 = 0;
-  if (fId.genericSubdet() != HcalGenericDetId::HcalGenForward) value0 = 0.177;  // GeV/fC
-  else {
-    if (HcalDetId(fId).depth() == 1) value0 = 0.2146;
-    else if (HcalDetId(fId).depth() == 2) value0 = 0.3375;
+  if (fId.genericSubdet() != HcalGenericDetId::HcalGenForward) { value0 = 0.177;  // GeV/fC
+  } else {
+    if (HcalDetId(fId).depth() == 1) { value0 = 0.2146;
+    } else if (HcalDetId(fId).depth() == 2) { value0 = 0.3375;
+}
   }
   float value [4] = {value0, value0, value0, value0};
-  if (fSmear) for (int i = 0; i < 4; i++) value [i] = CLHEP::RandGauss::shoot (value0, width.getValue (i)); 
+  if (fSmear) { for (int i = 0; i < 4; i++) { value [i] = CLHEP::RandGauss::shoot (value0, width.getValue (i)); 
+}
   CastorGain result (fId.rawId (), value[0], value[1], value[2], value[3]);
   return result;
 }
@@ -81,7 +84,8 @@ CastorQIECoder CastorDbHardcode::makeQIECoder (HcalGenericDetId fId) {
 CastorCalibrationQIECoder CastorDbHardcode::makeCalibrationQIECoder (HcalGenericDetId fId) {
   CastorCalibrationQIECoder result (fId.rawId ());
   float lowEdges [32];
-  for (int i = 0; i < 32; i++) lowEdges[i] = -1.5 + i*0.35;
+  for (int i = 0; i < 32; i++) { lowEdges[i] = -1.5 + i*0.35;
+}
   result.setMinCharges (lowEdges);
   return result;
 }

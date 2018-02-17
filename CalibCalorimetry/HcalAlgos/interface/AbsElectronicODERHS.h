@@ -57,41 +57,41 @@ public:
             const unsigned nExpected = this->nParameters();
             if (nExpected)
             {
-                if (paramMask_.size() != nExpected)
-                    return false;
+                if (paramMask_.size() != nExpected) {
+                    return false; }
                 unsigned count = 0;
                 const unsigned char* mask = &paramMask_[0];
-                for (unsigned i=0; i<nExpected; ++i)
-                    count += mask[i];
+                for (unsigned i=0; i<nExpected; ++i) {
+                    count += mask[i]; }
                 allSet_ = count == nExpected;
             }
-            else
-                allSet_ = true;
+            else {
+                allSet_ = true; }
         }
         return allSet_;
     }
 
     inline void setParameter(const unsigned which, const double value)
     {
-        if (!initialized_)
-            initialize();
+        if (!initialized_) {
+            initialize(); }
         paramMask_.at(which) = 1;
         params_[which] = value;
     }
 
     inline double getParameter(const unsigned which) const
     {
-        if (!paramMask_.at(which)) throw cms::Exception(
+        if (!paramMask_.at(which)) { throw cms::Exception(
             "In AbsElectronicODERHS::getParameter: no such parameter or "
-            "parameter value is not established yet");
+            "parameter value is not established yet"); }
         return params_[which];
     }
 
     inline const std::vector<double>& getAllParameters() const
     {
-        if (!allParametersSet()) throw cms::Exception(
+        if (!allParametersSet()) { throw cms::Exception(
             "In AbsElectronicODERHS::getAllParameters: "
-            "some parameter values were not established yet");
+            "some parameter values were not established yet"); }
         return params_;
     }
 
@@ -100,8 +100,8 @@ public:
         if (len)
         {
             assert(values);
-            if (!initialized_)
-                initialize();
+            if (!initialized_) {
+                initialize(); }
             const unsigned sz = params_.size();
             const unsigned imax = std::min(sz, len);
             for (unsigned i=0; i<imax; ++i)
@@ -114,8 +114,8 @@ public:
 
     inline void setLeadingParameters(const std::vector<double>& values)
     {
-        if (!values.empty())
-            setLeadingParameters(&values[0], values.size());
+        if (!values.empty()) {
+            setLeadingParameters(&values[0], values.size()); }
     }
 
 protected:
@@ -134,8 +134,8 @@ private:
         {
             params_.resize(nExpected);
             paramMask_.resize(nExpected);
-            for (unsigned i=0; i<nExpected; ++i)
-                paramMask_[i] = 0;
+            for (unsigned i=0; i<nExpected; ++i) {
+                paramMask_[i] = 0; }
         }
         initialized_ = true;
     }

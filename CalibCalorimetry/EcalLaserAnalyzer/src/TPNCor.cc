@@ -77,16 +77,16 @@ double TPNCor::getPNCorrectionFactor( double val0 , int gain )
   double pn=val0;
   double xpn=val0/1000.0;
 
-  if( isFileOK==0) return 1.0;
+  if( isFileOK==0) { return 1.0; }
 
-  if( gain> iSizeGain ) cout << "Unknown gain, gain has to be lower than "<<iSizeGain << endl;
+  if( gain> iSizeGain ) { cout << "Unknown gain, gain has to be lower than "<<iSizeGain << endl; }
   
   if( gain< iSizeGain ) {
     
     cor=xpn*(corParams[gain][0] +xpn*(corParams[gain][1]+xpn*corParams[gain][2]));
     
-    if(pn!=0) corr = 1.0 - cor/pn;
-    else corr=1.0;
+    if(pn!=0) { corr = 1.0 - cor/pn;
+    } else { corr=1.0; }
   } 
   
   return corr;

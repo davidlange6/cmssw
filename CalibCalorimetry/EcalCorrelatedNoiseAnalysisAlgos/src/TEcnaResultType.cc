@@ -80,16 +80,18 @@ void TEcnaResultType::SetSizeMat(Int_t nrow, Int_t ncol) {
 //Set size of fMatMat
   nrow = TMath::Abs(nrow);
   ncol = TMath::Abs(ncol);
-  if ((nrow>0) && (ncol>0)) fMatMat.ReSet(nrow,ncol);
-  else                      fMatMat.ReSet(1,1);
+  if ((nrow>0) && (ncol>0)) { fMatMat.ReSet(nrow,ncol);
+  } else {                      fMatMat.ReSet(1,1);
+}
 }
 
 void TEcnaResultType::SetSizeHis(Int_t nrow, Int_t ncol) {
 //Set size of fMatHis
   nrow = TMath::Abs(nrow);
   ncol = TMath::Abs(ncol);
-  if ((nrow>0) && (ncol>0)) fMatHis.ReSet(nrow,ncol);
-  else                      fMatHis.ReSet(1,1);
+  if ((nrow>0) && (ncol>0)) { fMatHis.ReSet(nrow,ncol);
+  } else {                      fMatHis.ReSet(1,1);
+}
 }
 
 CnaResultTyp  TEcnaResultType::GetTypOfEntry(Int_t  kEntry)

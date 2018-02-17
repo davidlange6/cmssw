@@ -111,9 +111,9 @@ void testChannel::analyze (edm::Event const& event,
             m_pedVSDAC.Fill (df.sample (iSample).adc (),DACvalues[smId]) ;
             if (crystalId == m_xtal)
               { 
-                if (gainId == 1) m_singlePedVSDAC_1.Fill (df.sample (iSample).adc (),DACvalues[smId]) ;
-                if (gainId == 2) m_singlePedVSDAC_2.Fill (df.sample (iSample).adc (),DACvalues[smId]) ;
-                if (gainId == 3) m_singlePedVSDAC_3.Fill (df.sample (iSample).adc (),DACvalues[smId]) ;
+                if (gainId == 1) { m_singlePedVSDAC_1.Fill (df.sample (iSample).adc (),DACvalues[smId]) ; }
+                if (gainId == 2) { m_singlePedVSDAC_2.Fill (df.sample (iSample).adc (),DACvalues[smId]) ; }
+                if (gainId == 3) { m_singlePedVSDAC_3.Fill (df.sample (iSample).adc (),DACvalues[smId]) ; }
               }
          } // loop over the samples
     } // loop over the digis

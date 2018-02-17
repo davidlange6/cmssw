@@ -62,7 +62,8 @@ std::string PasswordReader::tokenize(const string& s,
   while(pos0<s.size() && find(delim.begin(), delim.end(), s[pos0])!=delim.end()){
     ++pos0;
   }
-  if(pos0>=len || pos0==string::npos) return "";
+  if(pos0>=len || pos0==string::npos) { return "";
+}
   pos = s.find_first_of(delim, pos0);
   return s.substr(pos0, (pos>0?pos:s.size())-pos0);
 }

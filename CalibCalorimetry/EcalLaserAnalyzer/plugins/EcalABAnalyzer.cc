@@ -107,8 +107,8 @@ phi(-1), eta(-1), event(0), color(-1), channelIteratorEE(0)
     nCrys    = NCRYSEE;
   }
   iZ         =  1;
-  if(_fedid <= 609 ) 
-    iZ       = -1;
+  if(_fedid <= 609 ) { 
+    iZ       = -1; }
   
   for(unsigned int j=0;j<nCrys;j++){
     iEta[j]=-1;
@@ -207,7 +207,7 @@ void EcalABAnalyzer::beginJob() {
   shapana -> set_const(_nsamples,_firstsample,_lastsample,
 		       _presample, _nevtmax, _noise, _chi2cut);
   
-  if(doesABTreeExist && fAB ) fAB->Close();
+  if(doesABTreeExist && fAB ) { fAB->Close(); }
   
   if(_fitab){
     alphafile=nameabfile.str();
@@ -286,7 +286,7 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
     // Get run type and run number 
 
     int fed = headerItr->fedId();  
-    if(fed!=_fedid && _fedid!=-999) continue; 
+    if(fed!=_fedid && _fedid!=-999) { continue;  }
     
     runType=headerItr->getRunType();
     runNum=headerItr->getRunNumber();
@@ -298,20 +298,20 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
 
     // Check fed corresponds to the DCC in TCC
     
-    if( 600+dccID != fedID ) continue;
+    if( 600+dccID != fedID ) { continue; }
 
     // Cut on runType
 
     if(runType!=EcalDCCHeaderBlock::LASER_STD 
        && runType!=EcalDCCHeaderBlock::LASER_GAP 
        && runType!=EcalDCCHeaderBlock::LASER_POWER_SCAN 
-       && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN ) return; 
+       && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN ) { return;  }
     
     // Retrieve laser color and event number
     
     EcalDCCHeaderBlock::EcalDCCEventSettings settings = headerItr->getEventSettings();
     color = settings.wavelength;
-    if( color <0 ) return;
+    if( color <0 ) { return; }
 
     std::vector<int>::iterator iter = find( colors.begin(), colors.end(), color );
     if( iter==colors.end() ){
@@ -322,7 +322,7 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
 
   // Cut on fedID
 
-  if(fedID!=_fedid && _fedid!=-999) return; 
+  if(fedID!=_fedid && _fedid!=-999) { return;  }
   
 
   // ===========================
@@ -390,8 +390,8 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
 	adc[i]=samp_crystal.adc() ;    
 	adcG[i]=samp_crystal.gainId();   
 	adc[i]*=adcG[i];
-	if (i==0) adcGain=adcG[i];
-	if (i>0) adcGain=TMath::Max(adcG[i],adcGain);  
+	if (i==0) { adcGain=adcG[i]; }
+	if (i>0) { adcGain=TMath::Max(adcG[i],adcGain);   }
       }
 
       APDPulse->setPulse(adc);
@@ -400,8 +400,8 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
       // Quality checks
       //================
       
-      if(adcGain!=1) nEvtBadGain[channel]++;   
-      if(!APDPulse->isTimingQualOK()) nEvtBadTiming[channel]++;
+      if(adcGain!=1) { nEvtBadGain[channel]++;    }
+      if(!APDPulse->isTimingQualOK()) { nEvtBadTiming[channel]++; }
       nEvtTot[channel]++;
 
 
@@ -414,8 +414,8 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
 	Delta12->addEntry(APDPulse->getDelta(1,2));
 	
 	if( nevtAB[channel] < _nevtmax && _fitab ){
-	  if(doesABTreeExist)  shapana -> putAllVals(channel, adc, eta, phi);	
-	  else shapana -> putAllVals(channel, adc, eta, phi, dccID, side, towerID, channelID);
+	  if(doesABTreeExist) {  shapana -> putAllVals(channel, adc, eta, phi);	
+	  } else { shapana -> putAllVals(channel, adc, eta, phi, dccID, side, towerID, channelID); }
    	  nevtAB[channel]++ ;
 	}
       }
@@ -467,7 +467,7 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
       // APD Pulse
       //=========== 
 
-      if( (*digiItr).size()>10) std::cout <<"SAMPLES SIZE > 10!" <<  (*digiItr).size()<< std::endl;
+      if( (*digiItr).size()>10) { std::cout <<"SAMPLES SIZE > 10!" <<  (*digiItr).size()<< std::endl; }
  
       // Loop on adc samples  
 
@@ -478,8 +478,8 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
 	adcG[i]=samp_crystal.gainId();   
 	adc[i]*=adcG[i];
 	
-	if (i==0) adcGain=adcG[i];
-	if (i>0) adcGain=TMath::Max(adcG[i],adcGain);  
+	if (i==0) { adcGain=adcG[i]; }
+	if (i>0) { adcGain=TMath::Max(adcG[i],adcGain);   }
       }
       
       APDPulse->setPulse(adc);
@@ -487,8 +487,8 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
       // Quality checks
       //================
       
-      if(adcGain!=1) nEvtBadGain[channel]++;   
-      if(!APDPulse->isTimingQualOK()) nEvtBadTiming[channel]++;
+      if(adcGain!=1) { nEvtBadGain[channel]++;    }
+      if(!APDPulse->isTimingQualOK()) { nEvtBadTiming[channel]++; }
       nEvtTot[channel]++;
       
       // Fill if Pulse is fine
@@ -500,8 +500,8 @@ void EcalABAnalyzer:: analyze( const edm::Event & e, const  edm::EventSetup& c){
 	Delta12->addEntry(APDPulse->getDelta(1,2));
 	
 	if( nevtAB[channel] < _nevtmax && _fitab ){
-	  if(doesABTreeExist)  shapana -> putAllVals(channel, adc, eta, phi);	
-	  else shapana -> putAllVals(channel, adc, eta, phi, dccID, side, towerID, channelID);  
+	  if(doesABTreeExist) {  shapana -> putAllVals(channel, adc, eta, phi);	
+	  } else { shapana -> putAllVals(channel, adc, eta, phi, dccID, side, towerID, channelID);   }
 	  nevtAB[channel]++ ;
 	}
       }
@@ -533,7 +533,7 @@ void EcalABAnalyzer::endJob() {
   double delta12=Delta12->getMean();
   if(delta12>_presamplecut) {
     _presample=2;
-    if(delta01>_presamplecut) _presample=1;
+    if(delta01>_presamplecut) { _presample=1; }
   }
   
   APDPulse->setPresamples(_presample);
@@ -580,14 +580,14 @@ void EcalABAnalyzer::endJob() {
   double BadGainChanPercentage=double(nChanBadGain)/double(nCrys);
   double BadTimingChanPercentage=double(nChanBadTiming)/double(nCrys);
   
-  if(BadGainChanPercentage>_qualpercent) isGainOK = false;
-  if(BadTimingChanPercentage>_qualpercent) isTimingOK = false;
+  if(BadGainChanPercentage>_qualpercent) { isGainOK = false; }
+  if(BadTimingChanPercentage>_qualpercent) { isTimingOK = false; }
 
   
-  if( !isGainOK )
-  std::cout <<    "\t+=+ ............................ WARNING! APD GAIN WAS NOT 1    +=+" << std::endl;
-  if( !isTimingOK )
-  std::cout <<    "\t+=+ ............................ WARNING! TIMING WAS BAD        +=+" << std::endl;
+  if( !isGainOK ) {
+  std::cout <<    "\t+=+ ............................ WARNING! APD GAIN WAS NOT 1    +=+" << std::endl; }
+  if( !isTimingOK ) {
+  std::cout <<    "\t+=+ ............................ WARNING! TIMING WAS BAD        +=+" << std::endl; }
 
   std::cout <<    "\t+=+    .................................... done  +=+" << std::endl;
   std::cout <<    "\t+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" << std::endl;

@@ -19,10 +19,14 @@ MEEEGeom::quadrant( SuperCrysCoord iX, SuperCrysCoord iY )
   bool top  = iY>=11;  bool bot  = !top;
   
   int iquad=0;
-  if( near && top ) iquad=1;
-  if( far  && top ) iquad=2;
-  if( far  && bot ) iquad=3;
-  if( near && bot ) iquad=4;
+  if( near && top ) { iquad=1;
+}
+  if( far  && top ) { iquad=2;
+}
+  if( far  && bot ) { iquad=3;
+}
+  if( near && bot ) { iquad=4;
+}
   
   return iquad;
 }
@@ -85,8 +89,10 @@ MEEEGeom::sm( SuperCrysCoord iX, SuperCrysCoord iY, int iz )
   // this is *my* convention. To be consistent with the barrel
   // sm goes from 1 to 9 for iz+ and from 10 to 18 for iz-
   int ism_ = sector( iX, iY );
-  if( ism_<0 ) return ism_;
-  if( iz<0 ) ism_+=9;
+  if( ism_<0 ) { return ism_;
+}
+  if( iz<0 ) { ism_+=9;
+}
   return ism_;
 }
 
@@ -129,7 +135,8 @@ MEEEGeom::lmmod( SuperCrysCoord iX, SuperCrysCoord iY )
   iym=20;
   ixm=10;
   int iX_ = iX;
-  if( iX>=11 ) iX_ = 20-iX+1;
+  if( iX>=11 ) { iX_ = 20-iX+1;
+}
   int iY_ = iY;
   il=iym-iY_;
   ic=iX_-1;
@@ -162,9 +169,11 @@ MEEEGeom::sc_in_quad( SuperCrysCoord iX, SuperCrysCoord iY )
   iym=10;
   ixm=10;
   int iX_ = iX;
-  if( iX>=11 ) iX_ = 20-iX+1;
+  if( iX>=11 ) { iX_ = 20-iX+1;
+}
   int iY_ = iY;
-  if( iY>=11 ) iY_ = 20-iY+1;
+  if( iY>=11 ) { iY_ = 20-iY+1;
+}
   il=iym-iY_;
   ic=iX_-1;
   ii=il*ixm+ic;
@@ -197,9 +206,11 @@ MEEEGeom::sc_type( SuperCrysCoord iX, SuperCrysCoord iY )
   iym=10;
   ixm=10;
   int iX_ = iX;
-  if( iX>=11 ) iX_ = 20-iX+1;
+  if( iX>=11 ) { iX_ = 20-iX+1;
+}
   int iY_ = iY;
-  if( iY>=11 ) iY_ = 20-iY+1;
+  if( iY>=11 ) { iY_ = 20-iY+1;
+}
   il=iym-iY_;
   ic=iX_-1;
   ii=il*ixm+ic;
@@ -212,7 +223,8 @@ MEEEGeom::sc( SuperCrysCoord iX, SuperCrysCoord iY )
 {
   int isc_in_quad = sc_in_quad( iX, iY );
   assert( isc_in_quad!=0 );
-  if( isc_in_quad<0 ) return -1;
+  if( isc_in_quad<0 ) { return -1;
+}
 
   int iquad = quadrant( iX, iY );
   return 79*(iquad-1)+isc_in_quad;
@@ -235,13 +247,16 @@ MEEEGeom::dcc( SuperCrysCoord iX, SuperCrysCoord iY, int iz )
   int isect = sector( iX, iY );
   assert( isect!=0 );
   assert( abs(iz)==1 );
-  if( isect<0 ) return -1;
+  if( isect<0 ) { return -1;
+}
 
   int idcc=0;
   
   idcc = isect-6;
-  if( idcc<=0 ) idcc+=9;
-  if( iz==+1 )  idcc+=45;
+  if( idcc<=0 ) { idcc+=9;
+}
+  if( iz==+1 ) {  idcc+=45;
+}
 
   return idcc;
 }
@@ -267,15 +282,20 @@ MEEEGeom::lmr( SuperCrysCoord iX, SuperCrysCoord iY, int iz )
   int isect = sector( iX, iY );
   assert( isect!=0 );
   assert( abs(iz)==1 );
-  if( isect<0 ) return -1;
+  if( isect<0 ) { return -1;
+}
 
   int ilmr=0;
   ilmr = isect-6;
-  if( ilmr<=0 ) ilmr+=9;
-  if( ilmr==9 ) ilmr++;
-  if( ilmr==8 && iquad==4 ) ilmr++;
-  if( iz==+1 )  ilmr+=72;
-  else          ilmr+=82;
+  if( ilmr<=0 ) { ilmr+=9;
+}
+  if( ilmr==9 ) { ilmr++;
+}
+  if( ilmr==8 && iquad==4 ) { ilmr++;
+}
+  if( iz==+1 ) {  ilmr+=72;
+  } else {          ilmr+=82;
+}
 
   return ilmr;
 }
@@ -287,10 +307,14 @@ MEEEGeom::dee( SuperCrysCoord iX, SuperCrysCoord iY, int iz )
   int idee=0;
   bool far = ( iquad==2 || iquad==3 );  bool near = !far;
   bool plus = (iz>0); bool minus = !plus;
-  if( far  && plus  ) idee=1;
-  if( near && plus  ) idee=2;
-  if( near && minus ) idee=3;
-  if( far  && minus ) idee=4; 
+  if( far  && plus  ) { idee=1;
+}
+  if( near && plus  ) { idee=2;
+}
+  if( near && minus ) { idee=3;
+}
+  if( far  && minus ) { idee=4; 
+}
 
   return idee;
 }
@@ -402,11 +426,13 @@ MEEEGeom::crystal( CrysCoord ix, CrysCoord iy )
   int iY = (iy-1)/5+1;
   int isc = sc( iX, iY );
   assert( isc!=0 );
-  if( isc<0 ) return -2;
+  if( isc<0 ) { return -2;
+}
 
   int icr_in_sc = crystal_in_sc( ix, iy );
   assert( icr_in_sc!=0 );
-  if( icr_in_sc<0 ) return -1;
+  if( icr_in_sc<0 ) { return -1;
+}
   
   return 25*(isc-1) + icr_in_sc;
 }
@@ -438,21 +464,25 @@ MEEEGeom::dccFromSm( int ism )
 int
 MEEEGeom::smFromDcc( int idcc )
 {
-  if( idcc>600 ) idcc-=600;  // also works with FEDids
+  if( idcc>600 ) { idcc-=600;  // also works with FEDids
+}
   int ism(0);
   if( idcc>=1 && idcc<=9 )
     {
       ism = 6+idcc;
-      if( ism>9 ) ism-=9;
+      if( ism>9 ) { ism-=9;
+}
       ism+=9;
     }
   else if( idcc>=46 && idcc<=54 )
     {
       ism = idcc-46+7;
-      if( ism>9 ) ism-=9;
+      if( ism>9 ) { ism-=9;
+}
     }
-  else
+  else {
     abort();
+}
   return ism;
 }
 
@@ -462,7 +492,8 @@ MEEEGeom::getGraphBoundary(  int type, int num, int iz, int xside )
   std::list< std::pair< float, float > > l;
   getBoundary( l, type, num, iz, xside );
   int n = l.size();
-  if( n==0 ) return nullptr;
+  if( n==0 ) { return nullptr;
+}
   
   // GHM : changed to comply to CMSSW compilator options
   float ix[1000];
@@ -539,7 +570,8 @@ MEEEGeom::getBoundary(  std::list< std::pair< float, float > >& l, int type, int
 	    };
 	  ok &= num_==num;
 
-	  if( !in && !ok ) continue;
+	  if( !in && !ok ) { continue;
+}
 	  if(  in &&  ok ) 
 	    {
 	      lastix = ix;
@@ -556,7 +588,8 @@ MEEEGeom::getBoundary(  std::list< std::pair< float, float > >& l, int type, int
 	      map_.insert( std::pair< int, std::pair<int, int> >( iy, std::pair<int,int>( firstix, lastix ) ) );
 	    }
 	}
-      if( in ) map_.insert( std::pair< int, std::pair<int, int> >( iy, std::pair<int,int>( firstix, lastix ) ) );
+      if( in ) { map_.insert( std::pair< int, std::pair<int, int> >( iy, std::pair<int,int>( firstix, lastix ) ) );
+}
 	
     }
 
@@ -569,7 +602,8 @@ MEEEGeom::getBoundary(  std::list< std::pair< float, float > >& l, int type, int
   for( int iy=1; iy<=100; iy++ )
     {
       it = map_.find(iy);
-      if( it==map_.end() ) continue;
+      if( it==map_.end() ) { continue;
+}
       int n_ =  map_.count( iy );
       //      std::cout << "n[" << iy << "]=" << n_ << std::endl;
       assert( n_==1 );  // fixme !
@@ -603,11 +637,12 @@ MEEEGeom::deeFromMem( int imem )
 {
   int imem_ = imem%600;
   int dee_(0);
-  if( imem_==50 || imem_==51 ) dee_=1;
-  else if( imem_==47 || imem_==46 ) dee_=2;
-  else if( imem_==1  || imem_==2  ) dee_=3;
-  else if( imem_==5  || imem_==6  ) dee_=4;
-  else abort();
+  if( imem_==50 || imem_==51 ) { dee_=1;
+  } else if( imem_==47 || imem_==46 ) { dee_=2;
+  } else if( imem_==1  || imem_==2  ) { dee_=3;
+  } else if( imem_==5  || imem_==6  ) { dee_=4;
+  } else { abort();
+}
   return dee_;
 }
 
@@ -716,8 +751,10 @@ MEEEGeom::pn( int dee, int ilmmod )
   // -- module 16    PNA=(601)105    PNB=(602)210
   // -- module 17    PNA=(601)105    PNB=(602)210
 
-  if( ilmmod==20 ) ilmmod=18;
-  if( ilmmod==21 ) ilmmod=19;
+  if( ilmmod==20 ) { ilmmod=18;
+}
+  if( ilmmod==21 ) { ilmmod=19;
+}
 
   std::pair<int,int> pns(0,0);
 
@@ -940,7 +977,8 @@ MEEEGeom::side( SuperCrysCoord iX, SuperCrysCoord iY, int iz )
 {
   int side = 0;
   int ilmr = lmr( iX, iY, iz );
-  if ( ilmr == 81 || ilmr == 91 ) side=1;
+  if ( ilmr == 81 || ilmr == 91 ) { side=1;
+}
 
   return side;
 }
@@ -955,7 +993,8 @@ MEEEGeom::lmmodFromLmr( int ilmr )
   int iside = dccAndSide_.second;
   bool near_ = near(ilmr);
   int ism   = smFromDcc( idcc );
-  if( ism>9 ) ism-=9;
+  if( ism>9 ) { ism-=9;
+}
   assert( iside==0 || ism==5 );
   if ( ism==5 || (ism<5 && !near_) || (ism>5 && near_) )
     {}

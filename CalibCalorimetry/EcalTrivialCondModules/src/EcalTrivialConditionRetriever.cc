@@ -138,10 +138,10 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   std::string weightType;
   std::ostringstream str;
 
-  if (!weightsForAsynchronousRunning_)
+  if (!weightsForAsynchronousRunning_) {
     str << "_CMS.txt" ;
-  else
-    str << "_TB.txt" ;
+  } else {
+    str << "_TB.txt" ; }
 
   weightType = str.str();
 
@@ -176,7 +176,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   mappingFile_ = ps.getUntrackedParameter<std::string>("mappingFile","");
 
   if ( producedEcalMappingElectronics_ ) {
-    if ( mappingFile_ != "" ) { // if file provided read channel map
+    if ( !mappingFile_.empty() ) { // if file provided read channel map
       setWhatProduced( this, &EcalTrivialConditionRetriever::getMappingFromConfiguration );
     } else { 
       setWhatProduced( this, &EcalTrivialConditionRetriever::produceEcalMappingElectronics );
@@ -195,26 +195,26 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   }
 
   getESAlignmentFromFile_ = ps.getUntrackedParameter<bool>("getESAlignmentFromFile",false);
-  if(getESAlignmentFromFile_)
-    ESAlignmentFile_ = ps.getUntrackedParameter<std::string>("ESAlignmentFile",path+"ESAlignment.txt");
+  if(getESAlignmentFromFile_) {
+    ESAlignmentFile_ = ps.getUntrackedParameter<std::string>("ESAlignmentFile",path+"ESAlignment.txt"); }
 
   verbose_ = ps.getUntrackedParameter<int>("verbose", 0);
 
   //Tell Producer what we produce
   //setWhatproduce(this);
-  if (producedEcalPedestals_)
-    setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalPedestals );
+  if (producedEcalPedestals_) {
+    setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalPedestals ); }
 
   if (producedEcalWeights_) {
       setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalWeightXtalGroups );
       setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalTBWeights );
     }
 
-  if (producedEcalGainRatios_)
-    setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalGainRatios );
+  if (producedEcalGainRatios_) {
+    setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalGainRatios ); }
 
-  if (producedEcalADCToGeVConstant_)
-    setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalADCToGeVConstant );
+  if (producedEcalADCToGeVConstant_) {
+    setWhatProduced(this, &EcalTrivialConditionRetriever::produceEcalADCToGeVConstant ); }
 
   // TimeOffsetConstant
   producedEcalTimeOffsetConstant_ = ps.getUntrackedParameter<bool>("producedEcalTimeOffsetConstant",true);
@@ -229,7 +229,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   linearCorrectionsFile_ = ps.getUntrackedParameter<std::string>("linearCorrectionsFile","") ;
 
   if (producedEcalLinearCorrections_) { // user asks to produce constants
-    if(linearCorrectionsFile_ != "") {  // if file provided read constants
+    if(!linearCorrectionsFile_.empty()) {  // if file provided read constants
       setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalLinearCorrections );
     } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalLinearCorrections ) ;
@@ -246,7 +246,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   intercalibConstantsMCFile_ = ps.getUntrackedParameter<std::string>("intercalibConstantsMCFile","") ;
 
   if (producedEcalIntercalibConstants_) { // user asks to produce constants
-    if(intercalibConstantsFile_ != "") {  // if file provided read constants
+    if(!intercalibConstantsFile_.empty()) {  // if file provided read constants
         setWhatProduced (this, &EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration ) ;
     } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalIntercalibConstants ) ;
@@ -257,7 +257,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   producedEcalIntercalibConstantsMC_ = ps.getUntrackedParameter<bool>("producedEcalIntercalibConstantsMC",true);
 
   if (producedEcalIntercalibConstantsMC_) { // user asks to produce constants
-    if(intercalibConstantsMCFile_ != "") {  // if file provided read constants
+    if(!intercalibConstantsMCFile_.empty()) {  // if file provided read constants
         setWhatProduced (this, &EcalTrivialConditionRetriever::getIntercalibConstantsMCFromConfiguration ) ;
     } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalIntercalibConstantsMC ) ;
@@ -270,7 +270,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   intercalibErrorsFile_ = ps.getUntrackedParameter<std::string>("intercalibErrorsFile","") ;
 
   if (producedEcalIntercalibErrors_) { // user asks to produce constants
-    if(intercalibErrorsFile_ != "") {  // if file provided read constants
+    if(!intercalibErrorsFile_.empty()) {  // if file provided read constants
         setWhatProduced (this, &EcalTrivialConditionRetriever::getIntercalibErrorsFromConfiguration ) ;
     } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalIntercalibErrors ) ;
@@ -283,7 +283,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   timeCalibConstantsFile_ = ps.getUntrackedParameter<std::string>("timeCalibConstantsFile","") ;
 
   if (producedEcalTimeCalibConstants_) { // user asks to produce constants
-    if(timeCalibConstantsFile_ != "") {  // if file provided read constants
+    if(!timeCalibConstantsFile_.empty()) {  // if file provided read constants
         setWhatProduced (this, &EcalTrivialConditionRetriever::getTimeCalibConstantsFromConfiguration ) ;
     } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalTimeCalibConstants ) ;
@@ -296,7 +296,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   timeCalibErrorsFile_ = ps.getUntrackedParameter<std::string>("timeCalibErrorsFile","") ;
 
   if (producedEcalTimeCalibErrors_) { // user asks to produce constants
-    if(timeCalibErrorsFile_ != "") {  // if file provided read constants
+    if(!timeCalibErrorsFile_.empty()) {  // if file provided read constants
         setWhatProduced (this, &EcalTrivialConditionRetriever::getTimeCalibErrorsFromConfiguration ) ;
     } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &EcalTrivialConditionRetriever::produceEcalTimeCalibErrors ) ;
@@ -372,7 +372,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   channelStatusFile_ = ps.getUntrackedParameter<std::string>("channelStatusFile","");
 
   if ( producedEcalChannelStatus_ ) {
-          if ( channelStatusFile_ != "" ) { // if file provided read channel map
+          if ( !channelStatusFile_.empty() ) { // if file provided read channel map
                   setWhatProduced( this, &EcalTrivialConditionRetriever::getChannelStatusFromConfiguration );
           } else { // set all channels to working -- FIXME might be changed
                   setWhatProduced( this, &EcalTrivialConditionRetriever::produceEcalChannelStatus );
@@ -409,7 +409,7 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
   trgChannelStatusFile_ = ps.getUntrackedParameter<std::string>("trgChannelStatusFile","");
 
   if ( producedEcalTrgChannelStatus_ ) {
-          if ( trgChannelStatusFile_ != "" ) { // if file provided read channel map
+          if ( !trgChannelStatusFile_.empty() ) { // if file provided read channel map
                   setWhatProduced( this, &EcalTrivialConditionRetriever::getTrgChannelStatusFromConfiguration );
           } else { // set all channels to working -- FIXME might be changed
                   setWhatProduced( this, &EcalTrivialConditionRetriever::produceEcalTrgChannelStatus );
@@ -434,16 +434,16 @@ EcalTrivialConditionRetriever::EcalTrivialConditionRetriever( const edm::Paramet
     findingRecord<ESAlignmentRcd>();
   }
   //Tell Finder what records we find
-  if (producedEcalPedestals_)  findingRecord<EcalPedestalsRcd>();
+  if (producedEcalPedestals_) {  findingRecord<EcalPedestalsRcd>(); }
 
   if (producedEcalWeights_) {
       findingRecord<EcalWeightXtalGroupsRcd>();
       findingRecord<EcalTBWeightsRcd>();
     }
 
-  if (producedEcalGainRatios_)  findingRecord<EcalGainRatiosRcd>();
+  if (producedEcalGainRatios_) {  findingRecord<EcalGainRatiosRcd>(); }
 
-  if (producedEcalADCToGeVConstant_)  findingRecord<EcalADCToGeVConstantRcd>();
+  if (producedEcalADCToGeVConstant_) {  findingRecord<EcalADCToGeVConstantRcd>(); }
 
   producedEcalSampleMask_ = ps.getUntrackedParameter<bool>("producedEcalSampleMask",true);
   if (producedEcalSampleMask_) {
@@ -478,7 +478,7 @@ EcalTrivialConditionRetriever::setIntervalFor( const edm::eventsetup::EventSetup
                                                const edm::IOVSyncValue& iTime,
                                                edm::ValidityInterval& oValidity)
 {
-  if(verbose_>=1) std::cout << "EcalTrivialConditionRetriever::setIntervalFor(): record key = " << rk.name() << "\ttime: " << iTime.time().value() << std::endl;
+  if(verbose_>=1) { std::cout << "EcalTrivialConditionRetriever::setIntervalFor(): record key = " << rk.name() << "\ttime: " << iTime.time().value() << std::endl; }
   //For right now, we will just use an infinite interval of validity
   oValidity = edm::ValidityInterval( edm::IOVSyncValue::beginOfTime(),edm::IOVSyncValue::endOfTime() );
 }
@@ -509,7 +509,7 @@ EcalTrivialConditionRetriever::produceEcalPedestals( const EcalPedestalsRcd& ) {
 
 
   for(int iEta=-EBDetId::MAX_IETA; iEta<=EBDetId::MAX_IETA ;++iEta) {
-    if(iEta==0) continue;
+    if(iEta==0) { continue; }
 
     if(totLumi_>0) {
       double eta=EBDetId::approxEta(EBDetId(iEta,1));
@@ -567,7 +567,7 @@ EcalTrivialConditionRetriever::produceEcalWeightXtalGroups( const EcalWeightXtal
   auto xtalGroups = std::make_unique<EcalWeightXtalGroups>();
   EcalXtalGroupId defaultGroupId(1);
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       // make an EBDetId since we need EBDetId::rawId() to be used as the key for the pedestals
       if (EBDetId::validDetId(ieta,iphi))
@@ -604,7 +604,7 @@ EcalTrivialConditionRetriever::produceEcalLinearCorrections( const EcalLinearCor
   auto ical = std::make_unique<EcalLinearCorrections>();
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       if (EBDetId::validDetId(ieta,iphi)) {
   	  EBDetId ebid(ieta,iphi);
@@ -678,7 +678,7 @@ EcalTrivialConditionRetriever::produceEcalIntercalibConstants( const EcalInterca
   auto ical = std::make_unique<EcalIntercalibConstants>();
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       // make an EBDetId since we need EBDetId::rawId() to be used as the key for the pedestals
       if (EBDetId::validDetId(ieta,iphi))
@@ -717,7 +717,7 @@ EcalTrivialConditionRetriever::produceEcalIntercalibConstantsMC( const EcalInter
   auto ical = std::make_unique<EcalIntercalibConstantsMC>();
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       // make an EBDetId since we need EBDetId::rawId() to be used as the key for the pedestals
       if (EBDetId::validDetId(ieta,iphi))
@@ -756,7 +756,7 @@ EcalTrivialConditionRetriever::produceEcalIntercalibErrors( const EcalIntercalib
   auto ical = std::make_unique<EcalIntercalibErrors>();
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       // make an EBDetId since we need EBDetId::rawId() to be used as the key for the pedestals
       if (EBDetId::validDetId(ieta,iphi))
@@ -792,7 +792,7 @@ EcalTrivialConditionRetriever::produceEcalTimeCalibConstants( const EcalTimeCali
   auto ical = std::make_unique<EcalTimeCalibConstants>();
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       // make an EBDetId since we need EBDetId::rawId() to be used as the key for the pedestals
       if (EBDetId::validDetId(ieta,iphi))
@@ -831,7 +831,7 @@ EcalTrivialConditionRetriever::produceEcalTimeCalibErrors( const EcalTimeCalibEr
   auto ical = std::make_unique<EcalTimeCalibErrors>();
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       // make an EBDetId since we need EBDetId::rawId() to be used as the key for the pedestals
       if (EBDetId::validDetId(ieta,iphi))
@@ -878,7 +878,7 @@ EcalTrivialConditionRetriever::produceEcalGainRatios( const EcalGainRatiosRcd& )
   gr.setGain6Over1( gainRatio6over1_ );
 
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       if (EBDetId::validDetId(ieta,iphi))
 	{
@@ -1068,11 +1068,11 @@ EcalTrivialConditionRetriever::produceEcalLaserAlphas( const EcalLaserAlphasRcd&
 
     for(int SMcons = 0; SMcons < 36; SMcons++) {
       int SM = SMpos[SMcons];
-      if(SM < 0) SM = 17 + abs(SM);
-      else SM--;
-      if(SMCal[SM] != SMcons)
+      if(SM < 0) { SM = 17 + abs(SM);
+      } else { SM--; }
+      if(SMCal[SM] != SMcons) {
 	 std::cout << " SM pb : read SM " <<  SMcons<< " SMpos " << SM
-		   << " SMCal " << SMCal[SM] << std::endl;
+		   << " SMCal " << SMCal[SM] << std::endl; }
     }
 
     std::string type, batch;
@@ -1083,17 +1083,17 @@ EcalTrivialConditionRetriever::produceEcalLaserAlphas( const EcalLaserAlphasRcd&
       for(int ic = 0; ic < 1700; ic++) {
 	fEB >> readSM >> pos >> bar >>  bar2 >> type >> batch;
 
-	if(readSM != SMcons || pos != ic + 1) 
+	if(readSM != SMcons || pos != ic + 1) { 
 	  std::cout << " barrel read pb read SM " << readSM << " const SM " << SMcons
-		    << " read pos " << pos << " ic " << ic << std::endl;
-	if(SM < 0) SM = 18 + abs(SM);
+		    << " read pos " << pos << " ic " << ic << std::endl; }
+	if(SM < 0) { SM = 18 + abs(SM); }
 	EBDetId ebdetid(SM, pos, EBDetId::SMCRYSTALMODE);
-	if(bar == 33101 || bar == 30301 )
+	if(bar == 33101 || bar == 30301 ) {
 	  alpha = laserAlphaMeanEBR_;
-	else if(bar == 33106) {
-	  if(bar2 <= 2000)
+	} else if(bar == 33106) {
+	  if(bar2 <= 2000) {
 	    alpha = laserAlphaMeanEBC_;
-	  else {
+	  } else {
 	    std::cout << " problem with barcode first " << bar << " last " << bar2 
 		      << " read SM " << readSM << " read pos " << pos << std::endl;
 	    alpha = laserAlphaMeanEBR_;
@@ -1133,7 +1133,7 @@ EcalTrivialConditionRetriever::produceEcalLaserAlphas( const EcalLaserAlphasRcd&
   } else {
     // laser alpha from mean and smearing 
     for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-      if(ieta==0) continue;
+      if(ieta==0) { continue; }
       for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
 	if (EBDetId::validDetId(ieta,iphi)) {
 	  EBDetId ebid(ieta,iphi);
@@ -1152,16 +1152,16 @@ EcalTrivialConditionRetriever::produceEcalLaserAlphas( const EcalLaserAlphasRcd&
       int x, y ,z, bid, bar, bar2;
       float LY, alpha = 0;
       fEE >> z >> x >> y >> LY >> bid >> bar >> bar2;
-      if(x < 1 || x > 100 || y < 1 || y > 100)
+      if(x < 1 || x > 100 || y < 1 || y > 100) {
 	std::cout << " wrong coordinates for barcode " << bar 
 		  << " x " << x << " y " << y << " z " << z << std::endl;
-      else {
-	if(bar == 33201 || (bar == 30399 && bar2 < 568))
+      } else {
+	if(bar == 33201 || (bar == 30399 && bar2 < 568)) {
 	    alpha = laserAlphaMeanEER_;
-	else if((bar == 33106 && bar2 > 2000 && bar2 < 4669) 
-		|| (bar == 30399 && bar2 > 567))
+	} else if((bar == 33106 && bar2 > 2000 && bar2 < 4669) 
+		|| (bar == 30399 && bar2 > 567)) {
 	  alpha = laserAlphaMeanEEC_;
-	else {
+	} else {
 	  std::cout << " problem with barcode " << bar << " " << bar2 
 		    << " x " << x << " y " << y << " z " << z << std::endl;
 	  alpha = laserAlphaMeanEER_;
@@ -1171,8 +1171,8 @@ EcalTrivialConditionRetriever::produceEcalLaserAlphas( const EcalLaserAlphasRcd&
 	EEDetId eedetidpos(x, y, z);
 	ical->setValue( eedetidpos, alpha );
       }
-      else // should not occur
-	std::cout << " problem with EEDetId " << " x " << x << " y " << y << " z " << z << std::endl;
+      else { // should not occur
+	std::cout << " problem with EEDetId " << " x " << x << " y " << y << " z " << z << std::endl; }
     }  
     fEE.close(); 
 
@@ -1195,8 +1195,8 @@ EcalTrivialConditionRetriever::produceEcalLaserAlphas( const EcalLaserAlphasRcd&
 	  EEDetId eedetidpos(x, y, z);
 	  ical->setValue( eedetidpos, alpha );
 	}
-	else // should not occur
-	  std::cout << " problem with EEDetId " << " x " << x << " y " << y << " z " << z << std::endl;
+	else { // should not occur
+	  std::cout << " problem with EEDetId " << " x " << x << " y " << y << " z " << z << std::endl; }
       }  
     }
     fEE.close(); 
@@ -1230,7 +1230,7 @@ EcalTrivialConditionRetriever::produceEcalLaserAPDPNRatiosRef( const EcalLaserAP
 {
   auto ical = std::make_unique<EcalLaserAPDPNRatiosRef>();
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       if (EBDetId::validDetId(ieta,iphi)) {
  	  EBDetId ebid(ieta,iphi);
@@ -1271,7 +1271,7 @@ EcalTrivialConditionRetriever::produceEcalLaserAPDPNRatios( const EcalLaserAPDPN
 
   auto ical = std::make_unique<EcalLaserAPDPNRatios>();
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
 
 
     
@@ -1314,7 +1314,7 @@ EcalTrivialConditionRetriever::produceEcalLaserAPDPNRatios( const EcalLaserAPDPN
 					*2.98/328.)));
 	  eta = fabs(eta);
 	  double drop=ageing.calcampDropTotal(eta);
-	  if(iX==50) std::cout<<"EE at eta="<<eta<<" dropping by "<<drop<<std::endl;
+	  if(iX==50) { std::cout<<"EE at eta="<<eta<<" dropping by "<<drop<<std::endl; }
 	  
 
  	  EcalLaserAPDPNRatios::EcalLaserAPDPNpair pairAPDPN;
@@ -1331,7 +1331,7 @@ EcalTrivialConditionRetriever::produceEcalLaserAPDPNRatios( const EcalLaserAPDPN
 	  double eta= -log(tan(0.5*atan(sqrt((iX-50.0)*(iX-50.0)+(iY-50.0)*(iY-50.0))*2.98/328.)));
 	  eta = fabs(eta);
 	  double drop=ageing.calcampDropTotal(eta);
-	  if(iX==50) std::cout<<"EE at eta="<<eta<<" dropping by "<<drop<<std::endl;
+	  if(iX==50) { std::cout<<"EE at eta="<<eta<<" dropping by "<<drop<<std::endl; }
 
 
  	  EcalLaserAPDPNRatios::EcalLaserAPDPNpair pairAPDPN;
@@ -1983,7 +1983,7 @@ EcalTrivialConditionRetriever::getChannelStatusFromConfiguration (const EcalChan
   
   // barrel
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       if (EBDetId::validDetId(ieta,iphi)) {
 	EBDetId ebid(ieta,iphi);
@@ -2070,7 +2070,7 @@ EcalTrivialConditionRetriever::produceEcalChannelStatus( const EcalChannelStatus
         auto ical = std::make_unique<EcalChannelStatus>();
         // barrel
         for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-                if(ieta==0) continue;
+                if(ieta==0) { continue; }
                 for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
                         if (EBDetId::validDetId(ieta,iphi)) {
                                 EBDetId ebid(ieta,iphi);
@@ -2104,7 +2104,7 @@ EcalTrivialConditionRetriever::produceEcalDQMChannelStatus( const EcalDQMChannel
         auto ical = std::make_unique<EcalDQMChannelStatus>();
         // barrel
         for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-                if(ieta==0) continue;
+                if(ieta==0) { continue; }
                 for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
                         if (EBDetId::validDetId(ieta,iphi)) {
                                 EBDetId ebid(ieta,iphi);
@@ -2141,8 +2141,8 @@ EcalTrivialConditionRetriever::produceEcalDQMTowerStatus( const EcalDQMTowerStat
         // barrel
 	int iz=0;
         for(int k=0 ; k<2; k++ ) {
-	  if(k==0) iz=-1;
-	  if(k==1) iz=+1;
+	  if(k==0) { iz=-1; }
+	  if(k==1) { iz=+1; }
 	  for(int i=1 ; i<73; i++) {
 	    for(int j=1 ; j<18; j++) {
 	      if (EcalTrigTowerDetId::validDetId(iz,EcalBarrel,j,i )){
@@ -2157,8 +2157,8 @@ EcalTrivialConditionRetriever::produceEcalDQMTowerStatus( const EcalDQMTowerStat
 
         // endcap
         for(int k=0 ; k<2; k++ ) {
-	  if(k==0) iz=-1;
-	  if(k==1) iz=+1;
+	  if(k==0) { iz=-1; }
+	  if(k==1) { iz=+1; }
 	  for(int i=1 ; i<21; i++) {
 	    for(int j=1 ; j<21; j++) {
 	      if (EcalScDetId::validDetId(i,j,iz )){
@@ -2184,8 +2184,8 @@ EcalTrivialConditionRetriever::produceEcalDCSTowerStatus( const EcalDCSTowerStat
         // barrel
 	int iz=0;
         for(int k=0 ; k<2; k++ ) {
-	  if(k==0) iz=-1;
-	  if(k==1) iz=+1;
+	  if(k==0) { iz=-1; }
+	  if(k==1) { iz=+1; }
 	  for(int i=1 ; i<73; i++) {
 	    for(int j=1 ; j<18; j++) {
 	      if (EcalTrigTowerDetId::validDetId(iz,EcalBarrel,j,i )){
@@ -2200,8 +2200,8 @@ EcalTrivialConditionRetriever::produceEcalDCSTowerStatus( const EcalDCSTowerStat
 
         // endcap
         for(int k=0 ; k<2; k++ ) {
-	  if(k==0) iz=-1;
-	  if(k==1) iz=+1;
+	  if(k==0) { iz=-1; }
+	  if(k==1) { iz=+1; }
 	  for(int i=1 ; i<21; i++) {
 	    for(int j=1 ; j<21; j++) {
 	      if (EcalScDetId::validDetId(i,j,iz )){
@@ -2227,8 +2227,8 @@ EcalTrivialConditionRetriever::produceEcalDAQTowerStatus( const EcalDAQTowerStat
         // barrel
 	int iz=0;
         for(int k=0 ; k<2; k++ ) {
-	  if(k==0) iz=-1;
-	  if(k==1) iz=+1;
+	  if(k==0) { iz=-1; }
+	  if(k==1) { iz=+1; }
 	  for(int i=1 ; i<73; i++) {
 	    for(int j=1 ; j<18; j++) {
 	      if (EcalTrigTowerDetId::validDetId(iz,EcalBarrel,j,i )){
@@ -2243,8 +2243,8 @@ EcalTrivialConditionRetriever::produceEcalDAQTowerStatus( const EcalDAQTowerStat
 
         // endcap
         for(int k=0 ; k<2; k++ ) {
-	  if(k==0) iz=-1;
-	  if(k==1) iz=+1;
+	  if(k==0) { iz=-1; }
+	  if(k==1) { iz=+1; }
 	  for(int i=1 ; i<21; i++) {
 	    for(int j=1 ; j<21; j++) {
 	      if (EcalScDetId::validDetId(i,j,iz )){
@@ -2269,7 +2269,7 @@ EcalTrivialConditionRetriever::getTrgChannelStatusFromConfiguration (const EcalT
   
   // barrel
   for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-    if(ieta==0) continue;
+    if(ieta==0) { continue; }
     for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
       if (EBDetId::validDetId(ieta,iphi)) {
 	EBDetId ebid(ieta,iphi);
@@ -2356,7 +2356,7 @@ EcalTrivialConditionRetriever::produceEcalTrgChannelStatus( const EcalTPGCrystal
         auto ical = std::make_unique<EcalTPGCrystalStatus>();
         // barrel
         for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA; ++ieta) {
-                if(ieta==0) continue;
+                if(ieta==0) { continue; }
                 for(int iphi=EBDetId::MIN_IPHI; iphi<=EBDetId::MAX_IPHI; ++iphi) {
                         if (EBDetId::validDetId(ieta,iphi)) {
                                 EBDetId ebid(ieta,iphi);
@@ -2434,7 +2434,7 @@ EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration
       const EcalIntercalibConstantMCMap& mymapMC= rcdMC->getMap();
 
       for(int ieta=-EBDetId::MAX_IETA; ieta<=EBDetId::MAX_IETA ;++ieta) {
-	if(ieta==0) continue;
+	if(ieta==0) { continue; }
 	
 	double eta=EBDetId::approxEta(EBDetId(ieta,1));
 	eta = fabs(eta);
@@ -2448,23 +2448,23 @@ EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration
 	      EBDetId ebid(ieta,iphi);
 	      EcalIntercalibConstants::const_iterator idref=mymap.find(ebid);
 	      EcalIntercalibConstant icalconstant=1;
-	      if(idref!=mymap.end())icalconstant=(*idref);
+	      if(idref!=mymap.end()) {icalconstant=(*idref); }
 
 	      EcalIntercalibConstantsMC::const_iterator idrefMC=mymapMC.find(ebid);
 	      EcalIntercalibConstantMC icalconstantMC=1;
-	      if(idrefMC!=mymapMC.end())icalconstantMC=(*idrefMC);
+	      if(idrefMC!=mymapMC.end()) {icalconstantMC=(*idrefMC); }
 	      
 	      double r = gRandom->Gaus(0,constantTerm); 
 
-	      if(iphi==10) std::cout<<"EB at eta="<<eta<<" IC="<<icalconstant<<" ICMC="<<icalconstantMC<<" smear="<<r<<" ";
+	      if(iphi==10) { std::cout<<"EB at eta="<<eta<<" IC="<<icalconstant<<" ICMC="<<icalconstantMC<<" smear="<<r<<" "; }
 
 	      icalconstant = icalconstant + r*1.29*icalconstantMC;
 	      rcd->setValue( ebid.rawId(), icalconstant );
 
-	      if(iphi==10) std::cout<<"newIC="<<icalconstant<<std::endl;
+	      if(iphi==10) { std::cout<<"newIC="<<icalconstant<<std::endl; }
 
 	      EcalIntercalibConstant icalconstant2=(*idref);
-	      if(icalconstant !=icalconstant2) std::cout<<">>>> error in smearing intercalib"<<std::endl;
+	      if(icalconstant !=icalconstant2) { std::cout<<">>>> error in smearing intercalib"<<std::endl; }
 	    }
 	}
       }
@@ -2479,25 +2479,25 @@ EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration
 	      double eta= -log(tan(0.5*atan(sqrt((iX-50.0)*(iX-50.0)+(iY-50.0)*(iY-50.0))*2.98/328.)));
 	      eta = fabs(eta);
 	      double constantTerm=ageing.calcresolutitonConstantTerm(eta);
-	      if(iX==50) std::cout<<"EE at eta="<<eta<<" constant term is "<<constantTerm<<std::endl;
+	      if(iX==50) { std::cout<<"EE at eta="<<eta<<" constant term is "<<constantTerm<<std::endl; }
 
 
 
 	      
 	      EcalIntercalibConstants::const_iterator idref=mymap.find(eedetidpos);
 	      EcalIntercalibConstant icalconstant=1;
-	      if(idref!=mymap.end())icalconstant=(*idref);
+	      if(idref!=mymap.end()) {icalconstant=(*idref); }
 
 	      EcalIntercalibConstantsMC::const_iterator idrefMC=mymapMC.find(eedetidpos);
 	      EcalIntercalibConstantMC icalconstantMC=1;
-	      if(idrefMC!=mymapMC.end())icalconstantMC=(*idrefMC);
+	      if(idrefMC!=mymapMC.end()) {icalconstantMC=(*idrefMC); }
 	      
 	      double r = gRandom->Gaus(0,constantTerm); 
 
-	      if(iX==10) std::cout<<"EE at eta="<<eta<<" IC="<<icalconstant<<" ICMC="<<icalconstantMC<<" smear="<<r<<" ";
+	      if(iX==10) { std::cout<<"EE at eta="<<eta<<" IC="<<icalconstant<<" ICMC="<<icalconstantMC<<" smear="<<r<<" "; }
 	      icalconstant = icalconstant + r*1.29*icalconstantMC;
 	      rcd->setValue( eedetidpos.rawId(), icalconstant );
-	      if(iX==10) std::cout<<"newIC="<<icalconstant<<std::endl;
+	      if(iX==10) { std::cout<<"newIC="<<icalconstant<<std::endl; }
 
 
 	      
@@ -2514,7 +2514,7 @@ EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration
 
 	      EcalIntercalibConstantsMC::const_iterator idrefMC=mymapMC.find(eedetidneg);
 	      EcalIntercalibConstantMC icalconstantMC=1;
-	      if(idrefMC!=mymapMC.end())icalconstantMC=(*idrefMC);
+	      if(idrefMC!=mymapMC.end()) {icalconstantMC=(*idrefMC); }
 	      
 	      double r = gRandom->Gaus(0,constantTerm); 
 	      icalconstant = icalconstant + r*1.29*icalconstantMC;
@@ -2606,8 +2606,8 @@ EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration
 
     fclose (inpFile) ;           // close inp. file
     edm::LogInfo ("EcalTrivialConditionRetriever") << "Read intercalibrations for " << ii << " xtals " ; 
-    if (ii!=1700) edm::LogWarning ("StoreEcalCondition") 
-      << "Some crystals missing, set to 1" << std::endl ;
+    if (ii!=1700) { edm::LogWarning ("StoreEcalCondition") 
+      << "Some crystals missing, set to 1" << std::endl ; }
     
     // Transfer the data to the inter-calibration coefficients container
     // -----------------------------------------------------------------
@@ -2626,8 +2626,8 @@ EcalTrivialConditionRetriever::getIntercalibConstantsFromConfiguration
 	// checking only sm_db -- guess can change with the above FIXME
 	if (sm_db >= EBDetId::MIN_SM && sm_db <= EBDetId::MAX_SM) {
 	  EBDetId ebid (sm_db,i+1,EBDetId::SMCRYSTALMODE) ;
-	  if (calib_status[i]) ical->setValue (ebid.rawId (), calib[i]) ;
-	  else ical->setValue (ebid.rawId (), 1.) ;
+	  if (calib_status[i]) { ical->setValue (ebid.rawId (), calib[i]) ;
+	  } else { ical->setValue (ebid.rawId (), 1.) ; }
 	}
 	//}
       } // loop over channels 
@@ -2758,8 +2758,8 @@ EcalTrivialConditionRetriever::getIntercalibErrorsFromConfiguration
 
   fclose (inpFile) ;           // close inp. file
   edm::LogInfo ("EcalTrivialConditionRetriever") << "Read intercalibrations for " << ii << " xtals " ; 
-  if (ii!=1700) edm::LogWarning ("StoreEcalCondition") 
-                << "Some crystals missing, set to 1" << std::endl ;
+  if (ii!=1700) { edm::LogWarning ("StoreEcalCondition") 
+                << "Some crystals missing, set to 1" << std::endl ; }
 
   // Transfer the data to the inter-calibration coefficients container
   // -----------------------------------------------------------------
@@ -2778,8 +2778,8 @@ EcalTrivialConditionRetriever::getIntercalibErrorsFromConfiguration
       // checking only sm_db -- guess can change with the above FIXME
       if (sm_db >= EBDetId::MIN_SM && sm_db <= EBDetId::MAX_SM) {
         EBDetId ebid (sm_db,i+1,EBDetId::SMCRYSTALMODE) ;
-        if (calib_status[i]) ical->setValue (ebid.rawId (), calib[i]) ;
-        else ical->setValue (ebid.rawId (), 1.) ;
+        if (calib_status[i]) { ical->setValue (ebid.rawId (), calib[i]) ;
+        } else { ical->setValue (ebid.rawId (), 1.) ; }
       }
       //}
     } // loop over channels 
@@ -2878,8 +2878,8 @@ EcalTrivialConditionRetriever::getTimeCalibConstantsFromConfiguration
 
   fclose (inpFile) ;           // close inp. file
   edm::LogInfo ("EcalTrivialConditionRetriever") << "Read timeCalibrations for " << ii << " xtals " ; 
-  if (ii!=1700) edm::LogWarning ("StoreEcalCondition") 
-                << "Some crystals missing, set to 1" << std::endl ;
+  if (ii!=1700) { edm::LogWarning ("StoreEcalCondition") 
+                << "Some crystals missing, set to 1" << std::endl ; }
 
   // Transfer the data to the inter-calibration coefficients container
   // -----------------------------------------------------------------
@@ -2898,8 +2898,8 @@ EcalTrivialConditionRetriever::getTimeCalibConstantsFromConfiguration
       // checking only sm_db -- guess can change with the above FIXME
       if (sm_db >= EBDetId::MIN_SM && sm_db <= EBDetId::MAX_SM) {
         EBDetId ebid (sm_db,i+1,EBDetId::SMCRYSTALMODE) ;
-        if (calib_status[i]) ical->setValue (ebid.rawId (), calib[i]) ;
-        else ical->setValue (ebid.rawId (), 1.) ;
+        if (calib_status[i]) { ical->setValue (ebid.rawId (), calib[i]) ;
+        } else { ical->setValue (ebid.rawId (), 1.) ; }
       }
       //}
     } // loop over channels 
@@ -2991,8 +2991,8 @@ EcalTrivialConditionRetriever::getTimeCalibErrorsFromConfiguration
 
   fclose (inpFile) ;           // close inp. file
   edm::LogInfo ("EcalTrivialConditionRetriever") << "Read time calibrations for " << ii << " xtals " ; 
-  if (ii!=1700) edm::LogWarning ("StoreEcalCondition") 
-                << "Some crystals missing, set to 1" << std::endl ;
+  if (ii!=1700) { edm::LogWarning ("StoreEcalCondition") 
+                << "Some crystals missing, set to 1" << std::endl ; }
 
   // Transfer the data to the inter-calibration coefficients container
   // -----------------------------------------------------------------
@@ -3011,8 +3011,8 @@ EcalTrivialConditionRetriever::getTimeCalibErrorsFromConfiguration
       // checking only sm_db -- guess can change with the above FIXME
       if (sm_db >= EBDetId::MIN_SM && sm_db <= EBDetId::MAX_SM) {
         EBDetId ebid (sm_db,i+1,EBDetId::SMCRYSTALMODE) ;
-        if (calib_status[i]) ical->setValue (ebid.rawId (), calib[i]) ;
-        else ical->setValue (ebid.rawId (), 1.) ;
+        if (calib_status[i]) { ical->setValue (ebid.rawId (), calib[i]) ;
+        } else { ical->setValue (ebid.rawId (), 1.) ; }
       }
       //}
     } // loop over channels 
@@ -3085,8 +3085,8 @@ EcalTrivialConditionRetriever::produceEcalAlignmentEB( const EBAlignmentRcd& ) {
   double mytrans[3] = {0., 0., 0.};
   double myeuler[3] = {0., 0., 0.};
   std::ifstream f;
-  if(getEBAlignmentFromFile_)
-    f.open(edm::FileInPath(EBAlignmentFile_).fullPath().c_str());
+  if(getEBAlignmentFromFile_) {
+    f.open(edm::FileInPath(EBAlignmentFile_).fullPath().c_str()); }
   std::vector<AlignTransform> my_align;
   int ieta = 1;
   int iphi = 0;
@@ -3096,8 +3096,8 @@ EcalTrivialConditionRetriever::produceEcalAlignmentEB( const EBAlignmentRcd& ) {
       iphi = 1 + (SM - 19) * 20;
       ieta = -1;
     }
-    else
-      iphi = SM * 20;
+    else {
+      iphi = SM * 20; }
     EBDetId ebdetId(ieta,iphi);
     if(getEBAlignmentFromFile_) {
       f >> myeuler[0] >> myeuler[1] >> myeuler[2] >> mytrans[0] >> mytrans[1] >> mytrans[2];
@@ -3141,19 +3141,19 @@ EcalTrivialConditionRetriever::produceEcalAlignmentEE( const EEAlignmentRcd& ) {
   double mytrans[3] = {0., 0., 0.};
   double myeuler[3] = {0., 0., 0.};
   std::ifstream f;
-  if(getEEAlignmentFromFile_)
-    f.open(edm::FileInPath(EEAlignmentFile_).fullPath().c_str());
+  if(getEEAlignmentFromFile_) {
+    f.open(edm::FileInPath(EEAlignmentFile_).fullPath().c_str()); }
   std::vector<AlignTransform> my_align;
   int ix = 20;
   int iy = 50;
   int side = -1;
   for(int Dee = 0 ; Dee < 4; Dee++ ) {
     // make an EEDetId since we need EEDetId::rawId()
-    if(Dee == 1 || Dee == 3) 
+    if(Dee == 1 || Dee == 3) { 
       ix = 70;
-    else ix = 20;
-    if(Dee == 2)
-      side = 1;
+    } else { ix = 20; }
+    if(Dee == 2) {
+      side = 1; }
     EEDetId eedetId(ix, iy, side);
     if(getEEAlignmentFromFile_) {
       f >> myeuler[0] >> myeuler[1] >> myeuler[2] >> mytrans[0] >> mytrans[1] >> mytrans[2];
@@ -3175,8 +3175,8 @@ EcalTrivialConditionRetriever::produceEcalAlignmentES( const ESAlignmentRcd& ) {
   double mytrans[3] = {0., 0., 0.};
   double myeuler[3] = {0., 0., 0.};
   std::ifstream f;
-  if(getESAlignmentFromFile_)
-    f.open(edm::FileInPath(ESAlignmentFile_).fullPath().c_str());
+  if(getESAlignmentFromFile_) {
+    f.open(edm::FileInPath(ESAlignmentFile_).fullPath().c_str()); }
   std::vector<AlignTransform> my_align;
   //  int ix_vect[10] = {10, 30, 30, 50, 10, 30, 10, 30};
   int pl_vect[10] = {2, 2, 1, 1, 1, 1, 2, 2};
@@ -3187,7 +3187,7 @@ EcalTrivialConditionRetriever::produceEcalAlignmentES( const ESAlignmentRcd& ) {
     // make an ESDetId since we need ESDetId::rawId()
     int ix = 10 + (layer%2) * 20;
     int plane = pl_vect[layer];
-    if(layer > 3) side = 1;
+    if(layer > 3) { side = 1; }
     ESDetId esdetId(strip, ix, iy, plane, side);
     if(getESAlignmentFromFile_) {
       f >> myeuler[0] >> myeuler[1] >> myeuler[2] >> mytrans[0] >> mytrans[1] >> mytrans[2];

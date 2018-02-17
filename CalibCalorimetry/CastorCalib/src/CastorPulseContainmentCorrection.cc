@@ -113,10 +113,10 @@ double CastorPulseContainmentCorrection::getCorrection(double fc_ampl) const
   }
   else {
     if (fabs(fclower->first - fc_ampl) <
-	fabs(fcupper->first - fc_ampl) )
+	fabs(fcupper->first - fc_ampl) ) {
       correction = fclower->second;
-    else
-      correction = fcupper->second;
+    } else {
+      correction = fcupper->second; }
   }
 
 #if 0

@@ -173,7 +173,7 @@ WatcherStreamFileReader::WatcherStreamFileReader(edm::ParameterSet const& pset):
     //    fileListCmdBuf << "/bin/ls " << inputDir_ << " | egrep '(";
     fileListCmdBuf << "/bin/find " << inputDir_ << " -maxdepth 2 -print | egrep '(";
     //TODO: validate patternDir (see ;, &&, ||) and escape special character
-    if(filePatterns_.empty()) throw cms::Exception("WacherSource", "filePatterns parameter is empty");
+    if(filePatterns_.empty()) { throw cms::Exception("WacherSource", "filePatterns parameter is empty"); }
     char curDir[PATH_MAX>0?PATH_MAX:4096];
     if(getcwd(curDir, sizeof(curDir))==nullptr){
       throw cms::Exception("WatcherSource")
@@ -183,7 +183,7 @@ WatcherStreamFileReader::WatcherStreamFileReader(edm::ParameterSet const& pset):
     curDir_ = curDir;
     
     for(unsigned i = 0 ; i < filePatterns_.size(); ++i){
-      if(i>0) fileListCmdBuf << "|";
+      if(i>0) { fileListCmdBuf << "|"; }
       //     if(filePatterns_[i].size()>0 && filePatterns_[0] != "/"){//relative path
       //       fileListCmdBuf << curDir << "/";
       //     }
@@ -218,10 +218,10 @@ const InitMsgView* WatcherStreamFileReader::getHeader(){
   
   const InitMsgView* header = inputFile->startMessage();
   
-  if(header->code() != Header::INIT) //INIT Msg
+  if(header->code() != Header::INIT) { //INIT Msg
     throw cms::Exception("readHeader","WatcherStreamFileReader")
       << "received wrong message type: expected INIT, got "
-      << header->code() << "\n";
+      << header->code() << "\n"; }
     
   return header;
 }
@@ -287,12 +287,12 @@ edm::StreamerInputFile* WatcherStreamFileReader::getInputFile(){
 	  }
 	  fileName.append(lineptr);
 	  filesInQueue_.push_back(fileName);
-	  if(verbosity_) cout << "[WatcherSource " << now() << "]" 
+	  if(verbosity_) { cout << "[WatcherSource " << now() << "]" 
 			      << " File to process: '"
-			      << fileName << "'\n";
+			      << fileName << "'\n"; }
 	}
       }
-      while(!feof(s)) fgetc(s);
+      while(!feof(s)) { fgetc(s); }
       pclose(s);
       if(filesInQueue_.empty()){
 	if(!waiting){
@@ -333,9 +333,9 @@ edm::StreamerInputFile* WatcherStreamFileReader::getInputFile(){
 	time_t t = time(nullptr);
 	for(;;){
 	  fstat(fd, &buf);
-	  if(verbosity_) cout << "file size: " << buf.st_size << ", prev size: "  << size << "\n";
-	  if(buf.st_size==size) break; else size = buf.st_size;
-	  if(difftime(t,buf.st_mtime)>60) break; //file older then 1 min=> tansfer must be finished
+	  if(verbosity_) { cout << "file size: " << buf.st_size << ", prev size: "  << size << "\n"; }
+	  if(buf.st_size==size) { break; } else { size = buf.st_size; }
+	  if(difftime(t,buf.st_mtime)>60) { break; //file older then 1 min=> tansfer must be finished }
 	  sleep(1);
 	}
 
@@ -344,9 +344,9 @@ edm::StreamerInputFile* WatcherStreamFileReader::getInputFile(){
 	  stringstream c;
 	  c << "/bin/mv -f \"" << fileName_ << "\" \"" << corruptedDir_
 	    << "/.\"";
-	  if(verbosity_) cout << "[WatcherSource " << now() << "]" 
+	  if(verbosity_) { cout << "[WatcherSource " << now() << "]" 
 			      << " Excuting "
-			      << c.str() << "\n"; 
+			      << c.str() << "\n";  }
 	  int i = system(c.str().c_str());
 	  if(i!=0){
 	    //throw cms::Exception("WatcherSource")
@@ -372,9 +372,9 @@ edm::StreamerInputFile* WatcherStreamFileReader::getInputFile(){
 	
 	string dest  = inprocessDir_ + "/" + filenam;
 	
-	if(verbosity_) cout << "[WatcherSource " << now() << "]" 
+	if(verbosity_) { cout << "[WatcherSource " << now() << "]" 
 			    << " Moving file "
-			    << fileName_ << " to " << dest << "\n";
+			    << fileName_ << " to " << dest << "\n"; }
 	
 	stringstream c;
 	c << "/bin/mv -f \"" << fileName_ << "\" \"" << dest
@@ -408,14 +408,14 @@ edm::StreamerInputFile* WatcherStreamFileReader::getInputFile(){
 }
 
 void WatcherStreamFileReader::closeFile(){
-  if(streamerInputFile_.get()==nullptr) return;
+  if(streamerInputFile_.get()==nullptr) { return; }
   //delete the streamer input file:
   streamerInputFile_.reset();
   stringstream cmd;
   //TODO: validation of processDir
   cmd << "/bin/mv -f \"" << fileName_ << "\" \"" << processedDir_ << "/.\"";
-  if(verbosity_) cout << "[WatcherSource " << now() << "]" 
-		      << " Excuting " << cmd.str() << "\n"; 
+  if(verbosity_) { cout << "[WatcherSource " << now() << "]" 
+		      << " Excuting " << cmd.str() << "\n";  }
   int i = system(cmd.str().c_str());
   if(i!=0){
     throw cms::Exception("WatcherSource")

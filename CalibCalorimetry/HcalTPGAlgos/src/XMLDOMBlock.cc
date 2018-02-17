@@ -349,21 +349,24 @@ XMLDOMBlock::~XMLDOMBlock()
 
 const char * XMLDOMBlock::getTagValue( const std::string & tagName, int _item, DOMDocument * _document )
 {
-  if (!_document) _document = document;
+  if (!_document) { _document = document;
+}
   const char * _result = XMLString::transcode( _document -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item ) -> getFirstChild()-> getNodeValue() );
   return _result;
 }
 
 const char * XMLDOMBlock::getTagValue( const std::string & tagName, int _item, DOMElement * _document )
 {
-  if (!_document) return nullptr;
+  if (!_document) { return nullptr;
+}
   const char * _result = XMLString::transcode( _document -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item ) -> getFirstChild()-> getNodeValue() );
   return _result;
 }
 
 DOMNode * XMLDOMBlock::setTagValue( const std::string & tagName, const std::string & tagValue, int _item, DOMDocument * _document )
 {
-  if (!_document) _document = document;
+  if (!_document) { _document = document;
+}
   DOMNode * the_tag = _document -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item );
   the_tag -> getFirstChild() -> setNodeValue( XMLProcessor::_toXMLCh( tagValue ) );
   return the_tag;
@@ -371,7 +374,8 @@ DOMNode * XMLDOMBlock::setTagValue( const std::string & tagName, const std::stri
 
 DOMNode * XMLDOMBlock::setTagValue(DOMElement * _elem, const std::string & tagName, const std::string & tagValue, int _item )
 {
-  if (!_elem) return nullptr;
+  if (!_elem) { return nullptr;
+}
   DOMNode * the_tag = _elem -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item );
   if (the_tag){
     the_tag -> getFirstChild() -> setNodeValue( XMLProcessor::_toXMLCh( tagValue ) );
@@ -381,7 +385,8 @@ DOMNode * XMLDOMBlock::setTagValue(DOMElement * _elem, const std::string & tagNa
 
 DOMNode * XMLDOMBlock::setTagValue( const std::string & tagName, const int & tagValue, int _item, DOMDocument * _document )
 {
-  if (!_document) _document = document;
+  if (!_document) { _document = document;
+}
   DOMNode * the_tag = _document -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item );
   the_tag -> getFirstChild() -> setNodeValue( XMLProcessor::_toXMLCh( tagValue ) );
   return the_tag;
@@ -389,7 +394,8 @@ DOMNode * XMLDOMBlock::setTagValue( const std::string & tagName, const int & tag
 
 DOMNode * XMLDOMBlock::setTagValue( DOMElement * _elem, const std::string & tagName, const int & tagValue, int _item )
 {
-  if (!_elem) return nullptr;
+  if (!_elem) { return nullptr;
+}
   DOMNode * the_tag = _elem -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item );
   if(the_tag){
     the_tag -> getFirstChild() -> setNodeValue( XMLProcessor::_toXMLCh( tagValue ) );
@@ -415,7 +421,8 @@ DOMNode * XMLDOMBlock::setTagAttribute( const std::string & tagName, const std::
 
 DOMNode * XMLDOMBlock::setTagAttribute( DOMElement * _elem, const std::string & tagName, const std::string & attrName, const std::string & attrValue, int _item )
 {
-  if (!_elem) return nullptr;
+  if (!_elem) { return nullptr;
+}
   DOMNode * the_tag = _elem ->  getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item );
   if (the_tag){
     DOMElement * _tag = (DOMElement *)the_tag;
@@ -434,7 +441,8 @@ DOMNode * XMLDOMBlock::setTagAttribute( const std::string & tagName, const std::
 
 DOMNode * XMLDOMBlock::setTagAttribute( DOMElement * _elem, const std::string & tagName, const std::string & attrName, const int & attrValue, int _item )
 {
-  if (!_elem) return nullptr;
+  if (!_elem) { return nullptr;
+}
   DOMNode * the_tag = _elem -> getElementsByTagName( XMLProcessor::_toXMLCh( tagName ) ) -> item( _item );
   if (the_tag){
     DOMElement * _tag = (DOMElement *)the_tag;
@@ -466,7 +474,8 @@ std::string & XMLDOMBlock::getString( void )
 
 std::string & XMLDOMBlock::getString( DOMNode * _node )
 {
-  if (the_string) delete the_string;
+  if (the_string) { delete the_string;
+}
   std::string _target = "string";
   the_string = new std::string( XMLString::transcode( theProcessor->serializeDOM(_node,_target) ) );
   return (*the_string);

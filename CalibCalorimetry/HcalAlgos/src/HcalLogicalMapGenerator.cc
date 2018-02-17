@@ -25,8 +25,8 @@ HcalLogicalMapGenerator::HcalLogicalMapGenerator() {
       //Intentionally relying on integer truncation here
       iadcquiHBHE[i][j][0] = i / 2 + 1;
       
-      if (i % 2 == 0) iadcquiHBHE[i][j][1] = j;
-      else            iadcquiHBHE[i][j][1] = NFCH + (j + 1) % 3;
+      if (i % 2 == 0) { iadcquiHBHE[i][j][1] = j;
+      } else {            iadcquiHBHE[i][j][1] = NFCH + (j + 1) % 3; }
     }
   }
 }
@@ -64,14 +64,14 @@ HcalLogicalMap HcalLogicalMapGenerator::createMap( const HcalTopology* topo, uns
   int CalibFull=216+425+8;
 
   uint32_t illegal_value=0;
-  for (int i=0;i<=HcalElectronicsId::maxLinearIndex;i++) LinearIndex2Entry.push_back(illegal_value);
-  for (int iHb=0;iHb<2*HbHalf;iHb++) HbHash2Entry.push_back(illegal_value);
-  for (int iHe=0;iHe<2*HeHalf;iHe++) HeHash2Entry.push_back(illegal_value);
-  for (int iHf=0;iHf<2*HfHalf;iHf++) HfHash2Entry.push_back(illegal_value);
-  for (int iHt=0;iHt<2*HtHalf;iHt++) HtHash2Entry.push_back(illegal_value);
-  for (int iHo=0;iHo<2*HoHalf;iHo++) HoHash2Entry.push_back(illegal_value);
-  for (int iHcalib=0;iHcalib<CalibFull;iHcalib++) HxCalibHash2Entry.push_back(illegal_value);
-  for (int iZdc=0;iZdc<2*ZdcHalf;iZdc++) ZdcHash2Entry.push_back(illegal_value);
+  for (int i=0;i<=HcalElectronicsId::maxLinearIndex;i++) { LinearIndex2Entry.push_back(illegal_value); }
+  for (int iHb=0;iHb<2*HbHalf;iHb++) { HbHash2Entry.push_back(illegal_value); }
+  for (int iHe=0;iHe<2*HeHalf;iHe++) { HeHash2Entry.push_back(illegal_value); }
+  for (int iHf=0;iHf<2*HfHalf;iHf++) { HfHash2Entry.push_back(illegal_value); }
+  for (int iHt=0;iHt<2*HtHalf;iHt++) { HtHash2Entry.push_back(illegal_value); }
+  for (int iHo=0;iHo<2*HoHalf;iHo++) { HoHash2Entry.push_back(illegal_value); }
+  for (int iHcalib=0;iHcalib<CalibFull;iHcalib++) { HxCalibHash2Entry.push_back(illegal_value); }
+  for (int iZdc=0;iZdc<2*ZdcHalf;iZdc++) { ZdcHash2Entry.push_back(illegal_value); }
 
   buildHBEFTMap(topo,HBHEHFEntries,HTEntries,LinearIndex2Entry,HbHash2Entry,HeHash2Entry,HfHash2Entry,HtHash2Entry);
   buildHOXMap(topo,HOHXEntries,LinearIndex2Entry,HoHash2Entry,HxCalibHash2Entry);
@@ -260,11 +260,11 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
                 irm_fi = irm_rmfiHBHE[ih][(itb + 1) % 2][ifb][0];
                 
                 //For eta >=21, the phi's cover 10 degrees rather than 5 (see HCAL TDR)
-                if (ieta >= 21 && (irm == 1 || irm == 3)) iwedge = (iphi + 1 + irm + 1) / 4;
-                else                            	  iwedge = (iphi + irm + 1) / 4;
+                if (ieta >= 21 && (irm == 1 || irm == 3)) { iwedge = (iphi + 1 + irm + 1) / 4;
+                } else {                            	  iwedge = (iphi + irm + 1) / 4; }
                 
                 //Roll over the wedge
-                if (iwedge > 18) iwedge -= 18;
+                if (iwedge > 18) { iwedge -= 18; }
               }
 	      else{
 	        S_side = '+';
@@ -273,11 +273,11 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
                 irm_fi = irm_rmfiHBHE[ih][itb][ifb][0];
                 
                 //For eta >=21, the phi's cover 10 degrees rather than 5 (see HCAL TDR)
-                if (ieta >= 21 && (irm == 4 || irm == 2)) iwedge = (iphi + 1 - irm + 6) / 4;
-                else		                          iwedge = (iphi - irm + 6) / 4;
+                if (ieta >= 21 && (irm == 4 || irm == 2)) { iwedge = (iphi + 1 - irm + 6) / 4;
+                } else {		                          iwedge = (iphi - irm + 6) / 4; }
                 
                 //Roll over the wedge
-                if (iwedge > 18) iwedge -= 18;
+                if (iwedge > 18) { iwedge -= 18; }
 	      }
 	      
               snprintf (tempbuff, sizeof tempbuff,  "%s%c%2.2i", det.c_str(), sidesign, iwedge);
@@ -289,22 +289,22 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
 	      //I use irm_fi - 2. Likewise, irm goes from 1 to 4 so use irm - 1
 	      
 	      //Pixel is split by HB and HE
-	      if (ieta > 16 || idepth > 2) ipixel = ipixelHE[irm_fi - 2][ifc][irm - 1]; //HE
-	      else               	   ipixel = ipixelHB[irm_fi - 2][ifc][irm - 1]; //HB
+	      if (ieta > 16 || idepth > 2) { ipixel = ipixelHE[irm_fi - 2][ifc][irm - 1]; //HE
+	      } else {               	   ipixel = ipixelHB[irm_fi - 2][ifc][irm - 1]; //HB }
 	            
 	      iqie = iadcquiHBHE[irm_fi - 2][ifc][0];
 	      iadc = iadcquiHBHE[irm_fi - 2][ifc][1];
  
               phideg = iphi - 3;
-	      if (phideg < 0) phideg = phideg + 72;
+	      if (phideg < 0) { phideg = phideg + 72; }
 	      phideg = (phideg / 4) * 20 + 10;
 	      irctcra = (( 89 - phideg  + 720)%360)/20;
 	      oddcard = irctcra % 2;
 	      irctcra /= 2;
-	      if (iside > 0) irctcra = irctcra + 9;
+	      if (iside > 0) { irctcra = irctcra + 9; }
 	      
 	      etaslb = ((ieta - 1) / 2) * 2 + 1;
-	      if (etaslb > 27) etaslb = 27;
+	      if (etaslb > 27) { etaslb = 27; }
 	      
 	      
 	      snprintf(tempbuff, sizeof tempbuff, "SLB_H_%3.3d%c%2.2d", phideg, S_side, etaslb);
@@ -322,9 +322,9 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
 	      else {            // these are on the special card 6 which folds back eta on the odd card half
                 irctcar = 6;
                 eta2 = ieta;
-                if (eta2 > 28) eta2 = 28;
-                if (oddcard == 0) eta3 = eta2;
-                else              eta3 = 57 - eta2;
+                if (eta2 > 28) { eta2 = 28; }
+                if (oddcard == 0) { eta3 = eta2;
+                } else {              eta3 = 57 - eta2; }
                 irctcon =  2 * (((eta3 - 1) / 2) % 4);
 	      }
 	      irctcon = 11 * irctcon + 1;
@@ -346,19 +346,19 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
               } 
 	      
               int ietamod;   // determine if eta is "odd" or "even". 
-              if (ieta == 29) ietamod = 0;
-              else            ietamod = ieta % 2;
+              if (ieta == 29) { ietamod = 0;
+              } else {            ietamod = ieta % 2; }
               if (ieta < 25) {         // use the regular table
-                if (ietamod == 1) mystream<<S_slbin_odd[phimod8];
-                else              mystream<<S_slbin_even[phimod8];
+                if (ietamod == 1) { mystream<<S_slbin_odd[phimod8];
+                } else {              mystream<<S_slbin_even[phimod8]; }
               }
               else if (crazy == 0) {   // use the regular table
-                if (ietamod == 1) mystream<<S_slbin_odd[phimod8];
-                else              mystream<<S_slbin_even[phimod8];
+                if (ietamod == 1) { mystream<<S_slbin_odd[phimod8];
+                } else {              mystream<<S_slbin_even[phimod8]; }
               }
               else {                   // swap odd/even!!!
-                if (ietamod == 1) mystream<<S_slbin_even[phimod8];
-                else              mystream<<S_slbin_odd[phimod8];
+                if (ietamod == 1) { mystream<<S_slbin_even[phimod8];
+                } else {              mystream<<S_slbin_odd[phimod8]; }
               }  
 	      
               slbin = mystream.str();
@@ -508,11 +508,11 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
                 sidesign = 'M';
                 
                 if (ieta < 40){
-                  if      (iphi == 1)     iphi = 71;
-                  else if (iphi == 71)    iphi = 1;
-                  else if (iphi % 4 == 1) iphi -= 2;
-                  else if (iphi % 4 == 3) iphi += 2;
-                  else                    edm::LogInfo( "HcalLogicalMapGenerator") <<"Even iphi in HFM"<<endl;
+                  if      (iphi == 1) {     iphi = 71;
+                  } else if (iphi == 71) {    iphi = 1;
+                  } else if (iphi % 4 == 1) { iphi -= 2;
+                  } else if (iphi % 4 == 3) { iphi += 2;
+                  } else {                    edm::LogInfo( "HcalLogicalMapGenerator") <<"Even iphi in HFM"<<endl; }
                 }
               }
               else{
@@ -532,8 +532,8 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
               irm = (irm - 1) % 3 + 1;
               
               //Wedge
-              if (iphi >= 71) iwedge = 1;
-              else	      iwedge = (iphi + 1) / 4 + 1;
+              if (iphi >= 71) { iwedge = 1;
+              } else {	      iwedge = (iphi + 1) / 4 + 1; }
               
               //RBX
               snprintf (tempbuff, sizeof tempbuff, "%s%c%2.2i", det.c_str(), sidesign, hfphi);
@@ -547,16 +547,16 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
               //Integer truncation again consistent with Fedor's map. 
               iqie = (irm_fi - 1) / 2 + 1;
               
-              if (irm_fi % 2 != 0) iadc = ifi_ch;
-              else       	   iadc = NFCH + (ifi_ch + 1) % 3;
+              if (irm_fi % 2 != 0) { iadc = ifi_ch;
+              } else {       	   iadc = NFCH + (ifi_ch + 1) % 3; }
                  
               //slb and rct variables
               //rctcrate
               phideg = iphi - 3;
-              if (phideg < 0) phideg = phideg + 72;
+              if (phideg < 0) { phideg = phideg + 72; }
               phideg = (phideg / 4) * 20 + 10;
               irctcra = (( 89 - phideg  + 720)%360)/40;
-              if (iside > 0) irctcra = irctcra + 9;
+              if (iside > 0) { irctcra = irctcra + 9; }
               
               //rct card and rct connector appear to be dummy here -- again, I follow Fedor's convention
               irctcar = 99;
@@ -578,18 +578,18 @@ void HcalLogicalMapGenerator::buildHBEFTMap(const HcalTopology* topo,
               
               int phibin = (iphi + 1) % 8 ;
               int etabin = (ieta - 29) / 3;
-              if (etabin < 0) etabin = 0;
-              if (etabin > 3) etabin = 3;
-              if (phibin < 4) mystream<<S_slbin_7[etabin];
-              else            mystream<<S_slbin_3[etabin];
+              if (etabin < 0) { etabin = 0; }
+              if (etabin > 3) { etabin = 3; }
+              if (phibin < 4) { mystream<<S_slbin_7[etabin];
+              } else {            mystream<<S_slbin_3[etabin]; }
               
               slbin = mystream.str();
               mystream.str("");
  
               slbin2 = "NA";
              
-              if (ieta < 40) idphi = 2;
-              else 	     idphi = 4;
+              if (ieta < 40) { idphi = 2;
+              } else { 	     idphi = 4; }
 
               HBHEHFLogicalMapEntry hbeflmapentry( 
 						  ifi_ch, ihtr_fi, ispigot, ifed, icrate, ihtr, fpga,
@@ -743,13 +743,13 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
   //for |eta| <= 4, htr_fi is a function of side and phmod6
   int HO_htr_fi_eta4_loc[2][6] = {{6, 6, 8, 8, 7, 7},   //iside = -1
 				  {4, 4, 5, 5, 3, 3}};  //iside = +1
-  if (mapIOV_<5)
-    memcpy( HO_htr_fi_eta4, HO_htr_fi_eta4_loc, sizeof(int)*2*6 );
+  if (mapIOV_<5) {
+    memcpy( HO_htr_fi_eta4, HO_htr_fi_eta4_loc, sizeof(int)*2*6 ); }
   
   int HO_htr_fi_eta123_loc[2][6] = {{6, 5, 4, 3, 8, 7},   //iside = -1
 				    {8, 7, 6, 5, 2, 1}};  //iside = +1
-  if (mapIOV_<5)
-    memcpy( HO_htr_fi_eta123, HO_htr_fi_eta123_loc, sizeof(int)*2*6 );
+  if (mapIOV_<5) {
+    memcpy( HO_htr_fi_eta123, HO_htr_fi_eta123_loc, sizeof(int)*2*6 ); }
   
   //HO_htr_fi_123eta5to15[2][11] is unnecessary because
   // HO_htr_fi_123eta5to15[i][j] == int HO_htr_fi_450eta5to15[i][j] - 1
@@ -792,10 +792,10 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
 					 {{ 9, 9},{13,13},{ 5, 5}},  //RM fibers 5
 					 {{19,19},{18,18},{17,17}},  //RM fibers 6
 					 {{15,15},{14,14},{16,16}}}; //RM fibers 7
-  if (mapIOV_ < 5)
+  if (mapIOV_ < 5) {
     memcpy( ipixelHO, ipixelHO_loc, sizeof(int)*NRMFIBR*NFCH*2 );
-  else
-    memcpy( ipixelHO, ipixelHO_sipm, sizeof(int)*NRMFIBR*NFCH*2 );
+  } else {
+    memcpy( ipixelHO, ipixelHO_sipm, sizeof(int)*NRMFIBR*NFCH*2 ); }
 
   //                            Fiber Channel        0         1         2
   std::string letterHO_loc[NRMFIBR][NFCH][2] = {{{"E","E"},{"G","L"},{"F","S"}},  //RM fiber 2
@@ -815,10 +815,10 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
   for (int jj = 0; jj < NRMFIBR; jj++) {
     for (int kk = 0; kk < NFCH; kk++) {
       for (int ll = 0; ll < 2; ll++) {
-	if (mapIOV_ < 5)
+	if (mapIOV_ < 5) {
 	  letterHO[jj][kk][ll] = letterHO_loc[jj][kk][ll];
-	else
-	  letterHO[jj][kk][ll] = letterHO_sipm[jj][kk][ll];
+	} else {
+	  letterHO[jj][kk][ll] = letterHO_sipm[jj][kk][ll]; }
       }
     }
   }
@@ -973,10 +973,10 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         ieta = iet + 1;
         iside = isid;
         
-        if (iphi >= 71 || iphi < 17)      ic = 0;
-        else if (iphi >= 17 && iphi < 35) ic = 1;
-        else if (iphi >= 35 && iphi < 53) ic = 2;
-        else                              ic = 3;
+        if (iphi >= 71 || iphi < 17) {      ic = 0;
+        } else if (iphi >= 17 && iphi < 35) { ic = 1;
+        } else if (iphi >= 35 && iphi < 53) { ic = 2;
+        } else {                              ic = 3; }
         	
         icrate=hocrate[ic];
         idepth=4;
@@ -991,27 +991,27 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         phmod6e123 = (phmod6 == 1 || phmod6 == 2 || phmod6 == 3); 
         
         //Ring 0 (HTR type 0) is special
-        if      (ieta <= 3  && (iside < 0 || phmod6 >= 4)) fpga = "bot";
-        else if (ieta <= 3  && iside > 0 && phmod6 < 4)  fpga = "top";
+        if      (ieta <= 3  && (iside < 0 || phmod6 >= 4)) { fpga = "bot";
+        } else if (ieta <= 3  && iside > 0 && phmod6 < 4) {  fpga = "top";
         //new HX HTR
-        else if ((ieta > 15 && iside > 0) && (icrate == 3 || icrate == 6))   fpga = "top";
-        else if ((ieta > 15 && iside > 0) && (icrate == 7 || icrate == 13))   fpga = "bot";
+        } else if ((ieta > 15 && iside > 0) && (icrate == 3 || icrate == 6)) {   fpga = "top";
+        } else if ((ieta > 15 && iside > 0) && (icrate == 7 || icrate == 13)) {   fpga = "bot";
         //HTR types 0 and 1
-        else if (ieta >= 10 && iside > 0)                 fpga = "top";
-        else if (ieta <  10 && ieta >= 6 && iside > 0)    fpga = "bot";
+        } else if (ieta >= 10 && iside > 0) {                 fpga = "top";
+        } else if (ieta <  10 && ieta >= 6 && iside > 0) {    fpga = "bot";
         //HTR types 2 and 3 
-        else if ((ieta == 5 && iside > 0) || ieta == 4)   fpga = "top";
-        else if ((ieta == 5 || ieta >= 10) && iside < 0)  fpga = "bot";
-        else if ((ieta < 10 && ieta >= 6) && iside < 0)   fpga = "top";
-        else    edm::LogInfo( "HcalLogicalMapGenerator") <<"Bad fpga code"<<endl;
+        } else if ((ieta == 5 && iside > 0) || ieta == 4) {   fpga = "top";
+        } else if ((ieta == 5 || ieta >= 10) && iside < 0) {  fpga = "bot";
+        } else if ((ieta < 10 && ieta >= 6) && iside < 0) {   fpga = "top";
+        } else {    edm::LogInfo( "HcalLogicalMapGenerator") <<"Bad fpga code"<<endl; }
         
         //dphi
-        if      (ieta <= 20) idphi = 1;
-        else                 idphi = -1000;
+        if      (ieta <= 20) { idphi = 1;
+        } else {                 idphi = -1000; }
         
         //create values usable in arrays from side and fpga
-        if   (iside == 1) sidear = 1;
-        else              sidear = 0;
+        if   (iside == 1) { sidear = 1;
+        } else {              sidear = 0; }
 
         phmod24 = iph % 24;
         
@@ -1020,13 +1020,13 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         
         //x - 5 for the eta array for the same reason
         //  the new stuff for HX
-        if          (ieta==16) irm_fi = HO_RM_fi_eta16;
-        else if (ieta >= 5) irm_fi = HO_RM_fi_eta5to15[ieta - 5];
-	else {
+        if          (ieta==16) { irm_fi = HO_RM_fi_eta16;
+        } else if (ieta >= 5) { irm_fi = HO_RM_fi_eta5to15[ieta - 5];
+	} else {
 	  if (mapIOV_ < 5) {
-	    if (ieta <= 3) irm_fi = HO_RM_fi_eta1to4[phmod24][0][sidear];
-	    else if (ieta == 4) irm_fi = HO_RM_fi_eta1to4[phmod24][1][sidear];
-	    else                irm_fi = -1000;
+	    if (ieta <= 3) { irm_fi = HO_RM_fi_eta1to4[phmod24][0][sidear];
+	    } else if (ieta == 4) { irm_fi = HO_RM_fi_eta1to4[phmod24][1][sidear];
+	    } else {                irm_fi = -1000; }
 	  }
 	  else if (mapIOV_ >= 5) {
 	    irm_fi = HO_RM_fi_eta1to4_sipm[phmod24][ieta-1][sidear];
@@ -1036,18 +1036,18 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         //HTR fiber
         
         //
-        if (ieta >= 5 && phmod6e450) ihtr_fi = HO_htr_fi_450eta5to15[sidear][ieta - 5];
-        else if (ieta >= 5 && phmod6e123) ihtr_fi = HO_htr_fi_450eta5to15[sidear][ieta - 5] - 1;
-	else if (ieta <= 4) {
+        if (ieta >= 5 && phmod6e450) { ihtr_fi = HO_htr_fi_450eta5to15[sidear][ieta - 5];
+        } else if (ieta >= 5 && phmod6e123) { ihtr_fi = HO_htr_fi_450eta5to15[sidear][ieta - 5] - 1;
+	} else if (ieta <= 4) {
 	  if (mapIOV_ < 5) {
-	    if (ieta == 4)      ihtr_fi = HO_htr_fi_eta4[sidear][phmod6];
-	    else if (ieta <= 3) ihtr_fi = HO_htr_fi_eta123[sidear][phmod6];
+	    if (ieta == 4) {      ihtr_fi = HO_htr_fi_eta4[sidear][phmod6];
+	    } else if (ieta <= 3) { ihtr_fi = HO_htr_fi_eta123[sidear][phmod6]; }
 	  }
 	  else if (mapIOV_ >= 5) {
 	    ihtr_fi = HO_htr_fi_eta1234_sipm[phmod6][ieta-1][(irm-1)/2][sidear];
 	  }
 	}
-	else                              ihtr_fi = -1000;
+	else {                              ihtr_fi = -1000; }
         
         //Fiber Channel
         //Eta >= 5 bools
@@ -1062,43 +1062,43 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         phir0v4 = (iphi % 24 == 6 || iphi % 24 == 8 || iphi % 24 == 10 || iphi % 24 == 12 || iphi % 24 == 14 || iphi % 24 == 16);
         
         if (ieta >= 5){
-          if      (ieta % 2 == 0 && phi1458)       ifi_ch = 0; 
-          else if (ieta % 2 == 0 && iphi % 3 == 0) ifi_ch = 1;
-          else if (ieta % 2 == 0 && phi271011)     ifi_ch = 2;
-          else if (ieta % 2 == 1 && iphi % 3 == 0) ifi_ch = 0; 
-          else if (ieta % 2 == 1 && phi271011)     ifi_ch = 1;
-          else if (ieta % 2 == 1 && phi1458)       ifi_ch = 2;
+          if      (ieta % 2 == 0 && phi1458) {       ifi_ch = 0; 
+          } else if (ieta % 2 == 0 && iphi % 3 == 0) { ifi_ch = 1;
+          } else if (ieta % 2 == 0 && phi271011) {     ifi_ch = 2;
+          } else if (ieta % 2 == 1 && iphi % 3 == 0) { ifi_ch = 0; 
+          } else if (ieta % 2 == 1 && phi271011) {     ifi_ch = 1;
+          } else if (ieta % 2 == 1 && phi1458) {       ifi_ch = 2; }
         }
 	else {
 	  if (mapIOV_ < 5) {
 	    if (ieta == 4){
 	      if (iside == -1){
-		if      (phir0v1)       ifi_ch = 0;
-		else if (phir0v4)       ifi_ch = 1;
-		else if (iphi % 2 == 1) ifi_ch = 2;
+		if      (phir0v1) {       ifi_ch = 0;
+		} else if (phir0v4) {       ifi_ch = 1;
+		} else if (iphi % 2 == 1) { ifi_ch = 2; }
 	      }
 	      else{
-		if      (phir0v3)       ifi_ch = 0;
-		else if (phir0v2)       ifi_ch = 1;
-		else if (iphi % 2 == 0) ifi_ch = 2;
+		if      (phir0v3) {       ifi_ch = 0;
+		} else if (phir0v2) {       ifi_ch = 1;
+		} else if (iphi % 2 == 0) { ifi_ch = 2; }
 	      }
 	    }
 	    //eta = -3 and eta = +2
 	    else if ((ieta == 3 && iside == -1) || (ieta == 2 && iside == 1)){
-	      if      (phir0v4)            ifi_ch = 0;
-	      else if (phir0v3)            ifi_ch = 1;
-	      else if (phir0v1 || phir0v2) ifi_ch = 2;
+	      if      (phir0v4) {            ifi_ch = 0;
+	      } else if (phir0v3) {            ifi_ch = 1;
+	      } else if (phir0v1 || phir0v2) { ifi_ch = 2; }
 	    }
 	    //eta = -2 and eta = +3
 	    else if ((ieta == 3 && iside == 1) || (ieta == 2 && iside == -1)){
-	      if      (phir0v2)            ifi_ch = 0;
-	      else if (phir0v1)            ifi_ch = 1;
-	      else if (phir0v3 || phir0v4) ifi_ch = 2;
+	      if      (phir0v2) {            ifi_ch = 0;
+	      } else if (phir0v1) {            ifi_ch = 1;
+	      } else if (phir0v3 || phir0v4) { ifi_ch = 2; }
 	    }
 	    //ieta = 1
 	    else if (ieta == 1){
-	      if      (phir0v1 || phir0v3) ifi_ch = 0;
-	      else if (phir0v2 || phir0v4) ifi_ch = 1;
+	      if      (phir0v1 || phir0v3) { ifi_ch = 0;
+	      } else if (phir0v2 || phir0v4) { ifi_ch = 1; }
 	    }
 	  }
 	  else {
@@ -1106,46 +1106,46 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
 	      more challenging and requires some thought*/
 	    if (ieta == 4){
 	      if (iside == -1){
-		if      (phir0v1)       ifi_ch = 0;
-		else if (phir0v4)       ifi_ch = 2;
-		else if (iphi % 2 == 1) ifi_ch = 2;
+		if      (phir0v1) {       ifi_ch = 0;
+		} else if (phir0v4) {       ifi_ch = 2;
+		} else if (iphi % 2 == 1) { ifi_ch = 2; }
 	      }
 	      else{
-		if      (phir0v3)       ifi_ch = 0;
-		else if (phir0v2)       ifi_ch = 2;
-		else if (iphi % 2 == 0) ifi_ch = 2;
+		if      (phir0v3) {       ifi_ch = 0;
+		} else if (phir0v2) {       ifi_ch = 2;
+		} else if (iphi % 2 == 0) { ifi_ch = 2; }
 	      }
 	    }
 	    if (ieta == 2){
 	      if (iside == -1){
-		if (iphi % 2 == 0)      ifi_ch = 2;
-		else if (iphi % 2 == 1) ifi_ch = 1;
+		if (iphi % 2 == 0) {      ifi_ch = 2;
+		} else if (iphi % 2 == 1) { ifi_ch = 1; }
 	      }
 	      else{
-		if (iphi % 2 == 0)      ifi_ch = 1;
-		else if (iphi % 2 == 1) ifi_ch = 2;
+		if (iphi % 2 == 0) {      ifi_ch = 1;
+		} else if (iphi % 2 == 1) { ifi_ch = 2; }
 	      }
 	    }
 	    if (ieta == 3){
 	      if (iside == -1){
-		if (iphi % 2 == 0)      ifi_ch = 0;
-		else if (iphi % 2 == 1) ifi_ch = 1;
+		if (iphi % 2 == 0) {      ifi_ch = 0;
+		} else if (iphi % 2 == 1) { ifi_ch = 1; }
 	      }
 	      else{
-		if (iphi % 2 == 1)      ifi_ch = 0;
-		else if (iphi % 2 == 0) ifi_ch = 1;
+		if (iphi % 2 == 1) {      ifi_ch = 0;
+		} else if (iphi % 2 == 0) { ifi_ch = 1; }
 	      }
 	    }
 	    if (ieta == 1){
 	      if (iside == -1){
-		if      (phir0v1)       ifi_ch = 0;
-		else if (phir0v4)       ifi_ch = 1;
-		else if (iphi % 2 == 1) ifi_ch = 0;
+		if      (phir0v1) {       ifi_ch = 0;
+		} else if (phir0v4) {       ifi_ch = 1;
+		} else if (iphi % 2 == 1) { ifi_ch = 0; }
 	      }
 	      else{
-		if      (phir0v3)       ifi_ch = 0;
-		else if (phir0v2)       ifi_ch = 1;
-		else if (iphi % 2 == 0) ifi_ch = 0;
+		if      (phir0v3) {       ifi_ch = 0;
+		} else if (phir0v2) {       ifi_ch = 1;
+		} else if (iphi % 2 == 0) { ifi_ch = 0; }
 	      }
 	    }
 	  }
@@ -1155,8 +1155,8 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         //(Although irm_fi for HF starts at 1 and for HO it starts at 2, so one can't just copy and paste)
         iqie = (irm_fi - 2) / 2 + 1;
         
-        if (irm_fi % 2 == 0) iadc = ifi_ch;
-        else       	     iadc = NFCH + (ifi_ch + 1) % 3;
+        if (irm_fi % 2 == 0) { iadc = ifi_ch;
+        } else {       	     iadc = NFCH + (ifi_ch + 1) % 3; }
         
 	//Pixel and Letter Code (Ring 0 is separate)
         if (ieta <= 4){
@@ -1173,17 +1173,17 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
 	if (ieta <= 4 && mapIOV_ >= 5) {
 	  if (ipixel==3 || ipixel==7 || ipixel==12 || ipixel==14 || ipixel==17 || ipixel==18) {
 	    mytype = 1;
-	    if (phmod6==1 || phmod6==3)
+	    if (phmod6==1 || phmod6==3) {
 	      fpga = "top";
-	    else
-	      fpga = "bot";
+	    } else {
+	      fpga = "bot"; }
 	  }
 	  else if (ipixel==1 || ipixel==4 || ipixel==8 || ipixel==15 || ipixel==16 || ipixel==19) {
 	    mytype = 2;
-	    if (phmod6==0 || phmod6==2)
+	    if (phmod6==0 || phmod6==2) {
 	      fpga = "top";
-	    else
-	      fpga = "bot";
+	    } else {
+	      fpga = "bot"; }
 	  }
 	  else if (ipixel==2 || ipixel==5 || ipixel==6 || ipixel==9 || ipixel==11 || ipixel==13) {
 	    mytype = 3;
@@ -1191,16 +1191,16 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
 	  }
         }
 
-        if (fpga == "bot") itb = 1;//convention different than for the
-        else               itb = 0;//electronics id, modified in the 
+        if (fpga == "bot") { itb = 1;//convention different than for the
+        } else {               itb = 0;//electronics id, modified in the  }
 	//MapEntry code
 
         //Determine which of HTR in the set belongs here. It depends only on eta and side.
         //  the new stuff for HX
-        if (ieta <= 3 || (ieta >= 14 && iside == 1))     ih = 0;
-        else if (ieta <= 13 && ieta >= 6 && iside == 1)  ih = 1;
-        else if (ieta <= 13 && ieta >= 6 && iside == -1) ih = 3;
-        else                                             ih = 2;
+        if (ieta <= 3 || (ieta >= 14 && iside == 1)) {     ih = 0;
+        } else if (ieta <= 13 && ieta >= 6 && iside == 1) {  ih = 1;
+        } else if (ieta <= 13 && ieta >= 6 && iside == -1) { ih = 3;
+        } else {                                             ih = 2; }
         
 	////special treatment for new ring-0 SiPMs
 	// the htrs are grouped in chunks of ((ph+2) mod 18)/6
@@ -1212,29 +1212,29 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         //Each value of "is" covers 30 degrees (that is, 6 values of phi). To calculate which ones,
         //I use phi % 18. Crates start at phi = 71, 17, 35, 53
         
-        if (iphi % 18 == 17 || iphi % 18 <= 4)      is = 0;
-        else if (iphi % 18 >= 5 && iphi % 18 <= 10) is = 1;
-        else                                        is = 2;
+        if (iphi % 18 == 17 || iphi % 18 <= 4) {      is = 0;
+        } else if (iphi % 18 >= 5 && iphi % 18 <= 10) { is = 1;
+        } else {                                        is = 2; }
         
-        if ( ieta == 16 && iside > 0 ) ihtr=21;
-	else if (ieta > 4)
+        if ( ieta == 16 && iside > 0 ) { ihtr=21;
+	} else if (ieta > 4) {
 	  ihtr=ihslotho[is][ih];
-        else {
+        } else {
 	  //special treatment only for ring-0
-	  if (mapIOV_ < 5)
+	  if (mapIOV_ < 5) {
 	    ihtr=ihslotho[is][ih];
-	  else {
-	    if (mytype == 1 || mytype == 2)
+	  } else {
+	    if (mytype == 1 || mytype == 2) {
 	      ih = 0;
-	    else
-	      ih = 2;
+	    } else {
+	      ih = 2; }
 	    ihtr=ihslotho[php2mod18ov6][ih];
 	  }
 	}
         
-        if ((ieta > 15 && iside > 0) && (icrate == 3 || icrate == 6))   ispigot = 12;
-        else if ((ieta > 15 && iside > 0) && (icrate == 7 || icrate == 13))   ispigot = 13;
-        else ispigot=ihtr<9?(ihtr-2)*2+itb:(ihtr-13)*2+itb;
+        if ((ieta > 15 && iside > 0) && (icrate == 3 || icrate == 6)) {   ispigot = 12;
+        } else if ((ieta > 15 && iside > 0) && (icrate == 7 || icrate == 13)) {   ispigot = 13;
+        } else { ispigot=ihtr<9?(ihtr-2)*2+itb:(ihtr-13)*2+itb; }
         idcc=ihtr<9?1:2;
         idcc_sl = idcc == 1 ?10:20;
         
@@ -1242,38 +1242,38 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
         
         //RBX and sector
         
-        if (iside == -1) sidesign = 'M';
-        else      	 sidesign = 'P';
+        if (iside == -1) { sidesign = 'M';
+        } else {      	 sidesign = 'P'; }
         
-        if      (ieta <= 4)                ring = 0;
-        else if (ieta >= 5 && ieta <= 10)  ring = 1;
-        else                               ring = 2;
+        if      (ieta <= 4) {                ring = 0;
+        } else if (ieta >= 5 && ieta <= 10) {  ring = 1;
+        } else {                               ring = 2; }
         
         //Sector ranges from 1 to 12 depending on phi. Sector 1 goes 71,72,1,2,3,4 so I start at -2
         sector = 0;
         for (i = -2; i < iphi; i+=6){
           sector++;
         }
-        if (sector > 12) sector = 1; //It rolls over for phi = 71,72 
+        if (sector > 12) { sector = 1; //It rolls over for phi = 71,72  }
         
         isector = sector;
         
         //For rings 1 and 2, we only want even sectors for the rbx
-        if (ring != 0 && sector % 2 != 0) sector++;
+        if (ring != 0 && sector % 2 != 0) { sector++; }
         
-        if (ring == 0)  snprintf (tempbuff, sizeof tempbuff, "%s%i%2.2d", det.c_str(), ring, sector);
-        else            snprintf (tempbuff, sizeof tempbuff, "%s%i%c%2.2d", det.c_str(), ring, sidesign, sector);
+        if (ring == 0) {  snprintf (tempbuff, sizeof tempbuff, "%s%i%2.2d", det.c_str(), ring, sector);
+        } else {            snprintf (tempbuff, sizeof tempbuff, "%s%i%c%2.2d", det.c_str(), ring, sidesign, sector); }
         mystream<<tempbuff;
         rbx = mystream.str();
         mystream.str("");
         if (ieta == 16) {
 	  det = "HOX";
 	  letter = "X";}
-        else det = "HO";
+        else { det = "HO"; }
         
         //  the new htr_fi stuff for HX
-        if (ieta==16 && isid<0) ihtr_fi = HO_htr_fi_450eta16M[irm - 1];
-        else if (ieta==16 && isid>0) ihtr_fi = HO_htr_fi_450eta16P[irm - 1][sector/2-1];
+        if (ieta==16 && isid<0) { ihtr_fi = HO_htr_fi_450eta16M[irm - 1];
+        } else if (ieta==16 && isid>0) { ihtr_fi = HO_htr_fi_450eta16P[irm - 1][sector/2-1]; }
         
         if ((ieta > 15 && iside > 0) && (icrate == 3 || icrate == 7))   {
           icrate = 6;
@@ -1284,7 +1284,7 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
           ifed = 727;
         }
         
-        if ( ieta == 16 ) ieta = 15;
+        if ( ieta == 16 ) { ieta = 15; }
         // fixing the switched RM's
         if ( iside == 1 && ring == 2 ) {
           if ( iphi == 5 ) {
@@ -1348,13 +1348,13 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
           if (ipixel==1){
             ipixel = 2;
             iadc = 4;
-	    if (mapIOV_ < 5)
+	    if (mapIOV_ < 5) {
 	      ifi_ch = 0;
-	    else {
+	    } else {
 	      irm_fi = 4;
 	      ifi_ch = 2;
-	      if (irm_fi % 2 == 0) iadc = ifi_ch;
-	      else       	   iadc = NFCH + (ifi_ch + 1) % 3;
+	      if (irm_fi % 2 == 0) { iadc = ifi_ch;
+	      } else {       	   iadc = NFCH + (ifi_ch + 1) % 3; }
 	      iqie = (irm_fi - 2) / 2 + 1;
 	      ihtr_fi = HO_htr_fi_eta1234_sipm[phmod6][4][(irm-1)/2][sidear];
 	      itb = 0;
@@ -1391,13 +1391,13 @@ void HcalLogicalMapGenerator::buildHOXMap(const HcalTopology* topo,
           else if (ipixel==17){
             ipixel = 18;
             iadc = 1;
-	    if (mapIOV_ < 5)
+	    if (mapIOV_ < 5) {
 	      ifi_ch = 1;
-	    else {
+	    } else {
 	      irm_fi = 6;
 	      ifi_ch = 1;
-	      if (irm_fi % 2 == 0) iadc = ifi_ch;
-	      else       	   iadc = NFCH + (ifi_ch + 1) % 3;
+	      if (irm_fi % 2 == 0) { iadc = ifi_ch;
+	      } else {       	   iadc = NFCH + (ifi_ch + 1) % 3; }
 	      iqie = (irm_fi - 2) / 2 + 1;
 	      ihtr_fi = HO_htr_fi_eta1234_sipm[phmod6][4][(irm-1)/2][sidear];
 	      if (phmod6==1 || phmod6==3) {
@@ -1525,7 +1525,7 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
         ihtr_fi=ifb+1;
         irm_fi = 1;// everything other than he is on A
         idphi=4;
-        if (itb==1) if(ihtr_fi%2==0) irm_fi = 2;  //all of the even fibers in HE are on B rather than A
+        if (itb==1) { if(ihtr_fi%2==0) { irm_fi = 2;  //all of the even fibers in HE are on B rather than A }
         if (det=="HE"){
           ispigot=13;
           fpga="bot";
@@ -1575,17 +1575,17 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
         for(ifc=0; ifc<NFCH; ifc++){
           ifi_ch=ifc;
           if (irm_fi==1){
-            if (ifc==0) ich_type=0;
-            else if (ifc==1) ich_type=1;
-            else if (ifc==2) {
-              if (det=="HB") ich_type=2;
-              else if(det=="HE") ich_type=3;
+            if (ifc==0) { ich_type=0;
+            } else if (ifc==1) { ich_type=1;
+            } else if (ifc==2) {
+              if (det=="HB") { ich_type=2;
+              } else if(det=="HE") { ich_type=3; }
             }
           }
           else if (irm_fi==2){
-            if (ifc==0) ich_type=4;
-            else if (ifc==1) ich_type=5;
-            else if (ifc==2) ich_type=6;
+            if (ifc==0) { ich_type=4;
+            } else if (ifc==1) { ich_type=5;
+            } else if (ifc==2) { ich_type=6; }
           }
           CALIBLogicalMapEntry caliblmapentry(
 					      ifi_ch, ihtr_fi, ispigot, ifed, icrate, ihtr, fpga,
@@ -1598,7 +1598,7 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
 
 	  const HcalGenericDetId hgdi(caliblmapentry.getDetId());	  
 	  const unsigned int hashedId=topo->detId2denseIdCALIB(hgdi);
-	  if (hgdi.genericSubdet()==HcalGenericDetId::HcalGenCalibration) HxCalibHash2Entry.at(hashedId)=CALIBEntries.size();
+	  if (hgdi.genericSubdet()==HcalGenericDetId::HcalGenCalibration) { HxCalibHash2Entry.at(hashedId)=CALIBEntries.size(); }
         }
       }
     }
@@ -1654,7 +1654,7 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
 
 	const HcalGenericDetId hgdi(caliblmapentry.getDetId());	  
 	const unsigned int hashedId=topo->detId2denseIdCALIB(hgdi);
-	if (hgdi.genericSubdet()==HcalGenericDetId::HcalGenCalibration) HxCalibHash2Entry.at(hashedId)=CALIBEntries.size();
+	if (hgdi.genericSubdet()==HcalGenericDetId::HcalGenCalibration) { HxCalibHash2Entry.at(hashedId)=CALIBEntries.size(); }
 
       }
     }
@@ -1694,14 +1694,14 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
 	  iside=0;
 	  sidesign='0';
         }
-        if (ieta==-2) S_side='2';
-        else if (ieta==-1) S_side='1';
-        else if (ieta==1) S_side='1';
-        else if (ieta==2) S_side='2';
+        if (ieta==-2) { S_side='2';
+        } else if (ieta==-1) { S_side='1';
+        } else if (ieta==1) { S_side='1';
+        } else if (ieta==2) { S_side='2'; }
 
         subdet ="CALIB_"+det;
-        if (ieta==0) snprintf (tempbuff, sizeof tempbuff, "%s%c%2.2i", det.c_str(), sidesign, iwedge);
-        else  snprintf (tempbuff, sizeof tempbuff, "%s%c%c%2.2i", det.c_str(), S_side, sidesign, iwedge);
+        if (ieta==0) { snprintf (tempbuff, sizeof tempbuff, "%s%c%2.2i", det.c_str(), sidesign, iwedge);
+        } else {  snprintf (tempbuff, sizeof tempbuff, "%s%c%c%2.2i", det.c_str(), S_side, sidesign, iwedge); }
         mystream<<tempbuff;
         rbx = mystream.str();
         mystream.str("");
@@ -1720,7 +1720,7 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
           (ieta==0) ? iphi=((iwedge*idphi)+71-idphi)%72 : iphi=(((iwedge/2)*idphi)+71-idphi)%72;
           //nothing on htr_fi=4 for the top
           //do {
-	  if (iside==0&&ifb==3) continue; // adjust logic since no longer inside loop
+	  if (iside==0&&ifb==3) { continue; // adjust logic since no longer inside loop }
             CALIBLogicalMapEntry caliblmapentry(
 						ifi_ch, ihtr_fi, ispigot, ifed, icrate, ihtr, fpga,
 						det, ieta, iphi, ich_type, 
@@ -1732,7 +1732,7 @@ void HcalLogicalMapGenerator::buildCALIBMap(const HcalTopology* topo,
 
 	    const HcalGenericDetId hgdi(caliblmapentry.getDetId());	  
 	    const unsigned int hashedId=topo->detId2denseIdCALIB(hgdi);
-	    if (hgdi.genericSubdet()==HcalGenericDetId::HcalGenCalibration) HxCalibHash2Entry.at(hashedId)=CALIBEntries.size();
+	    if (hgdi.genericSubdet()==HcalGenericDetId::HcalGenCalibration) { HxCalibHash2Entry.at(hashedId)=CALIBEntries.size(); }
 	  //} while (ifb!=ifb);
         }
       }
@@ -1793,8 +1793,8 @@ void HcalLogicalMapGenerator::buildZDCMap(const HcalTopology* topo, std::vector 
         ihtr_fi = irm_fi;
       }
       else {
-	if (mapIOV_<4) ihtr_fi = irm_fi + 3;
-        else ihtr_fi = irm_fi;
+	if (mapIOV_<4) { ihtr_fi = irm_fi + 3;
+        } else { ihtr_fi = irm_fi; }
       }
       if (icab < 6) {
         ix = icab;
@@ -1810,8 +1810,8 @@ void HcalLogicalMapGenerator::buildZDCMap(const HcalTopology* topo, std::vector 
         idx = 5;
         det = "ZDC_HAD";
         idet_ch = icab - 5;
-        if (icab==6) iqie = 1;
-        else iqie =  2;
+        if (icab==6) { iqie = 1;
+        } else { iqie =  2; }
       }
       ZDCLogicalMapEntry zdclmapentry(
 				      ifi_ch, ihtr_fi, ispigot, ifed, icrate, ihtr, fpga,
@@ -1876,34 +1876,34 @@ void HcalLogicalMapGenerator::ConstructTriggerTower(const HcalTopology* topo,
   t_fedid  = ifed;
 
   do {
-    if(t_iDep!=1) break;
-    if(t_chDet=="HE"&&t_iEta==29) break;
+    if(t_iDep!=1) { break; }
+    if(t_chDet=="HE"&&t_iEta==29) { break; }
 
     if(t_chDet=="HF") {
       t_jPhi=4;//20 degree slices in HF
       if(t_iEta==30||t_iEta==31||t_iEta==33||
 	 t_iEta==34||t_iEta==36||t_iEta==37||
-         t_iEta==39||t_iEta==40||t_iEta==41) break;
+         t_iEta==39||t_iEta==40||t_iEta==41) { break;
 
-      else if(t_iEta==32)t_iEta=30;
-      else if(t_iEta==35)t_iEta=31;
-      else if(t_iEta==38)t_iEta=32;
+      } else if(t_iEta==32) {t_iEta=30;
+      } else if(t_iEta==35) {t_iEta=31;
+      } else if(t_iEta==38) {t_iEta=32; }
 
       if(t_iPhi==3||t_iPhi==7||t_iPhi==11||t_iPhi==15||t_iPhi==19||
 	 t_iPhi==23||t_iPhi==27||t_iPhi==31||t_iPhi==35||t_iPhi==39||
 	 t_iPhi==43||t_iPhi==47||t_iPhi==51||t_iPhi==55||t_iPhi==59||
-	 t_iPhi==63||t_iPhi==67||t_iPhi==71) break;
+	 t_iPhi==63||t_iPhi==67||t_iPhi==71) { break; }
     }
   
-    if(t_side<0) t_iEta=-t_iEta;
+    if(t_side<0) { t_iEta=-t_iEta; }
     t_chDet="HT";
     
     if(t_slbin!="NA") {
-      if(t_slbin2!="NA") t_jPhi=1;
-      if(t_slbin=="A0"||t_slbin=="B0")  t_nDat=0;
-      else if(t_slbin=="A1"||t_slbin=="B1")  t_nDat=1;
-      else if(t_slbin=="C0"||t_slbin=="D0")  t_nDat=2;
-      else if(t_slbin=="C1"||t_slbin=="D1")  t_nDat=3;
+      if(t_slbin2!="NA") { t_jPhi=1; }
+      if(t_slbin=="A0"||t_slbin=="B0") {  t_nDat=0;
+      } else if(t_slbin=="A1"||t_slbin=="B1") {  t_nDat=1;
+      } else if(t_slbin=="C0"||t_slbin=="D0") {  t_nDat=2;
+      } else if(t_slbin=="C1"||t_slbin=="D1") {  t_nDat=3; }
       
       HTLogicalMapEntry htlmapentry(
 				    t_iEta, t_iPhi,
@@ -1914,10 +1914,10 @@ void HcalLogicalMapGenerator::ConstructTriggerTower(const HcalTopology* topo,
       HTEntries.push_back(htlmapentry);
     }
     if(t_slbin2!="NA") {
-      if(t_slbin2=="A0"||t_slbin2=="B0")  t_nDat=0;
-      else if(t_slbin2=="A1"||t_slbin2=="B1")  t_nDat=1;
-      else if(t_slbin2=="C0"||t_slbin2=="D0")  t_nDat=2;
-      else if(t_slbin2=="C1"||t_slbin2=="D1")  t_nDat=3;
+      if(t_slbin2=="A0"||t_slbin2=="B0") {  t_nDat=0;
+      } else if(t_slbin2=="A1"||t_slbin2=="B1") {  t_nDat=1;
+      } else if(t_slbin2=="C0"||t_slbin2=="D0") {  t_nDat=2;
+      } else if(t_slbin2=="C1"||t_slbin2=="D1") {  t_nDat=3; }
       t_jPhi=1;//after splitting up these towers, each half should have dphi of 1
       t_iPhi+=1;
 

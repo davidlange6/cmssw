@@ -24,7 +24,7 @@ void prefillMap(){
   
 
    for(int iEta=-EBDetId::MAX_IETA; iEta<=EBDetId::MAX_IETA ;++iEta) {
-     if(iEta==0) continue;
+     if(iEta==0) { continue; }
      for(int iPhi=EBDetId::MIN_IPHI; iPhi<=EBDetId::MAX_IPHI; ++iPhi) {
 
        try 
@@ -67,7 +67,7 @@ void print()
 
    int icount=0;
    for(int iEta=-EBDetId::MAX_IETA; iEta<=EBDetId::MAX_IETA ;++iEta) {
-     if(iEta==0) continue;
+     if(iEta==0) { continue; }
      for(int iPhi=EBDetId::MIN_IPHI; iPhi<=EBDetId::MAX_IPHI; ++iPhi) {
        if (EBDetId::validDetId(iEta,iPhi))
 	 {

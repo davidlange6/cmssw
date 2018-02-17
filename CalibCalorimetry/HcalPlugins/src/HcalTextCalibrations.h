@@ -57,7 +57,7 @@ public:
       CheckGetObject(const HcalTopology* topo) {}
       std::unique_ptr<T> operator()(std::istream& inStream){
         auto result = makeResult();
-        if(!HcalDbASCIIIO::getObject(inStream, &*result)) result.reset(nullptr);
+        if(!HcalDbASCIIIO::getObject(inStream, &*result)) { result.reset(nullptr); }
         return result;
       }
       virtual ~CheckGetObject() = default ;

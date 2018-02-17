@@ -31,8 +31,8 @@ public:
     inline const AbsElectronicODERHS& getRHS() const
     {
         const AbsODERHS* ptr = solver_.getRHS();
-        if (!ptr) throw cms::Exception(
-            "In QIE8Simulator::getRHS: RHS is not set");
+        if (!ptr) { throw cms::Exception(
+            "In QIE8Simulator::getRHS: RHS is not set"); }
         return *(static_cast<const AbsElectronicODERHS*>(ptr));
     }
 
@@ -149,18 +149,18 @@ private:
     inline AbsElectronicODERHS& modifiableRHS()
     {
         AbsODERHS* ptr = solver_.getRHS();
-        if (!ptr) throw cms::Exception(
-            "In QIE8Simulator::modifiableRHS: no RHS");
+        if (!ptr) { throw cms::Exception(
+            "In QIE8Simulator::modifiableRHS: no RHS"); }
         return *(static_cast<AbsElectronicODERHS*>(ptr));
     }
 
     inline double getCharge(const double t) const
     {
         double q;
-        if (integrateToGetCharge_)
+        if (integrateToGetCharge_) {
             q = solver_.interpolateIntegrated(chargeNode_, t, useCubic_);
-        else
-            q = solver_.interpolateCoordinate(chargeNode_, t, useCubic_);
+        } else {
+            q = solver_.interpolateCoordinate(chargeNode_, t, useCubic_); }
         return q;
     }
 

@@ -11,7 +11,8 @@ void HcalPulseShape::setNBin(int n) {
 }
 
 void HcalPulseShape::setShapeBin(int i, float f) {
-  if (i>=0 && i<nbin_) shape_[i]=f;
+  if (i>=0 && i<nbin_) { shape_[i]=f;
+}
 }
 
 float HcalPulseShape::operator()(double t) const {
@@ -23,7 +24,8 @@ float HcalPulseShape::at(double t) const {
   // shape is in 1 ns steps
   int i=(int)(t+0.5);
   float rv=0;
-  if (i>=0 && i<nbin_) rv=shape_[i];
+  if (i>=0 && i<nbin_) { rv=shape_[i];
+}
   return rv;
 }
 

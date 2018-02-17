@@ -92,8 +92,8 @@ void genlkupmap(double smin,
       sstep *= 2.0;
     }
 
-    if (thisxy.first > smax)
-      store_cur_pair = true;
+    if (thisxy.first > smax) {
+      store_cur_pair = true; }
       
     if (store_prev_pair) {
       m_ylookup[lastxy.first] = lastxy.second;

@@ -11,10 +11,12 @@ void ThirdOrderDelayODE::calculate(const double tau, const double currentIn,
                                    double* derivative) const
 {
     // Check input sanity
-    if (lenX < firstNode + 3U) throw cms::Exception(
+    if (lenX < firstNode + 3U) { throw cms::Exception(
         "In ThirdOrderDelayODE::calculate: insufficient number of variables");
-    if (tau <= 0.0) throw cms::Exception(
+}
+    if (tau <= 0.0) { throw cms::Exception(
         "In ThirdOrderDelayODE::calculate: delay time is not positive");
+}
     assert(x);
     assert(derivative);
 

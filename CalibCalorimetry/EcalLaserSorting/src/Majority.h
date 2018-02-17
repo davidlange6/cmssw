@@ -35,7 +35,8 @@ public:
 	m = *it;
       }
     }
-    if(proba) *proba = n_>0?m.second/n_:-1;
+    if(proba) { *proba = n_>0?m.second/n_:-1; }
+}
     return m.first;
   }
 

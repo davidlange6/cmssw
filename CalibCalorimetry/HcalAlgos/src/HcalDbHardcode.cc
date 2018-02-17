@@ -39,45 +39,45 @@ HcalDbHardcode::HcalDbHardcode() :
 
 const HcalHardcodeParameters& HcalDbHardcode::getParameters(HcalGenericDetId fId) const {
   if (fId.genericSubdet() == HcalGenericDetId::HcalGenBarrel){
-    if(useHBUpgrade_ && setHBUpgrade_) return theHBUpgradeParameters_;
-    else if(!useHBUpgrade_ && setHB_) return theHBParameters_;
-    else return theDefaultParameters_;
+    if(useHBUpgrade_ && setHBUpgrade_) { return theHBUpgradeParameters_;
+    } else if(!useHBUpgrade_ && setHB_) { return theHBParameters_;
+    } else { return theDefaultParameters_; }
   }
   else if (fId.genericSubdet() == HcalGenericDetId::HcalGenEndcap){
     bool b_isHEPlan1 = testHEPlan1_ ? isHEPlan1(fId) : false;
-    if((useHEUpgrade_ || b_isHEPlan1) && setHEUpgrade_) return theHEUpgradeParameters_;
-    else if(!useHEUpgrade_ && !b_isHEPlan1 && setHE_) return theHEParameters_;
-    else return theDefaultParameters_;
+    if((useHEUpgrade_ || b_isHEPlan1) && setHEUpgrade_) { return theHEUpgradeParameters_;
+    } else if(!useHEUpgrade_ && !b_isHEPlan1 && setHE_) { return theHEParameters_;
+    } else { return theDefaultParameters_; }
   }
   else if (fId.genericSubdet() == HcalGenericDetId::HcalGenForward){
-    if(useHFUpgrade_ && setHFUpgrade_) return theHFUpgradeParameters_;
-	else if(testHFQIE10_ && fId.isHcalDetId()){
+    if(useHFUpgrade_ && setHFUpgrade_) { return theHFUpgradeParameters_;
+	} else if(testHFQIE10_ && fId.isHcalDetId()){
         HcalDetId hid(fId);
         //special mixed case for HF 2016
-        if(hid.iphi()==39 && hid.zside()==1 && (hid.depth()>=3 || (hid.depth()==2 && (hid.ieta()==30 || hid.ieta()==34))) && setHFUpgrade_) return theHFUpgradeParameters_;
-        else if(setHF_) return theHFParameters_;
-        else return theDefaultParameters_;
+        if(hid.iphi()==39 && hid.zside()==1 && (hid.depth()>=3 || (hid.depth()==2 && (hid.ieta()==30 || hid.ieta()==34))) && setHFUpgrade_) { return theHFUpgradeParameters_;
+        } else if(setHF_) { return theHFParameters_;
+        } else { return theDefaultParameters_; }
     }
-    else if(!useHFUpgrade_ && setHF_) return theHFParameters_;
-    else return theDefaultParameters_;
+    else if(!useHFUpgrade_ && setHF_) { return theHFParameters_;
+    } else { return theDefaultParameters_; }
   }
   else if (fId.genericSubdet() == HcalGenericDetId::HcalGenOuter){
-    if(setHO_) return theHOParameters_;
-    else return theDefaultParameters_;
+    if(setHO_) { return theHOParameters_;
+    } else { return theDefaultParameters_; }
   }
-  else return theDefaultParameters_;
+  else { return theDefaultParameters_; }
 }
 
 const int HcalDbHardcode::getGainIndex(HcalGenericDetId fId) const {
   int index = 0;
   if (fId.genericSubdet() == HcalGenericDetId::HcalGenOuter) {
     HcalDetId hid(fId);
-    if ((hid.ieta() > -5) && (hid.ieta() < 5)) index = 0;
-    else index = 1;
+    if ((hid.ieta() > -5) && (hid.ieta() < 5)) { index = 0;
+    } else { index = 1; }
   } else if (fId.genericSubdet() == HcalGenericDetId::HcalGenForward) {
     HcalDetId hid(fId);
-    if (hid.depth() % 2 == 1) index = 0; //depths 1,3
-    else if (hid.depth() % 2 == 0) index = 1; //depths 2,4
+    if (hid.depth() % 2 == 1) { index = 0; //depths 1,3
+    } else if (hid.depth() % 2 == 0) { index = 1; //depths 2,4 }
   }
   return index;
 }
@@ -95,9 +95,9 @@ HcalPedestal HcalDbHardcode::makePedestal (HcalGenericDetId fId, bool fSmear, bo
   if (fSmear) {
     for (int i = 0; i < 4; i++) {
       value[i] = 0.0f;
-      while (value [i] <= 0.0f)
+      while (value [i] <= 0.0f) {
 	// ignore correlations, assume 10K pedestal run 
-	value [i] = value0 + (float)CLHEP::RandGauss::shoot (0.0, width.getWidth (i) / 100.);
+	value [i] = value0 + (float)CLHEP::RandGauss::shoot (0.0, width.getWidth (i) / 100.); }
     }
   }
   HcalPedestal result (fId.rawId (), 
@@ -136,7 +136,7 @@ HcalGain HcalDbHardcode::makeGain (HcalGenericDetId fId, bool fSmear) const { //
   if (fSmear) {
     for (int i = 0; i < 4; i++) {
       value[i] = 0.0f;
-      while (value [i] <= 0.0f) value [i] = value0 + (float)CLHEP::RandGauss::shoot (0.0, width.getValue (i)); 
+      while (value [i] <= 0.0f) { value [i] = value0 + (float)CLHEP::RandGauss::shoot (0.0, width.getValue (i));  }
     }
   }
   HcalGain result (fId.rawId (), value[0], value[1], value[2], value[3]);
@@ -238,7 +238,7 @@ HcalMCParam HcalDbHardcode::makeMCParam (HcalGenericDetId fId) const {
     timeSmearing = 0;                      // a4
 
     HcalDetId cell = HcalDetId(fId);
-    if (cell.ieta() == 1 && cell.iphi() == 1) pulseShapeID = 125;
+    if (cell.ieta() == 1 && cell.iphi() == 1) { pulseShapeID = 125; }
 
   }
   
@@ -524,11 +524,11 @@ std::unique_ptr<HcalFrontEndMap> HcalDbHardcode::makeHardcodeFrontEndMap(const s
 	det = detector[subdet];
 	irm = (iphi+1)%4 + 1;
 	int iwedge(0);
-	if (ieta >= 21 && (irm == 1 || irm == 3)) 
+	if (ieta >= 21 && (irm == 1 || irm == 3)) { 
 	  iwedge = (iphi + 1 + irm + 1) / 4;
-	else
-	  iwedge = (iphi + irm + 1) / 4;
-	if (iwedge > 18) iwedge -= 18;
+	} else {
+	  iwedge = (iphi + irm + 1) / 4; }
+	if (iwedge > 18) { iwedge -= 18; }
 	sprintf (tempbuff,"%s%c%2.2i%c",det.c_str(),sidesign,iwedge,'\0');
 	mystream << tempbuff;
 	rbx = mystream.str();
@@ -553,17 +553,17 @@ std::unique_ptr<HcalFrontEndMap> HcalDbHardcode::makeHardcodeFrontEndMap(const s
       } else if (subdet == HcalOuter) {
 	det = detector[subdet];
 	int ring(0), sector(0);
-        if      (ieta <= 4)                ring = 0;
-        else if (ieta >= 5 && ieta <= 10)  ring = 1;
-        else                               ring = 2;
-        for (int i = -2; i < iphi; i+=6)   sector++;
-        if (sector > 12) sector = 1; 
+        if      (ieta <= 4) {                ring = 0;
+        } else if (ieta >= 5 && ieta <= 10) {  ring = 1;
+        } else {                               ring = 2; }
+        for (int i = -2; i < iphi; i+=6) {   sector++; }
+        if (sector > 12) { sector = 1;  }
 	irm  =  ((iphi+1)/2)%6 + 1;
-        if (ring != 0 && sector % 2 != 0) sector++;
-        if (ring == 0) 
+        if (ring != 0 && sector % 2 != 0) { sector++; }
+        if (ring == 0) { 
 	  sprintf (tempbuff,"%s%i%2.2d",det.c_str(),ring,sector);
-        else 
-	  sprintf (tempbuff,"%s%i%c%2.2d",det.c_str(),ring,sidesign,sector);
+        } else { 
+	  sprintf (tempbuff,"%s%i%c%2.2d",det.c_str(),ring,sidesign,sector); }
         mystream << tempbuff;
 	rbx = mystream.str();
         mystream.str("");
@@ -596,7 +596,7 @@ bool HcalDbHardcode::isHEPlan1(HcalGenericDetId fId) const {
   if(fId.isHcalDetId()){
     HcalDetId hid(fId);
     //special mixed case for HE 2017
-    if(hid.zside()==1 && (hid.iphi()==63 || hid.iphi()==64 || hid.iphi()==65 || hid.iphi()==66)) return true;
+    if(hid.zside()==1 && (hid.iphi()==63 || hid.iphi()==64 || hid.iphi()==65 || hid.iphi()==66)) { return true; }
   }
   return false;
 }
@@ -622,7 +622,7 @@ HcalSiPMParameter HcalDbHardcode::makeHardcodeSiPMParameter (HcalGenericDetId fI
         theDC = getParameters(fId).darkCurrent(0,intlumi);
       }
     }
-    else theType = HcalHPD;
+    else { theType = HcalHPD; }
   } else if (fId.genericSubdet() == HcalGenericDetId::HcalGenEndcap) {
     if(useHEUpgrade_ || (testHEPlan1_ && isHEPlan1(fId))) {
       HcalDetId hid(fId);
@@ -636,10 +636,10 @@ HcalSiPMParameter HcalDbHardcode::makeHardcodeSiPMParameter (HcalGenericDetId fI
         theDC = getParameters(fId).darkCurrent(0,intlumi);
       }
     }
-    else theType = HcalHPD;
+    else { theType = HcalHPD; }
   } else if (fId.genericSubdet() == HcalGenericDetId::HcalGenOuter) {
-    if(useHOUpgrade_) theType = HcalHOHamamatsu;
-    else theType = HcalHPD;
+    if(useHOUpgrade_) { theType = HcalHOHamamatsu;
+    } else { theType = HcalHPD; }
   }
   
   return HcalSiPMParameter(fId.rawId(), theType, thePe2fC, theDC, 0, 0);

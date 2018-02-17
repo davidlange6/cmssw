@@ -21,7 +21,7 @@ HcalSiPMRadiationDamage::HcalSiPMRadiationDamage(std::vector<double> darkCurrent
 //accounts for both lumi dependence and temp dependence
 double HcalSiPMRadiationDamage::getDarkCurrent(double intlumi, unsigned index) const {
 	intlumi -= intlumiOffset_;
-	if(intlumi<=0) return darkCurrentBase_.at(index);
+	if(intlumi<=0) { return darkCurrentBase_.at(index); }
 	double darkCurrentNewLumi = darkCurrentBase_.at(index) + depVsNeutrons_.at(index)*(intlumi*intlumiToNeutrons_);
 	double darkCurrentNewTemp = darkCurrentNewLumi*std::exp(depVsTemp_*(temperatureNew_ - temperatureBase_));
 	return darkCurrentNewTemp;

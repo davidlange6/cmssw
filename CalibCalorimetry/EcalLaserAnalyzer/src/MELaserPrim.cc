@@ -121,7 +121,8 @@ MELaserPrim::getViewIds( int logic_id, int& channelView, int& id1, int& id2 )
 {
   bool out = true;
   int channelView_ = logic_id/1000000;
-  if( channelView!=0 && channelView_!=channelView ) out=false;
+  if( channelView!=0 && channelView_!=channelView ) { out=false;
+}
   channelView = channelView_;
   id1 = (logic_id%1000000)/10000;
   id2 = logic_id%10000;
@@ -135,13 +136,15 @@ MELaserPrim::init()
 
   if( _inpath=="0" )
     {
-      if( verbose_ ) std::cout << "no input file" << std::endl;
+      if( verbose_ ) { std::cout << "no input file" << std::endl;
+}
       init_ok = true;
       return; // GHM
     }
 
   TString cur(_inpath);
-  if( !cur.EndsWith("/") ) cur+="/";
+  if( !cur.EndsWith("/") ) { cur+="/";
+}
 
   if( _type==ME::iLaser )
     {
@@ -172,9 +175,12 @@ MELaserPrim::init()
 	  fclose( test );
 	}
 
-      if(apdpn_ok) apdpn_file = TFile::Open( _APDPN_fname );
-      if(ab_ok)    ab_file    = TFile::Open(    _AB_fname );
-      if(mtq_ok)  mtq_file   = TFile::Open(   _MTQ_fname );
+      if(apdpn_ok) { apdpn_file = TFile::Open( _APDPN_fname );
+}
+      if(ab_ok) {    ab_file    = TFile::Open(    _AB_fname );
+}
+      if(mtq_ok) {  mtq_file   = TFile::Open(   _MTQ_fname );
+}
 
       if( verbose_ )
 	{
@@ -182,7 +188,8 @@ MELaserPrim::init()
 	  std::cout << _AB_fname    << " ok=" << ab_ok    << std::endl;
 	  std::cout << _MTQ_fname   << " ok=" << mtq_ok    << std::endl;
 	}
-      if (!apdpn_ok || !pn_ok ) return; // FIXME !
+      if (!apdpn_ok || !pn_ok ) { return; // FIXME !
+}
   
       TString apdpn_tree_name;
       TString    ab_tree_name;
@@ -201,7 +208,8 @@ MELaserPrim::init()
 
       if(mtq_ok)  {
 	TTree *ckeckMtq = (TTree*) mtq_file->Get(mtq_tree_name);
-	if( ckeckMtq ==nullptr ) mtq_ok = false;
+	if( ckeckMtq ==nullptr ) { mtq_ok = false;
+}
       }
 
       if( _color != ME::iIRed && _color != ME::iBlue ){ 
@@ -220,8 +228,9 @@ MELaserPrim::init()
       apdpn_tree->SetBranchAddress("ieta", &apdpn_ieta, &b_apdpn_ieta);
       apdpn_tree->SetBranchAddress("iphi", &apdpn_iphi, &b_apdpn_iphi);
       apdpn_tree->SetBranchAddress("flag", &apdpn_flag, &b_apdpn_flag);
-      if( apdpn_tree->GetBranchStatus("ShapeCor")) apdpn_tree->SetBranchAddress("ShapeCor", &apdpn_ShapeCor, &b_apdpn_ShapeCor);
-      else apdpn_ShapeCor = 0.0;
+      if( apdpn_tree->GetBranchStatus("ShapeCor")) { apdpn_tree->SetBranchAddress("ShapeCor", &apdpn_ShapeCor, &b_apdpn_ShapeCor);
+      } else { apdpn_ShapeCor = 0.0;
+}
       for( int jj=0; jj<iSizeArray_apdpn; jj++ )
 	{
 	  TString name_ = apdpn_arrayName[jj];
@@ -282,13 +291,15 @@ MELaserPrim::init()
 	fclose( test );
       }
 
-      if(tpapd_ok) tpapd_file = TFile::Open( _TPAPD_fname );
+      if(tpapd_ok) { tpapd_file = TFile::Open( _TPAPD_fname );
+}
 
       if( verbose_ )
 	{
 	  std::cout << _TPAPD_fname << " ok=" << tpapd_ok << std::endl;
 	}
-      if (!tpapd_ok ) return;
+      if (!tpapd_ok ) { return;
+}
   
       TString tpapd_tree_name;
       TString tppn_tree_name;
@@ -325,7 +336,8 @@ MELaserPrim::init()
 void
 MELaserPrim::bookHistograms()
 {
-  if( !init_ok ) return;
+  if( !init_ok ) { return;
+}
   refresh();
 
   TString i_name, d_name;
@@ -505,7 +517,8 @@ MELaserPrim::fillHistograms()
 {
   TString t_name; 
 
-  if( !init_ok ) return;
+  if( !init_ok ) { return;
+}
 
   Long64_t nentries = 0;
   Long64_t ientry   = 0;
@@ -531,7 +544,8 @@ MELaserPrim::fillHistograms()
 	  }
 
 
-	  if( apdpn_iphi<0 ) continue;      
+	  if( apdpn_iphi<0 ) { continue;      
+}
 
 	  // fixme remove until coordinated are fine
 	  //if(ab_tree) assert( apdpn_ieta==ab_ieta && apdpn_iphi==ab_iphi );
@@ -542,7 +556,8 @@ MELaserPrim::fillHistograms()
 	    {
 	      // Barrel, global coordinates
 	      id1_ = _sm;   
-	      if ( apdpn_side != _side ) continue; 
+	      if ( apdpn_side != _side ) { continue; 
+}
 	      int ieta=apdpn_ieta;
 	      int iphi=apdpn_iphi;
 	      MEEBGeom::XYCoord xy_ = MEEBGeom::localCoord( ieta, iphi );
@@ -633,9 +648,11 @@ MELaserPrim::fillHistograms()
 	      assert( ientry>=0 );
 	      pn_tree->GetEntry( zentry );
 	      
-	      if( _side!=pn_side ) break;
+	      if( _side!=pn_side ) { break;
+}
 		  
-	      if( jj==1 ) assert( pn_moduleID==module_ );
+	      if( jj==1 ) { assert( pn_moduleID==module_ );
+}
 	      module_ = pn_moduleID;
 	      assert( pn_pnID==jj );
 	      
@@ -724,7 +741,8 @@ MELaserPrim::fillHistograms()
 	    assert( ientry>=0 );
 	    mtq_tree->GetEntry( jentry );
 	    
-	    if ( mtq_side != _side ) continue; 
+	    if ( mtq_side != _side ) { continue; 
+}
 	    
 	    i_t[t_name+separator+"LOGIC_ID"]       = logic_id_;
 	    i_t[t_name+separator+"FIT_METHOD"]     = 0 ;   // fixme  --- what's this? ? ?
@@ -931,7 +949,8 @@ MELaserPrim::fillHistograms()
 void
 MELaserPrim::writeHistograms()
 {
-  if( !init_ok ) return;
+  if( !init_ok ) { return;
+}
 
   out_file = new TFile( _outfile, "RECREATE" );
   //  out_file->cd();
@@ -1024,8 +1043,10 @@ TString
 MELaserPrim::lmfLaserName( int table, int type, int color )
 {
   TString str("LMF_ERROR");
-  if( table<0 || table>=ME::iSizeLmf )  return str;
-  if( color<0 || color>=ME::iSizeC )    return str;
+  if( table<0 || table>=ME::iSizeLmf ) {  return str;
+}
+  if( color<0 || color>=ME::iSizeC ) {    return str;
+}
 
   if( type==ME::iLaser )
     {
@@ -1071,7 +1092,8 @@ MELaserPrim::addBranchI( const char* t_name_, const char* v_name_ )
   TString slashI("/i"); // Warning: always unsigned
   TString t_name(t_name_);
   TString v_name(v_name_);
-  if( t_t.count(t_name)==0 ) t_t[t_name] = new TTree(t_name, t_name);
+  if( t_t.count(t_name)==0 ) { t_t[t_name] = new TTree(t_name, t_name);
+}
   t_t[t_name]->Branch(v_name, &i_t[t_name+separator+v_name],v_name+slashI);  
 }
 
@@ -1081,7 +1103,8 @@ MELaserPrim::addBranchF( const char* t_name_, const char* v_name_ )
   TString slashF("/F");
   TString t_name(t_name_);
   TString v_name(v_name_);
-  if( t_t.count(t_name)==0 ) t_t[t_name] = new TTree(t_name, t_name);
+  if( t_t.count(t_name)==0 ) { t_t[t_name] = new TTree(t_name, t_name);
+}
   t_t[t_name]->Branch(v_name, &f_t[t_name+separator+v_name],v_name+slashF);
 }
 
@@ -1091,7 +1114,8 @@ MELaserPrim::addBranchC( const char* t_name_, const char* v_name_ )
   TString slashC("/C");
   TString t_name(t_name_);
   TString v_name(v_name_);
-  if( t_t.count(t_name)==0 ) t_t[t_name] = new TTree(t_name, t_name);
+  if( t_t.count(t_name)==0 ) { t_t[t_name] = new TTree(t_name, t_name);
+}
   t_t[t_name]->Branch(v_name, &c_t[t_name+separator+v_name],v_name+slashC);
 }
 
@@ -1118,12 +1142,14 @@ bool
 MELaserPrim::setInt( const char* name, int ix, int iy, int ival )
 {
   TString name_;
-  if( _type==ME::iLaser ) name_=_primStr+name;
-  else if( _type==ME::iTestPulse ) name_=_tpPrimStr+name;
+  if( _type==ME::iLaser ) { name_=_primStr+name;
+  } else if( _type==ME::iTestPulse ) { name_=_tpPrimStr+name;
+}
  
   int _ival = getInt( name_, ix, iy );
   assert( _ival!=-99 );
-  if( _ival!=0 ) return false; 
+  if( _ival!=0 ) { return false; 
+}
 
   TH2I* h_ = (TH2I*) i_h[name_];
   assert( h_!=nullptr );
@@ -1136,12 +1162,14 @@ bool
 MELaserPrim::setVal( const char* name, int ix, int iy, float val )
 {
   TString name_;
-  if( _type==ME::iLaser ) name_=_primStr+name;
-  else if( _type==ME::iTestPulse ) name_=_tpPrimStr+name;
+  if( _type==ME::iLaser ) { name_=_primStr+name;
+  } else if( _type==ME::iTestPulse ) { name_=_tpPrimStr+name;
+}
  
   float _val = getVal( name_, ix, iy );
   assert( _val!=-99 );
-  if( _val!=0 ) return false; 
+  if( _val!=0 ) { return false; 
+}
 
   TH2F* h_ = (TH2F*) f_h[name_];
   assert( h_!=nullptr );
@@ -1217,7 +1245,8 @@ MELaserPrim::fill( const char* tname )
 void 
 MELaserPrim::setHistoStyle( TH1* h )
 {
-  if( h==nullptr ) return;
+  if( h==nullptr ) { return;
+}
   
   float _scale = 1;
 
@@ -1231,7 +1260,8 @@ MELaserPrim::setHistoStyle( TH1* h )
   for( int ii=0; ii<3; ii++ )
     {
       TAxis* a = axis[ii];
-      if( !a ) continue;
+      if( !a ) { continue;
+}
       a->SetLabelFont(132);
       a->SetLabelOffset(_scale*0.005);
       a->SetLabelSize(_scale*0.04);

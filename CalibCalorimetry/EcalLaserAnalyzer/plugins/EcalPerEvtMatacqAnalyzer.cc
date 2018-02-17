@@ -135,7 +135,7 @@ void EcalPerEvtMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::Event
     // Cut on runType
     
     if(runType!=EcalDCCHeaderBlock::LASER_STD && runType!=EcalDCCHeaderBlock::LASER_GAP 
-       && runType!=EcalDCCHeaderBlock::LASER_POWER_SCAN && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN) return; 
+       && runType!=EcalDCCHeaderBlock::LASER_POWER_SCAN && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN) { return;  }
     
     // Define output results files' names
     
@@ -171,7 +171,7 @@ void EcalPerEvtMatacqAnalyzer:: analyze( const edm::Event & e, const  edm::Event
     // 
     const EcalMatacqDigi& digis = *it;
     
-    if(digis.size()==0 || iCh>=N_channels) continue; 
+    if(digis.size()==0 || iCh>=N_channels) { continue;  }
 
     max=0;
     maxsamp=0;

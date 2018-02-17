@@ -124,8 +124,8 @@ pnID(-1), moduleID(-1), flag(0), channelIteratorEE(0), ShapeCor(0)
     nCrys    = NCRYSEE;
   }
   iZ         =  1;
-  if(_fedid <= 609 ) 
-    iZ       = -1;
+  if(_fedid <= 609 ) { 
+    iZ       = -1; }
   modules    = ME::lmmodFromDcc(_fedid);
   nMod       = modules.size(); 
   nRefChan   = NREFCHAN;
@@ -344,7 +344,7 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
     // Get run type and run number 
 
     int fed = headerItr->fedId();  
-    if(fed!=_fedid && _fedid!=-999) continue; 
+    if(fed!=_fedid && _fedid!=-999) { continue;  }
     
     runType=headerItr->getRunType();
     runNum=headerItr->getRunNumber();
@@ -356,20 +356,20 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
 
     // Check fed corresponds to the DCC in TCC
 
-    if( 600+dccID != fedID ) continue;
+    if( 600+dccID != fedID ) { continue; }
     
     // Cut on runType
     
     if ( runType!=EcalDCCHeaderBlock::LASER_STD 
 	 && runType!=EcalDCCHeaderBlock::LASER_GAP 
 	 && runType!=EcalDCCHeaderBlock::LASER_POWER_SCAN 
-	 && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN ) return; 
+	 && runType!=EcalDCCHeaderBlock::LASER_DELAY_SCAN ) { return;  }
     
     // Retrieve laser color and event number
     
     EcalDCCHeaderBlock::EcalDCCEventSettings settings = headerItr->getEventSettings();
     color = settings.wavelength;
-    if( color<0 ) return;
+    if( color<0 ) { return; }
 
     vector<int>::iterator iter = find( colors.begin(), colors.end(), color );
     if( iter==colors.end() ){
@@ -380,12 +380,12 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
   
   // Check Matacq shape exists
 
-  if(!IsMatacqOK) return;
+  if(!IsMatacqOK) { return; }
   
   
   // Cut on fedID
 
-  if(fedID!=_fedid && _fedid!=-999) return; 
+  if(fedID!=_fedid && _fedid!=-999) { return;  }
   
   // Count laser events
 
@@ -413,24 +413,24 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
     
     EcalPnDiodeDetId pnDetId = EcalPnDiodeDetId((*pnItr).id());
     
-    if (_debug==1) cout <<"-- debug test -- Inside PNDigi - pnID=" << 
-		     pnDetId.iPnId()<<", dccID="<< pnDetId.iDCCId()<< endl;
+    if (_debug==1) { cout <<"-- debug test -- Inside PNDigi - pnID=" << 
+		     pnDetId.iPnId()<<", dccID="<< pnDetId.iDCCId()<< endl; }
      
     // Skip MEM DCC without relevant data
   
     bool isMemRelevant=Mem->isMemRelevant(pnDetId.iDCCId());
-    if(!isMemRelevant) continue;
+    if(!isMemRelevant) { continue; }
 
     // Loop on PN samples
     
     for ( int samId=0; samId < (*pnItr).size() ; samId++ ) {
       pn[samId]=(*pnItr).sample(samId).adc();  
       pnG[samId]=(*pnItr).sample(samId).gainId(); 
-      if (samId==0) pnGain=pnG[samId];
-      if (samId>0) pnGain=int(TMath::Max(pnG[samId],pnGain));     
+      if (samId==0) { pnGain=pnG[samId]; }
+      if (samId>0) { pnGain=int(TMath::Max(pnG[samId],pnGain));      }
     }
     
-    if(pnGain!=1) cout << "PN gain different from 1"<< endl;
+    if(pnGain!=1) { cout << "PN gain different from 1"<< endl; }
     
     // Calculate amplitude from pulse
     
@@ -438,21 +438,21 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
     pnNoPed=PNPulse->getAdcWithoutPedestal();
     samplemax=PNPulse->getMaxSample();
     chi2pn = pnfit -> doFit(samplemax,&pnNoPed[0]); 
-    if(chi2pn == 101 || chi2pn == 102 || chi2pn == 103) pnAmpl=0.;
-    else pnAmpl= pnfit -> getAmpl();
+    if(chi2pn == 101 || chi2pn == 102 || chi2pn == 103) { pnAmpl=0.;
+    } else { pnAmpl= pnfit -> getAmpl(); }
     
     // Apply linearity correction
 
     double corr=1.0;
-    if( _docorpn ) corr=pnCorrector->getPNCorrectionFactor(pnAmpl, pnGain);
+    if( _docorpn ) { corr=pnCorrector->getPNCorrectionFactor(pnAmpl, pnGain); }
     pnAmpl*=corr;
     
     // Fill PN ampl vector
     
     allPNAmpl[pnDetId.iDCCId()].push_back(pnAmpl);
     
-    if (_debug==1) cout <<"-- debug -- Inside PNDigi - PNampl=" << 
-		     pnAmpl<<", PNgain="<< pnGain<<endl;  
+    if (_debug==1) { cout <<"-- debug -- Inside PNDigi - PNampl=" << 
+		     pnAmpl<<", PNgain="<< pnGain<<endl;   }
     
   }
 
@@ -505,9 +505,9 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
 
       setGeomEB(etaG, phiG, module, tower, strip, xtal, apdRefTT, channel, lmr);   
 
-      if (_debug==1) cout << "-- debug -- Inside EBDigi - towerID:"<< towerID<<
+      if (_debug==1) { cout << "-- debug -- Inside EBDigi - towerID:"<< towerID<<
 		       " channelID:" <<channelID<<" module:"<< module<<
-		       " modules:"<<modules.size()<< endl;
+		       " modules:"<<modules.size()<< endl; }
 
       // APD Pulse
       //=========== 
@@ -520,8 +520,8 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
 	adc[i]=samp_crystal.adc() ;    
 	adcG[i]=samp_crystal.gainId();   
 	adc[i]*=adcG[i];
-	if (i==0) adcGain=adcG[i];
-	if (i>0) adcGain=TMath::Max(adcG[i],adcGain);  
+	if (i==0) { adcGain=adcG[i]; }
+	if (i>0) { adcGain=TMath::Max(adcG[i],adcGain);   }
       }
 
       APDPulse->setPulse(adc);
@@ -530,8 +530,8 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
       // Quality checks
       //================
       
-      if(adcGain!=1) nEvtBadGain[channel]++;   
-      if(!APDPulse->isTimingQualOK()) nEvtBadTiming[channel]++;
+      if(adcGain!=1) { nEvtBadGain[channel]++;    }
+      if(!APDPulse->isTimingQualOK()) { nEvtBadTiming[channel]++; }
       nEvtTot[channel]++;
       
       // Associate PN ampl
@@ -540,10 +540,10 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
       int mem0=Mem->Mem(lmr,0);
       int mem1=Mem->Mem(lmr,1);
 
-      if(allPNAmpl[mem0].size()>MyPn0) pn0=allPNAmpl[mem0][MyPn0];
-      else pn0=0;
-      if(allPNAmpl[mem1].size()>MyPn1) pn1=allPNAmpl[mem1][MyPn1];
-      else pn1=0;
+      if(allPNAmpl[mem0].size()>MyPn0) { pn0=allPNAmpl[mem0][MyPn0];
+      } else { pn0=0; }
+      if(allPNAmpl[mem1].size()>MyPn1) { pn1=allPNAmpl[mem1][MyPn1];
+      } else { pn1=0; }
       
       // Fill if Pulse is fine
       //=======================
@@ -582,7 +582,7 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
       int ch=elecid_crystal.channelId()-1; 
 
       int module=MEEEGeom::lmmod( iX, iY );
-      if( module>=18 && side==1 ) module+=2;
+      if( module>=18 && side==1 ) { module+=2; }
       int lmr=MEEEGeom::lmr( iX, iY ,iZ); 
       int dee=MEEEGeom::dee(lmr);
       int apdRefTT=MEEEGeom::apdRefTower(lmr, module);  
@@ -602,14 +602,14 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
       setGeomEE(etaG, phiG, iX, iY, iZ, module, tower, ch, apdRefTT, channel, lmr);
       
       
-      if (_debug==1) cout << "-- debug -- Inside EEDigi - towerID:"<< towerID<<
+      if (_debug==1) { cout << "-- debug -- Inside EEDigi - towerID:"<< towerID<<
 		       " channelID:" <<channelID<<" module:"<< module<<
-		       " modules:"<<modules.size()<< endl;
+		       " modules:"<<modules.size()<< endl; }
       
       // APD Pulse
       //=========== 
 
-      if( (*digiItr).size()>10) cout <<"SAMPLES SIZE > 10!" <<  (*digiItr).size()<< endl;
+      if( (*digiItr).size()>10) { cout <<"SAMPLES SIZE > 10!" <<  (*digiItr).size()<< endl; }
  
       // Loop on adc samples  
 
@@ -620,8 +620,8 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
 	adcG[i]=samp_crystal.gainId();   
 	adc[i]*=adcG[i];
 	
-	if (i==0) adcGain=adcG[i];
-	if (i>0) adcGain=TMath::Max(adcG[i],adcGain);  
+	if (i==0) { adcGain=adcG[i]; }
+	if (i>0) { adcGain=TMath::Max(adcG[i],adcGain);   }
       }
       
       APDPulse->setPulse(adc);
@@ -629,8 +629,8 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
       // Quality checks
       //================
       
-      if(adcGain!=1) nEvtBadGain[channel]++;   
-      if(!APDPulse->isTimingQualOK()) nEvtBadTiming[channel]++;
+      if(adcGain!=1) { nEvtBadGain[channel]++;    }
+      if(!APDPulse->isTimingQualOK()) { nEvtBadTiming[channel]++; }
       nEvtTot[channel]++;
 
       
@@ -640,10 +640,10 @@ void EcalLaserAnalyzer2:: analyze( const edm::Event & e, const  edm::EventSetup&
       int mem0=Mem->Mem(lmr,0);
       int mem1=Mem->Mem(lmr,1);
       
-      if(allPNAmpl[mem0].size()>MyPn0) pn0=allPNAmpl[mem0][MyPn0];
-      else pn0=0;
-      if(allPNAmpl[mem1].size()>MyPn1) pn1=allPNAmpl[mem1][MyPn1];
-      else pn1=0;
+      if(allPNAmpl[mem0].size()>MyPn0) { pn0=allPNAmpl[mem0][MyPn0];
+      } else { pn0=0; }
+      if(allPNAmpl[mem1].size()>MyPn1) { pn1=allPNAmpl[mem1][MyPn1];
+      } else { pn1=0; }
 
       // Fill if Pulse is fine
       //=======================
@@ -688,7 +688,7 @@ void EcalLaserAnalyzer2::endJob() {
   double delta12=Delta12->getMean();
   if(delta12>_presamplecut) {
     _presample=2;
-    if(delta01>_presamplecut) _presample=1;
+    if(delta01>_presamplecut) { _presample=1; }
   }
   
   APDPulse->setPresamples(_presample);
@@ -733,8 +733,8 @@ void EcalLaserAnalyzer2::endJob() {
   double BadGainChanPercentage=double(nChanBadGain)/double(nCrys);
   double BadTimingChanPercentage=double(nChanBadTiming)/double(nCrys);
   
-  if(BadGainChanPercentage>_qualpercent) isGainOK = false;
-  if(BadTimingChanPercentage>_qualpercent) isTimingOK = false;
+  if(BadGainChanPercentage>_qualpercent) { isGainOK = false; }
+  if(BadTimingChanPercentage>_qualpercent) { isTimingOK = false; }
 
   // Analyze adc samples to get amplitudes
   //=======================================
@@ -742,10 +742,10 @@ void EcalLaserAnalyzer2::endJob() {
   cout <<  "\n\t+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+" << endl;
   cout <<    "\t+=+     Analyzing laser data: getting APD, PN, APD/PN, PN/PN    +=+" << endl;
   
-  if( !isGainOK )
-  cout <<    "\t+=+ ............................ WARNING! APD GAIN WAS NOT 1    +=+" << endl;
-  if( !isTimingOK )
-  cout <<    "\t+=+ ............................ WARNING! TIMING WAS BAD        +=+" << endl;
+  if( !isGainOK ) {
+  cout <<    "\t+=+ ............................ WARNING! APD GAIN WAS NOT 1    +=+" << endl; }
+  if( !isTimingOK ) {
+  cout <<    "\t+=+ ............................ WARNING! TIMING WAS BAD        +=+" << endl; }
     
   APDFile = new TFile(APDfile.c_str(),"RECREATE");
   
@@ -772,7 +772,7 @@ void EcalLaserAnalyzer2::endJob() {
     APDtrees[i]->Branch( "channelID", &channelID, "channelID/I" );
     APDtrees[i]->Branch( "apdAmpl",   &apdAmpl,   "apdAmpl/D"   );
     APDtrees[i]->Branch( "apdTime",   &apdTime,   "apdTime/D"   );
-    if(_saveallevents) APDtrees[i]->Branch( "adc", &adc ,"adc[10]/D"   );
+    if(_saveallevents) { APDtrees[i]->Branch( "adc", &adc ,"adc[10]/D"   ); }
     APDtrees[i]->Branch( "flagfit",   &flagfit,   "flagfit/I"   ); 
     APDtrees[i]->Branch( "pn0",       &pn0,       "pn0/D"       );
     APDtrees[i]->Branch( "pn1",       &pn1,       "pn1/D"       ); 
@@ -787,7 +787,7 @@ void EcalLaserAnalyzer2::endJob() {
     APDtrees[i]->SetBranchAddress( "channelID", &channelID ); 
     APDtrees[i]->SetBranchAddress( "apdAmpl",   &apdAmpl   );
     APDtrees[i]->SetBranchAddress( "apdTime",   &apdTime   );
-    if(_saveallevents)APDtrees[i]->SetBranchAddress( "adc", adc   );
+    if(_saveallevents) {APDtrees[i]->SetBranchAddress( "adc", adc   ); }
     APDtrees[i]->SetBranchAddress( "flagfit",   &flagfit   ); 
     APDtrees[i]->SetBranchAddress( "pn0",       &pn0       );
     APDtrees[i]->SetBranchAddress( "pn1",       &pn1       ); 
@@ -807,13 +807,13 @@ void EcalLaserAnalyzer2::endJob() {
       
       RefAPDtrees[iref][jmod]->Branch( "eventref",     &eventref,     "eventref/I"     );
       RefAPDtrees[iref][jmod]->Branch( "colorref",     &colorref,     "colorref/I"     );
-      if(iref==0) RefAPDtrees[iref][jmod]->Branch( "apdAmplA",   &apdAmplA,   "apdAmplA/D"   );
-      if(iref==1) RefAPDtrees[iref][jmod]->Branch( "apdAmplB",   &apdAmplB,   "apdAmplB/D"   );
+      if(iref==0) { RefAPDtrees[iref][jmod]->Branch( "apdAmplA",   &apdAmplA,   "apdAmplA/D"   ); }
+      if(iref==1) { RefAPDtrees[iref][jmod]->Branch( "apdAmplB",   &apdAmplB,   "apdAmplB/D"   ); }
       
       RefAPDtrees[iref][jmod]->SetBranchAddress( "eventref",     &eventref     );
       RefAPDtrees[iref][jmod]->SetBranchAddress( "colorref",     &colorref     ); 
-      if(iref==0)RefAPDtrees[iref][jmod]->SetBranchAddress( "apdAmplA",   &apdAmplA   );
-      if(iref==1)RefAPDtrees[iref][jmod]->SetBranchAddress( "apdAmplB",   &apdAmplB   );
+      if(iref==0) {RefAPDtrees[iref][jmod]->SetBranchAddress( "apdAmplA",   &apdAmplA   ); }
+      if(iref==1) {RefAPDtrees[iref][jmod]->SetBranchAddress( "apdAmplB",   &apdAmplB   ); }
       
     } 
   }
@@ -850,14 +850,14 @@ void EcalLaserAnalyzer2::endJob() {
       IsThereDataADC[iCry][icol]=1;      
       stringstream cut;
       cut <<"color=="<<colors.at(icol);
-      if(ADCtrees[iCry]->GetEntries(cut.str().c_str())<10) IsThereDataADC[iCry][icol]=0;
+      if(ADCtrees[iCry]->GetEntries(cut.str().c_str())<10) { IsThereDataADC[iCry][icol]=0; }
       
     }
 
     unsigned int iMod=iModule[iCry]-1;
     assert(iMod<=nMod);
 
-    if(isSPRFine) psfit -> init(_nsamples,_firstsample,_lastsample,_niter, nSamplesShapes, shapesVec, _noise );
+    if(isSPRFine) { psfit -> init(_nsamples,_firstsample,_lastsample,_niter, nSamplesShapes, shapesVec, _noise ); }
     
     // Loop on events
     //================
@@ -902,17 +902,17 @@ void EcalLaserAnalyzer2::endJob() {
 	
       }
       
-      if (_debug>=1) cout <<"-- debug test -- endJob -- apdAmpl:"<<apdAmpl
-			  <<" apdTime:"<< apdTime<< endl; 
+      if (_debug>=1) { cout <<"-- debug test -- endJob -- apdAmpl:"<<apdAmpl
+			  <<" apdTime:"<< apdTime<< endl;  }
 
       double pnmean;
       if (pn0<10 && pn1>10) {
 	pnmean=pn1;
       }else if (pn1<10 && pn0>10){
 	pnmean=pn0;
-      }else pnmean=0.5*(pn0+pn1);
+      }else { pnmean=0.5*(pn0+pn1); }
 
-      if (_debug>=1) cout <<"-- debug test -- endJob -- pnMean:"<<pnmean << endl; 
+      if (_debug>=1) { cout <<"-- debug test -- endJob -- pnMean:"<<pnmean << endl;  }
 
       // Fill PN stuff
       //===============
@@ -926,8 +926,8 @@ void EcalLaserAnalyzer2::endJob() {
       // Fill APD stuff 
       //================
  
-      if(apdAmpl!=0.0) APDFirstAnal[iCry][iCol]->addEntry(apdAmpl,pnmean, pn0, pn1, apdTime);      
-      if (_debug>=1) cout <<"-- debug test -- endJob -- filling APDTree"<< endl; 
+      if(apdAmpl!=0.0) { APDFirstAnal[iCry][iCol]->addEntry(apdAmpl,pnmean, pn0, pn1, apdTime);       }
+      if (_debug>=1) { cout <<"-- debug test -- endJob -- filling APDTree"<< endl;  }
 
       APDtrees[iCry]->Fill();
 
@@ -943,19 +943,19 @@ void EcalLaserAnalyzer2::endJob() {
 	
 	for(unsigned int ir=0;ir<nRefChan;ir++){
 	  
-	  if (_debug>=1) cout <<"-- debug test -- ir:" << ir <<" tt:"<< towerID<<" refmap:"<<apdRefMap[ir][iMod+1]<< " iCry:"<<iCry<<endl;
+	  if (_debug>=1) { cout <<"-- debug test -- ir:" << ir <<" tt:"<< towerID<<" refmap:"<<apdRefMap[ir][iMod+1]<< " iCry:"<<iCry<<endl; }
 	  
 	  if(apdRefMap[ir][iMod+1]==iCry) {
-	    if (_debug>=1) cout <<"-- debug test -- cut passed " <<endl;
-	    if (ir==0) apdAmplA=apdAmpl;
-	    else if(ir==1) apdAmplB=apdAmpl;
-	    if (_debug>=1) cout <<"-- debug test -- apdAmplA=" <<apdAmplA<<endl;
-	    if (_debug>=1) cout <<"-- debug test -- apdAmplB=" <<apdAmplB<<endl;
-	    if (_debug>=1) cout <<"-- debug test -- color=" <<color<<", event:"<< event<<", ir:" << ir <<" tt-1:"<< towerID-1<< endl;
+	    if (_debug>=1) { cout <<"-- debug test -- cut passed " <<endl; }
+	    if (ir==0) { apdAmplA=apdAmpl;
+	    } else if(ir==1) { apdAmplB=apdAmpl; }
+	    if (_debug>=1) { cout <<"-- debug test -- apdAmplA=" <<apdAmplA<<endl; }
+	    if (_debug>=1) { cout <<"-- debug test -- apdAmplB=" <<apdAmplB<<endl; }
+	    if (_debug>=1) { cout <<"-- debug test -- color=" <<color<<", event:"<< event<<", ir:" << ir <<" tt-1:"<< towerID-1<< endl; }
 	    
 	    RefAPDtrees[ir][iMod+1]->Fill(); 
 	    
-	    if (_debug>=1) cout <<"-- debug test -- tree filled"<< event<<endl;
+	    if (_debug>=1) { cout <<"-- debug test -- tree filled"<< event<<endl; }
 	  }	
 	}
       }
@@ -966,7 +966,7 @@ void EcalLaserAnalyzer2::endJob() {
   
   ADCFile->Close();
   
-  if (_debug==1) cout <<"-- debug test -- endJob -- after apdAmpl Loop"<< endl; 
+  if (_debug==1) { cout <<"-- debug test -- endJob -- after apdAmpl Loop"<< endl;  }
 
   // Remove temporary file
   //=======================
@@ -1085,7 +1085,7 @@ void EcalLaserAnalyzer2::endJob() {
       double cutMax;
       
       cutMin=APDFirstAnal[iCry][iCol]->getAPD().at(0)-2.0*APDFirstAnal[iCry][iCol]->getAPD().at(1);
-      if(cutMin<0) cutMin=0;
+      if(cutMin<0) { cutMin=0; }
       cutMax=APDFirstAnal[iCry][iCol]->getAPD().at(0)+2.0*APDFirstAnal[iCry][iCol]->getAPD().at(1);
       
       lowcut.push_back(cutMin);
@@ -1122,7 +1122,7 @@ void EcalLaserAnalyzer2::endJob() {
 	pnmean=pn1;
       }else if (pn1<10 && pn0>10){
 	pnmean=pn0;
-      }else pnmean=0.5*(pn0+pn1);
+      }else { pnmean=0.5*(pn0+pn1); }
 
       // Get back color
       //===============
@@ -1147,7 +1147,7 @@ void EcalLaserAnalyzer2::endJob() {
       // Get ref amplitudes
       //===================
       
-      if (_debug>=1) cout <<"-- debug test -- LastLoop event:"<<event<<" apdAmpl:"<< apdAmpl<< endl;
+      if (_debug>=1) { cout <<"-- debug test -- LastLoop event:"<<event<<" apdAmpl:"<< apdAmpl<< endl; }
       apdAmplA = 0.0;
       apdAmplB = 0.0;
       
@@ -1155,7 +1155,7 @@ void EcalLaserAnalyzer2::endJob() {
 	RefAPDtrees[iRef][iMod+1]->GetEntryWithIndex(event); 
       }
       
-      if (_debug==1 ) cout <<"-- debug test -- LastLoop apdAmplA:"<<apdAmplA<< " apdAmplB:"<< apdAmplB<<", event:"<< event<<", eventref:"<< eventref<< endl;
+      if (_debug==1 ) { cout <<"-- debug test -- LastLoop apdAmplA:"<<apdAmplA<< " apdAmplB:"<< apdAmplB<<", event:"<< event<<", eventref:"<< eventref<< endl; }
 
       // Fill APD stuff
       //===============
@@ -1165,7 +1165,7 @@ void EcalLaserAnalyzer2::endJob() {
 
     moduleID=iMod+1;
     
-    if( moduleID>=20 ) moduleID-=2;  // Trick to fix endcap specificity
+    if( moduleID>=20 ) { moduleID-=2;  // Trick to fix endcap specificity }
 
     // Get final results for APD 
     //===========================
@@ -1205,10 +1205,10 @@ void EcalLaserAnalyzer2::endJob() {
       side=iside[iCry];
       channelID=iChannelID[iCry];
       
-      if( !wasGainOK[iCry] || !wasTimingOK[iCry] || IsThereDataADC[iCry][iColor]==0 ) flag=1;
-      else flag=0;
+      if( !wasGainOK[iCry] || !wasTimingOK[iCry] || IsThereDataADC[iCry][iColor]==0 ) { flag=1;
+      } else { flag=0; }
       
-      if (_debug>=1) cout <<"-- debug test -- endJob -- APD[0]"<< APD[0]<<" APDoPN[0] "<<APDoPN[0]<<" APDoAPDA[0] "<<APDoAPDA[0]<< " flag "<< flag<< endl; 
+      if (_debug>=1) { cout <<"-- debug test -- endJob -- APD[0]"<< APD[0]<<" APDoPN[0] "<<APDoPN[0]<<" APDoAPDA[0] "<<APDoAPDA[0]<< " flag "<< flag<< endl;  }
       restrees[iColor]->Fill(); 
       
     }
@@ -1228,7 +1228,7 @@ void EcalLaserAnalyzer2::endJob() {
       pnID=ch;
       moduleID=iMod+1;
 
-      if( moduleID>=20 ) moduleID-=2;  // Trick to fix endcap specificity
+      if( moduleID>=20 ) { moduleID-=2;  // Trick to fix endcap specificity }
 
       for(unsigned int iColor=0;iColor<nCol;iColor++){
 
@@ -1245,7 +1245,7 @@ void EcalLaserAnalyzer2::endJob() {
 	  PNoPNB[i]=pnopn1vec.at(i);
 	}
 	
-	if (_debug>=1) cout <<"-- debug test -- endJob -- filling pn results'tree: PN[0]:"<<PN[0]<<" iModule:" << iMod<<" iColor:"<<iColor<<" ch:"<< ch<< endl; 
+	if (_debug>=1) { cout <<"-- debug test -- endJob -- filling pn results'tree: PN[0]:"<<PN[0]<<" iModule:" << iMod<<" iColor:"<<iColor<<" ch:"<< ch<< endl;  }
 	
 	// Fill PN results trees
 	//========================
@@ -1305,7 +1305,7 @@ bool EcalLaserAnalyzer2::getShapes() {
   FILE *test2;   
   TProfile *laserShape=nullptr;
   test2 = fopen(matfile.c_str(),"r");
-  if (test2) doesMatFileExist=1; 
+  if (test2) { doesMatFileExist=1;  }
   
   TFile *MatShapeFile;
   if (doesMatFileExist==1){
@@ -1314,14 +1314,14 @@ bool EcalLaserAnalyzer2::getShapes() {
     if(laserShape){
       doesMatShapeExist=1;
       double y=laserShape->Integral("w");
-      if(y!=0)laserShape->Scale(1.0/y);
+      if(y!=0) {laserShape->Scale(1.0/y); }
     }
   }else{
 
     cout <<" ERROR! Matacq shape file not found !"<< endl;
      
   }
-  if (doesMatShapeExist) IsMatacqOK=true;
+  if (doesMatShapeExist) { IsMatacqOK=true; }
 
   // Get SPR from the average elec shape in SM6:
   //============================================
@@ -1329,7 +1329,7 @@ bool EcalLaserAnalyzer2::getShapes() {
   int doesElecFileExist=0;
   FILE *test; 
   test = fopen(elecfile_.c_str(),"r");
-  if (test) doesElecFileExist=1; 
+  if (test) { doesElecFileExist=1;  }
   
   TFile *ElecShapesFile;
   TH1D* elecShape=nullptr ;
@@ -1341,7 +1341,7 @@ bool EcalLaserAnalyzer2::getShapes() {
     elecShape=(TH1D*) ElecShapesFile->Get(name.str().c_str());
     if(elecShape && doesMatShapeExist==1){
       double x=elecShape->GetMaximum();
-      if (x!=0) elecShape->Scale(1.0/x);
+      if (x!=0) { elecShape->Scale(1.0/x); }
       isSPRFine=true;
     }else{
       isSPRFine=false;
@@ -1406,7 +1406,7 @@ bool EcalLaserAnalyzer2::getShapes() {
 	}
       }
       
-      if(_saveshapes) PulseShape->Write();
+      if(_saveshapes) { PulseShape->Write(); }
     }
   }
   ShapeFile->Close();

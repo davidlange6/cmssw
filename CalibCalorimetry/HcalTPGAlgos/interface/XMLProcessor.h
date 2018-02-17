@@ -144,7 +144,8 @@ class XMLProcessor
   // this class is a singleton
   static XMLProcessor * getInstance()
     {
-      if (!instance) instance = new XMLProcessor();
+      if (!instance) { instance = new XMLProcessor(); }
+}
       return instance;
     }
   

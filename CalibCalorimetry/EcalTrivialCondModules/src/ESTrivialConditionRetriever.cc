@@ -54,23 +54,23 @@ ESTrivialConditionRetriever::ESTrivialConditionRetriever( const edm::ParameterSe
 
   //Tell Producer what we produce
   //setWhatproduce(this);
-  if (producedESPedestals_)
-    setWhatProduced(this, &ESTrivialConditionRetriever::produceESPedestals );
+  if (producedESPedestals_) {
+    setWhatProduced(this, &ESTrivialConditionRetriever::produceESPedestals ); }
 
   if (producedESWeights_) {
       setWhatProduced(this, &ESTrivialConditionRetriever::produceESWeightStripGroups );
       setWhatProduced(this, &ESTrivialConditionRetriever::produceESTBWeights );
     }
 
-  if (producedESADCToGeVConstant_)
-    setWhatProduced(this, &ESTrivialConditionRetriever::produceESADCToGeVConstant );
+  if (producedESADCToGeVConstant_) {
+    setWhatProduced(this, &ESTrivialConditionRetriever::produceESADCToGeVConstant ); }
 
   // intercalibration constants
   producedESIntercalibConstants_ = ps.getUntrackedParameter<bool>("producedESIntercalibConstants",true);
   intercalibConstantsFile_ = ps.getUntrackedParameter<std::string>("intercalibConstantsFile","") ;
 
   if (producedESIntercalibConstants_) { // user asks to produce constants
-    if(intercalibConstantsFile_ == "") {  // if file provided read constants
+    if(intercalibConstantsFile_.empty()) {  // if file provided read constants
       //    setWhatProduced (this, &ESTrivialConditionRetriever::getIntercalibConstantsFromConfiguration ) ;
       //  } else { // set all constants to 1. or smear as specified by user
         setWhatProduced (this, &ESTrivialConditionRetriever::produceESIntercalibConstants ) ;
@@ -97,7 +97,7 @@ ESTrivialConditionRetriever::ESTrivialConditionRetriever( const edm::ParameterSe
   channelStatusFile_ = ps.getUntrackedParameter<std::string>("channelStatusFile","");
 
   if ( producedESChannelStatus_ ) {
-          if ( channelStatusFile_ != "" ) { // if file provided read channel map
+          if ( !channelStatusFile_.empty() ) { // if file provided read channel map
                   setWhatProduced( this, &ESTrivialConditionRetriever::getChannelStatusFromConfiguration );
           } else { // set all channels to working -- FIXME might be changed
                   setWhatProduced( this, &ESTrivialConditionRetriever::produceESChannelStatus );
@@ -106,14 +106,14 @@ ESTrivialConditionRetriever::ESTrivialConditionRetriever( const edm::ParameterSe
   }
 
   //Tell Finder what records we find
-  if (producedESPedestals_)  findingRecord<ESPedestalsRcd>();
+  if (producedESPedestals_) {  findingRecord<ESPedestalsRcd>(); }
 
   if (producedESWeights_) {
       findingRecord<ESWeightStripGroupsRcd>();
       findingRecord<ESTBWeightsRcd>();
     }
 
-  if (producedESADCToGeVConstant_)  findingRecord<ESADCToGeVConstantRcd>();
+  if (producedESADCToGeVConstant_) {  findingRecord<ESADCToGeVConstantRcd>(); }
 
 }
 
@@ -129,7 +129,7 @@ ESTrivialConditionRetriever::setIntervalFor( const edm::eventsetup::EventSetupRe
                                                const edm::IOVSyncValue& iTime,
                                                edm::ValidityInterval& oValidity)
 {
-  if(verbose_>=1) std::cout << "ESTrivialConditionRetriever::setIntervalFor(): record key = " << rk.name() << "\ttime: " << iTime.time().value() << std::endl;
+  if(verbose_>=1) { std::cout << "ESTrivialConditionRetriever::setIntervalFor(): record key = " << rk.name() << "\ttime: " << iTime.time().value() << std::endl; }
   //For right now, we will just use an infinite interval of validity
   oValidity = edm::ValidityInterval( edm::IOVSyncValue::beginOfTime(),edm::IOVSyncValue::endOfTime() );
 }
@@ -148,7 +148,7 @@ ESTrivialConditionRetriever::produceESPedestals( const ESPedestalsRcd& ) {
       for (int iy=ESDetId::IY_MIN;iy<=ESDetId::IY_MAX;iy++){
 	for ( int iplane=1; iplane<=2; iplane++){
 	  for(int izeta=-1; izeta<=1 ;++izeta) {
-	    if(izeta==0) continue;
+	    if(izeta==0) { continue; }
 	    try {
 	      //ESDetId Plane iplane Zside izeta 
 	      ESDetId aPositiveId(istrip,ix,iy,iplane,izeta);
@@ -178,7 +178,7 @@ ESTrivialConditionRetriever::produceESWeightStripGroups( const ESWeightStripGrou
       for (int iy=ESDetId::IY_MIN;iy<=ESDetId::IY_MAX;iy++){
 	for ( int iplane=1; iplane<=2; iplane++){
 	  for(int izeta=-1; izeta<=1 ;++izeta) {
-	    if(izeta==0) continue;
+	    if(izeta==0) { continue; }
 	    try {
 	      //ESDetId Plane iplane Zside izeta 
 	      ESDetId anESId(istrip,ix,iy,iplane,izeta);
@@ -209,7 +209,7 @@ ESTrivialConditionRetriever::produceESIntercalibConstants( const ESIntercalibCon
       for (int iy=ESDetId::IY_MIN;iy<=ESDetId::IY_MAX;iy++){
 	for ( int iplane=1; iplane<=2; iplane++){
 	  for(int izeta=-1; izeta<=1 ;++izeta) {
-	    if(izeta==0) continue;
+	    if(izeta==0) { continue; }
 	    try {
 	      //ESDetId Plane iplane Zside izeta 
               ESDetId anESId(istrip,ix,iy,iplane,izeta);
@@ -311,7 +311,7 @@ ESTrivialConditionRetriever::getChannelStatusFromConfiguration (const ESChannelS
       for (int iy=ESDetId::IY_MIN;iy<=ESDetId::IY_MAX;iy++){
 	for ( int iplane=1; iplane<=2; iplane++){
 	  for(int izeta=-1; izeta<=1 ;++izeta) {
-	    if(izeta==0) continue;
+	    if(izeta==0) { continue; }
 	    try {
 	      //ESDetId Plane iplane Zside izeta 
 	      ESDetId anESId(istrip,ix,iy,iplane,izeta);
@@ -387,7 +387,7 @@ ESTrivialConditionRetriever::produceESChannelStatus( const ESChannelStatusRcd& )
       for (int iy=ESDetId::IY_MIN;iy<=ESDetId::IY_MAX;iy++){
 	for ( int iplane=1; iplane<=2; iplane++){
 	  for(int izeta=-1; izeta<=1 ;++izeta) {
-	    if(izeta==0) continue;
+	    if(izeta==0) { continue; }
 	    try {
 	      //ESDetId Plane iplane Zside izeta 
 	      ESDetId anESId(istrip,ix,iy,iplane,izeta);

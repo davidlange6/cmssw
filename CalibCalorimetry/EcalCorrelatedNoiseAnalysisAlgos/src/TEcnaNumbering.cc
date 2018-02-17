@@ -1248,62 +1248,96 @@ void TEcnaNumbering::BuildEndcapSCTable()
     {
       if( dee == 1 || dee == 4 ){ids = 1;}
       if( dee == 2 || dee == 3 ){ids = 9;}
-      for(Int_t isc= 13; isc<= 20; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 33; isc<= 40; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 54; isc<= 60; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 75; isc<= 79; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 96; isc<= 99; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=118; isc<=119; isc++)fT2d_DS[dee-1][isc-1] = ids;
+      for(Int_t isc= 13; isc<= 20; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 33; isc<= 40; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 54; isc<= 60; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 75; isc<= 79; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 96; isc<= 99; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=118; isc<=119; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
     }
   //........... (D1,S2)=(D2,S8)=(D3,S8)=(D4,S2)
   for(Int_t dee = 1; dee<=4; dee++)
     {
       if( dee == 1 || dee == 4 ){ids = 2;}
       if( dee == 2 || dee == 3 ){ids = 8;}
-      for(Int_t isc= 32; isc<= 32; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 51; isc<= 53; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 72; isc<= 74; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 92; isc<= 95; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=112; isc<=117; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=132; isc<=138; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=152; isc<=157; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=173; isc<=176; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=193; isc<=193; isc++)fT2d_DS[dee-1][isc-1] = ids;
+      for(Int_t isc= 32; isc<= 32; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 51; isc<= 53; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 72; isc<= 74; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 92; isc<= 95; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=112; isc<=117; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=132; isc<=138; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=152; isc<=157; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=173; isc<=176; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=193; isc<=193; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
     }
   //........... (D1,S3)=(D2,S7)=(D3,S7)=(D4,S3)
   for(Int_t dee = 1; dee<=4; dee++)
     {
       if( dee == 1 || dee == 4 ){ids = 3;}
       if( dee == 2 || dee == 3 ){ids = 7;}
-      for(Int_t isc= 50; isc<= 50; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 69; isc<= 71; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 88; isc<= 91; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=108; isc<=111; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=127; isc<=131; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=147; isc<=151; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=166; isc<=172; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=188; isc<=192; isc++)fT2d_DS[dee-1][isc-1] = ids;
+      for(Int_t isc= 50; isc<= 50; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 69; isc<= 71; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 88; isc<= 91; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=108; isc<=111; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=127; isc<=131; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=147; isc<=151; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=166; isc<=172; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=188; isc<=192; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
     }
   //........... (D1,S4)=(D2,S6)=(D3,S6)=(D4,S4)
   for(Int_t dee = 1; dee<=4; dee++)
     {
       if( dee == 1 || dee == 4 ){ids = 4;}
       if( dee == 2 || dee == 3 ){ids = 6;}
-      for(Int_t isc= 27; isc<= 29; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 44; isc<= 49; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 62; isc<= 68; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc= 82; isc<= 87; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=102; isc<=107; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=123; isc<=126; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=144; isc<=146; isc++)fT2d_DS[dee-1][isc-1] = ids;
-      for(Int_t isc=165; isc<=165; isc++)fT2d_DS[dee-1][isc-1] = ids;
+      for(Int_t isc= 27; isc<= 29; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 44; isc<= 49; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 62; isc<= 68; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc= 82; isc<= 87; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=102; isc<=107; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=123; isc<=126; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=144; isc<=146; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
+      for(Int_t isc=165; isc<=165; isc++) {fT2d_DS[dee-1][isc-1] = ids;
+}
     }
   //........... (D1,S5)=(D2,S5)=(D3,S5)=(D4,S5)
   for(Int_t dee = 1; dee<=4; dee++)
     {
-      for(Int_t isc=  1; isc<=  8; isc++)fT2d_DS[dee-1][isc-1] = 5;
-      for(Int_t isc= 21; isc<= 26; isc++)fT2d_DS[dee-1][isc-1] = 5;
-      for(Int_t isc= 41; isc<= 43; isc++)fT2d_DS[dee-1][isc-1] = 5;
+      for(Int_t isc=  1; isc<=  8; isc++) {fT2d_DS[dee-1][isc-1] = 5;
+}
+      for(Int_t isc= 21; isc<= 26; isc++) {fT2d_DS[dee-1][isc-1] = 5;
+}
+      for(Int_t isc= 41; isc<= 43; isc++) {fT2d_DS[dee-1][isc-1] = 5;
+}
     }
   
   //............................................ SC numbers in Data Sectors: fT2d_DSSC[][]
