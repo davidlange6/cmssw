@@ -64,8 +64,8 @@ reco::Particle StEvtSolution::getLepW() const
 {
   // FIXME: the charge from the genevent
   reco::Particle p;
-  if(this->getDecay() == "muon") p=reco::Particle(0, this->getMuon().p4()+this->getNeutrino().p4(), math::XYZPoint());
-  if(this->getDecay() == "electron") p=reco::Particle(0, this->getElectron().p4()+this->getNeutrino().p4(), math::XYZPoint());
+  if(this->getDecay() == "muon") { p=reco::Particle(0, this->getMuon().p4()+this->getNeutrino().p4(), math::XYZPoint()); }
+  if(this->getDecay() == "electron") { p=reco::Particle(0, this->getElectron().p4()+this->getNeutrino().p4(), math::XYZPoint()); }
   return p;
 }
 
@@ -73,8 +73,8 @@ reco::Particle StEvtSolution::getLept() const
 {
   // FIXME: the charge from the genevent
   reco::Particle p;
-  if(this->getDecay() == "muon") p=reco::Particle(0, this->getMuon().p4()+this->getNeutrino().p4()+this->getBottom().p4(), math::XYZPoint());
-  if(this->getDecay() == "electron") p=reco::Particle(0, this->getElectron().p4()+this->getNeutrino().p4()+this->getBottom().p4(), math::XYZPoint());
+  if(this->getDecay() == "muon") { p=reco::Particle(0, this->getMuon().p4()+this->getNeutrino().p4()+this->getBottom().p4(), math::XYZPoint()); }
+  if(this->getDecay() == "electron") { p=reco::Particle(0, this->getElectron().p4()+this->getNeutrino().p4()+this->getBottom().p4(), math::XYZPoint()); }
   return p;
 }
 
@@ -84,8 +84,8 @@ reco::Particle StEvtSolution::getLept() const
 // FIXME: provide defaults if the genevent is invalid
 const reco::GenParticle * StEvtSolution::getGenBottom() const 
 { 
-  if(!theGenEvt_) return nullptr; 
-  else return theGenEvt_->decayB();
+  if(!theGenEvt_) { return nullptr; 
+  } else { return theGenEvt_->decayB(); }
 }
 
 // FIXME: not implemented yet
@@ -97,26 +97,26 @@ const reco::GenParticle * StEvtSolution::getGenBottom() const
 
 const reco::GenParticle * StEvtSolution::getGenLepton() const 
 { 
-  if(!theGenEvt_) return nullptr; 
-  else return theGenEvt_->singleLepton(); 
+  if(!theGenEvt_) { return nullptr; 
+  } else { return theGenEvt_->singleLepton();  }
 }
 
 const reco::GenParticle * StEvtSolution::getGenNeutrino() const 
 { 
-  if(!theGenEvt_) return nullptr; 
-  else return theGenEvt_->singleNeutrino(); 
+  if(!theGenEvt_) { return nullptr; 
+  } else { return theGenEvt_->singleNeutrino();  }
 }
 
 const reco::GenParticle * StEvtSolution::getGenLepW() const 
 { 
-  if (!theGenEvt_) return nullptr; 
-  else return theGenEvt_->singleW(); 
+  if (!theGenEvt_) { return nullptr; 
+  } else { return theGenEvt_->singleW();  }
 }
 
 const reco::GenParticle * StEvtSolution::getGenLept() const 
 { 
-  if (!theGenEvt_) return nullptr; 
-  else return theGenEvt_->singleTop(); 
+  if (!theGenEvt_) { return nullptr; 
+  } else { return theGenEvt_->singleTop();  }
 }
 
 //-------------------------------------------
@@ -126,8 +126,8 @@ reco::Particle StEvtSolution::getRecLept() const
 {
   // FIXME: the charge from the genevent
   reco::Particle p;
-  if(this->getDecay() == "muon") p=reco::Particle(0, this->getMuon().p4()+this->getNeutrino().p4()+this->getRecBottom().p4(), math::XYZPoint());
-  if(this->getDecay() == "electron") p=reco::Particle(0, this->getElectron().p4()+this->getNeutrino().p4()+this->getRecBottom().p4(), math::XYZPoint());
+  if(this->getDecay() == "muon") { p=reco::Particle(0, this->getMuon().p4()+this->getNeutrino().p4()+this->getRecBottom().p4(), math::XYZPoint()); }
+  if(this->getDecay() == "electron") { p=reco::Particle(0, this->getElectron().p4()+this->getNeutrino().p4()+this->getRecBottom().p4(), math::XYZPoint()); }
   return p;
 }
 
@@ -157,5 +157,5 @@ void StEvtSolution::setGenEvt(const edm::Handle<StGenEvent> & aGenEvt){
 // set other info on the event
 //-------------------------------------------
 void StEvtSolution::setScanValues(const std::vector<double> & val) {
-  for(unsigned int i=0; i<val.size(); i++) scanValues_.push_back(val[i]);
+  for(unsigned int i=0; i<val.size(); i++) { scanValues_.push_back(val[i]); }
 }

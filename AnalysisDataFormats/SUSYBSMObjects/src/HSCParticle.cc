@@ -8,7 +8,7 @@ int HSCParticle::type() const {
    }else if( hasTrackRef() &&  hasMuonRef() && muonRef()->isGlobalMuon()){ return HSCParticleType::globalMuon;
    }else if( hasTrackRef() &&  hasMuonRef() && muonRef()->isStandAloneMuon()){ return HSCParticleType::matchedStandAloneMuon;
    }else if( hasTrackRef() &&  hasMuonRef() && muonRef()->isTrackerMuon()){ return HSCParticleType::trackerMuon;
-   }else                                                                    return HSCParticleType::unknown;
+   }else {                                                                    return HSCParticleType::unknown; }
 }
 
 float HSCParticle::p() const {
@@ -16,7 +16,7 @@ float HSCParticle::p() const {
   }else if(hasMuonRef() && muonRef()->innerTrack()    .isNonnull()){ return muonRef()->innerTrack()    ->p();
   }else if(hasMuonRef() && muonRef()->standAloneMuon().isNonnull()){ return muonRef()->standAloneMuon()->p();
   }else if(hasTrackRef()&& trackRef()                 .isNonnull()){ return trackRef()                 ->p();
-  }else return 0.0f;
+  }else { return 0.0f; }
 }
 
 float HSCParticle::pt() const {
@@ -24,7 +24,7 @@ float HSCParticle::pt() const {
   }else if(hasMuonRef() && muonRef()->innerTrack()    .isNonnull()){ return muonRef()->innerTrack()    ->pt();
   }else if(hasMuonRef() && muonRef()->standAloneMuon().isNonnull()){ return muonRef()->standAloneMuon()->pt();
   }else if(hasTrackRef()&& trackRef()                 .isNonnull()){ return trackRef()                 ->pt();
-  }else return 0.0f;
+  }else { return 0.0f; }
 }
 
 }

@@ -11,17 +11,17 @@ TtGenEvent::TtGenEvent(reco::GenParticleRefProd& decaySubset, reco::GenParticleR
 {
   parts_ = decaySubset;
   initPartons_= initSubset;
-  if(top() && topBar())
-    topPair_ = math::XYZTLorentzVector(top()->p4()+topBar()->p4());
+  if(top() && topBar()) {
+    topPair_ = math::XYZTLorentzVector(top()->p4()+topBar()->p4()); }
 }
 
 bool
 TtGenEvent::fromGluonFusion() const
 {
   const reco::GenParticleCollection& initPartsColl = *initPartons_;
-  if(initPartsColl.size()==2)
-    if(initPartsColl[0].pdgId()==21 && initPartsColl[1].pdgId()==21)
-      return true;
+  if(initPartsColl.size()==2) {
+    if(initPartsColl[0].pdgId()==21 && initPartsColl[1].pdgId()==21) {
+      return true; }
   return false;
 }
 
@@ -29,9 +29,9 @@ bool
 TtGenEvent::fromQuarkAnnihilation() const
 {
   const reco::GenParticleCollection& initPartsColl = *initPartons_;
-  if(initPartsColl.size()==2)
-    if(std::abs(initPartsColl[0].pdgId())<TopDecayID::tID && initPartsColl[0].pdgId()==-initPartsColl[1].pdgId())
-      return true;
+  if(initPartsColl.size()==2) {
+    if(std::abs(initPartsColl[0].pdgId())<TopDecayID::tID && initPartsColl[0].pdgId()==-initPartsColl[1].pdgId()) {
+      return true; }
   return false;
 }
 
@@ -40,9 +40,9 @@ TtGenEvent::semiLeptonicChannel() const
 {
   WDecay::LeptonType type=WDecay::kNone;
   if( isSemiLeptonic() && singleLepton() ){
-    if( std::abs(singleLepton()->pdgId())==TopDecayID::elecID ) type=WDecay::kElec;
-    if( std::abs(singleLepton()->pdgId())==TopDecayID::muonID ) type=WDecay::kMuon;
-    if( std::abs(singleLepton()->pdgId())==TopDecayID::tauID  ) type=WDecay::kTau;
+    if( std::abs(singleLepton()->pdgId())==TopDecayID::elecID ) { type=WDecay::kElec; }
+    if( std::abs(singleLepton()->pdgId())==TopDecayID::muonID ) { type=WDecay::kMuon; }
+    if( std::abs(singleLepton()->pdgId())==TopDecayID::tauID  ) { type=WDecay::kTau; }
   }
   return type;
 }
@@ -53,14 +53,14 @@ TtGenEvent::fullLeptonicChannel() const
   WDecay::LeptonType typeA=WDecay::kNone, typeB=WDecay::kNone;  
   if( isFullLeptonic() ){
     if( lepton() ){
-      if( std::abs(lepton()->pdgId())==TopDecayID::elecID ) typeA=WDecay::kElec;
-      if( std::abs(lepton()->pdgId())==TopDecayID::muonID ) typeA=WDecay::kMuon;
-      if( std::abs(lepton()->pdgId())==TopDecayID::tauID  ) typeA=WDecay::kTau;      
+      if( std::abs(lepton()->pdgId())==TopDecayID::elecID ) { typeA=WDecay::kElec; }
+      if( std::abs(lepton()->pdgId())==TopDecayID::muonID ) { typeA=WDecay::kMuon; }
+      if( std::abs(lepton()->pdgId())==TopDecayID::tauID  ) { typeA=WDecay::kTau;       }
     }
     if( leptonBar() ){
-      if( std::abs(leptonBar()->pdgId())==TopDecayID::elecID ) typeB=WDecay::kElec;
-      if( std::abs(leptonBar()->pdgId())==TopDecayID::muonID ) typeB=WDecay::kMuon;
-      if( std::abs(leptonBar()->pdgId())==TopDecayID::tauID  ) typeB=WDecay::kTau;      
+      if( std::abs(leptonBar()->pdgId())==TopDecayID::elecID ) { typeB=WDecay::kElec; }
+      if( std::abs(leptonBar()->pdgId())==TopDecayID::muonID ) { typeB=WDecay::kMuon; }
+      if( std::abs(leptonBar()->pdgId())==TopDecayID::tauID  ) { typeB=WDecay::kTau;       }
     }
   }
   return ( std::pair<WDecay::LeptonType,WDecay::LeptonType>(typeA, typeB) );

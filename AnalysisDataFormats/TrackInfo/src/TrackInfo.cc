@@ -12,15 +12,15 @@ const reco::TrackInfo::TrajectoryInfo & TrackInfo::trajStateMap() const {return 
 
 const RecHitType  TrackInfo::type(TrackingRecHitRef hit) const {
   TrajectoryInfo::const_iterator states=trajstates_.find(hit);
-  if(states!=trajstates_.end())return states->second.type();
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  if(states!=trajstates_.end()) {return states->second.type();
+  } else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return Null;
 }
 
 const PTrajectoryStateOnDet * TrackInfo::stateOnDet(StateType statetype,TrackingRecHitRef hit)const {
   TrajectoryInfo::const_iterator states=trajstates_.find(hit);
-  if(states!=trajstates_.end())return states->second.stateOnDet(statetype);
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  if(states!=trajstates_.end()) {return states->second.stateOnDet(statetype);
+  } else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return nullptr;
 }
 
@@ -30,24 +30,24 @@ const LocalVector  TrackInfo::localTrackMomentum(StateType statetype,TrackingRec
   if(states!=trajstates_.end())
     {
       const PTrajectoryStateOnDet * state=states->second.stateOnDet(statetype);
-      if(state!=nullptr) return state->parameters().momentum();
+      if(state!=nullptr) { return state->parameters().momentum(); }
     }
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return LocalVector(0,0,0); 
 }
 
 const LocalVector  TrackInfo::localTrackMomentumOnMono(StateType statetype,TrackingRecHitRef hit)const{ 
 
   TrajectoryInfo::const_iterator states=trajstates_.find(hit);
-  if(states!=trajstates_.end())return states->second.localTrackMomentumOnMono(statetype);
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  if(states!=trajstates_.end()) {return states->second.localTrackMomentumOnMono(statetype);
+  } else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return LocalVector(0,0,0); 
 }
 
 const LocalVector  TrackInfo::localTrackMomentumOnStereo(StateType statetype,TrackingRecHitRef hit)const{
 
   TrajectoryInfo::const_iterator states=trajstates_.find(hit);
-  if(states!=trajstates_.end())return states->second.localTrackMomentumOnStereo(statetype);
+  if(states!=trajstates_.end()) {return states->second.localTrackMomentumOnStereo(statetype); }
   return LocalVector(0,0,0); 
 }
 
@@ -57,9 +57,9 @@ const LocalPoint  TrackInfo::localTrackPosition(StateType statetype,TrackingRecH
   if(states!=trajstates_.end())
     {
       const PTrajectoryStateOnDet * state=states->second.stateOnDet(statetype);
-      if(state!=nullptr) return state->parameters().position();
+      if(state!=nullptr) { return state->parameters().position(); }
     }
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return LocalPoint(0,0,0);
 }
 
@@ -67,16 +67,16 @@ const LocalPoint  TrackInfo::localTrackPosition(StateType statetype,TrackingRecH
 const LocalPoint  TrackInfo::localTrackPositionOnMono(StateType statetype,TrackingRecHitRef hit)const{ 
 
   TrajectoryInfo::const_iterator states=trajstates_.find(hit);
-  if(states!=trajstates_.end())return states->second.localTrackPositionOnMono(statetype);
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  if(states!=trajstates_.end()) {return states->second.localTrackPositionOnMono(statetype);
+  } else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return LocalPoint(0,0,0); 
 }
 
 const LocalPoint  TrackInfo::localTrackPositionOnStereo(StateType statetype,TrackingRecHitRef hit)const{ 
 
   TrajectoryInfo::const_iterator states=trajstates_.find(hit);
-  if(states!=trajstates_.end())return states->second.localTrackPositionOnStereo(statetype);
-  else edm::LogError("TrackInfo")<<"This rechit does not exist";
+  if(states!=trajstates_.end()) {return states->second.localTrackPositionOnStereo(statetype);
+  } else { edm::LogError("TrackInfo")<<"This rechit does not exist"; }
   return LocalPoint(0,0,0); 
 }
 

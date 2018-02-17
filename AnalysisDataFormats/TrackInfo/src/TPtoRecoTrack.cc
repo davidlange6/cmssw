@@ -35,7 +35,7 @@ TrackingParticle TPtoRecoTrack::TPMother(unsigned short i) const
                         break;
                     }
                 }
-                if(!result.empty()) break;
+                if(!result.empty()) { break; }
             }
         }
         else
@@ -61,10 +61,10 @@ int TPtoRecoTrack::numTPMothers() const
         for(TrackingParticleRefVector::iterator di = TP().parentVertex()->daughterTracks_begin();
             di != TP().parentVertex()->daughterTracks_end(); ++di)
         {
-            if(si != di) count++;
+            if(si != di) { count++; }
             break;
         }
-        if(count>0) break;
+        if(count>0) { break; }
     }
     return count;
 }

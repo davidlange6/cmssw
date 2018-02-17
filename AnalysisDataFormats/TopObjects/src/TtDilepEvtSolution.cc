@@ -82,7 +82,7 @@ reco::Particle TtDilepEvtSolution::getLeptPos() const
 double TtDilepEvtSolution::getJetResidual() const
 {
   double distance = 0.;
-  if(!getGenB() || !getGenBbar()) return distance;
+  if(!getGenB() || !getGenBbar()) { return distance; }
   distance += reco::deltaR(getCalJetB(),*getGenB());
   distance += reco::deltaR(getCalJetBbar(),*getGenBbar());
   return distance;
@@ -91,19 +91,19 @@ double TtDilepEvtSolution::getJetResidual() const
 double TtDilepEvtSolution::getLeptonResidual() const
 {
   double distance = 0.;
-  if(!getGenLepp() || !getGenLepm()) return distance;
-  if(getWpDecay()=="electron")
+  if(!getGenLepp() || !getGenLepm()) { return distance; }
+  if(getWpDecay()=="electron") {
     distance += reco::deltaR(getElectronp(),*getGenLepp());
-  else if(getWpDecay()=="muon")
+  } else if(getWpDecay()=="muon") {
     distance += reco::deltaR(getMuonp(),*getGenLepp());
-  else if(getWpDecay()=="tau")
-    distance += reco::deltaR(getTaup(),*getGenLepp());
-  if(getWmDecay()=="electron")
+  } else if(getWpDecay()=="tau") {
+    distance += reco::deltaR(getTaup(),*getGenLepp()); }
+  if(getWmDecay()=="electron") {
     distance += reco::deltaR(getElectronm(),*getGenLepm());
-  else if(getWmDecay()=="muon")
+  } else if(getWmDecay()=="muon") {
     distance += reco::deltaR(getMuonm(),*getGenLepm());
-  else if(getWmDecay()=="tau")
-    distance += reco::deltaR(getTaum(),*getGenLepm());
+  } else if(getWmDecay()=="tau") {
+    distance += reco::deltaR(getTaum(),*getGenLepm()); }
   return distance;
 }
 
@@ -137,7 +137,7 @@ double TtDilepEvtSolution::getLRSignalEvtObsVal(unsigned int selObs) const
 {
   double val = -999.;
   for(size_t i=0; i<lrSignalEvtVarVal_.size(); i++){
-    if(lrSignalEvtVarVal_[i].first == selObs) val = lrSignalEvtVarVal_[i].second;
+    if(lrSignalEvtVarVal_[i].first == selObs) { val = lrSignalEvtVarVal_[i].second; }
   }
   return val;
 }
@@ -159,5 +159,5 @@ void TtDilepEvtSolution::setGenEvt(const edm::Handle<TtGenEvent>& aGenEvt) {
 void TtDilepEvtSolution::setLRSignalEvtObservables(const std::vector<std::pair<unsigned int, double> >& varval) 
 {
   lrSignalEvtVarVal_.clear();
-  for(size_t ise = 0; ise<varval.size(); ise++) lrSignalEvtVarVal_.push_back(varval[ise]);
+  for(size_t ise = 0; ise<varval.size(); ise++) { lrSignalEvtVarVal_.push_back(varval[ise]); }
 }

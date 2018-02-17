@@ -6,8 +6,8 @@
 void
 TtFullLeptonicEvent::print(const int verbosity) const
 {
-  if(verbosity%10 <= 0)
-    return;
+  if(verbosity%10 <= 0) {
+    return; }
 
   edm::LogInfo log("TtFullLeptonicEvent");
 
@@ -15,10 +15,10 @@ TtFullLeptonicEvent::print(const int verbosity) const
 
   // get some information from the genEvent
   log << " TtGenEvent says: ";
-  if( !this->genEvent()->isTtBar() )            log << "Not TtBar";
-  else if( this->genEvent()->isFullHadronic() ) log << "Fully Hadronic TtBar";
-  else if( this->genEvent()->isSemiLeptonic() ) log << "Semi-leptonic TtBar";
-  else if( this->genEvent()->isFullLeptonic() ) {
+  if( !this->genEvent()->isTtBar() ) {            log << "Not TtBar";
+  } else if( this->genEvent()->isFullHadronic() ) { log << "Fully Hadronic TtBar";
+  } else if( this->genEvent()->isSemiLeptonic() ) { log << "Semi-leptonic TtBar";
+  } else if( this->genEvent()->isFullLeptonic() ) {
     log << "Fully Leptonic TtBar, ";
     switch( this->genEvent()->fullLeptonicChannel().first ) {
     case WDecay::kElec : log << "Electron-"; break;
@@ -71,18 +71,18 @@ TtFullLeptonicEvent::print(const int verbosity) const
     unsigned nOfHyp = this->numberOfAvailableHypos(hypKey);
     if(nOfHyp > 1) {
       log << " * Number of available jet combinations: " << nOfHyp << "\n";
-      if(verbosity < 10)
-	log << " The following was found to be the best one:\n";
+      if(verbosity < 10) {
+	log << " The following was found to be the best one:\n"; }
     }
     // if verbosity level is smaller than 10, never show more than the best jet combination
-    if(verbosity < 10)
-      nOfHyp = 1;
+    if(verbosity < 10) {
+      nOfHyp = 1; }
     for(unsigned cmb=0; cmb<nOfHyp; cmb++) {
       // check if hypothesis is valid
-      if( !this->isHypoValid(hypKey, cmb) )
+      if( !this->isHypoValid(hypKey, cmb) ) {
 	log << " * Not valid! \n";
       // get meta information for valid hypothesis
-      else {
+      } else {
 	// jetLepComb
 	log << " * JetLepComb:";
 	std::vector<int> jets = this->jetLeptonCombination(hypKey, cmb);
@@ -101,8 +101,8 @@ TtFullLeptonicEvent::print(const int verbosity) const
 	// kinematic quantities of particles (if last digit of verbosity level > 1)
 	if(verbosity%10 >= 2) {
 	  log << " * Candidates (pt; eta; phi; mass):\n";
-	  if(verbosity%10 >= 3)
-	    printParticle(log, "top pair", this->topPair(hypKey, cmb));
+	  if(verbosity%10 >= 3) {
+	    printParticle(log, "top pair", this->topPair(hypKey, cmb)); }
 	  printParticle(log, "top         ", this->top  (hypKey, cmb));
 	  printParticle(log, "W plus      ", this->wPlus(hypKey, cmb));
 	  if(verbosity%10 >= 3) {

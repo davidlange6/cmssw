@@ -45,7 +45,7 @@ double WMuNuCandidate::acop() const{
       // Acoplanarity between the muon and the MET
        Geom::Phi<double> deltaphi(daughter(0)->phi()-daughter(1)->phi());
        double acop = deltaphi.value();
-       if (acop<0) acop = - acop;
+       if (acop<0) { acop = - acop; }
        acop = M_PI - acop;
        return acop;
 }

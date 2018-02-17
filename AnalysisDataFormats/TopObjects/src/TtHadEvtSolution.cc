@@ -215,7 +215,7 @@ double TtHadEvtSolution::getLRSignalEvtObsVal(unsigned int selObs) const
 {
   double val = -999.;
   for(size_t o=0; o<lrSignalEvtVarVal_.size(); o++){
-    if(lrSignalEvtVarVal_[o].first == selObs) val = lrSignalEvtVarVal_[o].second;
+    if(lrSignalEvtVarVal_[o].first == selObs) { val = lrSignalEvtVarVal_[o].second; }
   }
   return val;
 }
@@ -228,7 +228,7 @@ double TtHadEvtSolution::getLRJetCombObsVal(unsigned int selObs) const
 {
   double val = -999.;
   for(size_t o=0; o<lrJetCombVarVal_.size(); o++){
-    if(lrJetCombVarVal_[o].first == selObs) val = lrJetCombVarVal_[o].second;
+    if(lrJetCombVarVal_[o].first == selObs) { val = lrJetCombVarVal_[o].second; }
   }
   return val;
 }
@@ -252,7 +252,7 @@ void TtHadEvtSolution::setGenEvt(const edm::Handle<TtGenEvent> & aGenEvt)
 void TtHadEvtSolution::setLRJetCombObservables(const std::vector<std::pair<unsigned int, double> >& varval) 
 {
   lrJetCombVarVal_.clear();
-  for(size_t ijc = 0; ijc<varval.size(); ijc++) lrJetCombVarVal_.push_back(varval[ijc]);
+  for(size_t ijc = 0; ijc<varval.size(); ijc++) { lrJetCombVarVal_.push_back(varval[ijc]); }
 }
 
 //-------------------------------------------
@@ -262,5 +262,5 @@ void TtHadEvtSolution::setLRJetCombObservables(const std::vector<std::pair<unsig
 void TtHadEvtSolution::setLRSignalEvtObservables(const std::vector<std::pair<unsigned int, double> >& varval) 
 {
   lrSignalEvtVarVal_.clear();
-  for(size_t ise = 0; ise<varval.size(); ise++) lrSignalEvtVarVal_.push_back(varval[ise]);
+  for(size_t ise = 0; ise<varval.size(); ise++) { lrSignalEvtVarVal_.push_back(varval[ise]); }
 }

@@ -39,36 +39,36 @@ pat::Jet TtSemiEvtSolution::getHadb() const
 {
   // WARNING this is obsolete and only 
   // kept for backwards compatibility
-  if (jetCorrScheme_ == 1) return hadb_->correctedJet("HAD", "B"); // calibrate jets according to MC truth
-  else if (jetCorrScheme_ == 2) return hadb_->correctedJet("HAD", "B");
-  else return *hadb_;
+  if (jetCorrScheme_ == 1) { return hadb_->correctedJet("HAD", "B"); // calibrate jets according to MC truth
+  } else if (jetCorrScheme_ == 2) { return hadb_->correctedJet("HAD", "B");
+  } else { return *hadb_; }
 }
 
 pat::Jet TtSemiEvtSolution::getHadp() const 
 {
   // WARNING this is obsolete and only 
   // kept for backwards compatibility
-  if (jetCorrScheme_ == 1) return hadp_->correctedJet("HAD", "UDS"); // calibrate jets according to MC truth
-  else if (jetCorrScheme_ == 2) return hadp_->correctedJet("HAD", "UDS");
-  else return *hadp_;
+  if (jetCorrScheme_ == 1) { return hadp_->correctedJet("HAD", "UDS"); // calibrate jets according to MC truth
+  } else if (jetCorrScheme_ == 2) { return hadp_->correctedJet("HAD", "UDS");
+  } else { return *hadp_; }
 }
 
 pat::Jet TtSemiEvtSolution::getHadq() const 
 {
   // WARNING this is obsolete and only 
   // kept for backwards compatibility
-  if (jetCorrScheme_ == 1) return hadq_->correctedJet("HAD", "UDS"); // calibrate jets according to MC truth
-  else if (jetCorrScheme_ == 2) return hadq_->correctedJet("HAD", "UDS");
-  else return *hadq_;
+  if (jetCorrScheme_ == 1) { return hadq_->correctedJet("HAD", "UDS"); // calibrate jets according to MC truth
+  } else if (jetCorrScheme_ == 2) { return hadq_->correctedJet("HAD", "UDS");
+  } else { return *hadq_; }
 }
 
 pat::Jet TtSemiEvtSolution::getLepb() const 
 {
   // WARNING this is obsolete and only 
   // kept for backwards compatibility
-  if (jetCorrScheme_ == 1) return lepb_->correctedJet("HAD", "B"); // calibrate jets according to MC truth
-  else if (jetCorrScheme_ == 2) return lepb_->correctedJet("HAD", "B");
-  else return *lepb_;
+  if (jetCorrScheme_ == 1) { return lepb_->correctedJet("HAD", "B"); // calibrate jets according to MC truth
+  } else if (jetCorrScheme_ == 2) { return lepb_->correctedJet("HAD", "B");
+  } else { return *lepb_; }
 }
 
 //-------------------------------------------
@@ -90,8 +90,8 @@ reco::Particle TtSemiEvtSolution::getRecLept() const
 {
   // FIXME: the charge from the genevent
   reco::Particle p;
-  if (this->getDecay() == "muon")     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4() + this->getRecLepb().p4());
-  if (this->getDecay() == "electron") p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4() + this->getRecLepb().p4());
+  if (this->getDecay() == "muon") {     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4() + this->getRecLepb().p4()); }
+  if (this->getDecay() == "electron") { p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4() + this->getRecLepb().p4()); }
   return p;
 }
 
@@ -99,8 +99,8 @@ reco::Particle TtSemiEvtSolution::getRecLepW() const
 { 
   // FIXME: the charge from the genevent
   reco::Particle p;
-  if (this->getDecay() == "muon")     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4());
-  if (this->getDecay() == "electron") p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4());
+  if (this->getDecay() == "muon") {     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4()); }
+  if (this->getDecay() == "electron") { p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4()); }
   return p;
 }
 
@@ -119,16 +119,16 @@ reco::Particle TtSemiEvtSolution::getCalHadW() const
 reco::Particle TtSemiEvtSolution::getCalLept() const 
 {
   reco::Particle p;
-  if (this->getDecay() == "muon")     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4() + this->getCalLepb().p4());
-  if (this->getDecay() == "electron") p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4() + this->getCalLepb().p4());
+  if (this->getDecay() == "muon") {     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4() + this->getCalLepb().p4()); }
+  if (this->getDecay() == "electron") { p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4() + this->getCalLepb().p4()); }
   return p;
 }
 
 reco::Particle TtSemiEvtSolution::getCalLepW() const 
 {
   reco::Particle p;
-  if (this->getDecay() == "muon")     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4());
-  if (this->getDecay() == "electron") p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4());
+  if (this->getDecay() == "muon") {     p = reco::Particle(0,this->getRecLepm().p4() + this->getRecLepn().p4()); }
+  if (this->getDecay() == "electron") { p = reco::Particle(0,this->getRecLepe().p4() + this->getRecLepn().p4()); }
   return p;
 }
 
@@ -166,7 +166,7 @@ reco::Particle TtSemiEvtSolution::getFitLepW() const
 double TtSemiEvtSolution::getLRSignalEvtObsVal(unsigned int selObs) const {
   double val = -999.;
   for(size_t o=0; o<lrSignalEvtVarVal_.size(); o++){
-    if(lrSignalEvtVarVal_[o].first == selObs) val = lrSignalEvtVarVal_[o].second;
+    if(lrSignalEvtVarVal_[o].first == selObs) { val = lrSignalEvtVarVal_[o].second; }
   }
   return val;
 }
@@ -179,7 +179,7 @@ double TtSemiEvtSolution::getLRJetCombObsVal(unsigned int selObs) const
 {
   double val = -999.;
   for(size_t o=0; o<lrJetCombVarVal_.size(); o++){
-    if(lrJetCombVarVal_[o].first == selObs) val = lrJetCombVarVal_[o].second;
+    if(lrJetCombVarVal_[o].first == selObs) { val = lrJetCombVarVal_[o].second; }
   }
   return val;
 }
@@ -203,7 +203,7 @@ void TtSemiEvtSolution::setGenEvt(const edm::Handle<TtGenEvent> & aGenEvt)
 void TtSemiEvtSolution::setLRJetCombObservables(const std::vector<std::pair<unsigned int, double> >& varval) 
 {
   lrJetCombVarVal_.clear();
-  for(size_t ijc = 0; ijc<varval.size(); ijc++) lrJetCombVarVal_.push_back(varval[ijc]);
+  for(size_t ijc = 0; ijc<varval.size(); ijc++) { lrJetCombVarVal_.push_back(varval[ijc]); }
 }
 
 //-------------------------------------------  
@@ -212,7 +212,7 @@ void TtSemiEvtSolution::setLRJetCombObservables(const std::vector<std::pair<unsi
 void TtSemiEvtSolution::setLRSignalEvtObservables(const std::vector<std::pair<unsigned int, double> >& varval) 
 {
   lrSignalEvtVarVal_.clear();
-  for(size_t ise = 0; ise<varval.size(); ise++) lrSignalEvtVarVal_.push_back(varval[ise]);
+  for(size_t ise = 0; ise<varval.size(); ise++) { lrSignalEvtVarVal_.push_back(varval[ise]); }
 }
 
 
