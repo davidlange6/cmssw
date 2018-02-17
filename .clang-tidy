@@ -13,7 +13,8 @@ Checks: -*,
   ,readability-container-size-empty,
   ,readability-redundant-string-cstr,
   ,readability-static-definition-in-anonymous-namespace,
-  ,readability-uniqueptr-delete-release
+  ,readability-uniqueptr-delete-release,
+  ,readability-braces-around-statements,
 WarningsAsErrors: ''
 HeaderFilterRegex: ''
 AnalyzeTemporaryDtors: false
