@@ -34,7 +34,7 @@ def matchObjectCollection3 ( objects, matchCollection, deltaRMax = 0.3, filter =
             return dict( zip(objects, [None]*len(objects)) )
     # build all possible combinations
                                                                                                                                                                                             
-    allPairs = [(deltaR2 (object.eta(), object.phi(), match.eta(), match.phi()), (object, match)) for object in objects for match in matchCollection if filter(object,match) ]
+    allPairs = [(deltaR2 (object.eta(), object.phi(), match.eta(), match.phi()), (object, match)) for object in objects for match in matchCollection if list(filter(object,match)) ]
     allPairs.sort ()
     #
     # to flag already matched objects
