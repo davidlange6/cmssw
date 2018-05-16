@@ -84,7 +84,7 @@ def main():
     runsToBeAnalyzed = getRunsToBeUploaded(args.connect,args.dropbox,lumiauthpath,minrun=args.minrun) 
     
     runCounter=0
-    rs=runsToBeAnalyzed.keys()
+    rs=list(runsToBeAnalyzed.keys())
     rs.sort()
     for run in rs:
         runCounter+=1

@@ -29,7 +29,7 @@ def main():
                 file.close()
                 break
 
-    sortedKeys = finalList.keys()
+    sortedKeys = list(finalList.keys())
     sortedKeys.sort()
 
     databaseTag = ''

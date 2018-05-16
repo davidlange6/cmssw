@@ -2390,7 +2390,7 @@ defaultDataSets['2023D21']=''
 defaultDataSets['2023D22']=''
 defaultDataSets['2023D23']=''
 
-keys=defaultDataSets.keys()
+keys=list(defaultDataSets.keys())
 for key in keys:
   defaultDataSets[key+'PU']=defaultDataSets[key]
 
@@ -2423,7 +2423,7 @@ for ds in defaultDataSets:
 
 
 upgradeStepDict={}
-for stepType in upgradeSteps.keys():
+for stepType in list(upgradeSteps.keys()):
     for step in upgradeSteps[stepType]['steps']:
         stepName = step+upgradeSteps[stepType]['suffix']
         upgradeStepDict[stepName]={}
@@ -2599,7 +2599,7 @@ for year,k in [(year,k) for year in upgradeKeys for k in upgradeKeys[year]]:
         stepName = step + upgradeSteps['Timing']['suffix']
         upgradeStepDict[stepName][k] = deepcopy(upgradeStepDict[step][k])
         # avoid some nonsense
-        if '--era' in upgradeStepDict[stepName][k].keys() and not "_timing" in upgradeStepDict[stepName][k]['--era']:
+        if '--era' in list(upgradeStepDict[stepName][k].keys()) and not "_timing" in upgradeStepDict[stepName][k]['--era']:
             upgradeStepDict[stepName][k]['--era'] += "_timing"
 
     for step in upgradeSteps['Neutron']['steps']:
@@ -2609,7 +2609,7 @@ for year,k in [(year,k) for year in upgradeKeys for k in upgradeKeys[year]]:
             custNew = "SLHCUpgradeSimulations/Configuration/customise_mixing.customise_Mix_LongLived_Neutrons"
         stepName = step + upgradeSteps['Neutron']['suffix']
         upgradeStepDict[stepName][k] = deepcopy(upgradeStepDict[step][k])
-        if '--customise' in upgradeStepDict[stepName][k].keys():
+        if '--customise' in list(upgradeStepDict[stepName][k].keys()):
             upgradeStepDict[stepName][k]['--customise'] += ","+custNew
         else:
             upgradeStepDict[stepName][k]['--customise'] = custNew
@@ -2639,7 +2639,7 @@ for year,k in [(year,k) for year in upgradeKeys for k in upgradeKeys[year]]:
                            PUDataSets[k2],upgradeStepDict[stepName][k]])
                 upgradeStepDict[stepNamePmx][k] = d
 
-        for stepType in upgradeSteps.keys():
+        for stepType in list(upgradeSteps.keys()):
             if "Premix" in stepType:
                 # Premix stage1 is already set above, and there are no non-PU steps so has to be ignored here
                 continue
@@ -2673,7 +2673,7 @@ for year,k in [(year,k) for year in upgradeKeys for k in upgradeKeys[year]]:
                             d["--procModifiers"] = "premix_stage2"
                     upgradeStepDict[stepNamePUpmx][k] = d
 
-for step in upgradeStepDict.keys():
+for step in list(upgradeStepDict.keys()):
     # we need to do this for each fragment
    if 'Sim' in step or 'Premix' in step:
         for frag in upgradeFragments:

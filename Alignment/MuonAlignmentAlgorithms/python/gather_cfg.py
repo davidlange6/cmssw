@@ -84,7 +84,7 @@ json_file = os.getenv("ALIGNMENT_JSON")
 if json_file is not None and json_file != '':
   jsonfile=file(json_file, 'r')
   jsondict = json.load(jsonfile)
-  runs = jsondict.keys()
+  runs = list(jsondict.keys())
   runs.sort()
   for run in runs:
     blocks = jsondict[run]

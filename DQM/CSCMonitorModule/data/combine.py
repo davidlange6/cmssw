@@ -17,7 +17,7 @@ for h in f:
   else:
     missing[key]=name
 
-a=histos.keys()
+a=list(histos.keys())
 a.sort()
 for h in a:
   print h,
@@ -28,7 +28,7 @@ for h in a:
 
 print "========================= MISSING ============================"
 
-a=missing.keys()
+a=list(missing.keys())
 a.sort()
 for h in a:
   print h, missing[h]

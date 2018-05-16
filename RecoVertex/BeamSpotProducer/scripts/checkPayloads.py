@@ -209,7 +209,7 @@ def main():
         for iov in tmpListOfIOVs:
             if((iov >> 32) not in listOfIOVs):
                 listOfIOVs.append(iov >>32)
-    RRRuns = listOfRunsAndLumi.keys()
+    RRRuns = list(listOfRunsAndLumi.keys())
     RRRuns.sort()
     for run in RRRuns:
         #print listOfRunsAndLumiFromRR[run]

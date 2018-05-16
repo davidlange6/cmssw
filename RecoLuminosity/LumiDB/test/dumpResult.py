@@ -75,7 +75,7 @@ if __name__ == '__main__':
     del lumiquery
     del session
     del svc
-    alldays=result.keys()
+    alldays=list(result.keys())
     alldays.sort()
     for ordi in alldays:
         print datetime.datetime.fromordinal(ordi).date(),',',result[ordi]

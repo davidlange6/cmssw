@@ -246,7 +246,7 @@ if __name__ == '__main__':
 		
 	tmpfile.close()
 
-    keys = sortedlist.keys()
+    keys = list(sortedlist.keys())
     keys.sort()
 
     # write combined data file

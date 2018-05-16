@@ -42,7 +42,7 @@ def splitToPackages(ruleResult):
 
     if not ruleResult: return info
 
-    ruleResult = ruleResult.items()
+    ruleResult = list(ruleResult.items())
     ruleResult.sort()
     file, lines = ruleResult.pop(0)
     pathList = pathToList(file)

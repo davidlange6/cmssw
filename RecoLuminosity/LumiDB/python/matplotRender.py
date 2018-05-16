@@ -133,7 +133,7 @@ class matplotRender():
         csvreport=None
         rows=[]
         flat=[]
-        for label,yvalues in rawdata.items():
+        for label,yvalues in list(rawdata.items()):
             yvalues.sort()
             flat.append([t[1] for t in yvalues])
             ypoints[label]=[]
@@ -163,7 +163,7 @@ class matplotRender():
         ax.xaxis.set_minor_locator(minorLocator)
         ax.set_xbound(lower=xpoints[0],upper=xpoints[-1])
         ax.grid(True)
-        keylist=ypoints.keys()
+        keylist=list(ypoints.keys())
         keylist.sort()
         keylist.insert(0,keylist.pop(keylist.index(referenceLabel)))#move refereceLabel to front from now on
         legendlist=[]
@@ -233,7 +233,7 @@ class matplotRender():
         csvreport=None
         rows=[]
         flat=[]
-        for label,yvalues in rawdata.items():
+        for label,yvalues in list(rawdata.items()):
             yvalues.sort()
             flat.append([t[2] for t in yvalues])
             ypoints[label]=[]
@@ -261,7 +261,7 @@ class matplotRender():
         ax.xaxis.set_major_formatter(majorFormatter)
         #ax.xaxis.set_minor_locator(minorLocator)
         ax.grid(True)
-        keylist=ypoints.keys()
+        keylist=list(ypoints.keys())
         keylist.sort()
         keylist.insert(0,keylist.pop(keylist.index(referenceLabel)))#move refereceLabel to front from now on
         legendlist=[]
@@ -343,7 +343,7 @@ class matplotRender():
         csvreport=None
         rows=[]
         flat=[]
-        for label,yvalues in rawdata.items():
+        for label,yvalues in list(rawdata.items()):
             yvalues.sort()
             flat.append([t[3] for t in yvalues])
             if label==referenceLabel:
@@ -375,7 +375,7 @@ class matplotRender():
         for tx in xticklabels:
             tx.set_horizontalalignment('left')
         ax.grid(True)
-        keylist=ypoints.keys()
+        keylist=list(ypoints.keys())
         keylist.sort()
         keylist.insert(0,keylist.pop(keylist.index(referenceLabel)))#move refereceLabel to front from now on
         legendlist=[]
@@ -476,7 +476,7 @@ class matplotRender():
         fulldays=range(MinDay,MaxDay+1)
         allstarts=[]
         allstops=[]
-        for label,yvalues in rawdata.items():
+        for label,yvalues in list(rawdata.items()):
             yvalues.sort()
             flat.append([t[3] for t in yvalues])
             alldays=[t[0] for t in yvalues]
@@ -620,7 +620,7 @@ class matplotRender():
         MinDay=minTime.date().toordinal()
         MaxDay=maxTime.date().toordinal()
         fulldays=range(MinDay,MaxDay+1)
-        for label in rawdata.keys():
+        for label in list(rawdata.keys()):
             yvalues=rawdata[label]
             yvalues.sort()#sort by day
             alldays=[t[0] for t in yvalues]
@@ -736,7 +736,7 @@ class matplotRender():
         #print len(xpoints)
         ypoints={}
         ymax={}
-        for ylabel,yvalue in rawydata.items():
+        for ylabel,yvalue in list(rawydata.items()):
             ypoints[ylabel]=[y/lslength for y in yvalue]
             ymax[ylabel]=max(yvalue)/lslength
         left=0.15
@@ -769,7 +769,7 @@ class matplotRender():
         for tx in xticklabels:
             tx.set_horizontalalignment('right')
         ax.grid(True)
-        keylist=ypoints.keys()
+        keylist=list(ypoints.keys())
         keylist.sort()
         legendlist=[]
 

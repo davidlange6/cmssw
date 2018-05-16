@@ -76,7 +76,7 @@ Events={} #{ 'RelValZMM':'5000', 'RelValTTbar':'5000'}
 ############ Functions
 
 def replace(map, filein, fileout):
-    replace_items = map.items()
+    replace_items = list(map.items())
     while 1:
         line = filein.readline()
         if not line: break

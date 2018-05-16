@@ -38,7 +38,7 @@ def main():
         fileObjList[runNumber].size += int(output[1].split(' ')[4])
         totalSize += int(output[1].split(' ')[4]) 
 
-    sortedKeys = fileObjList.keys()
+    sortedKeys = list(fileObjList.keys())
     sortedKeys.sort()
 
     split=13

@@ -281,14 +281,14 @@ def selectFilesToProcess(listOfRunsAndLumiFromDBS,listOfRunsAndLumiFromRR,newRun
         runsAndFiles[run].append(fileName)    
         file.close()
 
-    rrKeys = listOfRunsAndLumiFromRR.keys()
+    rrKeys = list(listOfRunsAndLumiFromRR.keys())
     rrKeys.sort()
-    dbsKeys = listOfRunsAndLumiFromDBS.keys()
+    dbsKeys = list(listOfRunsAndLumiFromDBS.keys())
     dbsKeys.sort()
     #I remove the last entry from DBS since I am not sure it is an already closed run!
     lastUnclosedRun = dbsKeys.pop()
     #print "Last unclosed run: " + str(lastUnclosedRun)
-    procKeys = runsAndLumisProcessed.keys()
+    procKeys = list(runsAndLumisProcessed.keys())
     procKeys.sort()
     #print "Run Registry:"    
     #print rrKeys
@@ -479,7 +479,7 @@ def removeUncompleteRuns(newRunList,dataSet):
             processedRuns[run] = 0
         processedRuns[run] += 1
 
-    for run in processedRuns.keys():   
+    for run in list(processedRuns.keys()):   
         nFiles = getNumberOfFilesToProcessForRun(dataSet,run)
         if processedRuns[run] < nFiles:
             print "I haven't processed all files yet : " + str(processedRuns[run]) + " out of " + str(nFiles) + " for run: " + str(run)
@@ -511,7 +511,7 @@ def aselectFilesToProcess(listOfFilesToProcess,newRunList):
     lastClosedRun = getLastClosedRun(listOfFilesToProcess)
 #    print "LastClosedRun:-" + str(lastClosedRun) + "-"
 
-    processedRunsKeys = processedRuns.keys()
+    processedRunsKeys = list(processedRuns.keys())
     processedRunsKeys.sort()
 
     for run in processedRunsKeys:

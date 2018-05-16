@@ -170,7 +170,7 @@ MixingDefaultKey = '2012_Summer_50ns_PoissonOOTPU'
 
 def printMe():
     global Mixing
-    keys = Mixing.keys()
+    keys = list(Mixing.keys())
     keys.sort()
     fskeys=[]
     for key in keys:
