@@ -103,7 +103,7 @@ except NameError:
     from sets import Set as _set
 
 try:
-    _basestring = basestring
+    _basestring = str
 except NameError:
     _basestring = str
 
