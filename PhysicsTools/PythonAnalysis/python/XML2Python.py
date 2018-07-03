@@ -5,6 +5,7 @@
 import re
 import os
 import xml.sax.handler
+import six
 
 class DataNode (object):
 
@@ -101,7 +102,7 @@ class TreeBuilder (xml.sax.handler.ContentHandler):
 
     def topLevel (self):
         '''Returns top level object'''
-        return self._root.attributes().values()[0]
+        return self._root.attributes(list(six.itervalues()))[0]
         
 
     @staticmethod

@@ -2,6 +2,7 @@
 An API and a CLI for quickly building complex figures.
 """
 from __future__ import absolute_import
+import six
 
 __license__ = '''\
 Copyright (c) 2009-2010 Jeff Klukas <klukas@wisc.edu>
@@ -1626,7 +1627,7 @@ def parse_legend_root(options):
     return [0, 0, 0, 0]
 
 def load_matplotlib(ext):
-    if 'mpl' not in globals().keys():
+    if 'mpl' not in globals(list(six.iterkeys())):
         global r2m, mpl, np, plt
         try:
             import matplotlib as mpl
@@ -1782,7 +1783,7 @@ def process_options(options):
                 options.marker_sizes[i] = ROOT.gStyle.GetMarkerSize()
         if nhists == 2 and options.mc_color:
             options.fill_colors[(i+1)%2] = options.mc_color
-    for opt in [x for x in options.keys() if 'colors' in x]:
+    for opt in [x for x in list(six.iterkeys(options)) if 'colors' in x]:
         try:
             colors = options[opt]
             options[opt] = [parse_color(x, not use_mpl) for x in colors]

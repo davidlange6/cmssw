@@ -2,6 +2,7 @@ import re,os
 import FWCore.ParameterSet.Config as cms
 from Configuration.DataProcessing.GetScenario import getScenario
 
+import six
 """
 Example configuration for online reconstruction meant for visualization clients.
 """
@@ -12,7 +13,7 @@ from DQM.Integration.config.inputsource_cfi import options,runType,source
 #scenarios = {'pp_run': 'ppEra_Run2_2016','pp_run_stage1': 'ppEra_Run2_2016','cosmic_run':'cosmicsEra_Run2_2016','cosmic_run_stage1':'cosmicsEra_Run2_2016','hi_run':'HeavyIonsEra_Run2_HI'}
 scenarios = {'pp_run': 'ppEra_Run2_2018','cosmic_run':'cosmicsEra_Run2_2018','hi_run':'HeavyIonsEra_Run2_HI'}
 
-if not runType.getRunTypeName() in scenarios.keys():
+if not runType.getRunTypeName() in list(six.iterkeys(scenarios)):
     msg = "Error getting the scenario out of the 'runkey', no mapping for: %s\n"%runType.getRunTypeName()
     raise RuntimeError(msg)
 

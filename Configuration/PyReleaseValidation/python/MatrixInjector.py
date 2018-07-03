@@ -4,6 +4,7 @@ import os
 import copy
 import multiprocessing
 import time
+import six
 
 def performInjectionOptionTest(opt):
     if opt.show:
@@ -451,8 +452,8 @@ class MatrixInjector(object):
             #  - and also Campaign to be always the same as the AcquisitionEra
 
             if acqEra:
-                chainDict['AcquisitionEra'] = chainDict['AcquisitionEra'].values()[0] 
-                chainDict['ProcessingString'] = chainDict['ProcessingString'].values()[0]
+                chainDict['AcquisitionEra'] = list(six.itervalues(chainDict['AcquisitionEra']))[0] 
+                chainDict['ProcessingString'] = list(six.itervalues(chainDict['ProcessingString']))[0]
             else:
                 chainDict['AcquisitionEra'] = chainDict['nowmTasklist'][0]['AcquisitionEra']
                 chainDict['ProcessingString'] = chainDict['nowmTasklist'][0]['ProcessingString']

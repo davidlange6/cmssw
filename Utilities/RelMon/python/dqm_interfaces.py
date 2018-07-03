@@ -18,6 +18,7 @@ from threading import Thread,activeCount
 from time import sleep
 from urllib2  import Request,build_opener,urlopen
 
+import six
 import sys
 argv=sys.argv
 from ROOT import *
@@ -427,8 +428,8 @@ class DirWalkerDB(Thread):
     
     contents1 = fetchers[0].contents
     contents2 = fetchers[1].contents
-    set1= set(contents1.keys())
-    set2= set(contents2.keys())  
+    set1= set(list(six.iterkeys(contents1)))
+    set2= set(list(six.iterkeys(contents2)))  
     
     walkers=[]
     self_directory_directories=self.directory.subdirs
@@ -565,12 +566,12 @@ class DirWalkerFile(object):
                 if not exists(directory_name):
                     makedirs(directory_name)
                     chdir(directory_name)  
-            tmp = self.dqmrootfile2.ls().keys()
+            tmp = self.dqmrootfile2.ls(list(six.iterkeys()))
             for elem in tmp:
                 if "Run" in elem:
                     next_dir = elem
             self.dqmrootfile2.cd(next_dir)
-            tmp = self.dqmrootfile1.ls().keys()
+            tmp = self.dqmrootfile1.ls(list(six.iterkeys()))
             for elem in tmp:
                 if "Run" in elem:
                     next_dir = elem
@@ -594,12 +595,12 @@ class DirWalkerFile(object):
     contents={}
     self.different_histograms['file1']= {}
     self.different_histograms['file2']= {}
-    keys = [key for key in contents2.keys() if key in contents1] #set of all possible contents from both files
+    keys = [key for key in list(six.iterkeys(contents2)) if key in contents1] #set of all possible contents from both files
     #print " ## keys: %s" %(keys)
     for key in keys:  #iterate on all unique keys
       if contents1[key]!=contents2[key]:
-        diff_file1 = set(contents1.keys()) - set(contents2.keys()) #set of contents that file1 is missing
-        diff_file2 = set(contents2.keys()) - set(contents1.keys()) #--'-- that file2 is missing
+        diff_file1 = set(list(six.iterkeys(contents1))) - set(list(six.iterkeys(contents2))) #set of contents that file1 is missing
+        diff_file2 = set(list(six.iterkeys(contents2))) - set(list(six.iterkeys(contents1))) #--'-- that file2 is missing
         for key1 in diff_file1:
             obj_type = contents1[key1]
             if obj_type == "TDirectoryFile":
@@ -706,10 +707,10 @@ class DirWalkerFile(object):
     rundir=""
     if self.run<0:
       # change dir in the first one...
-      #print  self.ls().keys()
+      #print  self.ls(list(six.iterkeys()))
       first_run_dir = ""
       try:
-        first_run_dir = filter(lambda k: "Run " in k, self.ls().keys())[0]
+        first_run_dir = filter(lambda k: "Run " in k, self.ls(list(six.iterkeys())))[0]
       except:
          print "\nRundir not there: Is this a generic rootfile?\n"
       rundir=first_run_dir

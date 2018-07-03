@@ -1,6 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
 
+import six
 """
 Important note to developers: the random number services of the GEM and 
 ME0 digi modules are no longer initialized in this file. Instead, they
@@ -18,7 +19,7 @@ you may have forgotten to specify the correct era!
 #  - drop unnecessary mixObjects
 def customize_mix_muon_only(process):
     process.mix.digitizers = digitizers = cms.PSet()
-    digi_aliases = [n for n in process.aliases.keys() if 'Digi' in n]
+    digi_aliases = [n for n in list(six.iterkeys(process.aliases)) if 'Digi' in n]
     for a in digi_aliases: process.__delattr__(a)
     from SimGeneral.MixingModule.mixObjects_cfi import theMixObjects
     process.mix.mixObjects = theMixObjects

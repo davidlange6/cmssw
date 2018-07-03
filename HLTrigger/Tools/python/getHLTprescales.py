@@ -2,6 +2,7 @@
 from sys import stderr, exit
 import commands
 
+import six
 from optparse import OptionParser
 parser = OptionParser(usage="usage: %prog [options] Trigger_Path")
 parser.add_option("--firstRun",  dest="firstRun",  help="first run", type="int", metavar="RUN", default="1")
@@ -50,7 +51,7 @@ MapIndex=readIndex()
 runKeys = queryRR(options.firstRun,options.lastRun,options.groupName)
 prescaleTable = {}
 Absent = []
-runs = runKeys.keys(); runs.sort()
+runs = list(six.iterkeys(runKeys)); runs.sort()
 stderr.write("Querying ConfDB for prescales for path %s...\n" % (path));
 jsout = {}
 for run in runs:

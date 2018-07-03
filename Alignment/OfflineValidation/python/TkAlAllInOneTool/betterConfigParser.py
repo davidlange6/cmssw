@@ -5,6 +5,7 @@ import copy
 import collections
 from TkAlExceptions import AllInOneError
 
+import six
 
 class AdaptedDict(collections.OrderedDict):
     """
@@ -158,7 +159,7 @@ class BetterConfigParser(ConfigParser.ConfigParser):
             "logdir":os.getcwd(),
             "eosdir": "",
             }
-        self.checkInput("general", knownSimpleOptions = defaults.keys())
+        self.checkInput("general", knownSimpleOptions = list(six.iterkeys(defaults)))
         general = self.getResultingSection( "general", defaultDict = defaults )
         internal_section = "internals"
         if not self.has_section(internal_section):

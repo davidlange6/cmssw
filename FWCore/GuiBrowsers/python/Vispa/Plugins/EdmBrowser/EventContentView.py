@@ -4,6 +4,7 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
 from Vispa.Views.AbstractView import AbstractView
+import six
 
 class EventContentView(QTableWidget, AbstractView):
     """ Holds a table to compare event contents.
@@ -75,7 +76,7 @@ class EventContentView(QTableWidget, AbstractView):
                     text="Yes"
                 else:
                     text="No"
-                if "_".join(entry) in comment.keys():
+                if "_".join(entry) in list(six.iterkeys(comment)):
                     text+=" ("+comment["_".join(entry)]+")"
                 #if relative:
                 color=Qt.white

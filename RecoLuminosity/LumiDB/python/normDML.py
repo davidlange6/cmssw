@@ -1,5 +1,6 @@
 import os,coral
 from RecoLuminosity.LumiDB import nameDealer,dbUtil,revisionDML,CommonUtil
+import six
 
 ########################################################################
 # Norm/Correction/version DML API                                      #
@@ -175,7 +176,7 @@ def normInfoByName(schema,normname):
         del qHandle
         raise
     if len(result)>0:
-        maxdataid=max(result.keys())
+        maxdataid=max(list(six.iterkeys(result)))
         return result[maxdataid]
     return result
 def normValueById(schema,normid):

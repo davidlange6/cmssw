@@ -14,6 +14,7 @@ import copy
 import json
 import re
 import urllib2
+import six
 
 class LumiList(object):
     """
@@ -143,8 +144,8 @@ class LumiList(object):
 
     def __and__(self, other): # Things in both
         result = {}
-        aruns = set(self.compactList.keys())
-        bruns = set(other.compactList.keys())
+        aruns = set(list(six.iterkeys(self.compactList)))
+        bruns = set(list(six.iterkeys(other.compactList)))
         for run in aruns & bruns:
             lumiList = []                    # List for this run
             unique = []                    # List for this run
@@ -174,8 +175,8 @@ class LumiList(object):
 
     def __or__(self, other):
         result = {}
-        aruns = self.compactList.keys()
-        bruns = other.compactList.keys()
+        aruns = list(six.iterkeys(self.compactList))
+        bruns = list(six.iterkeys(other.compactList))
         runs = set(aruns + bruns)
         for run in runs:
             overlap = sorted(self.compactList.get(run, []) + other.compactList.get(run, []))
@@ -238,7 +239,7 @@ class LumiList(object):
         Return the list of pairs representation
         """
         theList = []
-        runs = self.compactList.keys()
+        runs = list(six.iterkeys(self.compactList))
         runs.sort(key=int)
         for run in runs:
             lumis = self.compactList[run]
@@ -253,7 +254,7 @@ class LumiList(object):
         '''
         return the sorted list of runs contained
         '''
-        return sorted (self.compactList.keys())
+        return sorted (list(six.iterkeys(self.compactList)))
 
 
     def _getLumiParts(self):
@@ -263,7 +264,7 @@ class LumiList(object):
         """
 
         parts = []
-        runs = self.compactList.keys()
+        runs = list(six.iterkeys(self.compactList))
         runs.sort(key=int)
         for run in runs:
             lumis = self.compactList[run]

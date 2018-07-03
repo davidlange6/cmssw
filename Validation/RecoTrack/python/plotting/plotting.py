@@ -1016,7 +1016,7 @@ class AggregateBins:
                 # the iteration timing plots), so let's test them all
                 for lab in labels:
                     if lab in values:
-                        ivalue = values.keys().index(lab)
+                        ivalue = list(six.iterkeys(values)).index(lab)
                         break
             binIndexOrder.append( (ivalue, i) )
 
@@ -2563,7 +2563,7 @@ class PlotFolder:
         self._section = kwargs.pop("section", None)
         self._numberOfEventsHistogram = kwargs.pop("numberOfEventsHistogram", None)
         if len(kwargs) > 0:
-            raise Exception("Got unexpected keyword arguments: "+ ",".join(kwargs.keys()))
+            raise Exception("Got unexpected keyword arguments: "+ ",".join(list(six.iterkeys(kwargs))))
 
     def loopSubFolders(self):
         """Return True if the PlotGroups of this folder should be applied to the all subfolders"""
@@ -2721,7 +2721,7 @@ class PlotterFolder:
                     if sf_translated is not None and not sf_translated in subfolders:
                         subfolders[sf_translated] = DQMSubFolder(sf, sf_translated)
 
-            self._dqmSubFolders = subfolders.values()
+            self._dqmSubFolders = list(six.itervalues(subfolders))
             self._dqmSubFolders.sort(key=lambda sf: sf.subfolder)
 
         self._fallbackNames = fallbackNames

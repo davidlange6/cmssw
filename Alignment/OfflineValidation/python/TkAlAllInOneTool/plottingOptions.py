@@ -11,6 +11,7 @@ from primaryVertexValidation import PrimaryVertexValidation
 from TkAlExceptions import AllInOneError
 from trackSplittingValidation import TrackSplittingValidation
 from zMuMuValidation import ZMuMuValidation
+import six
 
 class BasePlottingOptions(object):
     __metaclass__ = ValidationMetaClass
@@ -92,7 +93,7 @@ class BasePlottingOptions(object):
         if self.general["era"] not in eraenum:
             raise AllInOneError("Era must be one of " + ", ".join(eraenum) + "!")
 
-        knownOpts = set(self.defaults.keys())|self.mandatories|self.optionals
+        knownOpts = set(list(six.iterkeys(self.defaults)))|self.mandatories|self.optionals
         ignoreOpts = []
         config.checkInput("plots:"+self.type,
                           knownSimpleOptions = knownOpts,

@@ -3,6 +3,7 @@ from RecoLuminosity.LumiDB import nameDealer,dbUtil,revisionDML,lumiTime,CommonU
 from datetime import datetime
 import array
 
+import six
 
 ########################################################################
 # LumiDB DML                           API                             #
@@ -909,7 +910,7 @@ def lumiRunByIds(schema,dataidMap,lumitype='HF'):
     result={}
     if not dataidMap:
         return result
-    inputRange=dataidMap.keys()
+    list(six.iterkeys(inputRange=dataidMap))
     for r in inputRange:
         lumidataid=dataidMap[r][0]
         if lumidataid:
@@ -925,7 +926,7 @@ def beamstatusByIds(schema,dataidMap):
     result={}
     if not dataidMap:
         return result
-    inputRange=dataidMap.keys()
+    list(six.iterkeys(inputRange=dataidMap))
     for r in inputRange:
         if r not in result:
             result[r]={}

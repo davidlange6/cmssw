@@ -25,6 +25,7 @@
 
 import random, os
 from math import *
+import six
 
 # set the initial seed for reproducibility!
 random.seed(123456)
@@ -79,7 +80,7 @@ class Alignable:
         self.location = location
 
     def writeXML(self):
-        parameters = self.location.keys()
+        parameters = list(six.iterkeys(self.location))
         if self.alignabletype[0:2] == "DT":
             parameters.sort(DTsorter)
         else:
@@ -101,7 +102,7 @@ class Position:
         self.location = location
 
     def writeXML(self):
-        parameters = self.location.keys()
+        parameters = list(six.iterkeys(self.location))
         parameters.sort(sorter)
 
         output = ["<setposition relativeto=\"ideal\" "]

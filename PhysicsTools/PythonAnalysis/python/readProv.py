@@ -1,5 +1,6 @@
 
 import copy
+import six
 
 class filereader:
 
@@ -55,7 +56,7 @@ class filereader:
                 module=[]
                 splitLine= line.split()
                 key=splitLine[-1]
-                if key not in file_modules.keys():
+                if key not in list(six.iterkeys(file_modules)):
                     file_modules[key]=[]
                 module.append(splitLine[-2])
                 value.append(line[:-1])

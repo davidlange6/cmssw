@@ -27,6 +27,7 @@ import argparse
 import netrc
 import shutil
 import getpass
+import six
 
 def get_version_info(url):
 	"""
@@ -220,7 +221,7 @@ def parse_arguments():
 
 	# if prep, prod or None were given, convert to URLs in dictionary server_alias_to_url
 	# if not, assume a URL has been given and use this instead
-	if command_line_data.server in server_alias_to_url.keys():
+	if command_line_data.server in list(six.iterkeys(server_alias_to_url)):
 		command_line_data.server = server_alias_to_url[command_line_data.server]
 
 	# use netrc to get username and password
@@ -285,7 +286,7 @@ def parse_arguments():
 		for (option_name, option_value) in command_line_data.__dict__.items():
 			# if the metadata_dictionary sets this, overwrite it
 			if option_name != "destinationTags":
-				if option_value != None or (option_value == None and not(option_name in metadata_dictionary.keys())):
+				if option_value != None or (option_value == None and not(option_name in list(six.iterkeys(metadata_dictionary)))):
 					# if option_value has a value, override the metadata file entry
 					# or if option_value is None but the metadata file doesn't give a value,
 					# set the entry to None as well
@@ -293,7 +294,7 @@ def parse_arguments():
 			else:
 				if option_value != {None:{}}:
 					metadata_dictionary["destinationTags"] = {option_value:{}}
-				elif option_value == {None:{}} and not("destinationTags" in metadata_dictionary.keys()):
+				elif option_value == {None:{}} and not("destinationTags" in list(six.iterkeys(metadata_dictionary))):
 					metadata_dictionary["destinationTags"] = {None:{}}
 
 	if command_line_data.review_options:

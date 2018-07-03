@@ -2,6 +2,7 @@
 from sys import stderr, exit
 import commands, os
 
+import six
 from optparse import OptionParser
 parser = OptionParser(usage=
 """
@@ -111,7 +112,7 @@ runs = sorted(runKeys.keys())
 
 # loop over all hlt keys found
 
-all_hlt_keys_seen = set(runKeys.values())
+all_hlt_keys_seen = set(list(six.itervalues(runKeys)))
 
 print >> stderr,"found %d runs and %d HLT menus" % ( len(runKeys), len(all_hlt_keys_seen))
 
@@ -128,7 +129,7 @@ for hlt_key in all_hlt_keys_seen:
 
    prescaleTable[hlt_key] = getPrescaleTableFromProcessObject(process)
 
-   all_path_names = set(process.paths.keys())
+   all_path_names = set(list(six.iterkeys(process.paths)))
 
    # remember which hlt paths were in this menu
    hlt_path_names_table[hlt_key] = all_path_names

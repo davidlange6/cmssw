@@ -1,3 +1,4 @@
+import six
 import json
 class selectionParser(object):
     def __init__(self,selectStr):
@@ -23,7 +24,7 @@ class selectionParser(object):
             self.__result[int(k)]=expandedvalues
             self.__strresult[k]=[str(x) for x in expandedvalues]
     def runs(self):
-        return self.__result.keys()
+        return list(six.iterkeys(self.__result))
     def runsandls(self):
         '''return expanded {run:lslist}
         '''
@@ -33,7 +34,7 @@ class selectionParser(object):
         '''
         return self.__strresult
     def numruns(self):
-        return len(self.__result.keys())
+        return len(list(six.iterkeys(self.__result)))
     def numls(self,run):
         return len(self.__result[run])
 if __name__ == "__main__":

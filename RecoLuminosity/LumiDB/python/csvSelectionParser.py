@@ -1,3 +1,4 @@
+import six
 import csv
 def is_intstr(s):
     try:
@@ -29,7 +30,7 @@ class csvSelectionParser(object):
             lsvalues.sort()
             self.__strresult[k]=[str(x) for x in lsvalues]
     def runs(self):
-        return self.__result.keys()
+        return list(six.iterkeys(self.__result))
     def runsandls(self):
         '''return {run:lslist}
         '''
@@ -39,7 +40,7 @@ class csvSelectionParser(object):
         '''
         return self.__strresult
     def numruns(self):
-        return len(self.__result.keys())
+        return len(list(six.iterkeys(self.__result)))
     def numls(self,run):
         return len(self.__result[run])
         

@@ -16,7 +16,7 @@ class Histograms(object):
         # are kept track of automagically, even if they are in
         # child classes
         # setting StatOverflows True for all histograms
-        for var in vars( self ).values():
+        for var in vars( self list(six.itervalues())):
             try:
                 if var.InheritsFrom('TNamed'):
                     self.named.append(var)
@@ -42,3 +42,4 @@ class Histograms(object):
         dir.cd()
 
         
+import six

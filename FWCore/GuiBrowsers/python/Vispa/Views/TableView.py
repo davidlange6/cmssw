@@ -8,6 +8,7 @@ from Vispa.Share.BasicDataAccessor import BasicDataAccessor
 from Vispa.Views.AbstractView import AbstractView
 from Vispa.Views.PropertyView import PropertyView,Property
 from Vispa.Share.ThreadChain import ThreadChain
+import six
 
 class TableWidgetItem(QTableWidgetItem):
     def __lt__(self,other):
@@ -105,7 +106,7 @@ class TableView(AbstractView, QTableWidget):
             ranking={}
             for ps in properties:
               for property in ps:
-                if not property[1] in ranking.keys():
+                if not property[1] in list(six.iterkeys(ranking)):
                     ranking[property[1]]=1
                     if property[0]!="Category":
                         self._columns+=[property[1]]

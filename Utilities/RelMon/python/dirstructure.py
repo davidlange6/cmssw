@@ -13,6 +13,7 @@ from copy import deepcopy
 from os import chdir,getcwd,listdir,makedirs,rmdir
 from os.path import exists,join
 
+import six
 import sys
 argv=sys.argv
 from ROOT import *
@@ -107,7 +108,7 @@ class Directory(Weighted):
     
     self.n_skiped = 0
     self.n_comp_skiped = 0
-    self.n_missing_objs = len(self.different_histograms['file1'].keys())+len(self.different_histograms['file2'].keys())
+    self.n_missing_objs = len(list(six.iterkeys(self.different_histograms['file1'])))+len(self.different_histograms['file2'].keys())
     if self.n_missing_objs != 0:
       print "    [*] Missing in %s: %s" %(self.filename1, self.different_histograms['file1'])
       print "    [*] Missing in %s: %s" %(self.filename2, self.different_histograms['file2'])

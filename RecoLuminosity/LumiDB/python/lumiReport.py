@@ -364,7 +364,7 @@ def toScreenOverview(lumidata,resultlines,scalefactor,irunlsdict=None,noWarning=
     sortedresult=sorted(result,key=lambda x : int(str(x[0]).split(':')[0]))
     if irunlsdict and not noWarning:
         for run,cmslslist in irunlsdict.items():
-            if run not in datarunlsdict.keys() or datarunlsdict[run] is None:
+            if run not in list(six.iterkeys(datarunlsdict)) or datarunlsdict[run] is None:
                 sys.stdout.write('[WARNING] selected run '+str(run)+' not in lumiDB or has no qualified data\n')
                 continue
             if cmslslist:
@@ -490,7 +490,7 @@ def toScreenLumiByLS(lumidata,resultlines,scalefactor,irunlsdict=None,noWarning=
     sortedresult=sorted(result,key=lambda x : int(str(x[0]).split(':')[0]))    
     if irunlsdict and not noWarning:
         for run,cmslslist in irunlsdict.items():
-            if run not in datarunlsdict.keys() or datarunlsdict[run] is None:
+            if run not in list(six.iterkeys(datarunlsdict)) or datarunlsdict[run] is None:
                 sys.stdout.write('[WARNING] selected run '+str(run)+' not in lumiDB or has no qualified data\n')
                 continue
             if cmslslist:
@@ -587,7 +587,7 @@ def toScreenLSEffective(lumidata,resultlines,scalefactor,irunlsdict=None,noWarni
             rline[7]=myeff
         result.append(rline)        
 
-    for run in lumidata.keys():#loop over runs
+    for run in list(six.iterkeys(lumidata)):#loop over runs
         lsdata=lumidata[run]
         if not lsdata:
             result.append([str(run),'n/a','n/a','n/a','n/a','n/a','n/a','n/a'])
@@ -643,7 +643,7 @@ def toScreenLSEffective(lumidata,resultlines,scalefactor,irunlsdict=None,noWarni
     sortedresult=sorted(result,key=lambda x : int(str(x[0]).split(':')[0]))
     if irunlsdict and not noWarning:
         for run,cmslslist in irunlsdict.items():
-            if run not in datarunlsdict.keys() or datarunlsdict[run] is None:
+            if run not in list(six.iterkeys(datarunlsdict)) or datarunlsdict[run] is None:
                 sys.stdout.write('[WARNING] selected run '+str(run)+' not in lumiDB or has no HLT data\n')
                 continue
             if cmslslist:
@@ -740,7 +740,7 @@ def toScreenTotEffective(lumidata,resultlines,scalefactor,irunlsdict=None,noWarn
             rline[5]='%.3f'%(rr)+' ('+lumiu+')'
             totdict[mypath][1]+=reff
         result.append(rline)
-    for run in lumidata.keys():#loop over runs
+    for run in list(six.iterkeys(lumidata)):#loop over runs
         lsdata=lumidata[run]
         hprescdict={}
         lprescdict={}
@@ -836,7 +836,7 @@ def toScreenTotEffective(lumidata,resultlines,scalefactor,irunlsdict=None,noWarn
                 
     if irunlsdict and not noWarning:
         for run,cmslslist in irunlsdict.items():
-            if run not in datarunlsdict.keys() or datarunlsdict[run] is None:
+            if run not in list(six.iterkeys(datarunlsdict)) or datarunlsdict[run] is None:
                 sys.stdout.write('[WARNING] selected run '+str(run)+' not in lumiDB or has no HLT data\n')
                 continue
             if cmslslist:
@@ -988,7 +988,7 @@ def toScreenLSTrg(trgdata,iresults=[],irunlsdict=None,noWarning=True,toFile=None
                 result.append([str(run),str(cmslsnum),'%.4f'%(deadfrac),bitdataStr])
     if irunlsdict and not noWarning:
         for run,cmslslist in irunlsdict.items():
-            if run not in datarunlsdict.keys() or datarunlsdict[run] is None:
+            if run not in list(six.iterkeys(datarunlsdict)) or datarunlsdict[run] is None:
                 sys.stdout.write('[WARNING] selected run '+str(run)+' not in lumiDB or has no qualified data\n')
                 continue
             if cmslslist:

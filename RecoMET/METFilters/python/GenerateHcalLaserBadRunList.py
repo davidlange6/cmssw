@@ -5,6 +5,7 @@ import time
 
 import FWCore.ParameterSet.Config as cms
 from hcalLaserEventFilter_cfi import hcalLaserEventFilter
+import six
 
 ''' Program reads existing bad run/event list from hcalLaserEventFilter_cfi.py, and an (optional) new list from a text file.  If a text file is specified, this is assumed to be the desired new bad list, and its output will be sent to badEvents.py in the form needed by the cfi file.
 
@@ -82,7 +83,7 @@ if __name__=="__main__":
     # At some point, add ability to append/replace.
     # For now, new list is just the output from newBadDict
 
-    newkeys=newBadDict.keys()
+    list(six.iterkeys(newkeys=newBadDict))
     newkeys.sort()
     notInOld={}
     notInNew={}
@@ -111,14 +112,14 @@ if __name__=="__main__":
 
     print "Total bad events in new file = ",len(newkeys)
 
-    if len(notInOld.keys())>0:
+    if len(list(six.iterkeys(notInOld)))>0:
         print
-        print "A total of %i bad events found"%len(notInOld.keys())
+        print "A total of %i bad events found"%len(list(six.iterkeys(notInOld)))
         for k in notInOld.keys():
             print k
 
-    if len(notInNew.keys())>0:
+    if len(list(six.iterkeys(notInNew)))>0:
         print
-        print "A total of %i events aren't in NEW list!"%len(notInNew.keys())
+        print "A total of %i events aren't in NEW list!"%len(list(six.iterkeys(notInNew)))
         for k in notInNew.keys():
             print k

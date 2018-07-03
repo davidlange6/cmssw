@@ -7,6 +7,7 @@ import configTemplates
 from dataset import Dataset
 from helperFunctions import replaceByMap, addIndex, getCommandOutput2, boolfromstring, pythonboolstring
 from TkAlExceptions import AllInOneError
+import six
 
 class ValidationMetaClass(ABCMeta):
     sets = ["mandatories", "optionals", "needpackages"]
@@ -125,7 +126,7 @@ class GenericValidation(object):
             except ValueError:
                 raise AllInOneError("AutoAlternates needs to be true or false, not %s" % config.get("alternateTemplates","AutoAlternates"))
 
-        knownOpts = set(self.defaults.keys())|self.mandatories|self.optionals
+        knownOpts = set(list(six.iterkeys(self.defaults)))|self.mandatories|self.optionals
         ignoreOpts = []
         config.checkInput(self.valType+":"+self.name,
                           knownSimpleOptions = knownOpts,

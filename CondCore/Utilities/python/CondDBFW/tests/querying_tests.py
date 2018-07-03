@@ -13,6 +13,7 @@ import CondCore.Utilities.CondDBFW.models as models
 
 from CondCore.Utilities.CondDBFW.utils import to_timestamp, to_datetime, friendly_since
 from CondCore.Utilities.CondDBFW.models import Range, Radius
+import six
 
 prod_connection_string = "frontier://FrontierProd/CMS_CONDITIONS"
 secrets_source = None
@@ -39,7 +40,7 @@ def factory_tests(querying_tests):
 		"""
 		keys = ["globaltag", "globaltagmap", "tag", "iov", "payload"]
 		for key in keys:
-			self.assertTrue(key in self.connection.models.keys())
+			self.assertTrue(key in list(six.iterkeys(self.connection.models)))
 		proxy_method_names = ["global_tag", "global_tag_map", "tag", "iov", "payload"]
 		for name in proxy_method_names:
 			self.assertTrue(hasattr(self.connection, name))

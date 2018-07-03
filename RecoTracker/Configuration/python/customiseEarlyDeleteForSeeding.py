@@ -47,7 +47,7 @@ def customiseEarlyDeleteForSeeding(process, products):
                 keys.remove(dependsOn)
             products[name].extend(products[dependsOn])
 
-    keys = set(depends.keys())
+    keys = set(list(six.iterkeys(depends)))
     while len(keys) > 0:
         name = keys.pop()
         _resolve(keys, name)

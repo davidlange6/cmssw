@@ -12,6 +12,7 @@ from Vispa.Main.Application import Application
 from Vispa.Views.PropertyView import PropertyView
 from Vispa.Main.Exceptions import exception_traceback
 from .ToolDataAccessor import standardToolsDir,ConfigToolBase
+import six
 
 class ToolDialog(QDialog):
     def __init__(self,parent=None):
@@ -64,12 +65,12 @@ class ToolDialog(QDialog):
             module=imp.load_source(pythonModule, toolsFile)
             for name in dir(module):
                 tool=getattr(module,name)
-                if inspect.isclass(tool) and issubclass(tool,ConfigToolBase) and not self._toolDataAccessor.label(tool) in self._toolsDict.keys() and not tool==ConfigToolBase:
+                if inspect.isclass(tool) and issubclass(tool,ConfigToolBase) and not self._toolDataAccessor.label(tool) in list(six.iterkeys(self._toolsDict)) and not tool==ConfigToolBase:
                     self._toolsDict[self._toolDataAccessor.label(tool)]=tool
         # Show test tool
         #from FWCore.GuiBrowsers.editorTools import ChangeSource
         #self._toolsDict["ChangeSource"]=ChangeSource
-        if len(self._toolsDict.keys())==0 and self._toolsDir==standardToolsDir:
+        if len(list(six.iterkeys(self._toolsDict)))==0 and self._toolsDir==standardToolsDir:
             logging.error(__name__ + ": Could not find any PAT tools. These will be available for the ConfigEditor in a future release.")
             QCoreApplication.instance().errorMessage("Could not find any PAT tools. These will be available for the ConfigEditor in a future release.")
             return

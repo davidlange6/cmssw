@@ -163,7 +163,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
 
 # import input-config and make list of all imported configs
         for i in imported_configs.iterkeys():
-            if i in sys.modules.keys():
+            if i in list(six.iterkeys(sys.modules)):
                 del sys.modules[i]
         sys.path.insert(0, os.path.dirname(self._filename))
         common_imports = sys.modules.copy()
@@ -239,13 +239,13 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
         else:
             folder_list += [("paths", six.itervalues(self.process().paths))]
         folder_list += [("endpaths", six.itervalues(self.process().endpaths))]
-        folder_list += [("modules", self._sort_list(self.process().producers.values()+self.process().filters.values()+self.process().analyzers.values()))]
-        folder_list += [("services", self._sort_list(self.process().services.values()))]
-        folder_list += [("psets", self._sort_list(self.process().psets.values()))]
-        folder_list += [("vpsets", self._sort_list(self.process().vpsets.values()))]
-        folder_list += [("essources", self._sort_list(self.process().es_sources.values()))]
-        folder_list += [("esproducers", self._sort_list(self.process().es_producers.values()))]
-        folder_list += [("esprefers", self._sort_list(self.process().es_prefers.values()))]
+        folder_list += [("modules", self._sort_list(self.process(list(six.itervalues().producers))+self.process().filters.values()+self.process().analyzers.values()))]
+        folder_list += [("services", self._sort_list(self.process(list(six.itervalues().services))))]
+        folder_list += [("psets", self._sort_list(self.process(list(six.itervalues().psets))))]
+        folder_list += [("vpsets", self._sort_list(self.process(list(six.itervalues().vpsets))))]
+        folder_list += [("essources", self._sort_list(self.process(list(six.itervalues().es_sources))))]
+        folder_list += [("esproducers", self._sort_list(self.process(list(six.itervalues().es_producers))))]
+        folder_list += [("esprefers", self._sort_list(self.process(list(six.itervalues().es_prefers))))]
         folders={}
 	for foldername, entry in folder_list:
             folder = ConfigFolder(foldername, process_folder)
@@ -357,7 +357,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
                 
     def motherRelations(self, object):
         """ Get motherRelations of an object """
-        if object in self._motherRelationsDict.keys():
+        if object in list(six.iterkeys(self._motherRelationsDict)):
 	    try:
                 return self._motherRelationsDict[object]
 	    except TypeError:
@@ -367,7 +367,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
 
     def daughterRelations(self, object):
         """ Get daughterRelations of an object """
-        if object in self._daughterRelationsDict.keys():
+        if object in list(six.iterkeys(self._daughterRelationsDict)):
 	    try:
                 return self._daughterRelationsDict[object]
 	    except TypeError:
@@ -497,7 +497,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
 
     def uses(self, object):
         """ Get list of all config objects that are used as input """
-        if not object in self._usesDict.keys():
+        if not object in list(six.iterkeys(self._usesDict)):
             uses = []
             for key, value in self.inputTags(object):
                 module = str(value).split(":")[0]
@@ -512,7 +512,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
     
     def foundIn(self, object):
         """ Make list of all mother sequences """
-        if not object in self._foundInDict.keys():
+        if not object in list(six.iterkeys(self._foundInDict)):
             foundin = []
             for entry in self._allObjects:
                 for daughter in self.children(entry):
@@ -526,7 +526,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
 
     def usedBy(self, object):
         """ Find config objects that use this as input """
-        if not object in self._usedByDict.keys():
+        if not object in list(six.iterkeys(self._usedByDict)):
             usedby = []
             for entry in self._allObjects:
                 for uses in self.uses(entry):
@@ -669,7 +669,7 @@ class ConfigDataAccessor(BasicDataAccessor, RelativeDataAccessor):
                 if not module in allLabels:
                     if not ("*",module,product,process) in content:
                         content += [("*",module,product,process)]
-                    if "*_"+module+"_"+product+"_"+process in content_objects.keys():
+                    if "*_"+module+"_"+product+"_"+process in list(six.iterkeys(content_objects)):
                         content_objects["*_"+module+"_"+product+"_"+process]+=","+self.label(object)
                     else:
                         content_objects["*_"+module+"_"+product+"_"+process]=self.label(object)

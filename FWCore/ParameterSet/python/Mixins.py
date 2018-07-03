@@ -637,7 +637,7 @@ def _modifyParametersFromDict(params, newParams, errorRaiser, keyDepth=""):
                     if isinstance(params[key],_Parameterizable):
                         pset = params[key]
                         p =pset.parameters_()
-                        oldkeys = set(p.keys())
+                        oldkeys = set(list(six.iterkeys(p)))
                         _modifyParametersFromDict(p,
                                                   value,errorRaiser,
                                                   ("%s.%s" if isinstance(key, str) else "%s[%s]")%(keyDepth,key))
@@ -647,10 +647,10 @@ def _modifyParametersFromDict(params, newParams, errorRaiser, keyDepth=""):
                         for k in oldkeys:
                             delattr(pset,k)
                     elif isinstance(params[key],_ValidatingParameterListBase):
-                        if any(not isinstance(k, int) for k in value.keys()):
+                        if any(not isinstance(k, int) for k in list(six.iterkeys(value))):
                             raise TypeError("Attempted to change a list using a dict whose keys are not integers")
                         plist = params[key]
-                        if any((k < 0 or k >= len(plist)) for k in value.keys()):
+                        if any((k < 0 or k >= len(plist)) for k in list(six.iterkeys(value))):
                             raise IndexError("Attempted to set an index which is not in the list")
                         p = dict(enumerate(plist))
                         _modifyParametersFromDict(p,

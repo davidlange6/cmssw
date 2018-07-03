@@ -22,6 +22,7 @@ from CRABAPI.RawCommand import crabCommand
 from CRABClient.UserUtilities import getConsoleLogLevel, setConsoleLogLevel
 from CRABClient.ClientUtilities import LOGLEVEL_MUTE
 from CRABClient.ClientExceptions import CachefileNotFoundException
+import six
 
 ## The CrabController class
 #
@@ -524,7 +525,7 @@ class CrabTask:
             #try it once more
             time.sleep(2)
             self.state , self.jobs,self.failureReason = controller.status(self.crab_folder)
-        self.nJobs = len(self.jobs.keys())
+        self.nJobs = len(list(six.iterkeys(self.jobs)))
         self.updateJobStats()
         if self.state == "NOSTATE":
             self.log.debug( "Trying to resubmit because of NOSTATE" )

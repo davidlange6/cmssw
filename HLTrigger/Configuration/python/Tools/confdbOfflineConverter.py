@@ -6,6 +6,7 @@ import urllib
 import shutil
 import subprocess
 import atexit
+import six
 
 class OfflineConverter:
 
@@ -213,7 +214,7 @@ def main():
     _dbs = {}
     _dbs['v1'] = [ '--%s' % _db for _db in OfflineConverter.databases['v1'] ] + [ '--runNumber' ]
     _dbs['v2'] = [ '--%s' % _db for _db in OfflineConverter.databases['v2'] ] + [ '--runNumber' ]
-    _dbargs = set(args) & set(sum(_dbs.values(), []))
+    _dbargs = set(args) & set(sum(list(six.itervalues(_dbs)), []))
 
     if _dbargs:
         if len(_dbargs) > 1:

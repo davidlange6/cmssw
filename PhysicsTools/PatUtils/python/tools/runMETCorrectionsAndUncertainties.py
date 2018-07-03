@@ -5,6 +5,7 @@ import PhysicsTools.PatAlgos.tools.helpers as configtools
 from PhysicsTools.PatAlgos.tools.helpers import getPatAlgosToolsTask, addToProcessAndTask
 from PhysicsTools.PatAlgos.tools.jetTools import switchJetCollection
 
+import six
 
 def isValidInputTag(input):
     input_str = input
@@ -495,7 +496,7 @@ class RunMETCorrectionsAndUncertainties(ConfigToolBase):
         
         #if empty correction level, no need to try something
         for cor in correctionLevel:
-            if cor not in corNames.keys():
+            if cor not in list(six.iterkeys(corNames)):
                 if cor != "":
                     print "ERROR : ",cor," is not a proper MET correction name! aborting the MET correction production"
                 return patMetCorrectionSequence, metModName

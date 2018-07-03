@@ -556,7 +556,7 @@ def printRecordedLumi (lumidata, isVerbose = False, hltpath = ''):
         perlsdata = dataperRun[2]
         totalSelectedLS = totalSelectedLS+len (perlsdata)
         recordedLumi = 0.0
-        #norbits = perlsdata.values()[0][3]
+        #norbits = list(six.itervalues(perlsdata))[0][3]
         recordedLumi = calculateTotalRecorded (perlsdata)
         totalRecorded = totalRecorded+recordedLumi
         trgdict = dataperRun[1]
@@ -584,7 +584,7 @@ def printRecordedLumi (lumidata, isVerbose = False, hltpath = ''):
         for trg, trgdata in trgdict.items():
             #print trg, trgdata
             rowdata = []                    
-            if trg == trgdict.keys()[0]:
+            if trg == list(six.iterkeys(trgdict))[0]:
                 rowdata += [str (runnum)]
             else:
                 rowdata += ['']
@@ -653,7 +653,7 @@ def dumpRecordedLumi (lumidata, hltpath = ''):
             continue
         perlsdata = dataperRun[2]
         recordedLumi = 0.0
-        #norbits = perlsdata.values()[0][3]
+        #norbits = list(six.itervalues(perlsdata))[0][3]
         recordedLumi = calculateTotalRecorded (perlsdata)
         trgdict = dataperRun[1]
         effective = calculateEffective (trgdict, recordedLumi)
@@ -709,7 +709,7 @@ def printOverviewData (delivered, recorded, hltpath = ''):
             continue
         totalDeliveredLS += int (deliveredrowdata[1])
         totalDelivered += float (deliveredrowdata[2])
-        selectedls = recorded[runidx][2].keys()
+        selectedls = list(six.iterkeys(recorded[runidx][2]))
         #print 'runidx ', runidx, deliveredrowdata
         #print 'selectedls ', selectedls
         if len (selectedls) == 0:
@@ -1876,5 +1876,5 @@ if __name__=='__main__':
     #print
     #print 'runsbyfill ',runsbyfill
     #print
-    #print 'runsinaweek ',runsinaweek.keys()
+    #print 'runsinaweek list(six.iterkeys(',runsinaweek))
     print 'all fills ',allfills

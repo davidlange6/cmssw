@@ -2,6 +2,7 @@
 # NOTE: EventBranch._readData has to be taken care of at another place!
 
 #import cmserror
+import six
 
 def addIterator(obj):
     """function for adding iterators to objects""" 
@@ -45,9 +46,9 @@ def emptyIterator(self):
 # automatic detection of iterators.      
 def _findIterators(obj):
     objDict = obj.__dict__
-    _beginNames = [name for name in objDict.keys() if "begin" in 
+    _beginNames = [name for name in list(six.iterkeys(objDict)) if "begin" in 
 name.lower()]
-    _endNames = [name for name in objDict.keys() if "end" in name.lower()]
+    _endNames = [name for name in list(six.iterkeys(objDict)) if "end" in name.lower()]
     if len(_beginNames)==1 and len(_endNames)== 1 and _beginNames[0].lower().replace("begin","") == _endNames[0].lower().replace("end",""):  
         return objDict[_beginNames[0]], objDict[_endNames[0]]
     else:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from FWCore.ParameterSet.Types import PSet
+import six
 import FWCore.ParameterSet.Config as cms
 class RunType(PSet):
   def __init__(self,types=['pp_run','pp_run_stage1','cosmic_run','cosmic_run_stage1','hi_run','hpu_run']):
@@ -21,7 +22,7 @@ class RunType(PSet):
     
   def setRunType(self,rt):
     if isinstance(rt,int): 
-      if rt not in self.__runTypesDict.values():
+      if rt not in list(six.itervalues(self.__runTypesDict)):
         raise TypeError("%d not a valid Run Type" % rt)
       
       self.__runType = rt
@@ -29,7 +30,7 @@ class RunType(PSet):
       return
     
     if isinstance(rt,str):
-      if rt not in self.__runTypesDict.keys():
+      if rt not in list(six.iterkeys(self.__runTypesDict)):
         raise TypeError("%s not a valid Run Type" % rt)
       
       self.__runTypeName = rt

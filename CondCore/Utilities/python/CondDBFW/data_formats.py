@@ -8,6 +8,7 @@ Note: may also contain a decorator that can wrap a class around a function that 
 """
 
 from data_sources import json_data_node, json_list, json_dict, json_basic
+import six
 
 # decorators
 
@@ -72,10 +73,10 @@ def _to_array_of_dicts(data):
 	return json_data_node.make(array_of_dicts)
 
 def _to_datatables(data):
-	headers = map(str, data.get(0).data().keys())
+	headers = map(str, data.get(0).data(list(six.iterkeys())))
 	new_data = []
 	for n in range(0, len(data.data())):
-		new_data.append(map(lambda entry : str(entry) if isinstance(entry, unicode) else entry, data.get(n).data().values()))
+		new_data.append(map(lambda entry : str(entry) if isinstance(entry, unicode) else entry, data.get(n).data(list(six.itervalues()))))
 	return json_data_node.make({
 		"headers" : headers,
 		"data" : new_data

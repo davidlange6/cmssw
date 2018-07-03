@@ -2,6 +2,7 @@ import FWCore.ParameterSet.Config as cms
 import sys
 import FWCore.ParameterSet.VarParsing as VarParsing
 from FWCore.Utilities.Enumerate import Enumerate
+import six
 
 varType = Enumerate ("Run1 2015 2017 2019 2023D17 2023D19 MaPSA")
 
@@ -9,7 +10,7 @@ def help():
    print "Usage: cmsRun dumpFWRecoGeometry_cfg.py  tag=TAG "
    print "   tag=tagname"
    print "       indentify geometry condition database tag"
-   print "      ", varType.keys()
+   print "      ", list(six.iterkeys(varType))
    print ""
    print "   tgeo=bool"
    print "       dump in TGeo format to borwse it geomtery viewer"

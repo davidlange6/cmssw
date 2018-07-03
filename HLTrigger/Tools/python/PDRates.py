@@ -106,7 +106,7 @@ def RateInPD(Run,PrimaryDataset,lsMin,lsMax,printLS=False):
 	if printLS:
 		print "lsmin lsmax",lsmin,lsmax
 		for ls in range(lsmin,lsmax):
-			if not repr(ls) in RatePerLS.keys():
+			if not repr(ls) in list(six.iterkeys(RatePerLS)):
 				RatePerLS[LS] = 0
 				print "Missing LS ",ls
 

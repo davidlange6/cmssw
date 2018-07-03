@@ -2,6 +2,7 @@ import sys, os
 
 from Configuration.PyReleaseValidation.WorkFlow import WorkFlow
 from Configuration.PyReleaseValidation.MatrixUtil import InputInfo
+import six
 
 # ================================================================================
 
@@ -112,7 +113,7 @@ class MatrixReader(object):
     
     def makeStep(self,step,overrides):
         from Configuration.PyReleaseValidation.relval_steps import merge
-        if len(overrides.keys()) > 0:
+        if len(list(six.iterkeys(overrides))) > 0:
             copyStep=merge([overrides]+[step])
             return copyStep
         else:    
@@ -220,7 +221,7 @@ class MatrixReader(object):
                     else:
                         testName=step+'INPUT'
                     #print "JR",stepI,stepIr,testName,stepList
-                    if testName in self.relvalModule.steps.keys():
+                    if testName in list(six.iterkeys(self.relvalModule.steps)):
                         #print "JR",stepI,stepIr
                         stepList[stepI]=testName
                         #pop the rest in the list
@@ -248,7 +249,7 @@ class MatrixReader(object):
                 ## maybe we want too level deep input
                 """
                 if num in fromInput:
-                    if step+'INPUT' in self.relvalModule.steps.keys():
+                    if step+'INPUT' in list(six.iterkeys(self.relvalModule.steps)):
                         stepName = step+"INPUT"
                         stepList.remove(step)
                         stepList.insert(stepIndex,stepName)
@@ -321,7 +322,7 @@ class MatrixReader(object):
             dataFileName = matrixFile.replace('relval_', 'cmsDriver_')+'_hlt.txt'
             outFile = open(dataFileName,'w')
 
-            print "found ", len(self.workFlowSteps.keys()), ' workflows for ', dataFileName
+            print "found ", len(list(six.iterkeys(self.workFlowSteps))), ' workflows for ', dataFileName
             ids = sorted(self.workFlowSteps.keys())
             indexAndSteps=[]
 
@@ -454,7 +455,7 @@ class MatrixReader(object):
         prefixIn = self.filesPrefMap[fileNameIn]
 
         # get through the list of items and update the requested workflows only
-        keyList = self.workFlowSteps.keys()
+        keyList = list(six.iterkeys(self.workFlowSteps))
         ids = []
         for item in keyList:
             id, pref = item

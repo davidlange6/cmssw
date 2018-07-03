@@ -141,16 +141,16 @@ class Process(object):
     # some user-friendly methods for command-line browsing
     def producerNames(self):
         """Returns a string containing all the EDProducer labels separated by a blank"""
-        return ' '.join(self.producers_().keys())
+        return ' '.join(self.producers_(list(six.iterkeys())))
     def analyzerNames(self):
         """Returns a string containing all the EDAnalyzer labels separated by a blank"""
-        return ' '.join(self.analyzers_().keys())
+        return ' '.join(self.analyzers_(list(six.iterkeys())))
     def filterNames(self):
         """Returns a string containing all the EDFilter labels separated by a blank"""
-        return ' '.join(self.filters_().keys())
+        return ' '.join(self.filters_(list(six.iterkeys())))
     def pathNames(self):
         """Returns a string containing all the Path names separated by a blank"""
-        return ' '.join(self.paths_().keys())
+        return ' '.join(self.paths_(list(six.iterkeys())))
 
     def __setstate__(self, pkldict):
         """
@@ -427,7 +427,7 @@ class Process(object):
             raise ValueError('this attribute cannot be deleted')
 
         # we have to remove it from all dictionaries/registries
-        dicts = [item for item in self.__dict__.values() if (isinstance(item, dict) or isinstance(item, DictTypes.SortedKeysDict))]
+        dicts = [item for item in list(six.itervalues(self.__dict__)) if (isinstance(item, dict) or isinstance(item, DictTypes.SortedKeysDict))]
         for reg in dicts:
             if name in reg: del reg[name]
         # if it was a labelable object, the label needs to be removed
@@ -1014,7 +1014,7 @@ class Process(object):
             print "  sequences:"+",".join(unneededSeqLabels)
             print "  paths/endpaths:"+",".join(unneededPaths)
     def _pruneModules(self, d, scheduledNames):
-        moduleNames = set(d.keys())
+        moduleNames = set(list(six.iterkeys(d)))
         junk = moduleNames - scheduledNames
         for name in junk:
             delattr(self, name)
@@ -2459,7 +2459,7 @@ process.s2 = cms.Sequence(process.a+(process.a+process.a))
             p.path2 = Path(p.b)
             self.assert_(p.schedule is None)
             pths = p.paths
-            keys = pths.keys()
+            keys = list(six.iterkeys(pths))
             self.assertEqual(pths[keys[0]],p.path1)
             self.assertEqual(pths[keys[1]],p.path2)
             p.prune()
@@ -2478,7 +2478,7 @@ process.s2 = cms.Sequence(process.a+(process.a+process.a))
             p.path1 = Path(p.a)
             self.assert_(p.schedule is None)
             pths = p.paths
-            keys = pths.keys()
+            keys = list(six.iterkeys(pths))
             self.assertEqual(pths[keys[1]],p.path1)
             self.assertEqual(pths[keys[0]],p.path2)
 
@@ -2664,7 +2664,7 @@ process.addSubProcess(cms.SubProcess(process = childProcess, SelectEvents = cms.
             p.path2 = Path(p.b)
             self.assert_(p.schedule is None)
             pths = p.paths
-            keys = pths.keys()
+            keys = list(six.iterkeys(pths))
             self.assertEqual(pths[keys[0]],p.path1)
             self.assertEqual(pths[keys[1]],p.path2)
             p.pset1 = PSet(parA = string("pset1"))
@@ -2699,7 +2699,7 @@ process.addSubProcess(cms.SubProcess(process = childProcess, SelectEvents = cms.
             p.path4 = Path(p.b+p.s3)
             p.schedule = Schedule(p.path1,p.path2,p.path3)
             pths = p.paths
-            keys = pths.keys()
+            keys = list(six.iterkeys(pths))
             self.assertEqual(pths[keys[0]],p.path1)
             self.assertEqual(pths[keys[1]],p.path2)
             p.prune()

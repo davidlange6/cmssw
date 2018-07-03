@@ -1,6 +1,7 @@
 from optparse import OptionParser
 from random import gauss
 from math import sqrt
+import six
 import os
 execfile("Alignment/MuonAlignment/data/idealTransformation.py")
 
@@ -200,7 +201,7 @@ sum_phiyphiy = 0.
 sum_phiyphiz = 0.
 sum_phizphiz = 0.
 
-for xi, yi, zi, phixi, phiyi, phizi in misal.values():
+for xi, yi, zi, phixi, phiyi, phizi in list(six.itervalues(misal)):
     sum_x += xi
     sum_y += yi
     sum_z += zi

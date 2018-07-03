@@ -127,7 +127,7 @@ def drawMany(name, histoDicts, styles=_defaultStyles, opts={}, ncolumns=4):
     if len(histoDicts) == 0:
         return
 
-    histoNames = histoDicts[0].keys()
+    histoNames = list(six.iterkeys(histoDicts[0]))
     ratio = False
     ratioFactor = _ratioFactor
     for opt in six.itervalues(opts):

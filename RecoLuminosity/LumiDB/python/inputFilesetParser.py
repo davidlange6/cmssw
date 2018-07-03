@@ -1,4 +1,5 @@
 import os,csv
+import six
 from RecoLuminosity.LumiDB import csvSelectionParser,selectionParser,CommonUtil
 def filehasHeader(f):
     line=f.readline()
@@ -58,7 +59,7 @@ class inputFilesetParser(object):
                 runnumber=int(field0)
                 if runnumber not in result:
                     result[runnumber]=None
-        return result.keys()
+        return list(six.iterkeys(result))
     def selectedRunsWithresult(self):
         '''
         output: [run,run,...]

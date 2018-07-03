@@ -3,6 +3,7 @@ def plotSequences(seq,filename):
     from os import popen
     from os.path import basename
     from re import sub;
+import six
     import FWCore.ParameterSet.Config as cms
     stderr.write("Writing plot to %s\n" % (filename,))
     dot = popen("dot -Tpng > %s" % (filename,), "w")
@@ -72,8 +73,8 @@ def plotModuleInputs(seq,filename,printOuter=True,printLinkNames=True):
         for (tn,tv) in tags:
             tve = escapeParValue(tv)
             if tve not in alls: alls[tve]=True
-    names = deps.keys();
-    if printOuter: names = alls.keys()
+    names = list(six.iterkeys(deps));
+    if printOuter: names = list(six.iterkeys(alls))
     done = {}
     for n in names:
         ne = escapeParValue(n)

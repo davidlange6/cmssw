@@ -16,6 +16,7 @@
 # 
 # Full licence is in the file COPYING and at http://www.gnu.org/copyleft/gpl.html
 
+import six
 import re, codecs, os, platform, copy, itertools, math, cmath, random, sys, copy
 _epsilon = 1e-5
 
@@ -746,7 +747,7 @@ class Fig:
 
     self.trans = kwds["trans"]; del kwds["trans"]
     if len(kwds) != 0:
-      raise TypeError("Fig() got unexpected keyword arguments %s" % kwds.keys())
+      raise TypeError("Fig() got unexpected keyword arguments %s" % list(six.iterkeys(kwds)))
 
   def SVG(self, trans=None):
     """Apply the transformation "trans" and return an SVG object.
@@ -851,7 +852,7 @@ class Plot:
     self.text_attr = kwds["text_attr"]; del kwds["text_attr"]
     self.axis_attr = kwds["axis_attr"]; del kwds["axis_attr"]
     if len(kwds) != 0:
-      raise TypeError("Plot() got unexpected keyword arguments %s" % kwds.keys())
+      raise TypeError("Plot() got unexpected keyword arguments %s" % list(six.iterkeys(kwds)))
 
   def SVG(self, trans=None):
     """Apply the transformation "trans" and return an SVG object."""
@@ -950,7 +951,7 @@ class Frame:
     self.axis_attr.update(kwds["axis_attr"]); del kwds["axis_attr"]
 
     if len(kwds) != 0:
-      raise TypeError("Frame() got unexpected keyword arguments %s" % kwds.keys())
+      raise TypeError("Frame() got unexpected keyword arguments %s" % list(six.iterkeys(kwds)))
 
   def SVG(self):
     """Apply the window transformation and return an SVG object."""

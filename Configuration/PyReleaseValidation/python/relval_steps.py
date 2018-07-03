@@ -2,6 +2,7 @@ from MatrixUtil import *
 
 from Configuration.HLT.autoHLT import autoHLT
 from Configuration.AlCa.autoPCL import autoPCL
+import six
 
 # step1 gensim: for run1
 step1Defaults = {'--relval'      : None, # need to be explicitly set
@@ -2500,6 +2501,7 @@ defaultDataSets['2023D27']=''
 defaultDataSets['2023D28']=''
 
 keys=defaultDataSets.keys()
+
 for key in keys:
   defaultDataSets[key+'PU']=defaultDataSets[key]
 
@@ -2709,7 +2711,7 @@ for year,k in [(year,k) for year in upgradeKeys for k in upgradeKeys[year]]:
         stepName = step + upgradeSteps['Timing']['suffix']
         upgradeStepDict[stepName][k] = deepcopy(upgradeStepDict[step][k])
         # avoid some nonsense
-        if '--era' in upgradeStepDict[stepName][k].keys() and not "_timing" in upgradeStepDict[stepName][k]['--era']:
+        if '--era' in list(six.iterkeys(upgradeStepDict[stepName][k])) and not "_timing" in upgradeStepDict[stepName][k]['--era']:
             upgradeStepDict[stepName][k]['--era'] += "_timing"
 
     for step in upgradeSteps['Neutron']['steps']:
@@ -2719,7 +2721,7 @@ for year,k in [(year,k) for year in upgradeKeys for k in upgradeKeys[year]]:
             custNew = "SLHCUpgradeSimulations/Configuration/customise_mixing.customise_Mix_LongLived_Neutrons"
         stepName = step + upgradeSteps['Neutron']['suffix']
         upgradeStepDict[stepName][k] = deepcopy(upgradeStepDict[step][k])
-        if '--customise' in upgradeStepDict[stepName][k].keys():
+        if '--customise' in list(six.iterkeys(upgradeStepDict[stepName][k])):
             upgradeStepDict[stepName][k]['--customise'] += ","+custNew
         else:
             upgradeStepDict[stepName][k]['--customise'] = custNew

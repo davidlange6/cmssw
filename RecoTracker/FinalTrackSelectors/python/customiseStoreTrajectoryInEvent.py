@@ -1,6 +1,7 @@
+import six
 import FWCore.ParameterSet.Config as cms
 def producers_by_type(process, *types):
-    return (module for module in process._Process__producers.values() if module._TypedParameterizable__type in types)
+    return (module for module in list(six.itervalues(process._Process__producers)) if module._TypedParameterizable__type in types)
 
 def customiseStoreTrajectoryInEvent(process):
     for producer in producers_by_type(process,"TrackProducer"):

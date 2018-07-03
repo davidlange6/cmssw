@@ -1,4 +1,5 @@
 import FWCore.ParameterSet.Config as cms
+import six
 
 # helper fuctions
 from HLTrigger.Configuration.common import *
@@ -10,7 +11,7 @@ from HLTrigger.Configuration.common import *
 
 # CCCTF tuning
 # def customiseFor12718(process):
-#     for pset in process._Process__psets.values():
+#     for pset in list(six.itervalues(process._Process__psets)):
 #         if hasattr(pset,'ComponentType'):
 #             if (pset.ComponentType == 'CkfBaseTrajectoryFilter'):
 #                 if not hasattr(pset,'minGoodStripCharge'):

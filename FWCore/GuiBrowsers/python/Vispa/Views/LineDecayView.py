@@ -20,6 +20,7 @@ from Vispa.Views.WidgetView import WidgetView
 
 try:
     from pxl.algorithms import *
+import six
     import_autolayout_error=None
 except Exception as e:
     import_autolayout_error=(str(e),exception_traceback())
@@ -577,7 +578,7 @@ class LineDecayContainer(WidgetContainer, ObjectHolder):
         daughterNode = None 
         if self.dataAccessor():
             for daughter in self.dataAccessor().daughterRelations(object):
-                if daughter in self._particlesDict.keys():
+                if daughter in list(six.iterkeys(self._particlesDict)):
                     daughterDecayObject = self._particlesDict[daughter]
                     if not daughterNode:
                         daughterNode = daughterDecayObject.motherNode()
@@ -589,7 +590,7 @@ class LineDecayContainer(WidgetContainer, ObjectHolder):
                             daughterNode = daughterDecayObject.motherNode()
                                 
             for mother in self.dataAccessor().motherRelations(object):
-                if mother in self._particlesDict.keys():
+                if mother in list(six.iterkeys(self._particlesDict)):
                     motherDecayObject = self._particlesDict[mother]
                     if not motherNode:
                         motherNode = motherDecayObject.daughterNode()
@@ -909,7 +910,7 @@ class LineDecayContainer(WidgetContainer, ObjectHolder):
                 if isinstance(object, DecayLine):
                     # make sure both nodes of particle are stored in self._nodeVector
                     # and set relations between these nodes
-                    if not object.motherNode() in self._allNodes.keys():
+                    if not object.motherNode() in list(six.iterkeys(self._allNodes)):
                         # create new node
                         motherNode = Node()
                         motherNode.position = Vector2(0, 0)
@@ -920,7 +921,7 @@ class LineDecayContainer(WidgetContainer, ObjectHolder):
                         # use same node again, if it was already created for another particle
                         motherNode = self._allNodes[object.motherNode()]
                         newMother = False
-                    if not object.daughterNode() in self._allNodes.keys():
+                    if not object.daughterNode() in list(six.iterkeys(self._allNodes)):
                         daughterNode = Node()
                         daughterNode.position = Vector2(0, 0)
                         daughterNode.isVertex = False
@@ -996,7 +997,7 @@ class LineDecayContainer(WidgetContainer, ObjectHolder):
         yOffset = -minY + (self.getDistance("titleFieldBottom") + 4* self.getDistance("topMargin")) / self.zoomFactor()
         
         for decayNode in self.dataObjects():
-            if isinstance(decayNode, DecayNode) and decayNode in self._allNodes.keys():
+            if isinstance(decayNode, DecayNode) and decayNode in list(six.iterkeys(self._allNodes)):
                 decayNode.setPosition(QPoint(self._allNodes[decayNode].position.x + xOffset, self._allNodes[decayNode].position.y + yOffset))
             
         # arrange potential sub-views under decay tree

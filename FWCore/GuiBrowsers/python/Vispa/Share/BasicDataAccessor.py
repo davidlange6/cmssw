@@ -47,7 +47,7 @@ class BasicDataAccessor(object):
         propertiesDict = {}
         for p in self.properties(object):
             propertiesDict[p[1]] = p
-        if name in propertiesDict.keys():
+        if name in list(six.iterkeys(propertiesDict)):
             return propertiesDict[name]
         else:
             return None
@@ -103,3 +103,4 @@ class BasicDataAccessorInterface(object):
         object = self
         exec("result=" + str(script))
         return result
+import six

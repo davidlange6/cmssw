@@ -3,6 +3,7 @@ from sys import stderr, exit
 import commands
 
 
+import six
 #
 # E.P., 27 July 2010
 # query to the Run Reistry taken from a script by Giovanni Petrucianni
@@ -21,19 +22,19 @@ parser.add_option("--perKey",    action="store_true",default=False,dest="perKey"
 from queryRR import queryRR
 
 runKeys = queryRR(options.firstRun,options.lastRun,options.groupName)
-runs = runKeys.keys(); runs.sort()
+runs = list(six.iterkeys(runKeys)); runs.sort()
 
 if options.perKey:
  	runsPerKey={}
 	for run in runs:
 		key = runKeys[run]
-		if not key in runsPerKey.keys():
+		if not key in list(six.iterkeys(runsPerKey)):
 			tmpruns=[]
 			tmpruns.append(run)
 			runsPerKey[key] = tmpruns
 		else:
 			runsPerKey[key].append(run)
-	theKeys = runsPerKey.keys()
+	theKeys = list(six.iterkeys(runsPerKey))
 	for key in theKeys:
 		theruns = runsPerKey[key]
 		topr=""

@@ -22,6 +22,7 @@ import errno
 import sqlite3
 import json
 import tempfile
+import six
 
 defaultBackend = 'online'
 defaultHostname = 'cms-conddb-prod.cern.ch'
@@ -194,7 +195,7 @@ class HTTP(object):
         # make sure the logs are safe ... at least somewhat :)
         data4log = copy.copy(data)
         if data4log:
-            if 'password' in data4log.keys():
+            if 'password' in list(six.iterkeys(data4log)):
                 data4log['password'] = '*'
 
         retries = [0] + list(self.retries)

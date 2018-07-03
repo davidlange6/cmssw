@@ -4,6 +4,7 @@ import FWCore.ParameterSet.VarParsing as VarParsing
 from FWCore.Utilities.Enumerate import Enumerate
 from pprint import pprint
 from Configuration.Geometry.dict2023Geometry import detectorVersionDict
+import six
 
 varType = Enumerate ("Run1 2015 2015dev 2017 2017Muon 2019 2023")
 defaultVersion=str();
@@ -12,7 +13,7 @@ def help():
    print "Usage: cmsRun dumpSimGeometry_cfg.py  tag=TAG version=VERSION "
    print "   tag=tagname"
    print "       indentify geometry scenario "
-   print "      ", varType.keys()
+   print "      ", list(six.iterkeys(varType))
    print ""
    print "   version=versionNumber"
    print "       scenario version from 2023 dictionary:"

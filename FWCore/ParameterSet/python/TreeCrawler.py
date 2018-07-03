@@ -276,7 +276,7 @@ def transformIntoGraph(depgraph,toplevel):
     for key, value in six.iteritems(depgraph):
         if key.count(".") == 2 or key == toplevel:
             package = packageDict[key]
-            package.dependencies = [packageDict[name] for name in value.keys() if name.count(".") == 2]
+            package.dependencies = [packageDict[name] for name in list(six.iterkeys(value)) if name.count(".") == 2]
 
     removeRecursiveLoops( packageDict[toplevel] )
     # find and return the top level config

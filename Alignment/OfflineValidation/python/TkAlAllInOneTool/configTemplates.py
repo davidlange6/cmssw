@@ -6,6 +6,7 @@ from monteCarloValidationTemplates import *
 from trackSplittingValidationTemplates import *
 from zMuMuValidationTemplates import *
 from TkAlExceptions import AllInOneError
+import six
 
 ######################################################################
 ######################################################################
@@ -388,10 +389,10 @@ queue = .oO[queue]Oo.
 
 def alternateTemplate( templateName, alternateTemplateName ):
 
-    if not templateName in globals().keys():
+    if not templateName in globals(list(six.iterkeys())):
         msg = "unknown template to replace %s"%templateName
         raise AllInOneError(msg)
-    if not alternateTemplateName in globals().keys():
+    if not alternateTemplateName in globals(list(six.iterkeys())):
         msg = "unknown template to replace %s"%alternateTemplateName
         raise AllInOneError(msg)
     globals()[ templateName ] = globals()[ alternateTemplateName ]

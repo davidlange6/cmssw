@@ -7,6 +7,7 @@
 #     string fileName = "tmp.xml"
 #     string relativeto = "container"   # keep in mind which relativeto you used when interpreting positions and angles!
 #     bool survey = false               # important: survey must be false
+import six
 #     bool rawIds = false               # important: rawIds must be false
 #     bool eulerAngles = false
 #     int32 precision = 10
@@ -178,9 +179,9 @@ class MuonGeometry(xml.sax.handler.ContentHandler):
       writeline("<?xml-stylesheet type=\"text/xml\" href=\"MuonAlignment.xsl\"?>\n")
       writeline("<MuonAlignment>\n\n")
 
-      dtkeys = self.dt.keys()
+      dtkeys = list(six.iterkeys(self.dt))
       dtkeys.sort(dtorder)
-      csckeys = self.csc.keys()
+      csckeys = list(six.iterkeys(self.csc))
       csckeys.sort(cscorder)
 
       def f(number): return format % number

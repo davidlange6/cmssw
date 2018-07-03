@@ -1,5 +1,6 @@
 import os,coral,re
 from RecoLuminosity.LumiDB import nameDealer
+import six
 
 class correctionTerm(object):
     constfactor=1.141 # const upshift , same for everyone     
@@ -200,7 +201,7 @@ def correctionsForRangeV2(schema,inputRange,correctionTerm):
         raise
     del qHandle
     for run in runs:
-        if run not in result.keys():
+        if run not in list(six.iterkeys(result)):
             result[run]=(constfactor,afterglow,ncollidingbunches,nonlinear_1,nonlinear_2) 
     return result
 #=======================================================================================================
@@ -315,7 +316,7 @@ def correctionsForRangeV2(schema,inputRange,correctionTerm):
 #        raise
 #    del qHandle
 #    for run in runs:
-#        if run not in result.keys():
+#        if run not in list(six.iterkeys(result)):
 #            result[run]=(1.0,1.0,0.0) #those have no fillscheme 2011 runs
 #    return result
 #=======================================================================================================
@@ -391,7 +392,7 @@ def pixelcorrectionsForRange(schema,inputRange):
         raise
     del qHandle
     for run in runs:
-        if run not in result.keys():
+        if run not in list(six.iterkeys(result)):
             result[run]=1.0 #those have no fillscheme 
     return result
 

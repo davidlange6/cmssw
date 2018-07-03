@@ -1,5 +1,6 @@
 import array,coral
 from RecoLuminosity.LumiDB import CommonUtil,nameDealer
+import six
 
 def uncalibrateLumi(runnumber,instlumi,instlumierror):
     '''
@@ -528,7 +529,7 @@ def trgFromOldGT(session,runnumber):
         # reprocess Algo name result filling unallocated trigger bit with string "False"
         #
         for algoidx in range(NAlgoBit):
-            if algoidx in triggernamemap.keys():
+            if algoidx in list(six.iterkeys(triggernamemap)):
                 bitnames.append(triggernamemap[algoidx])
             else:
                 bitnames.append('False')

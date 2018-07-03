@@ -255,7 +255,7 @@ class GenObject (object):
         contClass   = GenObject._setupClassHeader (contName, noColon = True)
         goDataDec   = diffDataDec = contDataDec = "\n      // data members\n"
         first = True
-        for key in sorted( GenObject._objsDict[objName].keys() ):
+        for key in sorted( list(six.iterkeys(GenObject._objsDict[objName])) ):
             if key.startswith ("_"): continue
             varTypeList = GenObject._objsDict[objName][key]
             cppType = GenObject._cppType[ varTypeList['varType'] ]
@@ -324,7 +324,7 @@ class GenObject (object):
         # Generate source code
         sourceCode = "#include <string>\n#include <vector>\n" \
                      + "using namespace std;\n"
-        for objClassName in sorted( GenObject._objsDict.keys() ):
+        for objClassName in sorted( list(six.iterkeys(GenObject._objsDict)) ):
             sourceCode += GenObject._createCppClass (objClassName)
         GenObjectRootLibDir = "genobjectrootlibs"
         if not os.path.exists (GenObjectRootLibDir):
@@ -369,7 +369,7 @@ class GenObject (object):
             tofillDict = GenObject._tofillDict.\
                          setdefault (genObject, {}).\
                          setdefault (objName, {})
-            for varName in GenObject._objsDict [objName].keys():
+            for varName in GenObject._objsDict list(six.iterkeys([objName])):
                 # if the key starts with an '_', then it is not a
                 # variable, so don't treat it as one.
                 if varName.startswith ("_"):
@@ -717,7 +717,7 @@ class GenObject (object):
     def _rootObjectCopy (goSource, rootTarget):
         """Copies information from goSourse into Root Object"""
         objName = goSource._objName
-        for varName in GenObject._objsDict [objName].keys():
+        for varName in GenObject._objsDict list(six.iterkeys([objName])):
             # if the key starts with an '_', then it is not a
             # variable, so don't treat it as one.
             if varName.startswith ("_"):
@@ -735,7 +735,7 @@ class GenObject (object):
             goName = GenObject.rootClassName (objName)
             classObj = GenObject._rootClassDict[ goName ]
         rootObj = classObj()
-        for varName in GenObject._objsDict [objName].keys():
+        for varName in GenObject._objsDict list(six.iterkeys([objName])):
             setattr( rootObj, varName, obj (varName) )
         return rootObj
 
@@ -749,7 +749,7 @@ class GenObject (object):
         if not rootObj:
             diffName = GenObject.rootDiffClassName( objName )
             rootObj = GenObject._rootClassDict[diffName]()
-        for varName in GenObject._objsDict [objName].keys():
+        for varName in GenObject._objsDict list(six.iterkeys([objName])):
             if varName.startswith ("_"): continue
             goType = GenObject._objsDict[objName][varName]['varType']
             if not goType in GenObject._basicSet:
@@ -783,7 +783,7 @@ class GenObject (object):
         rootfile = ROOT.TFile.Open (outputFile, "recreate")
         tree = ROOT.TTree (treeName, treeDescription)
         GenObject._loadGoRootLibrary()
-        for objName in sorted (GenObject._objsDict.keys()):
+        for objName in sorted (list(six.iterkeys(GenObject._objsDict))):
             classname = GenObject.rootClassName (objName)
             rootObj = \
                     GenObject._rootClassDict[objName] = \
@@ -819,7 +819,7 @@ class GenObject (object):
         runEventObject = getattr (ROOT, 'go_runevent')()
         diffTree.Branch ('runevent', 'go_runevent', runEventObject)
         GenObject._rootClassDict['runevent'] = runEventObject
-        for objName in sorted (GenObject._objsDict.keys()):
+        for objName in sorted (list(six.iterkeys(GenObject._objsDict))):
             if objName == 'runevent': continue
             classname = GenObject.rootClassName (objName)
             GenObject._rootClassDict[classname] = getattr (ROOT, classname)
@@ -1048,7 +1048,7 @@ class GenObject (object):
         if not GenObject._runEventListDone:
             GenObject._runEventListDone = True
             ignoreSet = set( ['run', 'event'] )
-            for varName in sorted (runevent.__dict__.keys()):
+            for varName in sorted (list(six.iterkeys(runevent.__dict__))):
                 if varName.startswith ('_') or varName in ignoreSet:
                     continue
                 form = runevent.getVariableProperty (varName, "form")
@@ -1210,7 +1210,7 @@ class GenObject (object):
         # really matched.
         matchedSet = set()
         noMatch1Set = set()
-        firstDictKeys = sorted (firstDict.keys())
+        firstDictKeys = sorted (list(six.iterkeys(firstDict)))
         for index1 in firstDictKeys:
             list1 = firstDict[index1]
             # do I have a match?
@@ -1231,7 +1231,7 @@ class GenObject (object):
             else:
                 # no match
                 noMatch1Set.add (index1)
-        noMatch2Set = set( secondDict.keys() )
+        noMatch2Set = set( list(six.iterkeys(secondDict)) )
         return matchedSet, noMatch1Set, noMatch2Set
 
 
@@ -1281,7 +1281,7 @@ class GenObject (object):
         """For debugging purposes only.  Will deliberately change
         values of first tree to verify that script is correctly
         finding problems."""
-        for objName in sorted (event.keys()):
+        for objName in sorted (list(six.iterkeys(event))):
             if "runevent" == objName:
                 # runevent is a special case.  We don't compare these
                 continue
@@ -1367,7 +1367,7 @@ class GenObject (object):
                 GenObject.blurEvent (event1,
                                      GenObject._kitchenSinkDict['blur'],
                                      where)
-            for objName in sorted (event1.keys()):
+            for objName in sorted (list(six.iterkeys(event1))):
                 if "runevent" == objName:
                     # runevent is a special case.  We don't compare these
                     continue
@@ -1426,7 +1426,7 @@ class GenObject (object):
                     problems = GenObject.\
                                compareTwoItems (vec1[ pair[1 - 1] ],
                                                 vec2[ pair[2 - 1] ])
-                    if problems.keys():
+                    if list(six.iterkeys(problems)):
                         # pprint.pprint (problems)
                         for varName in problems.keys():
                             countDict = resultsDict.\

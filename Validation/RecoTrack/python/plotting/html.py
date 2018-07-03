@@ -378,7 +378,7 @@ class Page(object):
 
         fileTable = []
 
-        sections = self._orderSets(self._plotSets.keys())
+        sections = self._orderSets(list(six.iterkeys(self._plotSets)))
         for isec, section in enumerate(sections):
             leg = self._appendLegend(section)
 
@@ -435,7 +435,7 @@ class Page(object):
                     return False
             return True
 
-        sections = self._orderSets(self._tables.keys())
+        sections = self._orderSets(list(six.iterkeys(self._tables)))
         for isec, section in enumerate(sections):
             leg = self._appendLegend(section)
 
@@ -571,7 +571,7 @@ class PageSet(object):
         #print "TrackingPageSet.write"
         ret = []
 
-        keys = self._orderPages(self._pages.keys())
+        keys = self._orderPages(list(six.iterkeys(self._pages)))
         for key in keys:
             page = self._pages[key]
             if page.isEmpty():

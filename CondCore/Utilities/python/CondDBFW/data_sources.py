@@ -5,6 +5,7 @@ This file contains the base DataSource class, and all sub classes that implement
 """
 
 import json
+import six
 
 # data_source will extend this
 class node(object):
@@ -279,7 +280,7 @@ class json_list(json_data_node):
 			table_name = None
 			data = self.data()
 			# gets headers stored in first dictionary
-			headers = data[0].keys()
+			headers = list(six.iterkeys(data[0]))
 
 		if columns != None:
 			headers = columns

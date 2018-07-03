@@ -4,6 +4,7 @@ from FWCore.GuiBrowsers.ConfigToolBase import *
 from PhysicsTools.PatAlgos.tools.helpers import cloneProcessingSnippet
 from RecoTauTag.RecoTau.TauDiscriminatorTools import *
 from PhysicsTools.PatAlgos.cleaningLayer1.tauCleaner_cfi import preselection
+import six
 
 # applyPostFix function adapted to unscheduled mode
 def applyPostfix(process, label, postfix):
@@ -225,7 +226,7 @@ def switchToPFTauByType(process,
         'hpsPFTau'           : switchToPFTauHPS,
         'caloRecoTau'        : switchToCaloTau
     }
-    if not pfTauType in mapping.keys():
+    if not pfTauType in list(six.iterkeys(mapping)):
         raise ValueError("Error in <switchToPFTauByType>: Undefined pfTauType = %s !!" % pfTauType)
     
     mapping[pfTauType](process, tauSource = tauSource,

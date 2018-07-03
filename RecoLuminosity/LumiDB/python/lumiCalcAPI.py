@@ -1,5 +1,6 @@
 import os,coral,datetime,fnmatch,time
 from RecoLuminosity.LumiDB import nameDealer,revisionDML,dataDML,lumiTime,CommonUtil,selectionParser,hltTrgSeedMapper,normFunctors,lumiParameters
+import six
 
 ########################################################################
 # Lumi data management and calculation API                             #
@@ -396,7 +397,7 @@ def deliveredLumiForIds(schema,irunlsdict,dataidmap,runsummaryMap,beamstatusfilt
     
     intglumimap={}
     if lumitype=='HF':
-        intglumimap=dataDML.intglumiForRange(schema,irunlsdict.keys())#some runs need drift correction
+        intglumimap=dataDML.intglumiForRange(list(six.iterkeys(schema,irunlsdict)))#some runs need drift correction
     allsince=[]
     if normmap:
         allsince=sorted(normmap.keys())
@@ -501,7 +502,7 @@ def lumiForIds(schema,irunlsdict,dataidmap,runsummaryMap,beamstatusfilter=None,t
     '''
     deliveredresult=deliveredLumiForIds(schema,irunlsdict,dataidmap,runsummaryMap,beamstatusfilter=beamstatusfilter,timeFilter=timeFilter,normmap=normmap,withBXInfo=withBXInfo,bxAlgo=bxAlgo,xingMinLum=xingMinLum,withBeamIntensity=withBeamIntensity,lumitype=lumitype,minbiasXsec=minbiasXsec)
     trgresult=trgForIds(schema,irunlsdict,dataidmap)
-    for run in deliveredresult.keys():#loop over delivered,already selected
+    for run in list(six.iterkeys(deliveredresult)):#loop over delivered,already selected
         perrundata=deliveredresult[run]
         if perrundata is None or len(perrundata)==0: #pass through 
             continue
@@ -556,7 +557,7 @@ def effectiveLumiForIds(schema,irunlsdict,dataidmap,runsummaryMap=None,beamstatu
     deliveredresult=deliveredLumiForIds(schema,irunlsdict,dataidmap,runsummaryMap,beamstatusfilter=beamstatusfilter,timeFilter=timeFilter,normmap=normmap,withBXInfo=withBXInfo,bxAlgo=bxAlgo,xingMinLum=xingMinLum,withBeamIntensity=withBeamIntensity,lumitype=lumitype,minbiasXsec=minbiasXsec)
     trgresult=trgForIds(schema,irunlsdict,dataidmap,withPrescale=True) #{run:[cmslsnum,deadfrac,deadtimecount,bitzero_count,bitzero_prescale,[(bitname,prescale,counts,mask)]]}
     hltresult=hltForIds(schema,irunlsdict,dataidmap,hltpathname=hltpathname,hltpathpattern=hltpathpattern,withL1Pass=False,withHLTAccept=False) #{runnumber:[(cmslsnum,[(hltpath,hltprescale,l1pass,hltaccept),...]),(cmslsnum,[])})}
-    for run in deliveredresult.keys(): #loop over delivered
+    for run in list(six.iterkeys(deliveredresult)): #loop over delivered
         perrundata=deliveredresult[run]
         if perrundata is None or len(perrundata)==0:#pass through 
             continue

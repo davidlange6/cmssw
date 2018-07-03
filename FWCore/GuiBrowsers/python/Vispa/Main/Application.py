@@ -25,6 +25,7 @@ from Vispa.Main.RotatingIcon import RotatingIcon
 import Vispa.__init__
 
 from . import Resources
+import six
 
 class Application(QApplication):
 
@@ -266,7 +267,7 @@ class Application(QApplication):
         if name in [plugin.__class__.__name__ for plugin in self._plugins]:
             logging.info("%s: initalizePlugin(): Plugin '%s' already loaded. Aborting..." % (self.__class__.__name__, name))
             return True
-        if not name in self._loadablePlugins.keys():
+        if not name in list(six.iterkeys(self._loadablePlugins)):
             logging.error("%s: initalizePlugin(): Unknown plugin '%s'. Aborting..." % (self.__class__.__name__, name))
             return False
         
@@ -842,7 +843,7 @@ class Application(QApplication):
                 self._knownExtensionsDictionary[ft.extension()] = plugin
                 self._knownFiltersList.append(ft.fileDialogFilter())
         if len(self._knownFiltersList) > 0:
-            allKnownFilter = 'All known files (*.' + " *.".join(self._knownExtensionsDictionary.keys()) + ')'
+            allKnownFilter = 'All known files (*.' + " *.".join(list(six.iterkeys(self._knownExtensionsDictionary))) + ')'
             self._knownFiltersList.insert(1, allKnownFilter)
             logging.debug('Application: _collectFileExtensions() - ' + allKnownFilter)
         else:
@@ -1296,7 +1297,7 @@ class Application(QApplication):
         self._window.statusBar().addPermanentWidget(self._progressWidget)
 
     def startWorking(self, message=""):
-        if len(self._workingMessages.keys()) == 0:
+        if len(list(six.iterkeys(self._workingMessages))) == 0:
             self._progressWidget.start()
         self._window.statusBar().showMessage(message + "...")
         self._messageId+=1
@@ -1305,12 +1306,12 @@ class Application(QApplication):
         return self._messageId
 
     def stopWorking(self, id, end="done"):
-        if not id in self._workingMessages.keys():
+        if not id in list(six.iterkeys(self._workingMessages)):
             logging.error(self.__class__.__name__ +": stopWorking() - Unknown id %s. Aborting..." % str(id))
             return
-        if len(self._workingMessages.keys()) > 1:
-            self._window.statusBar().showMessage(self._workingMessages[self._workingMessages.keys()[0]] + "...")
-            self._progressWidget.setToolTip(self._workingMessages[self._workingMessages.keys()[0]])
+        if len(list(six.iterkeys(self._workingMessages))) > 1:
+            self._window.statusBar().showMessage(list(six.iterkeys(self._workingMessages[self._workingMessages))[0]] + "...")
+            self._progressWidget.setToolTip(list(six.iterkeys(self._workingMessages[self._workingMessages))[0]])
         else:
             self._progressWidget.stop()
             self._progressWidget.setToolTip("")

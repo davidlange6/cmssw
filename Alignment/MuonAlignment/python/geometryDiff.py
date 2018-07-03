@@ -2,6 +2,7 @@
 
 from Alignment.MuonAlignment.geometryXMLparser import MuonGeometry, dtorder, cscorder
 import sys, getopt
+import six
 
 usage = "Usage: geometryDiff.py [-h|--help] [-e|--epsilon epsilon] geometry1.xml geometry2.xml"
 
@@ -59,11 +60,11 @@ def rotFromEuler(g):
 
 def loopover(which):
   if which == "DT":
-    keys = geom1.dt.keys()
+    keys = list(six.iterkeys(geom1.dt))
     keys.sort(dtorder)
 
   elif which == "CSC":
-    keys = geom1.csc.keys()
+    keys = list(six.iterkeys(geom1.csc))
     keys.sort(cscorder)
 
   else: raise Exception

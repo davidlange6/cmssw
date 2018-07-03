@@ -6,6 +6,7 @@
 
 from BeautifulSoup import *
 import sys, os, copy
+import six
 
 htmlFullPath     = None
 htmlFilePath     = None
@@ -101,7 +102,7 @@ if __name__ == "__main__":
         destTabClassName = 'tabs2'
 
     allRows = []
-    pageNames = pages.keys(); pageNames.sort()
+    pageNames = list(six.iterkeys(pages)); pageNames.sort()
     for page in pageNames:
         allRows = allRows + pages[page]
     pages['All'] = allRows

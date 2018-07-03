@@ -5,6 +5,7 @@
 ############################################################
 
 import coral
+import six
 from RecoLuminosity.LumiDB import nameDealer,idDealer,dbUtil
 #==============================
 # SELECT
@@ -539,7 +540,7 @@ def currentDataTag(schema,lumitype='HF'):
             tagmap[tagid]=tagname
         del qHandle
         if len(tagmap)!=0:
-            currenttagid=max(tagmap.keys())
+            currenttagid=max(list(six.iterkeys(tagmap)))
         if currenttagid==0:
             raise 'currentDataTag: no tag available'
         return (currenttagid,tagmap[currenttagid])
@@ -625,7 +626,7 @@ def alldataTags(schema,lumitype='HF'):
             tagmap[tagid]=[tagname,0,0,creationtime]
         del qHandle
         
-        tagids=tagmap.keys()
+        list(six.iterkeys(tagids=tagmap))
         allruns=set()
         for tagid in tagids:
             qConditionStr='TAGID<=:tagid'
@@ -763,7 +764,7 @@ def dataTagInfo(schema,tagname,runlist=None,lumitype='HF'):
             tagmap[tagid]=[tagname,0,0,creationtime]
         del qHandle
         
-        tagids=tagmap.keys()
+        list(six.iterkeys(tagids=tagmap))
         allruns=set()
         for tagid in tagids:
             qConditionStr='TAGID<=:tagid'

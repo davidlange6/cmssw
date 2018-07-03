@@ -11,6 +11,7 @@ from Vispa.Main.Exceptions import exception_traceback
 from Vispa.Share.BasicDataAccessor import BasicDataAccessor
 
 import FWCore.ParameterSet.Config as cms
+import six
 import FWCore.GuiBrowsers.EnablePSetHistory
 FWCore.GuiBrowsers.EnablePSetHistory.ACTIVATE_INSPECTION=False
 from FWCore.GuiBrowsers.ConfigToolBase import ConfigToolBase
@@ -186,7 +187,7 @@ class ToolDataAccessor(BasicDataAccessor):
                 logging.warning(__name__ + ": setProperty: Cannot set comment "+exception_traceback())
                 self._parameterErrors[str(id(object))+"."+name]=error
                 return error  
-        if str(id(object))+"."+name in self._parameterErrors.keys():
+        if str(id(object))+"."+name in list(six.iterkeys(self._parameterErrors)):
             del self._parameterErrors[str(id(object))+"."+name]
         return True
 
@@ -262,4 +263,4 @@ class ToolDataAccessor(BasicDataAccessor):
         return self._toolModules
 
     def parameterErrors(self,object):
-        return [self._parameterErrors[key] for key in self._parameterErrors.keys() if str(id(object))==key.split(".")[0]] 
+        return [self._parameterErrors[key] for key in list(six.iterkeys(self._parameterErrors)) if str(id(object))==key.split(".")[0]] 

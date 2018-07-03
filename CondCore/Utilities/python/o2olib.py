@@ -11,6 +11,7 @@ import string
 import json
 
 import CondCore.Utilities.credentials as auth
+import six
 
 prod_db_service = ['cms_orcon_prod','cms_orcon_prod/cms_cond_general_w']
 dev_db_service = ['cms_orcoff_prep','cms_orcoff_prep/cms_test_conditions']
@@ -263,7 +264,7 @@ class O2OJobMgr(O2OMgr):
             enabled = 'Y' if (r[2]==1) else 'N'
             row.append('%4s' %enabled )
             lastRun = '-'
-            if r[0] in runs.keys():
+            if r[0] in list(six.iterkeys(runs)):
                 lastRun = runs[r[0]]
             row.append( lastRun )
             table.append(row)

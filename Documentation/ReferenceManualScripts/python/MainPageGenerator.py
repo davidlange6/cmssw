@@ -1,5 +1,6 @@
 import json, urllib2, os, sys
 from BeautifulSoup import *
+import six
 
 ## MainPageGenerator class is used for generating main page that contains domain trees (Analysis, Calibration and Alignment, Core, DAQ etc.) 
 class MainPageGenerator:
@@ -349,7 +350,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
             content += self.HTMLTreeBegin(i)
             keysJ = sorted(self.data[domain][i].keys())
             for j in keysJ:
-#                if len(self.data[domain][i][j].keys()) == 1:
+#                if len(list(six.iterkeys(self.data[domain][i][j]))) == 1:
 #                    if self.data[domain][i][j].has_key("__DATA__"):
 #                        content += self.HTMLTreeAddItem(j, self.data[domain][i][j]["__DATA__"])
 #                    else:

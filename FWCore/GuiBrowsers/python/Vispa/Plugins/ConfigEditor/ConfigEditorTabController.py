@@ -17,6 +17,7 @@ from Vispa.Gui.TextDialog import TextDialog
 
 try:
     from FWCore.GuiBrowsers.DOTExport import DotExport
+import six
     import_dotexport_error=None
 except Exception as e:
     import_dotexport_error=(str(e),exception_traceback())
@@ -445,7 +446,7 @@ class ConfigEditorTabController(BrowserTabController):
         return True
 
     def updateConfigHighlight(self):
-        if self.tab().editorTableView().selection() in self.toolDataAccessor().toolModules().keys():
+        if self.tab().editorTableView().selection() in self.toolDataAccessor().toolModules(list(six.iterkeys())):
             self.tab().centerView().highlight(self.toolDataAccessor().toolModules()[self.tab().editorTableView().selection()])
         else:
             self.tab().centerView().highlight([])

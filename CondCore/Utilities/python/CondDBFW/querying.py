@@ -19,6 +19,7 @@ import traceback
 import os
 import netrc
 import sys
+import six
 
 class connection(object):
 	engine = None
@@ -314,7 +315,7 @@ class factory():
 		if len(pkargs.items()) != 0:
 			# apply the filters defined in **kwargs
 			model_data = apply_filters(model_data, model, **pkargs)
-			amount = pkargs["amount"] if "amount" in pkargs.keys() else None
+			amount = pkargs["amount"] if "amount" in list(six.iterkeys(pkargs)) else None
 			model_data = model_data.limit(amount)
 			if model_data.count() > 1:
 				# if we have multiple objects, return a json_list

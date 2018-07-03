@@ -64,7 +64,7 @@ class difference :
         print '\nModules run only on the '+string+ ' edmfile:'+'\n'
         for i in module1.keys():
             labelList=[]
-            if (i not in module2.keys())and (i not in self._sameprocess):
+            if (i not in list(six.iterkeys(module2)))and (i not in self._sameprocess):
                 print '\n Process '+i+' not run on edmfile '+string +'\n'
             elif i!='Processing':
                 k=i
@@ -84,3 +84,4 @@ class difference :
                                 
 
 
+import six

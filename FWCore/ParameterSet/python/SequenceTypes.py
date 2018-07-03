@@ -4,6 +4,7 @@ from Mixins import _Labelable, _Unlabelable
 from Mixins import _ValidatingParameterListBase
 from ExceptionHandling import *
 from OrderedSet import OrderedSet
+import six
 
 class _HardDependency(object):
     """Information relevant for when a hard dependency, 
@@ -542,10 +543,10 @@ class SequencePlaceholder(_Sequenceable):
                            +" was never overridden")
     def resolve(self, processDict,keepIfCannotResolve=False):
         if not self._name in processDict:
-            #print str(processDict.keys())
+            #print str(list(six.iterkeys(processDict)))
             if keepIfCannotResolve:
                 return self
-            raise RuntimeError("The SequencePlaceholder "+self._name+ " cannot be resolved.\n Known keys are:"+str(processDict.keys()))
+            raise RuntimeError("The SequencePlaceholder "+self._name+ " cannot be resolved.\n Known keys are:"+str(list(six.iterkeys(processDict))))
         o = processDict[self._name]
         if not isinstance(o,_Sequenceable):
             raise RuntimeError("The SequencePlaceholder "+self._name+ " refers to an object type which is not allowed to be on a sequence: "+str(type(o)))
@@ -579,7 +580,7 @@ class Schedule(_ValidatingParameterListBase,_ConfigureComponent,_Unlabelable):
     def __init__(self,*arg,**argv):
         super(Schedule,self).__init__(*arg)
         self._tasks = OrderedSet()
-        theKeys = argv.keys()
+        theKeys = list(six.iterkeys(argv))
         if theKeys:
             if len(theKeys) > 1 or theKeys[0] != "tasks":
                 raise RuntimeError("The Schedule constructor can only have one keyword argument after its Path and\nEndPath arguments and it must use the keyword 'tasks'")
@@ -1467,7 +1468,7 @@ class TaskPlaceholder(object):
         if not self._name in processDict:
             if keepIfCannotResolve:
                 return self
-            raise RuntimeError("The TaskPlaceholder "+self._name+ " cannot be resolved.\n Known keys are:"+str(processDict.keys()))
+            raise RuntimeError("The TaskPlaceholder "+self._name+ " cannot be resolved.\n Known keys are:"+str(list(six.iterkeys(processDict))))
         o = processDict[self._name]
         if not o._isTaskComponent():
             raise RuntimeError("The TaskPlaceholder "+self._name+ " refers to an object type which is not allowed to be on a task: "+str(type(o)))

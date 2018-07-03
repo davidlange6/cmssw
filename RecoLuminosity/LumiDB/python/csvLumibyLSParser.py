@@ -2,6 +2,7 @@
 # pixelLumiCalc.py lumibyls -i json_DCSONLY_pp.txt --hltpath "HLT_Photon75_CaloIdVL_IsoL*" -o myHLTtest.out
 # format: Run,LS,HLTpath,L1bit,HLTpresc,L1presc,Recorded(/ub),Effective(/ub)
 import csv
+import six
 import re
 def is_intstr(s):
     try:
@@ -79,7 +80,7 @@ class csvLumibyLSParser(object):
         self.__result[runnumber]=ldict #catch the last one
 
     def runs(self):
-        return self.__result.keys()
+        return list(six.iterkeys(self.__result))
     def runsandls(self):
         '''return {run:lslist}
         '''
@@ -89,7 +90,7 @@ class csvLumibyLSParser(object):
 #        '''
 #        return self.__strresult
     def numruns(self):
-        return len(self.__result.keys())
+        return len(list(six.iterkeys(self.__result)))
     def numls(self,run):
         return len(self.__result[run])
         

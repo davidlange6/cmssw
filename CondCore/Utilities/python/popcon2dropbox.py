@@ -8,6 +8,7 @@ import shutil
 import logging
 from datetime import datetime
 
+import six
 errorInImportFileFolder = 'import_errors'
 dateformatForFolder = "%Y-%m-%d-%H-%M-%S"
 dateformatForLabel = "%Y-%m-%d %H:%M:%S"
@@ -126,7 +127,7 @@ def copy( args, dbName ):
 
     datef = datetime.now()
     destMap = { "oracle://cms_orcoff_prep/cms_conditions": "oradev", "oracle://cms_orcon_prod/cms_conditions": "onlineorapro"  }
-    if destDb.lower() in destMap.keys():
+    if destDb.lower() in list(six.iterkeys(destMap)):
         destDb = destMap[destDb.lower()]
     else:
         if destDb.startswith('sqlite'):

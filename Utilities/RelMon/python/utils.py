@@ -17,6 +17,7 @@ from cPickle import load
 from os.path import dirname,basename,join,isfile
 from threading import Thread
 from time import asctime
+import six
 
 theargv=sys.argv
 sys.argv=[]
@@ -588,13 +589,13 @@ def make_files_pairs(files, verbose=True):
         for version in versions_files:
             print '%s: %d files' % (str(version),  len(versions_files[version]))
 
-    if len(versions_files.keys()) <= 1:
+    if len(list(six.iterkeys(versions_files))) <= 1:
         print '\nFound too little versions, there is nothing to pair. Exiting...\n'
         exit()
 
     ## Select two biggest groups.
-    versions = versions_files.keys()
-    sizes = [len(value) for value in versions_files.values()]
+    versions = list(six.iterkeys(versions_files))
+    sizes = [len(value) for value in list(six.itervalues(versions_files))]
     v1 = versions[sizes.index(max(sizes))]
     versions.remove(v1)
     sizes.remove(max(sizes))

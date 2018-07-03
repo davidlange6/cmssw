@@ -15,6 +15,7 @@ class Steps(dict):
         if key in self:
             print "ERROR in Step"
             print "overwritting",key,"not allowed"
+import six
             import sys
             sys.exit(-9)
         else:
@@ -68,7 +69,7 @@ def selectedLS(list_runs=[],maxNum=-1,l_json=data_json2015):
     ls_count = 0
 
     for run in list_runs:
-        if str(run) in l_json.keys():
+        if str(run) in list(six.iterkeys(l_json)):
             # print "run %s is there"%(run)
             runNumber = run
             # print "Doing lumi-section selection for run %s: "%(run)
@@ -78,7 +79,7 @@ def selectedLS(list_runs=[],maxNum=-1,l_json=data_json2015):
                 if (ls_count > maxNum) & (maxNum != -1):
                     break
                     # return local_dict
-                if runNumber in local_dict.keys():
+                if runNumber in list(six.iterkeys(local_dict)):
                     local_dict[runNumber].append(LSsegment)
                 else: 
                     local_dict[runNumber] = [LSsegment]
@@ -88,7 +89,7 @@ def selectedLS(list_runs=[],maxNum=-1,l_json=data_json2015):
             print "run %s is NOT present in json %s\n\n"%(run, l_json)
         # print "++    %s"%(local_dict)
 
-    if ( len(local_dict.keys()) > 0 ) :
+    if ( len(list(six.iterkeys(local_dict))) > 0 ) :
         return local_dict
     else :
         print "No luminosity section interval passed the json and your selection; returning None"
@@ -141,7 +142,7 @@ class InputInfo(object):
         if len(self.run) != 0:
             return "echo '{\n"+",".join(('"%d":[[1,268435455]]\n'%(x,) for x in self.run))+"}'"
         if self.ls :
-            return "echo '{\n"+",".join(('"%d" : %s\n'%( int(x),self.ls[x]) for x in self.ls.keys()))+"}'"
+            return "echo '{\n"+",".join(('"%d" : %s\n'%( int(x),self.ls[x]) for x in list(six.iterkeys(self.ls))))+"}'"
         return None
 
     def lumis(self):
@@ -159,14 +160,14 @@ class InputInfo(object):
 
         if self.ls :
             the_queries = []
-            #for query_run in self.ls.keys():
+            #for query_run in list(six.iterkeys(self.ls)):
             # print "run is %s"%(query_run)
             # if you have a LS list specified, still query das for the full run (multiple ls queries take forever)
             # and use step1_lumiRanges.log to run only on LS which respect your selection
 
             # DO WE WANT T2_CERN ?
-            return ["file {0}={1} run={2}".format(query_by, query_source, query_run) for query_run in self.ls.keys()]
-            #return ["file {0}={1} run={2} site=T2_CH_CERN".format(query_by, query_source, query_run) for query_run in self.ls.keys()]
+            return ["file {0}={1} run={2}".format(query_by, query_source, query_run) for query_run in list(six.iterkeys(self.ls))]
+            #return ["file {0}={1} run={2} site=T2_CH_CERN".format(query_by, query_source, query_run) for query_run in list(six.iterkeys(self.ls))]
 
 
                 # 

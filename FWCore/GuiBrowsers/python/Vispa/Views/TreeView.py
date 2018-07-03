@@ -6,6 +6,7 @@ from PyQt4.QtGui import QTreeWidget,QTreeWidgetItem,QInputDialog
 from Vispa.Main.Application import Application
 from Vispa.Share.BasicDataAccessor import BasicDataAccessor
 from Vispa.Views.AbstractView import AbstractView
+import six
 
 class TreeView(AbstractView, QTreeWidget):
     """ The TreeView widget fills itself using a DataAccessor.
@@ -130,7 +131,7 @@ class TreeView(AbstractView, QTreeWidget):
             self._updatingFlag -=1
 
     def _selectedItem(self):
-        if self._selection in self._itemDict.keys():
+        if self._selection in list(six.iterkeys(self._itemDict)):
             return self._itemDict[self._selection]
         elif self._firstItem!=None:
             return self._firstItem

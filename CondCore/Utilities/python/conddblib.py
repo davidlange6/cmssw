@@ -15,6 +15,7 @@ import logging
 
 import sqlalchemy
 import sqlalchemy.ext.declarative
+import six
 
 authPathEnvVar = 'COND_AUTH_PATH'
 schema_name = 'CMS_CONDITIONS'
@@ -241,7 +242,7 @@ def make_dbtype( backendName, schemaName, baseType ):
                 members[k] = sqlalchemy.Column(v[0],nullable=nullable)
     dbType = type(dbtype_name,(_Base,),members)
     
-    if backendName not in db_models.keys():
+    if backendName not in list(six.iterkeys(db_models)):
         db_models[backendName] = {}
     db_models[backendName][baseType.__name__] = dbType
     return dbType
@@ -388,7 +389,7 @@ class Connection(object):
 
     def get_dbtype(self,theType):
         basename = theType.__name__
-        if self._backendName not in db_models.keys() or basename not in db_models[self._backendName].keys():
+        if self._backendName not in list(six.iterkeys(db_models)) or basename not in list(six.iterkeys(db_models[self._backendName])):
             return make_dbtype( self._backendName, self._schemaName, theType )
         else:
             return db_models[self._backendName][basename]
@@ -462,13 +463,13 @@ def getSessionOnMasterDB( session1, session2 ):
     sessiondict[key %(session1._url.drivername,session1._url.host)] = session1
     sessiondict[key %(session2._url.drivername,session2._url.host)] = session2
     masterkey = key %('oracle',ONLINEORAPRO)
-    if masterkey in sessiondict.keys():
+    if masterkey in list(six.iterkeys(sessiondict)):
         return sessiondict[masterkey]
     adgkey = key %('oracle',ORAPRO)
-    if adgkey in sessiondict.keys():
+    if adgkey in list(six.iterkeys(sessiondict)):
         return sessiondict[adgkey]
     frontierkey = key %('frontier',PRO)
-    if frontierkey in sessiondict.keys():
+    if frontierkey in list(six.iterkeys(sessiondict)):
         return sessiondict[frontierkey]
     # default case: frontier on pro
     conn = Connection(make_url())
@@ -517,13 +518,13 @@ def make_url(database='pro',read_only = True):
                                                                 'W': dbwriter_user_name }, ),
     }
 
-    if database in officialdbs.keys():
+    if database in list(six.iterkeys(officialdbs)):
         key = ('R' if read_only else 'W')
         mapping = officialdbs[database]
         tech = mapping[0]
         service = mapping[1]
         schema_dict = mapping[2]
-        if key in schema_dict.keys():
+        if key in list(six.iterkeys(schema_dict)):
             database = _getCMSSQLAlchemyConnectionString(tech,service,schema_dict[key])
         else:
             raise Exception("Read-only database %s://%s cannot be accessed in update mode." %(tech,service))

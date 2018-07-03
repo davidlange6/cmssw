@@ -8,6 +8,7 @@ from plottingOptions import PlottingOptions
 from TkAlExceptions import AllInOneError
 from trackSplittingValidation import TrackSplittingValidation
 from zMuMuValidation import ZMuMuValidation
+import six
 
 class PreexistingValidation(GenericValidation):
     """
@@ -40,7 +41,7 @@ class PreexistingValidation(GenericValidation):
             except RuntimeError:
                 raise AllInOneError("%s is not a valid jobid.\nMaybe it finished already?"%self.jobid)
 
-        knownOpts = set(self.defaults.keys())|self.mandatories|self.optionals
+        knownOpts = set(list(six.iterkeys(self.defaults)))|self.mandatories|self.optionals
         ignoreOpts = []
         config.checkInput("preexisting"+self.valType+":"+self.name,
                           knownSimpleOptions = knownOpts,

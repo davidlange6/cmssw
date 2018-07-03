@@ -5,6 +5,7 @@ import re
 from cmssw_exportdb_xml import *
 from FileNamesHelper import *
 
+import six
 """
 Performance profiling:
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
@@ -219,11 +220,11 @@ def processModuleTimeLogData(modules_timelog, groupBy = "module_name"):
 		
 		
 	# calculate Min,Max, Avg, RMS for each module and in this way get the final data to be imported
-	##for mod_name in times_bymod.keys():
+	##for mod_name in list(six.iterkeys(times_bymod)):
 	##	#copy needed data
 	##	#mod_data = {"label": times_bymod[mod_name][0]["label"], "name": times_bymod[mod_name][0]["name"]}
 	##	#New data structure:
-	##	mod_data = {"label":times_bymod[mod_name].keys()[0],"name":times_bymod[mod_name][times_bymod[mod_name].keys()[0]].keys()[0]}
+	##	mod_data = list(six.iterkeys({"label":times_bymod[mod_name]))[0],"name":times_bymod[mod_name][times_bymod[mod_name].keys()[0]].keys()[0]}
 	##	# add statistical data
 	##
 	##	mod_data["stats"] =calc_MinMaxAvgRMS(f_time = lambda x: x["time"], f_evt_num = lambda x: x["event_number"], items = times_bymod[mod_name])
