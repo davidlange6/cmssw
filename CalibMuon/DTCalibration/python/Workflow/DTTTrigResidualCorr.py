@@ -21,7 +21,7 @@ class DTTTrigResidualCorr:
 
         self.initProcess()
         self.task = CmsswTask(self.dir,self.configs)
-    
+
     def initProcess(self): 
         ttrig_ResidCorr = self.result_dir + '/' + 'ttrig_residuals_' + str(self.runnumber)
         ttrig_ResidCorr_db = os.path.abspath(ttrig_ResidCorr + '.db')
@@ -34,14 +34,14 @@ class DTTTrigResidualCorr:
         self.process['dtTTrigResidualCorrection_cfg.py'].source.firstRun = self.runnumber
         self.process['dtTTrigResidualCorrection_cfg.py'].GlobalTag.globaltag = self.config.globaltag
 
-	if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
-	    tag = self.config.inputDBTag
-	    record = self.config.inputDBRcd
-	    connect = self.config.connectStrDBTag
-	    moduleName = 'customDB%s' % record 
-	    addPoolDBESSource(process = self.process['dtTTrigResidualCorrection_cfg.py'],
-			      moduleName = moduleName,record = record,tag = tag,
-			      connect = connect)
+        if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
+            tag = self.config.inputDBTag
+            record = self.config.inputDBRcd
+            connect = self.config.connectStrDBTag
+            moduleName = 'customDB%s' % record 
+            addPoolDBESSource(process = self.process['dtTTrigResidualCorrection_cfg.py'],
+                              moduleName = moduleName,record = record,tag = tag,
+                              connect = connect)
 
         # Input vDrift db
         if hasattr(self.config,'inputVDriftDB') and self.config.inputVDriftDB:
@@ -69,7 +69,7 @@ class DTTTrigResidualCorr:
         self.process['dumpDBToFile_ResidCorr_cfg.py'] = loadCmsProcess(self.pset_templates['dumpDBToFile_ResidCorr_cfg.py'])
         self.process['dumpDBToFile_ResidCorr_cfg.py'].calibDB.connect = 'sqlite_file:%s' % ttrig_ResidCorr_db
         self.process['dumpDBToFile_ResidCorr_cfg.py'].dumpToFile.outputFileName = ttrig_ResidCorr_txt 
- 
+
     def writeCfg(self):
         for cfg in self.configs:
             writeCfg(self.process[cfg],self.dir,cfg)

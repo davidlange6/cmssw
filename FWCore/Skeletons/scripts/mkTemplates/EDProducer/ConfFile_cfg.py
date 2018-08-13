@@ -28,7 +28,7 @@ process.out = cms.OutputModule("PoolOutputModule",
 @example_myparticle     )
 )
 
-  
+
 process.p = cms.Path(process.myProducerLabel)
 
 process.e = cms.EndPath(process.out)

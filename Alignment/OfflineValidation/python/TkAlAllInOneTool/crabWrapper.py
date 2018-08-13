@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import os
 import subprocess
@@ -65,10 +66,10 @@ if __name__ == "__main__":
     theCrabOptions = {"-create":"",
                       "-cfg":"TkAlOfflineValidation.shiftPlots.crab.cfg"}
     theCrab.run( theCrabOptions )
-    
+
     theCrabOptions = {"-submit":""}
     theCrab.run( theCrabOptions )
-    
+
     theCrabOptions = {"-status":""}
     theCrab.run( theCrabOptions )
 
@@ -76,4 +77,4 @@ if __name__ == "__main__":
     try:
         theCrab.run( theCrabOptions )
     except AllInOneError, e:
-        print "crab: ", e
+        print("crab: ", e)

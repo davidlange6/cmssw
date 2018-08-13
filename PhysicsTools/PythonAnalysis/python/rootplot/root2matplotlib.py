@@ -81,7 +81,7 @@ class Hist2D(utilities.Hist2D):
         """
         Draw a box plot with size indicating content using
         :func:`matplotlib.pyplot.scatter`.
-        
+
         The data will be normalized, with the largest box using a marker of
         size maxsize (in points).
         """

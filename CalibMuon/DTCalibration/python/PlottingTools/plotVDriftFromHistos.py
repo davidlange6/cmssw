@@ -1,10 +1,11 @@
+from __future__ import print_function
 import ROOT
 from drawHistoAllChambers import drawHisto
 
 def binNumber(station,sector):
     start = (station - 1)*12
     return start + sector
- 
+
 def plot(fileName,sl,option="HISTOP",draw=True):
 
     slType = sl
@@ -21,7 +22,7 @@ def plot(fileName,sl,option="HISTOP",draw=True):
     histosWheel = {}
     for wh in wheels:
         histoName = 'Wheel%d_%s_VDrift' % (wh,slStr)
-        print "Accessing",histoName
+        print("Accessing",histoName)
         histosWheel[wh] = file.Get(histoName)
 
     # (Wh-2 MB1 Sec1 ... Wh-2 MB1 Sec12 ... Wh-1 MB1 Sec1 ... Wh-1 MB1 Sec12 ...)
@@ -33,21 +34,21 @@ def plot(fileName,sl,option="HISTOP",draw=True):
         nSectors = 12
         if st == 4: nSectors = 14 
         if st == 4 and slType == 2: continue 
-        if verbose: print "Station",st
+        if verbose: print("Station",st)
         for wh in wheels:
-            if verbose: print "Wheel",wh 
+            if verbose: print("Wheel",wh) 
             for sec in range(1,nSectors+1):
-                if verbose: print "Sector",sec
+                if verbose: print("Sector",sec)
                 binHisto = binNumber(st,sec)
-                if verbose: print "Bin from histos:",binHisto 
+                if verbose: print("Bin from histos:",binHisto) 
                 value = histosWheel[wh].GetBinContent(binHisto)
                 # From cm/ns to micron/ns
                 value *= 10000.
- 
+
                 binHistoNew = (st - 1)*60 + (wh + 2)*nSectors + sec
-                if verbose: print "Bin final",binHistoNew
+                if verbose: print("Bin final",binHistoNew)
                 histo.SetBinContent(binHistoNew,value) 
-  
+
                 if sec == 1:
                     label = "Wheel %d" % wh
                     if wh == -2: label += " MB%d" % st  
@@ -77,7 +78,7 @@ def compare(fileNames,sl):
             canvas = objs[0]
             objects = objs[2]
         histos.append(objs[1])
-        
+
         canvas.cd()
         if idx:
             histos[-1].SetLineColor(colors[ (idx - 1) % len(colors) ])

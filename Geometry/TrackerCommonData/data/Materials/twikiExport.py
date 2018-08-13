@@ -19,7 +19,7 @@ class Constituent:
 #        print "%s\tX0: %.3f\trho: %.3f\tX0': %.3f"%(self.theName, float(predefinedMaterials[self.theName][3]), float(predefinedMaterials[self.theName][2]), self.theX0)        
     def __str__(self):
         return "Name: "+self.theName+" desc: "+self.theDescription+" mass "+self.theMass+" type "+self.theType+" count "+self.theCount
-        
+
 class Material:
     def __init__(self, matString, comment):
         if matString == "" or not matString[0] == "#":
@@ -33,13 +33,13 @@ class Material:
         self.theMcVolume = float(line.split('"')[4].split()[0])
         self.theComment = comment
         self.theConstituents = []
-    
+
     def getRealValues(self):
         result = {}
         result["Volume"] = 0
         result["X0"] = 0
         result["L0"] = 0
-        
+
         totMass =  self.getMass()
         invX0 = 0
         invL0 = 0
@@ -51,9 +51,9 @@ class Material:
         result["Density"] = self.getMass() / result["Volume"]            
         result["X0"] = 1 / ( invX0 * result["Density"] )
         result["L0"] = 1 / ( invL0 * result["Density"] )
-        
+
         return result
-    
+
     def getSimValues(self):
         result = self.getRealValues()
         fraction = self.theMcVolume / result["Volume"]
@@ -61,15 +61,15 @@ class Material:
         result["Density"] = self.getMass() / self.theMcVolume
         result["X0"] *= fraction
         result["L0"] *= fraction
-    
+
         return result
-   
+
     def getMass(self):
         result = 0
         for con in self.theConstituents:
             result += con.theMass * con.theCount
         return result
-        
+
     def addConstituent(self, constString, predefinedMaterials):
         if constString  == "" or not constString[0] == "*":
             raise StandardError , "not a valid Constituent: "+constString
@@ -79,7 +79,7 @@ class Material:
         number = int( line.split('"')[0].split()[0] )
         if not len(self.theConstituents) == number:
             raise StandardError, "Constituent Number mismatch for "+str(len(self.theConstituents))+" in: "+line
-    
+
     def __str__(self):
         result = "[ "+self.theName+" Description: "+self.theDescription+" MC-Volume:"+str(self.theMcVolume)+"\n"
         result += "Comments:\n"+self.theComment
@@ -102,8 +102,8 @@ def parseInFile(inFile, predefinedMaterials, config):
 
             #print "Name: "+name+" Description: "+description+" mcVolume: "+str(mcVolume)
         elif not line == "" and line[0] == "*":
-            
-                materials[-1].addConstituent(line, predefinedMaterials)
+
+            materials[-1].addConstituent(line, predefinedMaterials)
         else:
             ignore = False
             for char in config["parsing"]["ignorelines"]:
@@ -196,7 +196,7 @@ def main():
         options.output = options.inFile.replace(".in",".twiki")
     if options.config == None:
         options.config = "twikiConfig.ini"
-    
+
     config = readConfig(options.config)
 
     predefinedMaterials = {}

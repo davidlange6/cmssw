@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import FWCore.ParameterSet.Config as cms
 
@@ -8,7 +9,7 @@ except:
     try:
         import simplejson as json
     except:
-        print "Please use lxplus or set an environment (for example crab) with json lib available"
+        print("Please use lxplus or set an environment (for example crab) with json lib available")
         sys.exit(1)
 
 inputfiles = os.environ["ALIGNMENT_INPUTFILES"].split(" ")
@@ -56,13 +57,13 @@ minNCrossedChambers = int(os.environ["ALIGNMENT_MINNCROSSEDCHAMBERS"])
 createAlignNtuple = False
 envNtuple = os.getenv("ALIGNMENT_CREATEALIGNNTUPLE")
 if envNtuple is not None:
-  if envNtuple=='True': createAlignNtuple = True
+    if envNtuple=='True': createAlignNtuple = True
 
 # optionally: create a ntuple with MapPlot plugin
 createMapNtuple = False
 envNtuple = os.getenv("ALIGNMENT_CREATEMAPNTUPLE")
 if envNtuple is not None:
-  if envNtuple=='True': createMapNtuple = True
+    if envNtuple=='True': createMapNtuple = True
 
 # optionally do selective DT or CSC alignment
 doDT = True
@@ -70,47 +71,47 @@ doCSC = True
 envDT = os.getenv("ALIGNMENT_DO_DT")
 envCSC = os.getenv("ALIGNMENT_DO_CSC")
 if envDT is not None and envCSC is not None:
-  if envDT=='True' and envCSC=='False':
-    doDT = True
-    doCSC = False
-  if envDT=='False' and envCSC=='True':
-    doDT = False
-    doCSC = True
+    if envDT=='True' and envCSC=='False':
+        doDT = True
+        doCSC = False
+    if envDT=='False' and envCSC=='True':
+        doDT = False
+        doCSC = True
 
 # optionally use JSON file for good limi mask
 good_lumis = []
 json_file = os.getenv("ALIGNMENT_JSON")
 #json_file = 'Cert_136035-144114_7TeV_StreamExpress_Collisions10_JSON.txt'
 if json_file is not None and json_file != '':
-  jsonfile=file(json_file, 'r')
-  jsondict = json.load(jsonfile)
-  runs = jsondict.keys()
-  runs.sort()
-  for run in runs:
-    blocks = jsondict[run]
-    blocks.sort()
-    prevblock = [-2,-2]
-    for lsrange in blocks:
-      if lsrange[0] == prevblock[1]+1:
+    jsonfile=file(json_file, 'r')
+    jsondict = json.load(jsonfile)
+    runs = jsondict.keys()
+    runs.sort()
+    for run in runs:
+        blocks = jsondict[run]
+        blocks.sort()
+        prevblock = [-2,-2]
+        for lsrange in blocks:
+            if lsrange[0] == prevblock[1]+1:
         #print "Run: ",run,"- This lumi starts at ", lsrange[0], " previous ended at ", prevblock[1]+1, " so I should merge"
-        prevblock[1] = lsrange[1]
-        good_lumis[-1] = str("%s:%s-%s:%s" % (run, prevblock[0], run, prevblock[1]))
-      else:
-        good_lumis.append(str("%s:%s-%s:%s" % (run, lsrange[0], run, lsrange[1])))
-        prevblock = lsrange
+                prevblock[1] = lsrange[1]
+                good_lumis[-1] = str("%s:%s-%s:%s" % (run, prevblock[0], run, prevblock[1]))
+            else:
+                good_lumis.append(str("%s:%s-%s:%s" % (run, lsrange[0], run, lsrange[1])))
+                prevblock = lsrange
 
 
 process = cms.Process("GATHER")
 
 if len(good_lumis)>0:
-  process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(*inputfiles),
-    skipEvents = cms.untracked.uint32(skipEvents), 
-    lumisToProcess = cms.untracked.VLuminosityBlockRange(*good_lumis))
+    process.source = cms.Source("PoolSource",
+      fileNames = cms.untracked.vstring(*inputfiles),
+      skipEvents = cms.untracked.uint32(skipEvents), 
+      lumisToProcess = cms.untracked.VLuminosityBlockRange(*good_lumis))
 else:
-  process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring(*inputfiles),
-    skipEvents = cms.untracked.uint32(skipEvents))
+    process.source = cms.Source("PoolSource",
+      fileNames = cms.untracked.vstring(*inputfiles),
+      skipEvents = cms.untracked.uint32(skipEvents))
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(maxEvents))
 #process.options = cms.untracked.PSet(  wantSummary = cms.untracked.bool(True) )

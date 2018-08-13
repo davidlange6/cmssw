@@ -170,8 +170,8 @@ def get_serializable_classes_members(node, all_template_types=None, namespace=''
             if only_from_path is not None \
                 and child.location.file is not None \
                 and not child.location.file.name.startswith(only_from_path):
-                    logging.debug('Skipping since it is an external of this package: %s', child.spelling)
-                    continue
+                logging.debug('Skipping since it is an external of this package: %s', child.spelling)
+                continue
 
             serializable = is_serializable_class(child)
             if serializable:
@@ -417,12 +417,12 @@ class SerializationCodeGenerator(object):
         product_name = '%s%s' % (self.split_path[1], self.split_path[2])
         logging.debug('product_name = %s', product_name)
 
-	if not scramFlags:
-	   cpp_flags = get_flags(product_name, 'CPPFLAGS')
-           cxx_flags = get_flags(product_name, 'CXXFLAGS')
-	else:
-	   cpp_flags = self.cleanFlags( scramFlags )
-	   cxx_flags = []
+        if not scramFlags:
+            cpp_flags = get_flags(product_name, 'CPPFLAGS')
+            cxx_flags = get_flags(product_name, 'CXXFLAGS')
+        else:
+            cpp_flags = self.cleanFlags( scramFlags )
+            cxx_flags = []
 
         std_flags = get_default_gcc_search_paths()
         log_flags('cpp_flags', cpp_flags)
@@ -467,15 +467,15 @@ class SerializationCodeGenerator(object):
         return os.path.join(self.cmssw_base, self.split_path[0], self.split_path[1], self.split_path[2], *path)
 
     def cleanFlags(self, flagsIn):
-	flags = [ flag for flag in flagsIn if not flag.startswith(('-march', '-mtune')) ]
+        flags = [ flag for flag in flagsIn if not flag.startswith(('-march', '-mtune')) ]
         blackList = ['--', '-fipa-pta']
         return [x for x in flags if x not in blackList]
 
     def generate(self, outFileName):
 
-    	filename = outFileName
-	if not filename:  # in case we're not using scram, this may not be set, use the default then, assuming we're in the package dir ...
-	   filename = self._join_package_path('src', 'Serialization.cc')
+        filename = outFileName
+        if not filename:  # in case we're not using scram, this may not be set, use the default then, assuming we're in the package dir ...
+            filename = self._join_package_path('src', 'Serialization.cc')
 
         n_serializable_classes = 0
 
@@ -532,10 +532,10 @@ def main():
 
     logLevel = logging.INFO
     if opts.verbose < 1 and opts.output and opts.package:   # assume we're called by scram and reduce logging - but only if no verbose is requested
-       logLevel = logging.WARNING
+        logLevel = logging.WARNING
 
     if opts.verbose >= 1: 
-       logLevel = logging.DEBUG
+        logLevel = logging.DEBUG
 
     logging.basicConfig(
         format = '[%(asctime)s] %(levelname)s: %(message)s',
@@ -544,13 +544,13 @@ def main():
 
     if opts.package:  # we got a directory name to process, assume it's from scram and remove the last ('/src') dir from the path
         pkgDir = opts.package
-	if pkgDir.endswith('/src') :
-	    pkgDir, srcDir = os.path.split( opts.package )
+        if pkgDir.endswith('/src') :
+            pkgDir, srcDir = os.path.split( opts.package )
         os.chdir( pkgDir )
-	logging.info("Processing package in %s " % pkgDir)
+        logging.info("Processing package in %s " % pkgDir)
 
     if opts.output:
-       logging.info("Writing serialization code to %s " % opts.output)
+        logging.info("Writing serialization code to %s " % opts.output)
 
     SerializationCodeGenerator( scramFlags=args[1:] ).generate( opts.output )
 

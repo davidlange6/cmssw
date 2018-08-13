@@ -26,14 +26,14 @@ class DTResidualCalibration:
         self.process.GlobalTag.globaltag = self.config.globaltag
         self.process.dtResidualCalibration.rootFileName = self.outputfile 
         # Update Event Setup
-	if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
-	    tag = self.config.inputDBTag
-	    record = self.config.inputDBRcd
-	    connect = self.config.connectStrDBTag
-	    moduleName = 'customDB%s' % record 
-	    addPoolDBESSource(process = self.process,
-			      moduleName = moduleName,record = record,tag = tag,
-			      connect = connect)
+        if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
+            tag = self.config.inputDBTag
+            record = self.config.inputDBRcd
+            connect = self.config.connectStrDBTag
+            moduleName = 'customDB%s' % record 
+            addPoolDBESSource(process = self.process,
+                              moduleName = moduleName,record = record,tag = tag,
+                              connect = connect)
 
         if hasattr(self.config,'inputVDriftDB') and self.config.inputVDriftDB:
             addPoolDBESSource(process = self.process,
@@ -57,7 +57,7 @@ class DTResidualCalibration:
             if hasattr(self.config,'runOnMC') and self.config.runOnMC:
                 getattr(self.process,self.config.digilabel).inputLabel = 'rawDataCollector' 
             prependPaths(self.process,self.config.digilabel)
- 
+
         if hasattr(self.config,'preselection') and self.config.preselection:
             pathsequence = self.config.preselection.split(':')[0]
             seqname = self.config.preselection.split(':')[1]

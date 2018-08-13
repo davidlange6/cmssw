@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='1.02'
 import os,sys
 import coral
@@ -14,7 +15,7 @@ class constants(object):
         self.gtmonschema='CMS_GT_MON'
         self.deadviewname='GT_MON_TRIG_DEAD_VIEW'
         self.algoviewname='GT_MON_TRIG_ALGO_VIEW'
-        
+
 def bitzeroForRun(dbsession,c,runnum):
     '''
     select lsnr,counts,prescale from CMS_GT_MON.GT_MON_TRIG_ALGO_VIEW where runnr=:runnumber and algobit=:bitnum order by lsnr
@@ -36,7 +37,7 @@ def bitzeroForRun(dbsession,c,runnum):
         bitBindVarList.extend("bitnum","unsigned int")
         bitBindVarList["runnumber"].setData(int(runnum))
         bitBindVarList["bitnum"].setData(0)
-        
+
         query=schema.newQuery()
         query.addToTableList(c.algoviewname)
         query.addToOutputList('LSNR','lsnr')
@@ -44,7 +45,7 @@ def bitzeroForRun(dbsession,c,runnum):
         query.setCondition('RUNNR=:runnumber AND ALGOBIT=:bitnum',bitBindVarList)
         query.addToOrderList('lsnr')
         query.defineOutput(bitOutput)
-        
+
         cursor=query.execute()
         while cursor.next():
             cmslsnum=cursor.currentRow()['lsnr'].data()
@@ -55,10 +56,10 @@ def bitzeroForRun(dbsession,c,runnum):
         #print result
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-    
+
 def deadcountForRun(dbsession,c,runnum):
     '''
     select counts,lsnr from cms_gt_mon.gt_mon_trig_dead_view where runnr=:runnumber and deadcounter=:countername order by lsnr;
@@ -75,13 +76,13 @@ def deadcountForRun(dbsession,c,runnum):
         deadOutput=coral.AttributeList()
         deadOutput.extend("lsnr","unsigned int")
         deadOutput.extend("deadcount","unsigned long long")
-        
+
         deadBindVarList=coral.AttributeList()
         deadBindVarList.extend("runnumber","unsigned int")
         deadBindVarList.extend("countername","string")
         deadBindVarList["runnumber"].setData(int(runnum))
         deadBindVarList["countername"].setData('DeadtimeBeamActive')
-        
+
         query=schema.newQuery()
         query.addToTableList(c.deadviewname)
         query.addToOutputList('LSNR','lsnr')
@@ -89,7 +90,7 @@ def deadcountForRun(dbsession,c,runnum):
         query.setCondition('RUNNR=:runnumber AND DEADCOUNTER=:countername',deadBindVarList)
         query.addToOrderList('lsnr')
         query.defineOutput(deadOutput)
-        
+
         cursor=query.execute()
         while cursor.next():
             cmslsnum=cursor.currentRow()['lsnr'].data()
@@ -99,10 +100,10 @@ def deadcountForRun(dbsession,c,runnum):
         dbsession.transaction().commit()
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-        
+
 def main():
     c=constants()
     parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]),description="Dump GT info")
@@ -123,38 +124,38 @@ def main():
     if args.debug:
         msg=coral.MessageStream('')
         msg.setMsgVerbosity(coral.message_Level_Debug)
-    
+
     if args.action == 'deadtime':
         deadresult=deadcountForRun(session,c,runnumber)
         if deadresult and len(deadresult)!=0:
-            print 'run',runnumber
-            print 'ls deadcount'
+            print('run',runnumber)
+            print('ls deadcount')
             for cmsls,deadcount in deadresult.items():
-                print cmsls,deadcount
+                print(cmsls,deadcount)
         else:
-            print 'no deadtime found for run ',runnumber
-            
+            print('no deadtime found for run ',runnumber)
+
     if args.action == 'deadfraction':
         deadresult=deadcountForRun(session,c,runnumber)
         bitzeroresult=bitzeroForRun(session,c,runnumber)
         if deadresult and len(deadresult)!=0:
-            print 'run',runnumber
-            print 'ls deadfraction'
+            print('run',runnumber)
+            print('ls deadfraction')
             for cmsls,deadcount in deadresult.items():
                 bitzero_count=bitzeroresult[cmsls]
                 bitzero_prescale=1.0
                 if int(runnumber)>=146315:
                     bitzero_prescale=17.0
                 if bitzero_count==0:
-                    print cmsls,'no beam'
+                    print(cmsls,'no beam')
                 else:
-                    print cmsls,'%.5f'%float(float(deadcount)/(float(bitzero_count)*bitzero_prescale))
+                    print(cmsls,'%.5f'%float(float(deadcount)/(float(bitzero_count)*bitzero_prescale)))
         else:
-            print 'no deadtime found for run ',runnumber
-        
+            print('no deadtime found for run ',runnumber)
+
     del session
     del svc
-        
+
 if __name__=='__main__':
     main()
-    
+

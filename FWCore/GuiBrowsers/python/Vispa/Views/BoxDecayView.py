@@ -18,15 +18,15 @@ from Vispa.Share.ThreadChain import ThreadChain
 
 class BoxDecayView(WidgetView):
     """Visualizes a decay tree using boxes to represent containers as well as their contents.
-    
+
     Mother/daughter relations are represented by connection lines. The BoxDecayView is automatically filled using a DataAccessor.
     """
-    
+
     LABEL = "&Box Decay View"
     UPDATE_EVERY = 20
     NO_SORTING_ABOVE = 10000
     WARNING_ABOVE = 500
-    
+
     def __init__(self, parent=None):
         logging.debug(__name__ + ": __init__")
         WidgetView.__init__(self, parent)
@@ -48,13 +48,13 @@ class BoxDecayView(WidgetView):
             else:
                 self.WARNING_ABOVE=1000
         self._arrangeUsingRelationsFlag=set
-    
+
     def arrangeUsingRelations(self):
         return self._arrangeUsingRelationsFlag
 
     def setSortBeforeArranging(self, set):
         self._sortBeforeArranging = set
-    
+
     def sortBeforeArranging(self):
         self._sortBeforeArranging
 
@@ -66,7 +66,7 @@ class BoxDecayView(WidgetView):
 
     def setDataAccessor(self, accessor):
         """ Sets the DataAccessor from which the boxes are created.
-        
+
         You need to call updateContent() in order to make the changes visible.   
         """
         if not isinstance(accessor, BasicDataAccessor):
@@ -74,7 +74,7 @@ class BoxDecayView(WidgetView):
         if not isinstance(accessor, RelativeDataAccessor):
             raise TypeError(__name__ + " requires data accessor of type RelativeDataAccessor.")
         WidgetView.setDataAccessor(self, accessor)
-    
+
     def cancel(self):
         """ Stop all running operations.
         """
@@ -92,7 +92,7 @@ class BoxDecayView(WidgetView):
             if result == 0:
                 self.WARNING_ABOVE=0
         return True
-        
+
     def updateContent(self, overrideCheck=False):
         """ Clear the BoxDecayView and refill it.
         """
@@ -186,7 +186,7 @@ class BoxDecayView(WidgetView):
 
     def createConnections(self, operationId, widgetParent):
         """ Create connection lines between objects.
-        
+
         In BoxDecayView default mother-daughter relations are vizualized by the connections.
         """
         for w1 in widgetParent.children():
@@ -212,7 +212,7 @@ class BoxDecayView(WidgetView):
 
     def createBoxesRecursive(self, operationId, objects, widgetParent, positionName="0"):
         """ Creates a box from an object.
-        
+
         All children of this object are created recursively.
         """
         #logging.debug(__name__ + ": createBoxesRecursive")
@@ -246,7 +246,7 @@ class BoxDecayView(WidgetView):
             child_positionName = positionName + "-" + str(i)
             self.addWidget(widget, object, child_positionName)
             i += 1
-            
+
         # create Connections
         if not self.createConnections(operationId, widgetParent):
             return None
@@ -270,12 +270,12 @@ class BoxDecayView(WidgetView):
             if isinstance(widget, (WidgetContainer,ConnectableWidget)):
                 widget.show()
         self.autosizeScrollArea()
-        
+
         return True
 
     def _sortByRelations(self, objects):
         """ Sort a list of objects by their mother/daughter relations.
-        
+
         All daughter objects are put directly behind the mother object in the list.
         This sorting algorithm is run before the display of objects with relations.
         """
@@ -303,14 +303,14 @@ class BoxDecayView(WidgetView):
                         sortedObjects.insert(i, child)
         sortedObjects += unsortedObjects
         return tuple(sortedObjects)
-        
+
     def closeEvent(self, event):
         self.clear()
         WidgetView.closeEvent(self, event)
 
     def contentStartX(self):
         return 10 * self.zoomFactor()
-    
+
     def contentStartY(self):
         return 10 * self.zoomFactor()
 
@@ -335,12 +335,12 @@ class BoxDecayView(WidgetView):
                 if not widget.collapsed() and d>=depth or\
                     widget.collapsed() and d<depth:
                     widget.toggleCollapse()
-        
+
     def expandObject(self,object):
         widget=self.widgetByObject(object)
         if isinstance(widget,WidgetContainer) and widget.collapsed():
             widget.toggleCollapse()
-        
+
     def collapseObject(self,object):
         widget=self.widgetByObject(object)
         if isinstance(widget,WidgetContainer) and not widget.collapsed():
@@ -348,30 +348,30 @@ class BoxDecayView(WidgetView):
 
     def toggleCollapsed(self,object):
         self.emit(SIGNAL("toggleCollapsed"), object)
-        
+
 class BoxDecayContainer(WidgetContainer):
     AUTOSIZE = True
     AUTOSIZE_KEEP_ASPECT_RATIO = False
     AUTOLAYOUT_CHILDREN_ENABLED = True
-    
+
     def __init__(self, parent=None):
         WidgetContainer.__init__(self, parent)
-        
+
     def dataAccessor(self):
         return self.parent().dataAccessor()
-    
+
     def widgetByObject(self, mother):
         return self.parent().widgetByObject(mother)
-        
+
     def arrangeUsingRelations(self):
         return self.parent().arrangeUsingRelations()
-        
+
     def autosizeScrollArea(self):
         return self.parent().autosizeScrollArea()
-    
+
     def autolayoutChildren(self):
         self.__class__.autolayoutAlgorithm(self)
-        
+
     #@staticmethod
     def autolayoutAlgorithm(self):
         """ Arrange box position according to mother relations.
@@ -408,7 +408,7 @@ class BoxDecayContainer(WidgetContainer):
     def toggleCollapse(self):
         WidgetContainer.toggleCollapse(self)
         self.toggleCollapsed(self.object)
-        
+
     def toggleCollapsed(self,object):
         self.parent().toggleCollapsed(object)
-        
+

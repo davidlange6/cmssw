@@ -1,3 +1,4 @@
+from __future__ import print_function
 import ConfigParser,os.path
 
 #################################
@@ -51,9 +52,9 @@ class normFileParser(object):
             elif self.__datasectionname in section:
                 datasectionResult.append(thisectionresult)
         return [defsectionResult,datasectionResult]
-    
+
 if __name__ == "__main__":
     s='../test/norm_HFV2.cfg'
     parser=normFileParser(s)
-    print parser.parse()
+    print(parser.parse())
 

@@ -1,16 +1,17 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='2.00'
 import os,sys
 import coral
 from RecoLuminosity.LumiDB import argparse,dbUtil,nameDealer
 
 def createLumi(dbsession):
-    print 'creating lumi db schema...'
+    print('creating lumi db schema...')
     dbsession.transaction().start(False)
     schema=dbsession.nominalSchema()
     db=dbUtil.dbUtil(schema)
     #cms run summary table
-    
+
     cmsrunsummary=coral.TableDescription()
     cmsrunsummary.setName( nameDealer.cmsrunsummaryTableName() )
     cmsrunsummary.insertColumn('RUNNUM','unsigned int')
@@ -49,7 +50,7 @@ def createLumi(dbsession):
     summary.insertColumn('CMSBXINDEXBLOB','blob')
     summary.insertColumn('BEAMINTENSITYBLOB_1','blob')
     summary.insertColumn('BEAMINTENSITYBLOB_2','blob')
-         
+
     summary.setPrimaryKey('LUMISUMMARY_ID')
     summary.setNotNullConstraint('RUNNUM',True)
     summary.setNotNullConstraint('CMSLSNUM',True)
@@ -69,7 +70,7 @@ def createLumi(dbsession):
 
     summary.setUniqueConstraint(('RUNNUM','LUMIVERSION','LUMILSNUM'))
     summary.createIndex('lumisummary_runnum',('RUNNUM'))
-    
+
     db.createTable(summary,True)
     #lumi detail table
     detail=coral.TableDescription()
@@ -111,7 +112,7 @@ def createLumi(dbsession):
     trg.setNotNullConstraint('PRESCALE',True)
     trg.setPrimaryKey('TRG_ID')
     trg.createIndex('trg_runnum',('RUNNUM'))
-    
+
     db.createTable(trg,True)
     #hlt table
     hlt=coral.TableDescription()
@@ -159,7 +160,7 @@ def createLumi(dbsession):
     lumihltresult.insertColumn( 'HLTPATH','float' )
     lumihltresult.insertColumn( 'RECORDEDLUMI','float' )
     db.createTable(lumihltresult,False)
-    
+
     #lumivalidation table
     lumivalidation=coral.TableDescription()
     lumivalidation.setName( nameDealer.lumivalidationTableName() )
@@ -169,10 +170,10 @@ def createLumi(dbsession):
     lumivalidation.insertColumn( 'COMMENT','string' )
     lumivalidation.setPrimaryKey(('RUNNUM','CMSLSNUM'))
     lumivalidation.setNotNullConstraint('FLAG',True)
-    
+
     db.createTable(lumivalidation,False)
     dbsession.transaction().commit()
-    
+
 def createValidation(dbsession):
     '''
     lumivalidation table
@@ -190,9 +191,9 @@ def createValidation(dbsession):
     lumivalidation.setNotNullConstraint('FLAG',True)
     db.createTable(lumivalidation,False)
     dbsession.transaction().commit()
-    
+
 def dropLumi(dbsession):
-    print 'droping lumi db schema...'
+    print('droping lumi db schema...')
     dbsession.transaction().start(False)
     schema=dbsession.nominalSchema()
     db=dbUtil.dbUtil(schema)
@@ -206,9 +207,9 @@ def dropLumi(dbsession):
     db.dropTable( nameDealer.lumihltresultTableName() )
     db.dropTable( nameDealer.lumivalidationTableName() )
     dbsession.transaction().commit()
-    
+
 def describeLumi(dbsession):
-    print 'lumi db schema dump...'
+    print('lumi db schema dump...')
     dbsession.transaction().start(True)
     schema=dbsession.nominalSchema()
     db=dbUtil.dbUtil(schema)
@@ -222,7 +223,7 @@ def createIndex(dbsession):
     schema.tableHandle( nameDealer.trgTableName() ).schemaEditor().createIndex('trg_runnum',('RUNNUM'))
     schema.tableHandle( nameDealer.hltTableName() ).schemaEditor().createIndex('hlt_runnum',('RUNNUM'))
     dbsession.transaction().commit()
-    
+
 def dropIndex(dbsession):
     dbsession.transaction().start(False)
     schema=dbsession.nominalSchema()
@@ -230,7 +231,7 @@ def dropIndex(dbsession):
     schema.tableHandle( nameDealer.trgTableName() ).schemaEditor().dropIndex('trg_runnum')
     schema.tableHandle( nameDealer.hltTableName() ).schemaEditor().dropIndex('hlt_runnum')
     dbsession.transaction().commit()
-    
+
 def main():
     parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]),description="Lumi DB schema operations.")
     # add the arguments
@@ -251,20 +252,20 @@ def main():
         os.environ['CORAL_AUTH_PATH']=args.authpath
     session=svc.connect(connectstring,accessMode=coral.access_Update)
     if args.action == 'create':
-       if args.validationTab:
-           createValidation(session)
-       else:
-           createLumi(session)
+        if args.validationTab:
+            createValidation(session)
+        else:
+            createLumi(session)
     if args.action == 'drop':
-       dropLumi(session)
+        dropLumi(session)
     if args.action == 'describe':
-       describeLumi(session)
+        describeLumi(session)
     if args.action == 'addindex':
-       createIndex(session)
+        createIndex(session)
     if args.action == 'dropindex':
-       dropIndex(session)
+        dropIndex(session)
     if args.verbose :
-        print 'verbose mode'
+        print('verbose mode')
 if __name__=='__main__':
     main()
-    
+

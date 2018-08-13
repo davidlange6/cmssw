@@ -1,3 +1,4 @@
+from __future__ import print_function
 ############################################################
 # LumiDB Revision and Versioning API
 #
@@ -173,7 +174,7 @@ def branchType(schema,name):
 #        return result
 #    except :
 #        raise 
-    
+
 def revisionsInBranchName(schema,branchname):
     '''
     returns all revisions in a branch/tag by name
@@ -278,35 +279,35 @@ def latestDataRevisionOfEntry(schema,datatableName,entry,revrange):
     result=dataRevisionsOfEntry(schema,datatableName,entry,revrange)
     if result and len(result)!=0: return max(result)
     return None
-    
+
 def branchInfoByName(schema,branchName):
     '''
     select (revision_id,branch_id) from revisions where name=:branchName
     '''
     try:
-         qHandle=schema.newQuery()
-         qHandle.addToTableList( nameDealer.revisionTableName() )
-         qHandle.addToOutputList('REVISION_ID','revision_id')
-         qHandle.addToOutputList('BRANCH_ID','branch_id')
-         qCondition=coral.AttributeList()
-         qCondition.extend('name','string')
-         qCondition['name'].setData(branchName)
-         qResult=coral.AttributeList()
-         qResult.extend('revision_id','unsigned long long')
-         qResult.extend('branch_id','unsigned long long')
-         qHandle.defineOutput(qResult)
-         qHandle.setCondition('NAME=:name',qCondition)
-         cursor=qHandle.execute()
-         revision_id=None
-         branch_id=None
-         while cursor.next():
-             revision_id=cursor.currentRow()['revision_id'].data()
-             branch_id=cursor.currentRow()['branch_id'].data()
-         del qHandle
-         return (revision_id,branch_id)
+        qHandle=schema.newQuery()
+        qHandle.addToTableList( nameDealer.revisionTableName() )
+        qHandle.addToOutputList('REVISION_ID','revision_id')
+        qHandle.addToOutputList('BRANCH_ID','branch_id')
+        qCondition=coral.AttributeList()
+        qCondition.extend('name','string')
+        qCondition['name'].setData(branchName)
+        qResult=coral.AttributeList()
+        qResult.extend('revision_id','unsigned long long')
+        qResult.extend('branch_id','unsigned long long')
+        qHandle.defineOutput(qResult)
+        qHandle.setCondition('NAME=:name',qCondition)
+        cursor=qHandle.execute()
+        revision_id=None
+        branch_id=None
+        while cursor.next():
+            revision_id=cursor.currentRow()['revision_id'].data()
+            branch_id=cursor.currentRow()['branch_id'].data()
+        del qHandle
+        return (revision_id,branch_id)
     except Exception,e :
         raise RuntimeError(' revisionDML.branchInfoByName: '+str(e))
-    
+
 
 #=======================================================
 #
@@ -326,7 +327,7 @@ def bookNewEntry(schema,datatableName):
         return (revision_id,entry_id,data_id)
     except:
         raise
-    
+
 def bookNewRevision(schema,datatableName):
     '''
     allocate new revision_id,data_id
@@ -338,7 +339,7 @@ def bookNewRevision(schema,datatableName):
         return (revision_id,data_id)
     except:
         raise
-     
+
 def addEntry(schema,datatableName,entryinfo,branchinfo):
     '''
     input:
@@ -347,7 +348,7 @@ def addEntry(schema,datatableName,entryinfo,branchinfo):
     1.allocate and insert a new revision into the revisions table
     2.allocate and insert a new entry into the entry table with the new revision
     3.inset into data_rev table with new data_id ,revision)id mapping
-    
+
     insert into revisions(revision_id,branch_id,branch_name,comment,ctime) values()
     insert into datatablename_entries (entry_id,revision_id) values()
     insert into datatablename_rev(data_id,revision_id) values()
@@ -356,7 +357,7 @@ def addEntry(schema,datatableName,entryinfo,branchinfo):
         revisiontableName=nameDealer.revisionTableName()
         entrytableName=nameDealer.entryTableName(datatableName)
         revtableName=nameDealer.revmapTableName(datatableName)
-        
+
         db=dbUtil.dbUtil(schema)
         tabrowDefDict={}
         tabrowDefDict['REVISION_ID']='unsigned long long'
@@ -369,18 +370,18 @@ def addEntry(schema,datatableName,entryinfo,branchinfo):
         tabrowValueDict['BRANCH_NAME']=branchinfo[1]
         tabrowValueDict['CTIME']=coral.TimeStamp()
         db.insertOneRow(revisiontableName,tabrowDefDict,tabrowValueDict)
-        
+
         tabrowDefDict={}
         tabrowDefDict['REVISION_ID']='unsigned long long'
         tabrowDefDict['ENTRY_ID']='unsigned long long'    
         tabrowDefDict['NAME']='string'
-        
+
         tabrowValueDict={}
         tabrowValueDict['REVISION_ID']=entryinfo[0]
         tabrowValueDict['ENTRY_ID']=entryinfo[1]
         tabrowValueDict['NAME']=entryinfo[2]
         db.insertOneRow(entrytableName,tabrowDefDict,tabrowValueDict)
-    
+
         tabrowDefDict={}
         tabrowDefDict['REVISION_ID']='unsigned long long'
         tabrowDefDict['DATA_ID']='unsigned long long'
@@ -390,7 +391,7 @@ def addEntry(schema,datatableName,entryinfo,branchinfo):
         db.insertOneRow(revtableName,tabrowDefDict,tabrowValueDict)
     except:
         raise
-    
+
 def addRevision(schema,datatableName,revisioninfo,branchinfo):
     '''
     1.insert a new revision into the revisions table
@@ -404,7 +405,7 @@ def addRevision(schema,datatableName,revisioninfo,branchinfo):
     try:
         revisiontableName=nameDealer.revisionTableName()
         revtableName=nameDealer.revmapTableName(datatableName)
-        
+
         db=dbUtil.dbUtil(schema)
         tabrowDefDict={}
         tabrowDefDict['REVISION_ID']='unsigned long long'
@@ -417,9 +418,9 @@ def addRevision(schema,datatableName,revisioninfo,branchinfo):
         tabrowValueDict['BRANCH_ID']=branchinfo[0]
         tabrowValueDict['BRANCH_NAME']=branchinfo[1]
         tabrowValueDict['CTIME']=coral.TimeStamp()
-        
+
         db.insertOneRow(revisiontableName,tabrowDefDict,tabrowValueDict)
-        
+
         tabrowDefDict={}
         tabrowDefDict['REVISION_ID']='unsigned long long'
         tabrowDefDict['DATA_ID']='unsigned long long'
@@ -476,7 +477,7 @@ def createBranch(schema,name,parentname,comment=''):
         return (revisionid,parentid,parentname)
     except:
         raise
-    
+
 ################################################################
 # Data Tagging  API
 ################################################################
@@ -545,7 +546,7 @@ def currentDataTag(schema,lumitype='HF'):
         return (currenttagid,tagmap[currenttagid])
     except:
         raise
-        
+
 def addRunToCurrentDataTag(schema,runnum,lumiid,trgid,hltid,lumitype='HF',comment=''):
     '''
     select tagid from tags
@@ -624,7 +625,7 @@ def alldataTags(schema,lumitype='HF'):
             creationtime=cursor.currentRow()['creationtime'].data()
             tagmap[tagid]=[tagname,0,0,creationtime]
         del qHandle
-        
+
         tagids=tagmap.keys()
         allruns=set()
         for tagid in tagids:
@@ -762,7 +763,7 @@ def dataTagInfo(schema,tagname,runlist=None,lumitype='HF'):
             creationtime=cursor.currentRow()['creationtime'].data()
             tagmap[tagid]=[tagname,0,0,creationtime]
         del qHandle
-        
+
         tagids=tagmap.keys()
         allruns=set()
         for tagid in tagids:
@@ -881,11 +882,11 @@ def dataIdsByTagId(schema,tagid,runlist=None,withcomment=False,lumitype='HF'):
                     resultentry.append(commentdict[(0,0,hltid)])
                 else:
                     resultentry.append(())
-                    
+
     except:
         raise
     return result
-    
+
 def dataIdsByCurrentTag(schema,runlist=None,lumitype='HF'):
     '''
     dataIdsByTagId(schema,currenttagid,runlist)
@@ -915,7 +916,7 @@ if __name__ == "__main__":
     #print norminfo
     (branchid,branchparent)=branchInfoByName(schema,'DATA')
     databranchinfo=(branchid,'DATA')
-    print databranchinfo
+    print(databranchinfo)
     for runnum in [1200,1211,1222,1233,1345,1222,1200]:
         lumientryid=entryInBranch(schema,nameDealer.lumidataTableName(),str(runnum),'DATA')
         trgentryid=entryInBranch(schema,nameDealer.trgdataTableName(),str(runnum),'DATA')
@@ -937,7 +938,7 @@ if __name__ == "__main__":
         else:
             revisioninfo=bookNewRevision( schema,nameDealer.trgdataTableName() )
             addRevision(schema,nameDealer.trgdataTableName(),revisioninfo,databranchinfo)      
-             #add data here
+            #add data here
         if hltentryid is None:
             (revision_id,entry_id,data_id)=bookNewEntry( schema,nameDealer.hltdataTableName() )
             entryinfo=(revision_id,entry_id,str(runnum),data_id)
@@ -947,16 +948,16 @@ if __name__ == "__main__":
             revisioninfo=bookNewRevision( schema,nameDealer.hltdataTableName() )
             addRevision(schema,nameDealer.hltdataTableName(),revisioninfo,databranchinfo)
             #add data here
-        
+
     session.transaction().commit()
-    print 'test reading'
+    print('test reading')
     session.transaction().start(True)
-    print branchType(schema,'DATA')
+    print(branchType(schema,'DATA'))
     revlist=revisionsInBranchName(schema,'DATA')
-    print 'DATA revlist ',revlist
+    print('DATA revlist ',revlist)
     lumientry_id=entryInBranch(schema,nameDealer.lumidataTableName(),'1211','DATA')
-    print lumientry_id
+    print(lumientry_id)
     latestrevision=latestDataRevisionOfEntry(schema,nameDealer.lumidataTableName(),lumientry_id,revlist)
-    print 'latest data_id for run 1211 ',latestrevision
+    print('latest data_id for run 1211 ',latestrevision)
     session.transaction().commit()
     del session

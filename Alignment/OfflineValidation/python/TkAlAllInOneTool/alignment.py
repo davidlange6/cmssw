@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import configTemplates
 from helperFunctions import replaceByMap
@@ -25,11 +26,11 @@ class Alignment:
         self.color = config.get(section,"color")
         self.style = config.get(section,"style")
 
-        
+
     def __shorthandExists(self, theRcdName, theShorthand):
         """Method which checks, if `theShorthand` is a valid shorthand for the
         given `theRcdName`.
-        
+
         Arguments:
         - `theRcdName`: String which specifies the database record.
         - `theShorthand`: String which specifies the shorthand to check.
@@ -40,8 +41,8 @@ class Alignment:
             return True
         else:
             return False
-        
-        
+
+
     def __getConditions( self, theConfig, theSection ):
         conditions = []
         for option in theConfig.options( theSection ):
@@ -96,11 +97,11 @@ class Alignment:
         #FIXME delete return to end train debuging
         return
         if not dbpath.startswith("sqlite_file:"):
-            print "WARNING: could not check existence for",dbpath
+            print("WARNING: could not check existence for",dbpath)
         else:
             if not os.path.exists( dbpath.split("sqlite_file:")[1] ):
                 raise "could not find file: '%s'"%dbpath.split("sqlite_file:")[1]
- 
+
     def restrictTo( self, restriction ):
         result = []
         if not restriction == None:

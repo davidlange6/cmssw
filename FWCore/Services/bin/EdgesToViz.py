@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 import os
 import os.path
@@ -34,7 +35,7 @@ def readtable(flook):
         s.append(cols[s[7]])
         tab[s[0]]=s
     return tab,cols
-        
+
 
 def runme(infile,outfile,lookupfile,use_name):
     fin   = open(infile,'r')
@@ -42,7 +43,7 @@ def runme(infile,outfile,lookupfile,use_name):
     fout  = open(outfile,'w')
 
     table,libcols = readtable(flook)
-    
+
     fout.write('digraph prof {')
 
     uni = {}
@@ -50,7 +51,7 @@ def runme(infile,outfile,lookupfile,use_name):
 #    for i in libcols.items():
 #        print >>fout,'lib%d [label="%s",style=filled,color=%s,fontsize=18];' % (d,os.path.basename(i[0].strip('"')),i[1])
 #        d += 1
-        
+
 
     for line in fin.xreadlines():
         count,from_node,to_node = line.split()
@@ -58,14 +59,14 @@ def runme(infile,outfile,lookupfile,use_name):
         uni[to_node] = 1
         row_to = table[to_node]
         row_from = table[from_node]
-        
+
         if row_from[-1] == row_to[-1]:
             color="\"#000000\""
         else:
             row=table[to_node]
             color=row[-1]
-            
-        print >>fout, '%s -> %s [label="%s",fontsize=18,color=%s];' % (from_node,to_node,count,color)
+
+        print('%s -> %s [label="%s",fontsize=18,color=%s];' % (from_node,to_node,count,color), file=fout)
 
     # print "blob",uni.keys
 
@@ -78,15 +79,15 @@ def runme(infile,outfile,lookupfile,use_name):
         recursive_fraction = float(function_data[6])
         if recursive_fraction > .03 and recursive_fraction <.20: shape="box"
         else: shape="circle"
-        print >>fout,'%s [label="ID: %s\\nL: %5.1f%%\\nB: %5.1f%%",style=filled,color=%s,shape=%s,fontsize=18];' % (node_label,node_label,leaf_fraction*100, recursive_fraction*100,function_data[-1],shape)
+        print('%s [label="ID: %s\\nL: %5.1f%%\\nB: %5.1f%%",style=filled,color=%s,shape=%s,fontsize=18];' % (node_label,node_label,leaf_fraction*100, recursive_fraction*100,function_data[-1],shape), file=fout)
 
     fout.write('}')
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        print "usage: ", sys.argv[0], " edge_input_file digraph_output_file func_names_lookup_file"
+        print("usage: ", sys.argv[0], " edge_input_file digraph_output_file func_names_lookup_file")
         sys.exit(1)
-        
+
     infile = sys.argv[1]
     outfile = sys.argv[2]
     lookupfile = sys.argv[3]

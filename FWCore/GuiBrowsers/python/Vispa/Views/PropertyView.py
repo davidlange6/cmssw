@@ -1,3 +1,4 @@
+from __future__ import print_function
 import logging
 import sys
 import os.path
@@ -42,19 +43,19 @@ class ComboBoxReturn(QComboBox):
 
 class PropertyView(QTableWidget, AbstractView):
     """ Shows properties of an object in a QTableWidget using the DataAccessor.
-    
+
     The view can be used readonly ('setReadOnly') or for editing.
     On editing the signals 'valueChanged', 'propertyDeleted', 'propertyAdded' are emitted.
     """
 
     LABEL = "&Property View"
-    
+
     def __init__(self, parent=None, name=None):
         """ Constructor """
         #logging.debug(self.__class__.__name__ + ": __init__()")
         AbstractView.__init__(self)
         QTableWidget.__init__(self, parent)
-       
+
         self._operationId = 0
         self._updatingFlag=0
         self.updateIni = False
@@ -67,15 +68,15 @@ class PropertyView(QTableWidget, AbstractView):
 
         self._readOnly = False
         self._showAddDeleteButtonFlag = False
-        
+
         self.connect(self.horizontalHeader(), SIGNAL("sectionResized(int,int,int)"), self.sectionResized)
         self.connect(self, SIGNAL("itemDoubleClicked(QTableWidgetItem *)"), self.itemDoubleClickedSlot)
-        
+
     def cancel(self):
         """ Stop all running operations.
         """
         self._operationId += 1
-        
+
     def clear(self):
         """ Clear the table and set the header label.
         """
@@ -83,10 +84,10 @@ class PropertyView(QTableWidget, AbstractView):
         self.setRowCount(0)
         self.setColumnCount(2)
         self.setHorizontalHeaderLabels(['Property', 'Value'])
-    
+
     def propertyWidgets(self):
         """ Return all property widgets in the right column.
-        
+
         Closable as well as normal properties are returned.
         """
         widgets=[]
@@ -97,7 +98,7 @@ class PropertyView(QTableWidget, AbstractView):
             elif hasattr(widget,"closableProperty"):
                 widgets+=[(widget.closableProperty(),i)]
         return widgets
-        
+
     def updatePropertyHeight(self,property):
         """ Update the height of the column that holds a certain property.
         """
@@ -106,7 +107,7 @@ class PropertyView(QTableWidget, AbstractView):
             if widget==property:
                 self.verticalHeader().resizeSection(i, property.properyHeight())
                 return
-    
+
     def append(self, property):
         """ Adds a property to the PropertyView and returns it.
         """
@@ -127,14 +128,14 @@ class PropertyView(QTableWidget, AbstractView):
 
     def lastRow(self):
         """ Return the last row holding a property.
-        
+
         The row with the add new property field is not counted.
         """
         if not self._readOnly and self._showAddDeleteButtonFlag and not self._updatingFlag>0:
             return self.rowCount() - 2
         else:
             return self.rowCount() - 1
-    
+
     def addCategory(self, name):
         """ Add a category row to the tabel which consists of two gray LabelItems.
         """
@@ -146,7 +147,7 @@ class PropertyView(QTableWidget, AbstractView):
 
     def setReadOnly(self, readOnly):
         """ Sets all properties in the PropertyView to read-only.
-        
+
         After calling this function all properties that are added are set to read-only as well.
         """
         #logging.debug('PropertyView: setReadOnly()')
@@ -154,16 +155,16 @@ class PropertyView(QTableWidget, AbstractView):
         for property,i in self.propertyWidgets():
             if property:
                 property.setReadOnly(self._readOnly)
-    
+
     def readOnly(self):
         return self._readOnly
 
     def setShowAddDeleteButton(self,show):
         self._showAddDeleteButtonFlag=show
-    
+
     def showAddDeleteButton(self):
         return self._showAddDeleteButtonFlag
-    
+
     def resizeEvent(self, event):
         """ Resize columns when table size is changed.
         """
@@ -188,7 +189,7 @@ class PropertyView(QTableWidget, AbstractView):
 
     def setDataAccessor(self, accessor):
         """ Sets the DataAccessor from which the object properties are read.
-        
+
         You need to call updateContent() in order to make the changes visible.
         """
         if not isinstance(accessor, BasicDataAccessor):
@@ -227,7 +228,7 @@ class PropertyView(QTableWidget, AbstractView):
         lineedit._typelist=typelist
         typelist._lineedit=lineedit
         typelist._typelist=typelist
-    
+
     def updateContent(self):
         """ Fill the properties of an object in the PropertyView using the DataAccessor.
         """
@@ -264,7 +265,7 @@ class PropertyView(QTableWidget, AbstractView):
     #@staticmethod
     def propertyWidgetFromProperty(property, categoryName=None):
         """ Create a property widget from a property tuple.
-        
+
         This function is static in order to be used by other view, e.g. TableView.
         """
         propertyWidget=None
@@ -298,7 +299,7 @@ class PropertyView(QTableWidget, AbstractView):
 
     def valueChanged(self, property):
         """ This function is called when a property a changed.
-        
+
         The DataAcessor is called to handle the property change.
         """
         if self.dataAccessor() and not self._ignoreValueChangeFlag:
@@ -313,7 +314,7 @@ class PropertyView(QTableWidget, AbstractView):
                 if result==True:
                     self.emit(SIGNAL('valueChanged'),property.name(), newvalue, oldValue, property.categoryName())
                 else:
-                    print "valueChanged() result = ", result, type(result)
+                    print("valueChanged() result = ", result, type(result))
                     property.setToolTip(result)
                     QMessageBox.critical(self.parent(), 'Error', result)
                     bad=True
@@ -321,7 +322,7 @@ class PropertyView(QTableWidget, AbstractView):
 
     def removeProperty(self, bool=False):
         """ This function deletes a property.
-        
+
         The DataAcessor is called to handle the property remove.
         """
         property=self.sender().parent()._property
@@ -332,10 +333,10 @@ class PropertyView(QTableWidget, AbstractView):
                     if p==property:
                         self.removeRow(i)
                 self.emit(SIGNAL('propertyDeleted'),name)
-        
+
     def addProperty(self, bool=False):
         """ This function adds a property.
-        
+
         The DataAcessor is called to add the property.
         """
         type=str(self.sender()._typelist.currentText())
@@ -361,10 +362,10 @@ class PropertyView(QTableWidget, AbstractView):
                 self.sender()._lineedit.setText("")
                 property.setFocus()
                 self.emit(SIGNAL('propertyAdded'),property.name())
-        
+
     def itemDoubleClickedSlot(self, item):
         """ Slot for itemClicked() signal.
-        
+
         Calls items's property's doubleClicked().
         """
         #logging.debug(self.__class__.__name__ + ": itemDoubleClickedSlot()")
@@ -379,7 +380,7 @@ class LabelItem(QTableWidgetItem):
     """
     def __init__(self, argument, color=Qt.white):
         """ Constructor.
-        
+
         Argument may be either a string or a Property object.
         If argument is the latter the property's user info will be used for the label's tooltip.
         """
@@ -391,95 +392,95 @@ class LabelItem(QTableWidgetItem):
             tooltip = argument
             name = argument
             self._property = None
-            
+
         QTableWidgetItem.__init__(self, name)
         self.setToolTip(tooltip)
         self.setFlags(Qt.ItemIsEnabled)
         self.setBackgroundColor(color)
-    
+
     def property(self):
         return self._property
 
 class Property(object):
     """ Mother of all properties which can be added to the PropertyView using its append() function.
     """
-    
+
     USER_INFO = "General property"
     DEFAULT_HEIGHT = 20
-    
+
     def __init__(self, name, categoryName=None):
         self.setName(name)
         self.setUserInfo(self.USER_INFO)
         self._propertyView = None
         self._deletable=False
         self._categoryName = categoryName
-        
+
     def setName(self, name):
         """ Sets the name of this property.
         """
         self._name = name
-    
+
     def name(self):
         """ Return the name of this property.
         """
         return self._name
-    
+
     def categoryName(self):
         return self._categoryName
-    
+
     def setDeletable(self,deletable):
         self._deletable=deletable
-    
+
     def deletable(self):
         return self._deletable
-    
+
     def setPropertyView(self, propertyView):
         """ Sets PropertyView object.
         """
         self._propertyView = propertyView
-        
+
     def propertyView(self):
         """ Returns property view.
         """
         return self._propertyView
-    
+
     def setUserInfo(self, info):
         """ Returns user info string containing information on type of property and what data may be insert.
         """
         self._userInfo=info
-    
+
     def userInfo(self):
         """ Returns user info string containing information on type of property and what data may be insert.
         """
         return self._userInfo
-    
+
     def setReadOnly(self, readOnly):
         """ Disables editing functionality.
         """
         pass
-    
+
     def properyHeight(self):
         """ Return the height of the property widget.
         """
         return self.DEFAULT_HEIGHT
-    
+
     def setValue(self, value):
         """ Abstract function returning current value of this property.
-        
+
         Has to be implemented by properties which allow the user to change their value.
         """
         raise NotImplementedError
-    
+
     def value(self):
         """ Abstract function returning current value of this property.
-        
+
         Has to be implemented by properties which allow the user to change their value.
         """
         raise NotImplementedError
-    
+
     def valueChanged(self):
         """ Slot for change events. 
-        
+
         The actual object which have changed should connect their value changed signal 
         (or similar) to this function to forward change to data accessor of PropertyView.
         """
@@ -491,7 +492,7 @@ class Property(object):
         """ Called by PropertyView itemDoubleClicked().
         """
         pass
-    
+
     def setHighlighted(self,highlight):
         """ Highlight the property, e.g. change color.
         """
@@ -500,16 +501,16 @@ class Property(object):
 class BooleanProperty(Property, QCheckBox):
     """ Property holding a check box for boolean values.
     """
-    
+
     USER_INFO = "Enable / Disable"
-    
+
     def __init__(self, name, value, categoryName=None):
         """ Constructor.
         """
         Property.__init__(self, name, categoryName)
         QCheckBox.__init__(self)
         self.connect(self, SIGNAL('stateChanged(int)'), self.valueChanged)
-    
+
     def setChecked(self, check, report=True):
         if not report:
             self.disconnect(self, SIGNAL('stateChanged(int)'), self.valueChanged)
@@ -526,7 +527,7 @@ class BooleanProperty(Property, QCheckBox):
         else:
             self.setEnabled(True)
             self.connect(self, SIGNAL('stateChanged(int)'), self.valueChanged)
-        
+
     def value(self):
         """ Returns True if check box is checked.
         """
@@ -535,9 +536,9 @@ class BooleanProperty(Property, QCheckBox):
 class DropDownProperty(Property, QComboBox):
     """ Property holding a check box for boolean values.
     """
-    
+
     USER_INFO = "Drop down field"
-    
+
     def __init__(self, name, value, values, categoryName=None):
         """ Constructor.
         """
@@ -549,7 +550,7 @@ class DropDownProperty(Property, QComboBox):
         if value in values:
             self.setCurrentIndex(values.index(value))
         self.connect(self, SIGNAL('currentIndexChanged(int)'), self.valueChanged)
-    
+
     def setReadOnly(self, readOnly):
         """ Disables editing functionality.
         """
@@ -559,7 +560,7 @@ class DropDownProperty(Property, QComboBox):
         else:
             self.setEnabled(True)
             self.connect(self, SIGNAL('currentIndexChanged(int)'), self.valueChanged)
-        
+
     def value(self):
         """ Returns True if check box is checked.
         """
@@ -569,18 +570,18 @@ class TextEdit(QTextEdit):
     def focusOutEvent(self,event):
         QTextEdit.focusOutEvent(self,event)
         self.emit(SIGNAL("editingFinished()"))
-        
+
 class TextEditWithButtonProperty(Property, QWidget):
     """ This class provides a PropertyView property holding an editable text and a button.
-    
+
     It is possible to hide the button unless the mouse cursor is over the property. This feature is turned on by default. See setAutohideButton().
     If the button is pressed nothing happens. This functionality should be implemented in sub-classes. See buttonClicked().
     The text field can hold single or multiple lines. See setMultiline()
     """
-    
+
     BUTTON_LABEL = ''
     AUTOHIDE_BUTTON = True
-    
+
     def __init__(self, name, value, categoryName=None, multiline=False):
         """ The constructor creates a QHBoxLayout and calls createLineEdit(), createTextEdit() and createButton(). 
         """
@@ -590,11 +591,11 @@ class TextEditWithButtonProperty(Property, QWidget):
         self._textEdit = None
         self._button = None
         self.setAutohideButton(self.AUTOHIDE_BUTTON)
-        
+
         self.setLayout(QHBoxLayout())
         self.layout().setSpacing(0)
         self.layout().setContentsMargins(0, 0, 0, 0)
-        
+
         self._readOnly = False
         self._multiline = False
 
@@ -603,7 +604,7 @@ class TextEditWithButtonProperty(Property, QWidget):
         self.createButton()
         self.setMultiline(multiline)
         self.setValue(value)
-                
+
     def setValue(self, value):
         """ Sets value of text edit.
         """
@@ -624,7 +625,7 @@ class TextEditWithButtonProperty(Property, QWidget):
         # TODO: sometimes when changing value the text edit appears to be empty when new text is shorter than old text
         #if not self._multiline:
         #    self._textEdit.setCursorPosition(self._textEdit.displayText().length())
-    
+
     def setToolTip(self,text):
         self._lineEdit.setToolTip(text)
         self._textEdit.setToolTip(text)
@@ -642,7 +643,7 @@ class TextEditWithButtonProperty(Property, QWidget):
             self._lineEdit.show()
             self._textEdit.hide()
             self.setFocusProxy(self._lineEdit)
-        
+
     def createLineEdit(self, value=None):
         """ This function creates the signle line text field and adds it to the property's layout. 
         """
@@ -652,7 +653,7 @@ class TextEditWithButtonProperty(Property, QWidget):
         self._lineEdit.setContentsMargins(0, 0, 0, 0)
         self._lineEdit.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding))
         self.layout().addWidget(self._lineEdit)
-        
+
     def createTextEdit(self, value=None):
         """ This function creates the multi line text field and adds it to the property's layout. 
         """
@@ -663,10 +664,10 @@ class TextEditWithButtonProperty(Property, QWidget):
         self._textEdit.setContentsMargins(0, 0, 0, 0)
         self._textEdit.setSizePolicy(QSizePolicy(QSizePolicy.Expanding, QSizePolicy.MinimumExpanding))
         self.layout().addWidget(self._textEdit)
-        
+
     def properyHeight(self):
         """ Return the estimated height of the property.
-        
+
         The returned height covers the whole text, even if multiline.
         """
         if self._multiline:
@@ -677,17 +678,17 @@ class TextEditWithButtonProperty(Property, QWidget):
             return height
         else:
             return self.DEFAULT_HEIGHT
-            
+
     def lineEdit(self):
         """ Returns line edit.
         """
         return self._lineEdit
-        
+
     def textEdit(self):
         """ Returns text edit.
         """
         return self._textEdit
-        
+
     def createButton(self):
         """ Creates a button and adds it to the property's layout.
         """
@@ -696,20 +697,20 @@ class TextEditWithButtonProperty(Property, QWidget):
         self._button.setContentsMargins(0, 0, 0, 0)
         self.connect(self._button, SIGNAL('clicked(bool)'), self.buttonClicked)
         self.layout().addWidget(self._button)
-        
+
         if self.autohideButtonFlag:
             self._button.hide()
-    
+
     def button(self):
         """ Return button.
         """
         return self._button
-    
+
     def hasButton(self):
         """ Returns True if the button has been created, otherwise False is returned. 
         """
         return self._button != None
-    
+
     def setReadOnly(self, readOnly):
         """ Switch between readonly and editable.
         """
@@ -726,10 +727,10 @@ class TextEditWithButtonProperty(Property, QWidget):
                 self.createButton()
         self.lineEdit().setReadOnly(readOnly)
         self.textEdit().setReadOnly(readOnly)
-    
+
     def readOnly(self):
         return self._readOnly
-    
+
     def strValue(self):
         """ Returns value of text edit.
         """
@@ -738,30 +739,30 @@ class TextEditWithButtonProperty(Property, QWidget):
         else:
             return str(self._textEdit.toPlainText().toAscii())
         return ""
-    
+
     def value(self):
         """ Returns the value of correct type (in case its not a string).
         """
         return self.strValue()
-    
+
     def setAutohideButton(self, hide):
         """ If hide is True the button will only be visible while the cursor is over the property. 
         """
         self.autohideButtonFlag = hide
-        
+
     def buttonClicked(self, checked=False):
         """
         This function is called if the button was clicked. For information on the checked argument see documentation of QPushButton::clicked().
         This function should be overwritten by sub-classes.
         """ 
         pass
-        
+
     def enterEvent(self, event):
         """ If autohideButtonFlag is set this function makes the button visible. See setAutohideButton(). 
         """
         if self.autohideButtonFlag and self.hasButton() and not self._readOnly:
             self._button.show()
-            
+
     def leaveEvent(self, event):
         """ If autohideButtonFlag is set this function makes the button invisible. See setAutohideButton(). 
         """
@@ -777,7 +778,7 @@ class TextEditWithButtonProperty(Property, QWidget):
         # set property only if button is not being pressed
         if not self.button() or not self.button().isDown():
             Property.valueChanged(self)
-        
+
     def setHighlighted(self,highlight):
         """ Highlight the property by changing the background color of the textfield.
         """
@@ -788,7 +789,7 @@ class TextEditWithButtonProperty(Property, QWidget):
             p.setColor(QPalette.Active, QPalette.ColorRole(9),Qt.white)
         self._lineEdit.setPalette(p)
         self._textEdit.viewport().setPalette(p)
-    
+
     def keyPressEvent(self,event):
         """ Switch back to the original value on ESC.
         """
@@ -799,15 +800,15 @@ class TextEditWithButtonProperty(Property, QWidget):
 
 class StringProperty(TextEditWithButtonProperty):
     """ Property which holds an editable text.
-    
+
     A button is provided to switch between single and multi line mode. 
     """
-    
+
     BUTTON_LABEL = 'v'
     USER_INFO = "Text field"
-    
+
     AUTHIDE_BUTTON = False
-    
+
     def __init__(self, name, value, categoryName=None, multiline=None):
         """ Constructor """
         TextEditWithButtonProperty.__init__(self, name, value, categoryName, (multiline or str(value).count("\n")>0))
@@ -830,15 +831,15 @@ class StringProperty(TextEditWithButtonProperty):
             self.setValue(textEdit)
             self.valueChanged()
 
-        
+
 class IntegerProperty(Property,QWidget):
     """ Property which hold editable integer numbers.
-    
+
     A Spinbox is provided when the property is editable.
     """
-    
+
     USER_INFO = "Integer field"
-    
+
     def __init__(self, name, value, categoryName=None):
         """ Constructor
         """
@@ -847,7 +848,7 @@ class IntegerProperty(Property,QWidget):
         self.setLayout(QHBoxLayout())
         self.layout().setSpacing(0)
         self.layout().setContentsMargins(0, 0, 0, 0)
-        
+
         self._spinbox=QSpinBox()
         #self.maxint = sys.maxint     # does not work on Mac OS X (Snow Leopard 10.6.2), confusion between 32 and 64 bit limits
         self.maxint = 2**31
@@ -864,7 +865,7 @@ class IntegerProperty(Property,QWidget):
 
         self.setValue(value)
         self.connect(self._spinbox, SIGNAL('valueChanged(int)'), self.valueChanged)
-        
+
     def setReadOnly(self, readOnly):
         """ Switches between lineedit and spinbox.
         """
@@ -876,35 +877,35 @@ class IntegerProperty(Property,QWidget):
             self._spinbox.show()
             self._lineedit.hide()
             self.setFocusProxy(self._spinbox)
-        
+
     def value(self):
         """ Returns integer value.
         """
         return self._spinbox.value()
-    
+
     def setValue(self,value):
         self.disconnect(self._spinbox, SIGNAL('valueChanged(int)'), self.valueChanged)
         self._spinbox.setValue(value % self.maxint)
         self.connect(self._spinbox, SIGNAL('valueChanged(int)'), self.valueChanged)
         self._lineedit.setText(str(value))
-    
+
 class DoubleProperty(TextEditWithButtonProperty):
     """ TextEditWithButtonProperty which holds float numbers.
     """
-    
+
     USER_INFO = "Double field"
-    
+
     AUTHIDE_BUTTON = False
-    
+
     def __init__(self, name, value, categoryName=None):
         """ Constructor
         """
         TextEditWithButtonProperty.__init__(self, name, value, categoryName=None)
-        
+
     def createButton(self):
         """ Do not create a button."""
         pass
-    
+
     def _toString(self, object):
         if isinstance(object, float):
             return "%.10g" % object
@@ -913,7 +914,7 @@ class DoubleProperty(TextEditWithButtonProperty):
 
     def setValue(self, value):
         TextEditWithButtonProperty.setValue(self, self._toString(value))
-            
+
     def value(self):
         """ Transform text to float and return.
         """
@@ -924,20 +925,20 @@ class DoubleProperty(TextEditWithButtonProperty):
                 return float.fromhex(TextEditWithButtonProperty.value(self))
             except:
                 return ValueError("Entered value is not of type double.")
-    
+
 class FileProperty(TextEditWithButtonProperty):
     """ TextEditWithButtonProperty which holds file names.
-    
+
     A button for opening a dialog allowing to choose a file is provided.
     """
-    
+
     USER_INFO = "Select a file. Double click on label to open file."
     BUTTON_LABEL = '...'
-    
+
     def __init__(self, name, value, categoryName=None):
         TextEditWithButtonProperty.__init__(self, name, value, categoryName)
         self.button().setToolTip(self.userInfo())
-        
+
     def buttonClicked(self, checked=False):
         """ Shows the file selection dialog. """
         if self.value()!="":
@@ -961,7 +962,7 @@ class FileProperty(TextEditWithButtonProperty):
                     filename=filename[len(self._relativePath):].lstrip("/")
             self.setValue(filename)
             self.textEdit().emit(SIGNAL('editingFinished()'))
-            
+
     def labelDoubleClicked(self):
         """ Open selected file in default application.
         """
@@ -974,17 +975,17 @@ class FileProperty(TextEditWithButtonProperty):
 
 class FileVectorProperty(TextEditWithButtonProperty):
     """ TextEditWithButtonProperty which holds file names.
-    
+
     A button for opening a dialog allowing to choose a list of files is provided.
     """
-    
+
     USER_INFO = "Edit list of files."
     BUTTON_LABEL = '...'
-    
+
     def __init__(self, name, value, categoryName=None):
         TextEditWithButtonProperty.__init__(self, name, value, categoryName)
         self.button().setToolTip(self.userInfo())
-        
+
     def buttonClicked(self, checked=False):
         """ Shows the file selection dialog. """
         if type(self._originalValue)==type(()) and len(self._originalValue)>0:

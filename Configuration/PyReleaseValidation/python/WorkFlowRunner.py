@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 from threading import Thread
 
@@ -20,7 +21,7 @@ class WorkFlowRunner(Thread):
         self.cafVeto=cafVeto
         self.dasOptions=dasOptions
         self.jobReport=jobReport
-        
+
         self.wfDir=str(self.wf.numId)+'_'+self.wf.nameId
         return
 
@@ -30,21 +31,21 @@ class WorkFlowRunner(Thread):
         if self.dryRun: msg += " dryRun for '"
         else:      msg += " going to execute "
         msg += cmd.replace(';','\n')
-        print msg
+        print(msg)
 
         cmdLog = open(self.wfDir+'/cmdLog','a')
         cmdLog.write(msg+'\n')
         cmdLog.close()
-        
+
         ret = 0
         if not self.dryRun:
             p = Popen(cmd, shell=True)
             ret = os.waitpid(p.pid, 0)[1]
             if ret != 0:
-                print "ERROR executing ",cmd,'ret=', ret
+                print("ERROR executing ",cmd,'ret=', ret)
 
         return ret
-    
+
     def run(self):
 
         startDir = os.getcwd()
@@ -52,12 +53,12 @@ class WorkFlowRunner(Thread):
         if not os.path.exists(self.wfDir):
             os.makedirs(self.wfDir)
         elif not self.dryRun: # clean up to allow re-running in the same overall devel area, then recreate the dir to make sure it exists
-            print "cleaning up ", self.wfDir, ' in ', os.getcwd()
+            print("cleaning up ", self.wfDir, ' in ', os.getcwd())
             shutil.rmtree(self.wfDir) 
             os.makedirs(self.wfDir)
 
         preamble = 'cd '+self.wfDir+'; '
-       
+
         startime='date %s' %time.asctime()
 
         # check where we are running:
@@ -89,7 +90,7 @@ class WorkFlowRunner(Thread):
                 continue
             if not isinstance(com,str):
                 if self.cafVeto and (com.location == 'CAF' and not onCAF):
-                    print "You need to be no CAF to run",self.wf.numId
+                    print("You need to be no CAF to run",self.wf.numId)
                     self.npass.append(0)
                     self.nfail.append(0)
                     self.retStep.append(0)
@@ -107,7 +108,7 @@ class WorkFlowRunner(Thread):
                 retStep = self.doCmd(cmd)
                 #don't use the file list executed, but use the das command of cmsDriver for next step
                 inFile='filelist:step%d_dasquery.log'%(istep,)
-                print "---"
+                print("---")
             else:
                 #chaining IO , which should be done in WF object already and not using stepX.root but <stepName>.root
                 cmd += com
@@ -128,12 +129,12 @@ class WorkFlowRunner(Thread):
                     if not '--fileout' in com:
                         cmd+=' --fileout file:step%s.root '%(istep,)
                 if self.jobReport:
-                  cmd += ' --suffix "-j JobReport%s.xml " ' % istep
+                    cmd += ' --suffix "-j JobReport%s.xml " ' % istep
                 cmd+=closeCmd(istep,self.wf.nameId)            
                 retStep = self.doCmd(cmd)
 
 
-            
+
             self.retStep.append(retStep)
             if (retStep!=0):
                 #error occured
@@ -153,7 +154,7 @@ class WorkFlowRunner(Thread):
 
         endtime='date %s' %time.asctime()
         tottime='%s-%s'%(endtime,startime)
-        
+
 
         #### wrap up ####
 

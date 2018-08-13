@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 
+from __future__ import print_function
 import shutil, sys, os, re, valtools, string
 
 from string import Template
@@ -12,16 +13,16 @@ from subprocess import Popen,PIPE
 def processBenchmark( path, outputRootFile ):
     (release, bname, extension ) = valtools.decodePath( path )
     if bname != webpage.benchmarkName_:
-        print "sorry, you have to go to the",bname,"directory to produce this comparison. Note that you cannot compare different benchmarks."
+        print("sorry, you have to go to the",bname,"directory to produce this comparison. Note that you cannot compare different benchmarks.")
         sys.exit(4)
     benchmark = valtools.benchmark( extension )
     benchmark.release_ = release
-    print benchmark.benchmarkUrl( website ) 
+    print(benchmark.benchmarkUrl( website )) 
     root = benchmark.rootFileOnWebSite( website )
     shutil.copy(root, outputRootFile)
-    print 'retrieved ', root
+    print('retrieved ', root)
     return benchmark
-    
+
 
 webpage = valtools.webpage()
 webpage.parser_.usage = "example: %prog CMSSW_3_1_0_pre7/TauBenchmarkGeneric_ZTT_FastSim_IDEAL CMSSW_3_1_0_pre7/TauBenchmarkGeneric_TEST\nThe list of benchmarks can be obtained using the listBenchmarks.py command."
@@ -49,10 +50,10 @@ templateFile = 'indexCompare.html'
 indexhtml = "%s/%s" % (webpage.templates_,templateFile)
 
 # setting up benchmarks
-print 
+print() 
 benchmark1 = processBenchmark( webpage.args_[0],
                                'benchmark_0.root' )
-print
+print()
 benchmark2 = processBenchmark( webpage.args_[1],
                                'benchmark_1.root' )
 
@@ -123,4 +124,4 @@ if (webpage.options_.submit == True):
     benchmark1.addLinkToComparison( website, comparison )
     benchmark2.addLinkToComparison( website, comparison )
 
-    
+

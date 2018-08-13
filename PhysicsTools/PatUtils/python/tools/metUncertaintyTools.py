@@ -20,20 +20,20 @@ class RunMEtUncertainties(ConfigToolBase):
     def __init__(self):
         ConfigToolBase.__init__(self)
         self.addParameter(self._defaultParameters, 'electronCollection', cms.InputTag('selectedPatElectrons'),
-	                  "Input electron collection", Type=cms.InputTag, acceptNoneValue=True)
-	self.addParameter(self._defaultParameters, 'photonCollection', None, # CV: set to empty InputTag to avoid double-counting wrt. selectedPatElectrons collection
-	                  "Input photon collection", Type=cms.InputTag, acceptNoneValue=True)
-	self.addParameter(self._defaultParameters, 'muonCollection', cms.InputTag('selectedPatMuons'),
+                          "Input electron collection", Type=cms.InputTag, acceptNoneValue=True)
+        self.addParameter(self._defaultParameters, 'photonCollection', None, # CV: set to empty InputTag to avoid double-counting wrt. selectedPatElectrons collection
+                          "Input photon collection", Type=cms.InputTag, acceptNoneValue=True)
+        self.addParameter(self._defaultParameters, 'muonCollection', cms.InputTag('selectedPatMuons'),
                           "Input muon collection", Type=cms.InputTag, acceptNoneValue=True)
-	self.addParameter(self._defaultParameters, 'tauCollection', cms.InputTag('selectedPatTaus'),
+        self.addParameter(self._defaultParameters, 'tauCollection', cms.InputTag('selectedPatTaus'),
                           "Input tau collection", Type=cms.InputTag, acceptNoneValue=True)
-	self.addParameter(self._defaultParameters, 'jetCollection', cms.InputTag('selectedPatJets'),
+        self.addParameter(self._defaultParameters, 'jetCollection', cms.InputTag('selectedPatJets'),
                           "Input jet collection", Type=cms.InputTag)
-	self.addParameter(self._defaultParameters, 'dRjetCleaning', 0.5,
+        self.addParameter(self._defaultParameters, 'dRjetCleaning', 0.5,
                           "Eta-phi distance for extra jet cleaning", Type=float)
         self.addParameter(self._defaultParameters, 'jetCorrLabel', "L3Absolute",
                           "NOTE: use 'L3Absolute' for MC/'L2L3Residual' for Data", Type=str)
-	self.addParameter(self._defaultParameters, 'doSmearJets', True,
+        self.addParameter(self._defaultParameters, 'doSmearJets', True,
                           "Flag to enable/disable jet smearing to better match MC to Data", Type=bool)
         self.addParameter(self._defaultParameters, 'makeType1corrPFMEt', True,
                           "Flag to enable/disable sequence for Type 1 corrected PFMEt", Type=bool)
@@ -49,15 +49,15 @@ class RunMEtUncertainties(ConfigToolBase):
                           "MET sys. shift correction parameters", Type=cms.PSet)
         self.addParameter(self._defaultParameters, 'doApplySysShiftCorr', False,
                           "Flag to enable/disable usage of MET sys. shift corrections", Type=bool)
-	self.addParameter(self._defaultParameters, 'jetSmearFileName', 'PhysicsTools/PatUtils/data/pfJetResolutionMCtoDataCorrLUT.root',
+        self.addParameter(self._defaultParameters, 'jetSmearFileName', 'PhysicsTools/PatUtils/data/pfJetResolutionMCtoDataCorrLUT.root',
                           "Name of ROOT file containing histogram with jet smearing factors", Type=str)
         self.addParameter(self._defaultParameters, 'jetSmearHistogram', 'pfJetResolutionMCtoDataCorrLUT',
                           "Name of histogram with jet smearing factors", Type=str)
-	self.addParameter(self._defaultParameters, 'pfCandCollection', cms.InputTag('particleFlow'),
+        self.addParameter(self._defaultParameters, 'pfCandCollection', cms.InputTag('particleFlow'),
                           "Input PFCandidate collection", Type=cms.InputTag)
-	self.addParameter(self._defaultParameters, 'jetCorrPayloadName', 'AK5PF',
+        self.addParameter(self._defaultParameters, 'jetCorrPayloadName', 'AK5PF',
                           "Use AK5PF for PFJets, AK5Calo for CaloJets", Type=str)
-	self.addParameter(self._defaultParameters, 'varyByNsigmas', 1.0,
+        self.addParameter(self._defaultParameters, 'varyByNsigmas', 1.0,
                           "Number of standard deviations by which energies are varied", Type=float)
         self.addParameter(self._defaultParameters, 'addToPatDefaultSequence', True,
                           "Flag to enable/disable that metUncertaintySequence is inserted into patDefaultSequence", Type=bool)

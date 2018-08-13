@@ -16,39 +16,39 @@ def ne(self,other):
     return id(self)!=id(other)
 # PhysicsTools.PythonAnalysis.cmstools
 def all(container):
-  # loop over ROOT::TTree and similar
-  if hasattr(container,'GetEntries'):
-    try:
-      entries = container.GetEntries()
-      for entry in xrange(entries):
-        yield entry
-    except:
-        raise cmserror("Looping of %s failed" %container) 
-  # loop over std::vectors and similar
-  elif hasattr(container, 'size'):
-    # convert std::map to std::vector<std::pair>
-    if hasattr(container, 'ids'):
-      container = container.ids()
-    try:
-      entries = container.size()
-      for entry in xrange(entries):
-        yield container[entry]
-    except:
-      pass
-  # loop over c buffer
-  #elif hasattr(container,'begin') and hasattr(container,'end'):
-  #    begin=container.begin()
-  #    end=container.end()
-  #    while (begin!=end):
-  #        yield begin.__deref__()
-  #        begin.__preinc__()
+    # loop over ROOT::TTree and similar
+    if hasattr(container,'GetEntries'):
+        try:
+            entries = container.GetEntries()
+            for entry in xrange(entries):
+                yield entry
+        except:
+            raise cmserror("Looping of %s failed" %container) 
+    # loop over std::vectors and similar
+    elif hasattr(container, 'size'):
+        # convert std::map to std::vector<std::pair>
+        if hasattr(container, 'ids'):
+            container = container.ids()
+        try:
+            entries = container.size()
+            for entry in xrange(entries):
+                yield container[entry]
+        except:
+            pass
+    # loop over c buffer
+    #elif hasattr(container,'begin') and hasattr(container,'end'):
+    #    begin=container.begin()
+    #    end=container.end()
+    #    while (begin!=end):
+    #        yield begin.__deref__()
+    #        begin.__preinc__()
 
 class BranchDummy(object):
     def __init__(self,branchtuple):
         self.branchtuple=branchtuple
 
 class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAccessor, EventFileAccessor):
- 
+
     def __init__(self):
         logging.debug(__name__ + ": __init__")
 
@@ -59,7 +59,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         self._edmMotherRelations={}
         self._edmDaughterRelations={}
         self._edmChildrenObjects={}
-        
+
         self._eventIndex = 0
         self._numEvents = 0
 
@@ -72,7 +72,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         self._filterBranches=True
         self.maxLevels=2
         self.maxDaughters=1000
-        
+
     def isRead(self,object,levels=1):
         if not id(object) in self._edmChildrenObjects.keys():
             return False
@@ -138,7 +138,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
     def getShortType(self,object):
         typ=self.getType(object).split("<")[0].strip(" ")
         return typ
-    
+
     def getBranch(self,object):
         entry=object
         while id(entry) in self._edmParent.keys() and self._edmParent[id(entry)]!=None:
@@ -161,7 +161,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
             if not attr.startswith("__") and (self._underscore or attr.strip("_")==attr):
                 objects+=[(attr,prop)]
         return objects
-    
+
     def getObjectRef(self,object):
         """ get object and resolve references """
         typshort=self.getShortType(object)
@@ -360,13 +360,13 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
                     if not str(objectproperties[property][0]).startswith("ERROR"):
                         properties+=[(objectproperties[property][1],property,objectproperties[property][0])]
                         del objectproperties[property]
-            
+
         if len(objectproperties.keys())>0:
             properties+=[("Category","Errors","")]
             for property in objectproperties_sorted:
                 if property in objectproperties.keys():
                     properties+=[(objectproperties[property][1],property,objectproperties[property][0])]
-                
+
         return tuple(properties)
 
     def readObjectsRecursive(self,mother,label,edmobject,levels=1):
@@ -484,7 +484,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         if self._filterBranches and self._events:
             self.setFilterBranches(True)
         return True
-    
+
     def eventNumber(self):
         return self._eventIndex+1
 
@@ -529,7 +529,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         if charge==None:
             charge=0
         return charge
-        
+
     def isQuark(self, object):
         particleId = self.particleId(object)
         if not particleId:
@@ -561,7 +561,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         if not hasattr(defaultParticleDataList,"isPhotonId"):
             return False
         return defaultParticleDataList.isPhotonId(particleId)
-    
+
     def isHiggs(self, object):
         particleId = self.particleId(object)
         if not particleId:
@@ -569,7 +569,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         if not hasattr(defaultParticleDataList,"isHiggsId"):
             return False
         return defaultParticleDataList.isHiggsId(particleId)
-    
+
     def lineStyle(self, object):
         particleId = self.particleId(object)
         if hasattr(defaultParticleDataList,"isPhotonId") and defaultParticleDataList.isPhotonId(particleId):
@@ -579,7 +579,7 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         elif defaultParticleDataList.isBosonId(particleId):
             return self.LINE_STYLE_DASH
         return self.LINE_STYLE_SOLID
-    
+
     def color(self, object):
         particleId = self.particleId(object)
         if defaultParticleDataList.isLeptonId(particleId):
@@ -591,28 +591,28 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
         elif defaultParticleDataList.isBosonId(particleId):
             return QColor(253, 74, 74)
         return QColor(176, 179, 177)
-    
+
     def charge(self, object):
         charge=self.property(object,"charge")
         if charge==None:
             charge=0
         return charge
-    
+
     def linkMother(self, object, mother):
         pass
-        
+
     def linkDaughter(self, object, daughter):
         pass
 
     def underscoreProperties(self):
         return self._underscore
-    
+
     def setUnderscoreProperties(self,check):
         self._underscore=check
-    
+
     def filterBranches(self):
         return self._filterBranches
-    
+
     def setFilterBranches(self,check):
         if not self._events:
             return True
@@ -632,4 +632,4 @@ class EdmDataAccessor(BasicDataAccessor, RelativeDataAccessor, ParticleDataAcces
 
     def filteredBranches(self):
         return self._filteredBranches
-    
+

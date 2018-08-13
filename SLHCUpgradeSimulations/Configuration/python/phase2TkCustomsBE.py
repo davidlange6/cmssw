@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 #GEN-SIM so far...
 def customise(process):
@@ -11,8 +12,8 @@ def customise(process):
             if hasattr(process.mix,'input'):
                 n=process.mix.input.nbPileupEvents.averageNumber.value()
         else:
-            print 'phase1TkCustoms requires a --pileup option to cmsDriver to run the reconstruction/dqm'
-            print 'Please provide one!'
+            print('phase1TkCustoms requires a --pileup option to cmsDriver to run the reconstruction/dqm')
+            print('Please provide one!')
             sys.exit(1)
     if hasattr(process,'reconstruction'):
         process=customise_Reco(process,float(n))
@@ -25,7 +26,7 @@ def customise(process):
     if hasattr(process,'validation_step'):
         process=customise_Validation(process)
     process=customise_condOverRides(process)
-    
+
     return process
 
 def customise_Digi(process):
@@ -80,7 +81,7 @@ def customise_Reco(process,pileup):
     process.load("RecoTracker.IterativeTracking.HighPtTripletStep_cff")
     from RecoTracker.IterativeTracking.HighPtTripletStep_cff import HighPtTripletStep
     process.iterTracking = cms.Sequence(process.InitialStep*
-			    process.HighPtTripletStep*
+                            process.HighPtTripletStep*
                             process.LowPtTripletStep*
                             process.PixelPairStep*
                             process.DetachedTripletStep*
@@ -125,13 +126,13 @@ def customise_Reco(process,pileup):
         'BPix2+FPix1_pos+FPix2_pos', 
         'BPix2+FPix1_neg+FPix2_neg')
     process.convLayerPairs.layerList = cms.vstring('BPix1+BPix2', 
-    	'BPix2+BPix3', 
-    	'BPix2+FPix1_pos', 
-    	'BPix2+FPix1_neg', 
-    	'BPix2+FPix2_pos', 
-    	'BPix2+FPix2_neg', 
-    	'FPix1_pos+FPix2_pos', 
-    	'FPix1_neg+FPix2_neg')
+        'BPix2+BPix3', 
+        'BPix2+FPix1_pos', 
+        'BPix2+FPix1_neg', 
+        'BPix2+FPix2_pos', 
+        'BPix2+FPix2_neg', 
+        'FPix1_pos+FPix2_pos', 
+        'FPix1_neg+FPix2_neg')
 
     process.earlyGeneralTracks.setsToMerge = cms.VPSet( cms.PSet( tLists=cms.vint32(0,1,2,3,4), pQual=cms.bool(True) ))
     process.earlyGeneralTracks.hasSelector=cms.vint32(1,1,1,1,1)
@@ -182,7 +183,7 @@ def customise_Reco(process,pileup):
         ttrhBuilderLabel = cms.string('PixelTTRHBuilderWithoutAngle')
         )
     process.initialStepSeedClusterMask.oldClusterRemovalInfo=cms.InputTag("mixedTripletStepClusters")
-    
+
     # Need this line to stop error about missing siPixelDigis.
     process.MeasurementTracker.inactivePixelDetectorLabels = cms.VInputTag()
     process.load("SLHCUpgradeSimulations.Geometry.recoFromSimDigis_cff")
@@ -267,7 +268,7 @@ def customise_DQM(process,pileup):
 #    process.dqmoffline_step.remove(process.TrackMonStep4)
 #    process.dqmoffline_step.remove(process.TrackMonStep5)
 #    process.dqmoffline_step.remove(process.TrackMonStep6)
-    			    #The following two steps were removed
+                            #The following two steps were removed
                             #process.PixelLessStep*
                             #process.TobTecStep*
     process.dqmoffline_step.remove(process.muonAnalyzer)
@@ -283,10 +284,10 @@ def customise_DQM(process,pileup):
     process.SiPixelRecHitSource.isUpgrade = cms.untracked.bool(True)
     process.SiPixelTrackResidualSource.isUpgrade = cms.untracked.bool(True)
     process.SiPixelHitEfficiencySource.isUpgrade = cms.untracked.bool(True)
-    
+
     from DQM.TrackingMonitor.customizeTrackingMonitorSeedNumber import customise_trackMon_IterativeTracking_PHASE1PU140
     from DQM.TrackingMonitor.customizeTrackingMonitorSeedNumber import customise_trackMon_IterativeTracking_PHASE1PU70
-    
+
     if pileup>100:
         process=customise_trackMon_IterativeTracking_PHASE1PU140(process)
     else:

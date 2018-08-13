@@ -1,3 +1,4 @@
+from __future__ import print_function
 import coral
 import DBImpl
 class IdGenerator(object):
@@ -89,18 +90,18 @@ if __name__ == "__main__":
         transaction.commit()
         transaction.start(True)
         result=generator.getNewID(idtableName)
-        print 'new id ',result
+        print('new id ',result)
         transaction.commit()
         transaction.start(False)
         generator.incrementNextID(idtableName)
-        print 'new id ',generator.getNewID(idtableName)
+        print('new id ',generator.getNewID(idtableName))
         transaction.commit()
         del session
     except coral.Exception, e:
         transaction.rollback()
-        print str(e)
+        print(str(e))
         del session
     except Exception, e:
-        print "Failed in unit test"
-        print str(e)
+        print("Failed in unit test")
+        print(str(e))
         del session

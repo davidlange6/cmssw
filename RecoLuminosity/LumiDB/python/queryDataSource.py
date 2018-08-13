@@ -1,3 +1,4 @@
+from __future__ import print_function
 import array,coral
 from RecoLuminosity.LumiDB import CommonUtil,nameDealer
 
@@ -15,14 +16,14 @@ def uncalibrateLumi(runnumber,instlumi,instlumierror):
     if runnumber >=150431 and runnumber<=153368 :#7TeV HI runs
         return (float(instlumi)/normhi7tev,float(instlumierror)/normhi7tev)
     return (float(instlumi)/normpp7tev,float(instlumierror)/normpp7tev)
-    
+
 def uncalibratedlumiFromOldLumi(session,runnumber):
     '''
     retrieve old lumi value, divide by norm and restore to raw value
     select lumilsnum,cmslsnum,instlumi,instlumierror,instlumiquality,startorbit,numorbit,beamenergy,beamstatus,cmsbxindexblob,beamintensityblob_1,beamintensityblob_2 from lumisummary where runnum=:runnumber order by lumilsnum
-    
+
     select s.lumilsnum,d.bxlumivalue,d.bxlumierror,d.bxlumiquality from lumidetail d,lumisummary s where d.lumisummary_id=s.lumisummary_id and s.runnum=:runnumber and d.algoname=:algoname order by s.lumilsnum
-    
+
     output: {lumilsnum:[cmslsnum,uncalibratedinstlumi,uncalibratedinstlumierror,instlumiquality,beamstatus,beamenergy,numorbit,startorbit,cmsbxindexblob,beamintensityblob_1,beamintensityblob_2,bxlumivalue_occ1,bxlumierror_occ1,,bxlumiquality_occ1,bxlumivalue_occ2,bxlumierror_occ2,bxlumiquality_occ2,bxlumivalue_et,bxlumierror_et,bxlumiquality_et]}]}
     dict size ~ 200mb for 1000LS
     '''
@@ -325,7 +326,7 @@ def trgFromOldGT(session,runnumber):
     6. select prescale_factor_algo_000,algo.prescale_factor_algo_001..._127 from cms_gt.gt_run_presc_algo_view where prescale_index=:prescale_index and runnr=:runnumber;
     7. select prescale_factor_tt_000,tech.prescale_factor_tt_001..._63 from cms_gt.gt_run_presc_tech_view where prescale_index=:prescale_index and runnr=:runnumber;
     8. select lumi_section,prescale_index from cms_gt_mon.lumi_sections where run_number=:runnumber order by lumi_section
-    
+
     '''
     result=[]
     deadtimeresult={}#{cmslsnum:deadtime}
@@ -367,8 +368,8 @@ def trgFromOldGT(session,runnumber):
             s+=1
             lsnr=row['lsnr'].data()
             while s!=lsnr:
-                print 'DEADTIME alert: found hole in LS range'
-                print '         fill deadtimebeamactive 0 for LS '+str(s)
+                print('DEADTIME alert: found hole in LS range')
+                print('         fill deadtimebeamactive 0 for LS '+str(s))
                 deadtimeresult[s]=0
                 s+=1
             count=row['counts'].data()
@@ -400,7 +401,7 @@ def trgFromOldGT(session,runnumber):
         algoviewQuery.addToOrderList('lsnr')
         algoviewQuery.addToOrderList('algobit')
         algoviewQuery.defineOutput(algoOutput)
-      
+
         algocursor=algoviewQuery.execute()
         s=0
         while algocursor.next():
@@ -414,8 +415,8 @@ def trgFromOldGT(session,runnumber):
             if algobit==NAlgoBit-1:
                 s+=1
                 while s!=lsnr:
-                    print 'ALGO COUNT alert: found hole in LS range'
-                    print '     fill all algocount 0 for LS '+str(s)
+                    print('ALGO COUNT alert: found hole in LS range')
+                    print('     fill all algocount 0 for LS '+str(s))
                     tmpzero=[0]*NAlgoBit
                     algocount[s]=tmpzero
                     s+=1
@@ -427,7 +428,7 @@ def trgFromOldGT(session,runnumber):
             session.transaction().commit()
             raise 'requested run '+str(runnumber+' does not exist for algocounts ')
         del algoviewQuery
-                
+
         mybitcount_tech=[]
         techviewQuery=gtmonschema.newQuery()
         techviewQuery.addToTableList('GT_MON_TRIG_TECH_VIEW')
@@ -448,7 +449,7 @@ def trgFromOldGT(session,runnumber):
         techviewQuery.addToOrderList('lsnr')
         techviewQuery.addToOrderList('techbit')
         techviewQuery.defineOutput(techOutput)
-      
+
         techcursor=techviewQuery.execute()
         s=0
         while techcursor.next():
@@ -460,8 +461,8 @@ def trgFromOldGT(session,runnumber):
             if techbit==NTechBit-1:
                 s+=1
                 while s!=lsnr:
-                    print 'TECH COUNT alert: found hole in LS range'
-                    print '     fill all techcount 0 for LS '+str(s)
+                    print('TECH COUNT alert: found hole in LS range')
+                    print('     fill all techcount 0 for LS '+str(s))
                     tmpzero=[0]*NTechBit
                     techcount[s]=tmpzero
                     s+=1
@@ -536,7 +537,7 @@ def trgFromOldGT(session,runnumber):
         # reprocess Tech name 
         #
         for techidx in range(NTechBit):
-             bitnames.append(str(techidx))
+            bitnames.append(str(techidx))
         bitnameclob=','.join(bitnames)     
         #
         # select distinct(prescale_index) from cms_gt_mon.lumi_sections where run_number=:runnumber;
@@ -544,7 +545,7 @@ def trgFromOldGT(session,runnumber):
         prescaleidx=[]
         presidxQuery=gtmonschema.newQuery()
         presidxQuery.addToTableList('LUMI_SECTIONS')
-        
+
         presidxBindVariable=coral.AttributeList()
         presidxBindVariable.extend('runnumber','int')
         presidxBindVariable['runnumber'].setData(int(runnumber))
@@ -623,7 +624,7 @@ def trgFromOldGT(session,runnumber):
         #
         lumiprescQuery=gtmonschema.newQuery()
         lumiprescQuery.addToTableList('LUMI_SECTIONS')
-        
+
         lumiprescBindVariable=coral.AttributeList()
         lumiprescBindVariable.extend('runnumber','int')
         lumiprescBindVariable['runnumber'].setData(int(runnumber))
@@ -670,7 +671,7 @@ def trgFromOldGT(session,runnumber):
         session.transaction().rollback()
         del session
         raise
-    
+
 def hltFromRuninfoV2(session,runnumber):
     '''
     input:
@@ -701,8 +702,8 @@ def hltFromRuninfoV2(session,runnumber):
             npath=c.currentRow()['npath'].data()
         del q1
         if npath==0:
-            print 'request run is empty, do nothing'
-            
+            print('request run is empty, do nothing')
+
         q=hltschema.newQuery()
         bindVar=coral.AttributeList()
         bindVar.extend('runnumber','unsigned int')
@@ -786,7 +787,7 @@ def hltconf(session,hltkey):
 
         hltconfQuery.addToOutputList('PATHS.NAME','hltpath')
         hltconfQuery.addToOutputList('STRINGPARAMVALUES.VALUE','l1expression')
-                
+
         hltconfQuery.addToTableList('PATHS')
         hltconfQuery.addToTableList('STRINGPARAMVALUES')
         hltconfQuery.addToTableList('PARAMETERS')
@@ -809,7 +810,7 @@ def hltconf(session,hltkey):
         cursor=hltconfQuery.execute()
         while cursor.next():
             hltpath=cursor.currentRow()['hltpath'].data()
-            print hltpath
+            print(hltpath)
             l1expression=cursor.currentRow()['l1expression'].data()
             hlt2l1map[hltpath]=l1expression
         del hltconfQuery
@@ -823,7 +824,7 @@ def runsummary(session,schemaname,runnumber,complementalOnly=False):
     x select string_value from cms_runinfo.runsession_parameter where runnumber=:runnumber and name='CMS.TRG:TSC_KEY';
     x select distinct(string_value) from cms_runinfo.runsession_parameter where runnumber=:runnumber and name='CMS.SCAL:AMODEtag'
     x select distinct(string_value),session_id from cms_runinfo.runsession_parameter where runnumber=:runnumber and name='CMS.SCAL:EGEV' order by SESSION_ID
-    
+
     select string_value from cms_runinfo.runsession_parameter where runnumber=:runnumber and name='CMS.LVL0:SEQ_NAME'
     select string_value from cms_runinfo.runsession_parameter where runnumber=:runnumber and name='CMS.LVL0:HLT_KEY_DESCRIPTION';
     select string_value from cms_runinfo.runsession_parameter where runnumber=:runnumber and name='CMS.SCAL:FILLN' and rownum<=1;
@@ -864,7 +865,7 @@ def runsummary(session,schemaname,runnumber,complementalOnly=False):
             l1key=cursor.currentRow()['l1key'].data()
         del l1keyQuery
         result.append(l1key)
-        
+
         amodetagQuery=runinfoschema.newQuery()
         amodetagQuery.addToTableList('RUNSESSION_PARAMETER')
         amodetagOutput=coral.AttributeList()
@@ -883,7 +884,7 @@ def runsummary(session,schemaname,runnumber,complementalOnly=False):
             amodetag=cursor.currentRow()['amodetag'].data()
         del amodetagQuery
         result.append(amodetag)
-        
+
         egevQuery=runinfoschema.newQuery()
         egevQuery.addToTableList('RUNSESSION_PARAMETER')
         egevOutput=coral.AttributeList()
@@ -903,7 +904,7 @@ def runsummary(session,schemaname,runnumber,complementalOnly=False):
             egev=cursor.currentRow()['egev'].data()
         del egevQuery
         result.append(egev)
-        
+
         if not complementalOnly:
             seqQuery=runinfoschema.newQuery()
             seqQuery.addToTableList('RUNSESSION_PARAMETER')
@@ -1002,7 +1003,7 @@ def runsummary(session,schemaname,runnumber,complementalOnly=False):
         return result
     except:
         raise
-    
+
 if __name__ == "__main__":
     from RecoLuminosity.LumiDB import sessionManager
     #svc=sessionManager.sessionManager('oracle://cms_orcoff_prep/cms_lumi_dev_offline',authpath='/afs/cern.ch/user/x/xiezhen',debugON=False)
@@ -1022,5 +1023,5 @@ if __name__ == "__main__":
     #print hltFromRuninfoV2(session,135735)
     svc=sessionManager.sessionManager('oracle://cms_orcoff_prod/cms_lumi_prod',authpath='/afs/cern.ch/user/x/xiezhen',debugON=False)
     session=svc.openSession(isReadOnly=True,cpp2sqltype=[('unsigned int','NUMBER(10)'),('unsigned long long','NUMBER(20)')])
-    print uncalibratedlumiFromOldLumi(session,135735)
+    print(uncalibratedlumiFromOldLumi(session,135735))
     del session

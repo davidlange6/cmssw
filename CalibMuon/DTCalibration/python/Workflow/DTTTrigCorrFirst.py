@@ -1,3 +1,4 @@
+from __future__ import print_function
 from tools import loadCmsProcess,writeCfg
 from CmsswTask import *
 import os
@@ -31,7 +32,7 @@ class DTTTrigCorrFirst:
         ttrig_second = self.result_dir + '/' + 'ttrig_second_' + str(self.runnumber)
         ttrig_second_db = os.path.abspath(ttrig_second + '.db')
         ttrig_second_txt = os.path.abspath(ttrig_second + '.txt')
- 
+
         self.process = {}
         self.process['DTTTrigWriter_cfg.py'] = loadCmsProcess(self.pset_templates['DTTTrigWriter_cfg.py'])
         self.process['DTTTrigWriter_cfg.py'].ttrigwriter.rootFileName = timeBoxes
@@ -50,11 +51,11 @@ class DTTTrigCorrFirst:
         self.process['DumpDBToFile_second_cfg.py'] = loadCmsProcess(self.pset_templates['DumpDBToFile_second_cfg.py'])
         self.process['DumpDBToFile_second_cfg.py'].calibDB.connect = 'sqlite_file:%s' % ttrig_second_db
         self.process['DumpDBToFile_second_cfg.py'].dumpToFile.outputFileName = ttrig_second_txt  
- 
+
     def writeCfg(self):
         for cfg in self.configs:
             writeCfg(self.process[cfg],self.dir,cfg)
-           
+
     def run(self):
         self.task.run()
 
@@ -65,9 +66,9 @@ if __name__ == '__main__':
     for opt in sys.argv:
         if opt[:4] == 'run=':
             run = opt[4:] 
- 
+
     if not run: raise ValueError,'Need to set run number' 
- 
+
     result_dir = 'Run%s'%run
     result_dir += '/Ttrig/Results'
     if not os.path.exists(result_dir): os.makedirs(result_dir)
@@ -81,5 +82,5 @@ if __name__ == '__main__':
     dtTtrigCorrFirst.writeCfg()  
     dtTtrigCorrFirst.run()
 
-    print "Finished processing:"
-    for pset in dtTtrigCorrFirst.configs: print "--->",pset
+    print("Finished processing:")
+    for pset in dtTtrigCorrFirst.configs: print("--->",pset)

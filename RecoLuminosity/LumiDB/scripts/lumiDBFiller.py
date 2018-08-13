@@ -1,5 +1,6 @@
 #! /usr/bin/python
 
+from __future__ import print_function
 import string, os, time,re
 import commands
 lumiauthpath=''
@@ -37,9 +38,9 @@ def getRunsToBeUploaded(connectionString, dropbox, authpath='',minrun=180250):
     rlist= eval(statusAndOutput[1])
     if rlist:
         lastAnalyzedRunNumber = rlist[-1]
-        print 'Last run in DB: ', lastAnalyzedRunNumber
+        print('Last run in DB: ', lastAnalyzedRunNumber)
     else:
-        print 'No qualified run found in DB'
+        print('No qualified run found in DB')
         lastAnalyzedRunNumber=int(minrun)
     # check if there are new runs to be uploaded
     #command = 'ls -ltr '+dropbox
@@ -51,8 +52,8 @@ def getRunsToBeUploaded(connectionString, dropbox, authpath='',minrun=180250):
     #print qualifiedfiles
     lastRaw=files[-1]
     lastRecordedRun = getRunnumberFromFileName(lastRaw)
-    print 'Last lumi file produced by HF: ', lastRaw +', Run: ', lastRecordedRun 
-	
+    print('Last lumi file produced by HF: ', lastRaw +', Run: ', lastRecordedRun) 
+
     # if yes, fill a list with the runs yet to be uploaded
     runsToBeAnalyzed = {}
     if lastRecordedRun != lastAnalyzedRunNumber:
@@ -82,14 +83,14 @@ def main():
         lumilogpath=args.logpath
     loaderconf=args.loaderconf
     runsToBeAnalyzed = getRunsToBeUploaded(args.connect,args.dropbox,lumiauthpath,minrun=args.minrun) 
-    
+
     runCounter=0
     rs=runsToBeAnalyzed.keys()
     rs.sort()
     for run in rs:
         runCounter+=1
-        if runCounter==1: print 'List of processed runs: '
-        print 'Run: ', run, ' file: ', runsToBeAnalyzed[run]
+        if runCounter==1: print('List of processed runs: ')
+        print('Run: ', run, ' file: ', runsToBeAnalyzed[run])
         logFile=open(os.path.join(lumilogpath,'loadDB_run'+run+'.log'),'w',0)
 
         # filling the DB
@@ -98,9 +99,9 @@ def main():
         logFile.write(command+'\n')
         logFile.write(statusAndOutput[1])
         if not statusAndOutput[0] == 0:
-            print 'ERROR while loading info onto DB for run ' + run
-            print statusAndOutput[1]
-            
+            print('ERROR while loading info onto DB for run ' + run)
+            print(statusAndOutput[1])
+
     #    selectstring='"{'+run+':[]}"'
     #    command = 'lumiValidate.py -c '+args.connect+' -P '+ lumiauthpath+' -runls '+selectstring+' update' 
     #    statusAndOutput = commands.getstatusoutput(command)
@@ -110,7 +111,7 @@ def main():
     #    if not statusAndOutput[0] == 0:
     #        print 'ERROR while applying validation flag to run '+ run
     #        print statusAndOutput[1]
-    if runCounter == 0: print 'No runs to be analyzed'
+    if runCounter == 0: print('No runs to be analyzed')
 
 if __name__=='__main__':
     main()

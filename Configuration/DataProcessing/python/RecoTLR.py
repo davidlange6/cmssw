@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 #gone with the fact that there is no difference between production and development sequence
@@ -50,23 +51,23 @@ def customiseCosmicDataRun2(process):
 
 ##############################################################################
 def customiseCosmicMC(process):
-    
+
     return process
-        
+
 ##############################################################################
 def customiseVALSKIM(process):
-    print "WARNING"
-    print "this method is outdated, please use RecoTLR.customisePPData"
+    print("WARNING")
+    print("this method is outdated, please use RecoTLR.customisePPData")
     process= customisePPData(process)
     return process
-                
+
 ##############################################################################
 def customiseExpress(process):
     process= customisePPData(process)
 
     import RecoVertex.BeamSpotProducer.BeamSpotOnline_cfi
     process.offlineBeamSpot = RecoVertex.BeamSpotProducer.BeamSpotOnline_cfi.onlineBeamSpotProducer.clone()
-    
+
     return process
 
 ##############################################################################
@@ -101,7 +102,7 @@ def customiseExpressHI(process):
 
     import RecoVertex.BeamSpotProducer.BeamSpotOnline_cfi
     process.offlineBeamSpot = RecoVertex.BeamSpotProducer.BeamSpotOnline_cfi.onlineBeamSpotProducer.clone()
-    
+
     return process
 
 ##############################################################################
@@ -110,7 +111,7 @@ def customisePromptHI(process):
 
     import RecoVertex.BeamSpotProducer.BeamSpotOnline_cfi
     process.offlineBeamSpot = RecoVertex.BeamSpotProducer.BeamSpotOnline_cfi.onlineBeamSpotProducer.clone()
-    
+
     return process
 
 ##############################################################################
@@ -150,8 +151,8 @@ def planBTracking(process):
                                         process.ConvStep*
                                         process.conversionStepTracks
                                         )
-    
-    
+
+
     # stuff from RecoTracker_cff
     process.newCombinedSeeds.seedCollections=cms.VInputTag(
         cms.InputTag('initialStepSeeds'),
@@ -181,5 +182,5 @@ def planBTracking(process):
     if hasattr(process,'dqmoffline_step'):
         process.dqmoffline_step.remove(process.TrackMonStep4)
         #process.dqmoffline_step.remove(process.TrackMonStep5)
-        
+
     return process

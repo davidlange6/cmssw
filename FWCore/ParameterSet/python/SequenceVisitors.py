@@ -26,7 +26,7 @@ class EndPathValidator(object):
         self.__label = "'"+label+"' "
     def enter(self,visitee):
         if isinstance(visitee,EDFilter):
-	    if (visitee.type_() in self._presetFilters):
+            if (visitee.type_() in self._presetFilters):
                 if (visitee.type_() not in self.filtersOnEndpaths):
                     self.filtersOnEndpaths.append(visitee.type_())
         if hasattr(visitee, "label_") and not isinstance(visitee,Sequence):

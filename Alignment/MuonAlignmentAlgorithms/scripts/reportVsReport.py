@@ -1,14 +1,15 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import sys, optparse
 
 copyargs = sys.argv[:]
 
 for i in range(len(copyargs)):
-  if copyargs[i] == "":             copyargs[i] = "\"\""
-  if copyargs[i].find(" ") != -1:   copyargs[i] = "\"%s\"" % copyargs[i]
+    if copyargs[i] == "":             copyargs[i] = "\"\""
+    if copyargs[i].find(" ") != -1:   copyargs[i] = "\"%s\"" % copyargs[i]
 commandline = " ".join(copyargs)
-print commandline
+print(commandline)
 
 prog = sys.argv[0]
 
@@ -49,10 +50,10 @@ parser.add_option("-w", "--which",
                    type="string",
                    default="110011",
                    dest="which")
-                   
+
 options, args = parser.parse_args(sys.argv[1:])
 
-if len(args)!=2:   print usage; sys.exit()
+if len(args)!=2:   print(usage); sys.exit()
 
 
 ### definitions of selectors:
@@ -60,12 +61,12 @@ if len(args)!=2:   print usage; sys.exit()
 def DT(dt, wheel, station, sector): return dt == "DT"
 
 def CSC(csc, endcap, station, ring, chamber): 
-  if csc != "CSC": return False
-  # skip the duplicated ME1/a
-  if station==1 and ring==4: return False
-  # skip non-instrumented ME4/2's:
-  if station==4 and ring==2 and ( (endcap==1 and (chamber<9 or chamber >13)) or endcap==2 ) : return False
-  return True
+    if csc != "CSC": return False
+    # skip the duplicated ME1/a
+    if station==1 and ring==4: return False
+    # skip non-instrumented ME4/2's:
+    if station==4 and ring==2 and ( (endcap==1 and (chamber<9 or chamber >13)) or endcap==2 ) : return False
+    return True
 
 def CSCE1(csc, endcap, station, ring, chamber): return CSC(csc, endcap, station, ring, chamber) and endcap==1
 
@@ -89,8 +90,8 @@ ry = reports
 if options.which.count('1')>4: c1 = ROOT.TCanvas("c1","c1",1000,800)
 else: c1 = ROOT.TCanvas("c1","c1",760,800)
 
-print "corrections2D(reportsX=rx, reportsY=ry, selection=%s, pre_title_x='%s', pre_title_y='%s', which='%s' )" % ( 
-      selection, options.xlabel, options.ylabel, options.which )
+print("corrections2D(reportsX=rx, reportsY=ry, selection=%s, pre_title_x='%s', pre_title_y='%s', which='%s' )" % ( 
+      selection, options.xlabel, options.ylabel, options.which ))
 eval( "corrections2D(reportsX=rx, reportsY=ry, selection=%s, pre_title_x='%s', pre_title_y='%s', which='%s', canvas=c1 )" % ( 
       selection, options.xlabel, options.ylabel, options.which) )
 

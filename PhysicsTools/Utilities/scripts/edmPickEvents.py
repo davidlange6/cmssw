@@ -5,6 +5,7 @@
 # Charles Plager     Sept  7, 2010
 # Volker Adler       Apr  16, 2014
 
+from __future__ import print_function
 import os
 import sys
 import optparse
@@ -68,7 +69,7 @@ class Event (dict):
             raise RuntimeError, "Can not parse '%s' as Event object" \
                   % line.strip()
         if not self['dataset']:
-            print "No dataset is defined for '%s'.  Aborting." % line.strip()
+            print("No dataset is defined for '%s'.  Aborting." % line.strip())
             raise RuntimeError, 'Missing dataset'
 
     def __getattr__ (self, key):
@@ -89,7 +90,7 @@ def getFileNames (event):
     jsondict = das_client.get_data('https://cmsweb.cern.ch', query, 0, 0, False)
     status = jsondict['status']
     if status != 'ok':
-        print "DAS query status: %s"%(status)
+        print("DAS query status: %s"%(status))
         return files
 
     mongo_query = jsondict['mongo_query']
@@ -236,7 +237,7 @@ https://twiki.cern.ch/twiki/bin/view/CMS/PickEvents ''')
             try:
                 event = Event (line)
             except:
-                print "Skipping '%s'." % line.strip()
+                print("Skipping '%s'." % line.strip())
                 continue
             eventList.append(event)
         source.close()
@@ -263,12 +264,12 @@ https://twiki.cern.ch/twiki/bin/view/CMS/PickEvents ''')
         target = open (crabDict['crabcfg'], 'w')
         target.write (crabTemplate % crabDict)
         target.close
-        print "Please visit CRAB twiki for instructions on how to setup environment for CRAB:\nhttps://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideCrab\n"
+        print("Please visit CRAB twiki for instructions on how to setup environment for CRAB:\nhttps://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideCrab\n")
         if options.crabCondor:
-            print "You are running on condor.  Please make sure you have read instructions on\nhttps://twiki.cern.ch/twiki/bin/view/CMS/CRABonLPCCAF\n"
+            print("You are running on condor.  Please make sure you have read instructions on\nhttps://twiki.cern.ch/twiki/bin/view/CMS/CRABonLPCCAF\n")
             if not os.path.exists ('%s/.profile' % os.environ.get('HOME')):
-                print "** WARNING: ** You are missing ~/.profile file.  Please see CRABonLPCCAF instructions above.\n"
-        print "Setup your environment for CRAB.  Then edit %(crabcfg)s to make any desired changed.  The run:\n\ncrab -create -cfg %(crabcfg)s\ncrab -submit\n" % crabDict
+                print("** WARNING: ** You are missing ~/.profile file.  Please see CRABonLPCCAF instructions above.\n")
+        print("Setup your environment for CRAB.  Then edit %(crabcfg)s to make any desired changed.  The run:\n\ncrab -create -cfg %(crabcfg)s\ncrab -submit\n" % crabDict)
 
     else:
 
@@ -279,7 +280,7 @@ https://twiki.cern.ch/twiki/bin/view/CMS/PickEvents ''')
         for event in eventList:
             files.extend( getFileNames (event) )
         if not eventList:
-            print "No events defind.  Aborting."
+            print("No events defind.  Aborting.")
             sys.exit()
         # Purge duplicate files
         fileSet = set()
@@ -294,7 +295,7 @@ https://twiki.cern.ch/twiki/bin/view/CMS/PickEvents ''')
           sorted( [ "%d:%d" % (event.run, event.event) for event in eventList ] ) )
         command = 'edmCopyPickMerge outputFile=%s.root \\\n  eventsToProcess=%s \\\n  inputFiles=%s' \
                   % (options.base, eventsToProcess, source)
-        print "\n%s" % command
+        print("\n%s" % command)
         if options.runInteractive and not options.printInteractive:
             os.system (command)
 

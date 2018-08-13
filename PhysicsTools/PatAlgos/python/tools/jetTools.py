@@ -1,3 +1,4 @@
+from __future__ import print_function
 from FWCore.GuiBrowsers.ConfigToolBase import *
 from FWCore.ParameterSet.Mixins import PrintOptions,_ParameterTypeBase,_SimpleParameterTypeBase, _Parameterizable, _ConfigureComponent, _TypedParameterizable, _Labelable,  _Unlabelable,  _ValidatingListBase
 from FWCore.ParameterSet.SequenceTypes import _ModuleSequenceType, _Sequenceable
@@ -193,7 +194,7 @@ class AddJetCollection(ConfigToolBase):
             setattr(process, 'selectedPatJets'+_labelName+postfix, selectedPatJets.clone(src='patJets'+_labelName+postfix))
             knownModules.append('selectedPatJets'+_labelName+postfix)
 
-	## add new patJetPartonMatch to process
+        ## add new patJetPartonMatch to process
         from PhysicsTools.PatAlgos.mcMatchLayer0.jetMatch_cfi import patJetPartonMatch
         if 'patJetPartonMatch'+_labelName+postfix in knownModules :
             _newPatJetPartonMatch=getattr(process, 'patJetPartonMatch'+_labelName+postfix)
@@ -353,7 +354,7 @@ class AddJetCollection(ConfigToolBase):
                         setattr(process, btagInfo+_labelName+postfix, btag.softPFElectronsTagInfos.clone(jets = jetSource))
                     acceptedTagInfos.append(btagInfo)
                 else:
-                    print '  --> %s ignored, since not available via RecoBTag.Configuration.RecoBTag_cff!'%(btagInfo)
+                    print('  --> %s ignored, since not available via RecoBTag.Configuration.RecoBTag_cff!'%(btagInfo))
             ## setup all required btagDiscriminators
             acceptedBtagDiscriminators = list()
             for btagDiscr in btagDiscriminators :
@@ -361,7 +362,7 @@ class AddJetCollection(ConfigToolBase):
                     setattr(process, btagDiscr+_labelName+postfix, getattr(btag, btagDiscr).clone(tagInfos = cms.VInputTag( *[ cms.InputTag(x+_labelName+postfix) for x in supportedBtagDiscr[btagDiscr] ] )))
                     acceptedBtagDiscriminators.append(btagDiscr)
                 else:
-                    print '  --> %s ignored, since not available via RecoBTag.Configuration.RecoBTag_cff!'%(btagDiscr)
+                    print('  --> %s ignored, since not available via RecoBTag.Configuration.RecoBTag_cff!'%(btagDiscr))
             ## replace corresponding tags for pat jet production
             _newPatJets.tagInfoSources = cms.VInputTag( *[ cms.InputTag(x+_labelName+postfix) for x in acceptedTagInfos ] )
             _newPatJets.discriminatorSources = cms.VInputTag( *[ cms.InputTag(x+_labelName+postfix) for x in acceptedBtagDiscriminators ] )
@@ -381,8 +382,8 @@ class AddJetCollection(ConfigToolBase):
             _newPatJets.addBTagInfo = False
             ## adjust output module; these collections will be empty anyhow, but we do it to stay clean
             for outputModule in outputModules:
-                    if hasattr(process,outputModule):
-                        getattr(process,outputModule).outputCommands.append("drop *_"+'selected'+_labelName+postfix+"_tagInfos_*")
+                if hasattr(process,outputModule):
+                    getattr(process,outputModule).outputCommands.append("drop *_"+'selected'+_labelName+postfix+"_tagInfos_*")
 
         ## add jet correction factors if required by user
         if (jetCorrections != None):
@@ -697,7 +698,7 @@ class AddJetID(ConfigToolBase):
         jetIdTag=self._parameters['jetIdTag'].value
 
         jetIdLabel = jetIdTag + 'JetID'
-        print "Making new jet ID label with label " + jetIdTag
+        print("Making new jet ID label with label " + jetIdTag)
 
         ## replace jet id sequence
         process.load("RecoJets.JetProducers.ak4JetID_cfi")
@@ -757,28 +758,28 @@ class SetTagInfos(ConfigToolBase):
 setTagInfos=SetTagInfos()
 
 def deprecatedOptionOutputModule(obj):
-    print "-------------------------------------------------------"
-    print " Error: the option 'outputModule' is not supported"
-    print "        anymore by:"
-    print "                   ", obj._label
-    print "        please use 'outputModules' now and specify the"
-    print "        names of all needed OutModules in there"
-    print "        (default: ['out'])"
-    print "-------------------------------------------------------"
+    print("-------------------------------------------------------")
+    print(" Error: the option 'outputModule' is not supported")
+    print("        anymore by:")
+    print("                   ", obj._label)
+    print("        please use 'outputModules' now and specify the")
+    print("        names of all needed OutModules in there")
+    print("        (default: ['out'])")
+    print("-------------------------------------------------------")
     raise KeyError, "Unsupported option 'outputModule' used in '"+obj._label+"'"
 
 def undefinedLabelName(obj):
-    print "-------------------------------------------------------"
-    print " Error: the jet 'labelName' is not defined."
-    print "        All added jets must have 'labelName' defined."
-    print "-------------------------------------------------------"
+    print("-------------------------------------------------------")
+    print(" Error: the jet 'labelName' is not defined.")
+    print("        All added jets must have 'labelName' defined.")
+    print("-------------------------------------------------------")
     raise KeyError, "Undefined jet 'labelName' used in '"+obj._label+"'"
 
 def unsupportedJetAlgorithm(obj):
-    print "-------------------------------------------------------"
-    print " Error: Unsupported jet algorithm detected."
-    print "        The supported algorithms are:"
+    print("-------------------------------------------------------")
+    print(" Error: Unsupported jet algorithm detected.")
+    print("        The supported algorithms are:")
     for key in supportedJetAlgos.keys():
-        print "        " + key.upper() + ", " + key.lower() + ": " + supportedJetAlgos[key]
-    print "-------------------------------------------------------"
+        print("        " + key.upper() + ", " + key.lower() + ": " + supportedJetAlgos[key])
+    print("-------------------------------------------------------")
     raise KeyError, "Unsupported jet algorithm used in '"+obj._label+"'"

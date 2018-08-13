@@ -1,3 +1,4 @@
+from __future__ import print_function
 import csv
 def is_intstr(s):
     try:
@@ -42,15 +43,15 @@ class csvSelectionParser(object):
         return len(self.__result.keys())
     def numls(self,run):
         return len(self.__result[run])
-        
+
 if __name__ == '__main__':
     result={}
     #filename='../test/lumi_by_LS_all.csv'
     filename='../test/newruns.csv'
     s=csvSelectionParser(filename)
-    print 'runs : ',s.runs()
-    print 'full result : ',s.runsandls()
-    print 'str result : ',s.runsandlsStr()
-    print 'num runs : ',s.numruns()
+    print('runs : ',s.runs())
+    print('full result : ',s.runsandls())
+    print('str result : ',s.runsandlsStr())
+    print('num runs : ',s.numruns())
     #print 'numls in run : ',s.numls(135175)
 

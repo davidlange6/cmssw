@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 import Validation.RecoTau.ValidationUtils as Utils
 import copy
@@ -367,7 +368,7 @@ standardCompareTestAndReference = cms.PSet(
     )
   ),
 )
-        
+
 
 ##################################################
 #
@@ -424,146 +425,146 @@ UTILITIES
 """
 
 class ApplyFunctionToSequence:
-   """ Helper class that applies a given function to all modules
-       in a sequence """
-   def __init__(self,function):
-      self.functor = function
-   def enter(self, module):
-      self.functor(module)
-   def leave(self, module):
-      pass
+    """ Helper class that applies a given function to all modules
+        in a sequence """
+    def __init__(self,function):
+        self.functor = function
+    def enter(self, module):
+        self.functor(module)
+    def leave(self, module):
+        pass
 
 def TranslateToLegacyProdNames(input):
-   input = re.sub('fixedConePFTauProducer', 'pfRecoTauProducer', input)
-   #fixedDiscriminationRegex = re.compile('fixedConePFTauDiscrimination( \w* )')
-   fixedDiscriminationRegex = re.compile('fixedConePFTauDiscrimination(\w*)')
-   input = fixedDiscriminationRegex.sub(r'pfRecoTauDiscrimination\1', input)
-   input = re.sub('shrinkingConePFTauProducer', 'pfRecoTauProducerHighEfficiency', input)
-   shrinkingDiscriminationRegex = re.compile('shrinkingConePFTauDiscrimination(\w*)')
-   input = shrinkingDiscriminationRegex.sub(r'pfRecoTauDiscrimination\1HighEfficiency', input)
-   return input
+    input = re.sub('fixedConePFTauProducer', 'pfRecoTauProducer', input)
+    #fixedDiscriminationRegex = re.compile('fixedConePFTauDiscrimination( \w* )')
+    fixedDiscriminationRegex = re.compile('fixedConePFTauDiscrimination(\w*)')
+    input = fixedDiscriminationRegex.sub(r'pfRecoTauDiscrimination\1', input)
+    input = re.sub('shrinkingConePFTauProducer', 'pfRecoTauProducerHighEfficiency', input)
+    shrinkingDiscriminationRegex = re.compile('shrinkingConePFTauDiscrimination(\w*)')
+    input = shrinkingDiscriminationRegex.sub(r'pfRecoTauDiscrimination\1HighEfficiency', input)
+    return input
 
 
 def ConvertDrawJobToLegacyCompare(input):
-   """ Converts a draw job defined to compare 31X named PFTau validtion efficiencies
-       to comapre a 31X to a 22X named validation """
-   # get the list of drawjobs { name : copyOfPSet }
-   if not hasattr(input, "drawJobs"):
-      return
-   myDrawJobs = input.drawJobs.parameters_()
-   for drawJobName, drawJobData in myDrawJobs.iteritems():
-      print drawJobData
-      if not drawJobData.plots.pythonTypeName() == "cms.PSet":
-         continue
-      pSetToInsert = cms.PSet(
-            standardEfficiencyParameters,
-            plots = cms.VPSet(
-               # test plot w/ modern names
-               cms.PSet(
-                  dqmMonitorElements = drawJobData.plots.dqmMonitorElements,
-                  process = cms.string('test'),
-                  drawOptionEntry = cms.string('eff_overlay01'),
-                  legendEntry = cms.string(input.processes.test.legendEntry.value())
-                  ),
-               # ref plot w/ vintage name
-               cms.PSet(
-                  # translate the name
-                  dqmMonitorElements = cms.vstring(TranslateToLegacyProdNames(drawJobData.plots.dqmMonitorElements.value()[0])),
-                  process = cms.string('reference'),
-                  drawOptionEntry = cms.string('eff_overlay02'),
-                  legendEntry = cms.string(input.processes.reference.legendEntry.value())
-                  )
-               )
-            )
-      input.drawJobs.__setattr__(drawJobName, pSetToInsert)
+    """ Converts a draw job defined to compare 31X named PFTau validtion efficiencies
+        to comapre a 31X to a 22X named validation """
+    # get the list of drawjobs { name : copyOfPSet }
+    if not hasattr(input, "drawJobs"):
+        return
+    myDrawJobs = input.drawJobs.parameters_()
+    for drawJobName, drawJobData in myDrawJobs.iteritems():
+        print(drawJobData)
+        if not drawJobData.plots.pythonTypeName() == "cms.PSet":
+            continue
+        pSetToInsert = cms.PSet(
+              standardEfficiencyParameters,
+              plots = cms.VPSet(
+                 # test plot w/ modern names
+                 cms.PSet(
+                    dqmMonitorElements = drawJobData.plots.dqmMonitorElements,
+                    process = cms.string('test'),
+                    drawOptionEntry = cms.string('eff_overlay01'),
+                    legendEntry = cms.string(input.processes.test.legendEntry.value())
+                    ),
+                 # ref plot w/ vintage name
+                 cms.PSet(
+                    # translate the name
+                    dqmMonitorElements = cms.vstring(TranslateToLegacyProdNames(drawJobData.plots.dqmMonitorElements.value()[0])),
+                    process = cms.string('reference'),
+                    drawOptionEntry = cms.string('eff_overlay02'),
+                    legendEntry = cms.string(input.processes.reference.legendEntry.value())
+                    )
+                 )
+              )
+        input.drawJobs.__setattr__(drawJobName, pSetToInsert)
 
 def MakeLabeler(TestLabel, ReferenceLabel):
-   def labeler(module):
-      if hasattr(module, 'processes'):
-         if module.processes.hasParameter(['test', 'legendEntry']) and module.processes.hasParameter([ 'reference', 'legendEntry']):
-            module.processes.test.legendEntry = TestLabel
-            module.processes.reference.legendEntry = ReferenceLabel
-            print "Set test label to %s and reference label to %s for plot producer %s" % (TestLabel, ReferenceLabel, module.label())
-         else:
-            print "ERROR in RecoTauValidation_cfi::MakeLabeler - trying to set test/reference label but %s does not have processes.(test/reference).legendEntry parameters!" % module.label()
-   return labeler
+    def labeler(module):
+        if hasattr(module, 'processes'):
+            if module.processes.hasParameter(['test', 'legendEntry']) and module.processes.hasParameter([ 'reference', 'legendEntry']):
+                module.processes.test.legendEntry = TestLabel
+                module.processes.reference.legendEntry = ReferenceLabel
+                print("Set test label to %s and reference label to %s for plot producer %s" % (TestLabel, ReferenceLabel, module.label()))
+            else:
+                print("ERROR in RecoTauValidation_cfi::MakeLabeler - trying to set test/reference label but %s does not have processes.(test/reference).legendEntry parameters!" % module.label())
+    return labeler
 
 def SetYmodulesToLog(matchingNames = []):
-   ''' set all modules whose name contains one of the matching names to log y scale'''
-   def yLogger(module):
-      ''' set a module to use log scaling in the yAxis'''
-      if hasattr(module, 'drawJobs'):
-         print "EK DEBUG"
-         drawJobParamGetter = lambda subName : getattr(module.drawJobs, subName)
-         #for subModule in [getattr(module.drawJobs, subModuleName) for subModuleName in dir(module.drawJobs)]:
-         attrNames = dir(module.drawJobs)
-         for subModuleName, subModule in zip(attrNames, map(drawJobParamGetter, attrNames)):
-            matchedNames = [name for name in matchingNames if subModuleName.find( name) > -1] # matching sub strings
-            if len(matchingNames) == 0:
-               matchedNames = ['take','everything','and','dont','bother']
-            if hasattr(subModule, "yAxis") and len(matchedNames):
-               print "Setting drawJob: ", subModuleName, " to log scale."
-               subModule.yAxis = cms.string('fakeRate') #'fakeRate' configuration specifies the log scaling
-         if len(matchingNames) == 0: 
-            module.yAxes.efficiency.maxY_log = 40
-            module.yAxes.fakeRate.maxY_log = 40
-   return yLogger
+    ''' set all modules whose name contains one of the matching names to log y scale'''
+    def yLogger(module):
+        ''' set a module to use log scaling in the yAxis'''
+        if hasattr(module, 'drawJobs'):
+            print("EK DEBUG")
+            drawJobParamGetter = lambda subName : getattr(module.drawJobs, subName)
+            #for subModule in [getattr(module.drawJobs, subModuleName) for subModuleName in dir(module.drawJobs)]:
+            attrNames = dir(module.drawJobs)
+            for subModuleName, subModule in zip(attrNames, map(drawJobParamGetter, attrNames)):
+                matchedNames = [name for name in matchingNames if subModuleName.find( name) > -1] # matching sub strings
+                if len(matchingNames) == 0:
+                    matchedNames = ['take','everything','and','dont','bother']
+                if hasattr(subModule, "yAxis") and len(matchedNames):
+                    print("Setting drawJob: ", subModuleName, " to log scale.")
+                    subModule.yAxis = cms.string('fakeRate') #'fakeRate' configuration specifies the log scaling
+            if len(matchingNames) == 0: 
+                module.yAxes.efficiency.maxY_log = 40
+                module.yAxes.fakeRate.maxY_log = 40
+    return yLogger
 
 
 def SetBaseDirectory(Directory):
-   def BaseDirectorizer(module):
-      newPath = Directory
-      #if module.hasParameter("outputFilePath"):
-      if hasattr(module, "outputFilePath"):
-         oldPath = module.outputFilePath.value()
-         newPath = os.path.join(newPath, oldPath)
-         if not os.path.exists(newPath):
-            os.makedirs(newPath)
-         print newPath
-         module.outputFilePath = cms.string("%s" % newPath)
-   return BaseDirectorizer
+    def BaseDirectorizer(module):
+        newPath = Directory
+        #if module.hasParameter("outputFilePath"):
+        if hasattr(module, "outputFilePath"):
+            oldPath = module.outputFilePath.value()
+            newPath = os.path.join(newPath, oldPath)
+            if not os.path.exists(newPath):
+                os.makedirs(newPath)
+            print(newPath)
+            module.outputFilePath = cms.string("%s" % newPath)
+    return BaseDirectorizer
 
 def RemoveComparisonPlotCommands(module):
-   if hasattr(module, 'drawJobs'):
-      #get draw job parameter names
-      drawJobs = module.drawJobs.parameterNames_()
-      for drawJob in drawJobs:
-         if drawJob != "TauIdEffStepByStep":
-            module.drawJobs.__delattr__(drawJob)
-            print "Removing comparison plot", drawJob
+    if hasattr(module, 'drawJobs'):
+        #get draw job parameter names
+        drawJobs = module.drawJobs.parameterNames_()
+        for drawJob in drawJobs:
+            if drawJob != "TauIdEffStepByStep":
+                module.drawJobs.__delattr__(drawJob)
+                print("Removing comparison plot", drawJob)
 
 def SetPlotDirectory(myPlottingSequence, directory):
-   myFunctor = ApplyFunctionToSequence(SetBaseDirectory(directory))
-   myPlottingSequence.visit(myFunctor)
+    myFunctor = ApplyFunctionToSequence(SetBaseDirectory(directory))
+    myPlottingSequence.visit(myFunctor)
 
 def SetTestAndReferenceLabels(myPlottingSequence, TestLabel, ReferenceLabel):
-   myFunctor = ApplyFunctionToSequence(MakeLabeler(TestLabel, ReferenceLabel))
-   myPlottingSequence.visit(myFunctor)
+    myFunctor = ApplyFunctionToSequence(MakeLabeler(TestLabel, ReferenceLabel))
+    myPlottingSequence.visit(myFunctor)
 
 def SetCompareToLegacyProductNames(myPlottingSequence):
-   myFunctor = ApplyFunctionToSequence(ConvertDrawJobToLegacyCompare)
-   myPlottingSequence.visit(myFunctor)
+    myFunctor = ApplyFunctionToSequence(ConvertDrawJobToLegacyCompare)
+    myPlottingSequence.visit(myFunctor)
 
 def SetTestFileToPlot(myProcess, FileLoc):
-   myProcess.loadTau.test.inputFileNames = cms.vstring(FileLoc)
+    myProcess.loadTau.test.inputFileNames = cms.vstring(FileLoc)
 
 def SetReferenceFileToPlot(myProcess, FileLoc):
-   if FileLoc == None:
-      del myProcess.loadTau.reference
-   else:
-      myProcess.loadTau.reference.inputFileNames = cms.vstring(FileLoc)
+    if FileLoc == None:
+        del myProcess.loadTau.reference
+    else:
+        myProcess.loadTau.reference.inputFileNames = cms.vstring(FileLoc)
 
 def SetLogScale(myPlottingSequence):
-   myFunctor = ApplyFunctionToSequence(SetYmodulesToLog())
-   myPlottingSequence.visit(myFunctor)
+    myFunctor = ApplyFunctionToSequence(SetYmodulesToLog())
+    myPlottingSequence.visit(myFunctor)
 
 def SetSmartLogScale(myPlottingSequence):
-   myFunctor = ApplyFunctionToSequence(SetYmodulesToLog(['Electron', 'Muon', 'Isolation', 'TaNC']))
-   myPlottingSequence.visit(myFunctor)
+    myFunctor = ApplyFunctionToSequence(SetYmodulesToLog(['Electron', 'Muon', 'Isolation', 'TaNC']))
+    myPlottingSequence.visit(myFunctor)
 
 def SetPlotOnlyStepByStep(myPlottingSequence):
-   myFunctor = ApplyFunctionToSequence(RemoveComparisonPlotCommands)
-   myPlottingSequence.visit(myFunctor)
+    myFunctor = ApplyFunctionToSequence(RemoveComparisonPlotCommands)
+    myPlottingSequence.visit(myFunctor)
 
 def SetValidationExtention(module, extension):
     module.ExtensionName = module.ExtensionName.value()+extension
@@ -573,7 +574,7 @@ def setBinning(module,pset):
         module.histoSettings = pset
 
 def setTrigger(module,pset):
-   if hasattr(module,'_TypedParameterizable__type') and module._TypedParameterizable__type == 'TauTagValidation':
-      setattr(module,'turnOnTrigger',cms.bool(True)) #Turns on trigger (in case is off)
-      for item in pset.parameters_().items():
-         setattr(module.GenericTriggerSelection,item[0],item[1])
+    if hasattr(module,'_TypedParameterizable__type') and module._TypedParameterizable__type == 'TauTagValidation':
+        setattr(module,'turnOnTrigger',cms.bool(True)) #Turns on trigger (in case is off)
+        for item in pset.parameters_().items():
+            setattr(module.GenericTriggerSelection,item[0],item[1])

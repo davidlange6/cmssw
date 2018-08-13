@@ -24,7 +24,7 @@ class ToolDialog(QDialog):
         self.setWindowFlags(Qt.Window)
         self.setWindowTitle("Apply tool...")
         self.fill()
-    
+
     def fill(self):
         logging.debug(__name__ +': fill')
         self.setLayout(QVBoxLayout())

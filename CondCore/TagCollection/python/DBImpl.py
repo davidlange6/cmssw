@@ -1,6 +1,6 @@
 import coral
 import IdGenerator
-        
+
 class DBImpl(object):
     """Class wrap up all the database operations.\n
     """
@@ -46,7 +46,7 @@ class DBImpl(object):
             insertdata=coral.AttributeList()
             for (columnname,columntype) in tabrowDefDict.items():
                 insertdata.extend(columnname,columntype)
-                
+
             bulkOperation=dataEditor.bulkInsert(insertdata,len(bulkinput))
             for valuedict in bulkinput:
                 for (columnname,columnvalue) in valuedict.items():
@@ -65,7 +65,7 @@ class DBImpl(object):
             editor.deleteRows( condition, conditionbindDict )
         except Exception, e:
             raise Exception, str(e)
-        
+
     def dropTable( self, tableName ):
         """Drop specified table.
         """

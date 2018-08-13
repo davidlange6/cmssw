@@ -6,7 +6,7 @@ from Vispa.Main.Exceptions import exception_traceback
 
 class FindAlgorithm(ObjectHolder):
     """ Searches for label and properties in a list of objects using a BasicDataAccessor.
-    
+
     One can search using findUsingFindDialog where a FindDialog is used as input for the search label and properties.
     Navigation through the results in supported by next(), previous(),numberOfResult(),currentNumber()
     """
@@ -21,11 +21,11 @@ class FindAlgorithm(ObjectHolder):
         if not isinstance(accessor, BasicDataAccessor):
             raise TypeError(__name__ + " requires data accessor of type BasicDataAccessor.")
         ObjectHolder.setDataAccessor(self, accessor)
-    
+
     def clear(self):
         self._message=None
         self._results=[]
-            
+
     def findUsingFindDialog(self, dialog):
         logging.debug(__name__ +': findUsingFindDialog')
         self.clear()
@@ -37,7 +37,7 @@ class FindAlgorithm(ObjectHolder):
             return self._results[0]
         else:
             return []
-        
+
     def _findIn(self, object,dialog):
         # find Label
         foundLabel=True
@@ -100,13 +100,13 @@ class FindAlgorithm(ObjectHolder):
 
     def results(self):
         return self._results
-    
+
     def numberOfResults(self):
         return len(self._results)
-    
+
     def currentNumber(self):
         return self._index+1
-    
+
     def next(self):
         if len(self._results)==0:
             return None
@@ -114,7 +114,7 @@ class FindAlgorithm(ObjectHolder):
         if self._index>len(self._results)-1:
             self._index=0
         return self._results[self._index]
-    
+
     def previous(self):
         if len(self._results)==0:
             return None

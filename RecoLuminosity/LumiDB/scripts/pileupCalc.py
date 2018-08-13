@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='1.00'
 import os,sys,time
 import optparse
@@ -14,7 +15,7 @@ def parseInputFile(inputfilename):
     selectf=open(inputfilename,'r')
     inputfilecontent=selectf.read()
     p=pileupParser.pileupParser(inputfilecontent)                            
-    
+
 #    p=inputFilesetParser.inputFilesetParser(inputfilename)
     runlsbyfile=p.runsandls()
     return runlsbyfile
@@ -35,7 +36,7 @@ def MyErf(input):
         cErf = -1.0*cErf
 
     # Alternate Erf approximation:
-    
+
     #A1 = 0.278393
     #A2 = 0.230389
     #A3 = 0.000972
@@ -47,7 +48,7 @@ def MyErf(input):
     #dErf = 1.0 - 1.0/denom
     #if input<0:
     #    dErf = -1.0*dErf
-        
+
     return cErf
 
 
@@ -87,7 +88,7 @@ def fillPileupHistogram (lumiInfo, calcOption, hist, minbXsec, Nbins):
             #val = hist.GetBinCenter(obs+1)
             #prob = coeff*exp(-1.0*(val-AveNumInt)*(val-AveNumInt)/expon)
             #ProbFromRMS.append(prob)
-            
+
             left = hist.GetBinLowEdge(obs+1)
             right = left+BinWidth
 
@@ -114,8 +115,8 @@ def fillPileupHistogram (lumiInfo, calcOption, hist, minbXsec, Nbins):
         if obs<Nbins+1:            
             ProbFromRMS[obs] = 1.0
         if AveNumInt < 1.0E-5:
-           ProbFromRMS[obs] = 0.  # just ignore zero values
-        
+            ProbFromRMS[obs] = 0.  # just ignore zero values
+
     if calcOption == 'true':  # Just put distribution into histogram
         if RMSInt > 0:
             totalProb = 0
@@ -125,11 +126,11 @@ def fillPileupHistogram (lumiInfo, calcOption, hist, minbXsec, Nbins):
                 #print obs, val, RMSInt,coeff,expon,prob
                 totalProb += prob
                 hist.Fill (val, prob * LSintLumi)
-                
+
             if 1.0-totalProb > 0.01:
-                print "Significant probability density outside of your histogram"
-                print "Consider using a higher value of --maxPileupBin"
-                print "Mean %f, RMS %f, Integrated probability %f" % (AveNumInt,RMSInt,totalProb)
+                print("Significant probability density outside of your histogram")
+                print("Consider using a higher value of --maxPileupBin")
+                print("Mean %f, RMS %f, Integrated probability %f" % (AveNumInt,RMSInt,totalProb))
             #    hist.Fill (val, (1 - totalProb) * LSintLumi)
         else:
             hist.Fill(AveNumInt,LSintLumi)
@@ -147,8 +148,8 @@ def fillPileupHistogram (lumiInfo, calcOption, hist, minbXsec, Nbins):
                 hist.Fill (val, prob * LSintLumi * RMSWeight)
 
         if 1.0-totalProb > 0.01:
-            print "Significant probability density outside of your histogram"
-            print "Consider using a higher value of --maxPileupBin"
+            print("Significant probability density outside of your histogram")
+            print("Consider using a higher value of --maxPileupBin")
 
 
     return hist
@@ -204,12 +205,12 @@ if __name__ == '__main__':
                         default='pileup',
                         help='name of pileup histogram, default %default')
     parser.add_option('--verbose',dest='verbose',action='store_true',help='verbose mode for printing' )
-    
+
     # parse arguments
     try:
         (options, args) = parser.parse_args()
     except Exception , e:
-        print e
+        print(e)
     if not args:
         parser.print_usage()
         sys.exit()
@@ -217,17 +218,17 @@ if __name__ == '__main__':
         parser.print_usage()
         raise RuntimeError, "Exactly one output file must be given"
     output = args[0]
-    
+
 #    options=parser.parse_args()
 
     if options.verbose:
-        print 'General configuration'
-        print '\toutputfile: ',options.outputfile
-        print '\tAction: ',options.calcMode, 'luminosity distribution will be calculated'
-        print '\tinput selection file: ',options.inputfile
-        print '\tMinBiasXsec: ',options.minBiasXsec
-        print '\tmaxPileupBin: ',options.maxPileupBin
-        print '\tnumPileupBins: ',options.numPileupBins
+        print('General configuration')
+        print('\toutputfile: ',options.outputfile)
+        print('\tAction: ',options.calcMode, 'luminosity distribution will be calculated')
+        print('\tinput selection file: ',options.inputfile)
+        print('\tMinBiasXsec: ',options.minBiasXsec)
+        print('\tmaxPileupBin: ',options.maxPileupBin)
+        print('\tnumPileupBins: ',options.numPileupBins)
 
     import ROOT 
     pileupHist = ROOT.TH1D (options.pileupHistName,options.pileupHistName,
@@ -264,11 +265,11 @@ if __name__ == '__main__':
                         fillPileupHistogram (lumiInfo, options.calcMode,
                                 pileupHist, options.minBiasXsec, nbins)
                     else: # trouble
-                        print "Run %d, LumiSection %d not found in Lumi/Pileup input file. Check your files!" \
-                                % (run,LSnumber)
+                        print("Run %d, LumiSection %d not found in Lumi/Pileup input file. Check your files!" \
+                                % (run,LSnumber))
 
             else:  # trouble
-                print "Run %d not found in Lumi/Pileup input file.  Check your files!" % (run)
+                print("Run %d not found in Lumi/Pileup input file.  Check your files!" % (run))
 
 
 
@@ -286,5 +287,5 @@ if __name__ == '__main__':
         sys.exit()
 
     else:
-        print "must specify a pileup calculation mode via --calcMode true or --calcMode observed"
+        print("must specify a pileup calculation mode via --calcMode true or --calcMode observed")
         sys.exit()

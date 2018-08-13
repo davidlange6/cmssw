@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import pickle, os, sys
 
 ####################
@@ -18,7 +19,7 @@ def optionParse():
     if not os.path.isfile(datafile):
         parser.error("%s file does not exist" % datafile)
         sys.exit()
-        
+
     return datafile
 
 ########################################
@@ -61,18 +62,18 @@ def printBenchmarkData(afile):
                             for profilekey in profiledata:
                                 stepdata = profiledata[profilekey] 
                                 for stepkey in stepdata:
-                                    print "Host: " + str(host)
-                                    print "Options: " + str(options)
-                                    print cpustr
-                                    print "candle: " + str(candlekey)
-                                    print "profsetdata: " + str(profsetkey)                                
-                                    print "profiler: " + str(profilekey)                                
-                                    print "step: " + str(stepkey)
+                                    print("Host: " + str(host))
+                                    print("Options: " + str(options))
+                                    print(cpustr)
+                                    print("candle: " + str(candlekey))
+                                    print("profsetdata: " + str(profsetkey))                                
+                                    print("profiler: " + str(profilekey))                                
+                                    print("step: " + str(stepkey))
                                     for evtdat in stepdata[stepkey]:
-                                        print evtdat
+                                        print(evtdat)
         except TypeError, detail:
-            print "Data: does not exist for this machine, the server failed to return a valid data structure"
-            print detail
+            print("Data: does not exist for this machine, the server failed to return a valid data structure")
+            print(detail)
 
 
 if __name__ == "__main__":

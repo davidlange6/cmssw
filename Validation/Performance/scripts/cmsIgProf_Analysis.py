@@ -5,6 +5,7 @@
 # In python everything is an object, even if we don't know. 
 # os and time will become 2 objects for us.
 
+from __future__ import print_function
 import os,sys
 import time
 
@@ -15,13 +16,13 @@ IgProfProfile={'PERF_TICKS':'IgProfPerf',
                }
 
 def execute(command):
-    print '[IgAnalysis] %s ...' %command
+    print('[IgAnalysis] %s ...' %command)
     sys.stdout.flush()
     exitstate=os.system(command)
     return exitstate
-    
+
 def simple_igprof_analysis(profile_name,AnalysisType,output_type):
-    
+
     """This function takes as arguments:
     -a compressed (.gz) igprof output profile
     -the output directory where to store the output
@@ -40,7 +41,7 @@ def simple_igprof_analysis(profile_name,AnalysisType,output_type):
     #outfile=profile_name[:-3]+"___"+AnalysisType+".res"
     outfile=profile_name.split(".")[0].replace(IgProfProfile[AnalysisType],AnalysisType)+".res"
     #Launch the 1 command:
-    
+
     #command='igprof-analyse -d -v -g -r %s %s|tee -a \%s'%(AnalysisType,profile_name,outfile)
     #Replacing tee: it is polluting the log files...
 
@@ -58,13 +59,13 @@ def simple_igprof_analysis(profile_name,AnalysisType,output_type):
         exit=execute(command)
         #Let's manipulate the ASCII output to only keep the top 7 lines:
         # we open and read the txt ascii file
-        print "Reading the res file"
+        print("Reading the res file")
         txt_file=open(outfile,'r')
         txt_file_content=txt_file.readlines()#again:everything is an object
-        print "res file has %s lines!"%len(txt_file_content)
+        print("res file has %s lines!"%len(txt_file_content))
         txt_file.close()
         #overwrite the file to only save the first 7 lines:
-        print "Overwriting the res file, to reduce it to 7 lines"
+        print("Overwriting the res file, to reduce it to 7 lines")
         out_file=open(outfile,'w')
         line_num=0
         for line in txt_file_content:
@@ -73,11 +74,11 @@ def simple_igprof_analysis(profile_name,AnalysisType,output_type):
             if line_num == 7:
                 break
         out_file.close()
-    
+
     return exit
-    
+
 def diff_igprof_analysis(profile_name,regression_profile_name,AnalysisType):
-    
+
     """
     This function takes as arguments:
     -a compressed (.gz) igprof output profile
@@ -107,16 +108,16 @@ def library_igprof_analysis(profile_name,AnalysisType):
     #Regular Expression supplied by Giulio:
     command="igprof-analyse --sqlite -d -v -g -r %s -ml -mr 's|.*/(.*)$|\\1|' %s |sqlite3 %s"%(AnalysisType,profile_name,outfile)
     exit=execute(command)
-    
+
     return exit
 #-------------------------------------------------------------------------------
 
 # A procedure used for importing the function above with the import statement
 # or to run it if the script is called: power python..
 if __name__ == '__main__':
-    
+
     import optparse
-    
+
     # Here we define an option parser to handle commandline options..
     usage='IgProf_Analysis.py <options>'
     parser = optparse.OptionParser(usage)
@@ -124,7 +125,7 @@ if __name__ == '__main__':
                       help='The profile to manipulate' ,
                       default='',
                       dest='profile')
-                      
+
     parser.add_option('-c', '--counter',
                       help='The IgProf counter for the analysis (PERF_TICKS,MEM_TOTAL,MEM_LIVE,MEM_MAX)' ,
                       default='UNKNOWN_COUNTER',
@@ -143,18 +144,18 @@ if __name__ == '__main__':
                       default=False,
                       dest='library') 
     (options,args) = parser.parse_args()
-    
+
     # Now some fault control..If an error is found we raise an exception
     if options.profile=='':
         raise('Please select a profile, an output dir AND a type of output (ASCII or SQLITE3)!')
-    
+
     if not os.path.exists(options.profile):
         raise ('Input profile not present!')
 
     AnalysisType=options.counter
 
-    print "Input file is %s and AnalysisType is %s"%(options.profile,AnalysisType)
-    
+    print("Input file is %s and AnalysisType is %s"%(options.profile,AnalysisType))
+
     #launch the function!
     if options.regressionprofile:
         diff_igprof_analysis(options.profile,options.regressionprofile,AnalysisType)
@@ -162,4 +163,4 @@ if __name__ == '__main__':
         library_igprof_analysis(options.profile,AnalysisType)
     else:
         simple_igprof_analysis(options.profile,AnalysisType,options.output_type)        
- 
+

@@ -1,5 +1,6 @@
 '''This module collects some frequently used helper functions
 '''
+from __future__ import print_function
 import time,ast,re,json,coral,array
 def flatten(obj):
     '''Given nested lists or tuples, returns a single flattened list'''
@@ -26,7 +27,7 @@ def parseTime(iTime):
     p=re.compile('^\d{4}$')
     if re.match(p,iTime):
         return (None,int(iTime),None)
-    
+
 def lumiUnitForPrint(t):
     '''
     input : largest lumivalue
@@ -99,7 +100,7 @@ def pairwise(lst):
     """
     yield item i and item i+1 in lst. e.g.
     (lst[0], lst[1]), (lst[1], lst[2]), ..., (lst[-1], None)
-    
+
     from http://code.activestate.com/recipes/409825-look-ahead-one-item-during-iteration
     """
     if not len(lst): return
@@ -196,26 +197,26 @@ def inclusiveRange(start,stop,step):
         v+=step
     if v>=stop:
         yield stop
-        
+
 def tolegalJSON(inputstring):
-   '''
-   convert json like string to legal json string
-   add double quote around json keys if they are not there, change single quote to double quote around keys
-   '''
-   strresult=inputstring.strip()
-   strresult=re.sub("\s+","",strresult)
-   try:
-       mydict=ast.literal_eval(strresult)
-   except SyntaxError:
-       print 'error in converting string to dict'
-       raise
-   result={}
-   for k,v in mydict.items():
-       if not isinstance(k,str):
-           result[str(k)]=v
-       else:
-           result[k]=v
-   return re.sub("'",'"',str(result))
+    '''
+    convert json like string to legal json string
+    add double quote around json keys if they are not there, change single quote to double quote around keys
+    '''
+    strresult=inputstring.strip()
+    strresult=re.sub("\s+","",strresult)
+    try:
+        mydict=ast.literal_eval(strresult)
+    except SyntaxError:
+        print('error in converting string to dict')
+        raise
+    result={}
+    for k,v in mydict.items():
+        if not isinstance(k,str):
+            result[str(k)]=v
+        else:
+            result[k]=v
+    return re.sub("'",'"',str(result))
 
 def packArraytoBlob(iarray):
     '''
@@ -279,41 +280,41 @@ def parselumicorrector(correctorStr):
 
 if __name__=='__main__':
     nested=[[[1,2],[6,6,8]],[[3,4,5],[4,5]]]
-    print 'flattened ',flatten(nested)
+    print('flattened ',flatten(nested))
     a=[1,2,3,4,5]
     for i,j in pairwise(a):
         if j :
-            print i,j
+            print(i,j)
     lst = ['I1','I2','I1','I3','I4','I4','I7','I7','I7','I7','I7']
-    print count_dups(lst)
+    print(count_dups(lst))
     seqbag=[[1,2,3],[1,3,3],[1,4,6],[4,5,6,7],[8,9]]
-    print 'before ',seqbag
-    print 'after ',transposed(seqbag,None)
-    print [i for i in inclusiveRange(1,3,1)]
-    
+    print('before ',seqbag)
+    print('after ',transposed(seqbag,None))
+    print([i for i in inclusiveRange(1,3,1)])
+
     result=tolegalJSON('{1:[],2:[[1,3],[4,5]]}')
-    print result
+    print(result)
     pp=json.loads(result)
-    print pp["2"]
+    print(pp["2"])
     result=tolegalJSON("{'1':[],'2':[[1,3],[4,5]]}")
-    print result
+    print(result)
     pp=json.loads(result)
-    print pp["2"]
+    print(pp["2"])
     result=tolegalJSON('{"1":[],"2":[[1,3],[4,5]]}')
-    print result
+    print(result)
     pp=json.loads(result)
-    print pp["2"]
-    
+    print(pp["2"])
+
     a=array.array('f')
     a.append(1.3)
     a.append(1.4)
     a.append(2.3)
     a.append(6.3)
     myblob=packArraytoBlob(a)
-    print myblob.size()
-    print unpackBlobtoArray(myblob,'f')
+    print(myblob.size())
+    print(unpackBlobtoArray(myblob,'f'))
     b=array.array('f')
     myblob=packArraytoBlob(b)
-    print myblob.size()
+    print(myblob.size())
     a=['aa_f', 'bb', 'dfc']
-    print packListstrtoCLOB(a)
+    print(packListstrtoCLOB(a))

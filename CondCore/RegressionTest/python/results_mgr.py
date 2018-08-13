@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys
 import getopt
 import common_db
@@ -6,16 +7,16 @@ import results_db
 import reference_db
 
 def CmdUsage():
-	print "Command line arguments :"
-	print "--read_sel (-S) --full (-f) -i [runid] -l [test_label] -c [ cand_release:arch]: read the content of the results db"
-	print "--read (-R): read the content of the results db) db"
-	print "--del (-D) -i [runid] : delete the result entry for the run"
+    print("Command line arguments :")
+    print("--read_sel (-S) --full (-f) -i [runid] -l [test_label] -c [ cand_release:arch]: read the content of the results db")
+    print("--read (-R): read the content of the results db) db")
+    print("--del (-D) -i [runid] : delete the result entry for the run")
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "SRFDi:l:c:h", ['read_sel', 'read','full','del','help'])
 except getopt.GetoptError, err:
     # print help information and exit:
-    print str(err) # will print something like "option -a not recognized"
+    print(str(err)) # will print something like "option -a not recognized"
     CmdUsage()
     sys.exit(2)
 rflag = False
@@ -52,7 +53,7 @@ for o, a in opts:
 
 conn = common_db.createDBConnection()
 resDb = results_db.ResultsDB( conn ) 
-        
+
 mainOption = False
 if(rflag == True):
     resDb.read()
@@ -60,16 +61,16 @@ elif(sflag == True):
     crel = None
     carch = None
     if( CRELEASE != None ):
-	    tok = CRELEASE.split(":")
-	    crel = tok[0]
-	    carch = tok[1]
+        tok = CRELEASE.split(":")
+        crel = tok[0]
+        carch = tok[1]
     rrel = None
     rarch = None
     resDb.readSelection( RUNID, T_LABEL, crel, carch, fflag )
 elif( dflag == True ):
     if( RUNID == None ):
-	    print 'ERROR: runid has not been provided.'
+        print('ERROR: runid has not been provided.')
     else:
-	    resDb.deleteRun( RUNID )
+        resDb.deleteRun( RUNID )
 
 conn.close()

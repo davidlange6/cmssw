@@ -11,6 +11,7 @@
 #            However, copytree does not use ignore patterns (for filtering files)
 #            before python v2.6, when we upgrade to python 2.6 we should use this
 #            functionality.
+from __future__ import print_function
 import tempfile as tmp
 import optparse as opt
 import cmsPerfRegress as cpr
@@ -51,7 +52,7 @@ DirName=( #These need to match the candle directory names ending (depending on t
           )
 #Defining Steps as a union of Step and ProductionSteps:
 Steps=set(Step+ProductionSteps+["GEN,FASTSIM","GEN,FASTSIM_PILEUP"]) #Adding GEN,FASTSIM too by hand.
-print Steps
+print(Steps)
 
 ##################
 #
@@ -62,7 +63,7 @@ class ReldirExcept(Exception):
     "Relative directory could not be determined"
 
 def fail(errstr=""):
-    print errstr
+    print(errstr)
     delTmpDir()
     sys.exit()
 
@@ -82,7 +83,7 @@ def getcmdBasic(cmd):
 
 def getcmd(command):
     if _debug > 2:
-        print command
+        print(command)
     #Obsolete popen4-> subprocess.Popen
     #return os.popen4(command)[1].read().strip()
     return subprocess.Popen(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT).stdout.read().strip()
@@ -106,10 +107,10 @@ class Row(object):
     def __init__(self,table):
         self.table   = table
         self.coldata = {}
-        
+
     def __str__(self):
         return str(self.coldata)
-    
+
     def addEntry(self,colname,value):
         self.table._newCol(colname)
         self.coldata[colname] = value
@@ -118,7 +119,7 @@ class Row(object):
         return self.coldata
 
 class Table(object):
-    
+
     def __init__(self):
         self.colNames = []
         self.keys     = [None]
@@ -144,12 +145,12 @@ class Table(object):
         else:
             self.keys.append(name)
             self.rows[name] = Row(self)
-            
+
         return self.rows[name]
 
     def getTable(self,mode=0):
         name = "Total"
-        
+
         for key in self.keys:
             if  key == None:
                 pass
@@ -172,7 +173,7 @@ class Table(object):
                     rowobj.addEntry(name,total1)                    
                 else:
                     rowobj.addEntry(name,(total1,total2))
-                
+
         return (self.keys, self.rows)
 
     def addRow(self,row,name):
@@ -181,7 +182,7 @@ class Table(object):
         else:
             self.keys.append(name)
             self.rows[name] = row
-            
+
     def transpose(self):
         transp = Table()
         for col in self.colnames:
@@ -206,8 +207,8 @@ def main():
     def _copyReportsToStaging(repdir,LogFiles,cmsScimarkDir,stage):
         """Use function syscp to copy LogFiles and cmsScimarkDir over to staging area"""
         if _verbose:
-            print "Copying the logfiles to %s/." % stage
-            print "Copying the cmsScimark2 results to the %s/." % stage  
+            print("Copying the logfiles to %s/." % stage)
+            print("Copying the cmsScimark2 results to the %s/." % stage)  
 
         syscp(LogFiles     , stage + "/")
         syscp(cmsScimarkDir, stage + "/")
@@ -218,32 +219,32 @@ def main():
         try:
             LOG = open(LogFile,"w")
             if _verbose:
-                print "Writing Production Host, Location, Release and Tags information in %s" % LogFile 
+                print("Writing Production Host, Location, Release and Tags information in %s" % LogFile) 
             LOG.write("These performance tests were executed on host %s and published on %s" % (HOST,date))
             LOG.write("They were run in %s" % LocalPath)
             LOG.write("Results of showtags -r in the local release:\n%s" % ShowTagsResult)
             LOG.close()
         except IOError, detail:
-            print "WARNING: Can't create log file"            
-            print detail
+            print("WARNING: Can't create log file")            
+            print(detail)
 
     # Print Program header
     print_header()
 
     # Get environment variables
     #FIXME: should check into this and make sure the proper variables for the tests being published are read from logfile (case of deprecated releases...)
-    print "\n Getting Environment variables..."
+    print("\n Getting Environment variables...")
     (LocalPath, ShowTagsResult) = get_environ()
 
     # Parse options
     (options,args) = optionparse()
 
     # Determine program parameters and input/staging locations
-    print "\n Determining locations for input and staging..."
+    print("\n Determining locations for input and staging...")
     (drive,path,remote,stage,port,repdir,prevrev,igprof_remotedir) = getStageRepDirs(options,args)
 
     #Get the number of events for each test from logfile:
-    print "\n Getting the number of events for each test..."
+    print("\n Getting the number of events for each test...")
     #Let's do a quick implementation of something that looks at the logfile:
     cmsPerfSuiteLogfile="%s/cmsPerfSuite.log"%repdir
 
@@ -254,45 +255,45 @@ def main():
             (CMSSW_arch,CMSSW_version)=getArchVersionFromLog(cmsPerfSuiteLogfile)
             #For now keep the dangerous default? Better set it to a negative number...
         except:
-            print "There was an issue in reading out the number of events for the various tests or the architecture/CMSSW version using the standard logfile %s"%cmsPerfSuiteLogFile
-            print "Check that the format was not changed: this scripts relies on the initial perfsuite arguments to be dumped in the logfile one per line!"
-            print "For now taking the default values for all tests (0)!"
+            print("There was an issue in reading out the number of events for the various tests or the architecture/CMSSW version using the standard logfile %s"%cmsPerfSuiteLogFile)
+            print("Check that the format was not changed: this scripts relies on the initial perfsuite arguments to be dumped in the logfile one per line!")
+            print("For now taking the default values for all tests (0)!")
 
-    print "\n Scan report directory..."
+    print("\n Scan report directory...")
     # Retrieve some directories and information about them
     (ExecutionDate,LogFiles,date,cmsScimarkResults,cmsScimarkDir) = scanReportArea(repdir)
-    print "cmsScimarkResults are %s"%cmsScimarkResults
-    print "\n Copy report files to staging directory..."
+    print("cmsScimarkResults are %s"%cmsScimarkResults)
+    print("\n Copy report files to staging directory...")
     # Copy reports to staging area 
     _copyReportsToStaging(repdir,LogFiles,cmsScimarkDir,stage)
 
-    print "\n Creating log file..."
+    print("\n Creating log file...")
     # Produce a small logfile with basic info on the Production area
     _createLogFile("%s/ProductionLog.txt" % stage,date,repdir,ShowTagsResult)
 
     #Check if there are IgProf tests:
     for dirname in os.listdir(repdir):
         if "IgProf" in dirname:
-            print "\n Handling IgProf reports..."
+            print("\n Handling IgProf reports...")
             # add a function to handle the IgProf reports
             stageIgProfReports(igprof_remotedir,CMSSW_arch,CMSSW_version)
-    
-    print "\n Creating HTML files..."
+
+    print("\n Creating HTML files...")
     # create HTML files
     createWebReports(stage,repdir,ExecutionDate,LogFiles,cmsScimarkResults,date,prevrev)
 
-    print "\n Copy profiling logs to staging directory..."
+    print("\n Copy profiling logs to staging directory...")
     # Copy over profiling logs...
     getDirnameDirs(repdir,stage)
 
     # Send files to remote location
     if remote:
-        print "\n Uploading web report to remote location..."
+        print("\n Uploading web report to remote location...")
         syncToRemoteLoc(stage,drive,path,port)
-        print "\n Finished uploading! Now removing staging directory..."
+        print("\n Finished uploading! Now removing staging directory...")
         delTmpDir()
 
-    print "\n Finished!!!"
+    print("\n Finished!!!")
 
 ##########################
 #
@@ -301,7 +302,7 @@ def main():
 def get_environ():
     global CMSSW_VERSION, CMSSW_RELEASE_BASE, CMSSW_BASE, HOST, USER, BASE_PERFORMANCE, CMSSW_WORK
     global DEF_RELVAL, DEF_SIMUL
-    
+
     try:
         CMSSW_VERSION=os.environ['CMSSW_VERSION']
         CMSSW_RELEASE_BASE=os.environ['CMSSW_RELEASE_BASE']
@@ -319,7 +320,7 @@ def get_environ():
     PerformancePkg="%s/src/Validation/Performance"        % CMSSW_BASE
     if (os.path.exists(PerformancePkg)):
         BASE_PERFORMANCE=PerformancePkg
-        print "**Using LOCAL version of Validation/Performance instead of the RELEASE version**"
+        print("**Using LOCAL version of Validation/Performance instead of the RELEASE version**")
     else:
         BASE_PERFORMANCE="%s/src/Validation/Performance"  % CMSSW_RELEASE_BASE
 
@@ -346,7 +347,7 @@ def optionparse():
        Publish report to default relval location (this could be remote or local depending on the hardcoded default)
         ./%s --relval"""
       % ( PROG_NAME, PROG_NAME, PROG_NAME, PROG_NAME, PROG_NAME)))
-    
+
     devel  = opt.OptionGroup(parser, "Developer Options",
                                      "Caution: use these options at your own risk."
                                      "It is believed that some of them bite.\n")
@@ -409,7 +410,7 @@ def optionparse():
         help='Specify an AFS or host:mydir remote directory instead of default one',
         metavar='<IGPROF REMOTE DIRECTORY>'
         )
-    
+
     devel.add_option(
         '-d',
         '--debug',
@@ -511,12 +512,12 @@ def getStageRepDirs(options,args):
             split       = base.split(".")
             previousrev = split[1]
             currentrel  = split[3]
-            print "Regression Identification file exists, renaming report title for regression report. Old ver: %s" % previousrev
+            print("Regression Identification file exists, renaming report title for regression report. Old ver: %s" % previousrev)
         else:
-            print "No regression ID file exists and previous release name was not specified. Producing normal report."
+            print("No regression ID file exists and previous release name was not specified. Producing normal report.")
     else:
-        print "Previous release name was specified, renaming report title for regression report. Old ver %s" % previousrev
-    
+        print("Previous release name was specified, renaming report title for regression report. Old ver %s" % previousrev)
+
     uri = ""
     defaultlocal = False
     if options.simulation:
@@ -543,7 +544,7 @@ def getStageRepDirs(options,args):
         drive, path = uri.split(":",1)
     else:
         path = uri
-        
+
     if drive == "":
         path = os.path.abspath(path)
     remote = not drive == ""
@@ -564,12 +565,12 @@ def getStageRepDirs(options,args):
             except socket.gaierror:
                 unResolved = True
             if unResolved:
-                print "ERROR: Can not determine your hostname or ipv{4,6} address %s" % drive
+                print("ERROR: Can not determine your hostname or ipv{4,6} address %s" % drive)
                 if not (_dryrun or _test):
                     fail("exiting...")
 
     if (not remote) and (not options.port == 873) :
-        print "WARNING: Can not use a port if not performing a remote copy, ignoring"
+        print("WARNING: Can not use a port if not performing a remote copy, ignoring")
     port = options.port
 
     ###
@@ -579,7 +580,7 @@ def getStageRepDirs(options,args):
 
     StagingArea=""
     localExists = os.path.exists("%s/%s" % (CMSSW_WORK,CMSSW_VERSION))
-    
+
     if remote:
         #Cannot use this since the /tmp is limited to 2GB on lxbuild machines!
         #TMP_DIR=tmp.mkdtemp(prefix="/tmp/%s" % PROG_NAME)
@@ -589,7 +590,7 @@ def getStageRepDirs(options,args):
     elif defaultlocal and localExists:
         TMP_DIR=tmp.mkdtemp(prefix="%s/%s" % (CMSSW_WORK,CMSSW_VERSION))
         StagingArea = TMP_DIR
-        print "WARNING: %s already exists, creating a temporary staging area %s" % (CMSSW_WORK,TMP_DIR)
+        print("WARNING: %s already exists, creating a temporary staging area %s" % (CMSSW_WORK,TMP_DIR))
     #Local cases
     elif defaultlocal:
         StagingArea = CMSSW_WORK
@@ -598,9 +599,9 @@ def getStageRepDirs(options,args):
             os.mkdir(os.path.join(CMSSW_BASE,"work","Results"))
         except OSError:
             pass
-        print "**User did not specify location of results, staging in default %s**" % StagingArea 
+        print("**User did not specify location of results, staging in default %s**" % StagingArea) 
     else:
-        print "**User chose to publish results in a local directory**" 
+        print("**User chose to publish results in a local directory**") 
         StagingArea = path
         if not os.path.exists(path):
             try:
@@ -631,7 +632,7 @@ def getStageRepDirs(options,args):
             pass
         else:
             fail("ERROR: There was some problem (%s) when creating the staging directory" % detail)
-    
+
     return (drive,path,remote,StagingArea,port,repdir,previousrev,options.ig_remotedir)
 
 ####################
@@ -644,13 +645,13 @@ def scanReportArea(repdir):
     date=getDate()
     LogFiles  = glob.glob(repdir + "cms*.log")
     if _verbose:
-        print "Found the following log files:"
-        print LogFiles
+        print("Found the following log files:")
+        print(LogFiles)
 
     cmsScimarkDir = glob.glob(repdir + "cmsScimarkResults_*")
     if _verbose:
-        print "Found the following cmsScimark2 results directories:"
-        print cmsScimarkDir
+        print("Found the following cmsScimark2 results directories:")
+        print(cmsScimarkDir)
 
     cmsScimarkResults = []
     for adir in cmsScimarkDir:
@@ -669,11 +670,11 @@ def scanReportArea(repdir):
             ExecutionDateLastSec = os.stat(logf)[ST_CTIME]
             ExecutionDateLast    = os.stat(logf)[ST_MTIME]
             if _verbose:
-                print "Execution (completion) date for %s was: %s" % (logf,ExecutionDateLast)
+                print("Execution (completion) date for %s was: %s" % (logf,ExecutionDateLast))
             if (ExecutionDateLastSec > ExecutionDateSec):
                 ExecutionDateSec = ExecutionDateLastSec
                 ExecutionDate    = ExecutionDateLast
-                
+
     if ExecutionDate == "":
         ExecutionDate = ExecutionDateLast
 
@@ -688,7 +689,7 @@ def createRegressHTML(reghtml,repdir,outd,CurrentCandle,htmNames):
         for line in open(RegressTmplHTML):
             if candhreg.search(line):
                 html = "<table>"
-                
+
                 for x in htmNames:
                     abspath = os.path.join(repdir,outd)
                     if os.path.exists(abspath):
@@ -702,7 +703,7 @@ def createRegressHTML(reghtml,repdir,outd,CurrentCandle,htmNames):
             else:
                 REGR.write(line)
     except IOError, detail:
-        print "ERROR: Could not write regression html %s because %s" % (os.path.basename(reghtml),detail)                
+        print("ERROR: Could not write regression html %s because %s" % (os.path.basename(reghtml),detail))                
 
 def getOutputNames(base,reportName):
     logreg   = re.compile("(.*)\.log$")
@@ -827,8 +828,8 @@ def step_cmp(x,y):
         y_idx = last_y
 
     if x_idx == -1 or y_idx == -1:
-        print "WARNING: No valid step names could be found in the logfiles or root filenames being sorted: x: %s y: %s." % (xstr,ystr)
-        print "x", x_idx, "y", y_idx
+        print("WARNING: No valid step names could be found in the logfiles or root filenames being sorted: x: %s y: %s." % (xstr,ystr))
+        print("x", x_idx, "y", y_idx)
 
     if x_idx < y_idx:
         return -1
@@ -836,7 +837,7 @@ def step_cmp(x,y):
         return 0
     elif y_idx < x_idx:
         return 1
-        
+
 
 ######################
 #
@@ -851,7 +852,7 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
         if found:
             out = found.groups()[0]
         return out
-    
+
     def _getProfileReportLink(repdir,CurrentCandle,CurDir,step,CurrentProfile,Profiler):
         #FIXME:
         #Pileup now has it own directory... should add it in the DirName dictionary at the beginning?
@@ -918,7 +919,7 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
     #FIXME:
     #These numbers are used in the index.html they are not automatically matched to the actual
     #ones (one should automate this, by looking into the cmsCreateSimPerfTestPyRelVal.log logfile)    
-                            
+
     NumOfEvents={
                 DirName[0] : TimeSizeNumOfEvents,
                 DirName[1] : IgProfNumOfEvents,
@@ -984,8 +985,8 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
                 CAND.write("</h2>\n")
 
                 if _verbose:
-                    print "Producing candles html: ", CurrentCandle
-                
+                    print("Producing candles html: ", CurrentCandle)
+
                 for CurDir in DirName:
 
                     LocalPath = os.path.join(repdir,"%s_%s" % (CurrentCandle,CurDir))
@@ -1012,8 +1013,8 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
                         #This for cycle takes care of the case in which there are regression reports to link to the html:
                         for prof in profs:
                             if _verbose:
-                                print "Scanning for profile information for: ", prof
-                                
+                                print("Scanning for profile information for: ", prof)
+
                             printed = False
                             fullprof = (CurrentCandle,prof)
                             outd     = ""
@@ -1117,19 +1118,19 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
                         CandleLogFiles = filter(lambda x: (x.endswith(".log") or x.endswith("EdmSize")) and not os.path.isdir(x) and os.path.exists(x), map(lambda x: os.path.abspath(os.path.join(LocalPath,x)),thedir))                    
 
                     if (len(CandleLogFiles)>0):
-                        
+
                         syscp(CandleLogFiles,WebArea + "/")
                         base = os.path.basename(LocalPath)
                         lfileshtml = ""
-                     
+
                         for cand in CandleLogFiles:
                             cand = os.path.basename(cand)
                             if _verbose:
-                                print "Found %s in %s\n" % (cand,LocalPath)
-                                
+                                print("Found %s in %s\n" % (cand,LocalPath))
+
                             if not "EdmSize" in cand:
                                 lfileshtml += "<a href=\"./%s/%s\">%s </a><br/>" % (base,cand,cand)
-                                    
+
                         CAND.write("<p><strong>Logfiles for %s</strong></p>\n" % CurDir)    
                         CAND.write(lfileshtml)
 
@@ -1160,7 +1161,7 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
                                     CAND.write("<p><strong>%s</strong></p>\n" % CurDir)
                                     CAND.write("<ul>\n")
                                     PrintedOnce=True
-                                
+
                                 #Special cases first (IgProf MemAnalyse and Valgrind MemCheck)
                                 #Add among the special cases any IgProfMem (5,6,7) since now we added the dumping:
                                 if (CurrentProfile == Profile[5] or CurrentProfile == Profile[6]):
@@ -1179,7 +1180,7 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
                                             #for prolink in ProfileReportLink:
                                             IgProfDumpsTable(CAND,ProfileReportLink,step)
                                             #    _writeReportLink(CAND,prolink,CurrentProfile,step,NumOfEvents[CurDir],Profiler=os.path.basename(prolink))
-                                    
+
                                 elif (CurrentProfile == Profile[7]):
                                     for igprof in IgProfMemAnalyseOut:
                                         ProfileReportLink = _getProfileReportLink(repdir,CurrentCandle,
@@ -1233,7 +1234,7 @@ def createCandlHTML(tmplfile,candlHTML,CurrentCandle,WebArea,repdir,ExecutionDat
 
         CAND.close()
     except IOError, detail:
-        print "ERROR: Could not write candle html %s because %s" % (os.path.basename(candlHTML),detail)
+        print("ERROR: Could not write candle html %s because %s" % (os.path.basename(candlHTML),detail))
 
 
 def populateFromTupleRoot(tupname,repdir,rootfile,pureg):
@@ -1298,7 +1299,7 @@ def populateFromTupleRoot(tupname,repdir,rootfile,pureg):
         else:
             table.addRow(puRow,"%s PILEUP" %cand)                
     return table
-                
+
 
 def createHTMLtab(INDEX,table_dict,ordered_keys,header,caption,name,mode=0):
     cols     = len(ordered_keys)
@@ -1341,7 +1342,7 @@ def createHTMLtab(INDEX,table_dict,ordered_keys,header,caption,name,mode=0):
                         INDEX.write("<td>")
                         INDEX.write("%s" % dat)
                         INDEX.write("</td>")
-                        
+
                     elif mode == 3:
                         dat = rowdict[col]
                         INDEX.write("<td>")
@@ -1355,7 +1356,7 @@ def createHTMLtab(INDEX,table_dict,ordered_keys,header,caption,name,mode=0):
                             diff  = prettySize(diff)
                             data1 = prettySize(data1)
                             data2 = prettySize(data2)
-                        
+
                         seq = [ data1, data2, diff ]
                         for dat in seq:
                             INDEX.write("<td id=\"data\">")
@@ -1403,12 +1404,12 @@ def stageIgProfReports(remotedir,arch,version):
 
     #Create remote dir:
     try:
-        print mkdir_cmd
+        print(mkdir_cmd)
         os.system(mkdir_cmd)
-        print "Successfully created publication directory"
+        print("Successfully created publication directory")
     except:
-        print "Issues with publication directory existence/creation!"
-        
+        print("Issues with publication directory existence/creation!")
+
     #Copy files over to remote dir
     #replacing rsync with tar pipes since it can hang on AFS (Andreas' experience):
     #rsync_cmd="rsync -avz *_IgProf_*/*.sql3 %s/%s/%s"%(remotedir,arch,version)
@@ -1419,11 +1420,11 @@ def stageIgProfReports(remotedir,arch,version):
     try:
     #    print rsync_cmd
     #    os.system(rsync_cmd)
-        print tarpipe_cmd
+        print(tarpipe_cmd)
         os.system(tarpipe_cmd)
-        print "Successfully copied IgProf reports to %s"%remotedir
+        print("Successfully copied IgProf reports to %s"%remotedir)
     except:
-        print "Issues with rsyncing to the remote directory %s!"%remotedir
+        print("Issues with rsyncing to the remote directory %s!"%remotedir)
 
     #Make sure permissions are set for group to be able to write:
     if ":" in remotedir: #Remote host local directory case
@@ -1431,12 +1432,12 @@ def stageIgProfReports(remotedir,arch,version):
     else:
         chmod_cmd="chmod -R 775 %s/%s"%(remotedir,arch)
     try:
-        print chmod_cmd
+        print(chmod_cmd)
         os.system(chmod_cmd)
-        print "Successfully set permissions for IgProf reports directory %s"%remotedir
+        print("Successfully set permissions for IgProf reports directory %s"%remotedir)
     except:
-        print "(Potential) issues with chmoding the remote directory %s!"%remotedir
-    
+        print("(Potential) issues with chmoding the remote directory %s!"%remotedir)
+
     return #Later, report here something like the web link to the reports in igprof-navigator...
 
 
@@ -1472,8 +1473,8 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
 
     CandlTmpltHTML="%s/doc/candle.html" % BASE_PERFORMANCE
     if _verbose:
-        print "Copying %s/doc/perf_style.css style file to %s/." % (BASE_PERFORMANCE,WebArea)    
-        print "Template used: %s" % TemplateHtml
+        print("Copying %s/doc/perf_style.css style file to %s/." % (BASE_PERFORMANCE,WebArea))    
+        print("Template used: %s" % TemplateHtml)
 
     syscp((BASE_PERFORMANCE + "/doc/perf_style.css"),WebArea + "/.")
     pureg = re.compile("(.*)_PILEUP")    
@@ -1536,26 +1537,26 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                                 if createNewRow:
                                     createNewRow = False
                                     curRow = fsize_tab.newRow(cand)
-                                    
+
                                 if "PILEUP" in step:
                                     puRow.addEntry(realstep,fsize)
                                 else:
                                     if createNewRow:
                                         createNewRow = False
                                         curRow = fsize_tab.newRow(cand)
-                                        
+
                                     curRow.addEntry(step,fsize)       
                             except IOError, detail:
-                                print detail
+                                print(detail)
                             except OSError, detail:
-                                print detail
+                                print(detail)
                         if puRow == None:
                             pass
                         else:
                             fsize_tab.addRow(puRow,"%s PILEUP" %cand)                                                                    
                     (ordered_keys,table_dict) = fsize_tab.getTable(1)
                     cols = len(ordered_keys)
-                    
+
                     if len(table_dict) > 1 and cols > 0:
                         createHTMLtab(INDEX,table_dict,ordered_keys,
                                       "Release ROOT file sizes",
@@ -1594,7 +1595,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                                 step  = "Unknown-step"
                                 if found:
                                     step = found.groups()[0]
-                                    
+
                                 realstep  = "Unknown-step"
                                 if "PILEUP" in step:
                                     found = pureg.search(step)
@@ -1615,8 +1616,8 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                                         statinfo = os.stat(oldfile)
                                         fsize1   = statinfo.st_size
                                     else:
-                                        print "######DID NOT FIND Previous file (needed for the filesize table): %s"%oldfile
-                                            
+                                        print("######DID NOT FIND Previous file (needed for the filesize table): %s"%oldfile)
+
                                     if createNewRow:
                                         createNewRow = False
                                         curRow = fsize_tab.newRow(cand)
@@ -1631,26 +1632,26 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
 
                                         curRow.addEntry(step,data_tuple)
                                 except IOError, detail:
-                                    print detail
+                                    print(detail)
                                 except OSError, detail:
-                                    print detail
+                                    print(detail)
                             if puRow == None:
                                 pass
                             else:
                                 fsize_tab.addRow(puRow,"%s PILEUP" %cand)                                    
-                                    
+
                         (ordered_keys,table_dict) = fsize_tab.getTable()
                         cols = len(ordered_keys)
-                    
+
                         if len(table_dict) > 1 and cols > 0:
                             createHTMLtab(INDEX,table_dict,ordered_keys,
                                           "Release ROOT file sizes",
                                           "Table showing previous release ROOT filesizes, fs1, latest sizes, fs2, and the difference between them &#x0394; in (k/M/G) bytes.",
                                           "Filesizes",1)
                     except IOError, detail:
-                        print detail
+                        print(detail)
                     except OSError, detail:
-                        print detail
+                        print(detail)
             #CPU Time Summary Table    
             elif cpureg.search(NewFileLine):
                 #Case of NO REGRESSION
@@ -1685,7 +1686,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                                 if createPURow:
                                     createPURow = False
                                     puRow = Row(time_tab)
-                                
+
                             data = cpr.getTimingLogData(log)
                             mean = 0
                             i    = 0
@@ -1695,7 +1696,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                             try:
                                 mean = mean / float(i)
                             except ZeroDivisionError, detail:
-                                print "WARNING: Could not calculate mean CPU time from log because no events could be parsed", log
+                                print("WARNING: Could not calculate mean CPU time from log because no events could be parsed", log)
 
                             if "PILEUP" in step:
                                 puRow.addEntry(realstep,mean)
@@ -1712,7 +1713,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
 
                     (ordered_keys,table_dict) = time_tab.getTable(1)
                     cols = len(ordered_keys)
-                    
+
                     if len(table_dict) > 1 and cols > 0:
                         createHTMLtab(INDEX,table_dict,ordered_keys,
                                       "Release CPU times",
@@ -1727,7 +1728,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                     # Create the table data structure
                     #
                     cpu_time_tab =  populateFromTupleRoot("cpu_time_tuple",repdir,"timing-regress.root",pureg)
-                    
+
 
                     ###########
                     #
@@ -1743,8 +1744,8 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                                       "Table showing previous release CPU times, t1, latest times, t2, and the difference between them &#x0394; in secs.",
                                       "CPU Times (s)")
 
-                        
-                    
+
+
             elif lpathreg.search(NewFileLine):
                 INDEX.write(repdir + "\n")
             elif proddreg.search(NewFileLine):
@@ -1754,7 +1755,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                 for log in LogFiles:
                     log = os.path.basename(log)
                     if _verbose:
-                        print "linking log file %s" % log
+                        print("linking log file %s" % log)
                     INDEX.write("<a href=\"./%s\"> %s </a>" % (log,log))
                     INDEX.write("<br />\n")
                 #Add the cmsScimark results here:
@@ -1790,7 +1791,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
                         candlHTML = "%s.html" % acandle
                         INDEX.write("<a href=\"./%s\"> %s </a>" % (candlHTML,acandle))
                         INDEX.write("<br />\n")
-                    
+
                         candlHTML=os.path.join(WebArea,candlHTML)
                         createCandlHTML(CandlTmpltHTML,candlHTML,acandle,WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,date,prevrev)
             else:
@@ -1799,7 +1800,7 @@ def createWebReports(WebArea,repdir,ExecutionDate,LogFiles,cmsScimarkResults,dat
         #End of while loop on template html file
         INDEX.close()
     except IOError, detail:
-        print "Error: Could not create index Html file for some reason, check position. Details : %s" % detail
+        print("Error: Could not create index Html file for some reason, check position. Details : %s" % detail)
 
 ########################
 #
@@ -1811,7 +1812,7 @@ def getDirnameDirs(repdir,WebArea):
         return reduce(lambda x,y: x or y,map(lambda x: x in elem, DirName))
     def _print4Lambda(elem,WebArea):
         if _verbose:
-            print "Copying %s to %s\n" %  (elem,WebArea)
+            print("Copying %s to %s\n" %  (elem,WebArea))
 
     dirstocp = filter(lambda x: _containsDirName(x),map(lambda x: repdir + x,Dir))
     map(lambda x: _print4Lambda(x,WebArea),dirstocp)
@@ -1834,10 +1835,10 @@ def syncToRemoteLoc(stage,drive,path,port):
     args = "--port=%s %s %s:%s" % (port,os.path.normpath(stage),drive,path)
     retval = -1
     if _dryrun:
-        print              cmd + " --dry-run " + args 
+        print(cmd + " --dry-run " + args) 
         retval = os.system(cmd + " --dry-run " + args )
     else:
-        print cmd+" "+args
+        print(cmd+" "+args)
         retval = os.system(cmd + " " + args)
     return retval
 
@@ -1883,7 +1884,7 @@ def getRelativeDir(parent,child,keepTop=True):
         for x in range(n):
             cwalk.next()
     except StopIteration:
-        print "ERROR: Unable to determine relative dir"
+        print("ERROR: Unable to determine relative dir")
         raise ReldirExcept
 
     relpath = ""
@@ -1898,12 +1899,12 @@ def docopy(src,dest):
     try:
         copy2(src,dest)
     except OSError, detail:
-        print "WARNING: Could not copy %s to %s because %s" % (src,dest,detail)        
+        print("WARNING: Could not copy %s to %s because %s" % (src,dest,detail))        
     except IOError, detail:
-        print "WARNING: Could not copy %s to %s because %s" % (src,dest,detail)
+        print("WARNING: Could not copy %s to %s because %s" % (src,dest,detail))
     else:
         if _verbose:
-            print "Copied %s to %s" % (src,dest)
+            print("Copied %s to %s" % (src,dest))
 
 def copytree4(src,dest,keepTop=True):
     def _getNewLocation(source,child,dst,keepTop=keepTop):
@@ -1924,24 +1925,24 @@ def copytree4(src,dest,keepTop=True):
                     else:
                         copy2(node,newnode)
                 except IOError, detail:
-                    print "WARNING: Could not copy %s to %s because %s" % (node,newnode,detail)
+                    print("WARNING: Could not copy %s to %s because %s" % (node,newnode,detail))
                 except OSError, detail:
-                    print "WARNING: Could not copy %s to %s because %s" % (src,dest,detail)                    
+                    print("WARNING: Could not copy %s to %s because %s" % (src,dest,detail))                    
                 except ReldirExcept:
-                    print "WARNING: Could not determine new location for source %s into destination %s" % (source,dst)
+                    print("WARNING: Could not determine new location for source %s into destination %s" % (source,dst))
                 else:
                     if len(filter) > 0:
                         try:
                             match = fnmatch.fnmatch(node,filter[0])
                             assert not match
                         except AssertionError, detail:
-                            print node, filter[0], match
+                            print(node, filter[0], match)
                             raise RuntimeError
                     if _verbose:
                         if "root" in node:                            
-                            print "Filter %s Copied %s to %s" % (dontFilter,node,newnode)
-                            print "fnmatch %s" % fnmatch.fnmatch(node,cpFileFilter[0]) 
-                    
+                            print("Filter %s Copied %s to %s" % (dontFilter,node,newnode))
+                            print("fnmatch %s" % fnmatch.fnmatch(node,cpFileFilter[0])) 
+
     gen  = os.walk(src)
     try:
         newloc = _getNewLocation(src,src,dest)
@@ -1960,12 +1961,12 @@ def copytree4(src,dest,keepTop=True):
         except StopIteration:
             pass        
     except IOError, detail:
-        print "WARNING: Could not copy %s to %s because %s" % (src,dest,detail)
+        print("WARNING: Could not copy %s to %s because %s" % (src,dest,detail))
     except OSError, detail:
-        print "WARNING: Could not copy %s to %s because %s" % (src,dest,detail)        
+        print("WARNING: Could not copy %s to %s because %s" % (src,dest,detail))        
     except ReldirExcept:
-        print "WARNING: Could not determine the new location for source %s into destination %s" % (src,dest)
-        
+        print("WARNING: Could not determine the new location for source %s into destination %s" % (src,dest))
+
 def syscp(srcs,dest):
     if type(srcs) == type(""):
         if os.path.exists(srcs):
@@ -1974,7 +1975,7 @@ def syscp(srcs,dest):
             else:
                 docopy(srcs,dest)
         else:
-            print "ERROR: file to be copied %s does not exist" % foo            
+            print("ERROR: file to be copied %s does not exist" % foo)            
     else:
         for src in srcs:
             if os.path.exists(src):
@@ -1984,10 +1985,10 @@ def syscp(srcs,dest):
                 else:
                     docopy(src,dest)
             else:
-                print "ERROR: file to be copied %s does not exist" % foo
-            
+                print("ERROR: file to be copied %s does not exist" % foo)
+
 def print_header():
-    print "%s\n" % PROG_NAME
+    print("%s\n" % PROG_NAME)
 
 if __name__ == "__main__":
     main()

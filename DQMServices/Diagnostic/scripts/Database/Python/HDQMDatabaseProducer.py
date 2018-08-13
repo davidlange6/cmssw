@@ -1,16 +1,17 @@
+from __future__ import print_function
 import os
 import sys
 
 if len(sys.argv) != 2:
-    print "Error: please, specify the configuration file"
+    print("Error: please, specify the configuration file")
     sys.exit()
 else:
     configFile = sys.argv[1]
 
 if os.path.isfile(configFile):
-    print "Using configuration file:", configFile
+    print("Using configuration file:", configFile)
 else:
-    print "Error: configuration file", configFile, "not found"
+    print("Error: configuration file", configFile, "not found")
     sys.exit()
 
 # Read the parameters
@@ -35,7 +36,7 @@ if len(config.RecoTypes) == 0:
     for file in fullList:
         # print file.split("__")[2]
         keys[file.split("__")[2]] = 1
-    print "Found the following reco types:", keys.keys()
+    print("Found the following reco types:", keys.keys())
     config.RecoTypes = keys.keys()
 
 # Save the list of recoTypes to file for the WebInterface
@@ -52,12 +53,12 @@ for recoType in config.RecoTypes:
         # Take the list of already processed runs
         import DiscoverProcessedRuns
         discoverProcessedRuns = DiscoverProcessedRuns.DiscoverProcessedRuns()
-    
+
         discoverProcessedRuns.Database =           config.Database
         discoverProcessedRuns.AuthenticationPath = config.AuthenticationPath
         discoverProcessedRuns.CMSSW_Version =      config.CMSSW_Version
         discoverProcessedRuns.TagName =            FullTagName
-        
+
         processedRuns = discoverProcessedRuns.runsList()
 
         # Filter out the files of already processed runs
@@ -69,7 +70,7 @@ for recoType in config.RecoTypes:
                     try:
                         filteredList.remove(file)
                     except Exception:
-                        print "Error, trying to remove file:", file, "twice!"
+                        print("Error, trying to remove file:", file, "twice!")
                         pass
 
         # Sort with run number and remove the last RunsToSkip runs
@@ -101,8 +102,8 @@ for recoType in config.RecoTypes:
 
         # Produce the plots if needed
         if len(filteredList) == 0:
-            print "Creating plots"
-            
+            print("Creating plots")
+
             producePlots.Dir = config.BaseDir+"/"
             producePlots.TagName = FullTagName
             producePlots.DetName = subDetAndTag.SubDet
@@ -115,7 +116,7 @@ for recoType in config.RecoTypes:
             producePlots.RunType = config.RunType
             producePlots.Group = config.Group
             producePlots.QualityFlag = subDetAndTag.QualityFlag
-            
+
             producePlots.makePlots()
 
     # All done, save the recoType to file

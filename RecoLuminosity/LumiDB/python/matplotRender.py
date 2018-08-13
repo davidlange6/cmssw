@@ -4,6 +4,7 @@ Specs:
 -- PNG as default batch file format
 -- we support http mode by sending string buf via meme type image/png. Sending a premade static plot to webserver is considered a uploading process instead of http dynamic graphical mode. 
 '''
+from __future__ import print_function
 import sys,os
 import numpy,datetime
 import matplotlib
@@ -17,7 +18,7 @@ else:
     try:
         from RecoLuminosity.LumiDB import lumiQTWidget  
     except ImportError:
-        print 'unable to import GUI backend, switch to batch only mode'
+        print('unable to import GUI backend, switch to batch only mode')
         matplotlib.use('Agg',warn=False)
         batchonly=True
 from matplotlib.backends.backend_agg import FigureCanvasAgg as CanvasBackend
@@ -125,9 +126,9 @@ class matplotRender():
                 v=float(r[-(len(labels)-i)-1])#the values to plot are always the last n fields
                 rawdata.setdefault(lab,[]).append((runnumber,v))
         if not rawdata:
-            print '[WARNING]: no data to plot , exit'
+            print('[WARNING]: no data to plot , exit')
             return
-      
+
         tot=sum([t[1] for t in rawdata[referenceLabel]])
         (unitstring,denomitor)=guessLumiUnit(tot)
         csvreport=None
@@ -198,8 +199,8 @@ class matplotRender():
             trans=matplotlib.transforms.BlendedGenericTransform(ax.transData,ax.transAxes)
             ax.text(xpoints[0],1.025,str(xpoints[0]),transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
             ax.text(xpoints[-1],1.025,str(xpoints[-1]),transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
-        
-    
+
+
     def plotSumX_Fill(self,rawdata={},resultlines=[],minFill=None,maxFill=None,nticks=6,yscale='linear',withannotation=False,referenceLabel='Delivered',labels=['Delivered','Recorded'],textoutput=None):
         '''
         input:
@@ -224,7 +225,7 @@ class matplotRender():
                 rawdata.setdefault(lab,[]).append((fillnum,runnum,v))
         #print 'fillrunDict ',fillrunDict
         if not rawdata:
-            print '[WARNING]: no data, do nothing'
+            print('[WARNING]: no data, do nothing')
             return
         tot=sum([t[2] for t in rawdata[referenceLabel]])
         beginfo=''
@@ -298,7 +299,7 @@ class matplotRender():
         ax.legend(tuple(legendlist),loc='upper left')
         #adjust
         self.__fig.subplots_adjust(bottom=0.1,left=0.1)
-        
+
     def plotSumX_Time(self,rawdata={},resultlines=[],minTime=None,maxTime=None,nticks=6,yscale='linear',withannotation=False,referenceLabel='Delivered',labels=['Delivered','Recorded'],textoutput=None):
         '''
         input:
@@ -331,12 +332,12 @@ class matplotRender():
             if rawdata and runnumber in [t[0] for t in rawdata[referenceLabel]]:continue
             if starttime<minTime:continue
             if starttime>maxTime:continue
-                
+
             for i,lab in enumerate(labels):
                 v=float(r[-(len(labels)-i)])
                 rawdata.setdefault(lab,[]).append((runnumber,starttime,stoptime,v))        
         if not rawdata:
-            print '[WARNING]: no data, do nothing'
+            print('[WARNING]: no data, do nothing')
             return
         tot=sum([t[3] for t in rawdata[referenceLabel]])
         (unitstring,denomitor)=guessLumiUnit(tot)
@@ -413,7 +414,7 @@ class matplotRender():
             runs=[t[0] for t in rawdata[referenceLabel]]
             ax.text(xpoints[0],1.025,str(runs[0]),transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))        
             ax.text(xpoints[-1],1.025,str(runs[-1]),transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
-        
+
         if yearStrMin==yearStrMax:
             firsttimeStr=rawdata[referenceLabel][1][1].strftime('%b %d %H:%M') #time range(start) in the title is the first run beg time 
             lasttimeStr=rawdata[referenceLabel][-1][2].strftime('%b %d %H:%M') #time range(stop) in the tile is the last run stop time
@@ -428,7 +429,7 @@ class matplotRender():
         ax.autoscale_view(tight=True,scalex=True,scaley=False)
         self.__fig.autofmt_xdate(bottom=0.18,rotation=15,ha='right')
         self.__fig.subplots_adjust(bottom=0.2,left=0.15)
-        
+
     def plotPerdayX_Time(self,rawdata={},resultlines=[],minTime=None,maxTime=None,nticks=6,yscale='linear',withannotation=False,referenceLabel='Delivered',labels=['Delivered','Recorded'],textoutput=None):
         '''
         Input:
@@ -463,7 +464,7 @@ class matplotRender():
                 v=float(r[-(len(labels)-i)-1])
                 rawdata.setdefault(lab,[]).append((day,begrunls,endrunls,v))
         if not rawdata:
-            print '[WARNING]: no data, do nothing'
+            print('[WARNING]: no data, do nothing')
             return
         maxlum=max([t[3] for t in rawdata[referenceLabel]])
         minlum=min([t[3] for t in rawdata[referenceLabel] if t[3]>0]) #used only for log scale, fin the non-zero bottom
@@ -494,7 +495,7 @@ class matplotRender():
                         else:
                             thisdaylumi=thisdaylumi/denomitor
                     else:
-                         thisdaylumi=thisdaylumi/denomitor
+                        thisdaylumi=thisdaylumi/denomitor
                     ypoints[label].append(thisdaylumi)
                 ymax[label]=max(lumivals)/denomitor
         xpoints=fulldays
@@ -560,7 +561,7 @@ class matplotRender():
         #        trans=matplotlib.transforms.BlendedGenericTransform(ax.transData,ax.transAxes)
         #        ax.text(matplotlib.dates.date2num(begtime),1.025,beginfo,transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))        
         #        ax.text(matplotlib.dates.date2num(endtime),1.025,endinfo,transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
-        
+
         firstday=datetime.date.fromordinal(rawdata[referenceLabel][0][0])
         lastday=datetime.date.fromordinal(rawdata[referenceLabel][-1][0])
         firstdayStr=firstday.strftime('%Y %b %d')
@@ -608,12 +609,12 @@ class matplotRender():
                 v=float(r[-(len(labels)-i)-1])
                 rawdata.setdefault(lab,[]).append((day,runnumber,lsnum,v))
         if not rawdata:
-            print '[WARNING]: no data, do nothing'
+            print('[WARNING]: no data, do nothing')
             return
         maxlum=max([t[3] for t in rawdata[referenceLabel]])
         minlum=min([t[3] for t in rawdata[referenceLabel] if t[3]>0]) #used only for log scale, fin the non-zero bottom
         (unitstring,denomitor)=guessInstLumiUnit(maxlum)
-        
+
         csvreport=None
         rows=[]
         flat=[]
@@ -656,7 +657,7 @@ class matplotRender():
             flat.append(alldates)
             rows=zip(*flat)
             csvreport.writeRows([list(t) for t in rows])
-            
+
         yearStrMin=minTime.strftime('%Y')
         yearStrMax=maxTime.strftime('%Y')
         if yearStrMin==yearStrMax:
@@ -698,12 +699,12 @@ class matplotRender():
         ax.legend(tuple(legendlist),loc='upper left')
         ax.set_xbound(lower=matplotlib.dates.date2num(minTime),upper=matplotlib.dates.date2num(maxTime))
         if withannotation:
-           #annotations
-           trans=matplotlib.transforms.BlendedGenericTransform(ax.transData,ax.transAxes)
-           ax.text(xpoints[0],1.025,beginfo,transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
-           ax.text(xpoints[-1],1.025,endinfo,transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
-           ax.annotate(maxinfo,xy=(xmax,ymax),xycoords='data',xytext=(0,13),textcoords='offset points',arrowprops=dict(facecolor='green',shrink=0.05),size='x-small',horizontalalignment='center',color='green',bbox=dict(facecolor='white'))
-           
+            #annotations
+            trans=matplotlib.transforms.BlendedGenericTransform(ax.transData,ax.transAxes)
+            ax.text(xpoints[0],1.025,beginfo,transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
+            ax.text(xpoints[-1],1.025,endinfo,transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))
+            ax.annotate(maxinfo,xy=(xmax,ymax),xycoords='data',xytext=(0,13),textcoords='offset points',arrowprops=dict(facecolor='green',shrink=0.05),size='x-small',horizontalalignment='center',color='green',bbox=dict(facecolor='white'))
+
         firstday=datetime.date.fromordinal(rawdata[referenceLabel][0][0])
         lastday=datetime.date.fromordinal(rawdata[referenceLabel][-1][0])
         firstdayStr=firstday.strftime('%Y %b %d')
@@ -746,7 +747,7 @@ class matplotRender():
         bottom_h=bottom+height
         rect_scatter=[left,bottom,width,height]
         rect_table=[left,bottom_h,width,0.25]
-        
+
         nullfmt=matplotlib.ticker.NullFormatter()
         nullloc=matplotlib.ticker.NullLocator()
         axtab=self.__fig.add_axes(rect_table,frameon=False)
@@ -757,7 +758,7 @@ class matplotRender():
         axtab.yaxis.set_major_locator(nullloc)
 
         ax=self.__fig.add_axes(rect_scatter)
-        
+
         majorLoc=matplotlib.ticker.LinearLocator(numticks=nticks)
         minorLoc=matplotlib.ticker.LinearLocator(numticks=nticks*4)
         ax.set_xlabel(r'LS',position=(0.96,0))
@@ -784,11 +785,11 @@ class matplotRender():
         (unitstring,denomitor)=guessLumiUnit(totaldelivered)
         colLabels=('run','fill','max inst(/$\mu$b/s)','delivered('+unitstring+')','recorded('+unitstring+')')
         cellText=[[str(runnum),str(fill),'%.3f'%(peakinst),'%.3f'%(totaldelivered/denomitor),'%.3f'%(totalrecorded/denomitor)]]
-       
+
         sumtable=axtab.table(cellText=cellText,colLabels=colLabels,colWidths=[0.12,0.1,0.27,0.27,0.27],cellLoc='center',loc='center')
         trans=matplotlib.transforms.BlendedGenericTransform(ax.transData,ax.transAxes)        
         axtab.add_table(sumtable)
-        
+
         ax.text(xpoints[0],1.02,starttime[0:17],transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))   
         ax.text(xpoints[ncmsls-1],1.02,stoptime[0:17],transform=trans,horizontalalignment='left',size='x-small',color='green',bbox=dict(facecolor='white'))        
         ax.legend(tuple(legendlist),loc='upper right',numpoints=1)
@@ -799,22 +800,22 @@ class matplotRender():
         buf=StringIO()
         self.__canvas.print_png(buf)
         return buf.getvalue()
-    
+
     def drawPNG(self,filename):
         self.__canvas=CanvasBackend(self.__fig)    
         self.__canvas.print_figure(filename)
-    
+
     def drawInteractive(self):
         if batchonly:
-            print 'interactive mode is not available for your setup, exit'
+            print('interactive mode is not available for your setup, exit')
             sys.exit()
         aw=lumiQTWidget.ApplicationWindow(fig=self.__fig)
         aw.show()
         aw.destroy()
-        
+
 if __name__=='__main__':
     import csv
-    print '=====testing plotSumX_Run======'
+    print('=====testing plotSumX_Run======')
     f=open('/afs/cern.ch/cms/lumi/www/plots/operation/totallumivsrun-2011.csv','r')
     reader=csv.reader(f,delimiter=',')
     resultlines=[]
@@ -827,8 +828,8 @@ if __name__=='__main__':
     m.plotSumX_Run(rawdata={},resultlines=resultlines,minRun=None,maxRun=None,nticks=6,yscale='linear',withannotation=False)
     #m.drawPNG('totallumivsrun-2011test.png')
     m.drawInteractive()
-    print 'DONE'
-    
+    print('DONE')
+
 '''
     print '=====testing plotSumX_Fill======'
     f=open('/afs/cern.ch/cms/lumi/www/plots/operation/totallumivsfill-2011.csv','r')

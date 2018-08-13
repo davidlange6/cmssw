@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 __version__ = "$Revision: 1.11 $"
 
 import os
@@ -64,32 +65,32 @@ def fileUpload(uploadPath,lheList, reallyDoIt):
         result = exeFullList.stdout.readlines()
         if result[0].rstrip('\n') == 'The file exists.':
             addFile = False
-            print 'File '+newFileName+' already exists: do you want to overwrite? [y/n]'
+            print('File '+newFileName+' already exists: do you want to overwrite? [y/n]')
             reply = raw_input()
             if reply == 'y' or reply == 'Y':
                 addFile = True
                 additionalOption = ' -f '
-                print ''
-                print 'Overwriting file '+newFileName+'\n'
+                print('')
+                print('Overwriting file '+newFileName+'\n')
         # add the file
         if addFile:
-            print 'Adding file '+str(f)+'\n'
+            print('Adding file '+str(f)+'\n')
             inUploadScript += defaultEOScpCommand+additionalOption+' '+str(f)+' '+defaultEOSLoadPath+uploadPath+'/'+str(realFileName)+'\n'
 
 # launch the upload shell script        
 
-    print '\n Launching upload script \n'+inUploadScript+'\n at '+time.asctime(time.localtime(time.time()))+' ...\n'
+    print('\n Launching upload script \n'+inUploadScript+'\n at '+time.asctime(time.localtime(time.time()))+' ...\n')
     if reallyDoIt:  
-      exeRealUpload = subprocess.Popen(["/bin/sh","-c",inUploadScript])
-      exeRealUpload.communicate()
-    print '\n Upload ended at '+time.asctime(time.localtime(time.time()))
+        exeRealUpload = subprocess.Popen(["/bin/sh","-c",inUploadScript])
+        exeRealUpload.communicate()
+    print('\n Upload ended at '+time.asctime(time.localtime(time.time())))
 
 #################################################################################################    
-        
+
 if __name__ == '__main__':
-    
+
     import optparse
-    
+
     # Here we define an option parser to handle commandline options..
     usage='cmsLHEtoEOSManager.py <options>'
     parser = optparse.OptionParser(usage)
@@ -113,13 +114,13 @@ if __name__ == '__main__':
                       help='List the files in article <Id>' ,
                       default=0,
                       dest='artIdLi')                     
-    
+
     parser.add_option('-d', '--dry-run',
                       help='dry run, it does nothing, but you can see what it would do',
                       action='store_true',
                       default=False,
                       dest='dryRun')
-    
+
     parser.add_option('-c', '--compress',
                       help='compress the local .lhe file with xc before upload',
                       action='store_true',
@@ -130,18 +131,18 @@ if __name__ == '__main__':
 
     # print banner
 
-    print ''
-    print 'cmsLHEtoEOSmanager '+__version__[1:-1]
-    print ''
-    print 'Running on ',time.asctime(time.localtime(time.time()))
-    print ''
-    
+    print('')
+    print('cmsLHEtoEOSmanager '+__version__[1:-1])
+    print('')
+    print('Running on ',time.asctime(time.localtime(time.time())))
+    print('')
+
     reallyDoIt = not options.dryRun
 
     # Now some fault control..If an error is found we raise an exception
     if not options.newId and options.artIdUp==0 and options.artIdLi==0:
         raise Exception('Please specify the action to be taken, either "-n", "-u" or "-l"!')
-    
+
     if options.fileList=='' and (options.newId or options.artIdUp!=0):
         raise Exception('Please provide the input file list!')
 
@@ -149,11 +150,11 @@ if __name__ == '__main__':
         raise Exception('Options "-n", "-u" and "-l" are mutually exclusive, please chose only one!')
 
     if options.newId:
-        print 'Action: create new article\n'
+        print('Action: create new article\n')
     elif options.artIdUp != 0:
-        print 'Action: update article '+str(options.artIdUp)+'\n'
+        print('Action: update article '+str(options.artIdUp)+'\n')
     elif options.artIdLi != 0:
-        print 'Action: list content of article '+str(options.artIdLi)+'\n'
+        print('Action: list content of article '+str(options.artIdLi)+'\n')
 
     if options.artIdLi==0:
         theList = options.fileList.split(',')
@@ -166,15 +167,15 @@ if __name__ == '__main__':
             if not os.path.exists(f):
                 raise Exception('Input file '+f+' does not exists')
             if reallyDoIt and options.compress:
-              print "Compressing file",f
-              theCompressionCommand = 'xz '+f
-              exeCompression = subprocess.Popen(["/bin/sh","-c",theCompressionCommand])
-              exeCompression.communicate()
-              theCompressedFilesList.append(f+'.xz')
+                print("Compressing file",f)
+                theCompressionCommand = 'xz '+f
+                exeCompression = subprocess.Popen(["/bin/sh","-c",theCompressionCommand])
+                exeCompression.communicate()
+                theCompressedFilesList.append(f+'.xz')
         if reallyDoIt and options.compress:
-          theList = theCompressedFilesList
-              
-        
+            theList = theCompressedFilesList
+
+
 
     newArt = 0
     uploadPath = ''
@@ -184,15 +185,15 @@ if __name__ == '__main__':
     if options.newId:
         oldArt = lastArticle()
         newArt = oldArt+1
-        print 'Creating new article with identifier '+str(newArt)+' ...\n'
+        print('Creating new article with identifier '+str(newArt)+' ...\n')
         uploadPath = defaultEOSRootPath+'/'+str(newArt)
         theCommand = defaultEOSmkdirCommand+' '+uploadPath
         if reallyDoIt:
-          exeUpload = subprocess.Popen(["/bin/sh","-c",theCommand])
-          exeUpload.communicate()
+            exeUpload = subprocess.Popen(["/bin/sh","-c",theCommand])
+            exeUpload.communicate()
 
 # update article
-        
+
     elif options.artIdUp != 0:
         newArt = options.artIdUp
         if articleExist(newArt):
@@ -201,25 +202,25 @@ if __name__ == '__main__':
             raise('Article '+str(newArt)+' to be updated does not exist!')
 
 # list article
-        
+
     elif options.artIdLi !=0:
         listPath = defaultEOSRootPath+'/'+str(options.artIdLi)
         theCommand = defaultEOSlistCommand+' '+listPath
         exeList = subprocess.Popen(["/bin/sh","-c",theCommand], stdout=subprocess.PIPE)
         for line in exeList.stdout.readlines():
             if findXrdDir(line) != None:
-                print findXrdDir(line)
+                print(findXrdDir(line))
 
 
     if newArt > 0:
         fileUpload(uploadPath,theList, reallyDoIt)
         listPath = defaultEOSRootPath+'/'+str(newArt)
-        print ''
-        print 'Listing the '+str(newArt)+' article content after upload:'
+        print('')
+        print('Listing the '+str(newArt)+' article content after upload:')
         theCommand = defaultEOSlistCommand+' '+listPath
         if reallyDoIt:
-          exeFullList = subprocess.Popen(["/bin/sh","-c",theCommand])
-          exeFullList.communicate()
+            exeFullList = subprocess.Popen(["/bin/sh","-c",theCommand])
+            exeFullList.communicate()
         else:
-          print 'Dry run, nothing was done'
-        
+            print('Dry run, nothing was done')
+

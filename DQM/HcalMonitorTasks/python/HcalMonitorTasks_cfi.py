@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 from DQM.HcalMonitorTasks.HcalDigiMonitor_cfi            import *
@@ -97,4 +98,4 @@ def SetTaskParams(process,param, value):
         try:
             exec(cmd)
         except SyntaxError:
-            print "Could not execute command '%s'"%cmd
+            print("Could not execute command '%s'"%cmd)

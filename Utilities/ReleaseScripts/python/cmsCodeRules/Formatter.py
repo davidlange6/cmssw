@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import os, sys, string
 
 from xml.parsers import expat
@@ -12,54 +13,54 @@ class SimpleAsciiFormatter :
         self.format = ""
         self.title = title
         return
-    
+
     def showLine(self) :
-        print "\n================================================================================\n"
+        print("\n================================================================================\n")
         return
-    
+
     def write(self, arg="") :
-        print arg
+        print(arg)
         return
 
     def writeB(self, arg="") :
-        print arg
+        print(arg)
         return
 
     def writeBr(self) :
-        print 
+        print() 
         return
 
     def writeH1(self, arg="") :
-        print arg
+        print(arg)
         return
-    
+
     def writeH2(self, arg="") :
-        print arg
+        print(arg)
         return
 
     def writeH3(self, arg="") :
-        print arg
+        print(arg)
         return
-    
+
     def startTable(self, colSizes, colLabels) :
         self.cols = colSizes
         self.format = ""
         for fmt in self.cols :
             self.format += "%"+str(fmt)+"s "
-        print self.format % tuple(colLabels)
+        print(self.format % tuple(colLabels))
 
         return
 
     def writeRow(self, args) :
-        print self.format % tuple(args)
+        print(self.format % tuple(args))
 
         return
 
     def endTable(self) :
         self.format = None
         self.cols   = None
-        
-    
+
+
 # ================================================================================
 
 class SimpleHTMLFormatter :
@@ -87,14 +88,14 @@ class SimpleHTMLFormatter :
             self.outFile.write( '\n')   # blank line, end of headers
             self.outFile.write( "<html> " + '\n')
             self.outFile.write( "</html> " + '\n')
-        
+
         return
 
     def showLine(self) :
         self.headers()
         self.outFile.write( "<hr />" + '\n')
         return
-    
+
     def write(self, arg="", bold=False) :
         self.headers()
         if bold:
@@ -107,17 +108,17 @@ class SimpleHTMLFormatter :
         self.headers()
         self.outFile.write( "<br /> <br /> " + '\n')
         return
-    
+
     def writeB(self, arg="") :
         self.headers()
         self.outFile.write( "<b> " + arg + " </b>" + '\n')
         return
-    
+
     def writeH1(self, arg="") :
         self.headers()
         self.outFile.write( "<h1> " + arg + " </h1>" + '\n')
         return
-    
+
     def writeH2(self, arg="") :
         self.headers()
         self.outFile.write( "<h2> " + arg + " </h2>" + '\n')
@@ -127,12 +128,12 @@ class SimpleHTMLFormatter :
         self.headers()
         self.outFile.write( "<h3> " + arg + " </h3>" + '\n')
         return
-    
+
     def writeAnchor(self, ref="") :
         self.headers()
         self.outFile.write( '<a name="' + ref + '">&nbsp;</a>')
         return
-    
+
     def startTable(self, colSizes, colLabels, id=None, cls=None, tableAttr=None) :
         # we assume that html headers are done by now !!
         tableString = '<table '
@@ -164,7 +165,7 @@ class SimpleHTMLFormatter :
             if bold: self.outFile.write( '<td class=cellbold> ' )
             else:    self.outFile.write( "  <td> " )
             self.outFile.write( arg )
-            
+
             self.outFile.write( " </td>" + '\n')
         self.outFile.write( " </tr> " + '\n')
 
@@ -188,19 +189,19 @@ class SimpleHTMLFormatter :
         # we assume that headers are done by now !!
         self.outFile.write( "</tbody>" + '\n')
         self.outFile.write( "</table>" + '\n')
-        
+
     # --------------------------------------------------------------------------------
     def headers(self) :
         # make sure to write the headers only once ...
         if not self.headersDone :
-        
+
             self.outFile.write( "<html> " + '\n')
 
             self.outFile.write( "<head> " + '\n')
 
             if self.style:
                 self.outFile.write( self.style + '\n')
-            
+
             self.outFile.write( "<TITLE>" + self.title + "</TITLE>" + '\n')
             if self.scriptCode:
                 self.outFile.write( self.scriptCode + '\n' )
@@ -219,4 +220,4 @@ class SimpleHTMLFormatter :
             pass
         return
 
-    
+

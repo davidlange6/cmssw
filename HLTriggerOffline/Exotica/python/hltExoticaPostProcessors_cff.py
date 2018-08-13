@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 from HLTriggerOffline.Exotica.hltExoticaPostProcessor_cfi import *
@@ -7,19 +8,19 @@ def efficiency_string(objtype,plot_type,triggerpath):
     # --- IMPORTANT: Add here a elif if you are introduce a new collection
     #                (see EVTColContainer::getTypeString) 
     if objtype == "Mu" :
-	objtypeLatex="#mu"
+        objtypeLatex="#mu"
     elif objtype == "Ele": 
-	objtypeLatex="e"
+        objtypeLatex="e"
     elif objtype == "Photon": 
-	objtypeLatex="#gamma"
+        objtypeLatex="#gamma"
     elif objtype == "PFTau": 
-	objtypeLatex="#tau"
+        objtypeLatex="#tau"
     elif objtype == "PFJet": 
-	objtypeLatex="PFJet"
+        objtypeLatex="PFJet"
     elif objtype == "MET" :
-	objtypeLatex="MET"
+        objtypeLatex="MET"
     else:
-	objtypeLatex=objtype
+        objtypeLatex=objtype
 
     numer_description = "# gen %s passed the %s" % (objtypeLatex,triggerpath)
     denom_description = "# gen %s " % (objtypeLatex)
@@ -49,7 +50,7 @@ def efficiency_string(objtype,plot_type,triggerpath):
     all_titles = "%s for trigger %s; %s; %s" % (title, triggerpath,
                                         xAxis, yAxis)
     return "Eff_%s_%s '%s' %s_%s %s" % (input_type,triggerpath,
-		    all_titles,input_type,triggerpath,input_type)
+                    all_titles,input_type,triggerpath,input_type)
 
 # Adding the reco objects
 def add_reco_strings(strings):
@@ -74,18 +75,18 @@ efficiency_strings = []
 from HLTriggerOffline.Exotica.hltExoticaValidator_cfi import hltExoticaValidator as _config
 triggers = set([])
 for an in _config.analysis:
-	s = _config.__getattribute__(an)
-	vstr = s.__getattribute__("hltPathsToCheck")
-	map(lambda x: triggers.add(x.replace("_v","")),vstr)
+    s = _config.__getattribute__(an)
+    vstr = s.__getattribute__("hltPathsToCheck")
+    map(lambda x: triggers.add(x.replace("_v","")),vstr)
 triggers = list(triggers)
-print triggers
+print(triggers)
 #------------------------------------------------------------
 
 # Generating the list with all the efficiencies
 for type in plot_types:
     for obj in obj_types:
-	for trig in triggers:
-	    efficiency_strings.append(efficiency_string(obj,type,trig))
+        for trig in triggers:
+            efficiency_strings.append(efficiency_string(obj,type,trig))
 #for item in efficiency_strings:
 #    print item
 
@@ -117,10 +118,10 @@ hltExoticaPostHT.subDirs = ['HLT/Exotica/HT']
 hltExoticaPostHT.efficiencyProfile = efficiency_strings
 
 hltExoticaPostProcessors = cms.Sequence(
-		hltExoticaPostHighPtDimuon +
-		hltExoticaPostHighPtDielectron +
-		hltExoticaPostEleMu +
-		hltExoticaPostMonojet +
-		hltExoticaPostPureMET +
-		hltExoticaPostHT
+                hltExoticaPostHighPtDimuon +
+                hltExoticaPostHighPtDielectron +
+                hltExoticaPostEleMu +
+                hltExoticaPostMonojet +
+                hltExoticaPostPureMET +
+                hltExoticaPostHT
 )

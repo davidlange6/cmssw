@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import logging
 import os.path
@@ -46,7 +47,7 @@ class ConfigEditorTabController(BrowserTabController):
         self._toolDialog=None
         self._updateCenterView=False
         self.setEditable(False)
-        
+
         self._configMenu = self.plugin().application().createPluginMenu('&Config')
         self._configToolBar = self.plugin().application().createPluginToolBar('&Config')
         openEditorAction = self.plugin().application().createAction('&Open in custom editor', self.openEditor, "F6")
@@ -66,17 +67,17 @@ class ConfigEditorTabController(BrowserTabController):
         self._editorAction = self.plugin().application().createAction('&Edit using ConfigEditor', self.startEditMode, "F8")
         self._configMenu.addAction(self._editorAction)
         self._configToolBar.addAction(self._editorAction)
-        
+
     #@staticmethod
     def staticSupportedFileTypes():
         """ Returns supported file type: py.
         """
         return [('py', 'Config file')]
     staticSupportedFileTypes = staticmethod(staticSupportedFileTypes)
-    
+
     def dotExportAction(self):
         return self._dotExportAction
-    
+
     def updateViewMenu(self):
         BrowserTabController.updateViewMenu(self)
         self.disconnect(self.tab().centerView(), SIGNAL("doubleClicked"), self.onCenterViewDoubleClicked)
@@ -127,7 +128,7 @@ class ConfigEditorTabController(BrowserTabController):
         if (self.currentCenterViewClassId() == self.plugin().viewClassId(ConnectionStructureView) or self.currentCenterViewClassId() == self.plugin().viewClassId(SequenceStructureView)) and \
             self.tab().centerView().updateContent(True):
             if not self.dataAccessor().isContainer(select) and self.currentCenterViewClassId() == self.plugin().viewClassId(ConnectionStructureView):
-                    self.tab().centerView().select(select,500)
+                self.tab().centerView().select(select,500)
             else:
                 self.tab().centerView().restoreSelection()
             select = self.tab().centerView().selection()
@@ -138,7 +139,7 @@ class ConfigEditorTabController(BrowserTabController):
         if import_tools_error==None and self.tab().editorSplitter():
             self.updateConfigHighlight()
         self.plugin().application().stopWorking(statusMessage)
-        
+
     def activated(self):
         """ Shows plugin menus when user selects tab.
         """
@@ -301,7 +302,7 @@ class ConfigEditorTabController(BrowserTabController):
             if self.plugin().application().commandLineOptions().saveimage:
                 self.tab().centerView().updateConnections()
                 self.saveImage(self.plugin().application().commandLineOptions().saveimage)
-                print "Saved image to", self.plugin().application().commandLineOptions().saveimage, "."
+                print("Saved image to", self.plugin().application().commandLineOptions().saveimage, ".")
                 sys.exit(2)
             return True
         return False
@@ -326,7 +327,7 @@ class ConfigEditorTabController(BrowserTabController):
         """ Write replace config file.
         """
         logging.debug(__name__ + ': writeFile')
-        
+
         text_file = open(filename, "w")
         text_file.write(self.toolDataAccessor().topLevelObjects()[0].dumpPython()[1])
         if self.dataAccessor().process():
@@ -388,7 +389,7 @@ class ConfigEditorTabController(BrowserTabController):
         self.tab().originalButton().setChecked(False)
         self.tab().maximizeButton().setChecked(False)
         self.tab().verticalSplitter().setSizes([100, 1, 0])
-    
+
     def originalEditor(self):
         self.tab().minimizeButton().setChecked(False)
         self.tab().originalButton().setChecked(True)
@@ -402,7 +403,7 @@ class ConfigEditorTabController(BrowserTabController):
         self.tab().originalButton().setChecked(False)
         self.tab().maximizeButton().setChecked(True)
         self.tab().verticalSplitter().setSizes([0, 1, 100])
-    
+
     def _updateCode(self,propertyView=True):
         logging.debug(__name__ + ": _updateCode")
         self.tab().propertyView().setEnabled(False)
@@ -448,7 +449,7 @@ class ConfigEditorTabController(BrowserTabController):
             self.tab().centerView().highlight(self.toolDataAccessor().toolModules()[self.tab().editorTableView().selection()])
         else:
             self.tab().centerView().highlight([])
-            
+
     def importButtonClicked(self):
         logging.debug(__name__ + ": importButtonClicked")
         filename = QFileDialog.getOpenFileName(
@@ -469,7 +470,7 @@ class ConfigEditorTabController(BrowserTabController):
         self._updateCode()
         self.tab().editorTableView().select(self.tab().editorTableView().dataObjects()[-2])
         self.codeSelected(self.tab().editorTableView().dataObjects()[-2])
-            
+
     def removeButtonClicked(self,object):
         logging.debug(__name__ + ": removeButtonClicked")
         if not object or not self.dataAccessor().process() or\
@@ -501,13 +502,13 @@ class ConfigEditorTabController(BrowserTabController):
     def select(self, object):
         self.selectDataAccessor(object)
         BrowserTabController.select(self, object)
-    
+
     def selectDataAccessor(self,object):
         if import_tools_error==None and isinstance(object,ConfigToolBase):
             self.tab().propertyView().setDataAccessor(self.toolDataAccessor())
         else:
             self.tab().propertyView().setDataAccessor(self.dataAccessor())
-    
+
     def codeSelected(self,select):
         if self.tab().propertyView().dataObject() != select:
             statusMessage = self.plugin().application().startWorking("Updating property view")

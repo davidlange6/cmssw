@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 import optparse
 import re
@@ -7,7 +8,7 @@ from FWCore.PythonUtilities.LumiList import LumiList
 
 
 if __name__ == '__main__':
-    
+
     parser = optparse.OptionParser ("Usage: %prog alpha.json")
     parser.add_option ('--max', dest='max', type='int', default=0,
                        help='maximum run to keep in output')
@@ -45,4 +46,4 @@ if __name__ == '__main__':
     if options.output:
         alphaList.writeJSON (options.output)
     else:
-        print alphaList
+        print(alphaList)

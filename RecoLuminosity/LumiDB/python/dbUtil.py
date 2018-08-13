@@ -1,3 +1,4 @@
+from __future__ import print_function
 import coral
 from RecoLuminosity.LumiDB import nameDealer        
 class dbUtil(object):
@@ -8,16 +9,16 @@ class dbUtil(object):
         Input: coral schema handle.
         """
         self.__schema = schema
-        
+
     def listIndex(self,tablename):
         mytable=self.__schema.tableHandle(tablename)
-        print 'numberofindices ', mytable.description().numberOfIndices()
+        print('numberofindices ', mytable.description().numberOfIndices())
         for i in range(0,mytable.description().numberOfIndices()):
             index=mytable.description().index(i)
-            print ' ', index.name(),' -> '
+            print(' ', index.name(),' -> ')
             for iColumn in index.columnNames():
-                print iColumn
-            print ' (tablespace : ',index.tableSpaceName(),')'
+                print(iColumn)
+            print(' (tablespace : ',index.tableSpaceName(),')')
     def describeSchema(self):
         """
         Print out the overview of the schema
@@ -26,24 +27,24 @@ class dbUtil(object):
             tablelist=self.__schema.listTables()
             for t in tablelist:
                 table = self.__schema.tableHandle(t)
-                print 'table ===',t,'==='
+                print('table ===',t,'===')
                 n=table.description().numberOfColumns()
                 for i in range(0,n):
-                  columndesp=table.description().columnDescription(i)
-                  print '\t',columndesp.name(),columndesp.type()
+                    columndesp=table.description().columnDescription(i)
+                    print('\t',columndesp.name(),columndesp.type())
                 if table.description().hasPrimaryKey():
-                  print 'Primary Key : '
-                  print '\t',table.description().primaryKey().columnNames()
-                print 'Indices : '
+                    print('Primary Key : ')
+                    print('\t',table.description().primaryKey().columnNames())
+                print('Indices : ')
                 self.listIndex(t)
             viewlist=self.__schema.listViews()
             for v in viewlist:
                 myview = self.__schema.viewHandle('V0')
-                print 'definition : ',myview.definition()
+                print('definition : ',myview.definition())
                 n=myview.numberOfColumns()
                 for i in range(0,n):
-                  columndesp=view.column(i)
-                  print '\t',columndesp.name(),columndesp.type()
+                    columndesp=view.column(i)
+                    print('\t',columndesp.name(),columndesp.type())
         except Exception, e:
             raise Exception, str(e)
     def existRow( self, tableName, condition, conditionDefDict,conditionDict):
@@ -90,7 +91,7 @@ class dbUtil(object):
             return n
         except Exception, e:
             raise RuntimeError('dbUtil.updateOneRow:'+str(e))
-    
+
     def updateRows( self,tableName,updateAction,updateCondition,bindvarDef,bulkinput):
         '''
         update rows, note update must be ordered
@@ -137,7 +138,7 @@ class dbUtil(object):
             del bulkOperation
         except:
             raise
-        
+
     def deleteRows( self, tableName, condition, conditionbindDict ):
         """
         Delete row(s)
@@ -148,7 +149,7 @@ class dbUtil(object):
             editor.deleteRows( condition, conditionbindDict )
         except Exception, e:
             raise Exception, str(e)
-        
+
     def dropTable( self, tableName ):
         """
         Drop specified table.If associated Id table exists, drop also Id table
@@ -193,10 +194,10 @@ class dbUtil(object):
         Tell whether table exists
         """
         try:
-          self.__schema.tableHandle(tableName)
-          return True
+            self.__schema.tableHandle(tableName)
+            return True
         except coral.Exception, e:
-          return False
+            return False
 
     def createIDTable( self, tableName, deleteOld=True ):
         """
@@ -205,27 +206,27 @@ class dbUtil(object):
         Output: name of the id table created
         """
         try:
-          idtableName=nameDealer.idTableName(tableName)
-          if deleteOld is True:
-            self.__schema.dropIfExistsTable(idtableName)
-          else:
-            if self.__schema.existsTable(idtableName):
-               print 'table '+idtableName+' exists, do nothing'
-               return
-          description = coral.TableDescription()
-          description.setName( idtableName )
-          description.setPrimaryKey( nameDealer.idTableColumnDefinition()[0] )
-          description.insertColumn( nameDealer.idTableColumnDefinition()[0], nameDealer.idTableColumnDefinition()[1])
-          idtableHandle=self.__schema.createTable( description )
-          idtableHandle.privilegeManager().grantToPublic( coral.privilege_Select )
-          inputData = coral.AttributeList()
-          editor = idtableHandle.dataEditor()
-          editor.rowBuffer( inputData )
-          inputData[ nameDealer.idTableColumnDefinition()[0] ].setData(0)
-          editor.insertRow( inputData )
+            idtableName=nameDealer.idTableName(tableName)
+            if deleteOld is True:
+                self.__schema.dropIfExistsTable(idtableName)
+            else:
+                if self.__schema.existsTable(idtableName):
+                    print('table '+idtableName+' exists, do nothing')
+                    return
+            description = coral.TableDescription()
+            description.setName( idtableName )
+            description.setPrimaryKey( nameDealer.idTableColumnDefinition()[0] )
+            description.insertColumn( nameDealer.idTableColumnDefinition()[0], nameDealer.idTableColumnDefinition()[1])
+            idtableHandle=self.__schema.createTable( description )
+            idtableHandle.privilegeManager().grantToPublic( coral.privilege_Select )
+            inputData = coral.AttributeList()
+            editor = idtableHandle.dataEditor()
+            editor.rowBuffer( inputData )
+            inputData[ nameDealer.idTableColumnDefinition()[0] ].setData(0)
+            editor.insertRow( inputData )
         except Exception, e:
-          raise RuntimeError('dbUtil.createIDTable'+str(e))
-      
+            raise RuntimeError('dbUtil.createIDTable'+str(e))
+
     def createEntryTable( self, tableName, deleteOld=True ):
         """
         Create Entry table  for the given table.\n
@@ -233,23 +234,23 @@ class dbUtil(object):
         Output: name of the id table created
         """
         try:
-          entrytableName=nameDealer.entryTableName(tableName)
-          if deleteOld is True:
-            self.__schema.dropIfExistsTable(entrytableName)
-          else:
-            if self.__schema.existsTable(entrytableName):
-               print 'table '+entrytableName+' exists, do nothing'
-               return
-          description = coral.TableDescription()
-          description.setName( entrytableName )
-          description.insertColumn( 'ENTRY_ID' ,'unsigned long long')
-          description.insertColumn( 'REVISION_ID' ,'unsigned long long')
-          description.insertColumn( 'NAME' ,'string',56,False)
-          tableHandle=self.__schema.createTable( description )
-          tableHandle.privilegeManager().grantToPublic(coral.privilege_Select)
+            entrytableName=nameDealer.entryTableName(tableName)
+            if deleteOld is True:
+                self.__schema.dropIfExistsTable(entrytableName)
+            else:
+                if self.__schema.existsTable(entrytableName):
+                    print('table '+entrytableName+' exists, do nothing')
+                    return
+            description = coral.TableDescription()
+            description.setName( entrytableName )
+            description.insertColumn( 'ENTRY_ID' ,'unsigned long long')
+            description.insertColumn( 'REVISION_ID' ,'unsigned long long')
+            description.insertColumn( 'NAME' ,'string',56,False)
+            tableHandle=self.__schema.createTable( description )
+            tableHandle.privilegeManager().grantToPublic(coral.privilege_Select)
         except Exception, e:
-          raise RuntimeError(' dbUtil.createEntryTable '+str(e))
-      
+            raise RuntimeError(' dbUtil.createEntryTable '+str(e))
+
     def createRevMapTable( self, tableName, deleteOld=True ):
         """
         Create Rev table  for the given table.\n
@@ -257,21 +258,21 @@ class dbUtil(object):
         Output: name of the id table 
         """
         try:
-          revmaptableName=nameDealer.revmapTableName(tableName)
-          if deleteOld is True:
-            self.__schema.dropIfExistsTable(revmaptableName)
-          else:
-            if self.__schema.existsTable(revmaptableName):
-               print 'table '+revmaptableName+' exists, do nothing'
-               return
-          description = coral.TableDescription()
-          description.setName( revmaptableName )
-          description.insertColumn( 'DATA_ID','unsigned long long')
-          description.insertColumn( 'REVISION_ID' ,'unsigned long long')
-          tableHandle=self.__schema.createTable( description )
-          tableHandle.privilegeManager().grantToPublic(coral.privilege_Select)
+            revmaptableName=nameDealer.revmapTableName(tableName)
+            if deleteOld is True:
+                self.__schema.dropIfExistsTable(revmaptableName)
+            else:
+                if self.__schema.existsTable(revmaptableName):
+                    print('table '+revmaptableName+' exists, do nothing')
+                    return
+            description = coral.TableDescription()
+            description.setName( revmaptableName )
+            description.insertColumn( 'DATA_ID','unsigned long long')
+            description.insertColumn( 'REVISION_ID' ,'unsigned long long')
+            tableHandle=self.__schema.createTable( description )
+            tableHandle.privilegeManager().grantToPublic(coral.privilege_Select)
         except Exception, e:
-          raise RuntimeError(' dbUtil.createRevMapTable '+str(e))     
-      
+            raise RuntimeError(' dbUtil.createRevMapTable '+str(e))     
+
 if __name__ == "__main__":
     pass

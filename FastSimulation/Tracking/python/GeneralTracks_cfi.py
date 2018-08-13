@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 import RecoTracker.FinalTrackSelectors.trackListMerger_cfi
@@ -39,4 +40,4 @@ if (MixingMode=='GenMixing'):
 elif (MixingMode=='DigiRecoMixing'):
     generalTracksBeforeMixing = generalTracksBase.clone()
 else: 
-    print 'unsupported MixingMode label'
+    print('unsupported MixingMode label')

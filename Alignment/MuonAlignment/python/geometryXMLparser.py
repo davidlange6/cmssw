@@ -13,42 +13,42 @@
 # }
 
 def dtorder(a, b):
-  for ai, bi, name in zip(list(a) + [0]*(5 - len(a)), \
-                          list(b) + [0]*(5 - len(b)), \
-                          ("wheel", "station", "sector", "superlayer", "layer")):
-    exec("a%s = %d" % (name, ai))
-    exec("b%s = %d" % (name, bi))
+    for ai, bi, name in zip(list(a) + [0]*(5 - len(a)), \
+                            list(b) + [0]*(5 - len(b)), \
+                            ("wheel", "station", "sector", "superlayer", "layer")):
+        exec("a%s = %d" % (name, ai))
+        exec("b%s = %d" % (name, bi))
 
-  if awheel == bwheel and astation == bstation:
+    if awheel == bwheel and astation == bstation:
 
-    if asector != bsector:
-      if astation == 4: sectororder = [0, 1, 2, 3, 4, 13, 5, 6, 7, 8, 9, 10, 14, 11, 12]
-      elif awheel == 0: sectororder = [0, 1, 5, 9, 2, 6, 10, 3, 7, 11, 4, 8, 12]
-      else: sectororder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-      return cmp(sectororder.index(asector), sectororder.index(bsector))
+        if asector != bsector:
+            if astation == 4: sectororder = [0, 1, 2, 3, 4, 13, 5, 6, 7, 8, 9, 10, 14, 11, 12]
+            elif awheel == 0: sectororder = [0, 1, 5, 9, 2, 6, 10, 3, 7, 11, 4, 8, 12]
+            else: sectororder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+            return cmp(sectororder.index(asector), sectororder.index(bsector))
 
-    elif asuperlayer != bsuperlayer:
-      superlayerorder = [0, 1, 3, 2]
-      return cmp(superlayerorder.index(asuperlayer), superlayerorder.index(bsuperlayer))
+        elif asuperlayer != bsuperlayer:
+            superlayerorder = [0, 1, 3, 2]
+            return cmp(superlayerorder.index(asuperlayer), superlayerorder.index(bsuperlayer))
 
-  return cmp(a, b)
+    return cmp(a, b)
 
 def cscorder(a, b):
-  for ai, bi, name in zip(list(a) + [0]*(5 - len(a)), \
-                          list(b) + [0]*(5 - len(b)), \
-                          ("endcap", "station", "ring", "chamber", "layer")):
-    exec("a%s = %d" % (name, ai))
-    exec("b%s = %d" % (name, bi))
+    for ai, bi, name in zip(list(a) + [0]*(5 - len(a)), \
+                            list(b) + [0]*(5 - len(b)), \
+                            ("endcap", "station", "ring", "chamber", "layer")):
+        exec("a%s = %d" % (name, ai))
+        exec("b%s = %d" % (name, bi))
 
-  if astation == 1 and aring == 3: return cmp(a, b)
+    if astation == 1 and aring == 3: return cmp(a, b)
 
-  elif aendcap == bendcap and astation == bstation and aring == bring and achamber != bchamber:
-    if achamber == 0: return -1 # upper hierarchy comes first
-    if bchamber == 0: return  1 # upper hierarchy comes first
-    if achamber % 2 == 1 and bchamber % 2 == 0: return -1  # odds come first
-    elif achamber % 2 == 0 and bchamber % 2 == 1: return 1 # evens come after
+    elif aendcap == bendcap and astation == bstation and aring == bring and achamber != bchamber:
+        if achamber == 0: return -1 # upper hierarchy comes first
+        if bchamber == 0: return  1 # upper hierarchy comes first
+        if achamber % 2 == 1 and bchamber % 2 == 0: return -1  # odds come first
+        elif achamber % 2 == 0 and bchamber % 2 == 1: return 1 # evens come after
 
-  return cmp(a, b)
+    return cmp(a, b)
 
 # External libraries (standard in Python >= 2.4, at least)
 import xml.sax
@@ -103,9 +103,9 @@ class MuonGeometry(xml.sax.handler.ContentHandler):
         self._operation = None
 
         if stream is not None:
-          parser = xml.sax.make_parser()
-          parser.setContentHandler(self)
-          parser.parse(stream)
+            parser = xml.sax.make_parser()
+            parser.setContentHandler(self)
+            parser.parse(stream)
 
     # what to do when you get to a <startelement>
     def startElement(self, tag, attrib):
@@ -165,65 +165,65 @@ class MuonGeometry(xml.sax.handler.ContentHandler):
 
     # writing back to xml
     def xml(self, stream=None, precision=10):
-      if precision == None: format = "%g"
-      else: format = "%." + str(precision) + "f"
+        if precision == None: format = "%g"
+        else: format = "%." + str(precision) + "f"
 
-      if stream == None:
-        output = []
-        writeline = lambda x: output.append(x)
-      else:
-        writeline = lambda x: stream.write(x)
+        if stream == None:
+            output = []
+            writeline = lambda x: output.append(x)
+        else:
+            writeline = lambda x: stream.write(x)
 
-      writeline("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-      writeline("<?xml-stylesheet type=\"text/xml\" href=\"MuonAlignment.xsl\"?>\n")
-      writeline("<MuonAlignment>\n\n")
+        writeline("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+        writeline("<?xml-stylesheet type=\"text/xml\" href=\"MuonAlignment.xsl\"?>\n")
+        writeline("<MuonAlignment>\n\n")
 
-      dtkeys = self.dt.keys()
-      dtkeys.sort(dtorder)
-      csckeys = self.csc.keys()
-      csckeys.sort(cscorder)
+        dtkeys = self.dt.keys()
+        dtkeys.sort(dtorder)
+        csckeys = self.csc.keys()
+        csckeys.sort(cscorder)
 
-      def f(number): return format % number
+        def f(number): return format % number
 
-      def position_ape(ali, attributes):
-        writeline("  <%s%s />\n" % (level, attributes))
-        writeline("  <setposition relativeto=\"%s\" x=\"%s\" y=\"%s\" z=\"%s\" phix=\"%s\" phiy=\"%s\" phiz=\"%s\" />\n" % \
-                  (ali.relativeto, f(ali.x), f(ali.y), f(ali.z), f(ali.phix), f(ali.phiy), f(ali.phiz)))
+        def position_ape(ali, attributes):
+            writeline("  <%s%s />\n" % (level, attributes))
+            writeline("  <setposition relativeto=\"%s\" x=\"%s\" y=\"%s\" z=\"%s\" phix=\"%s\" phiy=\"%s\" phiz=\"%s\" />\n" % \
+                      (ali.relativeto, f(ali.x), f(ali.y), f(ali.z), f(ali.phix), f(ali.phiy), f(ali.phiz)))
 
-        if "xx" in ali.__dict__:
-          writeline("  <setape xx=\"%s\" xy=\"%s\" xz=\"%s\" yy=\"%s\" yz=\"%s\" zz=\"%s\" />\n" % \
-                    (f(ali.xx), f(ali.xy), f(ali.xz), f(ali.yy), f(ali.yz), f(ali.zz)))
+            if "xx" in ali.__dict__:
+                writeline("  <setape xx=\"%s\" xy=\"%s\" xz=\"%s\" yy=\"%s\" yz=\"%s\" zz=\"%s\" />\n" % \
+                          (f(ali.xx), f(ali.xy), f(ali.xz), f(ali.yy), f(ali.yz), f(ali.zz)))
 
-      for key in dtkeys:
-        writeline("<operation>\n")
+        for key in dtkeys:
+            writeline("<operation>\n")
 
-        if len(key) == 0: level = "DTBarrel"
-        elif len(key) == 1: level = "DTWheel "
-        elif len(key) == 2: level = "DTStation "
-        elif len(key) == 3: level = "DTChamber "
-        elif len(key) == 4: level = "DTSuperLayer "
-        elif len(key) == 5: level = "DTLayer "
+            if len(key) == 0: level = "DTBarrel"
+            elif len(key) == 1: level = "DTWheel "
+            elif len(key) == 2: level = "DTStation "
+            elif len(key) == 3: level = "DTChamber "
+            elif len(key) == 4: level = "DTSuperLayer "
+            elif len(key) == 5: level = "DTLayer "
 
-        ali = self.dt[key]
-        attributes = " ".join(["%s=\"%d\"" % (name, value) for name, value in zip(("wheel", "station", "sector", "superlayer", "layer"), key)])
-        position_ape(ali, attributes)
+            ali = self.dt[key]
+            attributes = " ".join(["%s=\"%d\"" % (name, value) for name, value in zip(("wheel", "station", "sector", "superlayer", "layer"), key)])
+            position_ape(ali, attributes)
 
-        writeline("</operation>\n\n")
+            writeline("</operation>\n\n")
 
-      for key in csckeys:
-        writeline("<operation>\n")
+        for key in csckeys:
+            writeline("<operation>\n")
 
-        if len(key) == 1: level = "CSCEndcap "
-        elif len(key) == 2: level = "CSCStation "
-        elif len(key) == 3: level = "CSCRing "
-        elif len(key) == 4: level = "CSCChamber "
-        elif len(key) == 5: level = "CSCLayer "
+            if len(key) == 1: level = "CSCEndcap "
+            elif len(key) == 2: level = "CSCStation "
+            elif len(key) == 3: level = "CSCRing "
+            elif len(key) == 4: level = "CSCChamber "
+            elif len(key) == 5: level = "CSCLayer "
 
-        ali = self.csc[key]
-        attributes = " ".join(["%s=\"%d\"" % (name, value) for name, value in zip(("endcap", "station", "ring", "chamber", "layer"), key)])
-        position_ape(ali, attributes)
+            ali = self.csc[key]
+            attributes = " ".join(["%s=\"%d\"" % (name, value) for name, value in zip(("endcap", "station", "ring", "chamber", "layer"), key)])
+            position_ape(ali, attributes)
 
-        writeline("</operation>\n\n")
+            writeline("</operation>\n\n")
 
-      writeline("</MuonAlignment>\n")
-      if stream == None: return "".join(output)
+        writeline("</MuonAlignment>\n")
+        if stream == None: return "".join(output)

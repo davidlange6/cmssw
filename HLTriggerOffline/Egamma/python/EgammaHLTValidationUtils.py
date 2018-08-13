@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 import sys, os, re
 
@@ -59,7 +60,7 @@ def makeGeneratedParticleAndFiducialVolumeFilter(process, pdgGen, requiredNumber
     has to manually add the modules of the returned
     sequence to globals() (in the calling module, not
     here, globals() live in a different name space here)
-    
+
     """
 
     # name of the physics process
@@ -188,7 +189,7 @@ class EgammaDQMModuleMaker:
                                      cutnum = cms.int32(requiredNumberOfGeneratedObjects),
 
 
-                                       
+
                                        )
 
         #--------------------
@@ -253,7 +254,7 @@ class EgammaDQMModuleMaker:
                               'HLTEndSequence'):
                 continue
 
-            
+
 
             module = getattr(self.process,moduleName)
 
@@ -323,9 +324,9 @@ class EgammaDQMModuleMaker:
             #--------------------
 
 ##            print >> sys.stderr,msgPrefix,"WARNING: unknown module type", module.type_(), " with name " + moduleName + " in path " + pathName
-                                         
+
     #----------------------------------------
-    
+
     def makePSetForL1SeedFilter(self,moduleName):
         """ generates a PSet to analyze the behaviour of an L1 seed.
 
@@ -470,8 +471,8 @@ class EgammaDQMModuleMaker:
                 IsoCollections = cms.VInputTag(module.isoTag, module.nonIsoTag),
                 theHLTOutputTypes = theHLTOutputTypes
                 )
-            
-        
+
+
         raise Exception("can't determine what the HLTEgammaGenericFilter '" + moduleName + "' should do: uses a collection produced by a module of C++ type '" + inputType + "'")
 
     #----------------------------------------
@@ -551,7 +552,7 @@ if __name__ == "__main__":
 
     # print "# ----------------------------------------------------------------------"
 
-    print moduleMaker.getResult().dumpPython()
+    print(moduleMaker.getResult().dumpPython())
 
 #----------------------------------------------------------------------
 
@@ -577,7 +578,7 @@ def findEgammaPaths(process):
                "singlePhoton":   [],
                "doublePhoton":   [],
                }
-    
+
     for path_name, path in process.paths.items():
 
         # print "XX",path_name.__class__,path.__class__
@@ -594,7 +595,7 @@ def findEgammaPaths(process):
         if path_name.startswith("HLT_Ele"):
             retval['singleElectron'].append(path)
             continue
-        
+
         if path_name.startswith("HLT_Photon"):
             retval['singlePhoton'].append(path)
             continue
@@ -641,7 +642,7 @@ def getModuleNamesOfPath(path):
             pass
 
         #----------------------------------------
-                
+
     visitor = Visitor()
     path.visit(visitor)
 
@@ -698,7 +699,7 @@ def getModulesOfSequence(sequence):
             pass
 
         #----------------------------------------
-                
+
     visitor = Visitor()
     sequence.visitNode(visitor)
 

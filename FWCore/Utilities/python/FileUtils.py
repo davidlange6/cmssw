@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import re
 import pprint as pprint # for testing
@@ -8,7 +9,7 @@ def loadListFromFile (filename):
     retval = []
     filename = os.path.expanduser (filename)
     if not os.path.exists (filename):
-        print "Error: '%s' file does not exist."
+        print("Error: '%s' file does not exist.")
         raise RuntimeError, "Bad filename"
     source = open (filename, 'r')        
     for line in source.readlines():
@@ -45,7 +46,7 @@ def sectionNofTotal (inputList, currentSection, numSections):
 ## ######################################################################## ##
 ##############################################################################
 
-    
+
 if __name__ == "__main__":
     #############################################
     ## Load and save command line history when ##

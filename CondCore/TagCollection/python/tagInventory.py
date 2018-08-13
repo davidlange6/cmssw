@@ -1,3 +1,4 @@
+from __future__ import print_function
 import coral
 import CommonUtils, IdGenerator, Node, DBImpl
 class  tagInventory(object):
@@ -27,7 +28,7 @@ class  tagInventory(object):
             transaction.rollback()
             raise Exception, str(er)
         return
-    
+
     def existInventoryTable( self ):
         """Check if inventory table exists
         """
@@ -76,7 +77,7 @@ class  tagInventory(object):
         """Add entry into the inventory.\n
         Input: base tag info. If identical data found already exists, do nothing
         Output: tagid. if tagid=0, there's no new entry added, i.e.no new tagid
-        
+
         """
         tagid=0
         transaction=self.__session.transaction()
@@ -118,7 +119,7 @@ class  tagInventory(object):
         except Exception, er:
             transaction.rollback()
             raise Exception, str(er)
-        
+
     def addEntriesReplaceService( self, newservicename ):
         """ clone all existing entries only servicename in pfn are different
         return collection of new (oldtagid,newtagid) pair 
@@ -150,7 +151,7 @@ class  tagInventory(object):
         except Exception, er:
             transaction.rollback()
             raise Exception, str(er)
-        
+
         inv=tagInventory(self.__session)
         try:
             for r in results:
@@ -168,9 +169,9 @@ class  tagInventory(object):
                 newtaglinks.append((oldtagid,n))
             return newtaglinks
         except Exception, e:
-            print str(e)
+            print(str(e))
             raise Exception, str(e)
-    
+
     def modifyEntriesReplaceService( self, newservicename ):
         """ replace all existing entries replace service name in pfn
         no change in other parameters
@@ -239,7 +240,7 @@ class  tagInventory(object):
         except Exception, er:
             transaction.rollback()
             raise Exception, str(er)
-        
+
     def getEntryByName( self, tagName, pfn ):
         """Get basic tag from inventory by tagName+pfn. pfn can be empty\n
         Input: tagname,pfn
@@ -378,7 +379,7 @@ class  tagInventory(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
+
     def deleteEntryByName( self, tagname ):
         """Delete entry with given tag name
         """
@@ -397,7 +398,7 @@ class  tagInventory(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
+
     def replaceTagLabel( self, tagname, label ):
         """Replace the run time label of the given tag
         """
@@ -483,7 +484,7 @@ class  tagInventory(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
+
 if __name__ == "__main__":
     #context = coral.Context()
     #context.setVerbosityLevel( 'ERROR' )
@@ -507,39 +508,39 @@ if __name__ == "__main__":
         tagentry.labelname='mylabel'
         inv.addEntry(tagentry)
         result=inv.getAllEntries()
-        print 'get all##\t',result
+        print('get all##\t',result)
         result=inv.getEntryByName('ecalpedestalsfromonline','oracle://devdb10/CMS_COND_ECAL')
-        print 'get ecalpedestalsfromonline##\t',result
+        print('get ecalpedestalsfromonline##\t',result)
         result=inv.getEntryByName('crap','oracle://devdb10/CMS_COND_ME')
-        print 'get crap##\t',result
+        print('get crap##\t',result)
         result=inv.getEntryById(0)
-        print 'get by id 0##\t',result
+        print('get by id 0##\t',result)
         inv.deleteEntryByName('ecalpedestalsfromonline')
-        print 'TESTING getEntryByName'
+        print('TESTING getEntryByName')
         result=inv.getEntryByName('ecalpedestalsfromonline','oracle://devdb10/CMS_COND_ECAL')
-        print 'get ecalpedestalsfromonline##\t',result
+        print('get ecalpedestalsfromonline##\t',result)
         result=inv.getEntryByName('crap','oracle://devdb10/CMS_COND_ME')
-        print 'get crap##\t',result
-        print 'TESTING cloneEntry'
+        print('get crap##\t',result)
+        print('TESTING cloneEntry')
         newid=inv.cloneEntry(result.tagid,'fontier://crap/crap')
-        print 'newid ',newid
-        print 'TESTING addEntriesReplaceService'
+        print('newid ',newid)
+        print('TESTING addEntriesReplaceService')
         newtagids=inv.addEntriesReplaceService('oracle://cms_orcoff_int')
-        print 'new tag ids ',newtagids
-        print 'TESTING modifyEntriesReplaceService'
+        print('new tag ids ',newtagids)
+        print('TESTING modifyEntriesReplaceService')
         inv.modifyEntriesReplaceService('oracle://cms_orcoff_int9r')
-        print 'TESTING bulkInsertEntries'
+        print('TESTING bulkInsertEntries')
         entries=[]
         entries.append({'tagid':10,'tagname':'tag1','pfn':'dbdb','recordname':'myrcd','objectname':'bobo','labelname':''})
         entries.append({'tagid':11,'tagname':'tag2','pfn':'dbdb','recordname':'mdrcd','objectname':'bobo','labelname':''})
         entries.append({'tagid':12,'tagname':'tag3','pfn':'dbdb','recordname':'ndrcd','objectname':'bobo','labelname':''})
         entries.append({'tagid':13,'tagname':'tag4','pfn':'dbdb','recordname':'ndrcd','objectname':'bobo','labelname':''})
         a=inv.bulkInsertEntries(entries)
-        print a
+        print(a)
         del session
-        
+
     except Exception, e:
-        print "Failed in unit test"
-        print str(e)
+        print("Failed in unit test")
+        print(str(e))
         del session
-        
+

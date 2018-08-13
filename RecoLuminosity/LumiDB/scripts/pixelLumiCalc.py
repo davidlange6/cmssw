@@ -6,6 +6,7 @@
 # Author:      Zhen Xie                                                #
 ########################################################################
 
+from __future__ import print_function
 import os,sys,time
 from RecoLuminosity.LumiDB import sessionManager,lumiTime,inputFilesetParser,csvSelectionParser,selectionParser,csvReporter,argparse,CommonUtil,lumiCalcAPI,revisionDML,normDML,lumiReport,lumiCorrections,RegexValidator
 
@@ -84,7 +85,7 @@ if __name__ == '__main__':
     parser.add_argument('-f','--fill',dest='fillnum',action='store',
                         default=None,required=False,
                         help='fill number (optional) ')
-    
+
     parser.add_argument('--begin',dest='begin',action='store',
                         default=None,
                         required=False,
@@ -117,13 +118,13 @@ if __name__ == '__main__':
                         default=None,
                         required=False,
                         help='specific path to site-local-config.xml file, optional. If path undefined, fallback to cern proxy&server')
-    
+
     parser.add_argument('--headerfile',dest='headerfile',action='store',
                         default=None,
                         required=False,
                         help='write command header output to specified file'
                        )
-    
+
     #################################################
     #switches
     #################################################
@@ -147,7 +148,7 @@ if __name__ == '__main__':
     parser.add_argument('--debug',dest='debug',
                         action='store_true',
                         help='debug')
-    
+
     options=parser.parse_args()
     if not options.runnumber and not options.inputfile and not options.fillnum and not options.begin:
         raise RuntimeError('at least one run selection argument in [-r,-f,-i,--begin] is required')
@@ -210,7 +211,7 @@ if __name__ == '__main__':
     if options.inputfile and (reqtimemax or reqtimemin):
         #if use time and file filter together, there's no point of warning about missing LS,switch off
         noWarning=True
-        
+
     ##############################################################
     # check working environment
     ##############################################################            
@@ -221,7 +222,7 @@ if __name__ == '__main__':
         from RecoLuminosity.LumiDB import checkforupdate
         cmsswWorkingBase=os.environ['CMSSW_BASE']
         if not cmsswWorkingBase:
-            print 'Please check out RecoLuminosity/LumiDB from CVS,scram b,cmsenv'
+            print('Please check out RecoLuminosity/LumiDB from CVS,scram b,cmsenv')
             sys.exit(11)
         c=checkforupdate.checkforupdate('pixeltagstatus.txt')
         workingversion=c.runningVersion(cmsswWorkingBase,'pixelLumiCalc.py',isverbose=False)
@@ -267,17 +268,17 @@ if __name__ == '__main__':
 
     dataidmap=lumiCalcAPI.runList(session.nominalSchema(),datatagid,runmin=reqrunmin,runmax=reqrunmax,fillmin=reqfillmin,fillmax=reqfillmax,startT=reqtimemin,stopT=reqtimemax,l1keyPattern=None,hltkeyPattern=None,amodetag=None,nominalEnergy=None,energyFlut=None,requiretrg=reqTrg,requirehlt=reqHlt,preselectedruns=filerunlist,lumitype='PIXEL')
     if not dataidmap:
-        print '[INFO] No qualified run found, do nothing'
+        print('[INFO] No qualified run found, do nothing')
         sys.exit(14)
     rruns=[]
     for irun,(lid,tid,hid) in dataidmap.items():
         if not lid:
-            print '[INFO] No qualified lumi data found for run, ',irun
+            print('[INFO] No qualified lumi data found for run, ',irun)
         if reqTrg and not tid:
-            print '[INFO] No qualified trg data found for run ',irun
+            print('[INFO] No qualified trg data found for run ',irun)
         #    continue
         if reqHlt and not hid:
-            print '[INFO] No qualified hlt data found for run ',irun
+            print('[INFO] No qualified hlt data found for run ',irun)
         #    continue
         rruns.append(irun)
     if not irunlsdict: #no file
@@ -287,7 +288,7 @@ if __name__ == '__main__':
             if selectedrun not in rruns:
                 del irunlsdict[selectedrun]
     if not irunlsdict:
-        print '[INFO] No qualified run found, do nothing'
+        print('[INFO] No qualified run found, do nothing')
         sys.exit(13)
     ###############################################################
     # check normtag and get norm values if required
@@ -317,33 +318,33 @@ if __name__ == '__main__':
     session.transaction().start(True)
     GrunsummaryData=lumiCalcAPI.runsummaryMap(session.nominalSchema(),irunlsdict,dataidmap,lumitype='PIXEL')
     if options.action == 'overview':
-       result=lumiCalcAPI.lumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,timeFilter=timeFilter,normmap=normvalueDict,lumitype='PIXEL')
-       lumiReport.toScreenOverview(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
+        result=lumiCalcAPI.lumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,timeFilter=timeFilter,normmap=normvalueDict,lumitype='PIXEL')
+        lumiReport.toScreenOverview(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
     if options.action == 'lumibyls':
-       if not options.hltpath:
-           result=lumiCalcAPI.lumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,timeFilter=timeFilter,normmap=normvalueDict,lumitype='PIXEL',minbiasXsec=options.minbiasxsec)
-           lumiReport.toScreenLumiByLS(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
-       else:
-           hltname=options.hltpath
-           hltpat=None
-           if hltname=='*' or hltname=='all':
-               hltname=None
-           elif 1 in [c in hltname for c in '*?[]']: #is a fnmatch pattern
-              hltpat=hltname
-              hltname=None
-           result=lumiCalcAPI.effectiveLumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,timeFilter=timeFilter,normmap=normvalueDict,hltpathname=hltname,hltpathpattern=hltpat,withBXInfo=False,bxAlgo=None,withBeamIntensity=False,lumitype='PIXEL')
-           lumiReport.toScreenLSEffective(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile,)
+        if not options.hltpath:
+            result=lumiCalcAPI.lumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,timeFilter=timeFilter,normmap=normvalueDict,lumitype='PIXEL',minbiasXsec=options.minbiasxsec)
+            lumiReport.toScreenLumiByLS(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
+        else:
+            hltname=options.hltpath
+            hltpat=None
+            if hltname=='*' or hltname=='all':
+                hltname=None
+            elif 1 in [c in hltname for c in '*?[]']: #is a fnmatch pattern
+                hltpat=hltname
+                hltname=None
+            result=lumiCalcAPI.effectiveLumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,timeFilter=timeFilter,normmap=normvalueDict,hltpathname=hltname,hltpathpattern=hltpat,withBXInfo=False,bxAlgo=None,withBeamIntensity=False,lumitype='PIXEL')
+            lumiReport.toScreenLSEffective(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile,)
     if options.action == 'recorded':#recorded actually means effective because it needs to show all the hltpaths...
-       hltname=options.hltpath
-       hltpat=None
-       if hltname is not None:
-          if hltname=='*' or hltname=='all':
-              hltname=None
-          elif 1 in [c in hltname for c in '*?[]']: #is a fnmatch pattern
-              hltpat=hltname
-              hltname=None
-       result=lumiCalcAPI.effectiveLumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,normmap=normvalueDict,hltpathname=hltname,hltpathpattern=hltpat,withBXInfo=False,bxAlgo=None,withBeamIntensity=False,lumitype='PIXEL')
-       lumiReport.toScreenTotEffective(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
+        hltname=options.hltpath
+        hltpat=None
+        if hltname is not None:
+            if hltname=='*' or hltname=='all':
+                hltname=None
+            elif 1 in [c in hltname for c in '*?[]']: #is a fnmatch pattern
+                hltpat=hltname
+                hltname=None
+        result=lumiCalcAPI.effectiveLumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=None,normmap=normvalueDict,hltpathname=hltname,hltpathpattern=hltpat,withBXInfo=False,bxAlgo=None,withBeamIntensity=False,lumitype='PIXEL')
+        lumiReport.toScreenTotEffective(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
     session.transaction().commit()
     del session
     del svc 

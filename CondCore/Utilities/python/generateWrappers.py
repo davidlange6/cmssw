@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 from CondCore.Utilities.payloadInspectorTemplate import *
 import string, os, sys
 
@@ -21,7 +22,7 @@ def guessPackage() :
     _f = lines.next()
     _f = _f[_f.find('CondFormats/')+len('CondFormats/'):]
     return _f[:_f.find('/')]
- 
+
 def guessClasses() :
     _ret = []
     lines = ( line for line in file('src/plugin.cc') if line[0:3]=='REG')
@@ -36,7 +37,7 @@ def generateClassesHeader(package):
     _leader = '\n * '
 
     _classes = guessClasses()
-    
+
     _newch = file('../../CondFormats/'+package+'/src/classes_new.h','w')
     _newch.write(_header)
     for cl in _classes :
@@ -51,7 +52,7 @@ def getClasses(package) :
     _ret = []
     _ch = file('../../CondFormats/'+package+'/src/classes.h')
     if (_ch.readline().find(_header)<0) :
-        print 'comment header not found in '+package
+        print('comment header not found in '+package)
         return _ret
     for line in _ch:
         if (line.find('*/')>0) : break
@@ -109,10 +110,10 @@ def generateWrapper(package,classes) :
     s = string.Template(wrapperTemplate)
     for classname in classes:
         f = file('plugins/'+classname+'PyWrapper.cc','w')
-        print "generating file:", f.name
+        print("generating file:", f.name)
         f.write(s.substitute(_PACKAGE_=package, _CLASS_NAME_=classname, _HEADER_FILE_=classname))
         f.close()
-          
+
 
 def generateDict(package):
     os.system('cd ../../;cvs co CondFormats/'+package)

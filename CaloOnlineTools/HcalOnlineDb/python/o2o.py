@@ -13,6 +13,7 @@
 #
 #########################################################################
 
+from __future__ import print_function
 import os
 import sys
 import subprocess
@@ -147,7 +148,7 @@ def guess_condition_from_tag(tagname):
         guessed_pool_record = "HcalL1TriggerObjectsRcd"
 
     else:
-        print "Cannot guess condition type"
+        print("Cannot guess condition type")
 
     return {'condition_type':guessed_type,
             'query_file_name':guessed_query_file_name,
@@ -158,7 +159,7 @@ def get_tags(tag_list_file_name):
     try:
         tag_list_file = open(tag_list_file_name)
     except:
-        print "Cannot open the file with the list of tags, exiting..."
+        print("Cannot open the file with the list of tags, exiting...")
         sys.exit()
     tag_list = []
     for line in tag_list_file:
@@ -178,7 +179,7 @@ def get_iovs(tag, input_pool_connect_string, mode):
             iov_list = iovs.splitlines()
             result = "success"
         except:
-            print "ERROR: Cannot get the IOV update list for tag", tag+". This tag will not be updated. Now continue to the next tag..."
+            print("ERROR: Cannot get the IOV update list for tag", tag+". This tag will not be updated. Now continue to the next tag...")
             iov_list=[]
             result = "fail"
 
@@ -188,7 +189,7 @@ def get_iovs(tag, input_pool_connect_string, mode):
         try:
             iov_list_file = open(base_dir+"/o2o/"+tag+"_iov_to_update.devel")
         except:
-            print "ERROR: Cannot open file with the IOV list for tag", tag+". This tag will not be updated. Now continue to the next tag..."
+            print("ERROR: Cannot open file with the IOV list for tag", tag+". This tag will not be updated. Now continue to the next tag...")
             result = "fail"
         result = "success"
         iov_list = []
@@ -204,7 +205,7 @@ def get_iovs(tag, input_pool_connect_string, mode):
     for line in iov_list:
         line_stripped = line.strip()
         if line.strip()[0:13] == "O2O_IOV_LIST:":
-           iovs.append(line.lstrip("O2O_IOV_LIST:"))
+            iovs.append(line.lstrip("O2O_IOV_LIST:"))
         if line_stripped[0:line_stripped.find(":")] == "CONNECTION ERROR":
             result = "fail_connect"
         if line_stripped[0:line_stripped.find(":")] == "NEW_POOL_TAG_TRUE":
@@ -217,19 +218,19 @@ def get_iovs(tag, input_pool_connect_string, mode):
 def run_popcon():
     status = "fail"
     try:
-        print "iov=", iov
+        print("iov=", iov)
         if mode == "online" or mode == "online_dropbox":
             subprocess.call(["cmsRun", str(python_popcon_file)])
         else:
-            print "In online mode would run Popcon now:", "cmsRun", str(python_popcon_file)
+            print("In online mode would run Popcon now:", "cmsRun", str(python_popcon_file))
         status = "success"
     except OSError:
-        print "Cannot execute cmsRun. Further processing of this tag is stopped, going to the next tag..."
+        print("Cannot execute cmsRun. Further processing of this tag is stopped, going to the next tag...")
         #break
     except:
-        print "Cannot execute cmsRun. Further processing of this tag is stopped, going to the next tag..."
+        print("Cannot execute cmsRun. Further processing of this tag is stopped, going to the next tag...")
         #break
-    
+
     #
     #_____ copy to the Dropbox area (optional)
     #
@@ -238,7 +239,7 @@ def run_popcon():
             retcall_meta = subprocess.call(['mv', str(output_dir)+'/'+str(dropbox_file_name_prefix)+'.txt', str(dropbox_dir)+'/'])
             retcall_sql    = subprocess.call(['mv', str(output_dir)+'/'+str(dropbox_file_name_prefix)+'.sql', str(dropbox_dir)+'/'])
         except:
-            print "ERROR: Cannot copy files to the dropbox area"
+            print("ERROR: Cannot copy files to the dropbox area")
 
     return {'status':status}
 #
@@ -258,9 +259,9 @@ for tag_name in tags:
     query_file_name   = guessed_condition['query_file_name']
     pool_record       = guessed_condition['pool_record']
 
-    print ""
-    print "Processing tag:", tag
-    print "Condition type:",condition_type 
+    print("")
+    print("Processing tag:", tag)
+    print("Condition type:",condition_type) 
 
     #
     #_____ read SQL query from a file
@@ -268,7 +269,7 @@ for tag_name in tags:
     query_file = open(query_file_name, "r")
     query = query_file.read()
     query_file.close()
-    
+
     #
     #_____ Popcon Dropbox requirements (optional)
     #
@@ -285,7 +286,7 @@ for tag_name in tags:
         dropbox_txt_file.write('till\n')
         dropbox_txt_file.write('usertext '+str(dropbox_comment)+'\n')
         dropbox_txt_file.close()
-    
+
     #
     #_____ loop over IOV to copy
     #
@@ -295,10 +296,10 @@ for tag_name in tags:
     # stop processing current tag if IOVs were not obtained
     if (gotten_iovs['result'] != "success"):
         if (gotten_iovs['result'] == "fail_connect"):
-            print "Problems connecting to", input_pool_connect_string
-            print "Unable to process tag", tag_name, "continuing to the next tag..."
+            print("Problems connecting to", input_pool_connect_string)
+            print("Unable to process tag", tag_name, "continuing to the next tag...")
         continue
-    
+
     o2o_iovs = gotten_iovs['iovs']
     isnewtag = gotten_iovs['newtag'] # is this a new POOL tag?
     i = 0
@@ -306,15 +307,15 @@ for tag_name in tags:
         i = i+1
         iov = int(line)
         pool_iov = iov
-        
+
         if i==1: # first IOV to update may be a special case
             if isnewtag:
-                print "Creating a new offline tag: ", tag_name
+                print("Creating a new offline tag: ", tag_name)
                 if condition_type == "DcsValues" and iov != 1:
-                    print "DCS values: The first IOV in the online tag is ", iov
-                    print "DCS values: Adding default DCS set values to the offline"
-                    print "DCS values: tag for IOVs 1 - ", iov-1
-                    print "DCS values: because first IOV in the offline tag must always be 1."
+                    print("DCS values: The first IOV in the online tag is ", iov)
+                    print("DCS values: Adding default DCS set values to the offline")
+                    print("DCS values: tag for IOVs 1 - ", iov-1)
+                    print("DCS values: because first IOV in the offline tag must always be 1.")
                     query_save = query
                     query_file_name = query_file_name+".default"
                     query_file = open(query_file_name, "r")
@@ -329,7 +330,7 @@ for tag_name in tags:
                         break
                 else:
                     pool_iov = 1 # force the first IOV in offline tag to be 1 by default
-                
+
         make_popcon_config_file(python_popcon_file)
         run_result = run_popcon()
         if run_result['status'] != "success":

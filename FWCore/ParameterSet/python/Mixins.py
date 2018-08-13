@@ -1,3 +1,4 @@
+from __future__ import print_function
 import inspect
 
 class _ConfigureComponent(object):
@@ -119,7 +120,7 @@ class _Parameterizable(object):
                 self.__setParameters(block.parameters_())
         self.__setParameters(kargs)
         self._isModified = False
-        
+
     def parameterNames_(self):
         """Returns the name of the parameters"""
         return self.__parameterNames[:]
@@ -162,7 +163,7 @@ class _Parameterizable(object):
             return getattr(self, params, None)
         for param in params:
             lastParam = getattr(lastParam, param, None)
-            print str(lastParam)
+            print(str(lastParam))
             if lastParam == None:
                 return None
         return lastParam
@@ -172,7 +173,7 @@ class _Parameterizable(object):
         import copy
         result = dict()
         for name in self.parameterNames_():
-               result[name]=copy.deepcopy(self.__dict__[name])
+            result[name]=copy.deepcopy(self.__dict__[name])
         return result
 
     def __addParameter(self, name, value):
@@ -342,7 +343,7 @@ class _TypedParameterizable(_Parameterizable):
                             params[name] = getattr(default,name)
                         return params
         return None
-    
+
     def dumpConfig(self, options=PrintOptions()):
         config = self.__type +' { \n'
         for name in self.parameterNames_():
@@ -367,9 +368,9 @@ class _TypedParameterizable(_Parameterizable):
             # and pass it to the constructor using the **{...} notation
             label = ""
             try:
-               label = "process."+self.label_()
+                label = "process."+self.label_()
             except:
-               label = "FIX-THIS"
+                label = "FIX-THIS"
             result += ")\n" + self.dumpPythonAttributes(label, options)
         return result
 
@@ -399,7 +400,7 @@ class _Labelable(object):
     """A 'mixin' used to denote that the class can be paired with a label (e.g. an EDProducer)"""
     def label_(self):
         if not hasattr(self, "_Labelable__label"):
-           raise RuntimeError("module has no label.  Perhaps it wasn't inserted into the process?")
+            raise RuntimeError("module has no label.  Perhaps it wasn't inserted into the process?")
         return self.__label
     def hasLabel_(self):
         return hasattr(self, "_Labelable__label") and self.__label is not None
@@ -610,13 +611,13 @@ if __name__ == "__main__":
             self.assertEqual(t,[1,2])
             t = TestList( iter((1,2)) )
             self.assertEqual(t,[1,2])
-            
-            
+
+
         def testLargeList(self):
             #lists larger than 255 entries can not be initialized
             #using the constructor
             args = [i for i in xrange(0,300)]
-            
+
             t = TestList(*args)
             pdump= t.dumpPython()
             class cms(object):

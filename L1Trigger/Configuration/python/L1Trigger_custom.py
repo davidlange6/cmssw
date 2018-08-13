@@ -1,3 +1,4 @@
+from __future__ import print_function
 # customization fragments to be used with cmsDriver and hltGetConfiguration
 #
 # V.M. Ghete 2010-06-09 initial version
@@ -102,14 +103,14 @@ def customiseL1Menu(process):
         useXmlFile = 'L1Menu_CollisionsHeavyIons2013_v0_L1T_Scales_20101224_Imp0_0x102c.xml'
 
     else :
-        print '   Using default L1 trigger menu from Global Tag '
+        print('   Using default L1 trigger menu from Global Tag ')
 
     ####### end of user choices - do not change the following
 
     if l1MenuSource == 'xmlFile' :
-        print '   Retrieve L1 trigger menu only from XML file '
-        print '       ', useXmlFile
-        print '       '
+        print('   Retrieve L1 trigger menu only from XML file ')
+        print('       ', useXmlFile)
+        print('       ')
 
         process.load('L1TriggerConfig.L1GtConfigProducers.l1GtTriggerMenuXml_cfi')
         process.l1GtTriggerMenuXml.TriggerMenuLuminosity = luminosityDirectory
@@ -122,9 +123,9 @@ def customiseL1Menu(process):
 
     elif l1MenuSource == 'sqlFile' :
         if useSqlFile != '' :
-            print '   Retrieve L1 trigger menu only from SQLlite file '
-            print '       ', useSqlFile
-            print '       '
+            print('   Retrieve L1 trigger menu only from SQLlite file ')
+            print('       ', useSqlFile)
+            print('       ')
 
             from CondCore.DBCommon.CondDBSetup_cfi import CondDBSetup
             process.l1conddb = cms.ESSource("PoolDBESSource",
@@ -138,10 +139,10 @@ def customiseL1Menu(process):
             process.es_prefer_l1conddb = cms.ESPrefer("PoolDBESSource", "l1conddb")
 
         else :
-            print '   Error: no SQL file is given; please provide a valid SQL file for option sqlFile'
+            print('   Error: no SQL file is given; please provide a valid SQL file for option sqlFile')
 
     else :
-        print ''
+        print('')
 
 
     return process
@@ -212,24 +213,24 @@ def customiseL1GtEmulatorFromRaw(process):
     # RPC Technical Trigger
     import L1Trigger.RPCTechnicalTrigger.rpcTechnicalTrigger_cfi
     process.simRpcTechTrigDigis = L1Trigger.RPCTechnicalTrigger.rpcTechnicalTrigger_cfi.rpcTechnicalTrigger.clone()
-    
+
     process.simRpcTriggerDigis.label = 'muonRPCDigis'
     process.simRpcTechTrigDigis.RPCDigiLabel = 'muonRPCDigis'
 
     # HCAL Technical Trigger
     import SimCalorimetry.HcalTrigPrimProducers.hcalTTPRecord_cfi
     process.simHcalTechTrigDigis = SimCalorimetry.HcalTrigPrimProducers.hcalTTPRecord_cfi.simHcalTTPRecord.clone()
-     
+
 
     # Global Trigger emulator
-    
+
     # do not run calo emulators - instead, use unpacked GCT digis for GT input
     process.simGtDigis.GctInputTag = 'gctDigis'
-    
+
     # do not run muon emulators - instead, use unpacked GMT digis for GT input 
     # (GMT digis produced by same module as the GT digis, as GT and GMT have common unpacker)
     process.simGtDigis.GmtInputTag = 'gtDigis'                                                                                                                                                               
-    
+
     # technical triggers
     process.simGtDigis.TechnicalTriggersInputTags = cms.VInputTag(
         cms.InputTag( 'simBscDigis' ), 
@@ -273,7 +274,7 @@ def customiseL1CaloAndGtEmulatorsFromRaw(process):
         cms.InputTag('hcalDigis'), 
         cms.InputTag('hcalDigis')
     )
-    
+
     # do not run muon emulators - instead, use unpacked GMT digis for GT input 
     # (GMT digis produced by same module as the GT digis, as GT and GMT have common unpacker)
     process.simRpcTechTrigDigis.RPCDigiLabel = 'muonRPCDigis'                                                                                                                                                                                           

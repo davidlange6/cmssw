@@ -102,7 +102,7 @@ class TreeBuilder (xml.sax.handler.ContentHandler):
     def topLevel (self):
         '''Returns top level object'''
         return self._root.attributes().values()[0]
-        
+
 
     @staticmethod
     def _name_mangle (name):
@@ -167,7 +167,7 @@ def xml2obj (**kwargs):
             filehandle.close()
             filehandle = filename = ''
         contents = quoteRE.sub (fixQuoteValue, contents)
-    
+
     ncDict = kwargs.get ('nameChangeDict', {})
     builder = TreeBuilder (nameChangeDict = ncDict)
     if contents:

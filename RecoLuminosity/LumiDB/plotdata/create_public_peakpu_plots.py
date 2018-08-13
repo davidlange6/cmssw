@@ -4,6 +4,7 @@
 ## File: create_public_lumi_plots.py
 ######################################################################
 
+from __future__ import print_function
 import sys
 import csv
 import os
@@ -26,10 +27,9 @@ from matplotlib import pyplot as plt
 # Matplotlib.
 from RecoLuminosity.LumiDB.mpl_axes_hist_fix import hist
 if matplotlib.__version__ != '1.0.1':
-    print >> sys.stderr, \
-          "ERROR The %s script contains a hard-coded bug-fix " \
+    print("ERROR The %s script contains a hard-coded bug-fix " \
           "for Matplotlib 1.0.1. The Matplotlib version loaded " \
-          "is %s" % (__file__, matplotlib.__version__)
+          "is %s" % (__file__, matplotlib.__version__), file=sys.stderr)
     sys.exit(1)
 matplotlib.axes.Axes.hist = hist
 # FIX FIX FIX end
@@ -77,7 +77,7 @@ def processdata(years):
             lumifilename=str(y)+'lumibyls.csv'
             f=open(lumifilename,'rb')
         except IOError:
-            print 'failed to open file ',lumifilename
+            print('failed to open file ',lumifilename)
             return result
         freader=csv.reader(f,delimiter=',')
         idx=0
@@ -100,7 +100,7 @@ def processdata(years):
             if avgpu>max_avgpu:
                 results[y][0][-1]=max_putime
                 results[y][1][-1]=max_avgpu
-        print results
+        print(results)
     return results
 
 
@@ -181,7 +181,7 @@ def TweakPlot(fig, ax, (time_begin, time_end),
 if __name__ == "__main__":
 
     desc_str = "test pu" \
-               
+
     arg_parser = optparse.OptionParser(description=desc_str)
     arg_parser.add_option("--ignore-cache", action="store_true",
                           help="Ignore all cached lumiCalc results " \
@@ -189,8 +189,7 @@ if __name__ == "__main__":
                           "(Rebuilds the cache as well.)")
     (options, args) = arg_parser.parse_args()
     if len(args) != 1:
-        print >> sys.stderr, \
-              "ERROR Need exactly one argument: a config file name"
+        print("ERROR Need exactly one argument: a config file name", file=sys.stderr)
         sys.exit(1)
     config_file_name = args[0]
     ignore_cache = options.ignore_cache
@@ -206,8 +205,7 @@ if __name__ == "__main__":
         }
     cfg_parser = ConfigParser.SafeConfigParser(cfg_defaults)
     if not os.path.exists(config_file_name):
-        print >> sys.stderr, \
-              "ERROR Config file '%s' does not exist" % config_file_name
+        print("ERROR Config file '%s' does not exist" % config_file_name, file=sys.stderr)
         sys.exit(1)
     cfg_parser.read(config_file_name)
 
@@ -225,9 +223,8 @@ if __name__ == "__main__":
     accel_mode = cfg_parser.get("general", "accel_mode")
     # Check if we know about this accelerator mode.
     if not accel_mode in KNOWN_ACCEL_MODES:
-        print >> sys.stderr, \
-              "ERROR Unknown accelerator mode '%s'" % \
-              accel_mode
+        print("ERROR Unknown accelerator mode '%s'" % \
+              accel_mode, file=sys.stderr)
 
     # WORKAROUND WORKAROUND WORKAROUND
     amodetag_bug_workaround = False
@@ -242,8 +239,8 @@ if __name__ == "__main__":
     beam_energy = None
     beam_energy_from_cfg = None
     if not beam_energy_tmp:
-        print "No beam energy specified --> using defaults for '%s'" % \
-              accel_mode
+        print("No beam energy specified --> using defaults for '%s'" % \
+              accel_mode)
         beam_energy_from_cfg = False
     else:
         beam_energy_from_cfg = True
@@ -255,8 +252,8 @@ if __name__ == "__main__":
     beam_fluctuation = None
     beam_fluctuation_from_cfg = None
     if not beam_fluctuation_tmp:
-        print "No beam energy fluctuation specified --> using the defaults to '%s'" % \
-              accel_mode
+        print("No beam energy fluctuation specified --> using the defaults to '%s'" % \
+              accel_mode)
         beam_fluctuation_from_cfg = False
     else:
         beam_fluctuation_from_cfg = True
@@ -272,17 +269,16 @@ if __name__ == "__main__":
     # If no end date is given, use today.
     today = datetime.datetime.utcnow().date()
     if not date_end:
-        print "No end date given --> using today"
+        print("No end date given --> using today")
         date_end = today
     # If end date lies in the future, truncate at today.
     if date_end > today:
-        print "End date lies in the future --> using today instead"
+        print("End date lies in the future --> using today instead")
         date_end = today
     # If end date is before start date, give up.
     if date_end < date_begin:
-        print >> sys.stderr, \
-              "ERROR End date before begin date (%s < %s)" % \
-              (date_end.isoformat(), date_begin.isoformat())
+        print("ERROR End date before begin date (%s < %s)" % \
+              (date_end.isoformat(), date_begin.isoformat()), file=sys.stderr)
         sys.exit(1)
 
     # If an Oracle connection string is specified, use direct Oracle
@@ -330,34 +326,34 @@ if __name__ == "__main__":
     ##########
 
     # Tell the user what's going to happen.
-    print "Using configuration from file '%s'" % config_file_name
+    print("Using configuration from file '%s'" % config_file_name)
     if ignore_cache:
-        print "Ignoring all cached lumiCalc results (and rebuilding the cache)"
+        print("Ignoring all cached lumiCalc results (and rebuilding the cache)")
     else:
-        print "Using cached lumiCalc results from %s" % \
-              CacheFilePath(cache_file_dir)
-    print "Using color schemes '%s'" % ", ".join(color_scheme_names)
-    print "Using lumiCalc script '%s'" % lumicalc_script
-    print "Using additional lumiCalc flags from configuration: '%s'" % \
-          lumicalc_flags_from_cfg
-    print "Selecting data for accelerator mode '%s'" % accel_mode
+        print("Using cached lumiCalc results from %s" % \
+              CacheFilePath(cache_file_dir))
+    print("Using color schemes '%s'" % ", ".join(color_scheme_names))
+    print("Using lumiCalc script '%s'" % lumicalc_script)
+    print("Using additional lumiCalc flags from configuration: '%s'" % \
+          lumicalc_flags_from_cfg)
+    print("Selecting data for accelerator mode '%s'" % accel_mode)
     if beam_energy_from_cfg:
-        print "Selecting data for beam energy %.0f GeV" % beam_energy
+        print("Selecting data for beam energy %.0f GeV" % beam_energy)
     else:
-        print "Selecting data for default beam energy for '%s' from:" % accel_mode
+        print("Selecting data for default beam energy for '%s' from:" % accel_mode)
         for (key, val) in beam_energy_defaults[accel_mode].iteritems():
-            print "  %d : %.1f GeV" % (key, val)
+            print("  %d : %.1f GeV" % (key, val))
     if beam_fluctuation_from_cfg:
-        print "Using beam energy fluctuation of +/- %.0f%%" % \
-              (100. * beam_fluctuation)
+        print("Using beam energy fluctuation of +/- %.0f%%" % \
+              (100. * beam_fluctuation))
     else:
-        print "Using default beam energy fluctuation for '%s' from:" % accel_mode
+        print("Using default beam energy fluctuation for '%s' from:" % accel_mode)
         for (key, val) in beam_fluctuation_defaults[accel_mode].iteritems():
-            print "  %d : +/- %.0f%%" % (key, 100. * val)
+            print("  %d : +/- %.0f%%" % (key, 100. * val))
     if use_oracle:
-        print "Using direct access to the Oracle luminosity database"
+        print("Using direct access to the Oracle luminosity database")
     else:
-        print "Using access to the luminosity database through the Frontier cache"
+        print("Using access to the luminosity database through the Frontier cache")
 
     ##########
 
@@ -365,27 +361,26 @@ if __name__ == "__main__":
     path_name = CacheFilePath(cache_file_dir)
     if not os.path.exists(path_name):
         if verbose:
-            print "Cache file path does not exist: creating it"
+            print("Cache file path does not exist: creating it")
         try:
             os.makedirs(path_name)
         except Exception, err:
-            print >> sys.stderr, \
-                  "ERROR Could not create cache dir: %s" % path_name
+            print("ERROR Could not create cache dir: %s" % path_name, file=sys.stderr)
             sys.exit(1)
 
     ##########
 
 
     years=[2010,2011,2012]
-    
+
     lumi_data_by_fill_per_year={} #{year:[[timestamp,timestamp],[max_pu,max_pu]]}
     lumi_data_by_fill_per_year=processdata(years)
-    
+
     #lumi_data_by_fill_per_year[2010]=[['05/05/10 05:59:58','06/02/10 10:47:25','07/02/10 12:47:25','08/02/10 11:47:25'],[10.0,2.5,11.3,4.5]]
     #lumi_data_by_fill_per_year[2011]=[['05/05/11 05:59:58','06/02/11 10:47:25','07/02/11 12:47:25','08/02/11 11:47:25','09/05/11 05:59:58','10/02/11 10:47:25','11/02/11 12:47:25'],[20.0,27.4,30.5,40.,22.,15.,45.]]
     #lumi_data_by_fill_per_year[2012]=[['05/05/12 05:59:58','06/02/12 10:47:25','07/02/12 12:47:25','08/02/12 11:47:25','09/05/12 05:59:58','10/02/12 10:47:25','11/02/12 12:47:25','11/02/12 12:47:25'],[10.0,17.4,20.5,30.,32.,25.,33.,42.]]
-    
-    
+
+
     InitMatplotlib()
 
     ##########
@@ -397,20 +392,20 @@ if __name__ == "__main__":
     ##########
 
     # And this is where the plotting starts.
-    print "Drawing things..."
+    print("Drawing things...")
     ColorScheme.InitColors()
-        
+
     #----------
 
     if len(years) > 1:
-        print "  peak interactions for %s together" % ", ".join([str(i) for i in years])
+        print("  peak interactions for %s together" % ", ".join([str(i) for i in years]))
 
         def PlotPeakPUAllYears(lumi_data_by_fill_per_year):
             """Mode 1: years side-by-side"""
 
             # Loop over all color schemes and plot.
             for color_scheme_name in color_scheme_names:
-                print "      color scheme '%s'" % color_scheme_name
+                print("      color scheme '%s'" % color_scheme_name)
                 color_scheme = ColorScheme(color_scheme_name)
                 color_by_year = color_scheme.color_by_year
                 logo_name = color_scheme.logo_name
@@ -430,7 +425,7 @@ if __name__ == "__main__":
                         times_tmp = [datetime.datetime.strptime(tmp,DATE_FMT_STR_LUMICALC).date() for tmp in lumi_data[0]]
                         times = [matplotlib.dates.date2num(i) for i in times_tmp] #x_axis
                         maxpus = lumi_data[1] # y_axis
-                        
+
                         # NOTE: Special case for 2010.
                         label = None
                         if year == 2010 or year == 2011 :
@@ -447,7 +442,7 @@ if __name__ == "__main__":
                                 label=label)
                         if is_log:
                             ax.set_yscale("log")
-                    
+
                     time_begin = datetime.datetime(years[0], 1, 1, 0, 0, 0)
                     time_end = datetime.datetime(years[-1], 12, 16, 20, 50,9)
                     str_begin = time_begin.strftime(DATE_FMT_STR_OUT)
@@ -457,7 +452,7 @@ if __name__ == "__main__":
                     num_cols = len(years)
                     tmp_x = 0.095
                     tmp_y = .95
-                   
+
                     leg = ax.legend(loc="upper left", bbox_to_anchor=(tmp_x, 0., 1., tmp_y),
                               frameon=False, ncol=num_cols)
                     for t in leg.get_texts():
@@ -494,9 +489,9 @@ if __name__ == "__main__":
                              (particle_type_str.lower(),
                               log_suffix, file_suffix))
         PlotPeakPUAllYears(lumi_data_by_fill_per_year)
-        
+
     plt.close()
 
-    print "Done"
+    print("Done")
 
 ######################################################################

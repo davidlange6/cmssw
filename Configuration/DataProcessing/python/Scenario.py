@@ -56,7 +56,7 @@ class Scenario(object):
         a combined ALCA file that gets mergepacked in a later step
 
         writeTiers is list of tiers to write out, not including ALCA
-        
+
         datasets is the list of datasets to split into for each tier
         written out. Should always be one dataset
 
@@ -101,7 +101,7 @@ class Scenario(object):
         build a DQM Harvesting configuration
 
         Arguments:
-        
+
         datasetName - aka workflow name for DQMServer, this is the name of the
         dataset containing the harvested run
         runNumber - The run being harvested
@@ -121,7 +121,7 @@ class Scenario(object):
         build an AlCa Harvesting configuration
 
         Arguments:
-        
+
         globalTag - The global tag being used
         inputFiles - The list of LFNs being harvested
 

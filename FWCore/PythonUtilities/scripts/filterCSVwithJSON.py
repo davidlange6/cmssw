@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 import optparse
 import re
@@ -7,7 +8,7 @@ from FWCore.PythonUtilities.LumiList import LumiList
 
 
 if __name__ == '__main__':
-    
+
     parser = optparse.OptionParser ("Usage: %prog input.json input.csv output.csv")
     parser.add_option ('--output', dest='output', type='string',
                        help='Save output to file OUTPUT')
@@ -36,16 +37,16 @@ if __name__ == '__main__':
         pieces = sepRE.split (copy.strip())
         if len (pieces) < minPieces:
             if not options.noWarnings:
-                print "Saving line '%s' since no identifiable run and lumi info" \
-                      % copy
+                print("Saving line '%s' since no identifiable run and lumi info" \
+                      % copy)
             target.write (line)
             continue
         try:
             run, lumi = int( pieces[runIndex] ), int( pieces[lumiIndex] )
         except:
             if not options.noWarnings:
-                print "Saving line '%s' since no identifiable run,lumi info" \
-                      % copy
+                print("Saving line '%s' since no identifiable run,lumi info" \
+                      % copy)
             target.write (line)
             continue
         # OK.  We recognize this line as containing a valid run and
@@ -53,6 +54,6 @@ if __name__ == '__main__':
         if (run, lumi) in jsonList:
             # Yes, it is.  Take it!
             target.write (line)
-            
+
     source.close()
     target.close()

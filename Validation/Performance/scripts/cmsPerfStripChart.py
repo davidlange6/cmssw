@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import os, sys
 try: import simplejson as json
 except ImportError: import json
@@ -38,7 +39,7 @@ def operate(timelog, memlog, json_f, num):
     memfile=open(memlog, 'r')
     memlog_lines=memfile.readlines()
     memfile.close()
- 
+
     # Get average, uncertainty of average and maximum rss.
     max_rss=average=error=' '
     i=0
@@ -77,7 +78,7 @@ def operate(timelog, memlog, json_f, num):
         if max_rss == ' ' or re.match(regex, max_rss) is None:
             raise RuntimeError('Could not parse \"' + memlog + '\" properly. ' +\
                                ' Check if Maximum rss is defined correct.')
- 
+
        # regex for dates 'YYYY-MM-DD-HHMM'
         regex = '(19|20|21)\d\d-(0[1-9]|1[012])-(0[1-9]|[12]'+\
                 '[0-9]|3[01])-([01][0-9]|2[0-4])([0-5][0-9])$'
@@ -87,7 +88,7 @@ def operate(timelog, memlog, json_f, num):
     except Exception, err:
         sys.stderr.write(script_name + ': Error: ' + str(err) + '\n')
         return 2
-    
+
     # Open for getting the data.
     json_db=open(json_f, "r")
     dict=json.load(json_db)
@@ -105,15 +106,15 @@ def operate(timelog, memlog, json_f, num):
                                        "Only the strip charts will be created.\n")
     else:
         dict["strips"].append(data)
-        print 'Storing entry to \"' + json_f +\
+        print('Storing entry to \"' + json_f +\
               '\" file with attribute values:\n' +\
               'IB=' + IB + '\naverage=' + average +\
-              '\nUncertainty of average=' + error +'\nmax_rss=' + max_rss
+              '\nUncertainty of average=' + error +'\nmax_rss=' + max_rss)
         # Store the data in json file.
         json_db = open(json_f, "w+")
         json.dump(dict, json_db, indent=2)
         json_db.close()
-        print 'File "' + json_f + '" was updated successfully!'
+        print('File "' + json_f + '" was updated successfully!')
 
     # Change to datetime type (helpful for sorting).
     for record in dict["strips"]:
@@ -125,7 +126,7 @@ def operate(timelog, memlog, json_f, num):
 
     # Sort the list.
     list = sorted(dict["strips"], key=lambda k : k['IB'], reverse=True)
- 
+
     # Check if there are NUM entries.
     if num > len(list):
         new_num = len(list)
@@ -158,7 +159,7 @@ def operate(timelog, memlog, json_f, num):
         average = list[i]['average']
         max_rss = list[i]['max_rss']
         error = list[i]['error']
-      
+
         histo1.GetXaxis().SetBinLabel(num-i, datime)
         histo1.SetBinContent(num-i, average)   
         histo1.SetBinError(num-i, error)
@@ -232,13 +233,13 @@ def operate(timelog, memlog, json_f, num):
     histo2.Write()
     rss_canvas.Write()
 
-  
+
 ########################################################################################### 
 
 if __name__ == '__main__':
 
     import optparse, stat
- 
+
     ################################
     # Definition of command usage. #
     ################################
@@ -285,7 +286,7 @@ if __name__ == '__main__':
     #############################################
     # Validity of .json file-database.          #
     #############################################
- 
+
     # The format that the json file must have:  
     format = "\n  {  \"strips\" :\n"   +\
              "    [\n      {\"IB\" : \"XXX_XXX\", \"average\" : M, \"error\" : E \"max_rss\" : N},\n" +\

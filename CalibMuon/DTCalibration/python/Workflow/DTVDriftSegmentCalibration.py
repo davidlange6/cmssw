@@ -25,14 +25,14 @@ class DTVDriftSegmentCalibration:
         self.process.GlobalTag.globaltag = self.config.globaltag
         self.process.dtVDriftSegmentCalibration.rootFileName = self.outputfile
         # Update Event Setup
-	if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
-	    tag = self.config.inputDBTag
-	    record = self.config.inputDBRcd
-	    connect = self.config.connectStrDBTag
-	    moduleName = 'customDB%s' % record 
-	    addPoolDBESSource(process = self.process,
-			      moduleName = moduleName,record = record,tag = tag,
-			      connect = connect)
+        if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
+            tag = self.config.inputDBTag
+            record = self.config.inputDBRcd
+            connect = self.config.connectStrDBTag
+            moduleName = 'customDB%s' % record 
+            addPoolDBESSource(process = self.process,
+                              moduleName = moduleName,record = record,tag = tag,
+                              connect = connect)
 
         if hasattr(self.config,'inputTTrigDB') and self.config.inputTTrigDB:
             label = ''

@@ -10,12 +10,13 @@ The output file from this script has the same prefix as the input
 files, but ends in 'calltree'.  This file can be fed directly into
 kcachegrind.
 '''
+from __future__ import print_function
 
 import sys
 import csv
 
 if len(sys.argv) < 3:
-    print "usage: ",sys.argv[0]," prefix_of_run_data tick_cutoff n|o"
+    print("usage: ",sys.argv[0]," prefix_of_run_data tick_cutoff n|o")
     sys.exit(1)
 
 prefix = sys.argv[1]
@@ -48,12 +49,12 @@ class Node:
 
     def parentTicks(me,count):
         me.ticks_as_parent += int(count)
-    
+
     def childTicks(me,count):
         c = int(count)
         me.ticks_as_parent += c
         me.ticks_as_child += c
-        
+
     def recurTicks(me,count):
         me.ticks_as_parent_recur += int(count)
 
@@ -87,15 +88,15 @@ else:
     namefile = csv.reader(open(prefix+"nice_names","rb"),delimiter='\t')
     for row in namefile:
         names[int(row[0])] = Node(row[0],row[-1])
-    
 
-print >>outfile,"events: ticks"
+
+print("events: ticks", file=outfile)
 
 for entry in names.values():
-    print >>outfile,"fn=(%s) %s"%(entry.fid,entry.name)
+    print("fn=(%s) %s"%(entry.fid,entry.name), file=outfile)
     # print entry[1]
 
-print >>outfile
+print(file=outfile)
 
 # all the 0 values below are line numbers (none in my case)
 #------------------------------
@@ -138,15 +139,15 @@ for node in names.values():
     cost=0
     #if len(node.children) == 0:
     cost = node.ticks_as_child
-    print >>outfile,"fn=(%d)"%node.fid
-    print >>outfile,"0 %d"%cost
+    print("fn=(%d)"%node.fid, file=outfile)
+    print("0 %d"%cost, file=outfile)
     #print >>outfile,"\n\n"
-    
+
     for child in node.children.keys():
         count = edges[(node.fid,child)].count
-        print >>outfile,"cfn=(%d)"%child
-        print >>outfile,"calls=%d 0"%count
-        print >>outfile,"0 %d"%count
-        
-    print >>outfile,"\n\n"
-            
+        print("cfn=(%d)"%child, file=outfile)
+        print("calls=%d 0"%count, file=outfile)
+        print("0 %d"%count, file=outfile)
+
+    print("\n\n", file=outfile)
+

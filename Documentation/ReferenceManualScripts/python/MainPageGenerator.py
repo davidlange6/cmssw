@@ -1,3 +1,4 @@
+from __future__ import print_function
 import json, urllib2, os, sys
 from BeautifulSoup import *
 
@@ -16,7 +17,7 @@ class MainPageGenerator:
         self.managersURL        = 'http://cmsdoxy.web.cern.ch/cmsdoxy/tcproxy.php?type=managers'
         self.usersURL           = 'http://cmsdoxy.web.cern.ch/cmsdoxy/tcproxy.php?type=users'
         self.CMSSWURL           = 'http://cmsdoxy.web.cern.ch/cmsdoxy/tcproxy.php?type=packages&release=CMSSW_4_4_2'
-        
+
         self.tWikiLinks         = {'Analysis':'https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCrab',
                                    'Calibration and Alignment':'https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideCalAli',
                                    'Core':'https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideFrameWork',
@@ -32,11 +33,11 @@ class MainPageGenerator:
                                    'L1':'https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideL1Trigger',
                                    'Reconstruction':'https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideReco',
                                    'Visualization':'https://twiki.cern.ch/twiki/bin/view/CMS/SWGuideVisualization'}
-        
+
         self.data               = None
-        
+
         self.GitLink            = "https://github.com/cms-sw/cmssw/tree/" + self.CMSVER + "/%s/%s"
-        
+
         self.title = "<center>\n<h1>CMSSW Documentation</h1>\n<h2>" + self.CMSVER + "</h2>\n</center>\n"
         self.links = """
 <p style="margin-left:10px;">
@@ -92,7 +93,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         self.WriteFile("index_backup.html", self.mainPageTemplate)          #backup file
         soup     = BeautifulSoup(self.mainPageTemplate)
         soup.head.insert(len(soup.head), self.head)
-        
+
         contents = soup.find("div", { "class" : "contents" })
         for child in contents.findChildren():
             child.extract()
@@ -100,98 +101,98 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         self.mainPageTemplate = str(soup)
         self.mainPageTemplate = self.mainPageTemplate.replace("CSCDQM Framework Guide", "")
         self.mainPageTemplate = self.mainPageTemplate.replace('&lt;','<').replace('&gt;', '>')
-        print "Main page template created..."
+        print("Main page template created...")
 
         self.CreateBuildRefMan()
-        print "RefMan created..."
-        
+        print("RefMan created...")
+
         self.treePageTamplate   = self.ReadFile(self.dataPath + "tree_template.html", pathFlag = False)
         self.classesSource      = self.ReadFile("classes.html")
         self.filesSource        = self.ReadFile("files.html")
         self.packageSource      = self.ReadFile("pages.html")
-        
+
     def ReadFile(self, fileName, pathFlag = True):
         """This method reads file directly or from path."""
         if pathFlag:
-            print "Read:", self.path + fileName
+            print("Read:", self.path + fileName)
             f = open(self.path + fileName)
         else:
             f = open(fileName)
-            print "Read:", fileName
+            print("Read:", fileName)
         data = f.read()
         f.close()
         return data
-    
+
     def WriteFile(self, fileName, data):
         """This method writes data"""
-        print "Write:", self.path + fileName
+        print("Write:", self.path + fileName)
         f = open(self.path + fileName, "w")
         f.write(data)
         f.close()
-        
+
     def GetFileName(self, fileName):
         """This method returns file name without extension"""
         if '.' in fileName:
             return fileName[0:fileName.find('.')]
         else:
             return fileName
-    
+
     def ParseJsonFromURL(self, URL):
         """This method returns data which is read from URL"""
         u = urllib2.urlopen(URL)
         return json.loads(u.read())
-    
+
     def __ParseItem(self, str_):
         return str_[0:str_.find('/')]
-    
+
     def __ParseSubItem(self, str_):
         if '/' in str_:
             return str_[str_.find('/')+1:]
         else:
             return None
-        
+
     def __GetHTMLItemDepth(self, item):
         return item["id"].count("_") - 1 # 1 for doxygen 1.8.5, 2 for old ver.
-    
+
     def __HTMLFileName(self, fileName):
         return fileName.lower().replace(' ', '_')
-    
+
     def PrepareData(self):
         self.managers = self.ParseJsonFromURL(self.managersURL)
-        print "Managers loaded and parsed..."
-            
+        print("Managers loaded and parsed...")
+
         self.users = self.ParseJsonFromURL(self.usersURL)
-        print "Users loaded and parsed..."
-        
+        print("Users loaded and parsed...")
+
         self.data = {}
         for i in self.managers.keys():
             self.data[i] = {"__DATA__":{"Contact":[]}}
             for j in self.managers[i]:
                 self.data[i]["__DATA__"]["Contact"].append(self.users[j])
         self.domains = self.ParseJsonFromURL(self.CMSSWURL)
-        print "Domains loaded and parsed..."
-        
+        print("Domains loaded and parsed...")
+
         for i in self.domains.keys():
             for j in self.domains[i]:
                 if not self.data[i].has_key(self.__ParseItem(j)):
                     self.data[i][self.__ParseItem(j)] = {}
                 if not self.data[i][self.__ParseItem(j)].has_key(self.__ParseSubItem(j)):
                     self.data[i][self.__ParseItem(j)][self.__ParseSubItem(j)] = {}
-                
+
                 self.data[i][self.__ParseItem(j)][self.__ParseSubItem(j)]["__DATA__"] = {
                     'git': self.GitLink % (self.__ParseItem(j), self.__ParseSubItem(j))
                     }
-                
+
         # for getting package links
         soup        = BeautifulSoup(self.packageSource)
         contents    = soup.find("div", { "class" : "contents" })
         li          = contents.findAll("tr", {})
-        
+
         self.packages = {}
         for i in li:
             if i.a["href"]:
                 self.packages[i.a.text] = i.a["href"]
-        print "Packages parsed(%d)..." % len(self.packages)
+        print("Packages parsed(%d)..." % len(self.packages))
 
         # for getting items from file.html
         soup        = BeautifulSoup(self.filesSource)
@@ -207,7 +208,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
                 self.classes[i.text]    = {}
                 level1          = i.text
                 flag = False
-                
+
             if self.__GetHTMLItemDepth(i) + origin == 2:
                 self.classes[level1][i.text] = {}
                 level2 = i.text
@@ -217,17 +218,17 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
                 flag = True
             if self.__GetHTMLItemDepth(i) + origin == 3 and i.text != u'interface':
                 flag = False
-                
+
 #            print i.text, self.__GetHTMLItemDepth(i)
 #            raw_input()
-            
+
             if flag and i.text != u'interface':
                 self.classes[level1][level2][i.text] = i.a["href"]
                 #self.ZEG = i
-        print "Class hierarchy loaded(%d)..." % len(self.classes)
-        
+        print("Class hierarchy loaded(%d)..." % len(self.classes))
+
 #        self.WriteFile("dbg.json", json.dumps(self.classes, indent = 1))
-        
+
         # for parsing classes links from classes.html
         soup        = BeautifulSoup(self.classesSource)
         contents    = soup.find("div", { "class" : "contents" })
@@ -237,8 +238,8 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         for i in td:
             if i.a and i.a.has_key('href'):
                 self.classesURLs[i.a.text] = i.a['href']
-        print "Class URLs was loaded... (%s)" % len(self.classesURLs)
-        
+        print("Class URLs was loaded... (%s)" % len(self.classesURLs))
+
         for i in self.data.keys():
             for j in self.data[i].keys():
                 if not self.classes.has_key(j): continue
@@ -256,7 +257,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         if self.data == None:
             self.PrepareData()
         self.WriteFile(fileName, json.dumps(self.data, indent = 1))
-    
+
     def CreateBuildRefMan(self):
         content = """<h1>The Reference Manual </h1>
         This is the CMSSW Reference Manual, the reference documentation of all classes and packages in CMSSW.<p>
@@ -292,11 +293,11 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
           </li>
         </ul>"""
         self.WriteFile('ReferenceManual.html', self.mainPageTemplate.replace(self.contentStamp, content))
-        
+
     def CreateNewMainPage(self, outputFileName):
         if self.data == None:
             self.PrepareData()
-            
+
         contents = """
         <table class="doctable" border="0" cellpadding="0" cellspacing="0">
         <tbody>
@@ -309,7 +310,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         for i in keysI:
             #########################
             if i == 'Other': continue
-            
+
             self.__NewTreePage(i)
             contents = contents + '\n<tr class="DCRow">\n'    ######### TAG: TR1
             #########################
@@ -318,7 +319,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
             else:
                 contents = contents + """<td width="50%%" style="padding:8px;cursor:pointer" onclick="toggleHoba('hoba_%s', 'iframes/%s.html')" id="hoba_%s"><a>%s</a></td>\n""" % (i.replace(' ', '_'), i.lower().replace(' ', '_'), i.replace(' ', '_'), i)
             #########################
-            
+
             contents = contents + '<td width="50%" class="contact">'
             for j in range(len(self.data[i]["__DATA__"]["Contact"])):
                 if j == len(self.data[i]["__DATA__"]["Contact"]) - 1:
@@ -335,14 +336,14 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
             <div style="display:none;" id="hoba_%s_div"><iframe width="100%%" frameborder="0"></iframe></div>
             </td></tr>
             """ % (i.replace(' ', '_'))
-            
+
         contents = contents + "</table>"
         self.WriteFile(outputFileName, self.mainPageTemplate.replace(self.contentStamp, self.title + contents + self.links))
-    
+
     def __NewTreePage(self, domain):
-        
+
         if not self.data.has_key(domain): return
-        
+
         content = ''
         keysI = self.data[domain].keys()
         keysI.sort()
@@ -372,7 +373,7 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
                         content += self.HTMLTreeAddItem(j, self.data[domain][i][j]["__DATA__"], folder = True)
                     else:
                         content += self.HTMLTreeAddItem(j, folder = True)
-                
+
                 for k in keysK:
                     if k == '__DATA__': continue
                     if self.data[domain][i][j][k]["__DATA__"]: content += self.HTMLTreeAddItem(k, self.data[domain][i][j][k]["__DATA__"])
@@ -384,9 +385,9 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         if self.tWikiLinks.has_key(domain):
             self.WriteFile("iframes/%s.html" % domain.lower().replace(' ', '_'), self.treePageTamplate % (domain, self.tWikiLinks[domain], content))
         else:
-            print 'Warning: The twiki link of "%s" domain not found...' % domain
+            print('Warning: The twiki link of "%s" domain not found...' % domain)
             self.WriteFile("iframes/%s.html" % domain.lower().replace(' ', '_'), self.treePageTamplate % (domain, '#', content))
-    
+
     def HTMLTreeBegin(self, title, links = {}):
         html = '\n<li>\n<div class="hitarea expandable-hitarea"></div>\n'
         html = html + '<span class="folder">%s\n' % title
@@ -395,14 +396,14 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         html = html + '</span>\n'
         html = html + '<ul style="display: block;">\n'
         return html
-    
+
     def HTMLTreeEnd(self):
         return '</li></ul>\n\n'
-    
+
     def HTMLTreeAddItem(self, title, links = None, endNode = False, folder = False):
         if endNode: html = '\t<li class="last">'
         else: html = '\t<li>'
-        
+
         if type(links) == str or type(links) == type(u''):
             if folder:
                 html = html + '\t<a href="%s" target="_blank" class=""><span class="emptyFolder">%s</span></a>\n' % (links, title)
@@ -419,17 +420,17 @@ $(".doctable").find("td").each(function(){ if (this.id.indexOf("hoba_") != -1)it
         else:
             html = html + '\t<span class="file">%s</span>\n' % title
         return html + '\t</li>\n'
-        
+
 if len(sys.argv) == 5:
     DATA_PATH = sys.argv[1]
     PATH = sys.argv[2]
     VER  = sys.argv[3]
     OUTF = sys.argv[4]
-      
+
     #os.system("cp -rf %s../data/iframes/ %s" % (os.path.split(__file__)[0], PATH))
-    
+
     l = MainPageGenerator(DATA_PATH, PATH, cmsVer = VER)
-    
+
     l.CreateNewMainPage(OUTF)
 else:
-    print "parameter error. It must be like this: python MainPageGenerator.py DATA_PATH/ CMSSW/doc/html/ CMS_VER OUTPUT_FILE_NAME"
+    print("parameter error. It must be like this: python MainPageGenerator.py DATA_PATH/ CMSSW/doc/html/ CMS_VER OUTPUT_FILE_NAME")

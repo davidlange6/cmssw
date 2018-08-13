@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='2.00'
 import os, sys
 import coral
@@ -57,11 +58,11 @@ def fillPileupHistogram (bxlumiinfo,pileupHistName,maxPileupBin,
                 mean = bxvalue * p.minBiasXsec * p.rotationTime
             if mean > 100:
                 if runNumber:
-                    print "mean number of pileup events > 100 for run %d, lum %d : m %f l %f" % \
-                          (runNumber, lumiSection, mean, bxvalue)
+                    print("mean number of pileup events > 100 for run %d, lum %d : m %f l %f" % \
+                          (runNumber, lumiSection, mean, bxvalue))
                 else:
-                    print "mean number of pileup events > 100 for lum %d: m %f l %f" % \
-                          (cmslsnum, mean, bxvalue)
+                    print("mean number of pileup events > 100 for lum %d: m %f l %f" % \
+                          (cmslsnum, mean, bxvalue))
             totalProb = 0
             for obs in range (upper):
                 prob = ROOT.TMath.Poisson (obs, mean)
@@ -69,13 +70,13 @@ def fillPileupHistogram (bxlumiinfo,pileupHistName,maxPileupBin,
                 hist.Fill (obs, prob * xingIntLumi)
             if debug:
                 xing=bxidx[idx]
-                print "ls", lumiSection, "xing", xing, "inst", bxvalue, \
-                      "mean", mean, "totalProb", totalProb, 1 - totalProb
-                print "  hist mean", hist.GetMean()
+                print("ls", lumiSection, "xing", xing, "inst", bxvalue, \
+                      "mean", mean, "totalProb", totalProb, 1 - totalProb)
+                print("  hist mean", hist.GetMean())
             if totalProb < 1:
                 hist.Fill (obs, (1 - totalProb) * xingIntLumi)
     return hist
-    
+
 ##############################
 ## ######################## ##
 ## ## ################## ## ##
@@ -103,7 +104,7 @@ if __name__ == '__main__':
                              'if path undefined, fallback to cern proxy&server')
     dbGroup.add_option     ('--debug', dest = 'debug', action = 'store_true',
                             help = 'debug')
-    
+
     inputGroup.add_option  ('-r', dest = 'runnumber', action = 'store',
                             help = 'run number')
     inputGroup.add_option  ('-i', dest = 'inputfile', action = 'store',
@@ -141,7 +142,7 @@ if __name__ == '__main__':
     try:
         (options, args) = parser.parse_args()
     except Exception , e:
-        print e
+        print(e)
     if not args:
         parser.print_usage()
         sys.exit()
@@ -179,7 +180,7 @@ if __name__ == '__main__':
                 delivered, recorded = float( pieces[2] ), float( pieces[3] )
                 xingIdx = [int(myidx) for myidx in  pieces[4::2] ]
                 xingVal = [float(myval) for myval in pieces[5::2] ]
-                
+
                 #xingInstLumiArray = [( int(orbit), float(lum) ) \
                 #                     for orbit, lum in zip( pieces[4::2],
                 #                                            pieces[5::2] ) ]
@@ -203,7 +204,7 @@ if __name__ == '__main__':
                 inputfilecontent = f.read()
                 inputRange =  selectionParser.selectionParser (inputfilecontent).runsandls()
         if not inputRange:
-            print 'failed to parse the input file', options.inputfile
+            print('failed to parse the input file', options.inputfile)
             raise
         if not options.withoutFineCorrection:
             rruns=inputRange.keys()
@@ -227,7 +228,7 @@ if __name__ == '__main__':
                 bxlumiinfo.append([cmslsnum,deliveredlumi,recordedlumi,bxlist])
                 runDict.setdefault(runnum,[]).append([cmslsnum,deliveredlumi,recordedlumi,bxlist])
     #print 'runDict ',runDict
-    
+
     import ROOT 
     pileupHist = ROOT.TH1D (options.pileupHistName,options.pileupHistName,
                       options.maxPileupBin + 1,

@@ -1,12 +1,12 @@
 class BasicDataAccessor(object):
     """ This class provides access to the underlying data model.
     """
-    
+
     def children(self, object):
         """ Return the children of a container object.
         """
         raise NotImplementedError
-    
+
     def isContainer(self, object):
         """ Return if the object is a container object.
         """
@@ -19,13 +19,13 @@ class BasicDataAccessor(object):
 
     def properties(self, object):
         """ Return the list of the properties of an object.
-        
+
         Each property is represented by a tuple containing its
         type, name, value, description, readonly(True/False), deletable(True/False).
         Possible types are: 'Category','String','MultilineString','File','FileVector','Boolean','Integer','Double'.
         """
         raise NotImplementedError
-    
+
     def setProperty(self, object, name, value, categoryName):
         """ Change the property 'name' of an object to a new value.
         """
@@ -76,7 +76,7 @@ class BasicDataAccessor(object):
 
 class BasicDataAccessorInterface(object):
     """ This class gives a comfortable Interface to objects accessible via an accessor.
-    
+
     Given the object and the accessor all properties and attributes of the object and
     the accessor are accessible via __getattr__. A script in which all attributes
     of the objects can be accessed can be run. 
@@ -85,7 +85,7 @@ class BasicDataAccessorInterface(object):
         self._object = object
         self._accessor = accessor
         self._throwAttributeErrors=throwAttributeErrors
-        
+
     def __getattr__(self, attr):
         if attr in [p[1] for p in self._accessor.properties(self._object)]:
             return self._accessor.propertyValue(self._object, attr)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import coral
 import nameDealer
 class idDealer(object):
@@ -8,10 +9,10 @@ class idDealer(object):
         self.__schema = schema
         self.__idTableColumnName = nameDealer.idTableColumnDefinition()[0]
         self.__idTableColumnType = nameDealer.idTableColumnDefinition()[1]
-        
+
     def getIDColumnDefinition( self ):
         return (self.__idTableColumnName, self.__idTableColumnType)
-    
+
     def getIDforTable( self, tableName ):
         """
         get the new id value to use for the given table
@@ -63,25 +64,25 @@ if __name__ == "__main__":
         schema=session.nominalSchema()
         idor=idDealer(schema)
         if schema.existsTable(fakeIDtableName) is False:
-          description=coral.TableDescription()
-          description.setName(fakeIDtableName)
-          description.setPrimaryKey(idor.getIDColumnDefinition()[0])        
-          description.insertColumn(idor.getIDColumnDefinition()[0],idor.getIDColumnDefinition()[1])
-          idtableHandle=schema.createTable(description)
-          idtableHandle.privilegeManager().grantToPublic(coral.privilege_Select)
-          inputData=coral.AttributeList()
-          editor=idtableHandle.dataEditor()
-          editor.rowBuffer(inputData)
-          inputData[ idor.getIDColumnDefinition()[0] ].setData(0)
-          editor.insertRow(inputData)
+            description=coral.TableDescription()
+            description.setName(fakeIDtableName)
+            description.setPrimaryKey(idor.getIDColumnDefinition()[0])        
+            description.insertColumn(idor.getIDColumnDefinition()[0],idor.getIDColumnDefinition()[1])
+            idtableHandle=schema.createTable(description)
+            idtableHandle.privilegeManager().grantToPublic(coral.privilege_Select)
+            inputData=coral.AttributeList()
+            editor=idtableHandle.dataEditor()
+            editor.rowBuffer(inputData)
+            inputData[ idor.getIDColumnDefinition()[0] ].setData(0)
+            editor.insertRow(inputData)
         idor.generateNextIDForTable('Fake')
-        print idor.getIDforTable('Fake')
+        print(idor.getIDforTable('Fake'))
         transaction.commit()
         del session
     except coral.Exception,e:
         transaction.rollback()
         del session
     except Exception, e:
-        print 'failed in unit test'
-        print str(e)
+        print('failed in unit test')
+        print(str(e))
         del session

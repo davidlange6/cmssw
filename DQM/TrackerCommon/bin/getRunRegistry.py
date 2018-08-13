@@ -2,12 +2,13 @@
 
 # For documentation of the RR XML-RPC handler, look into https://twiki.cern.ch/twiki//bin/view/CMS/DqmRrApi
 
+from __future__ import print_function
 import sys
 import xmlrpclib
 
 
 def displayHelp():
-  print """
+    print("""
   getRunRegistry.py
 
   CMSSW package DQM/TrackerCommon
@@ -46,7 +47,7 @@ def displayHelp():
   Valid options are:
     -h
       display this help and exit
-  """
+  """)
 
 
 # Option handling (very simple, no validity checks)
@@ -64,18 +65,18 @@ bOptions = {
 }
 iArgument  = 0
 for token in sys.argv[ 1:-1 ]:
-  iArgument = iArgument + 1
-  if token in sOptions.keys():
-    if not sys.argv[ iArgument + 1 ] in sOptions.keys() and not sys.argv[ iArgument + 1 ] in bOptions.keys():
-      del sOptions[ token ]
-      sOptions[ token ] = sys.argv[ iArgument + 1 ]
+    iArgument = iArgument + 1
+    if token in sOptions.keys():
+        if not sys.argv[ iArgument + 1 ] in sOptions.keys() and not sys.argv[ iArgument + 1 ] in bOptions.keys():
+            del sOptions[ token ]
+            sOptions[ token ] = sys.argv[ iArgument + 1 ]
 for token in sys.argv[ 1: ]:
-  if token in bOptions.keys():
-    del bOptions[ token ]
-    bOptions[ token ] = True
+    if token in bOptions.keys():
+        del bOptions[ token ]
+        bOptions[ token ] = True
 if bOptions[ '-h' ]:
-  displayHelp()
-  sys.exit( 0 )
+    displayHelp()
+    sys.exit( 0 )
 
 # Data extraction and local storage
 # initialise API access to defined RunRegistry proxy

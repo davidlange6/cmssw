@@ -5,6 +5,7 @@
 #
 # update lumisummary set instlumi=instlumi*:norm where runnum=:run 
 #
+from __future__ import print_function
 import os,sys
 import coral
 from RecoLuminosity.LumiDB import argparse
@@ -30,7 +31,7 @@ def calibrateRange(dbsession,normfactor,startrun,endrun):
         dbsession.transaction().commit()
         return nchanged
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
 def calibrateRun(dbsession,normfactor,runnum):
@@ -53,10 +54,10 @@ def calibrateRun(dbsession,normfactor,runnum):
         dbsession.transaction().commit()
         return nchanged
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-        
+
 def main():
     parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]),description="apply normalization factor to inst lumi")
     parser.add_argument('-c',dest='connectstr',action='store',required=True,help='connectstr')
@@ -66,7 +67,7 @@ def main():
     parser.add_argument('-startrun',dest='startrun',action='store',required=False,help='start run for range action')
     parser.add_argument('-endrun',dest='endrun',action='store',required=False,help='end run for range action')
     parser.add_argument('action',choices=['run','range'],help='calibrate run')
-    
+
     parser.add_argument('--debug',dest='debug',action='store_true',help='debug')
     args=parser.parse_args()
     connectstr=args.connectstr
@@ -88,10 +89,10 @@ def main():
         else:
             raise 'argument -r is required for action run'
         if args.debug:
-            print 'connectstr : ',connectstr
-            print 'normfactor : ',normfactor
-            print 'authpath : ',os.environ['CORAL_AUTH_PATH']
-            print 'runnumber : ',runnumber
+            print('connectstr : ',connectstr)
+            print('normfactor : ',normfactor)
+            print('authpath : ',os.environ['CORAL_AUTH_PATH'])
+            print('runnumber : ',runnumber)
         n=calibrateRun(session,normfactor,runnumber)
     if args.action == 'range':
         startrun=0
@@ -105,16 +106,16 @@ def main():
         else:
             raise 'argument -endrun is required for action range'
         if args.debug:
-            print 'connectstr : ',connectstr
-            print 'normfactor : ',normfactor
-            print 'authpath : ',os.environ['CORAL_AUTH_PATH']
-            print 'startrun : ',startrun
-            print 'endrun : ',endrun
+            print('connectstr : ',connectstr)
+            print('normfactor : ',normfactor)
+            print('authpath : ',os.environ['CORAL_AUTH_PATH'])
+            print('startrun : ',startrun)
+            print('endrun : ',endrun)
         n=calibrateRange(session,normfactor,startrun,endrun)
-    print 'number of rows changed: ',n
+    print('number of rows changed: ',n)
     del session
     del svc
-        
+
 if __name__=='__main__':
     main()
-    
+

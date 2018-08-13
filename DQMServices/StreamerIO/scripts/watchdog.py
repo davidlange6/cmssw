@@ -39,11 +39,11 @@ def launch(args):
             signal.alarm(args.t)
             ch = os.read(fd, 1024)
             signal.alarm(0)
-            
+
             if not ch:
                 os.close(fd)
                 return False, p.wait() # normal exit
-            
+
             log("Received: %s, timer reset." % repr(ch))
 
         except Timeout, t:
@@ -69,7 +69,7 @@ def main(args):
         if killed and args.restart:
             log("Restarting.")
             continue
-    
+
         break
 
 

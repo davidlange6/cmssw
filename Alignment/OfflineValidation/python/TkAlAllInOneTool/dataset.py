@@ -1,3 +1,4 @@
+from __future__ import print_function
 # idea stolen from:
 # http://cmssw.cvs.cern.ch/cgi-bin/cmssw.cgi/CMSSW/
 #        PhysicsTools/PatAlgos/python/tools/cmsswVersionTools.py
@@ -117,13 +118,13 @@ class Dataset:
                                for lumis in lumiSecStr ]
                 lumiSecExtend = "\n".join( lumiSecStr )
         elif jsonPath:
-                goodLumiSecStr = ( "goodLumiSecs = LumiList.LumiList(filename"
-                                   "= '%(json)s').getCMSSWString().split(',')\n"
-                                   "lumiSecs = cms.untracked"
-                                   ".VLuminosityBlockRange()\n"
-                                   )
-                lumiStr = "                    lumisToProcess = lumiSecs,\n"
-                lumiSecExtend = "lumiSecs.extend(goodLumiSecs)\n"
+            goodLumiSecStr = ( "goodLumiSecs = LumiList.LumiList(filename"
+                               "= '%(json)s').getCMSSWString().split(',')\n"
+                               "lumiSecs = cms.untracked"
+                               ".VLuminosityBlockRange()\n"
+                               )
+            lumiStr = "                    lumisToProcess = lumiSecs,\n"
+            lumiSecExtend = "lumiSecs.extend(goodLumiSecs)\n"
         if crab:
             files = ""
         else:
@@ -154,7 +155,7 @@ class Dataset:
                                "%(tab)s                    fileNames = readFiles\n"
                                ")\n"
                                "readFiles.extend(['dummy_File.root'])\n")
-        
+
     def __find_lt( self, a, x ):
         'Find rightmost value less than x'
         i = bisect.bisect_left( a, x )
@@ -191,9 +192,9 @@ class Dataset:
         dasQuery_files = ( 'file dataset=%s | grep file.name, file.nevents, '
                            'file.creation_time, '
                            'file.modification_time'%( self.__name ) )
-        print "Requesting file information for '%s' from DAS..."%( self.__name ),
+        print("Requesting file information for '%s' from DAS..."%( self.__name ), end=' ')
         data = self.__getData( dasQuery_files, dasLimit )
-        print "Done."
+        print("Done.")
         data = [ entry["file"] for entry in data ]
         if len( data ) == 0:
             msg = ("No files are available for the dataset '%s'. This can be "
@@ -227,9 +228,9 @@ class Dataset:
             return self.__runList
         dasQuery_runs = ( 'run dataset=%s | grep run.run_number,'
                           'run.creation_time'%( self.__name ) )
-        print "Requesting run information for '%s' from DAS..."%( self.__name ),
+        print("Requesting run information for '%s' from DAS..."%( self.__name ), end=' ')
         data = self.__getData( dasQuery_runs )
-        print "Done."
+        print("Done.")
         data = [ entry["run"][0] for entry in data ]
         data.sort( key = lambda run: run["creation_time"] )
         self.__runList = data
@@ -291,7 +292,7 @@ class Dataset:
 
     def dataType( self ):
         return self.__dataType
-    
+
     def datasetSnippet( self, jsonPath = None, begin = None, end = None,
                         firstRun = None, lastRun = None, nEvents = None,
                         crab = False ):
@@ -355,7 +356,7 @@ class Dataset:
                 %( outName )
                 + filePath +
                 "\nFor future use you have to do 'scram b'." )
-        print
+        print()
         theFile = open( filePath, "w" )
         theFile.write( dataset_cff )
         theFile.close()
@@ -368,7 +369,7 @@ class Dataset:
                      for fileInfo in self.fileInfoList() ]
         self.__fileList = fileList
         return fileList
-    
+
     def fileInfoList( self ):
         return self.__getFileInfoList( self.__dasLimit )
 
@@ -385,15 +386,15 @@ class Dataset:
 
 
 if __name__ == '__main__':
-    print "Start testing..."
+    print("Start testing...")
     datasetName = '/MinimumBias/Run2012D-TkAlMinBias-v1/ALCARECO'
     jsonFile = ( '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/'
                  'Collisions12/8TeV/Prompt/'
                  'Cert_190456-207898_8TeV_PromptReco_Collisions12_JSON.txt' )
     dataset = Dataset( datasetName )
-    print dataset.datasetSnippet( nEvents = 100,jsonPath = jsonFile,
+    print(dataset.datasetSnippet( nEvents = 100,jsonPath = jsonFile,
                                   firstRun = "207983",
-                                  end = "2012-11-28 00:00:00" )
+                                  end = "2012-11-28 00:00:00" ))
     dataset.dump_cff( outName = "Dataset_Test_TkAlMinBias_Run2012D",
                       jsonPath = jsonFile,
                       firstRun = "207983",

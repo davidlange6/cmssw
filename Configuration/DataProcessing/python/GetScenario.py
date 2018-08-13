@@ -18,7 +18,7 @@ def getScenario(scenarioName):
     Assumes that module exists at:
 
     Configuration.DataProcessing.Impl.<scenarioName>.py
-    
+
     """
     moduleName = "Configuration.DataProcessing.Impl.%s" % scenarioName
     try:

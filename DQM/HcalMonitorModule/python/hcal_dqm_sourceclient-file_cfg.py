@@ -1,10 +1,11 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 import os
 import string
 try:
     import inputfiles
 except:
-    print "Cannot import file inputfiles.py.  Proceeding anyway..."
+    print("Cannot import file inputfiles.py.  Proceeding anyway...")
 process = cms.Process("HCALDQM")
 
 #------------------------------------------------------

@@ -1,3 +1,4 @@
+from __future__ import print_function
 class ParametersObject (object):
     '''
     collection of constants used in lumi related calculation
@@ -10,7 +11,7 @@ class ParametersObject (object):
         self.lumiSectionLen  = self.numorbit * self.rotationTime
         ##self.minBiasXsec   = 71300 # unit: microbarn
 
-        
+
     def setRotationRate(self,rate):
         '''
         update the default LHC orbit frequency
@@ -18,16 +19,16 @@ class ParametersObject (object):
         Single beam energy of 3.5TeV: 11245.613
         '''
         self.rotationRate =rate
-        
+
     def setNumOrbit(self,numorbit):
         self.numorbit=numorbit
-        
+
     def setNumBx(self,numbx):
         '''
         update the default number of BX
         '''
         self.NBX = numbx
-        
+
     def calculateTimeParameters(self):
         '''Given the rotation rate, calculate lumi section length and
         rotation time.  This should be called if rotationRate is
@@ -35,19 +36,19 @@ class ParametersObject (object):
         '''
         self.rotationTime    = 1 / self.rotationRate
         self.lumiSectionLen  = self.numorbit * self.rotationTime
-        
+
     def lslengthsec(self):
         '''
         Calculate lslength in sec from number of orbit and BX
         '''
         return self.lumiSectionLen 
-       
+
 #=======================================================
 #   Unit Test
 #=======================================================
 if __name__ == "__main__":
     p=ParametersObject()
-    print p.lslengthsec()
-    print p.NBX
-    print p.numorbit
-    
+    print(p.lslengthsec())
+    print(p.NBX)
+    print(p.numorbit)
+

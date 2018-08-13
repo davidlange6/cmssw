@@ -1,13 +1,14 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import re,os,sys
 import optparse
 
 # python 2.6 has json modue; <2.6 could use simplejson
 try:
-  import json
+    import json
 except ImportError:
-  import simplejson as json
+    import simplejson as json
 
 from mutypes import * 
 
@@ -75,10 +76,10 @@ parser.add_option("-v", "--verbose",
 options,args=parser.parse_args()
 
 if options.inputDir=='':
-  print "\nOne or more of REQUIRED options is missing!\n"
-  parser.print_help()
-  # See \n"+sys.argv[0]+" --help"
-  sys.exit()
+    print("\nOne or more of REQUIRED options is missing!\n")
+    parser.print_help()
+    # See \n"+sys.argv[0]+" --help"
+    sys.exit()
 
 ######################################################
 
@@ -109,32 +110,32 @@ iteration_directory = iterationN
 
 
 def parseDir(dir,label,it1="",itN=""):
-  """it1 and itN   are the first and the last iterations' directory names
-     dir           is some directory with the results from for the LAST 
-                   iteration, so it must contain a itN substring 
-     label         is a label for tree's folder for this directory"""
-  if len(itN)>0 and dir.find(itN)==-1:
-    print "directory ", dir, "has no ", itN, " in it!!"
-    return ["problem!!!",""]
-  res = [label,dir]
-  files = os.listdir(dir)
-  files.sort()
-  for f in files:
-    if re.match(".+\.png", f):
-      if len(it1)>0 and len(itN)>0:
-        lnN = [itN,dir+'/'+f]
-        dir1 = dir.replace(itN,it1)
-        if not os.access(dir1+'/'+f,os.F_OK):
-          print "WARNING: no ",dir1+'/'+f," file found!!!"
-        ln1 = [it1,dir1+'/'+f]
-        ln = [NAME_TO_TITLE[f],dir+'/'+f,ln1,lnN]
-        res.append(ln)
-      else:
-        ln = [NAME_TO_TITLE[f],dir+'/'+f]
-        #print ln
-        res.append(ln)
-  #pp.pprint(res)
-  return res
+    """it1 and itN   are the first and the last iterations' directory names
+       dir           is some directory with the results from for the LAST 
+                     iteration, so it must contain a itN substring 
+       label         is a label for tree's folder for this directory"""
+    if len(itN)>0 and dir.find(itN)==-1:
+        print("directory ", dir, "has no ", itN, " in it!!")
+        return ["problem!!!",""]
+    res = [label,dir]
+    files = os.listdir(dir)
+    files.sort()
+    for f in files:
+        if re.match(".+\.png", f):
+            if len(it1)>0 and len(itN)>0:
+                lnN = [itN,dir+'/'+f]
+                dir1 = dir.replace(itN,it1)
+                if not os.access(dir1+'/'+f,os.F_OK):
+                    print("WARNING: no ",dir1+'/'+f," file found!!!")
+                ln1 = [it1,dir1+'/'+f]
+                ln = [NAME_TO_TITLE[f],dir+'/'+f,ln1,lnN]
+                res.append(ln)
+            else:
+                ln = [NAME_TO_TITLE[f],dir+'/'+f]
+                #print ln
+                res.append(ln)
+    #pp.pprint(res)
+    return res
 
 
 mytree = []
@@ -144,53 +145,53 @@ tree_level1 = ['test','']
 dt_basedir = iteration_directory+'/MB/'
 tree_level2 = parseDir(dt_basedir,"MB",iteration1,iterationN)
 for wheel in DT_TYPES:
-  dd = dt_basedir + wheel[0]
-  print dd
-  tree_level3 = parseDir(dd,wheel[0],iteration1,iterationN)
-  for station in wheel[2]:
-    dd = dt_basedir + wheel[0]+'/'+station[1]
-    print dd 
-    tree_level4 = parseDir(dd,station[0],iteration1,iterationN)
-    for sector in range(1,station[2]+1):
-      ssector = "%02d" % sector
-      dd = dt_basedir+wheel[0]+'/'+station[1]+'/'+ssector
-      #print dd
-      tree_level5 = parseDir(dd,"%s/%d" % (station[0],sector),iteration1,iterationN)
-      if len(tree_level5) == 2: tree_level5.append(['none',''])
-      tree_level4.append(tree_level5)
-    if len(tree_level4) == 2: tree_level4.append(['none',''])
-    tree_level3.append(tree_level4)
-  if len(tree_level3) == 2: tree_level3.append(['none',''])
-  tree_level2.append(tree_level3)
+    dd = dt_basedir + wheel[0]
+    print(dd)
+    tree_level3 = parseDir(dd,wheel[0],iteration1,iterationN)
+    for station in wheel[2]:
+        dd = dt_basedir + wheel[0]+'/'+station[1]
+        print(dd) 
+        tree_level4 = parseDir(dd,station[0],iteration1,iterationN)
+        for sector in range(1,station[2]+1):
+            ssector = "%02d" % sector
+            dd = dt_basedir+wheel[0]+'/'+station[1]+'/'+ssector
+            #print dd
+            tree_level5 = parseDir(dd,"%s/%d" % (station[0],sector),iteration1,iterationN)
+            if len(tree_level5) == 2: tree_level5.append(['none',''])
+            tree_level4.append(tree_level5)
+        if len(tree_level4) == 2: tree_level4.append(['none',''])
+        tree_level3.append(tree_level4)
+    if len(tree_level3) == 2: tree_level3.append(['none',''])
+    tree_level2.append(tree_level3)
 if len(tree_level2) == 2: tree_level2.append(['none',''])
 tree_level1.append(tree_level2)
 
 # CSC
 csc_basedir = iteration_directory+'/'
 for endcap in CSC_TYPES:
-  dd = csc_basedir+endcap[0]
-  print dd
-  tree_level2 = parseDir(dd,endcap[0],iteration1,iterationN)
-  for station in endcap[2]:
-    dd = csc_basedir+endcap[0]+'/'+station[1]
-    print dd
-    tree_level3 = parseDir(dd,station[0],iteration1,iterationN)
-    for ring in station[2]:
-      dd = csc_basedir+endcap[0]+'/'+station[1]+'/'+ring[1]
-      print dd
-      tree_level4 = parseDir(dd,"%s/%s" % (station[0],ring[1]),iteration1,iterationN)
-      for chamber in range(1,ring[2]+1):
-        schamber = "%02d" % chamber
-        dd = csc_basedir+endcap[0]+'/'+station[1]+'/'+ring[1]+'/'+schamber
-        #print dd
-        tree_level5 = parseDir(dd,"%s/%s/%d" % (station[0],ring[1],chamber),iteration1,iterationN)
-        tree_level4.append(tree_level5)
-      if len(tree_level4) == 2: tree_level4.append(['none',''])
-      tree_level3.append(tree_level4)
-    if len(tree_level3) == 2: tree_level3.append(['none',''])
-    tree_level2.append(tree_level3)
-  if len(tree_level2) == 2: tree_level2.append(['none',''])
-  tree_level1.append(tree_level2)
+    dd = csc_basedir+endcap[0]
+    print(dd)
+    tree_level2 = parseDir(dd,endcap[0],iteration1,iterationN)
+    for station in endcap[2]:
+        dd = csc_basedir+endcap[0]+'/'+station[1]
+        print(dd)
+        tree_level3 = parseDir(dd,station[0],iteration1,iterationN)
+        for ring in station[2]:
+            dd = csc_basedir+endcap[0]+'/'+station[1]+'/'+ring[1]
+            print(dd)
+            tree_level4 = parseDir(dd,"%s/%s" % (station[0],ring[1]),iteration1,iterationN)
+            for chamber in range(1,ring[2]+1):
+                schamber = "%02d" % chamber
+                dd = csc_basedir+endcap[0]+'/'+station[1]+'/'+ring[1]+'/'+schamber
+                #print dd
+                tree_level5 = parseDir(dd,"%s/%s/%d" % (station[0],ring[1],chamber),iteration1,iterationN)
+                tree_level4.append(tree_level5)
+            if len(tree_level4) == 2: tree_level4.append(['none',''])
+            tree_level3.append(tree_level4)
+        if len(tree_level3) == 2: tree_level3.append(['none',''])
+        tree_level2.append(tree_level3)
+    if len(tree_level2) == 2: tree_level2.append(['none',''])
+    tree_level1.append(tree_level2)
 
 # Common plots
 common_basedir = comdir
@@ -199,11 +200,11 @@ tree_level1.append(tree_level2)
 
 
 mytree.append(tree_level1)
-print " "
+print(" ")
 #pp.pprint(mytree)
-print
+print()
 
 ff = open("tree_items.js",mode="w")
-print >>ff, "var TREE_ITEMS = "
+print("var TREE_ITEMS = ", file=ff)
 json.dump(mytree,ff)
 ff.close()

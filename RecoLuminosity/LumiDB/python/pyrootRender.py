@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import ROOT
 from ROOT import TCanvas,TH1F,gROOT,TFile,gStyle,gDirectory,TDatime,TLegend
@@ -7,12 +8,12 @@ try:
     import Tkinter as Tk
     root=Tk.Tk()
 except ImportError:
-    print 'unable to import GUI backend, switch to batch only mode'
+    print('unable to import GUI backend, switch to batch only mode')
     batchonly=True
 
 def destroy(e) :
     sys.exit()
-        
+
 class interactiveRender(Tk.Frame):
     def __init__(self):
         Tk.Frame.__init__(self,master=root)
@@ -58,7 +59,7 @@ class batchRender():
         self.__canvas.SetSelected(rootobj)
         self.__canvas.SaveAs(self.__outfile)
 if __name__=='__main__':
-      
+
     da = TDatime(2010,03,30,13,10,00)
     h1f = TH1F("Luminposity","",1000,0.,1000)
     h1f.GetXaxis().SetNdivisions(-503)
@@ -69,16 +70,16 @@ if __name__=='__main__':
     h1f.GetXaxis().SetLabelSize(0.03);
     h1f.GetXaxis().SetTitleFont(32);
     h1f.GetXaxis().SetTitle("Date");
-        
+
     h1f.GetYaxis().SetLabelFont(32);
     h1f.GetYaxis().SetLabelSize(0.03);
     h1f.GetYaxis().SetTitleFont(32);
     h1f.GetYaxis().SetTitle("L (#mub^{-1})");
-    
+
     for i in range(0,1000):
         #h1f.GetXaxis().FindBin() ## Ricordati di calcolare il bin corretto per il tuo tempo
         h1f.SetBinContent(i,20.2+i)
-    
+
     #m=interactiveRender()
     #m.draw(h1f)
     bat=batchRender('testroot.jpg')

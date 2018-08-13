@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 import os
 
@@ -19,7 +20,7 @@ process = cms.Process("TBSim")
 
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 
-    
+
 process.load("SimGeneral.HepPDTESSource.pythiapdt_cfi")
 
 process.RandomNumberGeneratorService = cms.Service("RandomNumberGeneratorService",
@@ -210,7 +211,7 @@ process.load("SimCalorimetry.EcalTestBeam.ecaldigi_testbeam_cfi")
 
 # local reco
 process.load("Configuration.EcalTB.localReco_tbsim_cff")
- 
+
 # ntuplizer for TB data format
 #process.treeProducerCalibSimul = cms.EDFilter("TreeProducerCalibSimul",
 #    rootfile = cms.untracked.string("treeTB_"+myNameTag+".root"),
@@ -245,7 +246,7 @@ if mySample == "gf":
         tuning_pList = myParList
     )
 
-print "physics type : ", process.g4SimHits.Physics.type
+print("physics type : ", process.g4SimHits.Physics.type)
 
 # sequences
 process.doSimHits = cms.Sequence(process.ProductionFilterSequence*process.VtxSmeared*process.g4SimHits)
@@ -257,7 +258,7 @@ process.p1 = cms.Path(process.doSimHits*process.doSimTB*process.doEcalDigis*proc
 
 
 # modify the default behavior of the MessageLogger
-    
+
 process.MessageLogger.destinations=cms.untracked.vstring('cout'
                                                          ,'cerr'
                                                          ,'G4msg'

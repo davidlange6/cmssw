@@ -1,12 +1,13 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import sys, os
 import time
 import optparse
 from math import sqrt, log10, floor
 
 import ROOT
-    
+
 def manipulate_log(outdir, logfile_name, secsperbin):
     """ Parses logfile_name and create an html report
         with information and plots, at the outdir path.
@@ -58,7 +59,7 @@ def manipulate_log(outdir, logfile_name, secsperbin):
     # Save in file
     rootfilename = '%s/graphs.root' %outdir
     myfile = ROOT.TFile(rootfilename,'RECREATE')   
-        
+
     # Set limits
     min_val = data[min(data, key=data.get)]
     max_val = data[max(data, key=data.get)]
@@ -104,7 +105,7 @@ def manipulate_log(outdir, logfile_name, secsperbin):
     graph_canvas.cd()
     graph.Draw("ALP")
     avg_line.Draw("Same")
-   
+
 
     # Write graph to file
     graph_canvas.Print("%s/graph.png" %outdir,"png")
@@ -118,9 +119,9 @@ def manipulate_log(outdir, logfile_name, secsperbin):
     histo_canvas.Print("%s/histo.png" %outdir,"png")
     histo.Write()
     histo_canvas.Write() 
-    
+
     myfile.Close()   
-    
+
     ########################                
     #### The html page! ####
     ########################
@@ -151,15 +152,15 @@ def manipulate_log(outdir, logfile_name, secsperbin):
     # Comment out next 2 line to round uncertainty to the most significant digit
     #rounded_uncertainty=round(uncertainty, -int(floor(log10(uncertainty))))
     #print 'Rounded uncertainty=' , rounded_uncertainty  
-    print '------ Statistics ------'
-    print 'last event = {}'.format(last_event)
-    print 'Minval = {} maxval = {} interval = {}'.format(min_val, max_val, interval)
-    print 'Total Time = {}'.format(total_time)
-    print 'Average Time = {}'.format(average_time)
-    print 'Uncertainty of Average Time = {} +/- {}'.format(average_time, uncertainty)
+    print('------ Statistics ------')
+    print('last event = {}'.format(last_event))
+    print('Minval = {} maxval = {} interval = {}'.format(min_val, max_val, interval))
+    print('Total Time = {}'.format(total_time))
+    print('Average Time = {}'.format(average_time))
+    print('Uncertainty of Average Time = {} +/- {}'.format(average_time, uncertainty))
 
 #################################################################################################    
-        
+
 if __name__ == '__main__':
 
     # Here we define an option parser to handle commandline options..
@@ -169,7 +170,7 @@ if __name__ == '__main__':
                       help='The profile to manipulate' ,
                       default='',
                       dest='profile')
-                      
+
     parser.add_option('-o', '--outdir',
                       help='The directory of the output' ,
                       default='',
@@ -180,20 +181,20 @@ if __name__ == '__main__':
                       default='1',
                       dest='startevt')                      
     (options,args) = parser.parse_args()
-    
+
     # Now some fault control..If an error is found we raise an exception
     if options.profile == '' or\
        options.outdir == '':
         raise Exception('Please select a profile and an output dir!')
-    
+
     if not os.path.exists(options.profile) or\
        not os.path.exists(options.outdir):
         raise Exception('Outdir or input profile not present!')
-    
+
     try:
         startevt = float(options.startevt)        
     except ValueError:
-         print 'Problems in convertng starting event value!'
+        print('Problems in convertng starting event value!')
 
     # launch the function!
     manipulate_log(options.outdir,options.profile,startevt)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 class Node(object):
     def __init__( self ):
         """__init__
@@ -49,16 +50,16 @@ class LeafNode(Node):
 if __name__ == "__main__":
     node=Node()
     node.nodeid=1
-    print node.nodeid
-    print node.nodelabel
-    print node.lft
+    print(node.nodeid)
+    print(node.nodelabel)
+    print(node.lft)
     try:
         node.foreign='a'
     except AttributeError:
-        print 'caught right exception'
+        print('caught right exception')
     except Exception, er:
-        print 'unexpected error'
-        print str(er)
+        print('unexpected error')
+        print(str(er))
     leaf=LeafNode()
-    print leaf.__class__.__name__,'isLeaf',str(leaf.tagid)
-    print node.__class__.__name__,'isLeaf',str(node.tagid)
+    print(leaf.__class__.__name__,'isLeaf',str(leaf.tagid))
+    print(node.__class__.__name__,'isLeaf',str(node.tagid))

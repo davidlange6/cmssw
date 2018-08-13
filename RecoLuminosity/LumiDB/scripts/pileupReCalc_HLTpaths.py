@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='1.00'
 import os,sys,time
 import optparse
@@ -15,7 +16,7 @@ def parseInputFile(inputfilename):
     selectf=open(inputfilename,'r')
     inputfilecontent=selectf.read()
     p=pileupParser.pileupParser(inputfilecontent)                            
-    
+
 #    p=inputFilesetParser.inputFilesetParser(inputfilename)
     runlsbyfile=p.runsandls()
     return runlsbyfile
@@ -54,12 +55,12 @@ if __name__ == '__main__':
     parser.add_option('--inputLumiJSON',dest='inputLumiJSON',action='store',
                         help='Input Lumi/Pileup file in JSON format (required)')
     parser.add_option('--verbose',dest='verbose',action='store_true',help='verbose mode for printing' )
-    
+
     # parse arguments
     try:
         (options, args) = parser.parse_args()
     except Exception , e:
-        print e
+        print(e)
 #    if not args:
 #        parser.print_usage()
 #        sys.exit()
@@ -67,13 +68,13 @@ if __name__ == '__main__':
 #        parser.print_usage()
 #        raise RuntimeError, "Exactly one output file must be given"
 #    output = args[0]
-    
+
 #    options=parser.parse_args()
 
     if options.verbose:
-        print 'General configuration'
-        print '\toutputfile: ',options.outputfile
-        print '\tinput selection file: ',options.inputfile
+        print('General configuration')
+        print('\toutputfile: ',options.outputfile)
+        print('\tinput selection file: ',options.inputfile)
 
 
     #inpf = open (options.inputfile, 'r')
@@ -84,7 +85,7 @@ if __name__ == '__main__':
 
     #inputRange=inputFilesetParser.inputFilesetParser(options.inputfile)
 
-    
+
     inputPileupRange=parseInputFile(options.inputLumiJSON)
 
     # now, we have to find the information for the input runs and LumiSections 
@@ -99,7 +100,7 @@ if __name__ == '__main__':
         if run in inputPileupRange.keys():
             OUTPUTLINE+= ('"%d":' % run )
             OUTPUTLINE+= ' ['
-            
+
             LSPUlist = inputPileupRange[run]
             #print "LSPUlist", LSPUlist
             for LSnumber in lslist:
@@ -113,7 +114,7 @@ if __name__ == '__main__':
                         scale=HLTlumiInfo[1]/PUlumiInfo[0] # rescale to HLT recorded Lumi
 
                     if scale > 1.001:
-                        print 'Run %d, LS %d, HLT Scale (%f), HLTL (%f), PUL (%f) larger than one - please check!' % (run, LSnumber, scale, HLTlumiInfo[1],PUlumiInfo[0])
+                        print('Run %d, LS %d, HLT Scale (%f), HLTL (%f), PUL (%f) larger than one - please check!' % (run, LSnumber, scale, HLTlumiInfo[1],PUlumiInfo[0]))
                         scale=1.01  # HLT integrated values are wrong, punt                        
 
                     newIntLumi = scale*PUlumiInfo[0]
@@ -135,7 +136,7 @@ if __name__ == '__main__':
                     #print PUlumiInfo[0],HLTlumiInfo[1]
                     LumiString = "[%d,0.0,0.0,%2.4e]," % (LSnumber, newInstLumi)
                     OUTPUTLINE += LumiString
-                    
+
 
             lastindex=len(OUTPUTLINE)-1
             trunc = OUTPUTLINE[0:lastindex]
@@ -143,7 +144,7 @@ if __name__ == '__main__':
             OUTPUTLINE += '], '
 
         else:  # trouble
-            print "Run %d not found in Lumi/Pileup input file.  Check your files!" % (run)
+            print("Run %d not found in Lumi/Pileup input file.  Check your files!" % (run))
 
 
 #            print run
@@ -168,7 +169,7 @@ if __name__ == '__main__':
     if not outputfile:
         raise RuntimeError, \
               "Could not open '%s' as an output JSON file" % output
-                    
+
     outputfile.write(OUTPUTLINE)
     outputfile.close()
 

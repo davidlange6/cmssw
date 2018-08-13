@@ -9,6 +9,7 @@
 #
 ################################################################################
 
+from __future__ import print_function
 import subprocess as sub
 import sys
 from optparse import OptionParser
@@ -52,7 +53,7 @@ cmssw_release = args[0]
 # Specify the directory of data or MC
 relvaldir="RelVal"
 if options.data:
-  relvaldir+="Data"
+    relvaldir+="Data"
 
 # Specify the directory of the release
 releasedir=cmssw_release[:10]+"x"
@@ -60,11 +61,11 @@ releasedir=cmssw_release[:10]+"x"
 #fetch!
 thepath=cmssw_release
 if len(options.path1)>0:
-  thepath="%s.*%s"%(options.path1,thepath)
+    thepath="%s.*%s"%(options.path1,thepath)
 if len(options.path2)>0:
-  thepath="%s.*%s"%(thepath,options.path2)  
+    thepath="%s.*%s"%(thepath,options.path2)  
 command='relmon_rootfiles_spy.py ROOT/%s/%s/ -u -g -p %s'%(relvaldir,releasedir,thepath)
-print command
+print(command)
 sub.call(command.split(" "))
 
 # Main tree:

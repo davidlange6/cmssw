@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 from FastSimulation.Tracking.PixelTracksProducer_cff import *
@@ -24,8 +25,8 @@ if (MixingMode=='DigiRecoMixing'):
 elif (MixingMode=='GenMixing'):
     lastTrackingSteps = cms.Sequence(generalTracks+trackExtrapolator)
 else:
-    print 'unsupported MixingMode label'
-        
+    print('unsupported MixingMode label')
+
 import RecoTracker.MeasurementDet.MeasurementTrackerEventProducer_cfi
 MeasurementTrackerEvent = RecoTracker.MeasurementDet.MeasurementTrackerEventProducer_cfi.MeasurementTrackerEvent.clone(
     pixelClusterProducer = '',

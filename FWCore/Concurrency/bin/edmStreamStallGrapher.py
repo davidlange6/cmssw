@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 
 if len(sys.argv) == 1:
@@ -29,7 +30,7 @@ To Read: The script will then print an 'ASCII art' stall graph which consists of
  written in descending order. In addition, the list of all stall times for the
  module is given.
 """
-    print s
+    print(s)
     exit(0)
 
 fileName = sys.argv[1]
@@ -109,7 +110,7 @@ for n,trans,s,time in processingSteps:
             t.append(waitTime)
             states += " STALLED"
 
-    print states
+    print(states)
     streamState[s]=trans
 
 priorities = list()
@@ -122,4 +123,4 @@ def sumSort(i,j):
 priorities.sort(cmp=sumSort, reverse=True)
 
 for n,s,t in priorities:
-    print n, "%.2f"%s, [ "%.2f"%x for x in t]
+    print(n, "%.2f"%s, [ "%.2f"%x for x in t])

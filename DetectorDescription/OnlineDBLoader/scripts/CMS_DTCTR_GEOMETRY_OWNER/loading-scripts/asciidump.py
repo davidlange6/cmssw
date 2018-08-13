@@ -1,3 +1,4 @@
+from __future__ import print_function
 from  xml.dom.minidom import *
 import os
 import string
@@ -25,7 +26,7 @@ os.mkdir(outdir)
 #       os.remove(i)
 #    except:
 #       print "ex"
-        
+
 
 ##################################################################################
 #  Solid actions
@@ -84,8 +85,8 @@ def examine_section(r,ns,kind):
             LOGFILE.write(r.tagName + " " + qname(r.getAttribute("name"),ns) + " rmin = rmax\n")
             if (i != 0) and (i != (len(rmin)-1)):
                 LOGFILE.write("   the one above might be a problem!\n")
-                print r.tagName + " " + qname(r.getAttribute("name"),ns) + " rmin = rmax\n", i, range(0,len(rmin))
-                
+                print(r.tagName + " " + qname(r.getAttribute("name"),ns) + " rmin = rmax\n", i, range(0,len(rmin)))
+
     for i in range(0,len(rmin)):
         if rmin[i] > rmax[i]:
             LOGFILE.write(r.tagName + " " + qname(r.getAttribute("name"),ns) + " rmin > rmax\n")
@@ -104,10 +105,10 @@ def examine_section(r,ns,kind):
             if err>0:
                 LOGFILE.write(r.tagName + " " + qname(r.getAttribute("name"),ns) + " discontinuity at " + i.__str__() + "\n")
     if len(zz) == 2:
-         #print zz, qname(r.getAttribute("name"),ns)
-         #print n
-         LOGFILE.write(r.tagName + " " + qname(r.getAttribute("name"),ns) + " simpler solid possible\n")
-        
+        #print zz, qname(r.getAttribute("name"),ns)
+        #print n
+        LOGFILE.write(r.tagName + " " + qname(r.getAttribute("name"),ns) + " simpler solid possible\n")
+
 def poly_section_action(r,ns,kind):
     count = 0
     name = qname(r.getAttribute("name"),ns) + ","
@@ -129,7 +130,7 @@ def poly_section_action(r,ns,kind):
     #if count<5:
     #    LOGFILE.write("ZSECTION:" +" " + r.tagName + " " + name + "\n")
     examine_section(r,ns,kind)
-        
+
 def boolean_components(r,ns):
     s = ""
     for c in r.getElementsByTagName("rSolid"):
@@ -162,7 +163,7 @@ def reflectionsolid_action(r,s,ns):
     s = s + r.tagName +','
     generic_solid("REFLECTIONSOLIDS.dat",r,ns)
     return s
-    
+
 def shapelesssolid_action(r,s,ns):
     s = s  + r.tagName +','
     generic_solid("SHAPELESSSOLIDS.dat",r,ns)
@@ -233,7 +234,7 @@ def subtractionsolid_action(r,s,ns):
     comp = boolean_components(r,ns)
     generic_solid("BOOLEANSOLIDS.dat",r,ns,"S,"+comp,"","operation,solidA,solidB,x,y,z,rot")
     return s
-    
+
 # global things
 CATEGORIES = {}
 SOLIDTYPES = {
@@ -280,20 +281,20 @@ def unitc(s):
         if len(x) == 2:
             return string.atof(x[0])*UNITS[x[1]]  
     except:
-        print "ERROR IN unitc: >" + s + "<"
-        print x
-        print UNITS[x[1]]       
+        print("ERROR IN unitc: >" + s + "<")
+        print(x)
+        print(UNITS[x[1]])       
 
 def get_docs(config):
     result = []
-    print CONFIGFILE
+    print(CONFIGFILE)
     doc = xml.dom.minidom.parse(open(CONFIGFILE,'r'))
     file_elements = doc.getElementsByTagName("File")
-    print `file_elements`   
+    print(`file_elements`)   
     for file_element in file_elements:
         file_name = file_element.getAttribute("name")
         url_name = file_element.getAttribute("url")
-        print url_name + file_name
+        print(url_name + file_name)
         path = url_name+file_name
         ns = string.split(path,'/')[-1][:-4]
         result.append([url_name+file_name,ns])
@@ -343,7 +344,7 @@ def log_action(logp,s,ns):
             sol = qname(nodelist[i].getAttribute("name"),ns)
     result =  name_cat[0] + ',' + sol + ',' + mat + ',' + name_cat[1] + ',' 
     return result
-    
+
 def pos_action(posp,s,ns):
     PPCOUNT[0] = PPCOUNT[0] + 1
     nodelist = posp.childNodes
@@ -371,13 +372,13 @@ def pos_action(posp,s,ns):
         result = result + ",,,"
     result = result + rot + ',' + parent + ',' + child + ','
     return result
-    
+
 docs_ns = get_docs("configuration.xml")
-print `docs_ns`
+print(`docs_ns`)
 for doc in docs_ns:
     document_path = doc[0]
     namespace = doc[1]
-    print "Processing document: " + doc[0] + " ns=" + doc[1] 
+    print("Processing document: " + doc[0] + " ns=" + doc[1]) 
     doc = xml.dom.minidom.parse(open(doc[0],'r'));
 
     # syntax: list( tablename, list(elements), list(attributes) )
@@ -404,7 +405,7 @@ for doc in docs_ns:
 
               [ 'SOLIDS.dat', SOLIDTYPES.keys(),
                 [':name'], SOLIDTYPES.values() ]
-            
+
             ]
 
     for i in table:
@@ -434,10 +435,10 @@ for doc in docs_ns:
                         attr = qname(attr,namespace)
                     else:
                         if flagU == 0:    
-                             attr = unitc(attr)
+                            attr = unitc(attr)
                         else:     
-                             if attr == " ": # fix symbol=" " in ElementaryMaterial (could be done in an action)
-                                 attr = "0"
+                            if attr == " ": # fix symbol=" " in ElementaryMaterial (could be done in an action)
+                                attr = "0"
                     s = s + attr.__str__() + ","
                 if action != 0: # trigger special action if defined in the processing-table
                     le=0

@@ -3,16 +3,17 @@
 benedikt.hegner@cern.ch
 
 """
+from __future__ import print_function
 import re
 import ROOT
 import exceptions
 import sys
 ### define tab completion
 try:
-  import readline #cmscompleter
-  readline.parse_and_bind('tab: complete')
+    import readline #cmscompleter
+    readline.parse_and_bind('tab: complete')
 except:
-  print 'WARNING: Could not load tab completion'
+    print('WARNING: Could not load tab completion')
 
 
 # for adding iterators at runtime
@@ -22,25 +23,25 @@ import iterators
 ### workaround iterator generators for ROOT classes
 def all(container):
 
-  # loop over ROOT::TTree and similar
-  if hasattr(container,'GetEntries'):
-    try:
-      entries = container.GetEntries()
-      for entry in xrange(entries):
-        yield entry
-    except:
-        raise cmserror("Looping of %s failed" %container) 
+    # loop over ROOT::TTree and similar
+    if hasattr(container,'GetEntries'):
+        try:
+            entries = container.GetEntries()
+            for entry in xrange(entries):
+                yield entry
+        except:
+            raise cmserror("Looping of %s failed" %container) 
 
-  # loop over std::vectors and similar
-  elif hasattr(container, 'size'):
-    try:
-      entries = container.size()
-      for entry in xrange(entries):
-        yield container[entry]
-    except:
-      pass
+    # loop over std::vectors and similar
+    elif hasattr(container, 'size'):
+        try:
+            entries = container.size()
+            for entry in xrange(entries):
+                yield container[entry]
+        except:
+            pass
 
- # loop over containers with begin and end iterators
+       # loop over containers with begin and end iterators
 def loop(begin, end):
     """Convert a pair of C++ iterators into a python generator"""
     while (begin != end):
@@ -63,79 +64,79 @@ def createBranchBuffer(branch):
 
 
 class EventTree(object):
-      def __init__(self,obj):
-          sys.stderr.write ("WARNING: This package has been deprecated and will be removed in the near future.\nPlease switch to using FWLite.Python (https://twiki.cern.ch/twiki/bin/viewauth/CMS/WorkBookFWLitePython)\n")
-          treeName = 'Events'
-          if isinstance(obj, ROOT.TTree):
-              self._tree = obj
-          elif isinstance(obj, ROOT.TFile):
-              self._tree = obj.Get(treeName)
-          elif isinstance(obj, str):
-              self._tree = ROOT.TFile.Open(obj).Get(treeName)
-          else:
-              raise cmserror("EventTree accepts only TTrees, TFiles and filenames")
-          self._usedBranches = dict()
-          self._index = -1
-          self._aliases = self._tree.GetListOfAliases()
-      def branch(self,name):
-          # support for aliases
-          alias = self._tree.GetAlias(name)
-          if alias != '': name = alias 
-          # access the branch in ttree
-          if name in self._usedBranches:
-              return self._usedBranches[name]
-          self._usedBranches[name]=EventBranch(self,name)
-          return self._usedBranches[name]
-      def cppCode(self, name):
-          """C++ code for accessing the product inside the full framework"""
-          alias = self._tree.GetAlias(name)
-          if alias != '': name = alias
-          tmpBranch = self._tree.GetBranch(name)
-          typeString = ROOT.branchToClass(tmpBranch).GetName()
-          if "edm::Wrapper" in typeString:
-              typeString = typeString.replace("<edm::Wrapper","")
-              typeString = typeString.rstrip(">")
-          nameParts = name.split("_")
-          if nameParts[2] == "":
-              cppCode = 'edm::Handle<%s > dummy;\nevent.getByLabel("%s", dummy);'\
-                        %(typeString, nameParts[1])
-          else:
-              cppCode = 'edm::Handle<%s > dummy;\nevent.getByLabel("%s", "%s", dummy);'\
-                        %(typeString, nameParts[1], nameParts[2])
-          return cppCode
-      def getListOfAliases(self):
-          return self._aliases
-      def SetAlias (self, alias, fullName):
-          self.tree().SetAlias(alias, fullName)
-      def index(self):
-          return self._index
-      def tree(self):
-          return self._tree
-      def __setBranchIndicies(self):
-          for branch in self._usedBranches.itervalues():
-              branch.setIndex(self._index)
-      def __getattr__(self, name):
-          return self.branch(name)
-      def __getitem__(self,key):
-          if key <0 or key > self._tree.GetEntries():
-              raise IndexError
-          self._index = key
-          self.__setBranchIndicies()
-          self._tree.GetEntry(self._index,0)
-          return Event(self)
-      def __iter__(self):
-          # flushing/initializing the root buffers 
-          entry = 0
-          self._index = entry
-          self.__setBranchIndicies()
-          self._tree.GetEntry(self._index,0)
-          # the real loop
-          for entry in xrange(self._tree.GetEntries()):
-              self._index = entry
-              self.__setBranchIndicies()
-              self._tree.GetEntry(self._index,0)
-              yield Event(self)    # TODO: don't return a new object but update the old one 
-              
+    def __init__(self,obj):
+        sys.stderr.write ("WARNING: This package has been deprecated and will be removed in the near future.\nPlease switch to using FWLite.Python (https://twiki.cern.ch/twiki/bin/viewauth/CMS/WorkBookFWLitePython)\n")
+        treeName = 'Events'
+        if isinstance(obj, ROOT.TTree):
+            self._tree = obj
+        elif isinstance(obj, ROOT.TFile):
+            self._tree = obj.Get(treeName)
+        elif isinstance(obj, str):
+            self._tree = ROOT.TFile.Open(obj).Get(treeName)
+        else:
+            raise cmserror("EventTree accepts only TTrees, TFiles and filenames")
+        self._usedBranches = dict()
+        self._index = -1
+        self._aliases = self._tree.GetListOfAliases()
+    def branch(self,name):
+        # support for aliases
+        alias = self._tree.GetAlias(name)
+        if alias != '': name = alias 
+        # access the branch in ttree
+        if name in self._usedBranches:
+            return self._usedBranches[name]
+        self._usedBranches[name]=EventBranch(self,name)
+        return self._usedBranches[name]
+    def cppCode(self, name):
+        """C++ code for accessing the product inside the full framework"""
+        alias = self._tree.GetAlias(name)
+        if alias != '': name = alias
+        tmpBranch = self._tree.GetBranch(name)
+        typeString = ROOT.branchToClass(tmpBranch).GetName()
+        if "edm::Wrapper" in typeString:
+            typeString = typeString.replace("<edm::Wrapper","")
+            typeString = typeString.rstrip(">")
+        nameParts = name.split("_")
+        if nameParts[2] == "":
+            cppCode = 'edm::Handle<%s > dummy;\nevent.getByLabel("%s", dummy);'\
+                      %(typeString, nameParts[1])
+        else:
+            cppCode = 'edm::Handle<%s > dummy;\nevent.getByLabel("%s", "%s", dummy);'\
+                      %(typeString, nameParts[1], nameParts[2])
+        return cppCode
+    def getListOfAliases(self):
+        return self._aliases
+    def SetAlias (self, alias, fullName):
+        self.tree().SetAlias(alias, fullName)
+    def index(self):
+        return self._index
+    def tree(self):
+        return self._tree
+    def __setBranchIndicies(self):
+        for branch in self._usedBranches.itervalues():
+            branch.setIndex(self._index)
+    def __getattr__(self, name):
+        return self.branch(name)
+    def __getitem__(self,key):
+        if key <0 or key > self._tree.GetEntries():
+            raise IndexError
+        self._index = key
+        self.__setBranchIndicies()
+        self._tree.GetEntry(self._index,0)
+        return Event(self)
+    def __iter__(self):
+        # flushing/initializing the root buffers 
+        entry = 0
+        self._index = entry
+        self.__setBranchIndicies()
+        self._tree.GetEntry(self._index,0)
+        # the real loop
+        for entry in xrange(self._tree.GetEntries()):
+            self._index = entry
+            self.__setBranchIndicies()
+            self._tree.GetEntry(self._index,0)
+            yield Event(self)    # TODO: don't return a new object but update the old one 
+
 
 class Event(object):
     def __init__(self, eventTree):
@@ -172,7 +173,7 @@ class EventBranch(object):
 
 class cmserror(exceptions.StandardError):
     def __init__(self, message):
-          length = len(message)+7   #7=len("ERROR: ")
-          print "="*length
-          print "ERROR:", message
-          print "="*length
+        length = len(message)+7   #7=len("ERROR: ")
+        print("="*length)
+        print("ERROR:", message)
+        print("="*length)

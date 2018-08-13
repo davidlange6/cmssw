@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os,coral,fnmatch,time
 from RecoLuminosity.LumiDB import nameDealer,dbUtil,revisionDML,lumiTime,CommonUtil,lumiCorrections
 from datetime import datetime
@@ -17,7 +18,7 @@ def guesscorrIdByName(schema,tagname=None):
     '''
     select data_id from lumicorrectionss [where entry_name=:tagname]
     result lumicorrectionsdataid
-    
+
     '''
     lumicorrectionids=[]
     result=None
@@ -236,7 +237,7 @@ def fillrunMap(schema,fillnum=None,runmin=None,runmax=None,startT=None,stopT=Non
         raise
     del qHandle
     return result
-    
+
 def runList(schema,datatagid,runmin=None,runmax=None,fillmin=None,fillmax=None,startT=None,stopT=None,l1keyPattern=None,hltkeyPattern=None,amodetag=None,nominalEnergy=None,energyFlut=0.2,requiretrg=True,requirehlt=True,preselectedruns=None,lumitype=None):
     '''
     select r.runnum,l.starttime,l.stoptime,l.data_id,tag.trgdataid,tag.hltdataid from cmsrunsummary r,tagruns tag,lumidata l,trgdata t,hltdata h where l.runnum=tag.runnum and r.runnum=l.runnum (and l.runnum=t.runnum and t.runnum=h.runnum) and r.fillnum>=:fillmin and r.fillnum<=fillmax and r.runnum>:runmin and r.runnum<:runmax and r.amodetag=:amodetag (and regexp_like(r.l1key,:l1keypattern) and regexp_like(hltkey,:hltkeypattern) ) and l.nominalEnergy>=:nominalEnergy*(1-energyFlut) and l.nominalEnergy<=:nominalEnergy*(1+energyFlut) and tag.tagid<=:tagid and l.starttime is not null and l.stoptime is not null
@@ -255,7 +256,7 @@ def runList(schema,datatagid,runmin=None,runmax=None,fillmin=None,fillmax=None,s
         tagrunstablename=nameDealer.pixeltagRunsTableName()
     else:
         assert False, "ERROR Unknown lumitype '%s'" % lumitype
-    
+
     result={}#{runnum,[[lumiid,trgid,hltid]]}
     qHandle=schema.newQuery()
     r=nameDealer.cmsrunsummaryTableName()
@@ -385,7 +386,7 @@ def runList(schema,datatagid,runmin=None,runmax=None,fillmin=None,fillmax=None,s
             elif startT is not None:
                 minTime=lute.StrToDatetime(startT,customfm='%m/%d/%y %H:%M:%S')
                 if not (runstopTime>=minTime):
-                        continue
+                    continue
             elif stopT is not None:
                 maxTime=lute.StrToDatetime(stopT,customfm='%m/%d/%y %H:%M:%S')
                 runTime=lute.StrToDatetime(starttimeStr,customfm='%m/%d/%y %H:%M:%S')
@@ -729,7 +730,7 @@ def luminormById(schema,dataid):
 def trgRunById(schema,dataid,trgbitname=None,trgbitnamepattern=None):
     '''
     query: select RUNNUM,SOURCE,BITZERONAME,BITNAMECLOB,ALGOMASK_H,ALGOMASK_L,TECHMASK from trgdata where DATA_ID=:dataid
-    
+
     output: [runnum(0),datasource(1),bitzeroname(2),bitnamedict(3),algomask_h(4),algomask_l(5),techmask(6)]
              -- runnumber
              -- original source database name
@@ -871,7 +872,7 @@ def trgLSById(schema,dataid,trgbitname=None,trgbitnamepattern=None,withL1Count=F
                     trgcounts=CommonUtil.unpackBlobtoArray(trgcountblob,'l')
                 else:
                     trgcounts=CommonUtil.unpackBlobtoArray(trgcountblob,'I')
-                    
+
             bitinfo=[]
             for (bitidx,thisbitname) in trgnamedict:
                 thispresc=None
@@ -1030,7 +1031,7 @@ def lumiRunById(schema,lumidataid,lumitype='HF'):
 #    select entry_name,data_id,a1,a2,drift from lumicorrections where entry_name=:correctiontagname
 #    '''
 
-    
+
 #def fillschemeByRun(schema,runnum):
 #    fillscheme=''
 #    ncollidingbunches=0
@@ -1081,7 +1082,7 @@ def allfillschemes(schema):
         raise
     del qHandle
     return afterglows
-    
+
 def lumiLSById(schema,dataid,beamstatus=None,withBXInfo=False,bxAlgo='OCC1',withBeamIntensity=False,tableName=None):
     '''
     input:
@@ -1119,7 +1120,7 @@ def lumiLSById(schema,dataid,beamstatus=None,withBXInfo=False,bxAlgo='OCC1',with
             qHandle.addToOutputList('CMSBXINDEXBLOB','bxindexblob')
             qHandle.addToOutputList('BEAMINTENSITYBLOB_1','beam1intensity')
             qHandle.addToOutputList('BEAMINTENSITYBLOB_2','beam2intensity')
-        
+
         qConditionStr='DATA_ID=:dataid'
         qCondition=coral.AttributeList()
         qCondition.extend('dataid','unsigned long long')
@@ -1218,66 +1219,66 @@ def beamInfoById(schema,dataid,withBeamIntensity=False,minIntensity=0.1):
     del qHandle
     qHandle=schema.newQuery()
     try:
-       qHandle.addToTableList(nameDealer.lumisummaryv2TableName())
-       qHandle.addToOutputList('RUNNUM')
-       qHandle.addToOutputList('CMSLSNUM')
-       qHandle.addToOutputList('LUMILSNUM')
-       qHandle.addToOutputList('BEAMSTATUS')
-       qHandle.addToOutputList('BEAMENERGY')
-       if withBeamIntensity:
-           qHandle.addToOutputList('CMSBXINDEXBLOB')
-           qHandle.addToOutputList('BEAMINTENSITYBLOB_1')
-           qHandle.addToOutputList('BEAMINTENSITYBLOB_2')
-       qConditionStr='DATA_ID=:dataid'
-       qCondition=coral.AttributeList()
-       qCondition.extend('dataid','unsigned long long')
-       qCondition['dataid'].setData(dataid)
-       qResult=coral.AttributeList()
-       qResult.extend('RUNNUM','unsigned int')
-       qResult.extend('CMSLSNUM','unsigned int')
-       qResult.extend('LUMILSNUM','unsigned int')
-       qResult.extend('BEAMSTATUS','string')
-       qResult.extend('BEAMENERGY','float')
-       if withBeamIntensity:
-           qResult.extend('BXINDEXBLOB','blob')
-           qResult.extend('BEAM1INTENSITY','blob')
-           qResult.extend('BEAM2INTENSITY','blob')
-       qHandle.defineOutput(qResult)
-       qHandle.setCondition(qConditionStr,qCondition)
-       cursor=qHandle.execute()
-       while cursor.next():
-           runnum=cursor.currentRow()['RUNNUM'].data()
-           cmslsnum=cursor.currentRow()['CMSLSNUM'].data()
-           lumilsnum=cursor.currentRow()['LUMILSNUM'].data()
-           beamstatus=cursor.currentRow()['BEAMSTATUS'].data()
-           beamenergy=cursor.currentRow()['BEAMENERGY'].data()
-           bxindexblob=None
-           beaminfotupleList=[]
-           if withBeamIntensity:
-               bxindexblob=cursor.currentRow()['BXINDEXBLOB'].data()
-               beam1intensityblob=cursor.currentRow()['BEAM1INTENSITY'].data()
-               beam2intensityblob=cursor.currentRow()['BEAM2INTENSITY'].data()
-               bxindexArray=None
-               beam1intensityArray=None
-               beam2intensityArray=None
-               if bxindexblob:
-                   bxindexArray=CommonUtil.unpackBlobtoArray(bxindexblob,'h')
-               if beam1intensityblob:
-                   beam1intensityArray=CommonUtil.unpackBlobtoArray(beam1intensityblob,'f')
-               if beam2intensityblob:
-                   beam2intensityArray=CommonUtil.unpackBlobtoArray(beam2intensityblob,'f')
-               if bxindexArray and beam1intensityArray and beam2intensityArray:
-                   for idx,bxindex in enumerate(bxindexArray):
-                       if (beam1intensityArray[idx] and beam1intensityArray[idx]>minIntensity) or (beam2intensityArray[idx] and beam2intensityArray[idx]>minIntensity):
-                           beaminfotuple=(bxindex,beam1intensityArray[idx],beam2intensityArray[idx])                   
-                           beaminfotupleList.append(beaminfotuple)
-                   del bxindexArray[:]
-                   del beam1intensityArray[:]
-                   del beam2intensityArray[:]           
-           result.append((lumilsnum,cmslsnum,beamstatus,beamenergy,ncollidingbunches,beaminfotupleList))
+        qHandle.addToTableList(nameDealer.lumisummaryv2TableName())
+        qHandle.addToOutputList('RUNNUM')
+        qHandle.addToOutputList('CMSLSNUM')
+        qHandle.addToOutputList('LUMILSNUM')
+        qHandle.addToOutputList('BEAMSTATUS')
+        qHandle.addToOutputList('BEAMENERGY')
+        if withBeamIntensity:
+            qHandle.addToOutputList('CMSBXINDEXBLOB')
+            qHandle.addToOutputList('BEAMINTENSITYBLOB_1')
+            qHandle.addToOutputList('BEAMINTENSITYBLOB_2')
+        qConditionStr='DATA_ID=:dataid'
+        qCondition=coral.AttributeList()
+        qCondition.extend('dataid','unsigned long long')
+        qCondition['dataid'].setData(dataid)
+        qResult=coral.AttributeList()
+        qResult.extend('RUNNUM','unsigned int')
+        qResult.extend('CMSLSNUM','unsigned int')
+        qResult.extend('LUMILSNUM','unsigned int')
+        qResult.extend('BEAMSTATUS','string')
+        qResult.extend('BEAMENERGY','float')
+        if withBeamIntensity:
+            qResult.extend('BXINDEXBLOB','blob')
+            qResult.extend('BEAM1INTENSITY','blob')
+            qResult.extend('BEAM2INTENSITY','blob')
+        qHandle.defineOutput(qResult)
+        qHandle.setCondition(qConditionStr,qCondition)
+        cursor=qHandle.execute()
+        while cursor.next():
+            runnum=cursor.currentRow()['RUNNUM'].data()
+            cmslsnum=cursor.currentRow()['CMSLSNUM'].data()
+            lumilsnum=cursor.currentRow()['LUMILSNUM'].data()
+            beamstatus=cursor.currentRow()['BEAMSTATUS'].data()
+            beamenergy=cursor.currentRow()['BEAMENERGY'].data()
+            bxindexblob=None
+            beaminfotupleList=[]
+            if withBeamIntensity:
+                bxindexblob=cursor.currentRow()['BXINDEXBLOB'].data()
+                beam1intensityblob=cursor.currentRow()['BEAM1INTENSITY'].data()
+                beam2intensityblob=cursor.currentRow()['BEAM2INTENSITY'].data()
+                bxindexArray=None
+                beam1intensityArray=None
+                beam2intensityArray=None
+                if bxindexblob:
+                    bxindexArray=CommonUtil.unpackBlobtoArray(bxindexblob,'h')
+                if beam1intensityblob:
+                    beam1intensityArray=CommonUtil.unpackBlobtoArray(beam1intensityblob,'f')
+                if beam2intensityblob:
+                    beam2intensityArray=CommonUtil.unpackBlobtoArray(beam2intensityblob,'f')
+                if bxindexArray and beam1intensityArray and beam2intensityArray:
+                    for idx,bxindex in enumerate(bxindexArray):
+                        if (beam1intensityArray[idx] and beam1intensityArray[idx]>minIntensity) or (beam2intensityArray[idx] and beam2intensityArray[idx]>minIntensity):
+                            beaminfotuple=(bxindex,beam1intensityArray[idx],beam2intensityArray[idx])                   
+                            beaminfotupleList.append(beaminfotuple)
+                    del bxindexArray[:]
+                    del beam1intensityArray[:]
+                    del beam2intensityArray[:]           
+            result.append((lumilsnum,cmslsnum,beamstatus,beamenergy,ncollidingbunches,beaminfotupleList))
     except:
-       del qHandle
-       raise
+        del qHandle
+        raise
     del qHandle
     return (runnum,result)
 def lumiBXByAlgo(schema,dataid,algoname):
@@ -1604,7 +1605,7 @@ def guessLumiDataIdByRunInBranch(schema,runnum,tablename,branchName):
     lumientry_id=revisionDML.entryInBranch(schema,tablename,str(runnum),branchName)
     latestrevision=revisionDML.latestDataRevisionOfEntry(schema,tablename,lumientry_id,revlist)
     return latestrevision
-        
+
 def guessTrgDataIdByRunInBranch(schema,runnum,tablename,branchName):    
     revlist=revisionDML.revisionsInBranchName(schema,branchName)
     trgentry_id=revisionDML.entryInBranch(schema,tablename,str(runnum),branchName)
@@ -1647,7 +1648,7 @@ def guessDataIdByRun(schema,runnum,tablename,revfilter=None):
         return max(ids)
     else:
         return result
-        
+
 def guessDataIdForRange(schema,inputRange,tablename):
     '''
     input: inputRange [run]
@@ -1807,7 +1808,7 @@ def dataentryIdByRun(schema,runnum,branchfilter):
     '''
     select el.entry_id,et.entry_id,eh.entry_id,el.revision_id,et.revision_id,eh.revision_id from lumidataentiries el,trgdataentries et,hltdataentries eh where el.name=et.name and et.name=eh.name and el.name=:entryname;
     check on entryrev
-   
+
     return [lumientryid,trgentryid,hltentryid]
     '''
     result=[]
@@ -1927,7 +1928,7 @@ def addNormToBranch(schema,normname,amodetag,norm1,egev1,optionalnormdata,branch
         return (revision_id,entry_id,data_id)
     except :
         raise
-    
+
 def addCorrToBranch(schema,corrname,a1,optionalcorrdata,branchinfo):
     '''
     input:
@@ -2033,22 +2034,22 @@ def addHLTRunDataToBranch(schema,runnumber,hltrundata,branchinfo):
         (revision_id,entry_id,data_id)
     '''
     try:
-         pathnames=hltrundata[0]
-         datasource=hltrundata[1]
-         npath=len(pathnames.split(','))
-         entry_id=revisionDML.entryInBranch(schema,nameDealer.hltdataTableName(),str(runnumber),branchinfo[1])
-         if entry_id is None:
-             (revision_id,entry_id,data_id)=revisionDML.bookNewEntry(schema,nameDealer.hltdataTableName())
-             entryinfo=(revision_id,entry_id,str(runnumber),data_id)
-             revisionDML.addEntry(schema,nameDealer.hltdataTableName(),entryinfo,branchinfo)
-         else:
-             (revision_id,data_id)=revisionDML.bookNewRevision( schema,nameDealer.hltdataTableName() )
-             revisionDML.addRevision(schema,nameDealer.hltdataTableName(),(revision_id,data_id),branchinfo)
-         tabrowDefDict={'DATA_ID':'unsigned long long','ENTRY_ID':'unsigned long long','ENTRY_NAME':'string','RUNNUM':'unsigned int','SOURCE':'string','NPATH':'unsigned int','PATHNAMECLOB':'string'}
-         tabrowValueDict={'DATA_ID':data_id,'ENTRY_ID':entry_id,'ENTRY_NAME':str(runnumber),'RUNNUM':int(runnumber),'SOURCE':datasource,'NPATH':npath,'PATHNAMECLOB':pathnames}
-         db=dbUtil.dbUtil(schema)
-         db.insertOneRow(nameDealer.hltdataTableName(),tabrowDefDict,tabrowValueDict)
-         return (revision_id,entry_id,data_id)
+        pathnames=hltrundata[0]
+        datasource=hltrundata[1]
+        npath=len(pathnames.split(','))
+        entry_id=revisionDML.entryInBranch(schema,nameDealer.hltdataTableName(),str(runnumber),branchinfo[1])
+        if entry_id is None:
+            (revision_id,entry_id,data_id)=revisionDML.bookNewEntry(schema,nameDealer.hltdataTableName())
+            entryinfo=(revision_id,entry_id,str(runnumber),data_id)
+            revisionDML.addEntry(schema,nameDealer.hltdataTableName(),entryinfo,branchinfo)
+        else:
+            (revision_id,data_id)=revisionDML.bookNewRevision( schema,nameDealer.hltdataTableName() )
+            revisionDML.addRevision(schema,nameDealer.hltdataTableName(),(revision_id,data_id),branchinfo)
+        tabrowDefDict={'DATA_ID':'unsigned long long','ENTRY_ID':'unsigned long long','ENTRY_NAME':'string','RUNNUM':'unsigned int','SOURCE':'string','NPATH':'unsigned int','PATHNAMECLOB':'string'}
+        tabrowValueDict={'DATA_ID':data_id,'ENTRY_ID':entry_id,'ENTRY_NAME':str(runnumber),'RUNNUM':int(runnumber),'SOURCE':datasource,'NPATH':npath,'PATHNAMECLOB':pathnames}
+        db=dbUtil.dbUtil(schema)
+        db.insertOneRow(nameDealer.hltdataTableName(),tabrowDefDict,tabrowValueDict)
+        return (revision_id,entry_id,data_id)
     except :
         raise 
 
@@ -2122,7 +2123,7 @@ def insertTrgHltMap(schema,hltkey,trghltmap):
             nrows=len(bulkvalues)
         return nrows
     except :
-        print 'error in insertTrgHltMap '
+        print('error in insertTrgHltMap ')
         raise
 def bulkInsertTrgLSData(session,runnumber,data_id,trglsdata,bulksize=500):
     '''
@@ -2132,7 +2133,7 @@ def bulkInsertTrgLSData(session,runnumber,data_id,trglsdata,bulksize=500):
     result nrows inserted
     if nrows==0, then this insertion failed
     '''
-    print 'total number of trg rows ',len(trglsdata)
+    print('total number of trg rows ',len(trglsdata))
     lstrgDefDict=[('DATA_ID','unsigned long long'),('RUNNUM','unsigned int'),('CMSLSNUM','unsigned int'),('DEADTIMECOUNT','unsigned long long'),('BITZEROCOUNT','unsigned int'),('BITZEROPRESCALE','unsigned int'),('PRESCALEBLOB','blob'),('TRGCOUNTBLOB','blob')]
     committedrows=0
     nrows=0
@@ -2148,7 +2149,7 @@ def bulkInsertTrgLSData(session,runnumber,data_id,trglsdata,bulksize=500):
             nrows+=1
             committedrows+=1
             if nrows==bulksize:
-                print 'committing trg in LS chunck ',nrows
+                print('committing trg in LS chunck ',nrows)
                 db=dbUtil.dbUtil(session.nominalSchema())
                 session.transaction().start(False)
                 db.bulkInsert(nameDealer.lstrgTableName(),lstrgDefDict,bulkvalues)
@@ -2156,20 +2157,20 @@ def bulkInsertTrgLSData(session,runnumber,data_id,trglsdata,bulksize=500):
                 nrows=0
                 bulkvalues=[]
             elif committedrows==len(trglsdata):
-                print 'committing trg at the end '
+                print('committing trg at the end ')
                 db=dbUtil.dbUtil(session.nominalSchema())
                 session.transaction().start(False)
                 db.bulkInsert(nameDealer.lstrgTableName(),lstrgDefDict,bulkvalues)
                 session.transaction().commit()
     except :
-        print 'error in bulkInsertTrgLSData'
+        print('error in bulkInsertTrgLSData')
         raise 
 def bulkInsertHltLSData(session,runnumber,data_id,hltlsdata,bulksize=500):
     '''
     input:
     hltlsdata {cmslsnum:[inputcountBlob,acceptcountBlob,prescaleBlob]}
     '''
-    print 'total number of hlt rows ',len(hltlsdata)
+    print('total number of hlt rows ',len(hltlsdata))
     lshltDefDict=[('DATA_ID','unsigned long long'),('RUNNUM','unsigned int'),('CMSLSNUM','unsigned int'),('PRESCALEBLOB','blob'),('HLTCOUNTBLOB','blob'),('HLTACCEPTBLOB','blob')]
     committedrows=0
     nrows=0
@@ -2180,11 +2181,11 @@ def bulkInsertHltLSData(session,runnumber,data_id,hltlsdata,bulksize=500):
             acceptcountblob=perlshlt[1]
             prescaleblob=perlshlt[2]
             bulkvalues.append([('DATA_ID',data_id),('RUNNUM',runnumber),('CMSLSNUM',cmslsnum),('PRESCALEBLOB',prescaleblob),('HLTCOUNTBLOB',inputcountblob),('HLTACCEPTBLOB',acceptcountblob)])
-            
+
             nrows+=1
             committedrows+=1
             if nrows==bulksize:
-                print 'committing hlt in LS chunck ',nrows
+                print('committing hlt in LS chunck ',nrows)
                 db=dbUtil.dbUtil(session.nominalSchema())
                 session.transaction().start(False)
                 db.bulkInsert(nameDealer.lshltTableName(),lshltDefDict,bulkvalues)
@@ -2192,15 +2193,15 @@ def bulkInsertHltLSData(session,runnumber,data_id,hltlsdata,bulksize=500):
                 nrows=0
                 bulkvalues=[]
             elif committedrows==len(hltlsdata):
-                print 'committing hlt at the end '
+                print('committing hlt at the end ')
                 db=dbUtil.dbUtil(session.nominalSchema())
                 session.transaction().start(False)
                 db.bulkInsert(nameDealer.lshltTableName(),lshltDefDict,bulkvalues)
                 session.transaction().commit()
     except  :
-        print 'error in bulkInsertHltLSData'
+        print('error in bulkInsertHltLSData')
         raise 
-    
+
 def bulkInsertLumiLSSummary(session,runnumber,data_id,lumilsdata,tableName,bulksize=500,withDetails=True):
     '''
     input:
@@ -2211,7 +2212,7 @@ def bulkInsertLumiLSSummary(session,runnumber,data_id,lumilsdata,tableName,bulks
         lslumiDefDict=[('DATA_ID','unsigned long long'),('RUNNUM','unsigned int'),('LUMILSNUM','unsigned int'),('CMSLSNUM','unsigned int'),('INSTLUMI','float'),('INSTLUMIERROR','float'),('INSTLUMIQUALITY','short'),('BEAMSTATUS','string'),('BEAMENERGY','float'),('NUMORBIT','unsigned int'),('STARTORBIT','unsigned int'),('CMSBXINDEXBLOB','blob'),('BEAMINTENSITYBLOB_1','blob'),('BEAMINTENSITYBLOB_2','blob'),('BXLUMIVALUE_OCC1','blob'),('BXLUMIERROR_OCC1','blob'),('BXLUMIQUALITY_OCC1','blob'),('BXLUMIVALUE_OCC2','blob'),('BXLUMIERROR_OCC2','blob'),('BXLUMIQUALITY_OCC2','blob'),('BXLUMIVALUE_ET','blob'),('BXLUMIERROR_ET','blob'),('BXLUMIQUALITY_ET','blob')]
     else:
         lslumiDefDict=[('DATA_ID','unsigned long long'),('RUNNUM','unsigned int'),('LUMILSNUM','unsigned int'),('CMSLSNUM','unsigned int'),('INSTLUMI','float'),('INSTLUMIERROR','float'),('INSTLUMIQUALITY','short'),('BEAMSTATUS','string'),('BEAMENERGY','float'),('NUMORBIT','unsigned int'),('STARTORBIT','unsigned int')]
-    print 'total number of lumi rows ',len(lumilsdata)
+    print('total number of lumi rows ',len(lumilsdata))
     try:
         committedrows=0
         nrows=0
@@ -2244,7 +2245,7 @@ def bulkInsertLumiLSSummary(session,runnumber,data_id,lumilsdata,tableName,bulks
             nrows+=1
             committedrows+=1
             if nrows==bulksize:
-                print 'committing lumi in LS chunck ',nrows
+                print('committing lumi in LS chunck ',nrows)
                 db=dbUtil.dbUtil(session.nominalSchema())
                 session.transaction().start(False)
                 db.bulkInsert(tableName,lslumiDefDict,bulkvalues)
@@ -2252,7 +2253,7 @@ def bulkInsertLumiLSSummary(session,runnumber,data_id,lumilsdata,tableName,bulks
                 nrows=0
                 bulkvalues=[]
             elif committedrows==len(lumilsdata):
-                print 'committing lumi at the end '
+                print('committing lumi at the end ')
                 db=dbUtil.dbUtil(session.nominalSchema())
                 session.transaction().start(False)
                 db.bulkInsert(tableName,lslumiDefDict,bulkvalues)
@@ -2283,7 +2284,7 @@ def bulkInsertLumiLSSummary(session,runnumber,data_id,lumilsdata,tableName,bulks
 #        return len(bulkvalues)
 #    except:
 #        raise 
-    
+
 #def completeOldLumiData(schema,runnumber,lsdata,data_id):
 #    '''
 #    input:
@@ -2315,7 +2316,7 @@ def bulkInsertLumiLSSummary(session,runnumber,data_id,lumilsdata,tableName,bulks
 #        db.updateRows(nameDealer.lumidetailTableName(),updateAction,updateCondition,bindvarDef,inputData)
 #    except:
 #        raise
-    
+
 #=======================================================
 #   DELETE
 #=======================================================
@@ -2339,11 +2340,11 @@ if __name__ == "__main__":
     try:
     #    #lumidbDDL.createUniqueConstraints(schema)
         trunkinfo=revisionDML.createBranch(schema,'TRUNK',None,comment='main')
-        print trunkinfo
+        print(trunkinfo)
         datainfo=revisionDML.createBranch(schema,'DATA','TRUNK',comment='hold data')
-        print datainfo
+        print(datainfo)
         norminfo=revisionDML.createBranch(schema,'NORM','TRUNK',comment='hold normalization factor')
-        print norminfo
+        print(norminfo)
     except:
         raise
         #print 'branch already exists, do nothing'
@@ -2374,51 +2375,51 @@ if __name__ == "__main__":
         (hltrevid,hltentryid,hltdataid)=addHLTRunDataToBranch(schema,runnum,hltrundata,branchinfo)
         insertHltLSData(schema,runnum,hltdataid,hltlsdata)
     session.transaction().commit()
-    print 'test reading'
+    print('test reading')
     session.transaction().start(True)
-    print '===inspecting NORM by name==='
+    print('===inspecting NORM by name===')
     normrevlist=revisionDML.revisionsInBranchName(schema,'NORM')
     luminormentry_id=revisionDML.entryInBranch(schema,nameDealer.luminormTableName(),'pp7TeV','NORM')
     latestNorms=revisionDML.latestDataRevisionOfEntry(schema,nameDealer.luminormTableName(),luminormentry_id,normrevlist)
-    print 'latest norm data_id for pp7TeV ',latestNorms
-    
-    print '===inspecting DATA branch==='
-    print revisionDML.branchType(schema,'DATA')
+    print('latest norm data_id for pp7TeV ',latestNorms)
+
+    print('===inspecting DATA branch===')
+    print(revisionDML.branchType(schema,'DATA'))
     revlist=revisionDML.revisionsInBranchName(schema,'DATA')
-    print revlist
+    print(revlist)
     lumientry_id=revisionDML.entryInBranch(schema,nameDealer.lumidataTableName(),'1211','DATA')
     latestrevision=revisionDML.latestDataRevisionOfEntry(schema,nameDealer.lumidataTableName(),lumientry_id,revlist)
-    print 'latest lumi data_id for run 1211 ',latestrevision
+    print('latest lumi data_id for run 1211 ',latestrevision)
     lumientry_id=revisionDML.entryInBranch(schema,nameDealer.lumidataTableName(),'1222','DATA')
     latestrevision=revisionDML.latestDataRevisionOfEntry(schema,nameDealer.lumidataTableName(),lumientry_id,revlist)
-    print 'latest lumi data_id for run 1222 ',latestrevision
+    print('latest lumi data_id for run 1222 ',latestrevision)
     trgentry_id=revisionDML.entryInBranch(schema,nameDealer.trgdataTableName(),'1222','DATA')
     latestrevision=revisionDML.latestDataRevisionOfEntry(schema,nameDealer.trgdataTableName(),trgentry_id,revlist)
-    print 'latest trg data_id for run 1222 ',latestrevision
+    print('latest trg data_id for run 1222 ',latestrevision)
     session.transaction().commit()
-    print 'tagging data so far as data_orig'
+    print('tagging data so far as data_orig')
     session.transaction().start(False)
     (revisionid,parentid,parentname)=revisionDML.createBranch(schema,'data_orig','DATA',comment='tag of 2010data')
     session.transaction().commit()
     session.transaction().start(True)
-    print revisionDML.branchType(schema,'data_orig')
+    print(revisionDML.branchType(schema,'data_orig'))
     revlist=revisionDML.revisionsInTag(schema,revisionid,branchinfo[0])
-    print revlist
+    print(revlist)
     session.transaction().commit()
     session.transaction().start(False)
     for runnum in [1200,1222]:
-        print 'revising lumidata for run ',runnum
+        print('revising lumidata for run ',runnum)
         lumidummydata=generateDummyData.lumiSummary(schema,20)
         lumirundata=[lumidummydata[0]]
         lumilsdata=lumidummydata[1]
         (lumirevid,lumientryid,lumidataid)=addLumiRunDataToBranch(schema,runnum,lumirundata,branchinfo)
         insertLumiLSSummary(schema,runnum,lumidataid,lumilsdata)
     revlist=revisionDML.revisionsInTag(schema,revisionid,branchinfo[0])
-    print 'revisions in branch DATA',revisionDML.revisionsInBranch(schema,branchinfo[0])
+    print('revisions in branch DATA',revisionDML.revisionsInBranch(schema,branchinfo[0]))
     session.transaction().commit()
     #print 'revisions in tag data_orig ',revlist
-    
-    print '===test reading==='
+
+    print('===test reading===')
     session.transaction().start(True)
     #print 'guess norm by name'
     #normid1=guessnormIdByName(schema,'pp7TeV')
@@ -2441,8 +2442,8 @@ if __name__ == "__main__":
     #print beamInfoById(schema,lumidataid)
     #print 'lumibx by algo OCC1'
     #print lumiBXByAlgo(schema,lumidataid,'OCC1')
-    print 'trg run, trgdataid ',trgdataid
-    print trgRunById(schema,trgdataid,withblobdata=True)  
+    print('trg run, trgdataid ',trgdataid)
+    print(trgRunById(schema,trgdataid,withblobdata=True))  
     #print 'trg ls'
     #print trgLSById(schema,trgdataid)
     #print 'hlt run'

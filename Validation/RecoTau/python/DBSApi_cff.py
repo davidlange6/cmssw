@@ -1,3 +1,4 @@
+from __future__ import print_function
 def GetDbsInfo(toFind, requirements):
     "Interface with the DBS API to get the whatever you want of a requirements. ALWAYS RETURN A LIST OF STRINGS"
     from xml.dom.minidom import parseString
@@ -46,13 +47,13 @@ def FillSource(eventType,source):
     foundDs = GetDbsInfo('dataset', requirements)
     selDs = ''
     if len(foundDs) > 1:
-        print "Multiple datasets found for %s! Which one you would like to use?" % eventType
+        print("Multiple datasets found for %s! Which one you would like to use?" % eventType)
         for ds in foundDs:
-            print "%s  :  %s" % (foundDs.index(ds),ds)
+            print("%s  :  %s" % (foundDs.index(ds),ds))
         cnum = int(raw_input("\nselect Dataset: "))
         selDs = foundDs[cnum]
     elif len(foundDs) == 0:
-        print "Sorry! No Dataset found, exiting..."
+        print("Sorry! No Dataset found, exiting...")
         return None
     else:
         selDs = foundDs[0]
@@ -62,19 +63,19 @@ def FillSource(eventType,source):
         source.fileNames.append(entry)
 
 def serialize(root):
-        xmlstr = ''
-        for key in root.keys():
-            if isinstance(root[key], dict):
-                xmlstr = '%s<%s>%s</%s>' % (xmlstr, key, serialize(root[key]), key)
-            elif isinstance(root[key], list):
-                xmlstr = '%s<%s>' % (xmlstr, key)
-                for item in root[key]:
-                    xmlstr = '%s%s' % (xmlstr, serialize(item))
-                xmlstr = '%s</%s>' % (xmlstr, key)
-            else:
-                value = root[key]
-                xmlstr = '%s<%s>%s</%s>' % (xmlstr, key, value, key)
-        return xmlstr
+    xmlstr = ''
+    for key in root.keys():
+        if isinstance(root[key], dict):
+            xmlstr = '%s<%s>%s</%s>' % (xmlstr, key, serialize(root[key]), key)
+        elif isinstance(root[key], list):
+            xmlstr = '%s<%s>' % (xmlstr, key)
+            for item in root[key]:
+                xmlstr = '%s%s' % (xmlstr, serialize(item))
+            xmlstr = '%s</%s>' % (xmlstr, key)
+        else:
+            value = root[key]
+            xmlstr = '%s<%s>%s</%s>' % (xmlstr, key, value, key)
+    return xmlstr
 
 def DictToXML(root):
     from xml.dom.minidom import parseString    

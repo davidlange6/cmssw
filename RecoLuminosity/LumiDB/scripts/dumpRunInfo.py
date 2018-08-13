@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='1.02'
 import os,sys
 import re
@@ -16,7 +17,7 @@ class constants(object):
         self.fillnumname='CMS.SCAL:FILLN'
 def fillnumForRun(dbsession,c,runnum):
     '''select string_value from cms_runinfo.runsession_parameter where runnumber=129265 and name='CMS.SCAL:FILLN' and rownum<=1;
-    
+
     '''
     result=''
     try:
@@ -29,21 +30,21 @@ def fillnumForRun(dbsession,c,runnum):
 
         fillOutput=coral.AttributeList()
         fillOutput.extend("fillnum","string")
-        
+
         bindVarList=coral.AttributeList()
         bindVarList.extend("name","string")
         bindVarList.extend("runnumber","unsigned int")
 
         bindVarList["name"].setData(c.fillnumname)
         bindVarList["runnumber"].setData(int(runnum))
-        
+
         query=schema.newQuery()
         query.addToTableList(c.runsessionparameterTable)
         query.addToOutputList('STRING_VALUE','value')
         query.setCondition('NAME=:name AND RUNNUMBER=:runnumber',bindVarList)
         query.limitReturnedRows(1)
         query.defineOutput(fillOutput)
-        
+
         cursor=query.execute()
         while cursor.next():
             result=cursor.currentRow()['fillnum'].data()
@@ -52,10 +53,10 @@ def fillnumForRun(dbsession,c,runnum):
         #print result
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-        
+
 def hltkeyForRun(dbsession,c,runnum):
     '''
     select runnumber,string_value from cms_runinfo.runsession_parameter where name=:runsessionparametername and runnumber=:runnum 
@@ -72,21 +73,21 @@ def hltkeyForRun(dbsession,c,runnum):
         hltkeyOutput=coral.AttributeList()
         hltkeyOutput.extend("runnum","unsigned int")
         hltkeyOutput.extend("hltkey","string")
-        
+
         bindVarList=coral.AttributeList()
         bindVarList.extend("name","string")
         bindVarList.extend("runnumber","unsigned int")
 
         bindVarList["name"].setData(c.hltconfname)
         bindVarList["runnumber"].setData(int(runnum))
-        
+
         query=schema.newQuery()
         query.addToTableList(c.runsessionparameterTable)
         query.addToOutputList('RUNNUMBER','runnumber')
         query.addToOutputList('STRING_VALUE','value')
         query.setCondition('NAME=:name AND RUNNUMBER=:runnumber',bindVarList)
         query.defineOutput(hltkeyOutput)
-        
+
         cursor=query.execute()
         while cursor.next():
             runnum=cursor.currentRow()['runnum'].data()
@@ -97,10 +98,10 @@ def hltkeyForRun(dbsession,c,runnum):
         #print result
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-        
+
 def l1keyForRun(dbsession,c,runnum):
     '''
     select runnumber,string_value from cms_runinfo.runsession_parameter where name=:runsessionparametername and runnumber=:runnum 
@@ -117,21 +118,21 @@ def l1keyForRun(dbsession,c,runnum):
         l1keyOutput=coral.AttributeList()
         l1keyOutput.extend("runnum","unsigned int")
         l1keyOutput.extend("l1key","string")
-        
+
         bindVarList=coral.AttributeList()
         bindVarList.extend("name","string")
         bindVarList.extend("runnumber","unsigned int")
 
         bindVarList["name"].setData(c.tsckeyname)
         bindVarList["runnumber"].setData(int(runnum))
-        
+
         query=schema.newQuery()
         query.addToTableList(c.runsessionparameterTable)
         query.addToOutputList('RUNNUMBER','runnumber')
         query.addToOutputList('STRING_VALUE','value')
         query.setCondition('NAME=:name AND RUNNUMBER=:runnumber',bindVarList)
         query.defineOutput(l1keyOutput)
-        
+
         cursor=query.execute()
         while cursor.next():
             runnum=cursor.currentRow()['runnum'].data()
@@ -142,10 +143,10 @@ def l1keyForRun(dbsession,c,runnum):
         #print result
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-        
+
 def main():
     c=constants()
     parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]),description="Dump Run info")
@@ -167,40 +168,40 @@ def main():
     if args.debug:
         msg=coral.MessageStream('')
         msg.setMsgVerbosity(coral.message_Level_Debug)
-    
+
     if args.action == 'hltkey':
         p=re.compile(r'^/cdaq/physics/.+')
         result=hltkeyForRun(session,c,runnumber)
-        print 'runnumber hltkey'
+        print('runnumber hltkey')
         for runnum,hltkey in result.items():
             if not args.collisiononly:
-                print runnum,hltkey
+                print(runnum,hltkey)
             if args.collisiononly and re.match(p,hltkey):
                 fillnum=fillnumForRun(session,c,runnumber)
                 if len(fillnum)!=0:
-                    print runnum,hltkey
+                    print(runnum,hltkey)
     if args.action == 'l1key':
         p=re.compile(r'^TSC_.+_collisions_.+')
         result=l1keyForRun(session,c,runnumber)
-        print 'runnumber tsc_key'
+        print('runnumber tsc_key')
         for runnum,l1key in result.items():
             if not args.collisiononly:
-                print runnum,l1key
+                print(runnum,l1key)
             if args.collisiononly and re.match(p,l1key):
                 fillnum=fillnumForRun(session,c,runnumber)
                 if len(fillnum)!=0:
-                    print runnum,l1key
+                    print(runnum,l1key)
     if args.action == 'fill':
         result=fillnumForRun(session,c,runnumber)
-        print 'runnumber fill'
+        print('runnumber fill')
         if not args.collisiononly:
-            print runnumber,result
+            print(runnumber,result)
         else:
             if len(result)!=0:
-                print runnumber,result
+                print(runnumber,result)
     del session
     del svc
-        
+
 if __name__=='__main__':
     main()
-    
+

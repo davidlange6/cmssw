@@ -1,3 +1,4 @@
+from __future__ import print_function
 ## Original version of code heavily based on recipe written by Wai Yip
 ## Tung, released under PSF license.
 ## http://code.activestate.com/recipes/534109/
@@ -89,7 +90,7 @@ class DataNode (object):
         if isinstance (obj, list):
             first = True
             for value in obj:
-                print "value", value, value.__class__.__name__
+                print("value", value, value.__class__.__name__)
                 if first:
                     tempoffset = offset
                     first = False
@@ -99,7 +100,7 @@ class DataNode (object):
                     tempoffset = offset
                 if isinstance (value, DataNode):
                     retval += value.stringify (offset=tempoffset)
-                    print "  calling stringify for %s" % value
+                    print("  calling stringify for %s" % value)
                 elif DataNode.isiterable (value):
                     retval += DataNode._outputValues (value, '', offset)
                 else:
@@ -153,7 +154,7 @@ class DataNode (object):
             retval += DataNode._ouptputValues (self._data, name, tempspace)
         retval += '\n ' + ' ' * offset + '}'
         return retval 
-        
+
 
 
 class TreeBuilder (xml.sax.handler.ContentHandler):
@@ -196,7 +197,7 @@ class TreeBuilder (xml.sax.handler.ContentHandler):
     def topLevel (self):
         '''Returns top level object'''
         return self._root.attributes().values()[0]
-        
+
 
     @staticmethod
     def _name_mangle (name):
@@ -261,7 +262,7 @@ def xml2obj (**kwargs):
             filehandle.close()
             filehandle = filename = ''
         contents = quoteRE.sub (fixQuoteValue, contents)
-    
+
     ncDict = kwargs.get ('nameChangeDict', {})
     builder = TreeBuilder (nameChangeDict = ncDict)
     if contents:

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys,os,commands
 from CommonMethods import *
 
@@ -8,7 +9,7 @@ class FileObj:
         self.iovSince = 0
         self.fileName = ''                 
 
-                                                                        
+
 
 def main():
     payloadDir = "./Payloads_Repro2010Nov09/"
@@ -19,11 +20,11 @@ def main():
     dropbox = "/DropBox"
     for fileName in listOfFiles:
         fileNameRoot = fileName[0:len(fileName)-4]
-        print fileNameRoot
+        print(fileNameRoot)
         uploadSqliteFile(payloadDir, fileNameRoot, dropbox)
-            
 
 
-        
+
+
 if __name__ == "__main__":
     main()

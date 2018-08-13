@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 import optparse
 from FWCore.PythonUtilities.LumiList import LumiList
 
 
 if __name__ == '__main__':
-    
+
     parser = optparse.OptionParser ("Usage: %prog alpha.json")
     parser.add_option ('--range', dest='range', action='store_true',
                        help='Print out run range only')
@@ -20,6 +21,6 @@ if __name__ == '__main__':
         keys = alphaList.compactList.keys()
         minRun = min (keys)
         maxRun = max (keys)
-        print "runs %s - %s" % (minRun, maxRun)
+        print("runs %s - %s" % (minRun, maxRun))
         sys.exit()
-    print alphaList
+    print(alphaList)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os,time,sys
 from crab import Crab,common,parseOptions,CrabException
 from crabStatusFromReport import crabStatusFromReport
@@ -26,7 +27,7 @@ def computeSummaryCRAB260(up_task):
         if job_exit_code == 'None' :  job_exit_code = ''
         if job.runningJob['state'] == 'SubRequested' : jobStatus = 'Submitting'
         if job.runningJob['state'] == 'Terminated': jobStatus = 'Done'
-        
+
         if summary.has_key(jobStatus): summary[jobStatus] += 1
         else: summary[jobStatus] = 1 
         nJobs += 1
@@ -37,7 +38,7 @@ def computeSummaryCRAB260(up_task):
 
 def computeSummaryCRAB251(up_task):
     "Computes jobs summary for given task" 
- 
+
     taskId = str(up_task['name'])
     task_unique_name = str(up_task['name'])
     ended = None
@@ -80,7 +81,7 @@ def summaryServer(self):
     Returns jobs summary
     """
     #self.resynchClientSide()
-        
+
     upTask = common._db.getTask()  
     return computeSummary(upTask)
 
@@ -103,12 +104,12 @@ def crabAction(options, action = None):
         crab.run()
         if action: result = action(crab)
         del crab
-        print 'Log file is %s%s.log'%(common.work_space.logDir(),common.prog_name) 
+        print('Log file is %s%s.log'%(common.work_space.logDir(),common.prog_name)) 
     except CrabException, e:
         del crab
         #print '\n' + common.prog_name + ': ' + str(e) + '\n' 
         raise
-        
+
     if (common.logger): common.logger.delete()
 
     if result: return result
@@ -127,7 +128,7 @@ def crabActionCRAB251(options, action = None):
         #print 'Log file is %s%s.log'%(common.work_space.logDir(),common.prog_name)  
         #print '\n##############################  E N D  ####################################\n'
     except CrabException, e:
-        print '\n' + common.prog_name + ': ' + str(e) + '\n'
+        print('\n' + common.prog_name + ': ' + str(e) + '\n')
         pass
     pass
     #if (common.logger): common.logger.delete()
@@ -165,10 +166,10 @@ def crabStatus(project):
         #return crab.actions[act].summary()
         xml = crab.cfg_params.get("USER.xml_report",'')
         return common.work_space.shareDir() + xml
-        
+
     xmlreport = crabAction(options,action)
     status = crabStatusFromReport(xmlreport)
- 
+
     return status
 
 def convertStatus(status):
@@ -205,18 +206,18 @@ def convertStatus(status):
 def checkStatus(project, threshold = 95.0):
 
     status = crabStatus(project)
- 
-    print "Percentage of jobs per status:"
+
+    print("Percentage of jobs per status:")
     maxLength = max( [len(x) for x in status] )
     for item in status:
-        print "%*s: %.0f%%" % (maxLength,item,status[item])
+        print("%*s: %.0f%%" % (maxLength,item,status[item]))
 
 
     statusNew = convertStatus(status)
-       
-    print "Relative percentage finished: %.0f%%" % statusNew['Finished']
-    print "Relative percentage failed  : %.0f%%" % statusNew['Failed']
-    print "Relative percentage running : %.0f%%" % statusNew['Running']
+
+    print("Relative percentage finished: %.0f%%" % statusNew['Finished'])
+    print("Relative percentage failed  : %.0f%%" % statusNew['Failed'])
+    print("Relative percentage running : %.0f%%" % statusNew['Running'])
 
     finished = False
     # Condition for stopping
@@ -242,11 +243,11 @@ def crabWatch(action,project = None, threshold = 95.0):
     while True:
         if checkStatus(project,threshold): break
         time.sleep(180)
- 
-    print "Finished..."
+
+    print("Finished...")
 
     action(project)
-  
+
     return
 
 def initCrabEnvironment():
@@ -275,12 +276,12 @@ def initCrabEnvironment():
     os.environ['VOMS_PROXY_INFO_DONT_VERIFY_AC'] = '1'
     #print os.environ['LD_LIBRARY_PATH']
     #print os.environ['VOMS_PROXY_INFO_DONT_VERIFY_AC'] 
-    
+
     """ 
     export LD_LIBRARY_PATH=${GLITE_LOCATION}/lib:${LD_LIBRARY_PATH}
     export VOMS_PROXY_INFO_DONT_VERIFY_AC=1
     """
-   
+
     ## Get rid of some useless warning
     try:
         import warnings
@@ -311,7 +312,7 @@ def initCrabEnvironment():
 def run(project = None, threshold = 95.0):
 
     crabWatch(getOutput,project,threshold)
-    
+
     return
 
 if __name__ == '__main__':
@@ -320,9 +321,9 @@ if __name__ == '__main__':
     for opt in sys.argv:
         if opt[:8] == 'project=':
             project = opt[8:]
-            print "Running on CRAB project",project
+            print("Running on CRAB project",project)
         if opt[:10] == 'threshold=':
             threshold = float(opt[10:])
-            print "Using threshold",threshold 
-    
+            print("Using threshold",threshold) 
+
     run(project,threshold)

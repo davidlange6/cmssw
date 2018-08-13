@@ -7,6 +7,7 @@ Warrning!: did not finish the implementation, see TODO comment.
 Author:  Albertas Gimbutas,  Vilnius University (LT)
 e-mail:  albertasgim@gmail.com
 '''
+from __future__ import print_function
 import sqlite3
 import re
 from os import listdir, makedirs, getcwd
@@ -38,7 +39,7 @@ def dbfile2html(db_name, work_path, threshold=1e-5):
     them to static HTML files.
     """
     if not exists(db_name):
-        print "\nError: SQLite3 database file does not exsits. Exitting...\n"
+        print("\nError: SQLite3 database file does not exsits. Exitting...\n")
         exit()
 
     conn = sqlite3.connect(db_name)
@@ -76,7 +77,7 @@ def dbfile2html(db_name, work_path, threshold=1e-5):
         create_page([path, release_title, st_test], rel_summary_temp.render(context))
 
         ## Generate RootFileComparison html pages
-        print 'Generating %s (%s) comparison pages...' % (release_title, st_test)
+        print('Generating %s (%s) comparison pages...' % (release_title, st_test))
         c.execute('''SELECT id, directory_id FROM RootFileComparison WHERE release_comparison_id = ?;''', (rel_id,))
         for file_id, file_top_dir_id in c.fetchall():
             context['file_id'] = file_id
@@ -97,7 +98,7 @@ def dbfile2html(db_name, work_path, threshold=1e-5):
 
             for children_dir in children_dirs:
                 create_dir_pages(c, children_dir[0], [])
-        print 'Done.'
+        print('Done.')
 
 
 if __name__ == '__main__':

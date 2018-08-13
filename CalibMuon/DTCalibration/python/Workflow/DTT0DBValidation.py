@@ -32,31 +32,31 @@ class DTT0DBValidation:
             fileLabel = os.path.basename(file).split('.')[0] 
             pset_name = 'dtT0DBValidation_%s_Run%d_cfg.py' % (fileLabel,self.runnumber)
             self.process[pset_name] = loadCmsProcess(self.pset_template)
-	    self.process[pset_name].source.firstRun = self.runnumber
+            self.process[pset_name].source.firstRun = self.runnumber
 
-	    self.process[pset_name].tzeroRef.toGet = cms.VPSet(
-		cms.PSet(
-		    record = cms.string('DTT0Rcd'),
-		    tag = cms.string(refDBTag),
-		    label = cms.untracked.string('tzeroRef')
-		    ),
-		cms.PSet(
-		    record = cms.string('DTT0Rcd'),
-		    tag = cms.string('t0'),
-		    connect = cms.untracked.string('sqlite_file:%s' % file),
-		    label = cms.untracked.string('tzeroToValidate')
-		    )
-	        )
+            self.process[pset_name].tzeroRef.toGet = cms.VPSet(
+                cms.PSet(
+                    record = cms.string('DTT0Rcd'),
+                    tag = cms.string(refDBTag),
+                    label = cms.untracked.string('tzeroRef')
+                    ),
+                cms.PSet(
+                    record = cms.string('DTT0Rcd'),
+                    tag = cms.string('t0'),
+                    connect = cms.untracked.string('sqlite_file:%s' % file),
+                    label = cms.untracked.string('tzeroToValidate')
+                    )
+                )
             self.process[pset_name].tzeroRef.connect = connect
 
-	    if self.config:
-		label = 'dtT0DBValidation'
-		if hasattr(self.config,'label') and self.config.label: label = self.config.label 
-		workflowName = dqmWorkflowName(self.config.datasetpath,label,self.config.trial)
+            if self.config:
+                label = 'dtT0DBValidation'
+                if hasattr(self.config,'label') and self.config.label: label = self.config.label 
+                workflowName = dqmWorkflowName(self.config.datasetpath,label,self.config.trial)
                 self.process[pset_name].dqmSaver.workflow = workflowName
 
             if runNumbersToFiles: self.process[pset_name].dqmSaver.forceRunNumber = runNumbersToFiles[idx_file]
-	    self.process[pset_name].dqmSaver.dirName = os.path.abspath(self.output_dir)
+            self.process[pset_name].dqmSaver.dirName = os.path.abspath(self.output_dir)
 
             self.configs.append(pset_name)
             writeCfg(self.process[pset_name],self.dir,pset_name) 

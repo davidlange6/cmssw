@@ -1,17 +1,18 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import os,string,sys,commands,time,ConfigParser
 
 MAXRETRIES=10 # number of retries before giving up
 
 CONFIGFILE='dbtoconf.cfg'
 CONFIG = ConfigParser.ConfigParser()
-print 'Reading configuration file from ',CONFIGFILE
+print('Reading configuration file from ',CONFIGFILE)
 CONFIG.read(CONFIGFILE)
 
 # this is for [COMMON] part of the myconf.conf
 
-print " "
-print "dbtoconf.py:"
+print(" ")
+print("dbtoconf.py:")
 ACCOUNT=CONFIG.get('Common','Account')
 CONNSTRINGGLOBTAG=CONFIG.get('Common','Conn_string_gtag')
 GLOBTAG=CONFIG.get('Common','Globtag')
@@ -20,31 +21,31 @@ AUTHPATH=''
 try:
     AUTHPATH=CONFIG.get('Common','AuthPath')
 except:
-    print "WARNING: No authpath fount in config file"
+    print("WARNING: No authpath fount in config file")
 
 CONNREP=''
 try:
     CONNREP=CONFIG.get('Common','Conn_rep')
 except:
-    print "WARNING: No CONN_REP fount in config file"
+    print("WARNING: No CONN_REP fount in config file")
 
 TAGREP=''
 try:
     TAGREP=CONFIG.get('Common','Tag_rep')
 except:
-    print "WARNING: No TAG_REP fount in config file"
-    
-print
-print "Configuration:"
-print "================================"
-print "Account:",ACCOUNT
-print "CONNSTRING:",CONNSTRINGGLOBTAG
-print "GLOBALTAG:",GLOBTAG
-print "CONF OUTPUT:",CONFFILE
-print "Auth. Path:",AUTHPATH
-print "Conn. replacement:",CONNREP
-print "TAG  replacement:",TAGREP
-print "================================"
+    print("WARNING: No TAG_REP fount in config file")
+
+print()
+print("Configuration:")
+print("================================")
+print("Account:",ACCOUNT)
+print("CONNSTRING:",CONNSTRINGGLOBTAG)
+print("GLOBALTAG:",GLOBTAG)
+print("CONF OUTPUT:",CONFFILE)
+print("Auth. Path:",AUTHPATH)
+print("Conn. replacement:",CONNREP)
+print("TAG  replacement:",TAGREP)
+print("================================")
 
 # this is for tags
 TMPTAG='tmptag.list'
@@ -118,14 +119,14 @@ while tmp:
 #    print nlines,line
 
 tmp.close()
-print 'Read '+str(nlines)+' lines...'
-print 'Read ',len(leafnode),' leafnodes'
-print 'Read ',len(parent),' parent'
-print 'Read ',len(tag),' tag'
-print 'Read ',len(pfn),' pfn'
+print('Read '+str(nlines)+' lines...')
+print('Read ',len(leafnode),' leafnodes')
+print('Read ',len(parent),' parent')
+print('Read ',len(tag),' tag')
+print('Read ',len(pfn),' pfn')
 
 if len(leafnode)!=len(parent) or len(leafnode)!=len(tag) or len(leafnode)!=len(pfn):
-    print "# of leafnodes different from parent/tag/pfn"
+    print("# of leafnodes different from parent/tag/pfn")
     sys.exit()
 
 #output
@@ -179,7 +180,7 @@ if len(leafnode)!=len(parent) or len(leafnode)!=len(tag) or len(leafnode)!=len(p
 #    print "Connstring=",connstring[i]
 #    print "Account=",account[i]
 #    print "=================================="
-                               
+
 
 # open output conf file
 conf=open(CONFFILE,'w')
@@ -196,7 +197,7 @@ for iline in range(0,len(leafnode)):
         outline=' '+tag[iline]+'{pfn='+connstring[iline]+'/'+account[iline]+',objectname='+object[iline]+',recordname='+record[iline]+'}'
     else:
         outline=' '+tag[iline]+'{pfn='+connstring[iline]+'/'+account[iline]+',objectname='+object[iline]+',recordname='+record[iline]+',labelname='+label[iline]+'}'
-        
+
     if iline != len(leafnode)-1:
         outline=outline+';'
     outline=outline+'\n'
@@ -220,4 +221,4 @@ for ileaf in range(0,len(leafnode)):
 
 conf.close()
 
-print CONFFILE+' ready. Plase have a look'
+print(CONFFILE+' ready. Plase have a look')

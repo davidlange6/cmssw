@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 from math import *
 from ROOT import TFile, TObject, TTree
 from array import array
@@ -35,4 +36,4 @@ while key:
     key = keys.After(key)
 
 if len(globalTag) > 1:
-    print globalTag
+    print(globalTag)

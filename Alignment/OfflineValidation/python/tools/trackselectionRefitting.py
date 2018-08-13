@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import FWCore.ParameterSet.Config as cms
 
@@ -127,7 +128,7 @@ def getSequence(process, collection,
                 })
         pass
     else:
-        print "Unknown input track collection:", collection
+        print("Unknown input track collection:", collection)
         sys.exit(1)
 
 
@@ -184,7 +185,7 @@ def getSequence(process, collection,
     else:
         if mods[-1][-1]["method"] is "load" and \
                 not mods[-1][-1].get("clone", False):
-            print "Name of the last module needs to be modifiable."
+            print("Name of the last module needs to be modifiable.")
             sys.exit(1)
         src = _getModule(process, src, mods[-1][0], "FinalTrackRefitter",
                          options[mods[-1][0]][mods[-1][1]],
@@ -236,7 +237,7 @@ def _getModule(process, src, modType, moduleName, options, **kwargs):
             obj.src = src
             moduleName = objTuple[1]
     else:
-        print "Unknown method:", method
+        print("Unknown method:", method)
         sys.exit(1)
 
     for option in options:

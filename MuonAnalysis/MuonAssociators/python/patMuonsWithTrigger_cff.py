@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 ##    __  __       _          ____   _  _____   __  __                       
@@ -199,7 +200,7 @@ def addMCinfo(process):
     process.patMuonsWithoutTrigger.genParticleMatch = 'muonMatch'
 
 def addDiMuonTriggers(process):
-    print "[MuonAnalysis.MuonAssociators.patMuonsWithTrigger_cff] Di-muon triggers are already enabled by default"
+    print("[MuonAnalysis.MuonAssociators.patMuonsWithTrigger_cff] Di-muon triggers are already enabled by default")
 
 def useL1MatchingWindowForSinglets(process):
     "Change the L1 trigger matching window to be suitable also for CSC single triggers"

@@ -7,15 +7,16 @@
                 - which algorithms (shrinkingConePFTauDecayModeProducer, etc)
         Define locations of train/test ROOT files
 """
+from __future__ import print_function
 
 import sys
 import os
 # Get CMSSW base
 try:
-   Project_Area = os.environ["CMSSW_BASE"]
+    Project_Area = os.environ["CMSSW_BASE"]
 except KeyError:
-   print "$CMSSW_BASE enviroment variable not set!  Please run eval `scramv1 ru -[c]sh`"
-   sys.exit(1)
+    print("$CMSSW_BASE enviroment variable not set!  Please run eval `scramv1 ru -[c]sh`")
+    sys.exit(1)
 
 import FWCore.ParameterSet.Config as cms
 import glob
@@ -95,19 +96,19 @@ BackgroundFileTestingGlob = "%s/*4.root" % BackgroundRootDir
 #################################################################
 
 def GetTrainingFile(computerName, anAlgo):
-   return os.path.join(TauTagToolsWorkingDirectory, "test", "TrainDir_%s_%s" % (computerName, anAlgo), "%s.mva" % computerName)
+    return os.path.join(TauTagToolsWorkingDirectory, "test", "TrainDir_%s_%s" % (computerName, anAlgo), "%s.mva" % computerName)
 
 #Find the unique mva types to train
 listOfMVANames = {}
 for name, mvaCollection in MVACollections.iteritems():
-   for _mva in mvaCollection:
-      name = _mva.computerName.value()
-      if not name in listOfMVANames:
-         listOfMVANames[name] = _mva
+    for _mva in mvaCollection:
+        name = _mva.computerName.value()
+        if not name in listOfMVANames:
+            listOfMVANames[name] = _mva
 
 myModules = []
 for name, _mva in listOfMVANames.iteritems():
-   myModules.append(_mva)
+    myModules.append(_mva)
 
 SignalTrainFiles         = glob.glob(SignalFileTrainingGlob)
 BackgroundTrainFiles     = glob.glob(BackgroundFileTrainingGlob)
@@ -117,17 +118,17 @@ BackgroundTestingFiles     = glob.glob(BackgroundFileTestingGlob)
 
 # Catch dumb errors before we begin
 def EverythingInItsRightPlace():
-   if not len(SignalTrainFiles) or not len(BackgroundTrainFiles) or not len(SignalTestingFiles) or not len(BackgroundTestingFiles):
-      raise IOError, "The signal/background root file training/testing file list is empty! Check the SignalFileTrainingGlob etc. in MVASteering.py"
+    if not len(SignalTrainFiles) or not len(BackgroundTrainFiles) or not len(SignalTestingFiles) or not len(BackgroundTestingFiles):
+        raise IOError, "The signal/background root file training/testing file list is empty! Check the SignalFileTrainingGlob etc. in MVASteering.py"
 
-   # Ensure that we have all the necessary XML files 
-   for aModule in myModules:
-      computerName = aModule.computerName.value() #conver to python string
-      xmlFileLoc   = os.path.join(TauTagToolsWorkingDirectory, "xml", "%s.xml" % computerName)
-      if not os.path.exists(xmlFileLoc):
-         raise IOError, "Can't find xml configuration file for %s - please check that %s exists!" % (computerName, xmlFileLoc)
+    # Ensure that we have all the necessary XML files 
+    for aModule in myModules:
+        computerName = aModule.computerName.value() #conver to python string
+        xmlFileLoc   = os.path.join(TauTagToolsWorkingDirectory, "xml", "%s.xml" % computerName)
+        if not os.path.exists(xmlFileLoc):
+            raise IOError, "Can't find xml configuration file for %s - please check that %s exists!" % (computerName, xmlFileLoc)
 
-   if not os.path.exists(SignalRootDir):
-      raise IOError, "Signal root file directory (%s) does not exist! Have you created the MVA raw training data?" % SignalRootDir
-   if not os.path.exists(BackgroundRootDir):
-      raise IOError, "Background root file directory (%s) does not exist! Have you created the MVA raw training data?" % BackgroundRootDir
+    if not os.path.exists(SignalRootDir):
+        raise IOError, "Signal root file directory (%s) does not exist! Have you created the MVA raw training data?" % SignalRootDir
+    if not os.path.exists(BackgroundRootDir):
+        raise IOError, "Background root file directory (%s) does not exist! Have you created the MVA raw training data?" % BackgroundRootDir

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os,coral,re
 from RecoLuminosity.LumiDB import nameDealer
 
@@ -6,17 +7,17 @@ class correctionTerm(object):
 
 class nonlinearSingle(correctionTerm):
     t1=0.076  #slop
-    
+
 class nonlinearV2(correctionTerm):
     drift=0.01258 # drift 
     t1=0.063  # slop1
     t2=-0.0037# slop2
-        
+
 class nonlinearV3(correctionTerm):
     drift=0.00813# drift 
     t1=0.073    # slop1
     t2=-0.0037 # slop2
-        
+
 def afterglowByFillscheme(fillscheme,afterglowPatterns):
     '''
     search in the list of (pattern,afterglowfactor) for a match in regex
@@ -75,7 +76,7 @@ def driftcorrectionsForRange(schema,inputRange,correctionTerm,startrun=160403):
             raise
         del qHandle
         if not lint:
-            print '[WARNING] null intglumi for run ',r,' '
+            print('[WARNING] null intglumi for run ',r,' ')
         result[r]=defaultresult+correctionTerm.drift*lint
     #print 'lint ',lint,' result ',result
     return result
@@ -405,9 +406,9 @@ if __name__ == "__main__":
     schema=session.nominalSchema()
     session.transaction().start(True)
     driftresult=driftcorrectionsForRange(schema,[160467,152611])
-    print driftresult
+    print(driftresult)
     #result=correctionsForRange(schema,runrange)
     session.transaction().commit()
     del session
 
-    
+

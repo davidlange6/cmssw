@@ -1,3 +1,4 @@
+from __future__ import print_function
 from HTMLParser import HTMLParser
 from urllib2 import urlopen
 import cPickle as pickle
@@ -29,7 +30,7 @@ class Page1Parser(HTMLParser):
 
     def __init__(self):
         HTMLParser.__init__(self)
-        
+
         self.InRow=0
         self.InEntry=0
         self.table =  []
@@ -139,7 +140,7 @@ class Page1Parser(HTMLParser):
             self.updatepos(i, j)
             self.error("malformed start tag")
         raise AssertionError("we should not get here!")
-        
+
     def _Parse(self,url):
         self.table = []
         self.hyperlinks = []
@@ -147,7 +148,7 @@ class Page1Parser(HTMLParser):
         try:
             self.feed(req.read())
         except Exception, inst:
-            print inst
+            print(inst)
 
     def handle_starttag(self,tag,attrs):
         ValidTags = ['a','tr','td']
@@ -163,9 +164,9 @@ class Page1Parser(HTMLParser):
             elif tag == 'td':
                 self.InEntry=1
         except:
-            print tag
-            print attrs
-        
+            print(tag)
+            print(attrs)
+
     def handle_endtag(self,tag):
         if tag =='tr':
             if self.InRow==1:
@@ -200,8 +201,8 @@ class Page1Parser(HTMLParser):
             if not link.find('RUN='+self.RunNumber)==-1:
                 self.RunPage = link
                 return link
-        
-        
+
+
     def ParseRunPage(self):
         for entry in self.hyperlinks:
             entry = entry.replace('../../','http://cmswbm/')
@@ -242,13 +243,13 @@ class Page1Parser(HTMLParser):
         try:
             self.AvLumi = sum(self.LumiByLS[self.FirstLS:])/len(self.LumiByLS[self.FirstLS:])
         except ZeroDivisionError:
-            print "Cannot calculate average lumi -- something is wrong!"
-            print self.table[:10]
+            print("Cannot calculate average lumi -- something is wrong!")
+            print(self.table[:10])
             raise
 
     def ParseL1Page(self):
         for line in self.table:
-            print line
+            print(line)
             if len(line) < 9:
                 continue
             if line[1].startswith('L1_'):
@@ -270,7 +271,7 @@ class Page1Parser(HTMLParser):
                         lumi = float(StrLumiSplit[0])
                         lumi*= pow(10,int(StrLumiSplit[1])-30)
                         self.ColumnLumi.append(round(lumi,1))
-                    
+
 
             ## Get the actual prescale tables
             if line[1].startswith('L1_') or line[1].startswith('HLT_'):
@@ -337,12 +338,12 @@ class Page1Parser(HTMLParser):
                         try:
                             totalLine.append( int(hltPS)*int(l1PS) )
                         except:
-                            print hltPS
-                            print l1PS
+                            print(hltPS)
+                            print(l1PS)
                             raise
             self.TotalPrescaleTable.append(totalLine)
-                    
-        
+
+
     def Save(self, fileName):
         pickle.dump( self, open( fileName, 'w' ) )
 

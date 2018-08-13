@@ -24,14 +24,14 @@ class DTDQMHarvesting:
         self.process = loadCmsProcess(self.pset_template)
         self.process.GlobalTag.globaltag = self.config.globaltag
 
-	if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
-	    tag = self.config.inputDBTag
-	    record = self.config.inputDBRcd
-	    connect = self.config.connectStrDBTag
-	    moduleName = 'customDB%s' % record 
-	    addPoolDBESSource(process = self.process,
-			      moduleName = moduleName,record = record,tag = tag,
-			      connect = connect)
+        if hasattr(self.config,'inputDBTag') and self.config.inputDBTag:
+            tag = self.config.inputDBTag
+            record = self.config.inputDBRcd
+            connect = self.config.connectStrDBTag
+            moduleName = 'customDB%s' % record 
+            addPoolDBESSource(process = self.process,
+                              moduleName = moduleName,record = record,tag = tag,
+                              connect = connect)
 
         if hasattr(self.config,'inputTTrigDB') and self.config.inputTTrigDB:
             label = ''
@@ -62,7 +62,7 @@ class DTDQMHarvesting:
     def writeCfg(self):
         writeCfg(self.process,self.dir,self.pset_name)   
         #writeCfgPkl(self.process,self.dir,self.pset_name) 
-    
+
     def run(self):
         self.task.run()
         return

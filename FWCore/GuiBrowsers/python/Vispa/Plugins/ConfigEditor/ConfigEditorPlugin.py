@@ -22,7 +22,7 @@ from Vispa.Views.AbstractView import NoneView
 class ConfigEditorPlugin(BrowserPlugin):
     """ The ConfigEditorPlugin opens config files in a ConfigEditorTab.
     """
-    
+
     def __init__(self, application=None, name=None):
         logging.debug(__name__ + ": __init__")
         BrowserPlugin.__init__(self, application)

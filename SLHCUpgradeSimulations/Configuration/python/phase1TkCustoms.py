@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 from RecoTracker.IterativeTracking.iterativeTk_cff import *
@@ -15,12 +16,12 @@ def customise(process):
             if hasattr(process.mix,'input'):
                 n=process.mix.input.nbPileupEvents.averageNumber.value()
         else:
-            print 'phase1TkCustoms requires a --pileup option to cmsDriver to run the reconstruction/dqm'
-            print 'Please provide one!'
+            print('phase1TkCustoms requires a --pileup option to cmsDriver to run the reconstruction/dqm')
+            print('Please provide one!')
             sys.exit(1)
     if hasattr(process,'reconstruction'):
         process=customise_Reco(process,float(n))
-                
+
     if hasattr(process,'digitisation_step'):
         process=customise_Digi(process)
     if hasattr(process,'dqmoffline_step'):
@@ -30,7 +31,7 @@ def customise(process):
     if hasattr(process,'validation_step'):
         process=customise_Validation(process,float(n))
     process=customise_condOverRides(process)
-    
+
     return process
 
 def customise_DigiToRaw(process):
@@ -163,14 +164,14 @@ def remove_pixel_ineff(process):
         process.mix.digitizers.pixel.AddPixelInefficiencyFromPython = cms.bool(False) 
 
     return process
-    
+
 
 def customise_Reco(process,pileup):
 
     #this code supports either 70 or 140 pileup configurations - should fix as to support 0
     nPU=70
     if pileup>100: nPU=140
-    
+
     #use with latest pixel geometry
     process.ClusterShapeHitFilterESProducer.PixelShapeFile = cms.string('RecoPixelVertexing/PixelLowPtUtilities/data/pixelShape_Phase1Tk.par')
     # Need this line to stop error about missing siPixelDigis.
@@ -226,7 +227,7 @@ def customise_Reco(process,pileup):
     process.globalreco.insert(itIndex,process.trackingGlobalReco)
     process.reconstruction.insert(grIndex,process.globalreco)
     #Note process.reconstruction_fromRECO is broken
-    
+
     # End of new tracking configuration which can be removed if new Reconstruction is used.
 
 
@@ -242,7 +243,7 @@ def customise_Reco(process,pileup):
     PixelSeedMergerQuadruplets.BPix.HitProducer = cms.string("siPixelRecHits" )
     PixelSeedMergerQuadruplets.FPix.TTRHBuilder = cms.string("PixelTTRHBuilderWithoutAngle" )
     PixelSeedMergerQuadruplets.FPix.HitProducer = cms.string("siPixelRecHits" )
-    
+
     # Need these until pixel templates are used
     process.load("SLHCUpgradeSimulations.Geometry.recoFromSimDigis_cff")
     # PixelCPEGeneric #
@@ -264,7 +265,7 @@ def customise_Reco(process,pileup):
     process.regionalCosmicTracks.TTRHBuilder=cms.string('WithTrackAngle')
     process.cosmicsVetoTracksRaw.TTRHBuilder=cms.string('WithTrackAngle')
     # End of pixel template needed section
-    
+
     # Make pixelTracks use quadruplets
     process.pixelTracks.SeedMergerPSet = cms.PSet(
         layerList = PixelSeedMergerQuadruplets,

@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import os
 import time
 import sys
@@ -19,14 +20,14 @@ class testit(Thread):
             commandbase+='%s_'%word
         logfile='%s.log' %commandbase[:-1]
         logfile = logfile.replace('/','_') # otherwise the path in the args to --cusotmize make trouble
-        
+
         startime='date %s' %time.asctime()
         executable='%s > %s 2>&1' %(self.command,logfile)
-    
+
         exitcode=os.system(executable)
         endtime='date %s' %time.asctime()
         tottime='%s-%s'%(endtime,startime)
-    
+
         if exitcode!=0:
             log='%s : FAILED - time: %s s - exit: %s\n' %(self.command,tottime,exitcode)
             self.report+='%s\n'%log
@@ -37,17 +38,17 @@ class testit(Thread):
             self.report+='%s\n'%log
             self.nfail=0
             self.npass=1
-                
+
 def main(argv) :
 
     import getopt
-    
+
     try:
         opts, args = getopt.getopt(argv, "", ["nproc=","dohighstat",'hlt','inFile=','intbld'])
     except getopt.GetoptError, e:
-        print "unknown option", str(e)
+        print("unknown option", str(e))
         sys.exit(2)
-        
+
 # check command line parameter
     np=1
     doHighStat=0
@@ -67,7 +68,7 @@ def main(argv) :
             intBld = True
 
     if hlt:
-        print "\nWARNING: option --hlt is deprecated as this is now default.\n"
+        print("\nWARNING: option --hlt is deprecated as this is now default.\n")
 
     if inFile:
         commands_standard_file=open(inFile,'r')
@@ -86,7 +87,7 @@ def main(argv) :
             commands_highstat_file.close()
 
             lines=lines+lines_highstat
-   
+
 
     # for the integration builds, check only these samples:
     forIB = [ # from the standard_hlt:
@@ -96,17 +97,17 @@ def main(argv) :
              'SinglePiE50HCAL', 'H130GGgluonfusion', 'QQH120Inv', 'bJpsiX', 
              'JpsiMM', 'BsMM', 'UpsMM', 'CJets_Pt_50_120'
              ]
-    
+
     commands=[]
     for line in lines:
         if ( line[0]!='#' and
            line.replace(' ','')!='\n' ):
-               linecomponents=line.split('@@@')
-               if intBld and linecomponents[0].strip() not in forIB: continue
-               command=linecomponents[1][:-1]
-               commands.append(command)
-               print 'Will do: '+command
-        
+            linecomponents=line.split('@@@')
+            if intBld and linecomponents[0].strip() not in forIB: continue
+            command=linecomponents[1][:-1]
+            commands.append(command)
+            print('Will do: '+command)
+
 
     nfail=0
     npass=0
@@ -115,10 +116,10 @@ def main(argv) :
     clist = []
     cdone = []
     i=0
-    print 'Running in %s thread(s)' %np
+    print('Running in %s thread(s)' %np)
 
     for command in commands:
-        print 'Preparing to run %s' %command 
+        print('Preparing to run %s' %command) 
         current = testit(command)
         clist.append(current)
         cdone.append(0)
@@ -139,7 +140,7 @@ def main(argv) :
                     npass+=pingle.npass
                     report+=pingle.report
                     cdone[j]=1
-                    print pingle.report
+                    print(pingle.report)
 #            print 'Number of running threads: %s' % i        
 
     alen=len(cdone)
@@ -151,18 +152,18 @@ def main(argv) :
             nfail+=pingle.nfail
             npass+=pingle.npass
             report+=pingle.report
-            print pingle.report
-        
+            print(pingle.report)
+
     report+='\n %s tests passed, %s failed \n' %(npass,nfail)
-    print report
-    
+    print(report)
+
     runall_report_name='runall-report.log'
     runall_report=open(runall_report_name,'w')
     runall_report.write(report)
     runall_report.close()
-    
+
     if hlt:
-        print "\nWARNING: option --hlt is deprecated as this is now default.\n"
+        print("\nWARNING: option --hlt is deprecated as this is now default.\n")
 
 if __name__ == '__main__' :
     main(sys.argv[1:])

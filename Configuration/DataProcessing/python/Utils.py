@@ -23,36 +23,36 @@ def stepALCAPRODUCER(skims):
 def addMonitoring(process):
     """
     _addMonitoring_
-    
+
     Add the monitoring services to the process provided
     in order to write out performance summaries to the framework job report
     """
     import FWCore.ParameterSet.Config as cms
-    
+
     process.SimpleMemoryCheck = cms.Service("SimpleMemoryCheck",
                                             jobReportOutputOnly = cms.untracked.bool(True)
                                             )
     process.Timing = cms.Service("Timing",
                                  summaryOnly = cms.untracked.bool(True)
                                  )
-    
+
     return process
 
 
 def validateProcess(process):
     """
     _validateProcess_
-    
+
     Check attributes of process are appropriate for production
     This method returns nothing but will throw a RuntimeError for any issues it finds
     likely to cause problems in the production system
-    
+
     """
-    
+
     schedule=process.schedule_()
     paths=process.paths_()
     endpaths=process.endpaths_()
-    
+
     # check output mods are in paths and have appropriate settings
     for outputModName in process.outputModules_().keys():
         outputMod = getattr(process, outputModName)
@@ -84,7 +84,7 @@ def validateProcess(process):
             msg = "Output Module %s not in endPath" % outputModName
             raise RuntimeError, msg
 
-        
+
 def dqmIOSource(args):
     import FWCore.ParameterSet.Config as cms
     if args.get('newDQMIO', False):
@@ -118,4 +118,4 @@ def dqmSeq(args,default):
         return ':'+('+'.join(args['dqmSeq']))
     else:
         return default
-            
+

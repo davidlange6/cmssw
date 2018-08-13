@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys
 import getopt
 import common_db
@@ -6,22 +7,22 @@ import results_db
 import reference_db
 
 def CmdUsage():
-	print "Command line arguments :"
-	print "--create (-C): creates full regression test db schema"
-	print "--drop (-D): drops full regression test db schema."
-	print "--add (-A): -r [release] -a [arch] -p [path]: adds a reference release into db."
-	print "--erase (-E): -r [release] -a [arch]: remove a reference release from db."
-	print "--list (-L): lists the available reference releases"
-	print "--create_res: creates results db schema"
-	print "--drop_res: drops results db schema."
-	print "--create_ref: creates reference db schema"
-	print "--drop_ref: drops reference db schema."
+    print("Command line arguments :")
+    print("--create (-C): creates full regression test db schema")
+    print("--drop (-D): drops full regression test db schema.")
+    print("--add (-A): -r [release] -a [arch] -p [path]: adds a reference release into db.")
+    print("--erase (-E): -r [release] -a [arch]: remove a reference release from db.")
+    print("--list (-L): lists the available reference releases")
+    print("--create_res: creates results db schema")
+    print("--drop_res: drops results db schema.")
+    print("--create_ref: creates reference db schema")
+    print("--drop_ref: drops reference db schema.")
 
 try:
     opts, args = getopt.getopt(sys.argv[1:], "CDAELRr:a:p:h", ['create', 'drop', 'add', 'erase', 'list','read','create_res','drop_res','create_ref','drop_ref','help'])
 except getopt.GetoptError, err:
     # print help information and exit:
-    print str(err) # will print something like "option -a not recognized"
+    print(str(err)) # will print something like "option -a not recognized"
     CmdUsage()
     sys.exit(2)
 c0flag = False
@@ -72,7 +73,7 @@ for o, a in opts:
 
 conn = common_db.createDBConnection()
 refDb = reference_db.ReferenceDB( conn )
-        
+
 mainOption = False
 if(d0flag == True):
     refDb.drop()
@@ -90,18 +91,18 @@ if(c1flag == True):
 if(aflag == True and mainOption == False):
     mainOption = True
     if( RELEASE == None ):
-        print "-r parameter has not been specified."
+        print("-r parameter has not been specified.")
     if( ARCH == None ):
-        print "-a parameter has not been specified."
+        print("-a parameter has not been specified.")
     if( PATH == None ):
-        print "-p parameter has not been specified."
+        print("-p parameter has not been specified.")
     refDb.addRelease(RELEASE, ARCH, PATH)
 if(eflag == True and mainOption == False):
     mainOption = True
     if( RELEASE == None ):
-        print "-r parameter has not been specified."
+        print("-r parameter has not been specified.")
     if( ARCH == None ):
-        print "-a parameter has not been specified."
+        print("-a parameter has not been specified.")
     refDb.deleteRelease(RELEASE, ARCH)
 if(lflag == True and mainOption == False ):
     mainOption = True

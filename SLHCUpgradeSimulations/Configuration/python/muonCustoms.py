@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 
@@ -46,13 +47,13 @@ def customise_csc_cond_ungangedME11A_mc(process):
 
     from CalibMuon.Configuration.getCSCConditions_frontier_cff import cscConditions
     for (classname, tag) in myconds:
-      print classname, tag
-      sourcename = 'unganged_' + classname
-      process.__setattr__(sourcename, cscConditions.clone())
-      process.__getattribute__(sourcename).toGet = cms.VPSet( cms.PSet( record = cms.string(classname), tag = cms.string(tag)) )
-      process.__getattribute__(sourcename).connect = cms.string('frontier://FrontierProd/CMS_COND_CSC_000')
-      process.__setattr__('esp_' + classname, cms.ESPrefer("PoolDBESSource", sourcename) )
-    
+        print(classname, tag)
+        sourcename = 'unganged_' + classname
+        process.__setattr__(sourcename, cscConditions.clone())
+        process.__getattribute__(sourcename).toGet = cms.VPSet( cms.PSet( record = cms.string(classname), tag = cms.string(tag)) )
+        process.__getattribute__(sourcename).connect = cms.string('frontier://FrontierProd/CMS_COND_CSC_000')
+        process.__setattr__('esp_' + classname, cms.ESPrefer("PoolDBESSource", sourcename) )
+
     del cscConditions
 
     return process
@@ -105,9 +106,9 @@ def csc_PathVsModule_SanityCheck(process):
     # verify:
     for path_name, module_name in paths_modules:
         if hasattr(process, path_name) and not hasattr(process, module_name):
-            print "WARNING: module %s is not in %s path!!!" % (module_name, path_name)
-            print "         This path has the following modules:"
-            print "         ", getattr(process, path_name).moduleNames(),"\n"
+            print("WARNING: module %s is not in %s path!!!" % (module_name, path_name))
+            print("         This path has the following modules:")
+            print("         ", getattr(process, path_name).moduleNames(),"\n")
 
 
 # ------------------------------------------------------------------ 
@@ -293,15 +294,15 @@ def customise_csc_PostLS1(process):
     return process
 
 def customise_csc_hlt(process):
-    
+
     process.CSCGeometryESModule.useGangedStripsInME1a = False
-    
+
     process.hltCsc2DRecHits.readBadChannels = cms.bool(False)
     process.hltCsc2DRecHits.CSCUseGasGainCorrection = cms.bool(False)
-    
+
     # Switch input for CSCRecHitD to  s i m u l a t e d  digis
-    
+
     process.hltCsc2DRecHits.wireDigiTag  = cms.InputTag("simMuonCSCDigis","MuonCSCWireDigi")
     process.hltCsc2DRecHits.stripDigiTag = cms.InputTag("simMuonCSCDigis","MuonCSCStripDigi")
-    
+
     return process

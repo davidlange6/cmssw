@@ -1,3 +1,4 @@
+from __future__ import print_function
 import ROOT
 from fitResidual import fitResidual
 from drawHistoAllChambers import drawHisto
@@ -31,14 +32,14 @@ def plot(fileName,sl,dir='DQMData/Run 1/DT/Run summary/DTCalibValidation',option
         nSectors = 12
         if st == 4: nSectors = 14
         if st == 4 and slType == 2: continue 
-        if verbose: print "Station",st
+        if verbose: print("Station",st)
         for wh in wheels:
-            if verbose: print "Wheel",wh 
+            if verbose: print("Wheel",wh) 
             for sec in range(1,nSectors+1):
-                if verbose: print "Sector",sec
+                if verbose: print("Sector",sec)
                 # Get histogram
                 histoName = "%s/Wheel%d/Station%d/Sector%d/hResDist_STEP3_W%d_St%d_Sec%d_%s" % (dir,wh,st,sec,wh,st,sec,slStr) 
-                print "Accessing",histoName
+                print("Accessing",histoName)
                 histo = file.Get(histoName)
                 (histo,fitFunc) = fitResidual(histo,nSigmas,verbose)
                 fitMean = fitFunc.GetParameter(1)
@@ -47,12 +48,12 @@ def plot(fileName,sl,dir='DQMData/Run 1/DT/Run summary/DTCalibValidation',option
                 fitSigmaErr = fitFunc.GetParError(2)
 
                 binHistoNew = (st - 1)*60 + (wh + 2)*nSectors + sec
-                if verbose: print "Bin in summary histo",binHistoNew
+                if verbose: print("Bin in summary histo",binHistoNew)
                 histoMean.SetBinContent(binHistoNew,fitMean)
                 histoMean.SetBinError(binHistoNew,fitMeanErr)
                 histoSigma.SetBinContent(binHistoNew,fitSigma)
                 histoSigma.SetBinError(binHistoNew,fitSigmaErr)
-  
+
                 if sec == 1:
                     label = "Wheel %d" % wh
                     if wh == -2: label += " MB%d" % st  

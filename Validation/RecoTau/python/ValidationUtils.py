@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 import copy
 
@@ -58,7 +59,7 @@ def NameVariable(analyzer, discriminatorLabel=None):
     else:
         #print 'Case not found check the available cases in Validation/RecoTau/python/ValidationUtils.py -- NameVariable'
         first=analyzer.TauProducer.pythonValue()[1:-1]+analyzer.ExtensionName.pythonValue()[1:-1]
-    
+
     if discriminatorLabel == None:
         last = 'Matching'
     else:
@@ -95,35 +96,35 @@ class Scanner(object):
         pass
 
 def DisableQCuts(sequence):
-   scanner = Scanner()
-   sequence.visit(scanner)
-   disabled = cms.PSet(
-    isolationQualityCuts = cms.PSet(
-        minTrackHits = cms.uint32(0),
-        minTrackVertexWeight = cms.double(-1),
-        minTrackPt = cms.double(0),
-        maxTrackChi2 = cms.double(9999),
-        minTrackPixelHits = cms.uint32(0),
-        minGammaEt = cms.double(0),
-        maxDeltaZ = cms.double(0.2),
-        maxTransverseImpactParameter = cms.double(9999)
-        ),
-    pvFindingAlgo = cms.string('highestWeightForLeadTrack'),
-    primaryVertexSrc = cms.InputTag("offlinePrimaryVertices"),
-    signalQualityCuts = cms.PSet(
-        minTrackHits = cms.uint32(0),
-        minTrackVertexWeight = cms.double(-1),
-        minTrackPt = cms.double(0),
-        maxTrackChi2 = cms.double(9999),
-        minTrackPixelHits = cms.uint32(0),
-        minGammaEt = cms.double(0),
-        maxDeltaZ = cms.double(0.2),
-        maxTransverseImpactParameter = cms.double(9999)
-        )
-    )
-   for module in scanner.modules():
-      if hasattr(module,'qualityCuts'):
-         setattr(module,'qualityCuts',disabled)
+    scanner = Scanner()
+    sequence.visit(scanner)
+    disabled = cms.PSet(
+     isolationQualityCuts = cms.PSet(
+         minTrackHits = cms.uint32(0),
+         minTrackVertexWeight = cms.double(-1),
+         minTrackPt = cms.double(0),
+         maxTrackChi2 = cms.double(9999),
+         minTrackPixelHits = cms.uint32(0),
+         minGammaEt = cms.double(0),
+         maxDeltaZ = cms.double(0.2),
+         maxTransverseImpactParameter = cms.double(9999)
+         ),
+     pvFindingAlgo = cms.string('highestWeightForLeadTrack'),
+     primaryVertexSrc = cms.InputTag("offlinePrimaryVertices"),
+     signalQualityCuts = cms.PSet(
+         minTrackHits = cms.uint32(0),
+         minTrackVertexWeight = cms.double(-1),
+         minTrackPt = cms.double(0),
+         maxTrackChi2 = cms.double(9999),
+         minTrackPixelHits = cms.uint32(0),
+         minGammaEt = cms.double(0),
+         maxDeltaZ = cms.double(0.2),
+         maxTransverseImpactParameter = cms.double(9999)
+         )
+     )
+    for module in scanner.modules():
+        if hasattr(module,'qualityCuts'):
+            setattr(module,'qualityCuts',disabled)
 
 
 def SetPlotSequence(sequence):
@@ -147,12 +148,12 @@ def SpawnPSet(lArgument, subPset):
     ret = cms.PSet()
     for spawn in lArgument:
         if len(spawn) != 3:
-            print "ERROR! SpawnPSet uses argument of three data\n"
-            print self.__doc__
+            print("ERROR! SpawnPSet uses argument of three data\n")
+            print(self.__doc__)
             return None
         if len(spawn[1]) != len(spawn[2]):
-            print "ERROR! Lists of arguments to replace must have the same length"
-            print self.__doc__
+            print("ERROR! Lists of arguments to replace must have the same length")
+            print(self.__doc__)
             return None
         spawnArg = copy.deepcopy(subPset)
         for par, val in zip(spawn[1],spawn[2]):

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from IMProv.IMProvQuery import IMProvQuery
 from IMProv.IMProvLoader import loadIMProvFile
 
@@ -27,7 +28,7 @@ from IMProv.IMProvLoader import loadIMProvFile
 # more status code come from CrabServer and are here
 # https://twiki.cern.ch/twiki/bin/view/CMS/TaskTracking#Notes
 #
-    
+
 # map from new (left) to old (right) code
 statusMap = {
     'Undefined':'U',
@@ -66,10 +67,10 @@ def queryStatusXML(filename):
     Jobs = query(report)
 
     return Jobs
-  
+
 def printCrabStatusFromReport(filename):
     Jobs = queryStatusXML(filename)
-    print "Crab Id: StatusScheduler | Status | ProcessStatus | State | GridId |"
+    print("Crab Id: StatusScheduler | Status | ProcessStatus | State | GridId |")
     for j in Jobs:
         crabId = int(j.attrs.get("jobId",None))
         statusScheduler = str(j.attrs.get("statusScheduler",None))
@@ -79,7 +80,7 @@ def printCrabStatusFromReport(filename):
         gridId = str(j.attrs.get("schedulerId",None))
 
         # print crabId, processStatus, statusScheduler, status, state, gridId
-        print "%d : %s | %s | %s | %s | %s " % (crabId,statusScheduler,status,processStatus,state,gridId)
+        print("%d : %s | %s | %s | %s | %s " % (crabId,statusScheduler,status,processStatus,state,gridId))
 
         """
         # remap into old status codes from BOSS for use in JobRobot

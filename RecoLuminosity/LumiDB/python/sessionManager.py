@@ -1,10 +1,11 @@
+from __future__ import print_function
 import coral,os,os.path
 from RecoLuminosity.LumiDB import cacheconfigParser,connectstrParser
 
 class sessionManager(object):
     def defaultfrontierConfigString ():
         return '''<frontier-connect><proxy url = "http://cmst0frontier.cern.ch:3128"/><proxy url = "http://cmst0frontier.cern.ch:3128"/><proxy url = "http://cmst0frontier1.cern.ch:3128"/><proxy url = "http://cmst0frontier2.cern.ch:3128"/><server url = "http://cmsfrontier.cern.ch:8000/FrontierInt"/><server url = "http://cmsfrontier.cern.ch:8000/FrontierInt"/><server url = "http://cmsfrontier1.cern.ch:8000/FrontierInt"/><server url = "http://cmsfrontier2.cern.ch:8000/FrontierInt"/><server url = "http://cmsfrontier3.cern.ch:8000/FrontierInt"/><server url = "http://cmsfrontier4.cern.ch:8000/FrontierInt"/></frontier-connect>'''
-    
+
     def __init__(self,connectString,authpath=None,siteconfpath=None,debugON = False):
         self.__connectString=connectString
         self.__svc=None
@@ -65,12 +66,12 @@ class sessionManager(object):
 
 if __name__ == "__main__":
     svc=sessionManager('oracle://cms_orcoff_prep/cms_lumi_dev_offline',authpath='/afs/cern.ch/user/x/xiezhen',debugON=False)
-    print svc.realConnectString()
+    print(svc.realConnectString())
     session=svc.openSession(isReadOnly=True,cpp2sqltype=[('unsigned int','NUMBER(10)'),('unsigned long long','NUMBER(20)')])
     session.transaction().start(True)
     session.transaction().commit()
     del session
     svc=sessionManager('frontier://LumiPrep/CMS_LUMI_DEV_OFFLINE',debugON=False)
-    print svc.realConnectString()
+    print(svc.realConnectString())
     session=svc.openSession(isReadOnly=True,cpp2sqltype=[('unsigned int','NUMBER(10)'),('unsigned long long','NUMBER(20)')])
     del session

@@ -1,3 +1,4 @@
+from __future__ import print_function
 
 from Mixins import _ConfigureComponent, PrintOptions
 from Mixins import _Labelable, _Unlabelable
@@ -41,7 +42,7 @@ class _Sequenceable(object):
         visitor.leave(self)
     def _appendToCollection(self,collection):
         collection.append(self)
-        
+
 def _checkIfSequenceable(caller, v):
     if not isinstance(v,_Sequenceable):
         typename = format_typename(caller)
@@ -250,7 +251,7 @@ class _ModuleSequenceType(_ConfigureComponent, _Labelable):
     def __repr__(self):
         s = ''
         if self._seq is not None:
-           s = str(self._seq)
+            s = str(self._seq)
         return "cms."+type(self).__name__+'('+s+')\n'
     def moduleNames(self):
         """Returns a set containing the names of all modules being used"""
@@ -283,7 +284,7 @@ class _ModuleSequenceType(_ConfigureComponent, _Labelable):
         """Finds all instances of 'original' and substitutes 'replacement' for them.
            Returns 'True' if a replacement occurs."""
         if not isinstance(original,_Sequenceable) or not isinstance(replacement,_Sequenceable):
-           raise TypeError("replace only works with sequenceable objects")
+            raise TypeError("replace only works with sequenceable objects")
         else:
             v = _CopyAndReplaceSequenceVisitor(original,replacement)
             self.visit(v)
@@ -349,9 +350,9 @@ class _ModuleSequenceType(_ConfigureComponent, _Labelable):
 class _UnarySequenceOperator(_BooleanLogicSequenceable):
     """For ~ and - operators"""
     def __init__(self, operand):
-       self._operand = operand
-       if isinstance(operand, _ModuleSequenceType):
-           raise RuntimeError("This operator cannot accept a sequence")
+        self._operand = operand
+        if isinstance(operand, _ModuleSequenceType):
+            raise RuntimeError("This operator cannot accept a sequence")
     def __eq__(self, other):
         # allows replace(~a, b)
         return type(self) == type(other) and self._operand==other._operand
@@ -481,9 +482,9 @@ class SequencePlaceholder(_Sequenceable):
     def dumpPython(self, options):
         result = 'cms.SequencePlaceholder(\"'
         if options.isCfg:
-           result += 'process.'
+            result += 'process.'
         result += +self._name+'\")\n'
-    
+
 
 class Schedule(_ValidatingParameterListBase,_ConfigureComponent,_Unlabelable):
     def __init__(self,*arg,**argv):
@@ -556,7 +557,7 @@ class ExpandVisitor(object):
                 seq += el
         return self._type(seq)
 
-    
+
 
 class DecoratedNodeNameVisitor(object):
     """ Adds any '!' or '-' needed.  Takes a list """
@@ -598,180 +599,180 @@ class ResolveVisitor(object):
                 raise RuntimeError("The SequencePlaceholder "+visitee._name+ " cannot be resolved.\n Known keys are:"+str(self.processDict.keys()))
             visitee = self.processDict[visitee._name]
     def leave(self,visitee):
-       if isinstance(visitee, SequencePlaceholder):
-           pass
+        if isinstance(visitee, SequencePlaceholder):
+            pass
 
 
 class _CopyAndExcludeSequenceVisitorOld(object):
-   """Traverses a Sequence and constructs a new sequence which does not contain modules from the specified list"""
-   def __init__(self,modulesToRemove):
-       self.__modulesToIgnore = modulesToRemove
-       self.__stack = list()
-       self.__stack.append(list())
-       self.__result = None
-       self.__didExclude = False
-   def enter(self,visitee):
-       if len(self.__stack) > 0:
-           #add visitee to its parent's stack entry
-           self.__stack[-1].append([visitee,False])
-       if visitee.isLeaf():
-           if visitee in self.__modulesToIgnore:
-               self.__didExclude = True
-               self.__stack[-1][-1]=[None,True]
-       elif isinstance(visitee, Sequence):
-           if visitee in self.__modulesToIgnore:
-               self.__didExclude = True
-               self.__stack[-1][-1]=[None,True]
-           self.__stack.append(list())
-       else:
-           #need to add a stack entry to keep track of children
-           self.__stack.append(list())
-   def leave(self,visitee):
-       node = visitee
-       if not visitee.isLeaf():
-           #were any children changed?
-           l = self.__stack[-1]
-           changed = False
-           countNulls = 0
-           nonNulls = list()
-           for c in l:
-               if c[1] == True:
-                   changed = True
-               if c[0] is None:
-                   countNulls +=1
-               else:
-                   nonNulls.append(c[0])
-           if changed:
-               self.__didExclude = True
-               if countNulls != 0:
-                   #this node must go away
-                   if len(nonNulls) == 0:
-                       #all subnodes went away 
-                       node = None
-                   else:
-                       node = nonNulls[0]
-                       for n in nonNulls[1:]:
-                           node = node+n
-               else:
-                   #some child was changed so we need to clone
-                   # this node and replace it with one that holds 
-                   # the new child(ren)
-                   children = [x[0] for x in l ]
-                   if not isinstance(visitee,Sequence):
-                       node = visitee.__new__(type(visitee))
-                       node.__init__(*children)
-                   else:
-                       node = nonNulls[0]
-       if node != visitee:
-           #we had to replace this node so now we need to 
-           # change parent's stack entry as well
-           if len(self.__stack) > 1:
-               p = self.__stack[-2]
-               #find visitee and replace
-               for i,c in enumerate(p):
-                   if c[0]==visitee:
-                       c[0]=node
-                       c[1]=True
-                       break
-       if not visitee.isLeaf():
-           self.__stack = self.__stack[:-1]        
-   def result(self):
-       result = None
-       for n in (x[0] for x in self.__stack[0]):
-           if n is None:
-               continue
-           if result is None:
-               result = n
-           else:
-               result = result+n
-       return result
-   def didExclude(self):
-       return self.__didExclude
+    """Traverses a Sequence and constructs a new sequence which does not contain modules from the specified list"""
+    def __init__(self,modulesToRemove):
+        self.__modulesToIgnore = modulesToRemove
+        self.__stack = list()
+        self.__stack.append(list())
+        self.__result = None
+        self.__didExclude = False
+    def enter(self,visitee):
+        if len(self.__stack) > 0:
+            #add visitee to its parent's stack entry
+            self.__stack[-1].append([visitee,False])
+        if visitee.isLeaf():
+            if visitee in self.__modulesToIgnore:
+                self.__didExclude = True
+                self.__stack[-1][-1]=[None,True]
+        elif isinstance(visitee, Sequence):
+            if visitee in self.__modulesToIgnore:
+                self.__didExclude = True
+                self.__stack[-1][-1]=[None,True]
+            self.__stack.append(list())
+        else:
+            #need to add a stack entry to keep track of children
+            self.__stack.append(list())
+    def leave(self,visitee):
+        node = visitee
+        if not visitee.isLeaf():
+            #were any children changed?
+            l = self.__stack[-1]
+            changed = False
+            countNulls = 0
+            nonNulls = list()
+            for c in l:
+                if c[1] == True:
+                    changed = True
+                if c[0] is None:
+                    countNulls +=1
+                else:
+                    nonNulls.append(c[0])
+            if changed:
+                self.__didExclude = True
+                if countNulls != 0:
+                    #this node must go away
+                    if len(nonNulls) == 0:
+                        #all subnodes went away 
+                        node = None
+                    else:
+                        node = nonNulls[0]
+                        for n in nonNulls[1:]:
+                            node = node+n
+                else:
+                    #some child was changed so we need to clone
+                    # this node and replace it with one that holds 
+                    # the new child(ren)
+                    children = [x[0] for x in l ]
+                    if not isinstance(visitee,Sequence):
+                        node = visitee.__new__(type(visitee))
+                        node.__init__(*children)
+                    else:
+                        node = nonNulls[0]
+        if node != visitee:
+            #we had to replace this node so now we need to 
+            # change parent's stack entry as well
+            if len(self.__stack) > 1:
+                p = self.__stack[-2]
+                #find visitee and replace
+                for i,c in enumerate(p):
+                    if c[0]==visitee:
+                        c[0]=node
+                        c[1]=True
+                        break
+        if not visitee.isLeaf():
+            self.__stack = self.__stack[:-1]        
+    def result(self):
+        result = None
+        for n in (x[0] for x in self.__stack[0]):
+            if n is None:
+                continue
+            if result is None:
+                result = n
+            else:
+                result = result+n
+        return result
+    def didExclude(self):
+        return self.__didExclude
 
 
 class _MutatingSequenceVisitor(object):
     """Traverses a Sequence and constructs a new sequence by applying the operator to each element of the sequence"""
     def __init__(self,operator):
-      self.__operator = operator
-      self.__stack = list()
-      self.__stack.append(list())
-      self.__result = None
-      self.__didApply = False
+        self.__operator = operator
+        self.__stack = list()
+        self.__stack.append(list())
+        self.__result = None
+        self.__didApply = False
     def enter(self,visitee):
-      if len(self.__stack) > 0:
-          #add visitee to its parent's stack entry
-          self.__stack[-1].append([visitee,False])
-      v = self.__operator(visitee)
-      if v is not visitee:
-          #was changed
-          self.__didApply = True
-          self.__stack[-1][-1]=[v,True]
-      if not isinstance(visitee, _SequenceLeaf):
-          #need to add a stack entry to keep track of children
-          self.__stack.append(list())
+        if len(self.__stack) > 0:
+            #add visitee to its parent's stack entry
+            self.__stack[-1].append([visitee,False])
+        v = self.__operator(visitee)
+        if v is not visitee:
+            #was changed
+            self.__didApply = True
+            self.__stack[-1][-1]=[v,True]
+        if not isinstance(visitee, _SequenceLeaf):
+            #need to add a stack entry to keep track of children
+            self.__stack.append(list())
     def leave(self,visitee):
-      node = visitee
-      if not visitee.isLeaf():
-          #were any children changed?
-          l = self.__stack[-1]
-          changed = False
-          countNulls = 0
-          nonNulls = list()
-          for c in l:
-              if c[1] == True:
-                  changed = True
-              if c[0] is None:
-                  countNulls +=1
-              else:
-                  nonNulls.append(c[0])
-          if changed:
-              if countNulls != 0:
-                  #this node must go away
-                  if len(nonNulls) == 0:
-                      #all subnodes went away 
-                      node = None
-                  else:
-                      node = nonNulls[0]
-                      for n in nonNulls[1:]:
-                          node = node+n
-              else:
-                  #some child was changed so we need to clone
-                  # this node and replace it with one that holds 
-                  # the new child(ren)
-                  children = [x[0] for x in l ]
-                  if not isinstance(visitee,Sequence):
-                      node = visitee.__new__(type(visitee))
-                      node.__init__(*children)
-                  else:
-                      node = nonNulls[0]
-                      for n in nonNulls[1:]:
-                          node = node+n
+        node = visitee
+        if not visitee.isLeaf():
+            #were any children changed?
+            l = self.__stack[-1]
+            changed = False
+            countNulls = 0
+            nonNulls = list()
+            for c in l:
+                if c[1] == True:
+                    changed = True
+                if c[0] is None:
+                    countNulls +=1
+                else:
+                    nonNulls.append(c[0])
+            if changed:
+                if countNulls != 0:
+                    #this node must go away
+                    if len(nonNulls) == 0:
+                        #all subnodes went away 
+                        node = None
+                    else:
+                        node = nonNulls[0]
+                        for n in nonNulls[1:]:
+                            node = node+n
+                else:
+                    #some child was changed so we need to clone
+                    # this node and replace it with one that holds 
+                    # the new child(ren)
+                    children = [x[0] for x in l ]
+                    if not isinstance(visitee,Sequence):
+                        node = visitee.__new__(type(visitee))
+                        node.__init__(*children)
+                    else:
+                        node = nonNulls[0]
+                        for n in nonNulls[1:]:
+                            node = node+n
 
-      if node != visitee:
-          #we had to replace this node so now we need to 
-          # change parent's stack entry as well
-          if len(self.__stack) > 1:
-              p = self.__stack[-2]
-              #find visitee and replace
-              for i,c in enumerate(p):
-                  if c[0]==visitee:
-                      c[0]=node
-                      c[1]=True
-                      break
-      if not visitee.isLeaf():
-          self.__stack = self.__stack[:-1]        
+        if node != visitee:
+            #we had to replace this node so now we need to 
+            # change parent's stack entry as well
+            if len(self.__stack) > 1:
+                p = self.__stack[-2]
+                #find visitee and replace
+                for i,c in enumerate(p):
+                    if c[0]==visitee:
+                        c[0]=node
+                        c[1]=True
+                        break
+        if not visitee.isLeaf():
+            self.__stack = self.__stack[:-1]        
     def result(self):
-      result = None
-      for n in (x[0] for x in self.__stack[0]):
-          if n is None:
-              continue
-          if result is None:
-              result = n
-          else:
-              result = result+n
-      return result
+        result = None
+        for n in (x[0] for x in self.__stack[0]):
+            if n is None:
+                continue
+            if result is None:
+                result = n
+            else:
+                result = result+n
+        return result
     def _didApply(self):
-      return self.__didApply
+        return self.__didApply
 
 class _CopyAndRemoveFirstSequenceVisitor(_MutatingSequenceVisitor):
     """Traverses a Sequence and constructs a new sequence which does not contain modules from the specified list"""
@@ -995,7 +996,7 @@ if __name__=="__main__":
             t = TestVisitor(enters=[a,b],
                             leaves=[a,b])
             p.visit(t)
-            
+
             s=Sequence(plusAB)
             c=DummyModule("c")
             multSC = s*c
@@ -1003,7 +1004,7 @@ if __name__=="__main__":
             t=TestVisitor(enters=[s,a,b,c],
                           leaves=[a,b,s,c])
             p.visit(t)
-            
+
             notA= ~a
             p=Path(notA)
             t=TestVisitor(enters=[notA,a],leaves=[a,notA])
@@ -1044,7 +1045,7 @@ if __name__=="__main__":
             m3 = DummyModule("m3")
             m4 = DummyModule("m4")
             m5 = DummyModule("m5")
- 
+
             s1 = Sequence(m1*~m2*m1*m2*ignore(m2))
             s2 = Sequence(m1*m2)
             l = []
@@ -1071,7 +1072,7 @@ if __name__=="__main__":
             s3.replace(s2,m1)
             s3.visit(namesVisitor)
             self.assertEqual(l,['!m1', 'm1'])
-            
+
             s1 = Sequence(m1+m2)
             s2 = Sequence(m3+m4)
             s3 = Sequence(s1+s2)
@@ -1083,7 +1084,7 @@ if __name__=="__main__":
             m1 = DummyModule("a")
             m2 = DummyModule("b")
             m3 = DummyModule("c")
-        
+
             s = Sequence(m1+m2+m3)
             self.assertEqual(s.index(m1),0)
             self.assertEqual(s.index(m2),1)        
@@ -1098,8 +1099,8 @@ if __name__=="__main__":
             self.assertEqual(s.index(m1),0)
             self.assertEqual(s.index(m2),1)        
             self.assertEqual(s.index(m3),2)
-            
-        
+
+
         def testExpandAndClone(self):
             m1 = DummyModule("m1")
             m2 = DummyModule("m2")
@@ -1133,10 +1134,10 @@ if __name__=="__main__":
             namesVisitor = DecoratedNodeNameVisitor(l)
             p.visit(namesVisitor)
             self.assertEqual(l, ['m1', '!m2', 'm3', '-m4'])
-            
+
             s4 = Sequence()
             s4 +=m1
-            print s1._seq.dumpSequencePython()
+            print(s1._seq.dumpSequencePython())
             l[:]=[]; s1.visit(namesVisitor); self.assertEqual(l,['m1'])
             self.assertEqual(s4.dumpPython(None),"cms.Sequence(process.m1)\n")
             s4 = Sequence()
@@ -1202,7 +1203,7 @@ if __name__=="__main__":
             s4.remove(m1)
             l[:]=[]; s4.visit(namesVisitor); self.assertEqual(l,[])
             self.assertEqual(s4.dumpPython(None), "cms.Sequence()\n")
-            
+
         def testCopyAndExclude(self):
             a = DummyModule("a")
             b = DummyModule("b")
@@ -1300,7 +1301,7 @@ if __name__=="__main__":
             p1 += e
             self.assertEqual(p1.dumpPython(None),"cms.Path(process.a+process.b+process.c+process.e)\n")
             self.assertEqual(p2.dumpPython(None),"cms.Path(process.a+process.b+process.c)\n")
-        
+
         def testInsertInto(self):
             from FWCore.ParameterSet.Types import vstring
             class TestPSet(object):
@@ -1321,13 +1322,13 @@ if __name__=="__main__":
             ps = TestPSet()
             p.insertInto(ps,"p",dict())
             self.assertEqual(ps._dict, {"p":vstring("a","b","c","d")})
-                        
+
     unittest.main()
-                          
 
 
-                           
-    
 
-        
-        
+
+
+
+
+

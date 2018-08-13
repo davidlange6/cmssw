@@ -63,7 +63,7 @@ class ImportTool(ConfigToolBase):
         pass
     def setImportCommands(self,commands):
         self._importCommands=commands
-   
+
 class ApplyTool(ConfigToolBase):
     """Apply a tool"""
     _label="Apply tool"
@@ -82,12 +82,12 @@ class ToolDataAccessor(BasicDataAccessor):
         self._toolModules={}
         self._processCopy=None
         self._parameterErrors={}
-        
+
     def children(self, object):
         """ Return the children of a container object.
         """
         return ()
-    
+
     def isContainer(self, object):
         return False
 
@@ -125,7 +125,7 @@ class ToolDataAccessor(BasicDataAccessor):
 
     def properties(self, object):
         """ Return the list of the properties of an object.
-        
+
         Each property is represented by a tuple containing its
         type, name, value, description and readonly(True/False).
         Possible types are: 'Category','String','MultilineString','File','FileVector','Boolean','Integer','Double'.
@@ -146,7 +146,7 @@ class ToolDataAccessor(BasicDataAccessor):
             properties += [("Category", "Parameters", "")]
             properties+=[self._property(value.name,value.value,value.description,value.type,object.getAllowedValues(value.name)) for key,value in object.getParameters().items()]
         return properties
-    
+
     def setProperty(self, object, name, value, categoryName):
         """ Change the property 'name' of an object to a new value.
         """
@@ -204,7 +204,7 @@ class ToolDataAccessor(BasicDataAccessor):
     def removeTool(self,tool):
         self._toolList.remove(tool)
         return self.updateProcess()
-    
+
     def addTool(self,tool):
         tool.apply(self.configDataAccessor().process())
         self.configDataAccessor().setProcess(self.configDataAccessor().process())
@@ -251,7 +251,7 @@ class ToolDataAccessor(BasicDataAccessor):
                     importCommands+=[command]
             self._toolModules[self._toolList[-1]]=objects
         self._importTool.setImportCommands(importCommands)
-        
+
     def topLevelObjects(self):
         objectList=[self._importTool]+self._toolList
         if self.configDataAccessor().process():

@@ -1,5 +1,6 @@
 #!/bin/env python
 #
+from __future__ import print_function
 from sys import argv
 def cfgName2py(cfgName):
     result = cfgName.replace("/data/","/python/").replace(".","_")
@@ -11,5 +12,5 @@ def cfgName2py(cfgName):
 
 # for shell-scripters who want a value printed
 if __name__=="__main__":
-   if len(argv) == 2:
-       print cfgName2py(argv[1])
+    if len(argv) == 2:
+        print(cfgName2py(argv[1]))

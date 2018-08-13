@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import os,string,sys,commands,time,ConfigParser,operator
 
 from operator import itemgetter
@@ -6,13 +7,13 @@ MAXRETRIES=10 # number of retries before giving up
 
 CONFIGFILE='dbtoweb.cfg'
 CONFIG = ConfigParser.ConfigParser()
-print 'Reading configuration file from ',CONFIGFILE
+print('Reading configuration file from ',CONFIGFILE)
 CONFIG.read(CONFIGFILE)
 
 # this is for [COMMON] part of the myconf.conf
 
-print " "
-print "dbtoconf.py:"
+print(" ")
+print("dbtoconf.py:")
 ACCOUNT=CONFIG.get('Common','Account')
 CONNSTRINGGLOBTAG=CONFIG.get('Common','Conn_string_gtag')
 GLOBTAG=CONFIG.get('Common','Globtag')
@@ -23,19 +24,19 @@ AUTHPATH=''
 try:
     AUTHPATH=CONFIG.get('Common','AuthPath')
 except:
-    print "WARNING: No authpath fount in config file"
+    print("WARNING: No authpath fount in config file")
 
-    
-print
-print "Configuration:"
-print "================================"
-print "Account:",ACCOUNT
-print "CONNSTRING:",CONNSTRINGGLOBTAG
-print "Auth. Path:",AUTHPATH
-print "GLOBALTAG:",GLOBTAG
-print "Root dir:",ROOTDIR
 
-print "================================"
+print()
+print("Configuration:")
+print("================================")
+print("Account:",ACCOUNT)
+print("CONNSTRING:",CONNSTRINGGLOBTAG)
+print("Auth. Path:",AUTHPATH)
+print("GLOBALTAG:",GLOBTAG)
+print("Root dir:",ROOTDIR)
+
+print("================================")
 
 
 def myparser(input,parstag):
@@ -47,7 +48,7 @@ def myparser(input,parstag):
 #        print second
         if (len(second)>=1):
             out=second[0]
-            
+
     return out
 
 
@@ -65,14 +66,14 @@ def single(currgtag):
     record=[]
     connstring=[]
     account=[]
-    
+
     htmltag=open(currgtag+'.html','w')
     htmltag.write('<html>\n')
     htmltag.write('<body>\n')
     htmltag.write('<h3> Tag List for Global Tag: '+currgtag+' </h3>\n')
     htmltag.write('<h4> The first time you access a tag below you have to login (HN credentials)<br>')
     htmltag.write('Then you can come back here and access all tags </h4>\n')
- 
+
 
     htmltag.write('<table border="1">\n')
     htmltag.write('<tr>\n')
@@ -107,20 +108,20 @@ def single(currgtag):
             parent.append(myparser(line,'parent:'))
             tag.append(myparser(line,'tag:'))
             pfn.append(myparser(line,'pfn:'))
-    
+
     #    print nlines,line
-    
+
     tmp.close()
-    print 'Read '+str(nlines)+' lines...'
-    print 'Read ',len(leafnode),' leafnodes'
-    print 'Read ',len(parent),' parent'
-    print 'Read ',len(tag),' tag'
-    print 'Read ',len(pfn),' pfn'
-    
+    print('Read '+str(nlines)+' lines...')
+    print('Read ',len(leafnode),' leafnodes')
+    print('Read ',len(parent),' parent')
+    print('Read ',len(tag),' tag')
+    print('Read ',len(pfn),' pfn')
+
     if len(leafnode)!=len(parent) or len(leafnode)!=len(tag) or len(leafnode)!=len(pfn):
-        print "# of leafnodes different from parent/tag/pfn"
+        print("# of leafnodes different from parent/tag/pfn")
         sys.exit()
-    
+
     #output
     #print root,node,globparent
     #`create dictionary
@@ -134,7 +135,7 @@ def single(currgtag):
     #    for i in range(0,len(leafnode)):
     #    print sortindex[i][0]
 
-    print 'Scanning tags:'
+    print('Scanning tags:')
     for i in range(0,len(leafnode)):
         index=sortindex[i][0]
        #lm
@@ -151,7 +152,7 @@ def single(currgtag):
         #         print "Unable to get information on tag:",tag[i]," after ", MAXRETRIES, "retries"
         #         print "Giving up here..."
         #         sys.exit(1)
-    
+
         # adding tag to tag list page with link to condweb page
         # first define needed parameters
         TEMP=pfn[index].split('/')
@@ -194,13 +195,13 @@ try:
         os.chdir(ROOTDIR)
         TOBECREATED=1 
         BASEDIR=os.getcwd()
-        print 'ROOTDIR created, current dir= '+BASEDIR
+        print('ROOTDIR created, current dir= '+BASEDIR)
     else:    
         os.chdir(ROOTDIR)
         BASEDIR=os.getcwd()
-        print 'ROOTDIR exists already, current dir= '+BASEDIR
+        print('ROOTDIR exists already, current dir= '+BASEDIR)
 except:
-    print "ERROR: it is impossible to chdir in",ROOTDIR
+    print("ERROR: it is impossible to chdir in",ROOTDIR)
     sys.exit(1)
 
 HTMLTMP=HTMLNAME+'.tmp'
@@ -245,9 +246,9 @@ if GLOBTAG=="All" :
 else:
     treelist.append(GLOBTAG)
 
-print "Found trees:"
+print("Found trees:")
 for tree in range(0,len(treelist)):
-    print str(tree)+': Tree= '+treelist[tree]    
+    print(str(tree)+': Tree= '+treelist[tree])    
     # adding global tag to main page
     htmlroot.write('<tr>\n')
     file=treelist[tree]+'/'+treelist[tree]+'.html'
@@ -261,7 +262,7 @@ for tree in range(0,len(treelist)):
     if not os.path.exists(TREEDIR):
         os.mkdir(TREEDIR)
     os.chdir(TREEDIR)
-    print 'TREEDIR created, current dir is '+os.getcwd()
+    print('TREEDIR created, current dir is '+os.getcwd())
 
     single(treelist[tree])
     os.chdir(BASEDIR)
@@ -270,7 +271,7 @@ htmlroot.write('</table>\n')
 htmlroot.write('<h3> This list was created on: '+time.ctime()+'</h3>\n')
 htmlroot.write('</body>\n</html>\n')
 htmlroot.close()
-print 'A new root html has been created: '
-print BASEDIR+'/'+HTMLTMP
-print 'Please check and replace (in case)'
+print('A new root html has been created: ')
+print(BASEDIR+'/'+HTMLTMP)
+print('Please check and replace (in case)')
 #    os.system('cp '+HTMLTMP+' '+HTMLNAME+' ; rm -f '+HTMLTMP)

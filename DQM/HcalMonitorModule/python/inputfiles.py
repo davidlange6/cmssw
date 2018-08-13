@@ -1,3 +1,4 @@
+from __future__ import print_function
 rootfiles=[
     # Collisions at 900 GeV
     # /ExpressPhysics/BeamCommissioning09-Express-v2/FEVT  ---  run = 124022 and lumi>35 and lumi<100 #
@@ -72,7 +73,7 @@ def copyfiles(filelist,args=None):
     if len(args)>0:
         dir=args[0]
     if not os.path.isdir(dir):
-        print "Sorry, dir '%s' does not exist"%dir
+        print("Sorry, dir '%s' does not exist"%dir)
         return
     startcount=-1
     endcount=9999999999
@@ -81,8 +82,8 @@ def copyfiles(filelist,args=None):
     if (len(args)>2):
         endcount=string.atoi(args[2])
 
-    print "startcount = ",startcount
-    print "endcount = ",endcount
+    print("startcount = ",startcount)
+    print("endcount = ",endcount)
     counter=0
     for i in filelist:
         if not i.startswith("/store/"):
@@ -92,7 +93,7 @@ def copyfiles(filelist,args=None):
             continue
         temp=string.replace(i,"/store/","/castor/cern.ch/cms/store/")
         cmd="rfcp %s /tmp/temple/inputfiles"%temp
-        print cmd
+        print(cmd)
         os.system(cmd)
         if (counter>=endcount):
             break
@@ -100,7 +101,7 @@ def copyfiles(filelist,args=None):
 def makelocal(filelist,dir):
     import string
     import os
-    
+
     newfilelist=[]
     for i in range(len(filelist)):
         temp=os.path.basename(filelist[i])
@@ -117,5 +118,5 @@ if __name__=="__main__":
     if len(sys.argv)>1:
         outdir=sys.argv[1]
     if not os.path.isdir(outdir):
-        print "Sorry, output directory '%s' does not exist!"%outdir
+        print("Sorry, output directory '%s' does not exist!"%outdir)
     copyfiles(rootfiles,sys.argv[1:])

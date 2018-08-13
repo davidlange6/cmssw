@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 
 from Configuration.PyReleaseValidation.MatrixReader import MatrixReader
 from Configuration.PyReleaseValidation.MatrixRunner import MatrixRunner
 from Configuration.PyReleaseValidation.MatrixInjector import MatrixInjector,performInjectionOptionTest
-        
+
 # ================================================================================
 
 def showRaw(opt):
@@ -14,7 +15,7 @@ def showRaw(opt):
     mrd.showRaw(opt.useInput, opt.refRel, opt.fromScratch, opt.raw, opt.step1Only, selected=opt.testList)
 
     return 0
-        
+
 # ================================================================================
 
 def runSelected(opt):
@@ -25,14 +26,14 @@ def runSelected(opt):
     ret = 0
     if opt.show:
         mrd.show(opt.testList,opt.extended)
-        if opt.testList : print 'testListected items:', opt.testList
+        if opt.testList : print('testListected items:', opt.testList)
     else:
         mRunnerHi = MatrixRunner(mrd.workFlows, opt.nThreads)
         ret = mRunnerHi.runTests(opt)
 
     if opt.wmcontrol:
         if ret!=0:
-            print 'Cannot go on with wmagent injection with failing workflows'
+            print('Cannot go on with wmagent injection with failing workflows')
         else:
             wfInjector = MatrixInjector(opt,mode=opt.wmcontrol,options=opt.wmoptions)
             ret= wfInjector.prepare(mrd,
@@ -62,7 +63,7 @@ if __name__ == '__main__':
         'metmc' : [5.1, 15, 25, 37, 38, 39], #MC
         'muonmc' : [5.1, 124.4, 124.5, 20, 21, 22, 23, 25, 30], #MC
         }
-        
+
 
     import optparse
     usage = 'usage: runTheMatrix.py --show -s '
@@ -197,10 +198,10 @@ if __name__ == '__main__':
                       dest='jobReports',
                       default=False,
                       action='store_true')
-    
+
     opt,args = parser.parse_args()
     if opt.restricted:
-        print 'Deprecated, please use -l limited'
+        print('Deprecated, please use -l limited')
         if opt.testList:            opt.testList+=',limited'
         else:            opt.testList='limited'
 
@@ -213,9 +214,9 @@ if __name__ == '__main__':
         opt.apply=map(stepOrIndex,opt.apply.split(','))
     if opt.keep:
         opt.keep=map(stepOrIndex,opt.keep.split(','))
-        
-                
-                
+
+
+
     if opt.testList:
         testList=[]
         for entry in opt.testList.split(','):
@@ -230,8 +231,8 @@ if __name__ == '__main__':
                 try:
                     testList.append(float(entry))
                 except:
-                    print entry,'is not a possible selected entry'
-            
+                    print(entry,'is not a possible selected entry')
+
         opt.testList = list(set(testList))
 
 

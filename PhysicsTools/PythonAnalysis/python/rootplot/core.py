@@ -1,6 +1,7 @@
 """
 An API and a CLI for quickly building complex figures.
 """
+from __future__ import print_function
 
 __license__ = '''\
 Copyright (c) 2009-2010 Jeff Klukas <klukas@wisc.edu>
@@ -134,7 +135,7 @@ class Options(dict):
         rc_name = use_mpl and 'rootplotmplrc' or 'rootplotrc'
         rc_path = os.path.expanduser('~/.%s' % rc_name)
         if os.path.exists(rc_path):
-            print "Using styles and options from ~/.%s" % rc_name
+            print("Using styles and options from ~/.%s" % rc_name)
             shutil.copy(rc_path, joined(configdir, '%s.py' % rc_name))
             configs.insert(1, '%s.py' % rc_name)
         for f in configs:
@@ -533,7 +534,7 @@ def cli_rootplotmpl():
     global use_mpl
     use_mpl = True
     cli_rootplot()
-    
+
 def cli_rootplot():
     """
     An application for plotting histograms from a ROOT file.
@@ -548,8 +549,8 @@ def cli_rootplot():
         try:
             rootplot(*options.arguments(), **optdiff)
         except Exception, e:
-            print "Error:", e
-            print "For usage details, call '%s --help'" % prog
+            print("Error:", e)
+            print("For usage details, call '%s --help'" % prog)
             sys.exit(1)
 
 ##############################################################################
@@ -749,14 +750,14 @@ def rootplot(*args, **kwargs):
             report_progress(i + 1, len(plotargs), options.output, options.ext)
         report_progress(len(plotargs), len(plotargs),
                         options.output, options.ext)
-        print ''
+        print('')
     ## clean out empty directories
     for root, dirs, files in os.walk(options.output):
         if not os.listdir(root):
             os.rmdir(root)
     ## add index.html files to all directories
     if options.ext in ['png', 'gif', 'svg']:
-        print "Writing html index files..."
+        print("Writing html index files...")
         width, height = options.size
         if use_mpl:
             width, height = [x * options.dpi for x in options.size]
@@ -812,7 +813,7 @@ def write_config():
     f = open(filename, 'w')
     f.write(config_string())
     f.close()
-    print "Wrote %s to the current directory" % filename
+    print("Wrote %s to the current directory" % filename)
     sys.exit(0)
 
 def add_from_config_files(options, configs):
@@ -835,7 +836,7 @@ def add_from_config_files(options, configs):
         rc_name = 'rootplotrc'
     rc_path = os.path.expanduser('~/.%s' % rc_name)
     if os.path.exists(rc_path):
-        print "Using styles and options from ~/.%s" % rc_name
+        print("Using styles and options from ~/.%s" % rc_name)
         shutil.copy(rc_path, joined(configdir, '%s.py' % rc_name))
         configs.insert(0, '%s.py' % rc_name)
     for f in configs:
@@ -867,7 +868,7 @@ def walk_rootfile(path, rootfile, options):
     for folder in folders:
         for x in walk_rootfile(joined(path, folder), rootfile, options):
             yield x
-        
+
 def get_plot_inputs(files, options):
     #### Return a list of argument sets to be sent to plot().
     target_lists = []
@@ -1352,8 +1353,8 @@ def get_labels(hist, options):
 def report_progress(counter, nplots, output, ext, divisor=1):
     #### Print the current number of finished plots.
     if counter % divisor == 0:
-        print("\r%i plots of %i written to %s/ in %s format" %
-              (counter, nplots, output, ext)),
+        print(("\r%i plots of %i written to %s/ in %s format" %
+              (counter, nplots, output, ext)), end=' ')
         sys.stdout.flush()
 
 def merge_pdf(options):
@@ -1363,9 +1364,9 @@ def merge_pdf(options):
     for path, dirs, files in os.walk(options.output):
         paths += [joined(path, x) for x in files if x.endswith('.pdf')]
     if not paths:
-        print "No output files, so no merged pdf was made"
+        print("No output files, so no merged pdf was made")
         return
-    print "Writing %s..." % destination
+    print("Writing %s..." % destination)
     os.system('gs -q -dBATCH -dNOPAUSE -sDEVICE=pdfwrite '
               '-dAutoRotatePages=/All '
               '-sOutputFile=%s %s' % (destination, ' '.join(paths)))
@@ -1584,7 +1585,7 @@ def make_html_index(path, dirs, files, filetype, template, ncolumns,
     plots = re.sub('((\\n<a.*){%i})' % ncolumns, r'\1<br>', plots)
     output_file.write(template % locals())
     output_file.close()
-    
+
 def parse_range(xedges, expression):
     #### Returns the indices of the low and high bins indicated in expression.
     closest = lambda l,y: l.index(min(l, key=lambda x:abs(x-y)))
@@ -1630,7 +1631,7 @@ def load_matplotlib(ext):
         try:
             import matplotlib as mpl
         except ImportError:
-            print "Unable to access matplotlib"
+            print("Unable to access matplotlib")
             sys.exit(1)
         import numpy as np
         mpldict = {'png' : 'AGG',

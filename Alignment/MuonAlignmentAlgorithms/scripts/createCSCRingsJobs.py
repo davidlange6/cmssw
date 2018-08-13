@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import os, sys, optparse, math
 
 copyargs = sys.argv[:]
@@ -258,19 +259,19 @@ if options.inputInBlocks: inputInBlocks = "--inputInBlocks"
 json_file = options.json
 
 if validationLabel == '':
-  print "\nOne or more of REQUIRED options is missing!\n"
-  parser.print_help()
-  sys.exit()
+    print("\nOne or more of REQUIRED options is missing!\n")
+    parser.print_help()
+    sys.exit()
 
 fileNames=[]
 fileNamesBlocks=[]
 execfile(INPUTFILES)
 njobs = options.subjobs
 if (options.inputInBlocks):
-  njobs = len(fileNamesBlocks)
-  if njobs==0:
-    print "while --inputInBlocks is specified, the INPUTFILES has no blocks!"
-    sys.exit()
+    njobs = len(fileNamesBlocks)
+    if njobs==0:
+        print("while --inputInBlocks is specified, the INPUTFILES has no blocks!")
+        sys.exit()
 
 stepsize = int(math.ceil(1.*len(fileNames)/njobs))
 
@@ -284,12 +285,12 @@ last_align = None
 # step 0: convert initial geometry to xml
 INITIALXML = INITIALGEOM + '.xml'
 if INITIALGEOM[-3:]=='.db':
-  INITIALXML = INITIALGEOM[:-3] + '.xml'
-print "Converting",INITIALGEOM,"to",INITIALXML," ...will be done in several seconds..."
+    INITIALXML = INITIALGEOM[:-3] + '.xml'
+print("Converting",INITIALGEOM,"to",INITIALXML," ...will be done in several seconds...")
 exit_code = os.system("./Alignment/MuonAlignmentAlgorithms/scripts/convertSQLiteXML.py  %s %s" % (INITIALGEOM,INITIALXML))
 if exit_code>0:
-  print "problem: conversion exited with code:", exit_code
-  sys.exit()
+    print("problem: conversion exited with code:", exit_code)
+    sys.exit()
 
 
 #####################################################################
@@ -318,9 +319,9 @@ for iteration in range(1, ITERATIONS+1):
     for jobnumber in range(njobs):
         gather_fileName = "%sgather%03d.sh" % (directory, jobnumber)
         if not options.inputInBlocks:
-          inputfiles = " ".join(fileNames[jobnumber*stepsize:(jobnumber+1)*stepsize])
+            inputfiles = " ".join(fileNames[jobnumber*stepsize:(jobnumber+1)*stepsize])
         else:
-          inputfiles = " ".join(fileNamesBlocks[jobnumber])
+            inputfiles = " ".join(fileNamesBlocks[jobnumber])
 
         copyplots = "plotting*.root"
 
@@ -490,7 +491,7 @@ cp -f %(director)s.db  $ALIGNMENT_AFSDIR/%(directory)s
     bsubfile.append("bsub -R \"type==SLC5_64\" -q %s -J \"%s_align\" -w \"%s\" align.sh" % (queue, director, " && ".join(bsubnames)))
     bsubnames = []
     last_align = "%s_align" % director
-    
+
     # after the last iteration do diagnostics run for putting into a browser
     if iteration == ITERATIONS:
         # do we have plotting files created?
@@ -551,7 +552,7 @@ cp -f %(validationLabel)s_${timestamp}.tgz $ALIGNMENT_AFSDIR/
 
 """ % vars())
         os.system("chmod +x %svalidation.sh" % directory)
-        
+
         bsubfile.append("echo %svalidation.sh" % directory)
         bsubfile.append("bsub -R \"type==SLC5_64\" -q cmscaf1nd -J \"%s_validation\" -w \"ended(%s)\" validation.sh" % (director, last_align))
 

@@ -19,7 +19,7 @@ from Vispa.Plugins.EdmBrowser.EdmBrowserTabController import EdmBrowserTabContro
 class EdmBrowserPlugin(EventBrowserPlugin):
     """ The EdmBrowserPlugin opens edm root files in the EventBrowserTab.
     """
-    
+
     def __init__(self, application=None, name=None):
         logging.debug(__name__ + ": __init__")
         EventBrowserPlugin.__init__(self, application)
@@ -29,22 +29,22 @@ class EdmBrowserPlugin(EventBrowserPlugin):
         EventBrowserPlugin.startUp(self)
         self.addCenterView(EdmBrowserBoxView)
         self.addCenterView(TableView)
-                
+
     def newTab(self):
         """ Create EdmBrowserTab and add to MainWindow.
         """
         logging.debug(__name__ + ": newTab")
         tab = EdmBrowserTab(self.application().mainWindow())
-        
+
         controller = EdmBrowserTabController(self)
         controller.setDataAccessor(EdmDataAccessor())
         tab.setController(controller)
-        
+
         controller.boxContentDialog().addButton("&Label", "str(object.Label)")
         controller.boxContentDialog().addButton("&Type", "str(object.Type)")
         controller.boxContentDialog().addButton("&Name", "str(object.Name)")
         controller.boxContentDialog().addButton("&Pt", "str(object.Pt)")
-        
+
         self.application().mainWindow().addTab(tab)
         return tab
 

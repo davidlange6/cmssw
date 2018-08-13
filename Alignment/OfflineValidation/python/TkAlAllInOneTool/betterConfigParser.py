@@ -1,3 +1,4 @@
+from __future__ import print_function
 import ConfigParser
 import os
 import copy
@@ -53,7 +54,7 @@ class BetterConfigParser(ConfigParser.ConfigParser):
 
     def optionxform(self, optionstr):
         return optionstr
-    
+
     def exists( self, section, option):
         try:
             items = self.items(section) 
@@ -63,7 +64,7 @@ class BetterConfigParser(ConfigParser.ConfigParser):
             if item[0] == option:
                 return True
         return False
-        
+
     def __updateDict( self, dictionary, section ):
         result = dictionary
         try:
@@ -145,14 +146,14 @@ class BetterConfigParser(ConfigParser.ConfigParser):
             self.set(internal_section, "workdir", "/tmp/$USER")
         general["workdir"] = self.get(internal_section, "workdir")
         return general
-    
+
     def checkInput(self, section, knownSimpleOptions=[], knownKeywords=[],
                    ignoreOptions=[]):
         """
         Method which checks, if the given options in `section` are in the
         list of `knownSimpleOptions` or match an item of `knownKeywords`.
         This is basically a check for typos and wrong parameters.
-        
+
         Arguments:
         - `section`: Section of a configuration file
         - `knownSimpleOptions`: List of allowed simple options in `section`.

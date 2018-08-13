@@ -1,6 +1,7 @@
 """
 rootmath description
 """
+from __future__ import print_function
 
 __license__ = '''\
 Copyright (c) 2009-2010 Jeff Klukas <klukas@wisc.edu>
@@ -116,7 +117,7 @@ def newadd(outfile, targets, dest_path=""):
                 dest = joined(destdir, histname)
                 add(outfile, dest, hists, scales, dest_path)
         else:
-            print "Code not written yet to add histograms from multiple files"
+            print("Code not written yet to add histograms from multiple files")
             return
         return
 
@@ -157,7 +158,7 @@ def alltrue(iterable):
 def pathdiff(paths, joiner):
     """
     Return the appropriate destination for an object.
-    
+
     In all cases, the result will be placed in the deepest directory shared by
     all paths.  If the histogram names are the same, the result will be named
     based on the first directories that they do not share.  Otherwise, the 
@@ -210,11 +211,11 @@ def pathdiff2(paths, joiner='__', truncate=False):
 def pathdiff3(paths, joiner='__'):
     """
     Return the appropriate destination for an object.
-    
+
     If the final objects in each path match, then the return value will be the
     matching part of the paths.  Otherwise, the output path will simply be those
     names joined together with *joiner*.  See the examples below.
-    
+
     >>> pathdiff3(['/dirA/dirX/hist', '/dirA/dirY/hist'])
     '/hist'
     >>> pathdiff3(['/dirA/dirX/dirB/hist', '/dirA/dirY/dirB/hist'])

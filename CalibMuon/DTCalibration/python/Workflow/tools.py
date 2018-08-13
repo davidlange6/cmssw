@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os,sys,imp
 import pickle
 import ConfigParser
@@ -5,13 +6,13 @@ import ConfigParser
 def replaceTemplate(template,**opts):
     result = open(template).read()
     for item in opts:
-         old = '@@%s@@'%item
-         new = str(opts[item])
-         print "Replacing",old,"to",new
-         result = result.replace(old,new)
+        old = '@@%s@@'%item
+        new = str(opts[item])
+        print("Replacing",old,"to",new)
+        result = result.replace(old,new)
 
     return result
- 
+
 def getDatasetStr(datasetpath):
     datasetstr = datasetpath
     datasetstr.strip()
@@ -24,9 +25,9 @@ def dqmWorkflowName(datasetpath,type,rev=1):
     workflowName = datasetpath
     sections = workflowName.split('/')[1:]
     workflowName = '/%s/%s-%s-rev%d/%s' % (sections[0],sections[1],type,rev,sections[2])
-    
+
     return workflowName 
-   
+
 def listFilesInCastor(castor_dir,type = 'root',prefix = 'rfio:'):
     if not castor_dir: raise ValueError,'Please specify valid castor dir'
 
@@ -56,10 +57,10 @@ def copyFilesFromCastor(castor_dir,output_dir,type='root'):
     from subprocess import call
     files = listFilesInCastor(castor_dir,type,'')
 
-    print "Copying files from %s to %s" % (castor_dir,output_dir) 
+    print("Copying files from %s to %s" % (castor_dir,output_dir)) 
     for item in files:
         cmd = ['rfcp',item,output_dir] 
-        print "..." + item
+        print("..." + item)
         retcode = call(cmd)
         if retcode != 0: raise RuntimeError,'Error in copying file %s to directory %s' % (item,output_dir)
 
@@ -68,13 +69,13 @@ def copyFilesFromCastor(castor_dir,output_dir,type='root'):
 def copyFilesLocal(dir,output_dir,type='root'):
     if not dir: raise ValueError,'Please specify valid dir'
     if not output_dir: raise ValueError,'Please specify valid output dir'
-  
+
     from subprocess import call
     files = listFilesLocal(dir,type)
     cmd = ['cp']
     cmd.extend(files)
     cmd.append(output_dir)
-    print cmd 
+    print(cmd) 
     retcode = call(cmd)
     return retcode
 
@@ -88,7 +89,7 @@ def haddInCastor(castor_dir,result_file,type = 'root',prefix = 'rfio:',suffix = 
     from subprocess import call
     files = listFilesInCastor(castor_dir,type,prefix)
     if suffix: files = [item + suffix for item in files]
- 
+
     cmd = ['hadd',result_file]
     cmd.extend(files)
     #print cmd
@@ -114,9 +115,9 @@ def setGridEnv(cmssw_dir):
     os.system('source /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh')
     os.system('cmsenv')
     os.system('source /afs/cern.ch/cms/ccs/wm/scripts/Crab/crab.sh')
- 
+
     os.chdir(cwd)
- 
+
     return
 
 def parseInput(inputFields,requiredFields = ()):
@@ -167,7 +168,7 @@ def writeCfgPkl(process,dir,psetName):
     myPickle = pickle.Pickler(pklFile)
     myPickle.dump(process)
     pklFile.close()
- 
+
     outFile = open(dir + '/' + psetName,"w")
     outFile.write("import FWCore.ParameterSet.Config as cms\n")
     outFile.write("import pickle\n")
@@ -216,7 +217,7 @@ def loadCrabDefault(crabCfg,config):
     crabCfg.remove_option('CMSSW','lumis_per_job')
     crabCfg.remove_option('CMSSW','lumi_mask')
     crabCfg.remove_option('CMSSW','split_by_run')
- 
+
     """
     if hasattr(config,'totalnumberevents'): crabCfg.set('CMSSW','total_number_of_events',config.totalnumberevents)
     if hasattr(config,'eventsperjob'): crabCfg.set('CMSSW','events_per_job',config.eventsperjob) 
@@ -234,8 +235,8 @@ def loadCrabDefault(crabCfg,config):
     if hasattr(config,'splitByEvent') and config.splitByEvent:
         crabCfg.remove_option('CMSSW','runselection')
     else:
-	if hasattr(config,'runselection') and config.runselection:
-	    crabCfg.set('CMSSW','runselection',config.runselection)
+        if hasattr(config,'runselection') and config.runselection:
+            crabCfg.set('CMSSW','runselection',config.runselection)
 
     # USER section
     if not crabCfg.has_section('USER'): crabCfg.add_section('USER')  
@@ -268,5 +269,5 @@ def loadCrabDefault(crabCfg,config):
     else:
         if not crabCfg.has_section('CAF'): crabCfg.add_section('CAF')
         crabCfg.set('CAF','queue',config.queueAtCAF) 
-    
+
     return crabCfg

@@ -1,3 +1,4 @@
+from __future__ import print_function
 ##
 ##identical copy from online. no drift correction
 ##
@@ -67,14 +68,14 @@ class LumiCorrector(object):
         if name=="ALPHA2":
             return Alpha2_
         return 0.0
-    
+
     def AfterglowFactor(self,nBXs):
         Afterglow = 1.0
         for (bxthreshold,correction) in self.AfterglowMap_:
             if nBXs >= bxthreshold :
                 Afterglow = correction
         return Afterglow
-    
+
     def TotalNormOcc1(self,TotLumi_noNorm,nBXs):
         AvgLumi = 0.
         if nBXs>0:
@@ -82,7 +83,7 @@ class LumiCorrector(object):
         else:
             return 1.0
         return self.Occ1Norm_*self.Occ1ConstFactor_*self.AfterglowFactor(nBXs)/(1 + self.Alpha1_*AvgLumi + self.Alpha2_*AvgLumi*AvgLumi)
-    
+
     def PixelAfterglowFactor(self,nBXs):
         Afterglow = 1.0
         for bxthreshold,correction in self.pixelAfterglowMap_.items():
@@ -92,6 +93,6 @@ class LumiCorrector(object):
         return Afterglow
 if __name__=='__main__':
     lcorr=LumiCorrector()
-    print lcorr.AfterglowFactor(500)
-    print lcorr.TotalNormOcc1(0.3,700)
-    print lcorr.PixelAfterglowFactor(500)
+    print(lcorr.AfterglowFactor(500))
+    print(lcorr.TotalNormOcc1(0.3,700))
+    print(lcorr.PixelAfterglowFactor(500))

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 #from FastSimulation.PileUpProducer.PileUpSimulator13TeV_cfi import *
 
@@ -77,5 +78,5 @@ elif (MixingMode=='GenMixing'):
     mixGenPU.input.nbPileupEvents.probFunctionVariable = npu
     mixGenPU.input.nbPileupEvents.probValue = prob
 else:
-    print 'unsupported MixingMode label'
-    
+    print('unsupported MixingMode label')
+

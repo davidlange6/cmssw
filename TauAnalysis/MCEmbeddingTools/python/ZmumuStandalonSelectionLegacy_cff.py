@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 
@@ -79,7 +80,7 @@ goldenZmumuFilter = cms.EDFilter("CandViewCountFilter",
     minNumber = cms.uint32(1)
 )
 
-print "Zmumu skim will use: ", goldenZmumuFilter.src
+print("Zmumu skim will use: ", goldenZmumuFilter.src)
 
 
 

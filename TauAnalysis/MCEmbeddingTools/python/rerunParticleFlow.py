@@ -17,14 +17,14 @@ class seqVisitorGetModuleNames():
         self.modulesNames = []
 
     def giveNext(self):
-	return self.nextInChain
+        return self.nextInChain
     def givePrev(self):
-	return self.prevInChain
-      
+        return self.prevInChain
+
     def enter(self, visitee):
         if isinstance(visitee, _Module):
             self.modulesNames.append(visitee.label())
-	      	
+
     def leave(self, visitee):
         pass
 

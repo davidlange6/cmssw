@@ -1,3 +1,4 @@
+from __future__ import print_function
 # mapping with the available HLT tables supported by cmsDriver.py
 __triggerTable = {
 
@@ -26,14 +27,14 @@ def getDefaultTrigger():
     Retrieves the default trigger name
     """
     return __default
-    
+
 
 def getHelp():
     """
     Retrieves the list of available triggers
     """
     return __triggerTable.iterkeys()
-  
+
 
 def getConfigsForScenario(sequence = None):
     """
@@ -48,12 +49,12 @@ def getConfigsForScenario(sequence = None):
         # check if the specified trigger is valid
         trigger = sequence
         if trigger not in __triggerTable:
-            print 'An unsupported trigger has been requested: %s' % sequence
-            print 'The default one will be used instead: %s' % __default
-            print 'The supported triggers are:'
+            print('An unsupported trigger has been requested: %s' % sequence)
+            print('The default one will be used instead: %s' % __default)
+            print('The supported triggers are:')
             for key in __triggerTable.iterkeys():
-                print '\t%s' % key
-            print
+                print('\t%s' % key)
+            print()
             trigger = __default
 
     return __triggerTable[trigger]

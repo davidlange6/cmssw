@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 from FWCore.ParameterSet.usedOutput import *
 
@@ -25,26 +26,26 @@ process.Tau = cms.Sequence(process.tautagging+process.PFTau)
 names = ["RawToDigi","TkLocal","MuLocal","CaloLocal","Ecal","Tracking","JetMet","BTagVtx","Muon","EGamma","Tau","PFlow"]
 
 def assignModulesToSeqs():
-	#assign modules to pretty grouping
-	sequenceWithModules = { }
-	sequenceWithModulesString = { }
-	for name in names:
-	    sequenceWithModules[name] = []
-	    getModulesFromSequence(process.sequences[name],sequenceWithModules[name])
-	    #also create the flat string based version instead of full config one
-	    sequenceWithModulesString[name] = []
-	    for module in sequenceWithModules[name]:
-        	sequenceWithModulesString[name].append(module.label())
-	return (sequenceWithModules, sequenceWithModulesString)
+    #assign modules to pretty grouping
+    sequenceWithModules = { }
+    sequenceWithModulesString = { }
+    for name in names:
+        sequenceWithModules[name] = []
+        getModulesFromSequence(process.sequences[name],sequenceWithModules[name])
+        #also create the flat string based version instead of full config one
+        sequenceWithModulesString[name] = []
+        for module in sequenceWithModules[name]:
+            sequenceWithModulesString[name].append(module.label())
+    return (sequenceWithModules, sequenceWithModulesString)
 
 if __name__ == "__main__":
-	#print
-	(sequenceWithModules, sequenceWithModulesString) = assignModulesToSeqs()
-	for seq, mods  in sequenceWithModules.items():
-	#for seq, mods  in sequenceWithModulesString.items():
-	    print "sequence: %s" % (seq)
-	    for module in mods:
-	        print "  module: %s" % (module)
+    #print
+    (sequenceWithModules, sequenceWithModulesString) = assignModulesToSeqs()
+    for seq, mods  in sequenceWithModules.items():
+    #for seq, mods  in sequenceWithModulesString.items():
+        print("sequence: %s" % (seq))
+        for module in mods:
+            print("  module: %s" % (module))
 
 
 

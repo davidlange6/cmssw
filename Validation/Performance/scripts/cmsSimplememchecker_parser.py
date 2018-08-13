@@ -1,14 +1,15 @@
 #! /usr/bin/env python
 
-    
+
+from __future__ import print_function
 def manipulate_log(outdir,logfile_name,startevt):
 
     import time
     import sys
     import ROOT       
-    
+
     os.system('pwd')
-    
+
     # the fundamental structure: the key is the evt number the value is a list containing
     # VSIZE deltaVSIZE RSS deltaRSS
     data=[]
@@ -41,7 +42,7 @@ def manipulate_log(outdir,logfile_name,startevt):
             delta_vsize=float(line_content_list[5])
             rss=float(line_content_list[7])
             delta_rss=float(line_content_list[8])
-            
+
             data.append((event_number,{'vsize':vsize,
                                        'delta_vsize':delta_vsize,
                                        'rss':rss,
@@ -60,40 +61,40 @@ def manipulate_log(outdir,logfile_name,startevt):
         i+=1
 
     # print maximum rss for this job
-    print 'Maximum rss =', max_rss[1]
-                                    
+    print('Maximum rss =', max_rss[1])
+
     # skim the second entry when the event number is the same BUG!!!!!!!
     # i take elements in couples!
     new_data=[]
     if len(data)>2:
-    	if data[0][0]==data[1][0]:
-    	    print 'Two modules seem to have some output.\nCollapsing ...'
-    	    i=0
-    	    while True:
-    	        dataline1=data[i]
-    	        i+=1
-    	        dataline2=data[i]
-    	        new_eventnumber=dataline1[0]
-    	        new_vsize=dataline2[1]['vsize']
-    	        new_delta_vsize=dataline1[1]['delta_vsize']+dataline2[1]['delta_vsize']
-    	        new_rss=dataline2[1]['rss']
-    	        new_delta_rss=dataline1[1]['delta_rss']+dataline2[1]['delta_rss']
-    	        
-    	        new_data.append((new_eventnumber,{'vsize':new_vsize,
-    	                                          'delta_vsize':new_delta_vsize,
-    	                                          'rss':new_rss,
-    	                                          'delta_rss':new_delta_rss}))
-    	        i+=1
-    	        if i==len(data): break
-    	             
-    	    data=new_data
-    	    print 'Collapsing: Done!'        
-        
-    npoints=len(data)
-    
-    print '%s values read and stored ...' %npoints
+        if data[0][0]==data[1][0]:
+            print('Two modules seem to have some output.\nCollapsing ...')
+            i=0
+            while True:
+                dataline1=data[i]
+                i+=1
+                dataline2=data[i]
+                new_eventnumber=dataline1[0]
+                new_vsize=dataline2[1]['vsize']
+                new_delta_vsize=dataline1[1]['delta_vsize']+dataline2[1]['delta_vsize']
+                new_rss=dataline2[1]['rss']
+                new_delta_rss=dataline1[1]['delta_rss']+dataline2[1]['delta_rss']
 
-            
+                new_data.append((new_eventnumber,{'vsize':new_vsize,
+                                                  'delta_vsize':new_delta_vsize,
+                                                  'rss':new_rss,
+                                                  'delta_rss':new_delta_rss}))
+                i+=1
+                if i==len(data): break
+
+            data=new_data
+            print('Collapsing: Done!')        
+
+    npoints=len(data)
+
+    print('%s values read and stored ...' %npoints)
+
+
     # The Graphs 
     __argv=sys.argv # trick for a strange behaviour of the TApp..
     sys.argv=sys.argv[:1]
@@ -108,7 +109,7 @@ def manipulate_log(outdir,logfile_name,startevt):
     # Save in file
     rootfilename='%s/graphs.root' %outdir
     myfile=ROOT.TFile(rootfilename,'RECREATE')    
-       
+
     # dictionary of graphs!
     graph_dict={}
     for value in values_set:
@@ -121,8 +122,8 @@ def manipulate_log(outdir,logfile_name,startevt):
         graph.SetLineColor(2)        
         graph.SetTitle(value)
         graph.SetName('%s_graph' %value)
-        
-    
+
+
         #fill the graphs
         point_counter=0
         for event_number,vals_dict in data:
@@ -130,32 +131,32 @@ def manipulate_log(outdir,logfile_name,startevt):
                                        event_number,
                                        vals_dict[value])
             point_counter+=1
-        
+
         graph.GetXaxis().SetTitle("Event")
         last_event=data[-1][0]
         graph.GetXaxis().SetRangeUser(0,last_event+1)
         graph.GetYaxis().SetTitleOffset(1.3)
         graph.GetYaxis().SetTitle("MB")
-                          
-        
-            
+
+
+
         #print the graphs as files :)
         mycanvas=ROOT.TCanvas('%s_canvas' %value)
         mycanvas.cd()
         graph.Draw("ALP")
-    
+
         mycanvas.Print("%s/%s_graph.png"%(outdir,value),"png")
-        
+
         # write it on file
         graph.Write()
         mycanvas.Write()
-        
+
     myfile.Close() 
-        
+
     os.system('pwd') 
-                
+
     # The html page!------------------------------------------------------------------------------
-    
+
     titlestring='<b>Report executed with release %s on %s.</b>\n<br>\n<hr>\n'\
                                    %(os.environ['CMSSW_VERSION'],time.asctime())
     #Introducing this if to catch the cmsRelvalreport.py use case of "reuse" of TimingReport
@@ -178,15 +179,15 @@ def manipulate_log(outdir,logfile_name,startevt):
     html_file.write('<hr>\n<h1>Memory Checker Report</h1>\n<pre>\n' + report + '</pre>')
     html_file.write('\n</body>\n</html>')
     html_file.close()    
-    
-    
+
+
 #################################################################################################    
-        
+
 if __name__ == '__main__':
-    
+
     import optparse
     import os
-    
+
     # Here we define an option parser to handle commandline options..
     usage='simplememchecker_parser.py <options>'
     parser = optparse.OptionParser(usage)
@@ -194,7 +195,7 @@ if __name__ == '__main__':
                       help='The profile to manipulate' ,
                       default='',
                       dest='profile')
-                      
+
     parser.add_option('-o', '--outdir',
                       help='The directory of the output' ,
                       default='',
@@ -204,25 +205,25 @@ if __name__ == '__main__':
                       help='The event number from which we start. Default is 1.' ,
                       default='1',
                       dest='startevt')                      
-                                            
+
     (options,args) = parser.parse_args()
-    
+
     # Now some fault control..If an error is found we raise an exception
     if options.profile=='' or\
        options.outdir=='':
         raise('Please select a profile and an output dir!')
-    
+
     if not os.path.exists(options.profile) or\
        not os.path.exists(options.outdir):
         raise ('Outdir or input profile not present!')
-    
+
     try:
         startevt=int(options.startevt)        
     except ValueError:
-         print 'Problems in convertng starting event value!'
-         
-            
+        print('Problems in convertng starting event value!')
+
+
     #launch the function!
     manipulate_log(options.outdir,options.profile,startevt)
-    
-    
+
+

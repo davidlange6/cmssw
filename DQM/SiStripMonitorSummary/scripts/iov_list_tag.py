@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 from optparse import OptionParser, Option, OptionValueError
 import DLFCN
 import sys
@@ -13,9 +14,9 @@ def list_tag( conn_str, tag, auth_path ):
     db.startReadOnlyTransaction()
     iov = db.iov( tag )
     for elem in iov.elements:
-        print elem.since()
+        print(elem.since())
         db.commitTransaction()
-        
+
 if __name__ == "__main__":
     parser=OptionParser()
     parser.add_option("-c","--connection",action="store",dest="conn_str",help="connection string of the target account")
@@ -24,4 +25,4 @@ if __name__ == "__main__":
     (options, args) = parser.parse_args()
     list_tag( parser.values.conn_str,parser.values.tag, parser.values.auth_path  )
 
-            
+

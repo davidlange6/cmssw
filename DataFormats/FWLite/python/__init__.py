@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import ROOT
 import inspect
 import sys
@@ -26,17 +27,17 @@ def warn (*args, **kwargs):
     #print "after '%s'" % filename
     blankLines = kwargs.get('blankLines', 0)
     if blankLines:
-        print '\n' * blankLines
+        print('\n' * blankLines)
     spaces = kwargs.get('spaces', 0)
     if spaces:
-        print ' ' * spaces,
+        print(' ' * spaces, end=' ')
     if len (args):
-        print "%s (%s): " % (filename, lineNum),
+        print("%s (%s): " % (filename, lineNum), end=' ')
         for arg in args:
-            print arg,
-        print
+            print(arg, end=' ')
+        print()
     else:
-        print "%s (%s):" % (filename, lineNum)
+        print("%s (%s):" % (filename, lineNum))
 
 ########################
 ## ################## ##
@@ -68,7 +69,7 @@ class Handle:
         # So, we've created it and grabbed the type info.  Since we
         # don't want a memory leak, we destroy it.
         if kwargs.get ('noDelete'):
-            print "Not deleting wrapper"
+            print("Not deleting wrapper")
             del kwargs['noDelete']
         else:
             self._wrapper.IsA().Destructor( self._wrapper )
@@ -96,7 +97,7 @@ class Handle:
     def __str__ (self):
         return "%s" % (self._type)
 
-                                          
+
     ## Private member functions ##
 
     def _typeInfoGetter (self):
@@ -199,7 +200,7 @@ class Lumis:
             return self._lumi.luminosityBlockAuxiliary()
         except:
             raise RuntimeError, "Lumis.luminosityBlockAuxiliary() called on object in invalid state"
-        
+
 
     def getByLabel (self, *args):
         """Calls FWLite's getByLabel.  Called:
@@ -271,9 +272,9 @@ class Lumis:
             if self._maxLumis > 0 and self._lumiCounts >= self._maxLumis:
                 break
             self._lumi.__preinc__()
-            
-                    
-        
+
+
+
 ######################
 ## ################ ##
 ## ## ########## ## ##
@@ -350,7 +351,7 @@ class Runs:
             return self._run.runAuxiliary()
         except:
             raise RuntimeError, "Runs.runAuxiliary() called on object in invalid state"
-        
+
 
     def getByLabel (self, *args):
         """Calls FWLite's getByLabel.  Called:
@@ -386,8 +387,8 @@ class Runs:
                             labelString )
         return handle.isValid()
 
-                    
-       
+
+
 
     ##############################
     ## Private Member Functions ##
@@ -424,7 +425,7 @@ class Runs:
             if self._maxRuns > 0 and self._runCounts >= self._maxRuns:
                 break
             self._run.__preinc__()
-            
+
 
 ########################
 ## ################## ##
@@ -493,7 +494,7 @@ class Events:
             self._createFWLiteEvent()
         return self._event.to ( long(entryIndex) )
 
-        
+
     def toBegin (self):
         """Called to reset event loop to first event."""
         self._toBegin = True
@@ -555,7 +556,7 @@ class Events:
                             labelString )
         return handle.isValid()
 
-                    
+
     def __iter__ (self):
         return self._next()
 
@@ -647,7 +648,7 @@ class Events:
             else:
                 # if not, lets go to the next event
                 self._event.__preinc__()
-            
+
 
 
 if __name__ == "__main__":

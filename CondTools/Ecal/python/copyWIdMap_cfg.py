@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("ProcessOne")
@@ -23,7 +24,7 @@ process.load("CondCore.DBCommon.CondDBCommon_cfi")
 process.CondDBCommon.connect = 'sqlite_file:DB.db'
 process.CondDBCommon.DBParameters.authenticationPath = '/nfshome0/popcondev/conddb'
 
-print 'avant PoolDBOutputService' 
+print('avant PoolDBOutputService') 
 
 process.PoolDBOutputService = cms.Service("PoolDBOutputService",
     process.CondDBCommon, 
@@ -31,7 +32,7 @@ process.PoolDBOutputService = cms.Service("PoolDBOutputService",
     toPut = cms.VPSet(cms.PSet(
         record = cms.string('EcalTPGWeightIdMapRcd'),
         #tag = cms.string('EcalTPGWeightIdMap_craft')
-	tag = cms.string('EcalTPGWeightIdMap_TPGTrivial_config')
+        tag = cms.string('EcalTPGWeightIdMap_TPGTrivial_config')
     ))
 )
 

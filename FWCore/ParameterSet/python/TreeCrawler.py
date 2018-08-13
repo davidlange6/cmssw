@@ -1,3 +1,4 @@
+from __future__ import print_function
 # This CMS code is based on previous work done by Toby Dickenson, as indiciated below
 #
 # for questions: Benedikt.Hegner@cern.ch
@@ -31,16 +32,16 @@ def packageNameFromFilename(name):
 
 
 class Color:
-  """ANSI escape display sequences"""
-  info          = "\033[1;34m"
-  hilight       = "\033[31m"
-  alternate     = "\033[32m"
-  extra         = "\033[33m"
-  backlight     = "\033[43m"
-  underline     = "\033[4m"
-  lessemphasis  = "\033[30m"
-  deemphasis    = "\033[1;30m"
-  none          = "\033[0m"
+    """ANSI escape display sequences"""
+    info          = "\033[1;34m"
+    hilight       = "\033[31m"
+    alternate     = "\033[32m"
+    extra         = "\033[33m"
+    backlight     = "\033[43m"
+    underline     = "\033[4m"
+    lessemphasis  = "\033[30m"
+    deemphasis    = "\033[1;30m"
+    none          = "\033[0m"
 
 _stack = []
 
@@ -59,7 +60,7 @@ class Package(object):
             self.module = __import__(name,[],[],"*")
     def dump(self,level):
         indent = "  " * level
-        print indent, "+", Color.info, self.name, Color.none
+        print(indent, "+", Color.info, self.name, Color.none)
         # sort dependencies alphabetically
         self.dependencies.sort(key = lambda x: x.name)
         for package in self.dependencies:
@@ -70,16 +71,16 @@ class Package(object):
         if self.module:
             for number, line in enumerate(inspect.getsource(self.module).splitlines()):
                 if pattern in line:
-                     filename = packageNameFromFilename(inspect.getsourcefile(self.module))
-                     if not self.searched:
-                         # save the hit, so we can add later stacks to it
-                         self.hit = SearchHit()
-                         self.hit.number = number
-                         self.hit.filename = filename
-                         self.hit.line = line
-                         self.hit.stacks = list()
-                         result.append(self.hit)
-                     self.hit.stacks.append(copy.copy(_stack)) 
+                    filename = packageNameFromFilename(inspect.getsourcefile(self.module))
+                    if not self.searched:
+                        # save the hit, so we can add later stacks to it
+                        self.hit = SearchHit()
+                        self.hit.number = number
+                        self.hit.filename = filename
+                        self.hit.line = line
+                        self.hit.stacks = list()
+                        result.append(self.hit)
+                    self.hit.stacks.append(copy.copy(_stack)) 
         # then go on with dependencies
         _stack.append(self.name)
         for package in self.dependencies:
@@ -106,17 +107,17 @@ class mymf(modulefinder.ModuleFinder):
             self._last_caller = old_last_caller
 
     def import_module(self,partnam,fqname,parent):
-                              
+
         if partnam in ("FWCore","os"):
             r = None
         else:
             r = modulefinder.ModuleFinder.import_module(self,partnam,fqname,parent)
             # since the modulefinder is not able to look into the global area when coming from the local area, we force a second try   
             if parent and not r and self._localarea != '' and self._globalarea != '':
-                 parent.__file__ = parent.__file__.replace(self._localarea,self._globalarea)
-                 parent.__path__[0] = parent.__path__[0].replace(self._localarea,self._globalarea)
+                parent.__file__ = parent.__file__.replace(self._localarea,self._globalarea)
+                parent.__path__[0] = parent.__path__[0].replace(self._localarea,self._globalarea)
             r = modulefinder.ModuleFinder.import_module(self,partnam,fqname,parent)
-                                                         
+
         if r is not None:
             self._depgraph.setdefault(self._last_caller.__name__,{})[r.__name__] = 1
         return r
@@ -160,7 +161,7 @@ def getImportTree(filename,path):
     toplevelname = packageNameFromFilename(filename)
     # get dependencies from given file
     globalDependencyDict = getDependenciesFromPythonFile(filename,toplevelname,path)
-        
+
     # transform this flat structure in a dependency tree
     dependencyGraph = transformIntoGraph(globalDependencyDict,toplevelname)
     return dependencyGraph                                               

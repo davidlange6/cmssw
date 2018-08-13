@@ -39,7 +39,7 @@ def combineGTs(globaltag):
     else:
         # Nothing to do, return the input globaltag
         return main
-    
+
 
 def GlobalTag(essource = None, globaltag = None, conditions = None):
     """Modify the GlobalTag module configuration, allowing to use the extended
@@ -74,12 +74,12 @@ def GlobalTag(essource = None, globaltag = None, conditions = None):
                 # TODO backward compatible code: to be removed after migrating autoCond.py to use a map for custom conditions
                 map = {}
                 for entry in autoKey[1:]:
-                  entry = entry.split(',')
-                  record     = entry[1]
-                  label      = len(entry) > 3 and entry[3] or None
-                  tag        = entry[0]
-                  connection = len(entry) > 2 and entry[2] or None
-                  map[ (record, label) ] = (tag, connection)
+                    entry = entry.split(',')
+                    record     = entry[1]
+                    label      = len(entry) > 3 and entry[3] or None
+                    tag        = entry[0]
+                    connection = len(entry) > 2 and entry[2] or None
+                    map[ (record, label) ] = (tag, connection)
                 custom_conditions.update( map )
             else:
                 globaltag = autoKey
@@ -101,20 +101,20 @@ def GlobalTag(essource = None, globaltag = None, conditions = None):
     if conditions is not None:
         # TODO backward compatible code: to be removed after migrating ConfigBuilder.py and confdb.py to use a map for custom conditions
         if isinstance(conditions, basestring): 
-          if conditions:
-            map = {}
-            for entry in conditions.split('+'):
-                entry = entry.split(',')
-                record     = entry[1]
-                label      = len(entry) > 3 and entry[3] or None
-                tag        = entry[0]
-                connection = len(entry) > 2 and entry[2] or None
-                map[ (record, label) ] = (tag, connection)
-            custom_conditions.update( map )
+            if conditions:
+                map = {}
+                for entry in conditions.split('+'):
+                    entry = entry.split(',')
+                    record     = entry[1]
+                    label      = len(entry) > 3 and entry[3] or None
+                    tag        = entry[0]
+                    connection = len(entry) > 2 and entry[2] or None
+                    map[ (record, label) ] = (tag, connection)
+                custom_conditions.update( map )
         elif isinstance(conditions, dict):
-          custom_conditions.update( conditions )
+            custom_conditions.update( conditions )
         else:
-          raise TypeError, "the 'conditions' argument should be either a string or a dictionary"
+            raise TypeError, "the 'conditions' argument should be either a string or a dictionary"
 
     # explicit payloads toGet from DB
     if custom_conditions:

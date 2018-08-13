@@ -1,3 +1,4 @@
+from __future__ import print_function
 import sys
 import ConfigParser
 
@@ -43,32 +44,32 @@ class HDQMDatabaseProducerConfiguration:
         for item in fullList.split(";"):
             itemList = item.split(",")
             if len(itemList) != 3:
-                print "Error: incorrect configuration of subDetsAndTags"
+                print("Error: incorrect configuration of subDetsAndTags")
                 sys.exit()
             self.SubDetsAndTags.append(SubDetInfo(itemList[0].strip(), itemList[1].strip(), itemList[2].strip()))
             # print itemList[0], itemList[1], itemList[2]
 
         # [Database]
         # ##########
-        
+
         self.AuthenticationPath = config.get('Config', 'AuthenticationPath')
         self.Database = config.get('Config', 'Database')
-        
+
         # [Directories]
         # #############
-        
+
         # Directory where the scripts are
         self.BaseDir = config.get('Config', 'BaseDir')
-        
+
         # CMS environment
         self.CMS_PATH = config.get('Config', 'CMS_PATH')
         self.CMSSW_Version = config.get('Config', 'CMSSW_Version')
-        
+
         # Directory containing the cfg templates
         self.TemplatesDir = config.get('Config', 'TemplatesDir')
-        
+
         # DQM root files location
         self.SourceDir = config.get('Config', 'SourceDir')
-        
+
         # Directory where to copy the plots
         self.StorageDir = config.get('Config', 'StorageDir')

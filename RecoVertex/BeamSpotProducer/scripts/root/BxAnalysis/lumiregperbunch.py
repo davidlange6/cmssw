@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys,commands,os,calendar
 from ROOT import gDirectory,TFile
 
@@ -32,17 +33,17 @@ class bsmeas(object):
         self.dydz = dydz
         self.edxdz = edxdz
         self.edydz = edydz
-        
+
 
 
 
 def timeof(run,lumisection):
     # first check if this run is already in the list, otherwise read it
     if run not in runlstime.keys():
-        print "Reading lumi time from lumireg localcopy files"
+        print("Reading lumi time from lumireg localcopy files")
         filename="localcopy/BeamFitResults_Run"+run+".txt"
         if not os.path.exists(filename):
-            print "WARNING: file ",filename," does not exist. Returning null."
+            print("WARNING: file ",filename," does not exist. Returning null.")
             return -1
 
         # reading file
@@ -55,11 +56,9 @@ def timeof(run,lumisection):
             try:
                 tmp = BeamspotMeasurement(piece)
             except Exception, err:
-                print >> sys.stderr, \
-                      "    ERROR Found corrupt " \
-                      "beamspot measurement entry!"
-                print >> sys.stderr, \
-                      "    !!! %s !!!" % str(err)
+                print("    ERROR Found corrupt " \
+                      "beamspot measurement entry!", file=sys.stderr)
+                print("    !!! %s !!!" % str(err), file=sys.stderr)
                 continue
             # Argh!
             runfromfile=tmp.run_number
@@ -70,7 +69,7 @@ def timeof(run,lumisection):
             time_end=calendar.timegm(time_end.timetuple())-23 # assume end of lumisection
             lstime[lumimin]=time_begin
             lstime[lumimax]=time_end
-            
+
         # order lumisections and make a list
         lslist=lstime.keys()
         lslist.sort()
@@ -83,14 +82,14 @@ def timeof(run,lumisection):
         #            print lumirange
         #            print time_begin, calendar.timegm(time_begin.timetuple())
         #            print time_end, calendar.timegm(time_end.timetuple())
-        
+
         in_file.close()
     # now give a time
     dcloselumi=999999
     closelumi=-1
     closetime=-1
     lstimesorted=runlstime[run]
-    
+
     for pair in lstimesorted:
         (lumi,time)=pair
         if abs(lumisection-lumi)<dcloselumi:
@@ -101,7 +100,7 @@ def timeof(run,lumisection):
         finaltime=closetime+(lumisection-closelumi)*23
     else:
         finaltime=-1
-        
+
     return finaltime
 
 
@@ -109,7 +108,7 @@ def readroot():
     rls=[]
     bxlist=[]
     allmeas={}
-    
+
     DIRES=['X0','Y0','Z0','width_X0','Width_Y0','Sigma_Z0','dxdz','dydz']
     # DIRES=['X0']
     rootfile="BxAnalysis_Fill_"+FILL+".root"
@@ -140,14 +139,14 @@ def readroot():
                     nbin=histo.GetNbinsX()
 
                     thisbx=allmeas[bx]
-                    
+
                     for bin in range(1,nbin+1):
                         label=histo.GetXaxis().GetBinLabel(bin)
                         label=label.strip()
                         if ":" not in label:
                             # not a valid label of type run:lumi-lumi, skip it
                             continue
-                        
+
                         cont=histo.GetBinContent(bin)
                         if cont!=cont:
                             # it's a nan
@@ -160,9 +159,9 @@ def readroot():
                         #                            print label
                         #                        else:
                         if label not in rls:
-                            print "New range:",label," found in ",histoname
+                            print("New range:",label," found in ",histoname)
                             rls.append(label)
-                                
+
                         if label in thisbx.keys():
                             thismeas=thisbx[label]
                         else:
@@ -194,13 +193,13 @@ def readroot():
                             thismeas.dydz=cont
                             thismeas.edydz=err
 
-    
+
             key = iter.Next()
-        
-        
+
+
     #    for name in pippo:
     #        print name
-    
+
     filein.Close()
 
     # let's try to show it
@@ -217,15 +216,15 @@ def readroot():
 
 if __name__ == '__main__':
     if len(sys.argv)!=2:
-        print "Usage: :",sys.argv[0]," <fillnr>"
+        print("Usage: :",sys.argv[0]," <fillnr>")
         sys.exit(1)
     FILL=sys.argv[1]
 
     allmeas=readroot()
     # now write it
-    
+
     for bx in allmeas.keys():
-        print "writing bx=",bx
+        print("writing bx=",bx)
         bxmeas=allmeas[bx]
         lines={}
         for meas in bxmeas.keys():
@@ -239,8 +238,8 @@ if __name__ == '__main__':
             lumimax=lumimax.strip()
             lumimid=int((int(lumimin)+int(lumimax))/2.)
             meastime=timeof(runno,lumimid)
-            print runno,str(lumimid),meastime
-            
+            print(runno,str(lumimid),meastime)
+
             thismeas=bxmeas[meas]
 #            print thismeas.x,thismeas.ex,thismeas.y,thismeas.ey,thismeas.z,thismeas.ez
 #            print thismeas.wx,thismeas.ewx,thismeas.wy,thismeas.ewy,thismeas.wz,thismeas.ewz
@@ -255,14 +254,14 @@ if __name__ == '__main__':
                                                             thismeas.wz*10,thismeas.ewz*10)
             line+="%11.7f %11.7f %11.7f %11.7f" % (thismeas.dxdz,thismeas.edxdz,-thismeas.dydz,thismeas.edydz)
             line+="\n"
-            
+
             # validate it
             if (thismeas.x != 0.0 and thismeas.y != 0.0 and thismeas.z != 0.0 and
                 thismeas.wx != 0.0 and thismeas.wy != 0.0 and thismeas.wz != 0.0 and
                 thismeas.dxdz != 0.0 and thismeas.dydz != 0.0 ):
                 lines[meastime]=line
 
-            
+
         # now write it
         WORKDIR=OUTDIR+FILL
         os.system("mkdir -p "+WORKDIR)

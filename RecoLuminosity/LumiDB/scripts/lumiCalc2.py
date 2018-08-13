@@ -6,9 +6,10 @@
 # Author:      Zhen Xie                                                #
 ########################################################################
 
+from __future__ import print_function
 import os,sys,time
 from RecoLuminosity.LumiDB import sessionManager,lumiTime,inputFilesetParser,csvSelectionParser,selectionParser,csvReporter,argparse,CommonUtil,revisionDML,lumiCalcAPI,lumiReport,RegexValidator,normDML
-        
+
 beamChoices=['PROTPHYS','IONPHYS','PAPHYS']
 
 def parseInputFiles(inputfilename):
@@ -63,7 +64,7 @@ if __name__ == '__main__':
     parser.add_argument('-o',dest='outputfile',action='store',
                         required=False,
                         help='output to csv file' )
-    
+
     #################################################
     #arg to select exact run and ls
     #################################################
@@ -105,7 +106,7 @@ if __name__ == '__main__':
                         default=0.2,
                         required=False,
                         help='fluctuation in fraction allowed to nominal beam energy, default 0.2, to be used together with -beamenergy  (optional)')
-                        
+
     parser.add_argument('--begin',dest='begin',action='store',
                         default=None,
                         required=False,
@@ -137,12 +138,12 @@ if __name__ == '__main__':
                         default=1e-03,
                         required=False,
                         help='Minimum perbunch luminosity to print, default=1e-03/ub')
-    
+
     parser.add_argument('--xingAlgo', dest = 'xingAlgo',
                         default='OCC1',
                         required=False,
                         help='algorithm name for per-bunch lumi ')
-    
+
     #############################################
     #global scale factor
     #############################################        
@@ -159,7 +160,7 @@ if __name__ == '__main__':
                         default=None,
                         required=False,
                         help='specific path to site-local-config.xml file, optional. If path undefined, fallback to cern proxy&server')
-    
+
     parser.add_argument('--headerfile',dest='headerfile',action='store',
                         default=None,
                         required=False,
@@ -223,8 +224,8 @@ if __name__ == '__main__':
     if options.fillnum:
         reqfillmin=options.fillnum
         reqfillmax=options.fillnum
-        
-    
+
+
     if options.begin:
         (runbeg,fillbeg,timebeg)=CommonUtil.parseTime(options.begin)
         if runbeg: #there's --begin runnum #priority run,fill,time
@@ -256,7 +257,7 @@ if __name__ == '__main__':
     if options.inputfile and (reqtimemax or reqtimemin):
         #if use time and file filter together, there's no point of warning about missing LS,switch off
         noWarning=True
-        
+
     ##############################################################
     # check working environment
     ##############################################################
@@ -267,7 +268,7 @@ if __name__ == '__main__':
         from RecoLuminosity.LumiDB import checkforupdate
         cmsswWorkingBase=os.environ['CMSSW_BASE']
         if not cmsswWorkingBase:
-            print 'Please check out RecoLuminosity/LumiDB from CVS,scram b,cmsenv'
+            print('Please check out RecoLuminosity/LumiDB from CVS,scram b,cmsenv')
             sys.exit(11)
         c=checkforupdate.checkforupdate()
         workingversion=c.runningVersion(cmsswWorkingBase,'lumiCalc2.py',isverbose=False)
@@ -280,7 +281,7 @@ if __name__ == '__main__':
     #
     if options.authpath:
         os.environ['CORAL_AUTH_PATH'] = options.authpath
-        
+
     #############################################################
     #pre-check option compatibility
     #############################################################
@@ -288,7 +289,7 @@ if __name__ == '__main__':
     if options.action=='recorded':
         if not options.hltpath:
             raise RuntimeError('argument --hltpath pathname is required for recorded action')
-        
+
     svc=sessionManager.sessionManager(options.connect,
                                       authpath=options.authpath,
                                       siteconfpath=options.siteconfpath,
@@ -305,15 +306,15 @@ if __name__ == '__main__':
     if options.inputfile:
         (irunlsdict,iresults)=parseInputFiles(options.inputfile)
         filerunlist=irunlsdict.keys()
-        
-    
+
+
     #if not irunlsdict: #no file
     #    irunlsdict=dict(zip(rruns,[None]*len(rruns)))
     #else:
     #    for selectedrun in irunlsdict.keys():#if there's further filter on the runlist,clean input dict
     #        if selectedrun not in rruns:
     #            del irunlsdict[selectedrun]
-    
+
     ##############################################################
     # check datatag
     # #############################################################       
@@ -325,18 +326,18 @@ if __name__ == '__main__':
 
     dataidmap=lumiCalcAPI.runList(session.nominalSchema(),datatagid,runmin=reqrunmin,runmax=reqrunmax,fillmin=reqfillmin,fillmax=reqfillmax,startT=reqtimemin,stopT=reqtimemax,l1keyPattern=None,hltkeyPattern=None,amodetag=options.amodetag,nominalEnergy=options.beamenergy,energyFlut=options.beamfluctuation,requiretrg=reqTrg,requirehlt=reqHlt,preselectedruns=filerunlist)
     if not dataidmap:
-        print '[INFO] No qualified run found, do nothing'
+        print('[INFO] No qualified run found, do nothing')
         sys.exit(14)
     rruns=[]
     #crosscheck dataid value
     for irun,(lid,tid,hid) in dataidmap.items():
         if not lid:
-            print '[INFO] No qualified lumi data found for run, ',irun
+            print('[INFO] No qualified lumi data found for run, ',irun)
         if reqTrg and not tid:
-            print '[INFO] No qualified trg data found for run ',irun
+            print('[INFO] No qualified trg data found for run ',irun)
         #    continue
         if reqHlt and not hid:
-            print '[INFO] No qualified hlt data found for run ',irun
+            print('[INFO] No qualified hlt data found for run ',irun)
         #    continue
         rruns.append(irun)
     if not irunlsdict: #no file
@@ -346,7 +347,7 @@ if __name__ == '__main__':
             if selectedrun not in rruns:
                 del irunlsdict[selectedrun]
     if not irunlsdict:
-        print '[INFO] No qualified run found, do nothing'
+        print('[INFO] No qualified run found, do nothing')
         sys.exit(13)
 
     ###############################################################
@@ -371,12 +372,12 @@ if __name__ == '__main__':
     session.transaction().commit()
     lumiReport.toScreenHeader(thiscmmd,datatagname,normname,workingversion,updateversion,'HF',toFile=options.headerfile)
 
-                
+
     ##################
     # ls level       #
     ##################
     session.transaction().start(True)
-    
+
     GrunsummaryData=lumiCalcAPI.runsummaryMap(session.nominalSchema(),irunlsdict,dataidmap,lumitype='HF')
     if options.action == 'delivered':
         result=lumiCalcAPI.deliveredLumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=pbeammode,timeFilter=timeFilter,normmap=normvalueDict,lumitype='HF')
@@ -410,12 +411,12 @@ if __name__ == '__main__':
         result=lumiCalcAPI.effectiveLumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=pbeammode,timeFilter=timeFilter,normmap=normvalueDict,hltpathname=hltname,hltpathpattern=hltpat,withBXInfo=False,bxAlgo=None,xingMinLum=options.xingMinLum,withBeamIntensity=False,lumitype='HF')
         lumiReport.toScreenTotEffective(result,iresults,options.scalefactor,irunlsdict=irunlsdict,noWarning=noWarning,toFile=options.outputfile)
     if options.action == 'lumibylsXing':
-         result=lumiCalcAPI.lumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=pbeammode,timeFilter=timeFilter,normmap=normvalueDict,withBXInfo=True,bxAlgo=options.xingAlgo,xingMinLum=options.xingMinLum,withBeamIntensity=False,lumitype='HF')
-         outfile=options.outputfile
-         if not outfile:
-             print '[WARNING] no output file given. lumibylsXing writes per-bunch lumi only to default file lumibylsXing.csv'
-             outfile='lumibylsXing.csv'           
-         lumiReport.toCSVLumiByLSXing(result,options.scalefactor,outfile,irunlsdict=irunlsdict,noWarning=noWarning)
+        result=lumiCalcAPI.lumiForIds(session.nominalSchema(),irunlsdict,dataidmap,runsummaryMap=GrunsummaryData,beamstatusfilter=pbeammode,timeFilter=timeFilter,normmap=normvalueDict,withBXInfo=True,bxAlgo=options.xingAlgo,xingMinLum=options.xingMinLum,withBeamIntensity=False,lumitype='HF')
+        outfile=options.outputfile
+        if not outfile:
+            print('[WARNING] no output file given. lumibylsXing writes per-bunch lumi only to default file lumibylsXing.csv')
+            outfile='lumibylsXing.csv'           
+        lumiReport.toCSVLumiByLSXing(result,options.scalefactor,outfile,irunlsdict=irunlsdict,noWarning=noWarning)
     session.transaction().commit()
     del session
     del svc 

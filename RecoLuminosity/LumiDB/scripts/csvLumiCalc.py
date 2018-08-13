@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import sys
 import re
 import optparse
@@ -12,7 +13,7 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
 
     if len (args) != 1:
-        print "You must provide a CSV file\n"
+        print("You must provide a CSV file\n")
         parser.print_help()
         sys.exit()
 
@@ -24,7 +25,7 @@ if __name__ == '__main__':
     for line in events:
         pieces = sepRE.split (line.strip())
         if len (pieces) < 4:
-                continue
+            continue
         try:
             run,       lumi     = int  ( pieces[0] ), int  ( pieces[1] )
             delivered, recorded = float( pieces[2] ), float( pieces[3] )
@@ -42,7 +43,7 @@ if __name__ == '__main__':
             maxLumi = lumi
         totDelivered += delivered
         totRecorded  += recorded
-    print "Runs (%d, %d) to (%d, %d)" % (minRun, minLumi, maxRun, maxLumi)
+    print("Runs (%d, %d) to (%d, %d)" % (minRun, minLumi, maxRun, maxLumi))
     unit = "ub"
     if totRecorded > 1000.:
         totRecorded  /= 1000.
@@ -56,6 +57,6 @@ if __name__ == '__main__':
         totRecorded  /= 1000.
         totDelivered /= 1000.
         unit = "fb"
-    print "Total Delivered %.1f 1/%s  Total Recorded %.1f 1/%s" % \
-          (totDelivered, unit, totRecorded, unit)
+    print("Total Delivered %.1f 1/%s  Total Recorded %.1f 1/%s" % \
+          (totDelivered, unit, totRecorded, unit))
 

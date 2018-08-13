@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #test execute: export CMSSW_BASE=/tmp/CMSSW && ./validateAlignments.py -c defaultCRAFTValidation.ini,test.ini -n -N test
+from __future__ import print_function
 import os
 import sys
 import optparse
@@ -102,7 +103,7 @@ class ValidationJob:
                     globalDictionaries.alignRandDict[firstAlignName]
             except KeyError:
                 randomWorkdirPart = None
-                
+
             validation = GeometryComparison( name, firstAlign, secondAlign,
                                              self.__config,
                                              self.__commandLineOptions.getImages,
@@ -154,10 +155,10 @@ class ValidationJob:
         for script in self.__scripts:
             name = os.path.splitext( os.path.basename( script) )[0]
             if self.__commandLineOptions.dryRun:
-                print "%s would run: %s"%( name, os.path.basename( script) )
+                print("%s would run: %s"%( name, os.path.basename( script) ))
                 continue
             log = ">             Validating "+name
-            print ">             Validating "+name
+            print(">             Validating "+name)
             if self.validation.jobmode == "interactive":
                 log += getCommandOutput2( script )
             elif self.validation.jobmode.split(",")[0] == "lxBatch":
@@ -182,7 +183,7 @@ class ValidationJob:
                 try:
                     theCrab.run( options )
                 except AllInOneError, e:
-                    print "crab:", str(e).split("\n")[0]
+                    print("crab:", str(e).split("\n")[0])
                     exit(1)
             else:
                 raise AllInOneError, ("Unknown 'jobmode'!\n"
@@ -203,7 +204,7 @@ class ValidationJob:
 def createOfflineJobsMergeScript(offlineValidationList, outFilePath):
     repMap = offlineValidationList[0].getRepMap() # bit ugly since some special features are filled
     repMap[ "mergeOfflinParJobsInstantiation" ] = "" #give it a "" at first in order to get the initialisation back
-    
+
     theFile = open( outFilePath, "w" )
     theFile.write( replaceByMap( configTemplates.mergeOfflineParJobsTemplate ,repMap ) )
     theFile.close()
@@ -214,12 +215,12 @@ def createExtendedValidationScript(offlineValidationList, outFilePath):
 
     for validation in offlineValidationList:
         repMap[ "extendedInstantiation" ] = validation.appendToExtendedValidation( repMap[ "extendedInstantiation" ] )
-    
+
     theFile = open( outFilePath, "w" )
     # theFile.write( replaceByMap( configTemplates.extendedValidationTemplate ,repMap ) )
     theFile.write( replaceByMap( configTemplates.extendedValidationTemplate ,repMap ) )
     theFile.close()
-    
+
 def createMergeScript( path, validations ):
     if(len(validations) == 0):
         msg = "Cowardly refusing to merge nothing!"
@@ -253,21 +254,21 @@ def createMergeScript( path, validations ):
     repMap["CompareAlignments"] = "#run comparisons"
     for validationId in comparisonLists:
         compareStrings = [ val.getCompareStrings(validationId) for val in comparisonLists[validationId] ]
-            
+
         repMap.update({"validationId": validationId,
                        "compareStrings": " , ".join(compareStrings) })
-        
+
         repMap["CompareAlignments"] += \
             replaceByMap(configTemplates.compareAlignmentsExecution, repMap)
-      
+
     filePath = os.path.join(path, "TkAlMerge.sh")
     theFile = open( filePath, "w" )
     theFile.write( replaceByMap( configTemplates.mergeTemplate, repMap ) )
     theFile.close()
     os.chmod(filePath,0755)
-    
+
     return filePath
-    
+
 def createParallelMergeScript( path, validations ):
     if( len(validations) == 0 ):
         raise AllInOneError, "cowardly refusing to merge nothing!"
@@ -331,21 +332,21 @@ def createParallelMergeScript( path, validations ):
     repMap["CompareAlignments"] = "#run comparisons"
     for validationId in comparisonLists:
         compareStrings = [ val.getCompareStrings(validationId) for val in comparisonLists[validationId] ]
-            
+
         repMap.update({"validationId": validationId,
                        "compareStrings": " , ".join(compareStrings) })
-        
+
         repMap["CompareAlignments"] += \
             replaceByMap(configTemplates.compareAlignmentsExecution, repMap)
-      
+
     filePath = os.path.join(path, "TkAlMerge.sh")
     theFile = open( filePath, "w" )
     theFile.write( replaceByMap( configTemplates.mergeTemplate, repMap ) )
     theFile.close()
     os.chmod(filePath,0755)
-    
+
     return filePath
-    
+
 def loadTemplates( config ):
     if config.has_section("alternateTemplates"):
         for templateName in config.options("alternateTemplates"):
@@ -353,11 +354,11 @@ def loadTemplates( config ):
             #print "replacing default %s template by %s"%( templateName, newTemplateName)
             configTemplates.alternateTemplate(templateName, newTemplateName)
 
-    
+
 ####################--- Main ---############################
 def main(argv = None):
     if argv == None:
-       argv = sys.argv[1:]
+        argv = sys.argv[1:]
     optParser = optparse.OptionParser()
     optParser.description = """ all-in-one alignment Validation 
     This will run various validation procedures either on batch queues or interactviely. 
@@ -388,7 +389,7 @@ def main(argv = None):
 
     if not options.restrictTo == None:
         options.restrictTo = options.restrictTo.split(",")
-    
+
     options.config = [ os.path.abspath( iniFile ) for iniFile in \
                        options.config.split( "," ) ]
     config = BetterConfigParser()
@@ -399,10 +400,10 @@ def main(argv = None):
     if options.config == [ os.path.abspath( defaultConfig ) ]:
         if ( not options.crabStatus ) and \
                ( not os.path.exists( defaultConfig ) ):
-                raise AllInOneError, ( "Default 'ini' file '%s' not found!\n"
-                                       "You can specify another name with the "
-                                       "command line option '-c'/'--config'."
-                                       %( defaultConfig ))
+            raise AllInOneError, ( "Default 'ini' file '%s' not found!\n"
+                                   "You can specify another name with the "
+                                   "command line option '-c'/'--config'."
+                                   %( defaultConfig ))
     else:
         for iniFile in failedIniFiles:
             if not os.path.exists( iniFile ):
@@ -424,7 +425,7 @@ def main(argv = None):
             if len( existingValDirs ) > 0:
                 options.Name = existingValDirs[-1]
             else:
-                print "Cannot guess last working directory!"
+                print("Cannot guess last working directory!")
                 print ( "Please use the parameter '-N' or '--Name' to specify "
                         "the task for which you want a status report." )
                 return 1
@@ -437,25 +438,25 @@ def main(argv = None):
         os.chdir( outPath )
         crabLogDirs = fnmatch.filter( os.walk('.').next()[1], "crab.*" )
         if len( crabLogDirs ) == 0:
-            print "Found no crab tasks for job name '%s'"%( options.Name )
+            print("Found no crab tasks for job name '%s'"%( options.Name ))
             return 1
         theCrab = crabWrapper.CrabWrapper()
         for crabLogDir in crabLogDirs:
-            print
-            print "*" + "=" * 78 + "*"
+            print()
+            print("*" + "=" * 78 + "*")
             print ( "| Status report and output retrieval for:"
                     + " " * (77 - len( "Status report and output retrieval for:" ) )
                     + "|" )
             taskName = crabLogDir.replace( "crab.", "" )
-            print "| " + taskName + " " * (77 - len( taskName ) ) + "|"
-            print "*" + "=" * 78 + "*"
-            print
+            print("| " + taskName + " " * (77 - len( taskName ) ) + "|")
+            print("*" + "=" * 78 + "*")
+            print()
             crabOptions = { "-getoutput":"",
                             "-c": crabLogDir }
             try:
                 theCrab.run( crabOptions )
             except AllInOneError, e:
-                print "crab:  No output retrieved for this task."
+                print("crab:  No output retrieved for this task.")
             crabOptions = { "-status": "",
                             "-c": crabLogDir }
             theCrab.run( crabOptions )
@@ -471,7 +472,7 @@ def main(argv = None):
     # random numbers for geometry comparison
     if os.path.isdir( outPath ):
         shutil.rmtree( outPath )
-    
+
     if not os.path.exists( outPath ):
         os.makedirs( outPath )
     elif not os.path.isdir( outPath ):
@@ -500,9 +501,9 @@ def main(argv = None):
     else:
         createParallelMergeScript( outPath, validations )
 
-    print
+    print()
     map( lambda job: job.runJob(), jobs )
-    
+
 
 if __name__ == "__main__":        
     # main(["-n","-N","test","-c","defaultCRAFTValidation.ini,latestObjects.ini","--getImages"])
@@ -512,5 +513,5 @@ if __name__ == "__main__":
         try:
             main()
         except AllInOneError, e:
-            print "\nAll-In-One Tool:", str(e)
+            print("\nAll-In-One Tool:", str(e))
             exit(1)

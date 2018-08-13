@@ -29,28 +29,28 @@ def generate(step, evt_type, energy, evtnumber):
     This function calls all the other functions specific for
     an event evt_type.
     """
-   
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")
-    
+
     # Build the switch cases:
-    
+
     # Particle Gun
     if evt_type in ("MU+","MU-","E","DIE","GAMMA","TAU","PI0","PI+","PI-"):
-       generator = _generate_PGUN\
-         (step, evt_type, energy, evtnumber)
-     
+        generator = _generate_PGUN\
+          (step, evt_type, energy, evtnumber)
+
     elif evt_type in ("HZZMUMUMUMU", "HZZEEEE", "HZZTTTT", "HZZLLLL","HGG"):
-       generator = _generate_Higgs\
-         (step, evt_type, energy, evtnumber)
-     
+        generator = _generate_Higgs\
+          (step, evt_type, energy, evtnumber)
+
     elif evt_type in ("B_JETS", "C_JETS"):
-       generator = _generate_udscb_jets\
-         (step, evt_type, energy, evtnumber)        
-    
+        generator = _generate_udscb_jets\
+          (step, evt_type, energy, evtnumber)        
+
     elif evt_type in ("QCD","TTBAR","ZPJJ","MINBIAS","RS1GG","HpT"):
         generator = eval("_generate_"+evt_type+"(step, evt_type, energy, evtnumber)") 
-    
+
     elif evt_type in ("ZEE","ZTT","ZMUMU"):
         generator = _generate_Zll\
          (step, evt_type, energy, evtnumber)
@@ -58,15 +58,15 @@ def generate(step, evt_type, energy, evtnumber):
     elif evt_type in ("ZPEE","ZPTT","ZPMUMU"):
         generator = _generate_ZPll\
          (step, evt_type, energy, evtnumber)         
-             
+
     elif evt_type in ("WE","WM","WT"):
         generator = _generate_Wl(step, evt_type, energy, evtnumber)
-         
+
     else:
-      raise "Event type","Type not yet implemented."
-             
+        raise "Event type","Type not yet implemented."
+
     common.log( func_id+" Returning Generator")
-    
+
     return generator
 
 #------------------------------       
@@ -89,10 +89,10 @@ def _generate_PGUN(step, evt_type, energy, evtnumber):
                   "PI+":211,
                   "PI-":-211,
                   "PI0":111}
-    
+
     # Build the id string of the event name:
     id_string = evt_type+" "+energy+" nevts "+ str(evtnumber)    
-                  
+
     # We have to check if we want to generate a particle with pt=X or Energy=X                  
     pt_flag=True
     if 'pt' in energy[0:2] or \
@@ -101,11 +101,11 @@ def _generate_PGUN(step, evt_type, energy, evtnumber):
         energy=energy[2:]
     else:
         pt_flag=False         
-                  
+
     # Energy boundaries are now set:      
     lower_energy = ""
     upper_energy = ""
-    
+
 
 
     # Build the partID string
@@ -120,16 +120,16 @@ def _generate_PGUN(step, evt_type, energy, evtnumber):
         epsilon= 0.001
         lower_energy = str ( int(energy) - epsilon) # We want a calculation and
         upper_energy = str ( int(energy) + epsilon) # the result as a string   
-    
+
     # Build the process source
     if evt_type in ("TAU","E"):
         # Add the corresponding opposite sign particle. Only for taus and es.
         part_id.append(-1*part_id[0])
-    
+
     antip_flag=False
     if evt_type=="DIE":
         antip_flag=True  
-    
+
     if pt_flag:        
         common.log( func_id+ "This is a pt particle gun ..." )
         generator = cms.EDProducer("FlatRandomPtGunProducer",
@@ -164,23 +164,23 @@ def _generate_PGUN(step, evt_type, energy, evtnumber):
                             AddAntiParticle=cms.bool(antip_flag),
                             Verbosity = cms.untracked.int32(0)
                         )       
-                        
+
     common.log( func_id+" Returning Generator...")
-        
+
     return generator 
-   
+
 #---------------------------
-    
+
 def _generate_QCD(step, evt_type, energy, evtnumber):
     """
     Here the settings for the generation of QCD events 
     """
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")   
-        
+
     # Recover the energies from the string:
     upper_energy, lower_energy = energy_split(energy)
-    
+
     # Build the process source   
     generator = cms.EDFilter("Pythia6GeneratorFilter",
                         pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -196,20 +196,20 @@ def _generate_QCD(step, evt_type, energy, evtnumber):
                                                 "CKIN(3)="+upper_energy,
                                                 "CKIN(4)="+lower_energy))
                         )
-     
+
     common.log( func_id+" Returning Generator...")                 
     return generator
- 
+
 #---------------------------------
 
 def _generate_MINBIAS(step, evt_type, energy, evtnumber):
     """
     Settings for MINBIAS events generation
     """
-    
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")     
-    
+
     # Build the process source   
     generator = cms.EDFilter("Pythia6GeneratorFilter",
                       pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -235,9 +235,9 @@ def _generate_MINBIAS(step, evt_type, energy, evtnumber):
                                                 "MSUB(95)=1"))
                         )
     common.log( func_id+" Returning Generator...")                 
-    
+
     return generator   
-    
+
 #---------------------------------
 
 def _generate_Higgs(step, evt_type, energy, evtnumber):
@@ -248,7 +248,7 @@ def _generate_Higgs(step, evt_type, energy, evtnumber):
     """
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")      
-    
+
     # Choose between muon, tau or electron decay of the Z
     z_flag="0"
     electron_flag = "0"
@@ -270,7 +270,7 @@ def _generate_Higgs(step, evt_type, energy, evtnumber):
     elif evt_type == "HGG":
         gamma_flag="1"    
 
-  
+
     # Prepare The Pythia params  
     params = cms.vstring(
         "PMAS(25,1)=%s" %energy,      #mass of Higgs",
@@ -280,7 +280,7 @@ def _generate_Higgs(step, evt_type, energy, evtnumber):
         #processes (1, then ISUB=11, 12, 13, 28, 53, 68), QCD low pT processes
         #(2, then ISUB=11, #12, 13, 28, 53, 68, 91, 92, 94, 95)",
         #
-	#Check on possible errors during program
+        #Check on possible errors during program
         #execution",
         "MSUB(102)=1",             #ggH",
         "MSUB(123)=1",             #ZZ fusion to H",
@@ -341,7 +341,7 @@ def _generate_Higgs(step, evt_type, energy, evtnumber):
                      )
 
     common.log( func_id+" Returning Generator...")
-     
+
     return generator      
 
 #---------------------------------
@@ -355,21 +355,21 @@ def _generate_udscb_jets\
     """
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")
-    
+
     # Recover the energies from the string:
     upper_energy, lower_energy = energy_split(energy)
-   
+
     # According to the evt_type build the Pythia settings:
     pythia_jet_settings=cms.vstring("MSEL=0")  # User defined process
     pythia_jet_settings+=cms.vstring("MSUB(81)=1", #qq->QQ massive
                                      "MSUB(82)=1") #gg->QQ massive
     if evt_type == "C_JETS":
-            pythia_jet_settings+=cms.vstring("MSTP(7)=4") #ccbar
-            common.log( func_id+" Including settings for c jets")
+        pythia_jet_settings+=cms.vstring("MSTP(7)=4") #ccbar
+        common.log( func_id+" Including settings for c jets")
     else:
-            pythia_jet_settings+=cms.vstring("MSTP(7)=5") #bbbar
-            common.log( func_id+" Including settings for b jets")
-             
+        pythia_jet_settings+=cms.vstring("MSTP(7)=5") #bbbar
+        common.log( func_id+" Including settings for b jets")
+
     # Common part to all cases         
     pythia_common=cms.vstring("CKIN(3)="+upper_energy,  # Pt low cut 
                               "CKIN(4)="+lower_energy,  # Pt high cut
@@ -378,9 +378,9 @@ def _generate_udscb_jets\
                               "CKIN(15)=-2.5",          # -etamin 
                               "CKIN(16)=0"              # -etamax
                               )
-    
+
     pythia_jet_settings+=pythia_common
-    
+
     # Build the process source
     generator = cms.EDFilter('Pythia6GeneratorFilter',
                       pythiaVerbosity =cms.untracked.bool(True),
@@ -391,21 +391,21 @@ def _generate_udscb_jets\
                                 pythiaJets = pythia_jet_settings
                                )
                      )                       
-   
+
     common.log(func_id+" Returning Generator...")
-     
+
     return generator
 
 #-----------------------------------
-    
+
 def _generate_TTBAR(step, evt_type, energy, evtnumber):
     """
     Here the settings for the ttbar pairs are added to the process.
     """
-      
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log(func_id+" Entering... ")      
-    
+
     # Build the process source    
     generator = cms.EDFilter('Pythia6GeneratorFilter',
                       pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -431,9 +431,9 @@ def _generate_TTBAR(step, evt_type, energy, evtnumber):
                       )  
 
     common.log(func_id+" Returning Generator...")
-     
+
     return generator   
- 
+
 #---------------------------------
 
 def _generate_Zll(step, evt_type, energy, evtnumber):
@@ -441,7 +441,7 @@ def _generate_Zll(step, evt_type, energy, evtnumber):
     Here the settings for the Z ee simulation are added to the process.
     Energy parameter is not used.
     """
-      
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")      
 
@@ -458,7 +458,7 @@ def _generate_Zll(step, evt_type, energy, evtnumber):
         tau_flag = "1"
     else:
         electron_flag=muon_flag=tau_flag= "1"    
-    
+
     pythia_param_sets = cms.vstring(
                  "MSEL = 11 ",           
                  "MDME( 174,1) = 0",            #Z decay into d dbar",
@@ -492,7 +492,7 @@ def _generate_Zll(step, evt_type, energy, evtnumber):
                  "CKIN( 1) = 40.",            #(D=2. GeV)
                  "CKIN( 2) = -1.",            #(D=-1. GeV)      \
                  )     
-                 
+
     # Build the process source
     generator = cms.EDFilter('Pythia6GeneratorFilter', 
                       pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -506,7 +506,7 @@ def _generate_Zll(step, evt_type, energy, evtnumber):
                      )
 
     common.log(func_id+" Returning Generator...")
-     
+
     return generator   
 #---------------------------------
 
@@ -515,7 +515,7 @@ def _generate_Wl(step, evt_type, energy, evtnumber):
     Here the settings for the Z ee simulation are added to the process.
     Energy parameter is not used.
     """
-      
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")      
 
@@ -529,7 +529,7 @@ def _generate_Wl(step, evt_type, energy, evtnumber):
         muon_flag = "1"    
     elif evt_type == "WT":
         tau_flag = "1"    
-        
+
     # Build the process source
     generator = cms.EDFilter('Pythia6GeneratorFilter', 
                       pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -559,9 +559,9 @@ def _generate_Wl(step, evt_type, energy, evtnumber):
                      )
 
     common.log(func_id+" Returning Generator...")
-     
+
     return generator       
-                                   
+
 #---------------------------------
 
 def _generate_ZPJJ(step, evt_type, energy, evtnumber):
@@ -569,7 +569,7 @@ def _generate_ZPJJ(step, evt_type, energy, evtnumber):
     Here the settings for the Zprime to JJ simulation are added to the
     process. 
     """
-    
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log(func_id+" Entering... ")            
     common.log( func_id+" Returning Generator...")
@@ -584,7 +584,7 @@ def _generate_ZPll(step, evt_type, energy, evtnumber):
     Here the settings for the Z ee simulation are added to the process.
     Energy parameter is not used.
     """
-      
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")      
 
@@ -600,7 +600,7 @@ def _generate_ZPll(step, evt_type, energy, evtnumber):
         tau_flag = "1"
     else:
         electron_flag=muon_flag=tau_flag= "1"    
-    
+
     # Build the process source
     generator = cms.EDFilter('Pythia6GeneratorFilter', 
                       pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -643,19 +643,19 @@ def _generate_ZPll(step, evt_type, energy, evtnumber):
                      )
 
     common.log(func_id+" Returning Generator...")
-     
+
     return generator                   
-                                      
+
 #-----------------------------------
 
 def _generate_RS1GG(step, evt_type, energy, evtnumber):
     """
     Here the settings for the RS1 graviton into gamma gamma.
     """
-      
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")         
-    
+
     # Build the process source
     generator = cms.EDFilter('Pythia6GeneratorFilter', 
                       pythiaPylistVerbosity=cms.untracked.int32(0),
@@ -700,7 +700,7 @@ def _generate_RS1GG(step, evt_type, energy, evtnumber):
                      )
 
     common.log(func_id+" Returning Generator...")
-     
+
     return generator                     
 #-----------------------------------
 
@@ -708,10 +708,10 @@ def _generate_HpT(step, evt_type, energy, evtnumber):
     """
     Here the settings for the RS1 graviton into gamma gamma.
     """
-      
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ")         
-    
+
     # Build the process source
     generator = cms.EDFilter("Pythia6GeneratorFilter",
                       pythiaPylistVerbosity = cms.untracked.int32(0),
@@ -777,9 +777,9 @@ def _generate_HpT(step, evt_type, energy, evtnumber):
 
 
     common.log(func_id+" Returning Generator...")
-     
+
     return generator     
-    
+
 #---------------------------------    
 
 def energy_split(energy):
@@ -790,7 +790,7 @@ def energy_split(energy):
     """
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log( func_id+" Entering... ") 
-    
+
     separator_list = ["-", #fault tolerance is good
                       "_",
                       "*",
@@ -804,7 +804,7 @@ def energy_split(energy):
             if float(high) > float(low):
                 common.log(func_id+" Returning Energy...")
                 return (low,high)
-    
+
     raise "Energy Format: ","Unrecognised energy format."
 
 #-----------------------------------
@@ -814,11 +814,11 @@ def user_pythia_ue_settings():
     The function simply returns a cms.vstring which is a summary of the 
     Pythia settings for the event generation
     """
-    
-    
-    
+
+
+
     func_id=mod_id+"["+sys._getframe().f_code.co_name+"]"
     common.log(func_id+" Returning PythiaUE settings...")
-    
+
     return common.include_files('Configuration/Generator/data/PythiaUESettings.cfi')[0].pythiaUESettings
-            
+

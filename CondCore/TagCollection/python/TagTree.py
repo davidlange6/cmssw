@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import coral
 import IdGenerator, Node, DBImpl
@@ -65,7 +66,7 @@ class tagTree(object):
         """
         sourcetagTreeTableName = 'TAGTREE_TABLE_'+str.upper(sourcetreename)
         sourcetagTreeIDs = 'TAGTREE_'+str.upper(sourcetreename)+'_IDS'
-        
+
         transaction=self.__session.transaction()
         transaction.start(True)
         schema = self.__session.nominalSchema()
@@ -98,7 +99,7 @@ class tagTree(object):
             transaction.rollback()
             raise Exception, str(er)
         #print nresult,' rows copied from ',sourcetagTreeTableName
-        
+
         try:
             transaction.start(False)
             insertwtQuery=schema.tableHandle(self.__tagTreeIDs).dataEditor().insertWithQuery()
@@ -118,7 +119,7 @@ class tagTree(object):
         """
         if len(leafnodelinks.keys())==0:
             raise 'TagTree::replaceLeafLinks: empty input '
-        
+
         transaction=self.__session.transaction()
         transaction.start(False)
         schema = self.__session.nominalSchema()
@@ -159,12 +160,12 @@ class tagTree(object):
         transaction=self.__session.transaction()
         try:
             if parentLabel != 'ROOT':
-                    parentNode=self.getNode(parentLabel)
-                    if parentNode.empty():
-                        raise ValueError,"non-existing parent node "+parentLabel
-                    parentid=parentNode.nodeid
-                    lft=parentNode.rgt
-                    rgt=parentNode.rgt+1
+                parentNode=self.getNode(parentLabel)
+                if parentNode.empty():
+                    raise ValueError,"non-existing parent node "+parentLabel
+                parentid=parentNode.nodeid
+                lft=parentNode.rgt
+                rgt=parentNode.rgt+1
             ##start readonly transaction
             transaction.start(False)
             condition='nodelabel=:nodelabel'
@@ -196,7 +197,7 @@ class tagTree(object):
         except Exception, er:
             transaction.rollback()
             raise Exception, str(er)
-        
+
     def renameNodes( self, nodenamemap):
         """
         rename selected nodes \n
@@ -239,7 +240,7 @@ class tagTree(object):
             transaction.rollback()
             del query
             raise Exception, str(er)
-        
+
     def getNodeById( self, nodeid ):
         """return result of query "select * from treetable where nodeid=:nodeid" in Node structure \n
         Input: id of the node to get.\n
@@ -275,7 +276,7 @@ class tagTree(object):
         except Exception, er:
             transaction.rollback()
             raise Exception, str(er)
-        
+
     def getNode( self, label='ROOT' ):
         """return result of query "select * from treetable where nodelabel=label" in Node structure \n
         Input: name of the node to get. Default to 'ROOT' \n
@@ -551,7 +552,7 @@ class tagTree(object):
             self.__closeGap(tableHandle,parentlft,parentrgt,1)
             transaction.commit()
         except Exception, er:
-            print str(er)
+            print(str(er))
             transaction.rollback()
             raise Exception, str(er)   
     def __openGap(self,tableHandle,parentrgt,n):
@@ -601,37 +602,37 @@ if __name__ == "__main__":
         mynode.globaltill=10
         mytree.insertNode(mynode,'ROOT')
         result=mytree.getNode('A')
-        print result
+        print(result)
         mynode=Node.Node()
         mynode.nodelabel='AC1'
         mynode.globalsince=2
         mynode.globaltill=5
         mytree.insertNode(mynode,'A')
         result=mytree.getNode('A')
-        print result
+        print(result)
         result=mytree.getNode('AC1')
-        print result
+        print(result)
         result=mytree.getPath('AC1')
-        print result
+        print(result)
         result=mytree.getAllLeaves()
-        print 'all leafs',result
+        print('all leafs',result)
         mynode=Node.Node()
         mynode.nodelabel='AB2'
         mynode.globalsince=3
         mynode.globaltill=7
         mytree.insertNode(mynode,'A')
         result=mytree.getNode('A')
-        print 'Node A ',result
+        print('Node A ',result)
         result=mytree.getNode('AB2')
-        print 'Node AB2 ',result
+        print('Node AB2 ',result)
         result=mytree.getPath('AB2')
-        print 'Path to AB2 ',result
+        print('Path to AB2 ',result)
         allleafs=mytree.getAllLeaves()
-        print 'all leaves again',allleafs
-        print 'number of children ',mytree.nChildren('A')
-        print 'number of children ',mytree.nChildren('ROOT')
+        print('all leaves again',allleafs)
+        print('number of children ',mytree.nChildren('A'))
+        print('number of children ',mytree.nChildren('ROOT'))
         result=mytree.getSubtree('A')
-        print 'subtree of A ',result
+        print('subtree of A ',result)
         newtree=tagTree(session,'mynewtest')
         newtree.importFromTree('mytest2')
         newlinks={}
@@ -640,6 +641,6 @@ if __name__ == "__main__":
         newtree.replaceLeafLinks(newlinks)
         del session
     except Exception, e:
-        print "Failed in unit test"
-        print str(e)
+        print("Failed in unit test")
+        print(str(e))
         del session

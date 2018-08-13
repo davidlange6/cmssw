@@ -9,6 +9,7 @@
 #                                                                              
 ################################################################################
 
+from __future__ import print_function
 from sys import argv,exit
 from optparse import OptionParser
 import cPickle
@@ -145,122 +146,122 @@ parser.add_option("-B","--black_list",
 original_pickle_name=""
 if options.compare:
 
-  if os.environ.has_key("RELMON_SA"):
-    from dqm_interfaces import DirID,DQMcommunicator,DirWalkerDB
-    from dirstructure import Directory
-  else:  
-    from Utilities.RelMon.dqm_interfaces import DirID,DQMcommunicator,DirWalkerDB
-    from Utilities.RelMon.dirstructure import Directory
+    if os.environ.has_key("RELMON_SA"):
+        from dqm_interfaces import DirID,DQMcommunicator,DirWalkerDB
+        from dirstructure import Directory
+    else:  
+        from Utilities.RelMon.dqm_interfaces import DirID,DQMcommunicator,DirWalkerDB
+        from Utilities.RelMon.dirstructure import Directory
 
 
-  # Pre-process the inputs
-  fulldirname=options.outdir_name
-  if len(fulldirname)==0:
-    fulldirname=options.dir_name
-  if len(fulldirname)==0:
-    fulldirname="%s_%s_%s" %(sample1,cmssw_release1,cmssw_release2)
-  
-
-  black_list=[]
-  black_list_str=options.black_list
-  if len(black_list_str)>0:
-    for ele in black_list_str.split(","):
-      dirname,level=ele.split("@")
-      level=int(level)
-      black_list.append(DirID(dirname,level))
-
-  db_base_url="/data/json/archive/"
-  base1="%s/%s/%s/%s/DQM/" %(db_base_url,options.run1,options.sample,options.cmssw_release1)
-  base2="%s/%s/%s/%s/DQM/" %(db_base_url,options.run2,options.sample,options.cmssw_release2)
+    # Pre-process the inputs
+    fulldirname=options.outdir_name
+    if len(fulldirname)==0:
+        fulldirname=options.dir_name
+    if len(fulldirname)==0:
+        fulldirname="%s_%s_%s" %(sample1,cmssw_release1,cmssw_release2)
 
 
-  print "Analysing Histograms located in directory %s at: " %options.dir_name
-  for base in base1,base2:
-    print " o %s (server= %s)" %(base,options.dqm_server)
+    black_list=[]
+    black_list_str=options.black_list
+    if len(black_list_str)>0:
+        for ele in black_list_str.split(","):
+            dirname,level=ele.split("@")
+            level=int(level)
+            black_list.append(DirID(dirname,level))
 
-  # Set up the communicators
-  comm1 = DQMcommunicator(server=options.dqm_server)
-  comm2 = DQMcommunicator(server=options.dqm_server)
+    db_base_url="/data/json/archive/"
+    base1="%s/%s/%s/%s/DQM/" %(db_base_url,options.run1,options.sample,options.cmssw_release1)
+    base2="%s/%s/%s/%s/DQM/" %(db_base_url,options.run2,options.sample,options.cmssw_release2)
 
-  # Set up the fake directory structure
-  directory=Directory(options.dir_name)
-  dirwalker=DirWalkerDB(comm1,comm2,base1,base2,directory)
-  
-  # Set the production of pngs on and off
-  dirwalker.do_pngs=options.do_pngs
-  
-  # set the stat test
-  dirwalker.stat_test=options.stat_test
-  dirwalker.test_threshold=options.test_threshold
 
-  # Set the blacklist, if needed
-  if len(black_list)>0:
-    print "We have a Blacklist:"
-    for dirid in black_list:
-      print " o %s" %dirid
-    dirwalker.black_list=black_list
+    print("Analysing Histograms located in directory %s at: " %options.dir_name)
+    for base in base1,base2:
+        print(" o %s (server= %s)" %(base,options.dqm_server))
 
-  # Start the walker
-  if not os.path.exists(options.outdir_name) and len(options.outdir_name )>0:
-    os.mkdir(options.outdir_name)
-  if len(options.outdir_name)>0:
-    os.chdir(options.outdir_name)
+    # Set up the communicators
+    comm1 = DQMcommunicator(server=options.dqm_server)
+    comm2 = DQMcommunicator(server=options.dqm_server)
 
-  # Since the walker is a thread, run it!
-  dirwalker.start()
-  # And wait until it is finished :)
-  dirwalker.join()
+    # Set up the fake directory structure
+    directory=Directory(options.dir_name)
+    dirwalker=DirWalkerDB(comm1,comm2,base1,base2,directory)
 
-  # Fetch the directory from the walker
-  directory=dirwalker.directory
+    # Set the production of pngs on and off
+    dirwalker.do_pngs=options.do_pngs
 
-  # Set some meta for the page generation
-  directory.meta.sample=options.sample
-  directory.meta.run1=options.run1
-  directory.meta.run2=options.run2
-  directory.meta.release1=options.cmssw_release1
-  directory.meta.release2=options.cmssw_release2
-    
-  directory.meta.tier1,directory.meta.tier2 = options.tiers.split(",")
-  
-  # Print a summary Report on screen
-  directory.print_report()
+    # set the stat test
+    dirwalker.stat_test=options.stat_test
+    dirwalker.test_threshold=options.test_threshold
 
-  # Dump the directory structure on disk in a pickle
-  original_pickle_name="%s.pkl" %fulldirname
-  print "Pickleing the directory as %s in dir %s" %(original_pickle_name,os.getcwd())
-  output = open(original_pickle_name,"w")
-  cPickle.dump(directory, output, -1)# use highest protocol available for the pickle
-  output.close()
+    # Set the blacklist, if needed
+    if len(black_list)>0:
+        print("We have a Blacklist:")
+        for dirid in black_list:
+            print(" o %s" %dirid)
+        dirwalker.black_list=black_list
+
+    # Start the walker
+    if not os.path.exists(options.outdir_name) and len(options.outdir_name )>0:
+        os.mkdir(options.outdir_name)
+    if len(options.outdir_name)>0:
+        os.chdir(options.outdir_name)
+
+    # Since the walker is a thread, run it!
+    dirwalker.start()
+    # And wait until it is finished :)
+    dirwalker.join()
+
+    # Fetch the directory from the walker
+    directory=dirwalker.directory
+
+    # Set some meta for the page generation
+    directory.meta.sample=options.sample
+    directory.meta.run1=options.run1
+    directory.meta.run2=options.run2
+    directory.meta.release1=options.cmssw_release1
+    directory.meta.release2=options.cmssw_release2
+
+    directory.meta.tier1,directory.meta.tier2 = options.tiers.split(",")
+
+    # Print a summary Report on screen
+    directory.print_report()
+
+    # Dump the directory structure on disk in a pickle
+    original_pickle_name="%s.pkl" %fulldirname
+    print("Pickleing the directory as %s in dir %s" %(original_pickle_name,os.getcwd()))
+    output = open(original_pickle_name,"w")
+    cPickle.dump(directory, output, -1)# use highest protocol available for the pickle
+    output.close()
 
 #-------------------------------------------------------------------------------
 if options.report:
-  if os.environ.has_key("RELMON_SA"):  
-    from directories2html import directory2html
-    from dirstructure import Directory
-  else:
-    from Utilities.RelMon.directories2html import directory2html
-    from Utilities.RelMon.dirstructure import Directory    
-  
-  pickle_name=options.pklfile
-  if len(options.pklfile)==0:
-    pickle_name=original_pickle_name  
+    if os.environ.has_key("RELMON_SA"):  
+        from directories2html import directory2html
+        from dirstructure import Directory
+    else:
+        from Utilities.RelMon.directories2html import directory2html
+        from Utilities.RelMon.dirstructure import Directory    
 
-  print "Reading directory from %s" %(pickle_name)
-  ifile=open(pickle_name,"rb")
-  directory=cPickle.load(ifile)
-  ifile.close()
+    pickle_name=options.pklfile
+    if len(options.pklfile)==0:
+        pickle_name=original_pickle_name  
 
-  if os.path.exists(options.outdir_name) and len(directory.name)==0:
-    os.chdir(options.outdir_name)
-  
-  # Calculate the results of the tests for each directory
-  print "Calculating stats for the directory..."
-  directory.calcStats()
-  
-  print "Producing html..."
-  directory2html(directory)
-  
+    print("Reading directory from %s" %(pickle_name))
+    ifile=open(pickle_name,"rb")
+    directory=cPickle.load(ifile)
+    ifile.close()
+
+    if os.path.exists(options.outdir_name) and len(directory.name)==0:
+        os.chdir(options.outdir_name)
+
+    # Calculate the results of the tests for each directory
+    print("Calculating stats for the directory...")
+    directory.calcStats()
+
+    print("Producing html...")
+    directory2html(directory)
+
 if not (options.report or options.compare):
-  print "Neither comparison nor report to be executed. A typo?"
+    print("Neither comparison nor report to be executed. A typo?")
 

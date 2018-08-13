@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
 import os, sys, optparse, math
 
 prog = sys.argv[0]
@@ -27,8 +28,8 @@ Options for sqlite-->xml conversion:
 """ % vars()
 
 if len(sys.argv) < 3:
-  print "Too few arguments!\n\n"+usage
-  sys.exit()
+    print("Too few arguments!\n\n"+usage)
+    sys.exit()
 
 parser=optparse.OptionParser(usage)
 
@@ -97,8 +98,8 @@ theOutputFile = sys.argv[2]
 ok = False
 
 if theInputFile[-4:]==".xml" and theOutputFile[-3:]==".db":
-  ok = True
-  file("tmp_converter_cfg.py","w").write("""# xml2sqlite conversion
+    ok = True
+    file("tmp_converter_cfg.py","w").write("""# xml2sqlite conversion
 from Alignment.MuonAlignment.convertXMLtoSQLite_cfg import *
 process.MuonGeometryDBConverter.fileName = "%(theInputFile)s"
 process.PoolDBOutputService.connect = "sqlite_file:%(theOutputFile)s"
@@ -108,8 +109,8 @@ process.inertGlobalPositionRcd.toGet =  cms.VPSet(cms.PSet(record = cms.string('
 """ % vars())
 
 if theInputFile[-3:]==".db" and theOutputFile[-4:]==".xml":
-  ok = True
-  file("tmp_converter_cfg.py","w").write("""# sqlite2xml conversion
+    ok = True
+    file("tmp_converter_cfg.py","w").write("""# sqlite2xml conversion
 from Alignment.MuonAlignment.convertSQLitetoXML_cfg import *
 
 process.source = cms.Source("EmptySource",
@@ -141,12 +142,12 @@ process.MuonGeometryDBConverter.outputXML.suppressCSCLayers = %(supLayers)s
 """ % vars())
 
 if not ok:
-  print usage
-  sys.exit()
+    print(usage)
+    sys.exit()
 
 exit_code = os.system("cmsRun tmp_converter_cfg.py")
 
 if exit_code>0:
-  print "problem: cmsRun exited with code:", exit_code
+    print("problem: cmsRun exited with code:", exit_code)
 else: 
-  os.system("rm tmp_converter_cfg.py")
+    os.system("rm tmp_converter_cfg.py")

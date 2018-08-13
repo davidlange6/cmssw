@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import globalDictionaries
 import configTemplates
@@ -106,13 +107,13 @@ class GenericValidationData(GenericValidation):
     Subclass of `GenericValidation` which is the base for validations using
     datasets.
     """
-    
+
     def __init__(self, valName, alignment, config, valType,
                  addDefaults = {}, addMandatories=[]):
         """
         This method adds additional items to the `self.general` dictionary
         which are only needed for validations using datasets.
-        
+
         Arguments:
         - `valName`: String which identifies individual validation instances
         - `alignment`: `Alignment` instance to validate
@@ -160,7 +161,7 @@ class GenericValidationData(GenericValidation):
             globalDictionaries.usedDatasets[self.general["dataset"]] = Dataset(
                 self.general["dataset"] )
         self.dataset = globalDictionaries.usedDatasets[self.general["dataset"]]
-        
+
         if not self.jobmode.split( ',' )[0] == "crab":
             try:
                 self.general["datasetDefinition"] = self.dataset.datasetSnippet(
@@ -235,7 +236,7 @@ class GenericValidationData(GenericValidation):
     def createCrabCfg(self, path, crabCfgBaseName):
         """
         Method which creates a `crab.cfg` for a validation on datasets.
-        
+
         Arguments:
         - `path`: Path at which the file will be stored.
         - `crabCfgBaseName`: String which depends on the actual type of

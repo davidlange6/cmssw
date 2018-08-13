@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 VERSION='1.02'
 import os,sys
 import coral
@@ -26,7 +27,7 @@ def bitzeroForRun(dbsession,c,runnum):
             raise Exception,'cannot connect to schema'+c.wbmschema
         if not schema.existsTable(c.algotable):
             raise Exception,'non-existing view'+c.algotable
-        
+
         query=schema.newQuery()
         algoBindVarList=coral.AttributeList()
         algoBindVarList.extend("runnumber","unsigned int")
@@ -42,7 +43,7 @@ def bitzeroForRun(dbsession,c,runnum):
         bitzeroOutput=coral.AttributeList()
         bitzeroOutput.extend("lsnr","unsigned int")
         bitzeroOutput.extend('bitcount','unsigned int')
-        
+
         query.defineOutput(bitzeroOutput)
         cursor=query.execute()
         while cursor.next():
@@ -53,7 +54,7 @@ def bitzeroForRun(dbsession,c,runnum):
         dbsession.transaction().commit()
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
 
@@ -73,11 +74,11 @@ def deadcountForRun(dbsession,c,runnum):
         deadOutput=coral.AttributeList()
         deadOutput.extend("lsnr","unsigned int")
         deadOutput.extend("deadcount","unsigned long long")
-        
+
         deadBindVarList=coral.AttributeList()
         deadBindVarList.extend("RUNNUMBER","unsigned int")
         deadBindVarList["RUNNUMBER"].setData(int(runnum))
-        
+
         query=schema.newQuery()
         query.addToTableList(c.deadtable)
         query.addToOutputList('LUMISEGMENTNR','lsnr')
@@ -85,7 +86,7 @@ def deadcountForRun(dbsession,c,runnum):
         query.setCondition('RUNNUMBER=:runnumber',deadBindVarList)
         query.addToOrderList('LUMISEGMENTNR')
         query.defineOutput(deadOutput)
-        
+
         cursor=query.execute()
         while cursor.next():
             cmslsnum=cursor.currentRow()['lsnr'].data()
@@ -96,10 +97,10 @@ def deadcountForRun(dbsession,c,runnum):
         dbsession.transaction().commit()
         return result
     except Exception,e:
-        print str(e)
+        print(str(e))
         dbsession.transaction().rollback()
         del dbsession
-        
+
 def main():
     c=constants()
     parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]),description="Dump trigger info in wbm")
@@ -122,22 +123,22 @@ def main():
     if args.debug:
         msg=coral.MessageStream('')
         msg.setMsgVerbosity(coral.message_Level_Debug)
-        
+
     if args.action == 'deadtime':
         deadresult=deadcountForRun(session,c,runnumber)
         if deadresult and len(deadresult)!=0:
-            print 'run',runnumber
-            print 'ls deadcount'
+            print('run',runnumber)
+            print('ls deadcount')
             for cmsls,deadcount in deadresult.items():
-                print cmsls,deadcount
+                print(cmsls,deadcount)
         else:
-            print 'no deadtime found for run ',runnumber
-            
+            print('no deadtime found for run ',runnumber)
+
     if args.action == 'deadfraction':
         deadresult=deadcountForRun(session,c,runnumber)
         bitzeroresult=bitzeroForRun(session,c,runnumber)
-        print 'run',runnumber
-        print 'ls deadfraction'
+        print('run',runnumber)
+        print('ls deadfraction')
         if deadresult and len(deadresult)!=0:
             #print 'run',runnumber
             #print 'ls deadfraction'
@@ -147,14 +148,14 @@ def main():
                 if int(runnumber)>=146315:
                     bitzero_prescale=17.0
                 if bitzero==0:
-                    print cmsls,'no beam'
+                    print(cmsls,'no beam')
                 else:
-                    print cmsls,'%.5f'%float(float(deadcount)/(float(bitzero)*bitzero_prescale))
+                    print(cmsls,'%.5f'%float(float(deadcount)/(float(bitzero)*bitzero_prescale)))
         else:
-            print 'no deadtime found for run ',runnumber
+            print('no deadtime found for run ',runnumber)
     del session
     del svc
-        
+
 if __name__=='__main__':
     main()
-    
+

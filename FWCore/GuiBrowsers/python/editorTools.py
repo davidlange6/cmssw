@@ -33,7 +33,7 @@ class ChangeSource(ConfigToolBase):
     """ Tool for changing the source of a Process;
         Implemented for testing purposes.
     """
-    
+
     _label='changeSource'
     _defaultParameters=dicttypes.SortedKeysDict()
     def __init__(self):
@@ -41,20 +41,20 @@ class ChangeSource(ConfigToolBase):
         self.addParameter(self._defaultParameters,'source','No default value. Set your own', ' Source filenames')
         self._parameters=copy.deepcopy(self._defaultParameters)
         self._comment = ""
-        
+
     def getDefaultParameters(self):
         return self._defaultParameters
-   
+
     def __call__(self,process,source=None) :
         if source is None:
-           source=self._defaultParameters['source'].value 
+            source=self._defaultParameters['source'].value 
         self.setParameter('source',source)
         self.apply(process) 
-        
+
     def toolCode(self, process):
         source=self._parameters['source'].value
         process.source.fileNames=cms.untracked.vstring(source)
-    
+
 changeSource=ChangeSource()
 
 from FWCore.ParameterSet.Modules import Source
@@ -67,8 +67,8 @@ if __name__=='__main__':
         def testdumpPython(self):
             process = cms.Process('unittest')
             process.source=Source("PoolSource",fileNames = cms.untracked.string("file:file.root"))
-            
+
             changeSource(process,"file:filename.root")
             self.assertEqual(changeSource.dumpPython(),  ('\nfrom FWCore.GuiBrowsers.editorTools import *\n', "\nchangeSource(process , 'file:filename.root')\n"))
-            
+
     unittest.main()

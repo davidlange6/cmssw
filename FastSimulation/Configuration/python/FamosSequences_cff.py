@@ -1,3 +1,4 @@
+from __future__ import print_function
 import FWCore.ParameterSet.Config as cms
 
 from FastSimulation.Configuration.CommonInputs_cff import *
@@ -391,7 +392,7 @@ elif(CaloMode==3):
             trackDigiVertexSequence
             )
     else:
-        print 'unsupported MixingMode label'
+        print('unsupported MixingMode label')
 # out of the 'if':
     caloTowersSequence = cms.Sequence(
         caloRecHits+
@@ -408,7 +409,7 @@ elif(CaloMode==3):
             trackDigiVertexSequence
         )        
     else:
-        print 'unsupported MixingMode label'
+        print('unsupported MixingMode label')
 
 famosEcalDrivenElectronSequence = cms.Sequence(
     famosGsfTrackSequence+
@@ -474,7 +475,7 @@ if(CaloMode==3):
             famosPFTauTaggingSequence
             )
     else:
-        print 'unsupported MixingMode label'
+        print('unsupported MixingMode label')
 else:
     reconstructionWithFamos = cms.Sequence(
         trackVertexReco+

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import coral
 import DBImpl
 import CommonUtils
@@ -27,28 +28,28 @@ class entryComment(object):
             transaction.rollback()
             raise Exception, str(er)
         return result
-    
+
     def createEntryCommentTable(self):
         """Create entry comment able.Existing table will be deleted.
         """
         try:
-           transaction=self.__session.transaction()
-           transaction.start()
-           schema = self.__session.nominalSchema()
-           schema.dropIfExistsTable(CommonUtils.commentTableName())
-           description = coral.TableDescription()
-           description.setName(CommonUtils.commentTableName())
-           for columnName, columnType in self.__entryCommentTableColumns.items():
-               description.insertColumn(columnName,columnType)
-           for columnName in self.__entryCommentTableNotNullColumns:
-               description.setNotNullConstraint(columnName,True)
-           description.setPrimaryKey(self.__entryCommentTablePK)
-           tablehandle=schema.createTable(description)
-           tablehandle.privilegeManager().grantToPublic(coral.privilege_Select)
-           transaction.commit()
+            transaction=self.__session.transaction()
+            transaction.start()
+            schema = self.__session.nominalSchema()
+            schema.dropIfExistsTable(CommonUtils.commentTableName())
+            description = coral.TableDescription()
+            description.setName(CommonUtils.commentTableName())
+            for columnName, columnType in self.__entryCommentTableColumns.items():
+                description.insertColumn(columnName,columnType)
+            for columnName in self.__entryCommentTableNotNullColumns:
+                description.setNotNullConstraint(columnName,True)
+            description.setPrimaryKey(self.__entryCommentTablePK)
+            tablehandle=schema.createTable(description)
+            tablehandle.privilegeManager().grantToPublic(coral.privilege_Select)
+            transaction.commit()
         except Exception, e:
-           transaction.rollback() 
-           raise Exception, str(e)
+            transaction.rollback() 
+            raise Exception, str(e)
     def insertComment( self, tablename, entryid,comment ):
         """insert comment on the given entry of given table
         """
@@ -77,7 +78,7 @@ class entryComment(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)    
-        
+
     def getCommentForId( self, tableName, entryid ):
         """get comment for given id in given table
         """
@@ -111,7 +112,7 @@ class entryComment(object):
         """
         transaction=self.__session.transaction()
         result=[]
-        
+
         try:
             transaction.start(True)
             schema = self.__session.nominalSchema()
@@ -135,7 +136,7 @@ class entryComment(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
+
     def modifyCommentForId( self, tableName, entryid, newcomment ):
         """replace comment for given entry for given table
         """
@@ -175,7 +176,7 @@ class entryComment(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
+
     def deleteCommentForId( self, tablename, entryid):
         """delete selected comment entry 
         """
@@ -194,7 +195,7 @@ class entryComment(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
+
     def clearAllEntriesForTable( self, tablename ):
         """delete all entries related with given table
         """
@@ -211,45 +212,45 @@ class entryComment(object):
         except Exception, e:
             transaction.rollback()
             raise Exception, str(e)
-        
-    
+
+
 if __name__ == "__main__":
     svc = coral.ConnectionService()
     session = svc.connect( 'sqlite_file:testentryComment.db',
                            accessMode = coral.access_Update )
     try:
         entrycomment=entryComment(session)
-        print "test create entrycomment table"
+        print("test create entrycomment table")
         entrycomment.createEntryCommentTable()
-        print "test insert one comment"
+        print("test insert one comment")
         entrycomment.insertComment(CommonUtils.inventoryTableName(),12,'comment1')
         entrycomment.insertComment(CommonUtils.treeTableName('ABCTREE'),12,'comment1')
-        print "test bulk insert"
+        print("test bulk insert")
         bulkinput=[]
         bulkinput.append({'entryid':21,'tablename':CommonUtils.inventoryTableName(),'comment':'mycomment'})
         bulkinput.append({'entryid':22,'tablename':CommonUtils.inventoryTableName(),'comment':'mycomment2'})
         bulkinput.append({'entryid':23,'tablename':CommonUtils.inventoryTableName(),'comment':'mycomment3'})
         bulkinput.append({'entryid':24,'tablename':CommonUtils.inventoryTableName(),'comment':'mycomment4'})
         entrycomment.bulkinsertComments(CommonUtils.inventoryTableName(),bulkinput)
-        print "test getCommentsForTable ",CommonUtils.inventoryTableName()
+        print("test getCommentsForTable ",CommonUtils.inventoryTableName())
         results=entrycomment.getCommentsForTable(CommonUtils.inventoryTableName())
-        print results
+        print(results)
         result=entrycomment.getCommentForId(CommonUtils.inventoryTableName(),23)
-        print result
+        print(result)
         entrycomment.modifyCommentForId(CommonUtils.inventoryTableName(),23, 'mynewcomment' )
-        print entrycomment.getCommentForId(CommonUtils.inventoryTableName(),23)
-        print 'test replaceid'
+        print(entrycomment.getCommentForId(CommonUtils.inventoryTableName(),23))
+        print('test replaceid')
         entrycomment.replaceId(CommonUtils.inventoryTableName(),23,33 )
-        print entrycomment.getCommentForId(CommonUtils.inventoryTableName(),33)
-        print 'test deletecomment for id'
+        print(entrycomment.getCommentForId(CommonUtils.inventoryTableName(),33))
+        print('test deletecomment for id')
         entrycomment.deleteCommentForId(CommonUtils.inventoryTableName(), 24)
-        print entrycomment.getCommentsForTable(CommonUtils.inventoryTableName())
-        print 'clearAllEntriesForTable'
+        print(entrycomment.getCommentsForTable(CommonUtils.inventoryTableName()))
+        print('clearAllEntriesForTable')
         entrycomment.clearAllEntriesForTable(CommonUtils.inventoryTableName())
-        print entrycomment.getCommentsForTable(CommonUtils.inventoryTableName())
+        print(entrycomment.getCommentsForTable(CommonUtils.inventoryTableName()))
         del session
     except Exception, e:
-        print "Failed in unit test"
-        print str(e)
+        print("Failed in unit test")
+        print(str(e))
         del session
-        
+

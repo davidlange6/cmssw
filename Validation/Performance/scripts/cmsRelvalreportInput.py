@@ -21,6 +21,7 @@
 # Import modules and define functions
 #
 
+from __future__ import print_function
 import sys, os, re, operator
 import optparse as opt
 from cmsPerfCommons import Candles, CandDesc, FileName, KeywordToCfi, CustomiseFragment, CandFname, EventContents
@@ -76,7 +77,7 @@ def checkSteps(steps):
     '''Checks user steps <steps> for order against steps defined in AllSteps list.
     If they are not, prints a warning and exits.
     No return value.'''
-    
+
     #print steps
     #if ":" in steps:
     #    steps.split(
@@ -99,7 +100,7 @@ def checkSteps(steps):
             idx = AllSteps.index(astep.split(":")[0])            
             if not ( idx == -2 ):
                 if lstidx > idx:
-                    print "ERROR: Your user defined steps are not in a valid order"
+                    print("ERROR: Your user defined steps are not in a valid order")
                     sys.exit()
                 lstidx = idx    
             if "-" in step:
@@ -129,17 +130,17 @@ def getSteps(userSteps):
             astep = gfsreg.sub(r"GEN,FASTSIM", astep) #could add protection for user screw-ups
         elif greg.search(astep):
             astep = greg.sub(r"GEN,SIM", astep)
-            
-            
+
+
         #print astep
         # Finally collect all the steps into the steps list:
 
         steps.append(astep)
-    
+
     #steps = expandHypens(steps)
     checkSteps(steps)
     return steps
-        
+
 def optionparse():
     global _noprof
     explanations = map(lambda x: "          " + x, Candles)
@@ -181,7 +182,7 @@ def optionparse():
        Perform ValgrindFCE ValgrindMemCheck profiling for Minimum bias and 100 events. Only on GEN,SIM and DIGI steps.
         ./%s 100 \"MinBias\" 89 --cmsdriver=\"--conditions FakeConditions --eventcontent RAWSIM\" \"--usersteps=GEN-SIM,DIGI"""
       % ( THIS_PROG_NAME, explanation, THIS_PROG_NAME,THIS_PROG_NAME,THIS_PROG_NAME,THIS_PROG_NAME)))
-    
+
     devel  = opt.OptionGroup(parser, "Developer Options",
                                      "Caution: use these options at your own risk."
                                      "It is believed that some of them bite.\n")
@@ -229,7 +230,7 @@ def optionparse():
         help='Do not perform profiling, ever',
         #metavar='DEBUG',
         )
-    
+
     devel.add_option(
         '-d',
         '--debug',
@@ -243,7 +244,7 @@ def optionparse():
     parser.add_option_group(devel)
 
     (options, args) = parser.parse_args()
-    
+
 
     _noprof = options.noprof
     debug = options.debug
@@ -268,15 +269,15 @@ def expandHyphens(step):
         #el
         if not reduce(lambda x,y,: x and y,map(lambda x: x.split(":")[0] in AllSteps, hypsteps)):
         #(hypsteps[0].split(":")[0] in AllSteps and hypsteps[1].split(":") in AllSteps):
-            print "ERROR: One of the steps you defined is invalid"
+            print("ERROR: One of the steps you defined is invalid")
             sys.exit()
         else:
             if (hypsteps[0] == hypsteps[1]):
-                print "WARNING: You should not add a hypenated step that as the same source and destination step, ignoring"
+                print("WARNING: You should not add a hypenated step that as the same source and destination step, ignoring")
                 newsteps.append(hypsteps[0])
             else:
                 newsteps.append(hypsteps[0])
-                
+
                 srt = AllSteps.index(hypsteps[0].split(":")[0]) + 1
                 for n in range(srt,AllSteps.index(hypsteps[-1].split(":")[0])):
                     astep = AllSteps[n]
@@ -289,7 +290,7 @@ def expandHyphens(step):
                 newsteps.append(hypsteps[-1])
     else:
         if not (step.split(":")[0] in AllSteps):
-            print "ERROR: One of the steps you defined is invalid"
+            print("ERROR: One of the steps you defined is invalid")
             sys.exit()
         else:
             newsteps.append(step)
@@ -309,7 +310,7 @@ def setupProgramParameters(options,args):
     if options.cmsDriverOptions:
 
         cmsDriverOptions = options.cmsDriverOptions
-        print 'Using user-specified cmsDriver.py options: ' + cmsDriverOptions
+        print('Using user-specified cmsDriver.py options: ' + cmsDriverOptions)
 
     if options.userSteps:
 
@@ -318,22 +319,22 @@ def setupProgramParameters(options,args):
 
     if WhichCandles.lower() == 'allcandles':
         Candle = Candles
-        print 'ALL standard simulation candles will be PROCESSED:'
+        print('ALL standard simulation candles will be PROCESSED:')
     else:
         Candle = [WhichCandles]
-        print 'Candle %s will be PROCESSED' % Candle[0]
+        print('Candle %s will be PROCESSED' % Candle[0])
 
     # For now the two steps are built in, this can be added as an argument later
     # Added the argument option so now this will only be defined if it was not defined already:
 
     if not steps:
-        print 'The default steps will be run:'
+        print('The default steps will be run:')
         steps = DEF_STEPS
     else:
-        print "You defined your own steps to run:"
+        print("You defined your own steps to run:")
 
     for astep in steps:
-        print astep
+        print(astep)
 
     return (NumberOfEvents, ProfileCode, cmsDriverOptions, steps, Candle, options.bypasshlt,options.userInputFile)
 
@@ -348,8 +349,8 @@ def init_vars():
         CMSSW_RELEASE_BASE = os.environ['CMSSW_RELEASE_BASE']
         CMSSW_VERSION      = os.environ['CMSSW_VERSION']
     except KeyError:
-        print 'Error: An environment variable either CMSSW_{BASE, RELEASE_BASE or VERSION} is not available.'
-        print '       Please run eval `scramv1 runtime -csh` to set your environment variables'
+        print('Error: An environment variable either CMSSW_{BASE, RELEASE_BASE or VERSION} is not available.')
+        print('       Please run eval `scramv1 runtime -csh` to set your environment variables')
         sys.exit()
 
     return ( CMSSW_BASE,
@@ -359,11 +360,11 @@ def init_vars():
 def writeReportFileHeader(CMSSW_VERSION,CMSSW_RELEASE_BASE,CMSSW_BASE):
 
     SimCandlesFile = 'SimulationCandles_%s.txt' % CMSSW_VERSION
-    
+
     try:
         simcandles = open(SimCandlesFile, 'w')
     except IOError:
-        print "Couldn't open %s to save" % SimCandlesFile
+        print("Couldn't open %s to save" % SimCandlesFile)
 
     simcandles.write('#Candles file automatically generated by %s for %s\n'
                       % (THIS_PROG_NAME, CMSSW_VERSION))
@@ -406,7 +407,7 @@ def getProfileArray(ProfileCode):
                 secCase   = (i==4 and str(7) in ProfileCode) \
                             or (i == 5 and (str(6) in ProfileCode or str(7) in ProfileCode)) \
                             or (i == 6 and str(7) in ProfileCode)
-                
+
                 if firstCase or secCase:
                     Profile.append(AllowedProfile[i] + ' @@@ reuse')
                     #Here's the hack:
@@ -437,7 +438,7 @@ def determineNewProfile(step,Profile,SavedProfile):
 def pythonFragment(step,cmsdriverOptions):
     # Convenient CustomiseFragment dictionary to map the correct customise Python fragment for cmsDriver.py:
     #It is now living in cmsPerfCommons.py!
-    
+
     if "--pileup" in cmsdriverOptions and not (step == "HLT" or step.startswith("RAW2DIGI")):
         return CustomiseFragment['DIGI-PILEUP']
     elif CustomiseFragment.has_key(step):
@@ -455,7 +456,7 @@ def setInputFile(steps,step,acandle,stepIndex,pileup=False,bypasshlt=False):
         InputFileOption = "--filein file:%s_%s" % ( FileName[acandle],"DIGI" )
     else:
         InputFileOption = "--filein file:%s_%s" % ( FileName[acandle],steps[stepIndex - 1] )
-        
+
     if pileup:
         pass
     else :
@@ -479,7 +480,7 @@ def writeUnprofiledSteps(simcandles,CustomisePythonFragment,cmsDriverOptions,unp
     # reduce(lambda x,y : x + "," + "y",unprofiledSteps)
     #stepsStr = ",".join(unprofiledSteps)
 
-    
+
     #print "unprofiledSteps is %s"%unprofiledSteps
     #print "22acandle is %s"%acandle
     #Kludge in case -b option to skip HLT is used...
@@ -573,7 +574,7 @@ def writeCommands(simcandles,
                 userInputFile = "../INPUT_PILEUP_EVENTS.root"
                 stepIndex=AllSteps.index(steps[0].split("-")[0].split(":")[0])
                 rootFileStr=""
-                
+
             elif userInputFile == "":
                 #Write the necessary line to run without profiling all the steps before the wanted ones in one shot:
                 (stepIndex, rootFileStr) = writePrerequisteSteps(simcandles,steps,acandle,NumberOfEvents,cmsDriverOptions,pileup,bypasshlt)
@@ -610,16 +611,16 @@ def writeCommands(simcandles,
                 #Set the stop index at the last step of the composite step (WHY???) 
                 stopIndex = AllSteps.index(steps[-1].split("-")[1].split(":")[0]) + 1
             else:
-                
+
                 stopIndex = AllSteps.index(steps[-1].split(":")[0]) + 1
                 #print "Last step is %s and stopIndex is %s"%(steps[-1],stopIndex)
         steps = AllSteps
-            
+
     unprofiledSteps = []
     rawreg = re.compile("^RAW2DIGI")
 
 #Horrible structure... to be rewritten sooner or later...
-    
+
 #   FOR step in steps
 
     prevPrevOutputFile = ""
@@ -639,7 +640,7 @@ def writeCommands(simcandles,
         aftStep     = step
         # We need this in case we are running one-shot profiling or for DIGI-PILEUP
         stepToWrite = step 
-        
+
         CustomisePythonFragment = pythonFragment(step,cmsDriverOptions)
         oneShotProf = False
         hypsteps = []
@@ -651,7 +652,7 @@ def writeCommands(simcandles,
                 stepToWrite = stepToWrite + ",HLT:GRun"
             elif "HLT" in userSteps:
                 stepToWrite = stepToWrite.replace("HLT", "HLT:GRun")
-            
+
             #Checking now if the current step matches the first of a composite step in userSteps
             hypMatch = filter(lambda x: "-" in x,filter(lambda x: step == x.split("-")[0],userSteps))
             if not len(hypMatch) == 0 :
@@ -701,7 +702,7 @@ def writeCommands(simcandles,
 
             for prof in Profile:
                 #First prepare the cmsDriver.py command
-                
+
                 #Special case of EventEdmSize profiling 
                 if 'EdmSize' in prof:
                     EdmFile = "%s_%s.root" % (FileName[acandle],outfile) #stepToWrite) #Bug in the filename for EdmSize for PileUp corrected.
@@ -765,7 +766,7 @@ def writeCommands(simcandles,
                                CustomiseFragment['DIGI'],#Done by hand to avoid silly use of MixinModule.py for pre-digi individual steps
                                cmsDriverOptions #For FASTSIM PU need the whole cmsDriverOptions! [:cmsDriverOptions.index('--pileup')] 
                            ))
-                    
+
                     else:
                         Command = ("%s %s -n %s --step=%s %s %s --customise=%s %s" % (
                                cmsDriver,
@@ -851,9 +852,9 @@ def writeCommands(simcandles,
 
                         #so here's our new MetaName:
                         MetaName=acandle+"___"+stepToWrite+"___"+PileUp+"___"+Conditions+"___"+EventContent+"___"+IgProfProfile
-                        
+
                         if 'Analyse' not in prof and (lambda x: 'Analyse' in x,Profile):
-                                
+
                             simcandles.write("%s @@@ %s @@@ %s\n" % (Command,
                                                                            Profiler[prof],
                                                                            MetaName))
@@ -883,20 +884,20 @@ def writeCommands(simcandles,
                                                                        prof))
 
                 if debug:
-                    print InputFileOption, step, 'GEN,SIM' in step, 'HLT' in steps[stepIndex - 1], steps
-                    print "cmsDriveroptions : " + cmsDriverOption
+                    print(InputFileOption, step, 'GEN,SIM' in step, 'HLT' in steps[stepIndex - 1], steps)
+                    print("cmsDriveroptions : " + cmsDriverOption)
             prevPrevOutputFile = previousOutputFile          
             previousOutputFile = OutputFile
         else:
             unprofiledSteps.append(step)
             isNextStepForProfile = False # Just an initialization for scoping. don't worry about it being false
-            
+
             try:
                 isNextStepForProfile = steps[stepIndex + 1] in userSteps or reduce(lambda x,y : x or y,map(lambda z: steps[ stepIndex + 1 ] == z.split("-")[0].split(":")[0],userSteps))
                 #print "YES found Step %s when looking with standard step %s"%(steps[stepIndex],steps[stepIndex])
             except IndexError:
                 # This loop should have terminated if x + 1 is out of bounds!
-                print "Error: Something is wrong we shouldn't have come this far"
+                print("Error: Something is wrong we shouldn't have come this far")
                 break
 
             if isNextStepForProfile:
@@ -922,15 +923,15 @@ def writeCommandsToReport(simcandles,Candle,Profile,debug,NumberOfEvents,cmsDriv
     #EventContent = {'GEN,SIM': 'FEVTDEBUGHLT', 'DIGI': 'FEVTDEBUGHLT'}
 
     for acandle in Candle:
-        print '*Candle ' + acandle
-        
+        print('*Candle ' + acandle)
+
         ##################
         # If the first profiling we run is EdmSize we need to create the root file first
         #
 
         #Here all candles are processed with all the same command, and in the pileup case they will have the pileup settings set correctly already:
         #print "1-userInputFile: %s"%userInputFile
-        
+
         fstoutfile = writeCommands(simcandles,
                                    Profile,
                                    acandle,
@@ -941,7 +942,7 @@ def writeCommandsToReport(simcandles,Candle,Profile,debug,NumberOfEvents,cmsDriv
                                    0,
                                    False,
                                    userInputFile)
-        
+
 
 def main(argv=sys.argv):
 
@@ -983,8 +984,8 @@ def main(argv=sys.argv):
 
     writeCommandsToReport(simcandles,Candle,Profile,debug,NumberOfEvents,cmsDriverOptions,steps,bypasshlt,userInputFile)
 
-    print "Written out cmsRelvalreport.py input file at:\n%s"%os.path.abspath('./'+simcandles.name)
-                
+    print("Written out cmsRelvalreport.py input file at:\n%s"%os.path.abspath('./'+simcandles.name))
+
     simcandles.close()
 
 if __name__ == "__main__":

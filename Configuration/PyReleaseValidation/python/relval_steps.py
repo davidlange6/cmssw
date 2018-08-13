@@ -1,18 +1,19 @@
+from __future__ import print_function
 class Matrix(dict):
     def __setitem__(self,key,value):
         if key in self:
-            print "ERROR in Matrix"
-            print "overwritting",key,"not allowed"
+            print("ERROR in Matrix")
+            print("overwritting",key,"not allowed")
         else:
             self.update({float(key):WF(float(key),value)})
 
-            
+
 #the class to collect all possible steps
 class Steps(dict):
     def __setitem__(self,key,value):
         if key in self:
-            print "ERROR in Step"
-            print "overwritting",key,"not allowed"
+            print("ERROR in Step")
+            print("overwritting",key,"not allowed")
             import sys
             sys.exit(-9)
         else:
@@ -22,9 +23,9 @@ class Steps(dict):
 
     def overwrite(self,keypair):
         value=self[keypair[1]]
-        print "overwritting step",keypair[0],"with",keypair[1],str(value)
+        print("overwritting step",keypair[0],"with",keypair[1],str(value))
         self.update({keypair[0]:value})
-        
+
 class WF(list):
     def __init__(self,n,l):
         self.extend(l)
@@ -32,11 +33,11 @@ class WF(list):
         #the actual steps of this WF
         self.steps=[]
 
-        
+
     def interpret(self,stepsDict):
         for s in self:
             steps.append(stepsDict[s])
-    
+
 InputInfoNDefault=2000000    
 class InputInfo(object):
     def __init__(self,dataSet,label='',run=[],files=1000,events=InputInfoNDefault,split=10,location='CAF',ib_blacklist=None,ib_block=None) :
@@ -49,14 +50,14 @@ class InputInfo(object):
         self.split = split
         self.ib_blacklist = ib_blacklist
         self.ib_block = ib_block
-        
+
     def das(self, das_options):
         if len(self.run) is not 0:
             command = ";".join(["das_client.py %s --query '%s'" % (das_options, query) for query in self.queries()])
             command = "({0})".format(command)
         else:
             command = "das_client.py %s --query '%s'" % (das_options, self.queries()[0])
-       
+
         # Run filter on DAS output 
         if self.ib_blacklist:
             command += " | grep -E -v "
@@ -81,18 +82,18 @@ class InputInfo(object):
         if self.ib_block:
             return "input from: {0} with run {1}#{2}".format(self.dataSet, self.ib_block, self.run)
         return "input from: {0} with run {1}".format(self.dataSet, self.run)
-    
+
 # merge dictionaries, with prioty on the [0] index
 def merge(dictlist,TELL=False):
     import copy
     last=len(dictlist)-1
-    if TELL: print last,dictlist
+    if TELL: print(last,dictlist)
     if last==0:
         # ONLY ONE ITEM LEFT
         return copy.copy(dictlist[0])
     else:
         reducedlist=dictlist[0:max(0,last-1)]
-        if TELL: print reducedlist
+        if TELL: print(reducedlist)
         # make a copy of the last item
         d=copy.copy(dictlist[last])
         # update with the last but one item
@@ -806,7 +807,7 @@ def changeRefRelease(steps,listOfPairs):
             for (ref,newRef) in listOfPairs:
                 if ref in steps[s]['--pileup_input']:
                     steps[s]['--pileup_input']=steps[s]['--pileup_input'].replace(ref,newRef)
-        
+
 def addForAll(steps,d):
     for s in steps:
         steps[s].update(d)
@@ -904,7 +905,7 @@ def genvalid(fragment,d,suffix='all',fi=''):
         c['--filein']='lhe:%d'%(fi,)
     c['cfg']=fragment
     return c
-    
+
 steps['QCD_Pt-30_8TeV_herwigpp']=genvalid('QCD_Pt_30_8TeV_herwigpp_cff',step1GenDefaults)
 steps['DYToLL_M-50_TuneZ2star_8TeV_pythia6-tauola']=genvalid('DYToLL_M_50_TuneZ2star_8TeV_pythia6_tauola_cff',step1GenDefaults)
 steps['QCD_Pt-30_TuneZ2star_8TeV_pythia6']=genvalid('QCD_Pt_30_TuneZ2star_8TeV_pythia6_cff',step1GenDefaults)
@@ -985,7 +986,7 @@ steps['DIGI_ID']=merge([{'--restoreRND':'HLT','--process':'HLT2'},steps['DIGI']]
 steps['RESIM']=merge([{'-s':'reGEN,reSIM','-n':10},steps['DIGI']])
 steps['RESIMDIGI']=merge([{'-s':'reGEN,reSIM,DIGI,L1,DIGI2RAW,HLT:@relval,RAW2DIGI,L1Reco','-n':10,'--restoreRNDSeeds':'','--process':'HLT'},steps['DIGI']])
 
-    
+
 steps['DIGIHI']=merge([{'--conditions':'auto:starthi_HIon', '-s':'DIGI:pdigi_valid,L1,DIGI2RAW,HLT:HIon,RAW2DIGI,L1Reco', '--inputCommands':'"keep *","drop *_simEcalPreshowerDigis_*_*"', '-n':10}, hiDefaults, step2Defaults])
 
 #wmsplit['DIGIHI']=5
@@ -1154,7 +1155,7 @@ step3Up2015Hal = {'-s'            :'RAW2DIGI,L1Reco,RECO,EI,VALIDATION,DQM',
                   '-n'            :'10',
                  '--customise'    :'SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1'
                  }
-                             
+
 steps['RECOUP15']=merge([step3Up2015Defaults]) # todo: remove UP from label
 steps['RECOUP15PROD1']=merge([{ '-s' : 'RAW2DIGI,L1Reco,RECO,EI', '--datatier' : 'GEN-SIM-RECO,AODSIM', '--eventcontent' : 'RECOSIM,AODSIM'},step3Up2015Defaults])
 
@@ -1232,7 +1233,7 @@ step3Upgpixphase1Defaults = {'-s':'RAW2DIGI,L1Reco,RECO,EI,VALIDATION,DQM',
                  '--customise' : 'SLHCUpgradeSimulations/Configuration/phase1TkCustoms.customise',
                  '--geometry' : 'ExtendedPhaseIPixel' #check geo
                  }
-                             
+
 
 steps['RECOUP']=merge([step3Upgpixphase1Defaults])
 
@@ -1245,7 +1246,7 @@ step3Up2017Defaults = {'-s':'RAW2DIGI,L1Reco,RECO,EI,VALIDATION,DQM',
                  '--customise' : 'SLHCUpgradeSimulations/Configuration/postLS1Customs.customisePostLS1,SLHCUpgradeSimulations/Configuration/phase1TkCustoms.customise',
                  '--geometry' : 'Extended2017' #check geo
                  }
-                             
+
 steps['RECOUP17']=merge([step3Up2017Defaults])
 
 #add this line when testing from an input file that is not strictly GEN-SIM
@@ -1371,10 +1372,10 @@ steps['HARVESTUP']={'-s':'HARVESTING:validationHarvesting+dqmHarvesting',
                    '--conditions':'DESIGN61_V10::All', #to be updtaed with autocond
                    '--mc':'',
                    '--customise' : 'SLHCUpgradeSimulations/Configuration/phase1TkCustoms.customise',
-		   '--geometry' : 'ExtendedPhaseIPixel', #check geo
+                   '--geometry' : 'ExtendedPhaseIPixel', #check geo
                    '--filetype':'DQM'
                    }
-		   
+
 steps['HARVESTUP15']={'-s':'HARVESTING:validationHarvesting+dqmHarvesting', # todo: remove UP from label
                    '--conditions':'auto:run2_mc', 
                    '--magField'    : '38T_PostLS1',
@@ -1418,7 +1419,7 @@ steps['SKIMCOSD']={'-s':'SKIM:all',
                    '--scenario':'cosmics',
                    '--filein':'file:step2.root',
                    '--secondfilein':'filelist:step1_dasquery.log'}
-                 
+
 steps['RECOFROMRECO']=merge([{'-s':'RECO,EI',
                               '--filtername':'RECOfromRECO',
                               '--process':'reRECO',

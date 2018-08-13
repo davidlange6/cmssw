@@ -5,6 +5,7 @@ Please read license in your lcg external python version
 benedikt.hegner@cern.ch
 
 """
+from __future__ import print_function
 # TODO: sometimes results are doubled. clean global_matches list!
 
 import readline
@@ -16,7 +17,7 @@ __all__ = ["CMSCompleter"]
 
 class CMSCompleter(rlcompleter.Completer):
     def __init__(self, namespace = None):
-	
+
         if namespace and not isinstance(namespace, dict):
             raise TypeError,'namespace must be a dictionary'
 
@@ -33,9 +34,9 @@ class CMSCompleter(rlcompleter.Completer):
             import namespaceDict
             self.cmsnamespace = namespaceDict.getNamespaceDict()
         except:
-            print 'Could not load CMS namespace'
+            print('Could not load CMS namespace')
 
- 
+
     def global_matches(self, text):
         """Compute matches when text is a simple name.
 
@@ -48,7 +49,7 @@ class CMSCompleter(rlcompleter.Completer):
         n = len(text)
         for list in [keyword.kwlist,
                      __builtin__.__dict__,
-					 self.cmsnamespace]:
+                                         self.cmsnamespace]:
             for word in list:
                 if word[:n] == text and word != "__builtins__":
                     matches.append(word)

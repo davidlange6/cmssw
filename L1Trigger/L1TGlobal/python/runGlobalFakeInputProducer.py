@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys
 
 """
@@ -90,9 +91,9 @@ process.source = cms.Source("PoolSource",
 
 process.output =cms.OutputModule("PoolOutputModule",
         outputCommands = cms.untracked.vstring('keep *'),
-	fileName = cms.untracked.string('testGlobalMCInputProducer_'+`job`+'.root')
-	)
-	
+        fileName = cms.untracked.string('testGlobalMCInputProducer_'+`job`+'.root')
+        )
+
 process.options = cms.untracked.PSet()
 
 # Other statements
@@ -104,27 +105,27 @@ useMCtoGT = True
 
 process.dumpGT = cms.EDAnalyzer("l1t::GtInputDump",
                 egInputTag    = cms.InputTag("gtInput"),
-		muInputTag    = cms.InputTag("gtInput"),
-		tauInputTag   = cms.InputTag("gtInput"),
-		jetInputTag   = cms.InputTag("gtInput"),
-		etsumInputTag = cms.InputTag("gtInput") 
-		 )
+                muInputTag    = cms.InputTag("gtInput"),
+                tauInputTag   = cms.InputTag("gtInput"),
+                jetInputTag   = cms.InputTag("gtInput"),
+                etsumInputTag = cms.InputTag("gtInput") 
+                 )
 process.dumpED = cms.EDAnalyzer("EventContentAnalyzer")
 process.dumpES = cms.EDAnalyzer("PrintEventSetupContent")
 
 process.mcL1GTinput = cms.EDProducer("l1t::GenToInputProducer",
                                      bxFirst = cms.int32(-2),
                                      bxLast = cms.int32(2),
-				     maxMuCand = cms.int32(8),
-				     maxJetCand = cms.int32(12),
-				     maxEGCand  = cms.int32(12),
-				     maxTauCand = cms.int32(8),				     				     
+                                     maxMuCand = cms.int32(8),
+                                     maxJetCand = cms.int32(12),
+                                     maxEGCand  = cms.int32(12),
+                                     maxTauCand = cms.int32(8),				     				     
                                      jetEtThreshold = cms.double(1),
                                      tauEtThreshold = cms.double(1),
                                      egEtThreshold  = cms.double(1),
                                      muEtThreshold  = cms.double(1),
-				     emptyBxTrailer = cms.int32(5),
-				     emptyBxEvt = cms.int32(neventsPerJob)
+                                     emptyBxTrailer = cms.int32(5),
+                                     emptyBxEvt = cms.int32(neventsPerJob)
                                      )
 
 process.mcL1GTinput.maxMuCand = cms.int32(8)
@@ -137,41 +138,41 @@ process.fakeL1GTinput = cms.EDProducer("l1t::FakeInputProducer",
 
 # Note: There is no error checking on these parameters...you are responsible. 
                        egParams = cms.untracked.PSet(
-		           egBx    = cms.untracked.vint32(-2, -1,  0,  0,  1,  2),
-			   egHwPt  = cms.untracked.vint32(10, 20, 30, 61, 40, 50),
-			   egHwPhi = cms.untracked.vint32(11, 21, 31, 61, 41, 51),
-			   egHwEta = cms.untracked.vint32(12, 22, 32, 62, 42, 52),
-			   egIso   = cms.untracked.vint32( 0,  0,  1,  1,  0,  0)
-		       ),
-		       
+                           egBx    = cms.untracked.vint32(-2, -1,  0,  0,  1,  2),
+                           egHwPt  = cms.untracked.vint32(10, 20, 30, 61, 40, 50),
+                           egHwPhi = cms.untracked.vint32(11, 21, 31, 61, 41, 51),
+                           egHwEta = cms.untracked.vint32(12, 22, 32, 62, 42, 52),
+                           egIso   = cms.untracked.vint32( 0,  0,  1,  1,  0,  0)
+                       ),
+
                        muParams = cms.untracked.PSet(
-		           muBx    = cms.untracked.vint32(0, -1,  0,  0,  1,  2),
-			   muHwPt  = cms.untracked.vint32(5, 20, 30, 61, 40, 50),
-			   muHwPhi = cms.untracked.vint32(11, 21, 31, 61, 41, 51),
-			   muHwEta = cms.untracked.vint32(12, 22, 32, 62, 42, 52),
-			   muIso   = cms.untracked.vint32( 0,  0,  1,  1,  0,  0)
-		       ),
+                           muBx    = cms.untracked.vint32(0, -1,  0,  0,  1,  2),
+                           muHwPt  = cms.untracked.vint32(5, 20, 30, 61, 40, 50),
+                           muHwPhi = cms.untracked.vint32(11, 21, 31, 61, 41, 51),
+                           muHwEta = cms.untracked.vint32(12, 22, 32, 62, 42, 52),
+                           muIso   = cms.untracked.vint32( 0,  0,  1,  1,  0,  0)
+                       ),
 
                        tauParams = cms.untracked.PSet(
-		           tauBx    = cms.untracked.vint32(),
-			   tauHwPt  = cms.untracked.vint32(),
-			   tauHwPhi = cms.untracked.vint32(),
-			   tauHwEta = cms.untracked.vint32(),
-			   tauIso   = cms.untracked.vint32()
-		       ),
-		       
+                           tauBx    = cms.untracked.vint32(),
+                           tauHwPt  = cms.untracked.vint32(),
+                           tauHwPhi = cms.untracked.vint32(),
+                           tauHwEta = cms.untracked.vint32(),
+                           tauIso   = cms.untracked.vint32()
+                       ),
+
                        jetParams = cms.untracked.PSet(
-		           jetBx    = cms.untracked.vint32(  0,   0,   2,   1,   1,   2),
-			   jetHwPt  = cms.untracked.vint32(100, 200, 130, 170,  85, 145),
-			   jetHwPhi = cms.untracked.vint32(  2,  67,  10,   3,  78,  10),
-			   jetHwEta = cms.untracked.vint32(  1,  19,  11,   0,  17,  11)
-		       ),
-		       
+                           jetBx    = cms.untracked.vint32(  0,   0,   2,   1,   1,   2),
+                           jetHwPt  = cms.untracked.vint32(100, 200, 130, 170,  85, 145),
+                           jetHwPhi = cms.untracked.vint32(  2,  67,  10,   3,  78,  10),
+                           jetHwEta = cms.untracked.vint32(  1,  19,  11,   0,  17,  11)
+                       ),
+
                        etsumParams = cms.untracked.PSet(
-		           etsumBx    = cms.untracked.vint32( -2, -1,   0,  1,  2),
-			   etsumHwPt  = cms.untracked.vint32(  2,  1, 204,  3,  4),  
-			   etsumHwPhi = cms.untracked.vint32(  2,  1,  20,  3,  4)
-		       )		       		       		       		       
+                           etsumBx    = cms.untracked.vint32( -2, -1,   0,  1,  2),
+                           etsumHwPt  = cms.untracked.vint32(  2,  1, 204,  3,  4),  
+                           etsumHwPhi = cms.untracked.vint32(  2,  1,  20,  3,  4)
+                       )		       		       		       		       
                     )
 
 ## Load our L1 menu
@@ -204,22 +205,22 @@ process.simL1uGtDigis = cms.EDProducer("l1t::GtProducer",
 
 process.dumpGTRecord = cms.EDAnalyzer("l1t::GtRecordDump",
                 egInputTag    = cms.InputTag("gtInput"),
-		muInputTag    = cms.InputTag("gtInput"),
-		tauInputTag   = cms.InputTag("gtInput"),
-		jetInputTag   = cms.InputTag("gtInput"),
-		etsumInputTag = cms.InputTag("gtInput"),
-		uGtRecInputTag = cms.InputTag("simL1uGtDigis"),
-		uGtAlgInputTag = cms.InputTag("simL1uGtDigis"),
-		uGtExtInputTag = cms.InputTag("simL1uGtDigis"),
-		bxOffset       = cms.int32(skip),
-		minBx          = cms.int32(-2),
-		maxBx          = cms.int32(2),
-		minBxVec       = cms.int32(0),
-		maxBxVec       = cms.int32(0),		
-		dumpGTRecord   = cms.bool(False),
-		dumpVectors    = cms.bool(True),
-		tvFileName     = cms.string( ("TestVector_%03d.txt") % job )
-		 )
+                muInputTag    = cms.InputTag("gtInput"),
+                tauInputTag   = cms.InputTag("gtInput"),
+                jetInputTag   = cms.InputTag("gtInput"),
+                etsumInputTag = cms.InputTag("gtInput"),
+                uGtRecInputTag = cms.InputTag("simL1uGtDigis"),
+                uGtAlgInputTag = cms.InputTag("simL1uGtDigis"),
+                uGtExtInputTag = cms.InputTag("simL1uGtDigis"),
+                bxOffset       = cms.int32(skip),
+                minBx          = cms.int32(-2),
+                maxBx          = cms.int32(2),
+                minBxVec       = cms.int32(0),
+                maxBxVec       = cms.int32(0),		
+                dumpGTRecord   = cms.bool(False),
+                dumpVectors    = cms.bool(True),
+                tvFileName     = cms.string( ("TestVector_%03d.txt") % job )
+                 )
 
 
 
@@ -258,5 +259,5 @@ process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 if dump:
     outfile = open('dump_runGlobalFakeInputProducer_'+`job`+'.py','w')
-    print >> outfile,process.dumpPython()
+    print(process.dumpPython(), file=outfile)
     outfile.close()
