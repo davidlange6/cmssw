@@ -7,7 +7,7 @@
  */
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "FWCore/PythonParameterSet/interface/PythonProcessDesc.h"
+#include "FWCore/PyBind11ParameterSet/interface/PyBind11ProcessDesc.h"
 
 #include <cppunit/extensions/HelperMacros.h>
 
@@ -52,7 +52,7 @@ private:
   ParameterSetPtr pSet(char const* c) {
 
     //ParameterSetPtr result( new edm::ProcessDesc(std::string(c)) );
-    ParameterSetPtr result = PythonProcessDesc(std::string(c)).parameterSet();
+    ParameterSetPtr result = PyBind11ProcessDesc(std::string(c)).parameterSet();
     CPPUNIT_ASSERT(result->getParameter<std::string>("@process_name") == "test");
     return result;
   }

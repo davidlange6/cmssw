@@ -3,8 +3,10 @@
 #include "FWCore/PyBind11ParameterSet/interface/PyBind11ProcessDesc.h"
 #include "FWCore/PyBind11ParameterSet/src/initializePyBind11Module.h"
 #include "FWCore/PyBind11ParameterSet/src/PyBind11Wrapper.h"
+#include <pybind11/embed.h>
 
 #include <sstream>
+#include <iostream>
 
 PyBind11ProcessDesc::PyBind11ProcessDesc() :
    theProcessPSet(),
@@ -34,10 +36,14 @@ PyBind11ProcessDesc::PyBind11ProcessDesc(std::string const& config, int argc, ch
 void PyBind11ProcessDesc::prepareToRead() {
   edm::python::initializePyBind11Module();
   theMainModule = pybind11::module::import("__main__");
+  //theMainNamespace = theMainModule.attr("__dict__");
+  //std::cout << "got the dict\n";
 
-  theMainNamespace = theMainModule.attr("__dict__");
-  theMainNamespace.attr("processDesc") = pybind11::cast(this);
-  theMainNamespace.attr("processPSet") = pybind11::cast(&theProcessPSet);
+  theMainModule.attr("processDesc")=this; 
+  std::cout << "bound the desc\n";
+
+  theMainModule.attr("processPSet")=&theProcessPSet; //pybind11::cast(&theProcessPSet);
+  std::cout << "bound the pset\n";
 }
 
 void PyBind11ProcessDesc::read(std::string const& config) {
@@ -60,24 +66,17 @@ void PyBind11ProcessDesc::readFile(std::string const& fileName) {
                           "execfile('");
   initCommand += fileName + "')";
 
-  pybind11::handle(PyRun_String(initCommand.c_str(),
-				Py_file_input,
-				theMainNamespace.ptr(),
-				theMainNamespace.ptr()));
+  pybind11::exec(initCommand.c_str());
   std::string command("process.fillProcessDesc(processPSet)");
-  pybind11::handle(PyRun_String(command.c_str(),
-				Py_eval_input,
-				theMainNamespace.ptr(),
-				theMainNamespace.ptr()));
+  pybind11::exec(command.c_str());
 }
 
 void PyBind11ProcessDesc::readString(std::string const& pyConfig) {
   std::string command = pyConfig;
   command += "\nprocess.fillProcessDesc(processPSet)";
-  pybind11::handle(PyRun_String(command.c_str(),
-				Py_file_input,
-				theMainNamespace.ptr(),
-				theMainNamespace.ptr()));
+  std::cout << "command is\n";
+  std::cout << command << std::endl;
+  pybind11::exec(command.c_str());
 }
 
 std::shared_ptr<edm::ParameterSet> PyBind11ProcessDesc::parameterSet() const {

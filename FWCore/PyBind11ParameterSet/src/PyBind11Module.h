@@ -2,7 +2,7 @@
 #define FWCore_PythonParameterSet_PyBind11Module_h
 
 #include "FWCore/PyBind11ParameterSet/interface/Python11ParameterSet.h"
-//#include "FWCore/PythonParameterSet/interface/PythonProcessDesc.h"
+#include "FWCore/PyBind11ParameterSet/interface/PyBind11ProcessDesc.h"
 
 #include "DataFormats/Provenance/interface/EventRange.h"
 #include "DataFormats/Provenance/interface/LuminosityBlockID.h"
@@ -158,6 +158,14 @@ PYBIND11_MODULE(libFWCorePyBind11ParameterSet,m)
     .def("newPSet", &Python11ParameterSet::newPSet)
     .def("dump", &Python11ParameterSet::dump)
     ;
+
+  pybind11::class_<PyBind11ProcessDesc>(m,"ProcessDesc")//, pybind11::init<>())
+    .def(pybind11::init<std::string>())
+    .def("newPSet", &PyBind11ProcessDesc::newPSet)
+    .def("pset", &PyBind11ProcessDesc::pset, pybind11::return_value_policy::reference)
+    .def("dump", &PyBind11ProcessDesc::dump)
+    ;
+
 }
 
 
