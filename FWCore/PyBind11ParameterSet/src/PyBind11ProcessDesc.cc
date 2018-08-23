@@ -4,46 +4,48 @@
 #include "FWCore/PyBind11ParameterSet/src/initializePyBind11Module.h"
 #include "FWCore/PyBind11ParameterSet/src/PyBind11Wrapper.h"
 #include <pybind11/embed.h>
+#include <pybind11/pybind11.h>
 
 #include <sstream>
 #include <iostream>
 
 PyBind11ProcessDesc::PyBind11ProcessDesc() :
    theProcessPSet(),
-   theMainModule(),
-   theMainNamespace() {
+   theMainModule()
+{
+  pybind11::initialize_interpreter();
 }
 
 PyBind11ProcessDesc::PyBind11ProcessDesc(std::string const& config) :
    theProcessPSet(),
-   theMainModule(),
-   theMainNamespace() {
+   theMainModule()
+{
+  pybind11::initialize_interpreter();
+  edm::python::initializePyBind11Module();
   prepareToRead();
   read(config);
-  Py_Finalize();
 }
 
 PyBind11ProcessDesc::PyBind11ProcessDesc(std::string const& config, int argc, char* argv[]) :
    theProcessPSet(),
-   theMainModule(),
-   theMainNamespace() {
+   theMainModule()
+{
+  pybind11::initialize_interpreter();
+  edm::python::initializePyBind11Module();
   prepareToRead();
   PySys_SetArgv(argc, argv);
   read(config);
-  Py_Finalize();
+}
+
+PyBind11ProcessDesc::~PyBind11ProcessDesc() {
+  pybind11::finalize_interpreter();
 }
 
 void PyBind11ProcessDesc::prepareToRead() {
-  edm::python::initializePyBind11Module();
+  //  pybind11::scoped_interpreter guard{};
   theMainModule = pybind11::module::import("__main__");
-  //theMainNamespace = theMainModule.attr("__dict__");
-  //std::cout << "got the dict\n";
-
   theMainModule.attr("processDesc")=this; 
-  std::cout << "bound the desc\n";
-
-  theMainModule.attr("processPSet")=&theProcessPSet; //pybind11::cast(&theProcessPSet);
-  std::cout << "bound the pset\n";
+  theMainModule.attr("processPSet")=&theProcessPSet; 
 }
 
 void PyBind11ProcessDesc::read(std::string const& config) {
@@ -57,7 +59,6 @@ void PyBind11ProcessDesc::read(std::string const& config) {
   }
   catch(pybind11::error_already_set const&) {
      edm::pythonToCppException("Configuration");
-     Py_Finalize();
   }
 }
 
@@ -74,8 +75,6 @@ void PyBind11ProcessDesc::readFile(std::string const& fileName) {
 void PyBind11ProcessDesc::readString(std::string const& pyConfig) {
   std::string command = pyConfig;
   command += "\nprocess.fillProcessDesc(processPSet)";
-  std::cout << "command is\n";
-  std::cout << command << std::endl;
   pybind11::exec(command.c_str());
 }
 

@@ -8,7 +8,7 @@
 
 static
 void
-makePSetsFromFile(std::string const& fileName) { //, pybind11::object& mainNamespace) {
+makePSetsFromFile(std::string const& fileName) { 
   std::string initCommand("from FWCore.ParameterSet.Types import makeCppPSet\n"
                           "execfile('");
   initCommand += fileName + "')";
@@ -19,7 +19,7 @@ makePSetsFromFile(std::string const& fileName) { //, pybind11::object& mainNames
 
 static
 void
-makePSetsFromString(std::string const& module) { //, pybind11::object& mainNamespace) {
+makePSetsFromString(std::string const& module) { 
   std::string command = module;
   command += "\nfrom FWCore.ParameterSet.Types import makeCppPSet\nmakeCppPSet(locals(), topPSet)";
   pybind11::exec(command);
@@ -48,28 +48,29 @@ namespace edm {
 
   std::shared_ptr<ParameterSet>
   readPSetsFrom(std::string const& module) {
+    auto returnValue = std::make_shared<ParameterSet>();
     pybind11::scoped_interpreter guard{};
     python::initializePyBind11Module();
-
+    {
     pybind11::object mainModule = pybind11::module::import("__main__");
-    //pybind11::object mainNamespace = mainModule.attr("__dict__");
     Python11ParameterSet theProcessPSet;
     mainModule.attr("topPSet") = pybind11::cast(&theProcessPSet);
 
     try {
       // if it ends with py, it's a file
       if(module.substr(module.size()-3) == ".py") {
-        makePSetsFromFile(module);//,mainNamespace);
+        makePSetsFromFile(module);
       } else {
-        makePSetsFromString(module);//,mainNamespace);
+        makePSetsFromString(module);
       }
     }
     catch( pybind11::error_already_set const& ) {
       pythonToCppException("Configuration");
-      Py_Finalize();
+      //pybind11::finalize_interpreter();
+      //Py_Finalize();
     }
-    auto returnValue = std::make_shared<ParameterSet>();
     theProcessPSet.pset().swap(*returnValue);
+    }
     return returnValue;
   }
 } // namespace edm

@@ -12,7 +12,7 @@
 #include "FWCore/Utilities/interface/ESInputTag.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/Utilities/interface/InputTag.h"
-
+#include <pybind11/stl.h>
 #include <string>
 
 // This is to give some special handling to cms::Exceptions thrown
@@ -35,12 +35,13 @@ namespace {
 PYBIND11_MODULE(libFWCorePyBind11ParameterSet,m) 
 {
 
-  //boost::python::register_exception_translator<cms::Exception>(translatorlibFWCorePythonParameterSet);
+  //  pybind11::register_exception_translator<cms::Exception>(translatorlibFWCorePythonParameterSet);
 
   pybind11::class_<edm::InputTag>(m,"InputTag")
-    .def(pybind11::init<std::string>())
-    .def(pybind11::init<std::string, std::string, std::string>())
-    .def(pybind11::init<std::string, std::string>())
+    .def(pybind11::init<>())
+    .def(pybind11::init<const std::string &>())
+    .def(pybind11::init<const std::string &, const std::string &, const std::string &>())
+    .def(pybind11::init<const std::string &, const std::string &>())
     .def("label",    &edm::InputTag::label, pybind11::return_value_policy::copy) 
     .def("instance", &edm::InputTag::instance, pybind11::return_value_policy::copy) 
     .def("process",  &edm::InputTag::process, pybind11::return_value_policy::copy)
@@ -92,6 +93,7 @@ PYBIND11_MODULE(libFWCorePyBind11ParameterSet,m)
   ;
 
   pybind11::class_<Python11ParameterSet>(m,"ParameterSet")
+    .def(pybind11::init<>())
     .def("addInt32", &Python11ParameterSet::addParameter<int>)
     .def("getInt32", &Python11ParameterSet::getParameter<int>)
     .def("addVInt32", &Python11ParameterSet::addParameters<int>)
@@ -148,7 +150,7 @@ PYBIND11_MODULE(libFWCorePyBind11ParameterSet,m)
     .def("getVPSet", &Python11ParameterSet::getVPSet)
     .def("addFileInPath", &Python11ParameterSet::addParameter<edm::FileInPath>)
     .def("getFileInPath", &Python11ParameterSet::getParameter<edm::FileInPath>)
-    .def("newInputTag", &Python11ParameterSet::newInputTag)
+    .def("newInputTag", &Python11ParameterSet::newInputTag,  pybind11::return_value_policy::copy)
     .def("newESInputTag", &Python11ParameterSet::newESInputTag)
     .def("newEventID", &Python11ParameterSet::newEventID)
     .def("newLuminosityBlockID", &Python11ParameterSet::newLuminosityBlockID)
@@ -160,6 +162,7 @@ PYBIND11_MODULE(libFWCorePyBind11ParameterSet,m)
     ;
 
   pybind11::class_<PyBind11ProcessDesc>(m,"ProcessDesc")//, pybind11::init<>())
+    .def(pybind11::init<>())
     .def(pybind11::init<std::string>())
     .def("newPSet", &PyBind11ProcessDesc::newPSet)
     .def("pset", &PyBind11ProcessDesc::pset, pybind11::return_value_policy::reference)

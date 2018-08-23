@@ -27,6 +27,8 @@ public:
 
   PyBind11ProcessDesc(std::string const& config, int argc, char * argv[]);
 
+  ~PyBind11ProcessDesc();
+
   Python11ParameterSet newPSet() const {return Python11ParameterSet();}
 
   Python11ParameterSet& pset() { return theProcessPSet;}
@@ -48,7 +50,7 @@ private:
 
   Python11ParameterSet theProcessPSet;
   pybind11::object theMainModule;
-  pybind11::object theMainNamespace;
+  //  pybind11::object theMainNamespace;
 };
 
 #endif

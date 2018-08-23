@@ -114,8 +114,6 @@ void testmakeprocess::pathTest() {
 
    edm::ParameterSet& myparams = *(test);
    myparams.registerIt();
-//    std::cout << "ParameterSet looks like:\n";
-//    std::cout << myparams.toString() << std::endl;
    std::string rep = myparams.toString();
    edm::ParameterSet copy(rep);
    CPPUNIT_ASSERT(copy == myparams);
@@ -200,8 +198,6 @@ void testmakeprocess::emptyModuleTest() {
 
    edm::ParameterSet& myparams = *(test);
    myparams.registerIt();
-//    std::cout << "ParameterSet looks like:\n";
-//    std::cout << myparams.toString() << std::endl;
    std::string rep = myparams.toString();
    edm::ParameterSet copy(rep);
    CPPUNIT_ASSERT(copy == myparams);
@@ -217,12 +213,6 @@ void testmakeprocess::taskTest() {
 
    ParameterSetPtr test = pSet(kTest);
 
-   //std::cout << "Dumping parameter names\n";
-   //std::vector<std::string> names = test->getParameterNames();
-   //std::sort(names.begin(), names.end());
-   //for (auto const& name : names) {
-   //  std::cout << name << std::endl;
-   //}
 
    CPPUNIT_ASSERT(!test->existsAs<edm::ParameterSet>("m1") &&
                   !test->existsAs<edm::ParameterSet>("m2") &&
@@ -357,7 +347,6 @@ void testmakeprocess::taskTest() {
    std::set<std::string> serviceNames;
    for (auto const& pset : vpsetServices) {
      serviceNames.insert(pset.getParameter<std::string>("@service_type"));
-     // std::cout << "serviceName = " << pset.getParameter<std::string>("@service_type") << std::endl;
    }
    std::vector<std::string> expectedServiceNames;
    expectedServiceNames.emplace_back("serv1");
@@ -402,13 +391,6 @@ void testmakeprocess::taskTestWithEmptySchedule() {
    "process.schedule = cms.Schedule()\n";
 
    ParameterSetPtr test = pSet(kTest);
-
-   //std::cout << "Dumping parameter names\n";
-   //std::vector<std::string> names = test->getParameterNames();
-   //std::sort(names.begin(), names.end());
-   //for (auto const& name : names) {
-   //  std::cout << name << std::endl;
-   //}
 
    CPPUNIT_ASSERT(!test->existsAs<edm::ParameterSet>("m1") &&
                   !test->existsAs<edm::ParameterSet>("m2") &&
@@ -543,7 +525,6 @@ void testmakeprocess::taskTestWithEmptySchedule() {
    std::set<std::string> serviceNames;
    for (auto const& pset : vpsetServices) {
      serviceNames.insert(pset.getParameter<std::string>("@service_type"));
-     // std::cout << "serviceName = " << pset.getParameter<std::string>("@service_type") << std::endl;
    }
    std::vector<std::string> expectedServiceNames;
    expectedServiceNames.emplace_back("serv1");
@@ -578,13 +559,6 @@ void testmakeprocess::taskTestWithSchedule() {
                                     "process.tserv10])\n";
 
    ParameterSetPtr test = pSet(kTest);
-
-   //std::cout << "Dumping parameter names\n";
-   //std::vector<std::string> names = test->getParameterNames();
-   //std::sort(names.begin(), names.end());
-   //for (auto const& name : names) {
-   //  std::cout << name << std::endl;
-   //}
 
    CPPUNIT_ASSERT(!test->existsAs<edm::ParameterSet>("m1") &&
                   !test->existsAs<edm::ParameterSet>("m2") &&
@@ -719,7 +693,6 @@ void testmakeprocess::taskTestWithSchedule() {
    std::set<std::string> serviceNames;
    for (auto const& pset : vpsetServices) {
      serviceNames.insert(pset.getParameter<std::string>("@service_type"));
-     // std::cout << "serviceName = " << pset.getParameter<std::string>("@service_type") << std::endl;
    }
    std::vector<std::string> expectedServiceNames;
    expectedServiceNames.emplace_back("serv1");
