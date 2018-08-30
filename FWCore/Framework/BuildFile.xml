@@ -6,11 +6,13 @@
 <use   name="FWCore/ParameterSet"/>
 <use   name="FWCore/PluginManager"/>
 <use   name="FWCore/PythonParameterSet"/>
+<use   name="FWCore/PyBind11ParameterSet"/>
 <use   name="FWCore/ServiceRegistry"/>
 <use   name="FWCore/Utilities"/>
 <use   name="FWCore/Version"/>
 <use   name="boost"/>
 <use   name="rootcore"/>
+<use   name="py2-pybind11"/>
 <flags ADD_SUBDIR="1"/>
 <export>
   <lib   name="1"/>

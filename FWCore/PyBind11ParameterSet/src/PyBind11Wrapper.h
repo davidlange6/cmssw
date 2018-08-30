@@ -4,20 +4,20 @@
 #include <vector>
 #include <string>
 #include <pybind11/pybind11.h>
+#include <iostream>
 
 namespace edm {
 void
 pythonToCppException(const std::string& iType);
 
-//  boost::python::list toPythonList(const std::vector<std::string> & v);
   // utility to translate from an STL vector of strings to
   // a Python list
 
   template<typename T>
     pybind11::list toPython11List(const std::vector<T> & v) {
     pybind11::list result;
-    for(unsigned i = 0; i < v.size(); ++i) {
-       result.append(v[i]);
+    for(const auto & i: v) {
+       result.append(i);
     }
     return result;
   }
@@ -27,10 +27,12 @@ pythonToCppException(const std::string& iType);
   std::vector<T> toVector(pybind11::list & l)
   {
     std::vector<T> result;
+    result.reserve(l.size());
     for(unsigned i = 0; i < l.size(); ++i)
     {
       result.push_back(l[i].cast<T>());
     }
+    std::cout << result.size() << std::endl;
     return result;
   }
 }

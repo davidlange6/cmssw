@@ -44,7 +44,7 @@
 #include "FWCore/ParameterSet/interface/ProcessDesc.h"
 #include "FWCore/ParameterSet/interface/Registry.h"
 #include "FWCore/ParameterSet/interface/validateTopLevelParameterSets.h"
-#include "FWCore/PythonParameterSet/interface/PythonProcessDesc.h"
+#include "FWCore/PyBind11ParameterSet/interface/PyBind11ProcessDesc.h"
 
 #include "FWCore/ServiceRegistry/interface/ServiceRegistry.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
@@ -249,7 +249,7 @@ namespace edm {
     looperBeginJobRun_(false),
     forceESCacheClearOnNewRun_(false),
     eventSetupDataToExcludeFromPrefetching_() {
-    std::shared_ptr<ParameterSet> parameterSet = PythonProcessDesc(config).parameterSet();
+    std::shared_ptr<ParameterSet> parameterSet = PyBind11ProcessDesc(config).parameterSet();
     auto processDesc = std::make_shared<ProcessDesc>(parameterSet);
     processDesc->addServices(defaultServices, forcedServices);
     init(processDesc, iToken, iLegacy);
@@ -288,7 +288,7 @@ namespace edm {
     asyncStopRequestedWhileProcessingEvents_(false),
     eventSetupDataToExcludeFromPrefetching_()
   {
-    std::shared_ptr<ParameterSet> parameterSet = PythonProcessDesc(config).parameterSet();
+    std::shared_ptr<ParameterSet> parameterSet = PyBind11ProcessDesc(config).parameterSet();
     auto processDesc = std::make_shared<ProcessDesc>(parameterSet);
     processDesc->addServices(defaultServices, forcedServices);
     init(processDesc, ServiceToken(), serviceregistry::kOverlapIsError);
@@ -363,7 +363,7 @@ namespace edm {
     eventSetupDataToExcludeFromPrefetching_()
   {
     if(isPython) {
-      std::shared_ptr<ParameterSet> parameterSet = PythonProcessDesc(config).parameterSet();
+      std::shared_ptr<ParameterSet> parameterSet = PyBind11ProcessDesc(config).parameterSet();
       auto processDesc = std::make_shared<ProcessDesc>(parameterSet);
       init(processDesc, ServiceToken(), serviceregistry::kOverlapIsError);
     }
