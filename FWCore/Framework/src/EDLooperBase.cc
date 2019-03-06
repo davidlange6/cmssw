@@ -88,8 +88,12 @@ namespace edm {
   void EDLooperBase::endOfJob() {}
 
   void EDLooperBase::doBeginRun(RunPrincipal& iRP, EventSetupImpl const& iES, ProcessContext* processContext) {
-    GlobalContext globalContext(GlobalContext::Transition::kBeginRun, LuminosityBlockID(iRP.run(), 0), iRP.index(),
-                                LuminosityBlockIndex::invalidLuminosityBlockIndex(), iRP.beginTime(), processContext);
+    GlobalContext globalContext(GlobalContext::Transition::kBeginRun,
+                                LuminosityBlockID(iRP.run(), 0),
+                                iRP.index(),
+                                LuminosityBlockIndex::invalidLuminosityBlockIndex(),
+                                iRP.beginTime(),
+                                processContext);
     ParentContext parentContext(&globalContext);
     ModuleContextSentry moduleContextSentry(&moduleCallingContext_, parentContext);
     Run run(iRP, moduleDescription_, &moduleCallingContext_, false);
@@ -98,8 +102,12 @@ namespace edm {
   }
 
   void EDLooperBase::doEndRun(RunPrincipal& iRP, EventSetupImpl const& iES, ProcessContext* processContext) {
-    GlobalContext globalContext(GlobalContext::Transition::kEndRun, LuminosityBlockID(iRP.run(), 0), iRP.index(),
-                                LuminosityBlockIndex::invalidLuminosityBlockIndex(), iRP.endTime(), processContext);
+    GlobalContext globalContext(GlobalContext::Transition::kEndRun,
+                                LuminosityBlockID(iRP.run(), 0),
+                                iRP.index(),
+                                LuminosityBlockIndex::invalidLuminosityBlockIndex(),
+                                iRP.endTime(),
+                                processContext);
     ParentContext parentContext(&globalContext);
     ModuleContextSentry moduleContextSentry(&moduleCallingContext_, parentContext);
     Run run(iRP, moduleDescription_, &moduleCallingContext_, true);
@@ -109,8 +117,12 @@ namespace edm {
   void EDLooperBase::doBeginLuminosityBlock(LuminosityBlockPrincipal& iLB,
                                             EventSetupImpl const& iES,
                                             ProcessContext* processContext) {
-    GlobalContext globalContext(GlobalContext::Transition::kBeginLuminosityBlock, iLB.id(), iLB.runPrincipal().index(),
-                                iLB.index(), iLB.beginTime(), processContext);
+    GlobalContext globalContext(GlobalContext::Transition::kBeginLuminosityBlock,
+                                iLB.id(),
+                                iLB.runPrincipal().index(),
+                                iLB.index(),
+                                iLB.beginTime(),
+                                processContext);
     ParentContext parentContext(&globalContext);
     ModuleContextSentry moduleContextSentry(&moduleCallingContext_, parentContext);
     LuminosityBlock luminosityBlock(iLB, moduleDescription_, &moduleCallingContext_, false);
@@ -120,8 +132,12 @@ namespace edm {
   void EDLooperBase::doEndLuminosityBlock(LuminosityBlockPrincipal& iLB,
                                           EventSetupImpl const& iES,
                                           ProcessContext* processContext) {
-    GlobalContext globalContext(GlobalContext::Transition::kEndLuminosityBlock, iLB.id(), iLB.runPrincipal().index(),
-                                iLB.index(), iLB.beginTime(), processContext);
+    GlobalContext globalContext(GlobalContext::Transition::kEndLuminosityBlock,
+                                iLB.id(),
+                                iLB.runPrincipal().index(),
+                                iLB.index(),
+                                iLB.beginTime(),
+                                processContext);
     ParentContext parentContext(&globalContext);
     ModuleContextSentry moduleContextSentry(&moduleCallingContext_, parentContext);
     LuminosityBlock luminosityBlock(iLB, moduleDescription_, &moduleCallingContext_, true);

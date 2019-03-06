@@ -76,8 +76,8 @@ void testEventGetRefBeforePut::failGetProductNotRegisteredTest() {
   lbp->setAux(lumiAux);
   lbp->setRunPrincipal(rp);
   edm::EventAuxiliary eventAux(col, uuid, fakeTime, true);
-  edm::EventPrincipal ep(pregc, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_,
-                         edm::StreamID::invalidStreamID());
+  edm::EventPrincipal ep(
+      pregc, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_, edm::StreamID::invalidStreamID());
   edm::ProcessHistoryRegistry phr;
   ep.fillEventPrincipal(eventAux, phr);
   ep.setLuminosityBlockPrincipal(lbp.get());
@@ -85,8 +85,8 @@ void testEventGetRefBeforePut::failGetProductNotRegisteredTest() {
     edm::ParameterSet pset;
     pset.registerIt();
     auto processConfiguration = std::make_shared<edm::ProcessConfiguration>();
-    edm::ModuleDescription modDesc(pset.id(), "Blah", "blahs", processConfiguration.get(),
-                                   edm::ModuleDescription::getUniqueID());
+    edm::ModuleDescription modDesc(
+        pset.id(), "Blah", "blahs", processConfiguration.get(), edm::ModuleDescription::getUniqueID());
     edm::Event event(ep, modDesc, nullptr);
     edm::ProducerBase prod;
     event.setProducer(&prod, nullptr);
@@ -104,8 +104,8 @@ void testEventGetRefBeforePut::failGetProductNotRegisteredTest() {
     edm::ParameterSet pset;
     pset.registerIt();
     auto processConfiguration = std::make_shared<edm::ProcessConfiguration>();
-    edm::ModuleDescription modDesc(pset.id(), "Blah", "blahs", processConfiguration.get(),
-                                   edm::ModuleDescription::getUniqueID());
+    edm::ModuleDescription modDesc(
+        pset.id(), "Blah", "blahs", processConfiguration.get(), edm::ModuleDescription::getUniqueID());
     edm::Event event(ep, modDesc, nullptr);
     edm::ProducerBase prod;
     event.setProducer(&prod, nullptr);
@@ -139,8 +139,15 @@ void testEventGetRefBeforePut::getRefTest() {
   edm::ParameterSet pset;
   pset.registerIt();
 
-  edm::BranchDescription product(edm::InEvent, label, processName, dummytype.userClassName(), className,
-                                 productInstanceName, "", pset.id(), dummytype);
+  edm::BranchDescription product(edm::InEvent,
+                                 label,
+                                 processName,
+                                 dummytype.userClassName(),
+                                 className,
+                                 productInstanceName,
+                                 "",
+                                 pset.id(),
+                                 dummytype);
 
   product.init();
 
@@ -153,8 +160,8 @@ void testEventGetRefBeforePut::getRefTest() {
   edm::EventID col(1L, 1L, 1L);
   std::string uuid = edm::createGlobalIdentifier();
   edm::Timestamp fakeTime;
-  auto pcPtr = std::make_shared<edm::ProcessConfiguration>(processName, dummyProcessPset.id(), edm::getReleaseVersion(),
-                                                           edm::getPassID());
+  auto pcPtr = std::make_shared<edm::ProcessConfiguration>(
+      processName, dummyProcessPset.id(), edm::getReleaseVersion(), edm::getPassID());
   edm::ProcessConfiguration& pc = *pcPtr;
   std::shared_ptr<edm::ProductRegistry const> pregc(preg.release());
   auto runAux = std::make_shared<edm::RunAuxiliary>(col.run(), fakeTime, fakeTime);
@@ -164,8 +171,8 @@ void testEventGetRefBeforePut::getRefTest() {
   lbp->setAux(lumiAux);
   lbp->setRunPrincipal(rp);
   edm::EventAuxiliary eventAux(col, uuid, fakeTime, true);
-  edm::EventPrincipal ep(pregc, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_,
-                         edm::StreamID::invalidStreamID());
+  edm::EventPrincipal ep(
+      pregc, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_, edm::StreamID::invalidStreamID());
   edm::ProcessHistoryRegistry phr;
   ep.fillEventPrincipal(eventAux, phr);
   ep.setLuminosityBlockPrincipal(lbp.get());

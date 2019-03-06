@@ -27,8 +27,8 @@ namespace edm {
     EDGetTokenT<T> operator()(BranchDescription const& branchDescription) {
       if (match_(branchDescription)) {
         auto transition = branchDescription.branchType();
-        edm::InputTag tag{branchDescription.moduleLabel(), branchDescription.productInstanceName(),
-                          branchDescription.processName()};
+        edm::InputTag tag{
+            branchDescription.moduleLabel(), branchDescription.productInstanceName(), branchDescription.processName()};
         if (transition == edm::InEvent) {
           return module_->template consumes<T>(tag);
         } else if (transition == edm::InLumi) {

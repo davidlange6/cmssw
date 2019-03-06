@@ -124,10 +124,18 @@ namespace edm {
                                                         bool hasSubprocesses,
                                                         PreallocationConfiguration const& config,
                                                         ProcessContext const* processContext) {
-    return std::make_unique<Schedule>(
-        parameterSet, ServiceRegistry::instance().get<service::TriggerNamesService>(), *preg_, *branchIDListHelper_,
-        *thinnedAssociationsHelper_, subProcessParentageHelper_ ? subProcessParentageHelper_.get() : nullptr,
-        *act_table_, actReg_, processConfiguration(), hasSubprocesses, config, processContext);
+    return std::make_unique<Schedule>(parameterSet,
+                                      ServiceRegistry::instance().get<service::TriggerNamesService>(),
+                                      *preg_,
+                                      *branchIDListHelper_,
+                                      *thinnedAssociationsHelper_,
+                                      subProcessParentageHelper_ ? subProcessParentageHelper_.get() : nullptr,
+                                      *act_table_,
+                                      actReg_,
+                                      processConfiguration(),
+                                      hasSubprocesses,
+                                      config,
+                                      processContext);
   }
 
   void ScheduleItems::clear() {

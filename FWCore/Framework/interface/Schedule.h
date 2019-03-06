@@ -315,8 +315,8 @@ namespace edm {
                                        ServiceToken const& token,
                                        bool cleaningUpAfterException) {
     assert(iStreamID < streamSchedules_.size());
-    streamSchedules_[iStreamID]->processOneStreamAsync<T>(std::move(iTaskHolder), ep, es, token,
-                                                          cleaningUpAfterException);
+    streamSchedules_[iStreamID]->processOneStreamAsync<T>(
+        std::move(iTaskHolder), ep, es, token, cleaningUpAfterException);
   }
 
   template <typename T>

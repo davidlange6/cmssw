@@ -99,8 +99,8 @@ namespace edm {
     template <class TFactory>
     void registerFactory(std::unique_ptr<TFactory> iFactory, const std::string& iLabel = std::string()) {
       std::unique_ptr<eventsetup::ProxyFactoryBase> temp(iFactory.release());
-      registerFactoryWithKey(eventsetup::EventSetupRecordKey::makeKey<typename TFactory::record_type>(),
-                             std::move(temp), iLabel);
+      registerFactoryWithKey(
+          eventsetup::EventSetupRecordKey::makeKey<typename TFactory::record_type>(), std::move(temp), iLabel);
     }
 
     virtual void registerFactoryWithKey(const eventsetup::EventSetupRecordKey& iRecord,

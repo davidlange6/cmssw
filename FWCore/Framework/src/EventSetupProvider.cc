@@ -116,7 +116,8 @@ namespace edm {
 
           std::set<EventSetupRecordKey> records = proxyProv->usingRecords();
           for (std::set<EventSetupRecordKey>::iterator itRecord = records.begin(), itRecordEnd = records.end();
-               itRecord != itRecordEnd; ++itRecord) {
+               itRecord != itRecordEnd;
+               ++itRecord) {
             const DataProxyProvider::KeyedProxies& keyedProxies = proxyProv->keyedProxies(*itRecord);
             if (!keyedProxies.empty()) {
               //add them to our output
@@ -124,7 +125,8 @@ namespace edm {
 
               for (DataProxyProvider::KeyedProxies::const_iterator itProxy = keyedProxies.begin(),
                                                                    itProxyEnd = keyedProxies.end();
-                   itProxy != itProxyEnd; ++itProxy) {
+                   itProxy != itProxyEnd;
+                   ++itProxy) {
                 EventSetupRecordProvider::DataToPreferredProviderMap::iterator itFind =
                     dataToProviderMap.find(itProxy->first);
                 if (itFind != dataToProviderMap.end()) {
@@ -162,7 +164,8 @@ namespace edm {
           } else {
             for (EventSetupProvider::RecordToDataMap::const_iterator itRecData = itInfo.second.begin(),
                                                                      itRecDataEnd = itInfo.second.end();
-                 itRecData != itRecDataEnd; ++itRecData) {
+                 itRecData != itRecDataEnd;
+                 ++itRecData) {
               std::string recordName = itRecData->first;
               EventSetupRecordKey recordKey(eventsetup::EventSetupRecordKey::TypeTag::findType(recordName));
               if (recordKey.type() == eventsetup::EventSetupRecordKey::TypeTag()) {
@@ -196,8 +199,9 @@ namespace edm {
               //Does the proxyprovider make this?
               std::shared_ptr<DataProxyProvider> proxyProv = recordProviderForKey.proxyProvider(*itProxyProv);
               const DataProxyProvider::KeyedProxies& keyedProxies = proxyProv->keyedProxies(recordKey);
-              if (std::find_if(keyedProxies.begin(), keyedProxies.end(),
-                               [&datumKey](auto const& kp) { return kp.first == datumKey; }) == keyedProxies.end()) {
+              if (std::find_if(keyedProxies.begin(), keyedProxies.end(), [&datumKey](auto const& kp) {
+                    return kp.first == datumKey;
+                  }) == keyedProxies.end()) {
                 throw cms::Exception("ESPreferWrongData")
                     << "The es_prefer statement for type=" << itInfo.first.type_ << " label=\"" << itInfo.first.label_
                     << "\" specifies the data item \n"
@@ -231,7 +235,8 @@ namespace edm {
       recordToFinders_->clear();
       for (std::vector<std::shared_ptr<EventSetupRecordIntervalFinder>>::iterator itFinder = finders_->begin(),
                                                                                   itEnd = finders_->end();
-           itFinder != itEnd; ++itFinder) {
+           itFinder != itEnd;
+           ++itFinder) {
         typedef std::set<EventSetupRecordKey> Keys;
         const Keys recordsUsing = (*itFinder)->findingForRecords();
 
@@ -256,7 +261,8 @@ namespace edm {
       typedef std::set<EventSetupRecordKey> Keys;
       for (std::vector<std::shared_ptr<DataProxyProvider>>::iterator itProvider = dataProviders_->begin(),
                                                                      itEnd = dataProviders_->end();
-           itProvider != itEnd; ++itProvider) {
+           itProvider != itEnd;
+           ++itProvider) {
         ParameterSetIDHolder psetID((*itProvider)->description().pid_);
 
         const Keys recordsUsing = (*itProvider)->usingRecords();
@@ -413,8 +419,11 @@ namespace edm {
           bool firstProcessWithThisPSet = false;
           bool precedingHasMatchingPSet = false;
 
-          esController.lookForMatches(psetID, subProcessIndex_, precedingESProvider.subProcessIndex_,
-                                      firstProcessWithThisPSet, precedingHasMatchingPSet);
+          esController.lookForMatches(psetID,
+                                      subProcessIndex_,
+                                      precedingESProvider.subProcessIndex_,
+                                      firstProcessWithThisPSet,
+                                      precedingHasMatchingPSet);
 
           if (firstProcessWithThisPSet) {
             sharingCheckDone.insert(psetIDHolder);
@@ -574,8 +583,8 @@ namespace edm {
         // (We already checked the ESSources above and there should not be
         // any loopers)
         if (!dataItem.second->isSource_ && !dataItem.second->isLooper_) {
-          bool itMatches = esController.isMatchingESProducer(dataItem.second->pid_, subProcessIndex_,
-                                                             precedingESProvider.subProcessIndex_);
+          bool itMatches = esController.isMatchingESProducer(
+              dataItem.second->pid_, subProcessIndex_, precedingESProvider.subProcessIndex_);
           if (!itMatches) {
             return false;
           }

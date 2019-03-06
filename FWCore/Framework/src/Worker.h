@@ -450,8 +450,13 @@ namespace edm {
           if (auto queue = m_worker->serializeRunModule()) {
             auto const& principal = m_principal;
             auto& es = m_es;
-            auto f = [worker = m_worker, &principal, &es, streamID = m_streamID, parentContext = m_parentContext,
-                      sContext = m_context, serviceToken = m_serviceToken]() {
+            auto f = [worker = m_worker,
+                      &principal,
+                      &es,
+                      streamID = m_streamID,
+                      parentContext = m_parentContext,
+                      sContext = m_context,
+                      serviceToken = m_serviceToken]() {
               //Need to make the services available
               ServiceRegistry::Operate guard(serviceToken);
 
@@ -544,8 +549,12 @@ namespace edm {
           if (auto queue = m_worker->serializeRunModule()) {
             auto const& principal = m_principal;
             auto& es = m_es;
-            queue.push([worker = m_worker, &principal, &es, parentContext = m_parentContext,
-                        serviceToken = m_serviceToken, holder = m_holder]() {
+            queue.push([worker = m_worker,
+                        &principal,
+                        &es,
+                        parentContext = m_parentContext,
+                        serviceToken = m_serviceToken,
+                        holder = m_holder]() {
               //Need to make the services available
               ServiceRegistry::Operate guard(serviceToken);
 
@@ -859,11 +868,12 @@ namespace edm {
         };
 
         auto ownRunTask = std::make_shared<DestroyTask>(runTask);
-        auto selectionTask = make_waiting_task(tbb::task::allocate_root(), [ownRunTask, parentContext, &ep, token,
-                                                                            this](std::exception_ptr const*) mutable {
-          ServiceRegistry::Operate guard(token);
-          prefetchAsync(ownRunTask->release(), token, parentContext, ep);
-        });
+        auto selectionTask =
+            make_waiting_task(tbb::task::allocate_root(),
+                              [ownRunTask, parentContext, &ep, token, this](std::exception_ptr const*) mutable {
+                                ServiceRegistry::Operate guard(token);
+                                prefetchAsync(ownRunTask->release(), token, parentContext, ep);
+                              });
         prePrefetchSelectionAsync(selectionTask, token, streamID, &ep);
       } else {
         WaitingTask* moduleTask =

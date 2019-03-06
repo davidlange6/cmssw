@@ -492,7 +492,9 @@ void testStreamModule::lumiTest() {
 }
 
 void testStreamModule::lumiSummaryTest() {
-  runTest<LumiSummaryProd>({Trans::kGlobalBeginLuminosityBlock, Trans::kEvent, Trans::kStreamEndLuminosityBlock,
+  runTest<LumiSummaryProd>({Trans::kGlobalBeginLuminosityBlock,
+                            Trans::kEvent,
+                            Trans::kStreamEndLuminosityBlock,
                             Trans::kGlobalEndLuminosityBlock});
 }
 
@@ -512,6 +514,9 @@ void testStreamModule::endRunSummaryProdTest() {
 }
 
 void testStreamModule::endLumiSummaryProdTest() {
-  runTest<EndLumiSummaryProd>({Trans::kGlobalEndLuminosityBlock, Trans::kEvent, Trans::kGlobalBeginLuminosityBlock,
-                               Trans::kStreamEndLuminosityBlock, Trans::kGlobalEndLuminosityBlock});
+  runTest<EndLumiSummaryProd>({Trans::kGlobalEndLuminosityBlock,
+                               Trans::kEvent,
+                               Trans::kGlobalBeginLuminosityBlock,
+                               Trans::kStreamEndLuminosityBlock,
+                               Trans::kGlobalEndLuminosityBlock});
 }

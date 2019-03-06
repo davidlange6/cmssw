@@ -45,7 +45,8 @@ namespace edm {
         ParameterSet const& preferPSet = params.getParameterSet(*itName);
         std::vector<std::string> recordNames = preferPSet.getParameterNames();
         for (std::vector<std::string>::iterator itRecordName = recordNames.begin(), itRecordNameEnd = recordNames.end();
-             itRecordName != itRecordNameEnd; ++itRecordName) {
+             itRecordName != itRecordNameEnd;
+             ++itRecordName) {
           if ((*itRecordName)[0] == '@') {
             //this is a 'hidden parameter' so skip it
             continue;
@@ -62,7 +63,8 @@ namespace edm {
             }
             //FUTURE: 'any' should be a special name
             for (std::vector<std::string>::iterator itDatum = dataInfo.begin(), itDatumEnd = dataInfo.end();
-                 itDatum != itDatumEnd; ++itDatum) {
+                 itDatum != itDatumEnd;
+                 ++itDatum) {
               std::string datumName(*itDatum, 0, itDatum->find_first_of("/"));
               std::string labelName;
 
@@ -81,7 +83,8 @@ namespace edm {
           }
         }
         preferInfo[ComponentDescription(preferPSet.getParameter<std::string>("@module_type"),
-                                        preferPSet.getParameter<std::string>("@module_label"), false)] = recordToData;
+                                        preferPSet.getParameter<std::string>("@module_label"),
+                                        false)] = recordToData;
       }
       return std::make_unique<EventSetupProvider>(activityRegistry, subProcessIndex, &preferInfo);
     }
@@ -91,7 +94,8 @@ namespace edm {
       std::vector<std::string> providers = params.getParameter<std::vector<std::string> >("@all_esmodules");
 
       for (std::vector<std::string>::iterator itName = providers.begin(), itNameEnd = providers.end();
-           itName != itNameEnd; ++itName) {
+           itName != itNameEnd;
+           ++itName) {
         ParameterSet* providerPSet = params.getPSetForUpdate(*itName);
         validateEventSetupParameters(*providerPSet);
         providerPSet->registerIt();

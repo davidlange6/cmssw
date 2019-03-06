@@ -185,7 +185,8 @@ namespace edm {
                                  typename depends_on::HolderToCaller<TRecord, depends_on::TwoHolder<T1, T2> >::Caller_t>
     createDecoratorFrom(T* iT, const TRecord* iRec, const depends_on::TwoHolder<T1, T2>& iHolder) {
       return ESPreFunctorDecorator<
-          TRecord, typename depends_on::HolderToCaller<TRecord, depends_on::TwoHolder<T1, T2> >::Caller_t>(
+          TRecord,
+          typename depends_on::HolderToCaller<TRecord, depends_on::TwoHolder<T1, T2> >::Caller_t>(
           createDependsOnCaller(iT, iRec, iHolder.h2_, makeCaller(iT, iRec, iHolder.h1_)));
     }
 

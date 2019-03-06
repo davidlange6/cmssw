@@ -463,8 +463,14 @@ void testLimitedModule::streamTest() {
   auto testProd = std::make_shared<StreamProd>();
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kBeginStream, Trans::kStreamBeginRun, Trans::kStreamBeginLuminosityBlock,
-                             Trans::kEvent, Trans::kStreamEndLuminosityBlock, Trans::kStreamEndRun, Trans::kEndStream});
+  testTransitions(testProd,
+                  {Trans::kBeginStream,
+                   Trans::kStreamBeginRun,
+                   Trans::kStreamBeginLuminosityBlock,
+                   Trans::kEvent,
+                   Trans::kStreamEndLuminosityBlock,
+                   Trans::kStreamEndRun,
+                   Trans::kEndStream});
 }
 
 void testLimitedModule::runTest() {
@@ -492,8 +498,11 @@ void testLimitedModule::lumiSummaryTest() {
   auto testProd = std::make_shared<LumiSummaryProd>();
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalBeginLuminosityBlock, Trans::kEvent, Trans::kStreamEndLuminosityBlock,
-                             Trans::kGlobalEndLuminosityBlock});
+  testTransitions(testProd,
+                  {Trans::kGlobalBeginLuminosityBlock,
+                   Trans::kEvent,
+                   Trans::kStreamEndLuminosityBlock,
+                   Trans::kGlobalEndLuminosityBlock});
 }
 
 void testLimitedModule::beginRunProdTest() {
@@ -528,14 +537,19 @@ void testLimitedModule::endRunSummaryProdTest() {
   auto testProd = std::make_shared<EndRunSummaryProd>();
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalEndRun, Trans::kEvent, Trans::kGlobalBeginRun, Trans::kStreamEndRun,
-                             Trans::kGlobalEndRun});
+  testTransitions(
+      testProd,
+      {Trans::kGlobalEndRun, Trans::kEvent, Trans::kGlobalBeginRun, Trans::kStreamEndRun, Trans::kGlobalEndRun});
 }
 
 void testLimitedModule::endLumiSummaryProdTest() {
   auto testProd = std::make_shared<EndLumiSummaryProd>();
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalEndLuminosityBlock, Trans::kEvent, Trans::kGlobalBeginLuminosityBlock,
-                             Trans::kStreamEndLuminosityBlock, Trans::kGlobalEndLuminosityBlock});
+  testTransitions(testProd,
+                  {Trans::kGlobalEndLuminosityBlock,
+                   Trans::kEvent,
+                   Trans::kGlobalBeginLuminosityBlock,
+                   Trans::kStreamEndLuminosityBlock,
+                   Trans::kGlobalEndLuminosityBlock});
 }

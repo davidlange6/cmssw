@@ -15,6 +15,9 @@ AllowShortLoopsOnASingleLine: false
 BinPackParameters: false
 AlwaysBreakTemplateDeclarations: true
 ReflowComments: false
+BinPackArguments: false
+BinPackParameters: false
+
 #above are changes from CMSSW core sw meeting discussions (last 171128)
 
 #things unchanged

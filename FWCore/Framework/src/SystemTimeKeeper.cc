@@ -49,8 +49,9 @@ SystemTimeKeeper::SystemTimeKeeper(unsigned int iNumStreams,
       m_minModuleID(0),
       m_numberOfEvents(0) {
   std::sort(
-      m_modules.begin(), m_modules.end(),
-      [](const ModuleDescription* iLHS, const ModuleDescription* iRHS) -> bool { return iLHS->id() < iRHS->id(); });
+      m_modules.begin(), m_modules.end(), [](const ModuleDescription* iLHS, const ModuleDescription* iRHS) -> bool {
+        return iLHS->id() < iRHS->id();
+      });
   if (not m_modules.empty()) {
     m_minModuleID = m_modules.front()->id();
     unsigned int numModuleSlots = m_modules.back()->id() - m_minModuleID + 1;
@@ -281,7 +282,11 @@ void SystemTimeKeeper::fillTriggerTimingReport(TriggerTimingReport& rep) const {
   //Per path summary
   {
     fillPathSummary(0, m_endPathOffset, m_pathNames, m_modulesOnPaths, m_streamPathTiming, rep.trigPathSummaries);
-    fillPathSummary(m_endPathOffset, m_streamPathTiming[0].size(), m_pathNames, m_modulesOnPaths, m_streamPathTiming,
+    fillPathSummary(m_endPathOffset,
+                    m_streamPathTiming[0].size(),
+                    m_pathNames,
+                    m_modulesOnPaths,
+                    m_streamPathTiming,
                     rep.endPathSummaries);
   }
 }

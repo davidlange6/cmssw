@@ -268,9 +268,11 @@ void TestEDConsumerBase::testRegularType() {
     intConsumer.itemsToGet(edm::InEvent, indices);
 
     CPPUNIT_ASSERT(2 == indices.size());
-    CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(), indices.end(),
+    CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(),
+                                              indices.end(),
                                               edm::ProductResolverIndexAndSkipBit(vint_c_no_proc, true)));
-    CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(), indices.end(),
+    CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(),
+                                              indices.end(),
                                               edm::ProductResolverIndexAndSkipBit(vint_blank_no_proc, false)));
 
     std::vector<edm::ProductResolverIndexAndSkipBit> indicesMay;
@@ -391,9 +393,11 @@ void TestEDConsumerBase::testViewType() {
       consumer.itemsToGet(edm::InEvent, indices);
 
       CPPUNIT_ASSERT(2 == indices.size());
-      CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(), indices.end(),
+      CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(),
+                                                indices.end(),
                                                 edm::ProductResolverIndexAndSkipBit(v_int_no_proc, false)));
-      CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(), indices.end(),
+      CPPUNIT_ASSERT(indices.end() != std::find(indices.begin(),
+                                                indices.end(),
                                                 edm::ProductResolverIndexAndSkipBit(v_simple_no_proc, true)));
 
       std::vector<edm::ProductResolverIndexAndSkipBit> indicesMay;
@@ -557,7 +561,8 @@ void TestEDConsumerBase::testMay() {
     CPPUNIT_ASSERT(2 == indicesMay.size());
     CPPUNIT_ASSERT(indicesMay.end() !=
                    std::find(indicesMay.begin(), indicesMay.end(), edm::ProductResolverIndexAndSkipBit(vint_c, false)));
-    CPPUNIT_ASSERT(indicesMay.end() != std::find(indicesMay.begin(), indicesMay.end(),
+    CPPUNIT_ASSERT(indicesMay.end() != std::find(indicesMay.begin(),
+                                                 indicesMay.end(),
                                                  edm::ProductResolverIndexAndSkipBit(vint_blank, false)));
   }
 

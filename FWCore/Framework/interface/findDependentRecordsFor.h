@@ -64,7 +64,8 @@ namespace edm {
     template <typename T>
     std::set<EventSetupRecordKey> findDependentRecordsFor() {
       typedef typename boost::mpl::if_<typename std::is_base_of<edm::eventsetup::DependentRecordTag, T>::type,
-                                       FindDependenciesFromDependentRecord<T>, NoDependenciesForRecord>::type DepFinder;
+                                       FindDependenciesFromDependentRecord<T>,
+                                       NoDependenciesForRecord>::type DepFinder;
       std::set<EventSetupRecordKey> returnValue;
       DepFinder::dependentRecords(returnValue);
       return returnValue;

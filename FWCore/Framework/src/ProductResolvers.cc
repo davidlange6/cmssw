@@ -927,8 +927,8 @@ namespace edm {
           resolver_->prefetchFailed(index_, *principal_, skipCurrentProcess_, *exceptPtr);
         } else {
           if (not resolver_->dataValidFromResolver(index_, *principal_, skipCurrentProcess_)) {
-            resolver_->tryPrefetchResolverAsync(index_ + 1, *principal_, skipCurrentProcess_, sra_, mcc_,
-                                                serviceToken_);
+            resolver_->tryPrefetchResolverAsync(
+                index_ + 1, *principal_, skipCurrentProcess_, sra_, mcc_, serviceToken_);
           }
         }
         return nullptr;

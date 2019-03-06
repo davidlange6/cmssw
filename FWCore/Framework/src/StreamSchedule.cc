@@ -100,12 +100,18 @@ namespace edm {
         std::vector<std::string> temp;
         temp.reserve(vBranchesToDeleteEarly.size());
 
-        std::set_intersection(vBranchesToDeleteEarly.begin(), vBranchesToDeleteEarly.end(), allBranchNames.begin(),
-                              allBranchNames.end(), std::back_inserter(temp));
+        std::set_intersection(vBranchesToDeleteEarly.begin(),
+                              vBranchesToDeleteEarly.end(),
+                              allBranchNames.begin(),
+                              allBranchNames.end(),
+                              std::back_inserter(temp));
         vBranchesToDeleteEarly.swap(temp);
         if (temp.size() != vBranchesToDeleteEarly.size()) {
           std::vector<std::string> missingProducts;
-          std::set_difference(temp.begin(), temp.end(), vBranchesToDeleteEarly.begin(), vBranchesToDeleteEarly.end(),
+          std::set_difference(temp.begin(),
+                              temp.end(),
+                              vBranchesToDeleteEarly.begin(),
+                              vBranchesToDeleteEarly.end(),
                               std::back_inserter(missingProducts));
           LogInfo l("MissingProductsForCanDeleteEarly");
           l << "The following products in the 'canDeleteEarly' list are not available in this job and will be ignored.";
@@ -196,8 +202,11 @@ namespace edm {
     std::vector<std::string> modulesInConfig(proc_pset.getParameter<std::vector<std::string>>("@all_modules"));
     std::set<std::string> modulesInConfigSet(modulesInConfig.begin(), modulesInConfig.end());
     std::vector<std::string> unusedLabels;
-    set_difference(modulesInConfigSet.begin(), modulesInConfigSet.end(), usedWorkerLabels.begin(),
-                   usedWorkerLabels.end(), back_inserter(unusedLabels));
+    set_difference(modulesInConfigSet.begin(),
+                   modulesInConfigSet.end(),
+                   usedWorkerLabels.begin(),
+                   usedWorkerLabels.end(),
+                   back_inserter(unusedLabels));
     std::set<std::string> unscheduledLabels;
     std::vector<std::string> shouldBeUsedLabels;
     if (!unusedLabels.empty()) {
@@ -210,15 +219,16 @@ namespace edm {
         ParameterSet* modulePSet(proc_pset.getPSetForUpdate(label, isTracked));
         assert(isTracked);
         assert(modulePSet != nullptr);
-        workerManager_.addToUnscheduledWorkers(*modulePSet, preg, &prealloc, processConfiguration, label,
-                                               unscheduledLabels, shouldBeUsedLabels);
+        workerManager_.addToUnscheduledWorkers(
+            *modulePSet, preg, &prealloc, processConfiguration, label, unscheduledLabels, shouldBeUsedLabels);
       }
       if (!shouldBeUsedLabels.empty()) {
         std::ostringstream unusedStream;
         unusedStream << "'" << shouldBeUsedLabels.front() << "'";
         for (std::vector<std::string>::iterator itLabel = shouldBeUsedLabels.begin() + 1,
                                                 itLabelEnd = shouldBeUsedLabels.end();
-             itLabel != itLabelEnd; ++itLabel) {
+             itLabel != itLabelEnd;
+             ++itLabel) {
           unusedStream << ",'" << *itLabel << "'";
         }
         LogInfo("path") << "The following module labels are not assigned to any path:\n" << unusedStream.str() << "\n";
@@ -458,8 +468,15 @@ namespace edm {
 
     // an empty path will cause an extra bit that is not used
     if (!tmpworkers.empty()) {
-      trig_paths_.emplace_back(bitpos, name, tmpworkers, trptr, actionTable(), actReg_, &streamContext_,
-                               &skippingEvent_, PathContext::PathType::kPath);
+      trig_paths_.emplace_back(bitpos,
+                               name,
+                               tmpworkers,
+                               trptr,
+                               actionTable(),
+                               actReg_,
+                               &streamContext_,
+                               &skippingEvent_,
+                               PathContext::PathType::kPath);
     } else {
       empty_trig_paths_.push_back(bitpos);
     }
@@ -480,7 +497,14 @@ namespace edm {
 
     if (!tmpworkers.empty()) {
       //EndPaths are not supposed to stop if SkipEvent type exception happens
-      end_paths_.emplace_back(bitpos, name, tmpworkers, TrigResPtr(), actionTable(), actReg_, &streamContext_, nullptr,
+      end_paths_.emplace_back(bitpos,
+                              name,
+                              tmpworkers,
+                              TrigResPtr(),
+                              actionTable(),
+                              actReg_,
+                              &streamContext_,
+                              nullptr,
                               PathContext::PathType::kEndPath);
     } else {
       empty_end_paths_.push_back(bitpos);
@@ -714,13 +738,16 @@ namespace edm {
 
   void StreamSchedule::availablePaths(std::vector<std::string>& oLabelsToFill) const {
     oLabelsToFill.reserve(trig_paths_.size());
-    std::transform(trig_paths_.begin(), trig_paths_.end(), std::back_inserter(oLabelsToFill),
+    std::transform(trig_paths_.begin(),
+                   trig_paths_.end(),
+                   std::back_inserter(oLabelsToFill),
                    std::bind(&Path::name, std::placeholders::_1));
   }
 
   void StreamSchedule::modulesInPath(std::string const& iPathLabel, std::vector<std::string>& oLabelsToFill) const {
     TrigPaths::const_iterator itFound = std::find_if(
-        trig_paths_.begin(), trig_paths_.end(),
+        trig_paths_.begin(),
+        trig_paths_.end(),
         std::bind(std::equal_to<std::string>(), iPathLabel, std::bind(&Path::name, std::placeholders::_1)));
     if (itFound != trig_paths_.end()) {
       oLabelsToFill.reserve(itFound->size());
@@ -745,7 +772,8 @@ namespace edm {
     if (!found) {
       // if the hint did not work, do it the slow way
       itFound = std::find_if(
-          trig_paths_.begin(), trig_paths_.end(),
+          trig_paths_.begin(),
+          trig_paths_.end(),
           std::bind(std::equal_to<std::string>(), iPathLabel, std::bind(&Path::name, std::placeholders::_1)));
       if (itFound != trig_paths_.end())
         found = true;
@@ -773,7 +801,8 @@ namespace edm {
     if (!found) {
       // if the hint did not work, do it the slow way
       itFound = std::find_if(
-          end_paths_.begin(), end_paths_.end(),
+          end_paths_.begin(),
+          end_paths_.end(),
           std::bind(std::equal_to<std::string>(), iEndPathLabel, std::bind(&Path::name, std::placeholders::_1)));
       if (itFound != end_paths_.end())
         found = true;

@@ -46,8 +46,9 @@ namespace edm {
 
     void EventSetupsController::eventSetupForInstance(IOVSyncValue const& syncValue) {
       if (mustFinishConfiguration_) {
-        std::for_each(providers_.begin(), providers_.end(),
-                      [](std::shared_ptr<EventSetupProvider> const& esp) { esp->finishConfiguration(); });
+        std::for_each(providers_.begin(), providers_.end(), [](std::shared_ptr<EventSetupProvider> const& esp) {
+          esp->finishConfiguration();
+        });
         // When the ESSources and ESProducers were constructed a first pass was
         // done which attempts to get component sharing between SubProcesses
         // correct, but in this pass only the configuration of the components
@@ -66,8 +67,9 @@ namespace edm {
     }
 
     void EventSetupsController::forceCacheClear() const {
-      std::for_each(providers_.begin(), providers_.end(),
-                    [](std::shared_ptr<EventSetupProvider> const& esp) { esp->forceCacheClear(); });
+      std::for_each(providers_.begin(), providers_.end(), [](std::shared_ptr<EventSetupProvider> const& esp) {
+        esp->forceCacheClear();
+      });
     }
 
     bool EventSetupsController::isWithinValidityInterval(IOVSyncValue const& syncValue) const {

@@ -358,7 +358,8 @@ namespace edmtest {
       edm::Service<edm::ConstProductRegistry> reg;
       // Loop over provenance of products in registry.
       for (edm::ProductRegistry::ProductList::const_iterator it = reg->productList().begin();
-           it != reg->productList().end(); ++it) {
+           it != reg->productList().end();
+           ++it) {
         edm::BranchDescription const& desc = it->second;
         if (desc.branchID() == originalBranchID) {
           foundOriginalInRegistry = true;
@@ -429,7 +430,8 @@ namespace edmtest {
       edm::Service<edm::ConstProductRegistry> reg;
       // Loop over provenance of products in registry.
       for (edm::ProductRegistry::ProductList::const_iterator it = reg->productList().begin();
-           it != reg->productList().end(); ++it) {
+           it != reg->productList().end();
+           ++it) {
         edm::BranchDescription const& desc = it->second;
         if (desc.branchID() == originalBranchID) {
           foundOriginalInRegistry = true;
@@ -462,8 +464,8 @@ namespace edmtest {
     std::vector<int> emptyDummy;
 
     edm::InputTag tag("thingWithMergeProducer", "endLumi", "PROD");
-    checkExpectedLumiProducts(indexLumi_, expectedEndLumiProd_, tag, "endLumi", lumi,
-                              expectedEndLumiProdImproperlyMerged_);
+    checkExpectedLumiProducts(
+        indexLumi_, expectedEndLumiProd_, tag, "endLumi", lumi, expectedEndLumiProdImproperlyMerged_);
 
     edm::InputTag tagnew("thingWithMergeProducer", "endLumi");
     checkExpectedLumiProducts(indexLumi_, expectedEndLumiNew_, tagnew, "endLumi", lumi, emptyDummy);
@@ -495,7 +497,8 @@ namespace edmtest {
       edm::Service<edm::ConstProductRegistry> reg;
       // Loop over provenance of products in registry.
       for (edm::ProductRegistry::ProductList::const_iterator it = reg->productList().begin();
-           it != reg->productList().end(); ++it) {
+           it != reg->productList().end();
+           ++it) {
         edm::BranchDescription const& desc = it->second;
         if (desc.branchID() == originalBranchID) {
           foundOriginalInRegistry = true;

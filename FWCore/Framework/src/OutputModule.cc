@@ -66,8 +66,8 @@ namespace edm {
     selectors_.resize(1);
     //need to set wantAllEvents_ in constructor
     // we will make the remaining selectors once we know how many streams
-    wantAllEvents_ = detail::configureEventSelector(selectEvents_, process_name_, getAllTriggerNames(), selectors_[0],
-                                                    consumesCollector());
+    wantAllEvents_ = detail::configureEventSelector(
+        selectEvents_, process_name_, getAllTriggerNames(), selectors_[0], consumesCollector());
 
     SharedResourcesRegistry::instance()->registerSharedResource(SharedResourcesRegistry::kLegacyModuleResourceName);
   }
@@ -126,8 +126,8 @@ namespace edm {
     // Now fill in a mapping needed in the case that a branch was dropped while its EDAlias was kept.
     ProductSelector::fillDroppedToKept(preg, trueBranchIDToKeptBranchDesc, droppedBranchIDToKeptBranchID_);
 
-    thinnedAssociationsHelper_->updateFromParentProcess(thinnedAssociationsHelper, keepAssociation_,
-                                                        droppedBranchIDToKeptBranchID_);
+    thinnedAssociationsHelper_->updateFromParentProcess(
+        thinnedAssociationsHelper, keepAssociation_, droppedBranchIDToKeptBranchID_);
   }
 
   void OutputModule::keepThisBranch(BranchDescription const& desc,
@@ -374,8 +374,9 @@ namespace edm {
   void OutputModule::setEventSelectionInfo(
       std::map<std::string, std::vector<std::pair<std::string, int> > > const& outputModulePathPositions,
       bool anyProductProduced) {
-    selector_config_id_ =
-        detail::registerProperSelectionInfo(getParameterSet(selector_config_id_), description().moduleLabel(),
-                                            outputModulePathPositions, anyProductProduced);
+    selector_config_id_ = detail::registerProperSelectionInfo(getParameterSet(selector_config_id_),
+                                                              description().moduleLabel(),
+                                                              outputModulePathPositions,
+                                                              anyProductProduced);
   }
 }  // namespace edm

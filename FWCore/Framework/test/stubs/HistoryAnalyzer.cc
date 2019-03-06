@@ -113,11 +113,12 @@ namespace edmtest {
           assert(!modulesOnEndPath.empty());
           vstring expectedModulesOnEndPath = expectedModulesOnEndPaths_.getParameter<vstring>(*i);
           if (expectedModulesOnEndPath != modulesOnEndPath) {
-            std::copy(expectedModulesOnEndPath.begin(), expectedModulesOnEndPath.end(),
+            std::copy(expectedModulesOnEndPath.begin(),
+                      expectedModulesOnEndPath.end(),
                       std::ostream_iterator<std::string>(std::cout, " "));
             std::cout << std::endl;
-            std::copy(modulesOnEndPath.begin(), modulesOnEndPath.end(),
-                      std::ostream_iterator<std::string>(std::cout, " "));
+            std::copy(
+                modulesOnEndPath.begin(), modulesOnEndPath.end(), std::ostream_iterator<std::string>(std::cout, " "));
             std::cout << std::endl;
             assert(expectedModulesOnEndPath == modulesOnEndPath);
           }
@@ -130,8 +131,8 @@ namespace edmtest {
         if (all_modules != expectedModules_) {
           std::copy(all_modules.begin(), all_modules.end(), std::ostream_iterator<std::string>(std::cout, " "));
           std::cout << std::endl;
-          std::copy(expectedModules_.begin(), expectedModules_.end(),
-                    std::ostream_iterator<std::string>(std::cout, " "));
+          std::copy(
+              expectedModules_.begin(), expectedModules_.end(), std::ostream_iterator<std::string>(std::cout, " "));
           std::cout << std::endl;
           assert(all_modules == expectedModules_);
         }
@@ -146,7 +147,8 @@ namespace edmtest {
       }
 
       for (vstring::const_iterator i = expectedDroppedEndPaths_.begin(), iEnd = expectedDroppedEndPaths_.end();
-           i != iEnd; ++i) {
+           i != iEnd;
+           ++i) {
         assert(!proc_pset.exists(*i));
       }
 
@@ -161,7 +163,8 @@ namespace edmtest {
         }
       }
       for (vstring::const_iterator i = expectedDropFromProcPSet_.begin(), iEnd = expectedDropFromProcPSet_.end();
-           i != iEnd; ++i) {
+           i != iEnd;
+           ++i) {
         assert(!proc_pset.existsAs<edm::ParameterSet>(*i, true));
         assert(proc_pset.existsAs<edm::ParameterSet>(*i, false));
         bool isInRegistry = false;

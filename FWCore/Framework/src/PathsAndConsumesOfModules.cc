@@ -41,8 +41,8 @@ namespace edm {
       ++i;
     }
 
-    schedule->fillModuleAndConsumesInfo(allModuleDescriptions_, moduleIDToIndex_, modulesWhoseProductsAreConsumedBy_,
-                                        *preg);
+    schedule->fillModuleAndConsumesInfo(
+        allModuleDescriptions_, moduleIDToIndex_, modulesWhoseProductsAreConsumedBy_, *preg);
   }
 
   ModuleDescription const* PathsAndConsumesOfModules::doModuleDescription(unsigned int moduleID) const {

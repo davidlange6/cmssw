@@ -490,8 +490,8 @@ namespace edm {
   template <typename PROD>
   bool Event::getByLabel(std::string const& label, std::string const& productInstanceName, Handle<PROD>& result) const {
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_,
-                                               moduleCallingContext_);
+    BasicHandle bh = provRecorder_.getByLabel_(
+        TypeID(typeid(PROD)), label, productInstanceName, emptyString_, moduleCallingContext_);
     result = convert_handle<PROD>(std::move(bh));  // throws on conversion error
     if
       UNLIKELY(result.failedToGet()) { return false; }

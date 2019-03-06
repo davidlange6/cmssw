@@ -16,8 +16,10 @@ namespace edm {
 
   ModuleDescription Maker::createModuleDescription(MakeModuleParams const& p) const {
     ParameterSet const& conf = *p.pset_;
-    ModuleDescription md(conf.id(), conf.getParameter<std::string>("@module_type"),
-                         conf.getParameter<std::string>("@module_label"), p.processConfiguration_.get(),
+    ModuleDescription md(conf.id(),
+                         conf.getParameter<std::string>("@module_type"),
+                         conf.getParameter<std::string>("@module_label"),
+                         p.processConfiguration_.get(),
                          ModuleDescription::getUniqueID());
     return md;
   }

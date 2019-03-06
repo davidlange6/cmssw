@@ -73,9 +73,15 @@ namespace {
       auto pc = std::make_shared<edm::ProcessConfiguration>();
       pc->setParameterSetID(dummyProcessPset.id());
 
-      edm::BranchDescription prod(iDesc.branchType(), name_, iDesc.processName(), iDesc.fullClassName(),
-                                  iDesc.friendlyClassName(), iDesc.productInstanceName() + "-" + name_, "",
-                                  iDesc.parameterSetID(), iDesc.unwrappedType());
+      edm::BranchDescription prod(iDesc.branchType(),
+                                  name_,
+                                  iDesc.processName(),
+                                  iDesc.fullClassName(),
+                                  iDesc.friendlyClassName(),
+                                  iDesc.productInstanceName() + "-" + name_,
+                                  "",
+                                  iDesc.parameterSetID(),
+                                  iDesc.unwrappedType());
       reg_->addProduct(prod);
     }
   };
@@ -91,11 +97,11 @@ void testProductRegistry::setUp() {
 
   edm::ParameterSet pset;
   pset.registerIt();
-  intBranch_.reset(new edm::BranchDescription(edm::InEvent, "labeli", "PROD", "int", "int", "int", "", pset.id(),
-                                              edm::TypeWithDict(typeid(int))));
+  intBranch_.reset(new edm::BranchDescription(
+      edm::InEvent, "labeli", "PROD", "int", "int", "int", "", pset.id(), edm::TypeWithDict(typeid(int))));
 
-  floatBranch_.reset(new edm::BranchDescription(edm::InEvent, "labelf", "PROD", "float", "float", "float", "",
-                                                pset.id(), edm::TypeWithDict(typeid(float))));
+  floatBranch_.reset(new edm::BranchDescription(
+      edm::InEvent, "labelf", "PROD", "float", "float", "float", "", pset.id(), edm::TypeWithDict(typeid(float))));
 }
 
 namespace {

@@ -69,10 +69,20 @@ namespace edm {
                                                    ActivityRegistry* activityRegistry,
                                                    MergeableRunProductMetadata const* mergeableRunProductMetadata) {
     auto token = ServiceRegistry::instance().presentToken();
-    GlobalContext globalContext(GlobalContext::Transition::kWriteRun, LuminosityBlockID(rp.run(), 0), rp.index(),
-                                LuminosityBlockIndex::invalidLuminosityBlockIndex(), rp.endTime(), processContext);
-    auto t = [& mod = module(), &rp, globalContext, token, desc = &description(), activityRegistry,
-              mergeableRunProductMetadata, iTask]() mutable {
+    GlobalContext globalContext(GlobalContext::Transition::kWriteRun,
+                                LuminosityBlockID(rp.run(), 0),
+                                rp.index(),
+                                LuminosityBlockIndex::invalidLuminosityBlockIndex(),
+                                rp.endTime(),
+                                processContext);
+    auto t = [& mod = module(),
+              &rp,
+              globalContext,
+              token,
+              desc = &description(),
+              activityRegistry,
+              mergeableRunProductMetadata,
+              iTask]() mutable {
       std::exception_ptr ex;
       try {
         ServiceRegistry::Operate op(token);
@@ -98,8 +108,12 @@ namespace edm {
                                                     ProcessContext const* processContext,
                                                     ActivityRegistry* activityRegistry) {
     auto token = ServiceRegistry::instance().presentToken();
-    GlobalContext globalContext(GlobalContext::Transition::kWriteLuminosityBlock, lbp.id(), lbp.runPrincipal().index(),
-                                lbp.index(), lbp.beginTime(), processContext);
+    GlobalContext globalContext(GlobalContext::Transition::kWriteLuminosityBlock,
+                                lbp.id(),
+                                lbp.runPrincipal().index(),
+                                lbp.index(),
+                                lbp.beginTime(),
+                                processContext);
     auto t = [& mod = module(), &lbp, activityRegistry, token, globalContext, desc = &description(), iTask]() mutable {
       std::exception_ptr ex;
       try {

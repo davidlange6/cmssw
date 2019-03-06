@@ -238,7 +238,9 @@ namespace edm {
     std::set<ComponentDescription> EventSetupRecordProvider::proxyProviderDescriptions() const {
       using std::placeholders::_1;
       std::set<ComponentDescription> descriptions;
-      std::transform(providers_.begin(), providers_.end(), std::inserter(descriptions, descriptions.end()),
+      std::transform(providers_.begin(),
+                     providers_.end(),
+                     std::inserter(descriptions, descriptions.end()),
                      std::bind(&DataProxyProvider::description, _1));
       return descriptions;
     }
@@ -246,7 +248,8 @@ namespace edm {
     std::shared_ptr<DataProxyProvider> EventSetupRecordProvider::proxyProvider(ComponentDescription const& iDesc) {
       using std::placeholders::_1;
       auto itFound = std::find_if(
-          providers_.begin(), providers_.end(),
+          providers_.begin(),
+          providers_.end(),
           std::bind(std::equal_to<ComponentDescription>(), iDesc, std::bind(&DataProxyProvider::description, _1)));
       if (itFound == providers_.end()) {
         return std::shared_ptr<DataProxyProvider>();

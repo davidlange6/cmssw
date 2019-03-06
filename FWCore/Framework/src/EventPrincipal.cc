@@ -123,7 +123,8 @@ namespace edm {
         //  If not, then we've internally changed the original BranchID to the alias BranchID
         //  in the ProductID lookup so we need the alias BranchID.
         auto const& bd = prod->branchDescription();
-        prod->setProvenance(productProvenanceRetrieverPtr(), processHistory(),
+        prod->setProvenance(productProvenanceRetrieverPtr(),
+                            processHistory(),
                             branchIDToProductID(bd.isAlias() ? bd.originalBranchID() : bd.branchID()));
       }
     }
@@ -267,7 +268,8 @@ namespace edm {
     // Loop over thinned containers which were made by selecting elements from the parent container
     for (auto associatedBranches = thinnedAssociationsHelper_->parentBegin(parent),
               iEnd = thinnedAssociationsHelper_->parentEnd(parent);
-         associatedBranches != iEnd; ++associatedBranches) {
+         associatedBranches != iEnd;
+         ++associatedBranches) {
       ThinnedAssociation const* thinnedAssociation = getThinnedAssociation(associatedBranches->association());
       if (thinnedAssociation == nullptr)
         continue;
@@ -310,7 +312,8 @@ namespace edm {
     // Loop over thinned containers which were made by selecting elements from the parent container
     for (auto associatedBranches = thinnedAssociationsHelper_->parentBegin(parent),
               iEnd = thinnedAssociationsHelper_->parentEnd(parent);
-         associatedBranches != iEnd; ++associatedBranches) {
+         associatedBranches != iEnd;
+         ++associatedBranches) {
       ThinnedAssociation const* thinnedAssociation = getThinnedAssociation(associatedBranches->association());
       if (thinnedAssociation == nullptr)
         continue;

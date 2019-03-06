@@ -325,8 +325,10 @@ void testEsproducer::decoratorTest() {
 class DepProducer : public ESProducer {
 public:
   DepProducer() {
-    setWhatProduced(this, dependsOn(&DepProducer::callWhenDummyChanges, &DepProducer::callWhenDummyChanges2,
-                                    &DepProducer::callWhenDummyChanges3));
+    setWhatProduced(this,
+                    dependsOn(&DepProducer::callWhenDummyChanges,
+                              &DepProducer::callWhenDummyChanges2,
+                              &DepProducer::callWhenDummyChanges3));
   }
   std::shared_ptr<DummyData> produce(const DepRecord& /*iRecord*/) { return ptr_; }
   void callWhenDummyChanges(const DummyRecord&) { ++ptr_->value_; }

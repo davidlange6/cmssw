@@ -71,9 +71,12 @@ namespace edm {
     static bool constexpr isEvent_ = false;
 
     static GlobalContext makeGlobalContext(MyPrincipal const& principal, ProcessContext const* processContext) {
-      return GlobalContext(GlobalContext::Transition::kBeginRun, LuminosityBlockID(principal.run(), 0),
-                           principal.index(), LuminosityBlockIndex::invalidLuminosityBlockIndex(),
-                           principal.beginTime(), processContext);
+      return GlobalContext(GlobalContext::Transition::kBeginRun,
+                           LuminosityBlockID(principal.run(), 0),
+                           principal.index(),
+                           LuminosityBlockIndex::invalidLuminosityBlockIndex(),
+                           principal.beginTime(),
+                           processContext);
     }
 
     static void preScheduleSignal(ActivityRegistry* a, GlobalContext const* globalContext) {
@@ -183,8 +186,12 @@ namespace edm {
     static bool constexpr isEvent_ = false;
 
     static GlobalContext makeGlobalContext(MyPrincipal const& principal, ProcessContext const* processContext) {
-      return GlobalContext(GlobalContext::Transition::kEndRun, LuminosityBlockID(principal.run(), 0), principal.index(),
-                           LuminosityBlockIndex::invalidLuminosityBlockIndex(), principal.endTime(), processContext);
+      return GlobalContext(GlobalContext::Transition::kEndRun,
+                           LuminosityBlockID(principal.run(), 0),
+                           principal.index(),
+                           LuminosityBlockIndex::invalidLuminosityBlockIndex(),
+                           principal.endTime(),
+                           processContext);
     }
 
     static void preScheduleSignal(ActivityRegistry* a, GlobalContext const* globalContext) {
@@ -218,8 +225,12 @@ namespace edm {
     static bool constexpr isEvent_ = false;
 
     static GlobalContext makeGlobalContext(MyPrincipal const& principal, ProcessContext const* processContext) {
-      return GlobalContext(GlobalContext::Transition::kBeginLuminosityBlock, principal.id(),
-                           principal.runPrincipal().index(), principal.index(), principal.beginTime(), processContext);
+      return GlobalContext(GlobalContext::Transition::kBeginLuminosityBlock,
+                           principal.id(),
+                           principal.runPrincipal().index(),
+                           principal.index(),
+                           principal.beginTime(),
+                           processContext);
     }
 
     static void preScheduleSignal(ActivityRegistry* a, GlobalContext const* globalContext) {
@@ -331,8 +342,12 @@ namespace edm {
     static bool constexpr isEvent_ = false;
 
     static GlobalContext makeGlobalContext(MyPrincipal const& principal, ProcessContext const* processContext) {
-      return GlobalContext(GlobalContext::Transition::kEndLuminosityBlock, principal.id(),
-                           principal.runPrincipal().index(), principal.index(), principal.beginTime(), processContext);
+      return GlobalContext(GlobalContext::Transition::kEndLuminosityBlock,
+                           principal.id(),
+                           principal.runPrincipal().index(),
+                           principal.index(),
+                           principal.beginTime(),
+                           processContext);
     }
 
     static void preScheduleSignal(ActivityRegistry* a, GlobalContext const* globalContext) {

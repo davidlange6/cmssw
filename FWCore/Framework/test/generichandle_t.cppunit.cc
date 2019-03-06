@@ -88,8 +88,8 @@ void testGenericHandle::failgetbyLabelTest() {
   branchIDListHelper->updateFromRegistry(*preg);
   auto thinnedAssociationsHelper = std::make_shared<edm::ThinnedAssociationsHelper>();
   edm::EventAuxiliary eventAux(id, uuid, time, true);
-  edm::EventPrincipal ep(preg, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_,
-                         edm::StreamID::invalidStreamID());
+  edm::EventPrincipal ep(
+      preg, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_, edm::StreamID::invalidStreamID());
   edm::ProcessHistoryRegistry phr;
   ep.fillEventPrincipal(eventAux, phr);
   ep.setLuminosityBlockPrincipal(lbp.get());
@@ -140,8 +140,15 @@ void testGenericHandle::getbyLabelTest() {
   edm::ParameterSet pset;
   pset.registerIt();
 
-  edm::BranchDescription product(edm::InEvent, label, processName, dummytype.userClassName(), className,
-                                 productInstanceName, "", pset.id(), dummytype);
+  edm::BranchDescription product(edm::InEvent,
+                                 label,
+                                 processName,
+                                 dummytype.userClassName(),
+                                 className,
+                                 productInstanceName,
+                                 "",
+                                 pset.id(),
+                                 dummytype);
 
   product.init();
 
@@ -167,8 +174,8 @@ void testGenericHandle::getbyLabelTest() {
   lbp->setAux(edm::LuminosityBlockAuxiliary(rp->run(), 1, fakeTime, fakeTime));
   lbp->setRunPrincipal(rp);
   edm::EventAuxiliary eventAux(col, uuid, fakeTime, true);
-  edm::EventPrincipal ep(pregc, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_,
-                         edm::StreamID::invalidStreamID());
+  edm::EventPrincipal ep(
+      pregc, branchIDListHelper, thinnedAssociationsHelper, pc, &historyAppender_, edm::StreamID::invalidStreamID());
   edm::ProcessHistoryRegistry phr;
   ep.fillEventPrincipal(eventAux, phr);
   ep.setLuminosityBlockPrincipal(lbp.get());
@@ -187,8 +194,8 @@ void testGenericHandle::getbyLabelTest() {
 
     edm::ParameterSet pset;
     pset.registerIt();
-    edm::ModuleDescription modDesc(pset.id(), "Blah", "blahs", processConfiguration.get(),
-                                   edm::ModuleDescription::getUniqueID());
+    edm::ModuleDescription modDesc(
+        pset.id(), "Blah", "blahs", processConfiguration.get(), edm::ModuleDescription::getUniqueID());
     edm::Event event(ep, modDesc, nullptr);
 
     event.getByLabel(label, productInstanceName, h);

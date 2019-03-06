@@ -302,6 +302,10 @@ void testGlobalOutputModule::fileTest() {
   auto testProd = std::make_shared<FileOutputModule>(pset);
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalOpenInputFile, Trans::kEvent, Trans::kGlobalEndLuminosityBlock,
-                             Trans::kGlobalEndRun, Trans::kGlobalCloseInputFile});
+  testTransitions(testProd,
+                  {Trans::kGlobalOpenInputFile,
+                   Trans::kEvent,
+                   Trans::kGlobalEndLuminosityBlock,
+                   Trans::kGlobalEndRun,
+                   Trans::kGlobalCloseInputFile});
 }

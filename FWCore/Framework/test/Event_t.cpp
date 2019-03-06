@@ -210,12 +210,18 @@ void testEvent::registerProduct(std::string const& tag,
 
   TypeWithDict product_type(typeid(T));
 
-  BranchDescription branch(InEvent, moduleLabel, processName, product_type.userClassName(),
-                           product_type.friendlyClassName(), productInstanceName, moduleClassName, moduleParams.id(),
+  BranchDescription branch(InEvent,
+                           moduleLabel,
+                           processName,
+                           product_type.userClassName(),
+                           product_type.friendlyClassName(),
+                           productInstanceName,
+                           moduleClassName,
+                           moduleParams.id(),
                            product_type);
 
-  moduleDescriptions_[tag] = ModuleDescription(moduleParams.id(), moduleClassName, moduleLabel, processX.get(),
-                                               ModuleDescription::getUniqueID());
+  moduleDescriptions_[tag] = ModuleDescription(
+      moduleParams.id(), moduleClassName, moduleLabel, processX.get(), ModuleDescription::getUniqueID());
   availableProducts_->addProduct(branch);
 }
 
@@ -232,8 +238,10 @@ ProductID testEvent::addProduct(std::unique_ptr<T> product, std::string const& t
   ProducerBase prod;
   prod.produces<T>(productLabel);
   const_cast<std::vector<edm::ProductResolverIndex>&>(prod.putTokenIndexToProductResolverIndex())
-      .push_back(principal_->productLookup().index(PRODUCT_TYPE, edm::TypeID(typeid(T)),
-                                                   description->second.moduleLabel().c_str(), productLabel.c_str(),
+      .push_back(principal_->productLookup().index(PRODUCT_TYPE,
+                                                   edm::TypeID(typeid(T)),
+                                                   description->second.moduleLabel().c_str(),
+                                                   productLabel.c_str(),
                                                    description->second.processName().c_str()));
 
   temporaryEvent.setProducer(&prod, nullptr);
@@ -249,9 +257,11 @@ std::unique_ptr<ProducerBase> testEvent::putProduct(std::unique_ptr<T> product,
                                                     bool doCommit) {
   auto prod = std::make_unique<ProducerBase>();
   prod->produces<edmtest::IntProduct>(productInstanceLabel);
-  auto index = principal_->productLookup().index(
-      PRODUCT_TYPE, edm::TypeID(typeid(T)), currentModuleDescription_->moduleLabel().c_str(),
-      productInstanceLabel.c_str(), currentModuleDescription_->processName().c_str());
+  auto index = principal_->productLookup().index(PRODUCT_TYPE,
+                                                 edm::TypeID(typeid(T)),
+                                                 currentModuleDescription_->moduleLabel().c_str(),
+                                                 productInstanceLabel.c_str(),
+                                                 currentModuleDescription_->processName().c_str());
   CPPUNIT_ASSERT(index != std::numeric_limits<unsigned int>::max());
   const_cast<std::vector<edm::ProductResolverIndex>&>(prod->putTokenIndexToProductResolverIndex()).push_back(index);
   currentEvent_->setProducer(prod.get(), nullptr);
@@ -268,9 +278,11 @@ std::unique_ptr<ProducerBase> testEvent::putProductUsingToken(std::unique_ptr<T>
                                                               bool doCommit) {
   auto prod = std::make_unique<ProducerBase>();
   EDPutTokenT<edmtest::IntProduct> token = prod->produces<edmtest::IntProduct>(productInstanceLabel);
-  auto index = principal_->productLookup().index(
-      PRODUCT_TYPE, edm::TypeID(typeid(T)), currentModuleDescription_->moduleLabel().c_str(),
-      productInstanceLabel.c_str(), currentModuleDescription_->processName().c_str());
+  auto index = principal_->productLookup().index(PRODUCT_TYPE,
+                                                 edm::TypeID(typeid(T)),
+                                                 currentModuleDescription_->moduleLabel().c_str(),
+                                                 productInstanceLabel.c_str(),
+                                                 currentModuleDescription_->processName().c_str());
   CPPUNIT_ASSERT(index != std::numeric_limits<unsigned int>::max());
   const_cast<std::vector<edm::ProductResolverIndex>&>(prod->putTokenIndexToProductResolverIndex()).push_back(index);
   currentEvent_->setProducer(prod.get(), nullptr);
@@ -287,9 +299,11 @@ std::unique_ptr<ProducerBase> testEvent::emplaceProduct(T product,
                                                         bool doCommit) {
   auto prod = std::make_unique<ProducerBase>();
   EDPutTokenT<edmtest::IntProduct> token = prod->produces<edmtest::IntProduct>(productInstanceLabel);
-  auto index = principal_->productLookup().index(
-      PRODUCT_TYPE, edm::TypeID(typeid(T)), currentModuleDescription_->moduleLabel().c_str(),
-      productInstanceLabel.c_str(), currentModuleDescription_->processName().c_str());
+  auto index = principal_->productLookup().index(PRODUCT_TYPE,
+                                                 edm::TypeID(typeid(T)),
+                                                 currentModuleDescription_->moduleLabel().c_str(),
+                                                 productInstanceLabel.c_str(),
+                                                 currentModuleDescription_->processName().c_str());
   CPPUNIT_ASSERT(index != std::numeric_limits<unsigned int>::max());
   const_cast<std::vector<edm::ProductResolverIndex>&>(prod->putTokenIndexToProductResolverIndex()).push_back(index);
   currentEvent_->setProducer(prod.get(), nullptr);
@@ -342,13 +356,19 @@ testEvent::testEvent()
 
   auto processX = std::make_shared<ProcessConfiguration>(process);
   processConfigurations_.push_back(processX);
-  currentModuleDescription_.reset(new ModuleDescription(moduleParams.id(), moduleClassName, moduleLabel, processX.get(),
-                                                        ModuleDescription::getUniqueID()));
+  currentModuleDescription_.reset(new ModuleDescription(
+      moduleParams.id(), moduleClassName, moduleLabel, processX.get(), ModuleDescription::getUniqueID()));
 
   std::string productInstanceName("int1");
 
-  BranchDescription branch(InEvent, moduleLabel, processName, product_type.userClassName(),
-                           product_type.friendlyClassName(), productInstanceName, moduleClassName, moduleParams.id(),
+  BranchDescription branch(InEvent,
+                           moduleLabel,
+                           processName,
+                           product_type.userClassName(),
+                           product_type.friendlyClassName(),
+                           productInstanceName,
+                           moduleClassName,
+                           moduleParams.id(),
                            product_type);
 
   availableProducts_->addProduct(branch);
@@ -431,8 +451,8 @@ void testEvent::setUp() {
   lbp_->setRunPrincipal(rp);
   EventAuxiliary eventAux(id, uuid, time, true);
   const_cast<ProcessHistoryID&>(eventAux.processHistoryID()) = processHistoryID;
-  principal_.reset(new edm::EventPrincipal(preg, branchIDListHelper_, thinnedAssociationsHelper_, pc, &historyAppender_,
-                                           edm::StreamID::invalidStreamID()));
+  principal_.reset(new edm::EventPrincipal(
+      preg, branchIDListHelper_, thinnedAssociationsHelper_, pc, &historyAppender_, edm::StreamID::invalidStreamID()));
   principal_->fillEventPrincipal(eventAux, processHistoryRegistry_);
   principal_->setLuminosityBlockPrincipal(lbp_.get());
   ModuleCallingContext mcc(currentModuleDescription_.get());
@@ -692,12 +712,12 @@ void testEvent::getByLabel() {
     CPPUNIT_ASSERT(h->value == 200);
   }
 
-  BasicHandle bh = principal_->getByLabel(PRODUCT_TYPE, TypeID(typeid(edmtest::IntProduct)), "modMulti", "int1", "LATE",
-                                          nullptr, nullptr, nullptr);
+  BasicHandle bh = principal_->getByLabel(
+      PRODUCT_TYPE, TypeID(typeid(edmtest::IntProduct)), "modMulti", "int1", "LATE", nullptr, nullptr, nullptr);
   h = convert_handle<product_t>(std::move(bh));
   CPPUNIT_ASSERT(h->value == 100);
-  BasicHandle bh2(principal_->getByLabel(PRODUCT_TYPE, TypeID(typeid(edmtest::IntProduct)), "modMulti", "int1",
-                                         "nomatch", nullptr, nullptr, nullptr));
+  BasicHandle bh2(principal_->getByLabel(
+      PRODUCT_TYPE, TypeID(typeid(edmtest::IntProduct)), "modMulti", "int1", "nomatch", nullptr, nullptr, nullptr));
   CPPUNIT_ASSERT(!bh2.isValid());
 
   std::shared_ptr<Wrapper<edmtest::IntProduct> const> ptr =
@@ -730,10 +750,14 @@ void testEvent::getByToken() {
 
   CPPUNIT_ASSERT(currentEvent_->size() == 7);
 
-  IntProductConsumer consumer(std::vector<InputTag>{
-      InputTag("modMulti"), InputTag("modMulti", "int1"), InputTag("modMulti", "nomatch"),
-      InputTag("modMulti", "int1", "EARLY"), InputTag("modMulti", "int1", "LATE"),
-      InputTag("modMulti", "int1", "CURRENT"), InputTag("modMulti", "int2", "EARLY"), InputTag("modOne")});
+  IntProductConsumer consumer(std::vector<InputTag>{InputTag("modMulti"),
+                                                    InputTag("modMulti", "int1"),
+                                                    InputTag("modMulti", "nomatch"),
+                                                    InputTag("modMulti", "int1", "EARLY"),
+                                                    InputTag("modMulti", "int1", "LATE"),
+                                                    InputTag("modMulti", "int1", "CURRENT"),
+                                                    InputTag("modMulti", "int2", "EARLY"),
+                                                    InputTag("modOne")});
   consumer.updateLookup(InEvent, principal_->productLookup(), false);
 
   currentEvent_->setConsumer(&consumer);
@@ -802,10 +826,14 @@ void testEvent::getHandle() {
 
   CPPUNIT_ASSERT(currentEvent_->size() == 7);
 
-  IntProductConsumer consumer(std::vector<InputTag>{
-      InputTag("modMulti"), InputTag("modMulti", "int1"), InputTag("modMulti", "nomatch"),
-      InputTag("modMulti", "int1", "EARLY"), InputTag("modMulti", "int1", "LATE"),
-      InputTag("modMulti", "int1", "CURRENT"), InputTag("modMulti", "int2", "EARLY"), InputTag("modOne")});
+  IntProductConsumer consumer(std::vector<InputTag>{InputTag("modMulti"),
+                                                    InputTag("modMulti", "int1"),
+                                                    InputTag("modMulti", "nomatch"),
+                                                    InputTag("modMulti", "int1", "EARLY"),
+                                                    InputTag("modMulti", "int1", "LATE"),
+                                                    InputTag("modMulti", "int1", "CURRENT"),
+                                                    InputTag("modMulti", "int2", "EARLY"),
+                                                    InputTag("modOne")});
   consumer.updateLookup(InEvent, principal_->productLookup(), false);
 
   currentEvent_->setConsumer(&consumer);
@@ -874,10 +902,14 @@ void testEvent::get_product() {
 
   CPPUNIT_ASSERT(currentEvent_->size() == 7);
 
-  IntProductConsumer consumer(std::vector<InputTag>{
-      InputTag("modMulti"), InputTag("modMulti", "int1"), InputTag("modMulti", "nomatch"),
-      InputTag("modMulti", "int1", "EARLY"), InputTag("modMulti", "int1", "LATE"),
-      InputTag("modMulti", "int1", "CURRENT"), InputTag("modMulti", "int2", "EARLY"), InputTag("modOne")});
+  IntProductConsumer consumer(std::vector<InputTag>{InputTag("modMulti"),
+                                                    InputTag("modMulti", "int1"),
+                                                    InputTag("modMulti", "nomatch"),
+                                                    InputTag("modMulti", "int1", "EARLY"),
+                                                    InputTag("modMulti", "int1", "LATE"),
+                                                    InputTag("modMulti", "int1", "CURRENT"),
+                                                    InputTag("modMulti", "int2", "EARLY"),
+                                                    InputTag("modOne")});
   consumer.updateLookup(InEvent, principal_->productLookup(), false);
 
   currentEvent_->setConsumer(&consumer);

@@ -385,62 +385,64 @@ namespace edm {
     T::setStreamContext(streamContext_, ep);
 
     auto id = ep.id();
-    auto doneTask = make_waiting_task(tbb::task::allocate_root(), [this, iHolder, id, cleaningUpAfterException,
-                                                                   token](std::exception_ptr const* iPtr) mutable {
-      std::exception_ptr excpt;
-      if (iPtr) {
-        excpt = *iPtr;
-        //add context information to the exception and print message
-        try {
-          convertException::wrap([&]() { std::rethrow_exception(excpt); });
-        } catch (cms::Exception& ex) {
-          //TODO: should add the transition type info
-          std::ostringstream ost;
-          if (ex.context().empty()) {
-            ost << "Processing " << T::transitionName() << " " << id;
+    auto doneTask = make_waiting_task(
+        tbb::task::allocate_root(),
+        [this, iHolder, id, cleaningUpAfterException, token](std::exception_ptr const* iPtr) mutable {
+          std::exception_ptr excpt;
+          if (iPtr) {
+            excpt = *iPtr;
+            //add context information to the exception and print message
+            try {
+              convertException::wrap([&]() { std::rethrow_exception(excpt); });
+            } catch (cms::Exception& ex) {
+              //TODO: should add the transition type info
+              std::ostringstream ost;
+              if (ex.context().empty()) {
+                ost << "Processing " << T::transitionName() << " " << id;
+              }
+              ServiceRegistry::Operate op(token);
+              addContextAndPrintException(ost.str().c_str(), ex, cleaningUpAfterException);
+              excpt = std::current_exception();
+            }
+
+            ServiceRegistry::Operate op(token);
+            actReg_->preStreamEarlyTerminationSignal_(streamContext_, TerminationOrigin::ExceptionFromThisContext);
           }
-          ServiceRegistry::Operate op(token);
-          addContextAndPrintException(ost.str().c_str(), ex, cleaningUpAfterException);
-          excpt = std::current_exception();
-        }
 
-        ServiceRegistry::Operate op(token);
-        actReg_->preStreamEarlyTerminationSignal_(streamContext_, TerminationOrigin::ExceptionFromThisContext);
-      }
+          try {
+            ServiceRegistry::Operate op(token);
+            T::postScheduleSignal(actReg_.get(), &streamContext_);
+          } catch (...) {
+            if (not excpt) {
+              excpt = std::current_exception();
+            }
+          }
+          iHolder.doneWaiting(excpt);
+        });
 
-      try {
-        ServiceRegistry::Operate op(token);
-        T::postScheduleSignal(actReg_.get(), &streamContext_);
-      } catch (...) {
-        if (not excpt) {
-          excpt = std::current_exception();
-        }
-      }
-      iHolder.doneWaiting(excpt);
-    });
+    auto task = make_functor_task(tbb::task::allocate_root(),
+                                  [this, doneTask, h = WaitingTaskHolder(doneTask), &ep, &es, token]() mutable {
+                                    ServiceRegistry::Operate op(token);
+                                    try {
+                                      T::preScheduleSignal(actReg_.get(), &streamContext_);
 
-    auto task = make_functor_task(tbb::task::allocate_root(), [this, doneTask, h = WaitingTaskHolder(doneTask), &ep,
-                                                               &es, token]() mutable {
-      ServiceRegistry::Operate op(token);
-      try {
-        T::preScheduleSignal(actReg_.get(), &streamContext_);
+                                      workerManager_.resetAll();
+                                    } catch (...) {
+                                      h.doneWaiting(std::current_exception());
+                                      return;
+                                    }
 
-        workerManager_.resetAll();
-      } catch (...) {
-        h.doneWaiting(std::current_exception());
-        return;
-      }
+                                    for (auto& p : end_paths_) {
+                                      p.runAllModulesAsync<T>(doneTask, ep, es, token, streamID_, &streamContext_);
+                                    }
 
-      for (auto& p : end_paths_) {
-        p.runAllModulesAsync<T>(doneTask, ep, es, token, streamID_, &streamContext_);
-      }
+                                    for (auto& p : trig_paths_) {
+                                      p.runAllModulesAsync<T>(doneTask, ep, es, token, streamID_, &streamContext_);
+                                    }
 
-      for (auto& p : trig_paths_) {
-        p.runAllModulesAsync<T>(doneTask, ep, es, token, streamID_, &streamContext_);
-      }
-
-      workerManager_.processOneOccurrenceAsync<T>(doneTask, ep, es, token, streamID_, &streamContext_, &streamContext_);
-    });
+                                    workerManager_.processOneOccurrenceAsync<T>(
+                                        doneTask, ep, es, token, streamID_, &streamContext_, &streamContext_);
+                                  });
 
     if (streamID_.value() == 0) {
       //Enqueueing will start another thread if there is only

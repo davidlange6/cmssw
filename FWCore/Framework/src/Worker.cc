@@ -274,7 +274,9 @@ namespace edm {
   void Worker::setEarlyDeleteHelper(EarlyDeleteHelper* iHelper) { earlyDeleteHelper_ = iHelper; }
 
   void Worker::resetModuleDescription(ModuleDescription const* iDesc) {
-    ModuleCallingContext temp(iDesc, moduleCallingContext_.state(), moduleCallingContext_.parent(),
+    ModuleCallingContext temp(iDesc,
+                              moduleCallingContext_.state(),
+                              moduleCallingContext_.parent(),
                               moduleCallingContext_.previousModuleOnThread());
     moduleCallingContext_ = temp;
   }

@@ -100,7 +100,8 @@ namespace edm {
     std::set<EventSetupRecordKey> DataProxyProvider::usingRecords() const {
       std::set<EventSetupRecordKey> returnValue;
       for (RecordProxies::const_iterator itRecProxies = recordProxies_.begin(), itRecProxiesEnd = recordProxies_.end();
-           itRecProxies != itRecProxiesEnd; ++itRecProxies) {
+           itRecProxies != itRecProxiesEnd;
+           ++itRecProxies) {
         returnValue.insert(returnValue.end(), itRecProxies->first);
       }
       //copy_all(keys_, std::inserter(returnValue, returnValue.end()));

@@ -59,8 +59,8 @@ namespace edm {
       }
       auto branchType = convertToBranchType(p->transition_);
       if (branchType != InEvent) {
-        std::tuple<BranchType, std::type_index, std::string> entry{branchType, p->typeID_.typeInfo(),
-                                                                   p->productInstanceName_};
+        std::tuple<BranchType, std::type_index, std::string> entry{
+            branchType, p->typeID_.typeInfo(), p->productInstanceName_};
         if (registeredProducts.end() != registeredProducts.find(entry)) {
           //ignore registration of items if in both begin and end transitions for now
           // This is to work around ExternalLHEProducer
@@ -71,9 +71,17 @@ namespace edm {
       }
 
       TypeWithDict type(p->typeID_.typeInfo());
-      BranchDescription pdesc(branchType, iDesc.moduleLabel(), iDesc.processName(), p->typeID_.userClassName(),
-                              p->typeID_.friendlyClassName(), p->productInstanceName_, iDesc.moduleName(),
-                              iDesc.parameterSetID(), type, true, isEndTransition(p->transition_));
+      BranchDescription pdesc(branchType,
+                              iDesc.moduleLabel(),
+                              iDesc.processName(),
+                              p->typeID_.userClassName(),
+                              p->typeID_.friendlyClassName(),
+                              p->productInstanceName_,
+                              iDesc.moduleName(),
+                              iDesc.parameterSetID(),
+                              type,
+                              true,
+                              isEndTransition(p->transition_));
       if (p->aliasType_ == TypeLabelItem::AliasType::kSwitchAlias) {
         if (p->branchAlias_.empty()) {
           throw edm::Exception(edm::errors::LogicError)

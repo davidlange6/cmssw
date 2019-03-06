@@ -64,10 +64,10 @@ int work() {
   modAparams.registerIt();
   psetsA.insert(modAparams.id());
 
-  edm::BranchDescription b1(edm::InEvent, "modA", "PROD", "UglyProdTypeA", "ProdTypeA", "i1", "", pset.id(),
-                            dummyTypeWithDict);
-  edm::BranchDescription b2(edm::InEvent, "modA", "PROD", "UglyProdTypeA", "ProdTypeA", "i2", "", pset.id(),
-                            dummyTypeWithDict);
+  edm::BranchDescription b1(
+      edm::InEvent, "modA", "PROD", "UglyProdTypeA", "ProdTypeA", "i1", "", pset.id(), dummyTypeWithDict);
+  edm::BranchDescription b2(
+      edm::InEvent, "modA", "PROD", "UglyProdTypeA", "ProdTypeA", "i2", "", pset.id(), dummyTypeWithDict);
 
   // Our second pretend module has only one product, and gives it no
   // instance name.
@@ -77,16 +77,16 @@ int work() {
   modBparams.registerIt();
   psetsB.insert(modBparams.id());
 
-  edm::BranchDescription b3(edm::InEvent, "modB", "HLT", "UglyProdTypeB", "ProdTypeB", "", "", pset.id(),
-                            dummyTypeWithDict);
+  edm::BranchDescription b3(
+      edm::InEvent, "modB", "HLT", "UglyProdTypeB", "ProdTypeB", "", "", pset.id(), dummyTypeWithDict);
 
   // Our third pretend is like modA, except it hass processName_ of
   // "USER"
 
-  edm::BranchDescription b4(edm::InEvent, "modA", "USER", "UglyProdTypeA", "ProdTypeA", "i1", "", pset.id(),
-                            dummyTypeWithDict);
-  edm::BranchDescription b5(edm::InEvent, "modA", "USER", "UglyProdTypeA", "ProdTypeA", "i2", "", pset.id(),
-                            dummyTypeWithDict);
+  edm::BranchDescription b4(
+      edm::InEvent, "modA", "USER", "UglyProdTypeA", "ProdTypeA", "i1", "", pset.id(), dummyTypeWithDict);
+  edm::BranchDescription b5(
+      edm::InEvent, "modA", "USER", "UglyProdTypeA", "ProdTypeA", "i2", "", pset.id(), dummyTypeWithDict);
 
   // These are pointers to all the branches that are available. In a
   // framework program, these would come from the ProductRegistry

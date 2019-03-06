@@ -118,9 +118,15 @@ std::shared_ptr<edm::BranchDescription> test_ep::fake_single_process_branch(std:
   modParams.registerIt();
   std::shared_ptr<edm::ProcessConfiguration> process(fake_single_module_process(tag, processName, modParams));
 
-  auto result = std::make_shared<edm::BranchDescription>(edm::InEvent, moduleLabel, processName, productClassName,
-                                                         friendlyProductClassName, productInstanceName, moduleClass,
-                                                         modParams.id(), dummyType);
+  auto result = std::make_shared<edm::BranchDescription>(edm::InEvent,
+                                                         moduleLabel,
+                                                         processName,
+                                                         productClassName,
+                                                         friendlyProductClassName,
+                                                         productInstanceName,
+                                                         moduleClass,
+                                                         modParams.id(),
+                                                         dummyType);
   branchDescriptions_[tag] = result;
   return result;
 }
@@ -175,8 +181,12 @@ void test_ep::setUp() {
     lbp_->setAux(lumiAux);
     lbp_->setRunPrincipal(rp);
     edm::EventAuxiliary eventAux(eventID_, uuid, now, true);
-    pEvent_.reset(new edm::EventPrincipal(pProductRegistry_, branchIDListHelper, thinnedAssociationsHelper, *process,
-                                          &historyAppender_, edm::StreamID::invalidStreamID()));
+    pEvent_.reset(new edm::EventPrincipal(pProductRegistry_,
+                                          branchIDListHelper,
+                                          thinnedAssociationsHelper,
+                                          *process,
+                                          &historyAppender_,
+                                          edm::StreamID::invalidStreamID()));
     edm::ProcessHistoryRegistry phr;
     pEvent_->fillEventPrincipal(eventAux, phr);
     pEvent_->setLuminosityBlockPrincipal(lbp_.get());

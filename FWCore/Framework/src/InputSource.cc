@@ -227,8 +227,8 @@ namespace edm {
   void InputSource::closeFile(FileBlock* fb, bool cleaningUpAfterException) {
     if (fb != nullptr)
       fb->close();
-    callWithTryCatchAndPrint<void>([this]() { closeFile_(); }, "Calling InputSource::closeFile_",
-                                   cleaningUpAfterException);
+    callWithTryCatchAndPrint<void>(
+        [this]() { closeFile_(); }, "Calling InputSource::closeFile_", cleaningUpAfterException);
     return;
   }
 

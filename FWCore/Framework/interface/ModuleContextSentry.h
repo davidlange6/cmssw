@@ -12,8 +12,8 @@ namespace edm {
   public:
     ModuleContextSentry(ModuleCallingContext* moduleCallingContext, ParentContext const& parentContext)
         : moduleCallingContext_(moduleCallingContext) {
-      moduleCallingContext_->setContext(ModuleCallingContext::State::kRunning, parentContext,
-                                        CurrentModuleOnThread::getCurrentModuleOnThread());
+      moduleCallingContext_->setContext(
+          ModuleCallingContext::State::kRunning, parentContext, CurrentModuleOnThread::getCurrentModuleOnThread());
       CurrentModuleOnThread::setCurrentModuleOnThread(moduleCallingContext_);
     }
     ~ModuleContextSentry() {

@@ -242,8 +242,13 @@ namespace edm {
       try {
         std::ostringstream ost;
         ost << iEP.id();
-        shouldContinue = handleWorkerFailure(*pEx, iModuleIndex, /*isEvent*/ true, /*isBegin*/ true, InEvent,
-                                             worker.getWorker()->description(), ost.str());
+        shouldContinue = handleWorkerFailure(*pEx,
+                                             iModuleIndex,
+                                             /*isEvent*/ true,
+                                             /*isBegin*/ true,
+                                             InEvent,
+                                             worker.getWorker()->description(),
+                                             ost.str());
         //If we didn't rethrow, then we effectively skipped
         worker.skipWorker(iEP);
         finalException = std::exception_ptr();

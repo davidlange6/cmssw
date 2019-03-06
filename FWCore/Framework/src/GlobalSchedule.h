@@ -217,8 +217,8 @@ namespace edm {
       WaitingTaskHolder holdForLoop(doneTask);
       auto& aw = workerManagers_[ep.index()].allWorkers();
       for (Worker* worker : boost::adaptors::reverse(aw)) {
-        worker->doWorkAsync<T>(doneTask, ep, es, token, StreamID::invalidStreamID(), parentContext,
-                               globalContext.get());
+        worker->doWorkAsync<T>(
+            doneTask, ep, es, token, StreamID::invalidStreamID(), parentContext, globalContext.get());
       }
     } catch (...) {
       iHolder.doneWaiting(std::current_exception());

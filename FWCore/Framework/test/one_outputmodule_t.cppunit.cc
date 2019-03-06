@@ -354,8 +354,12 @@ void testOneOutputModule::runTest() {
   auto testProd = std::make_shared<RunOutputModule>(pset);
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalBeginRun, Trans::kEvent, Trans::kGlobalEndLuminosityBlock,
-                             Trans::kGlobalEndRun, Trans::kGlobalEndRun});
+  testTransitions(testProd,
+                  {Trans::kGlobalBeginRun,
+                   Trans::kEvent,
+                   Trans::kGlobalEndLuminosityBlock,
+                   Trans::kGlobalEndRun,
+                   Trans::kGlobalEndRun});
 }
 
 void testOneOutputModule::lumiTest() {
@@ -366,8 +370,12 @@ void testOneOutputModule::lumiTest() {
   auto testProd = std::make_shared<LumiOutputModule>(pset);
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalBeginLuminosityBlock, Trans::kEvent, Trans::kGlobalEndLuminosityBlock,
-                             Trans::kGlobalEndLuminosityBlock, Trans::kGlobalEndRun});
+  testTransitions(testProd,
+                  {Trans::kGlobalBeginLuminosityBlock,
+                   Trans::kEvent,
+                   Trans::kGlobalEndLuminosityBlock,
+                   Trans::kGlobalEndLuminosityBlock,
+                   Trans::kGlobalEndRun});
 }
 
 void testOneOutputModule::fileTest() {
@@ -378,8 +386,12 @@ void testOneOutputModule::fileTest() {
   auto testProd = std::make_shared<FileOutputModule>(pset);
 
   CPPUNIT_ASSERT(0 == testProd->m_count);
-  testTransitions(testProd, {Trans::kGlobalOpenInputFile, Trans::kEvent, Trans::kGlobalEndLuminosityBlock,
-                             Trans::kGlobalEndRun, Trans::kGlobalCloseInputFile});
+  testTransitions(testProd,
+                  {Trans::kGlobalOpenInputFile,
+                   Trans::kEvent,
+                   Trans::kGlobalEndLuminosityBlock,
+                   Trans::kGlobalEndRun,
+                   Trans::kGlobalCloseInputFile});
 }
 
 void testOneOutputModule::resourceTest() {

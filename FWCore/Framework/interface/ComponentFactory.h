@@ -60,7 +60,10 @@ namespace edm {
           std::shared_ptr<Maker> wm(edmplugin::PluginFactory<ComponentMakerBase<T>*()>::get()->create(modtype));
 
           if (wm.get() == nullptr) {
-            Exception::throwThis(errors::Configuration, "UnknownModule", T::name().c_str(), " of type ",
+            Exception::throwThis(errors::Configuration,
+                                 "UnknownModule",
+                                 T::name().c_str(),
+                                 " of type ",
                                  modtype.c_str(),
                                  " has not been registered.\n"
                                  "Perhaps your module type is misspelled or is not a "

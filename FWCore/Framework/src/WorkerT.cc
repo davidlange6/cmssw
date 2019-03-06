@@ -362,7 +362,8 @@ namespace edm {
                                             EventSetupImpl const& c,
                                             ModuleCallingContext const* mcc) {
     std::conditional_t<workerimpl::has_stream_functions<T>::value,
-                       workerimpl::DoStreamBeginTrans<T, RunPrincipal const>, workerimpl::DoNothing>
+                       workerimpl::DoStreamBeginTrans<T, RunPrincipal const>,
+                       workerimpl::DoNothing>
         might_call;
     might_call(this, id, rp, c, mcc);
     return true;
@@ -373,7 +374,8 @@ namespace edm {
                                           RunPrincipal const& rp,
                                           EventSetupImpl const& c,
                                           ModuleCallingContext const* mcc) {
-    std::conditional_t<workerimpl::has_stream_functions<T>::value, workerimpl::DoStreamEndTrans<T, RunPrincipal const>,
+    std::conditional_t<workerimpl::has_stream_functions<T>::value,
+                       workerimpl::DoStreamEndTrans<T, RunPrincipal const>,
                        workerimpl::DoNothing>
         might_call;
     might_call(this, id, rp, c, mcc);
@@ -414,7 +416,8 @@ namespace edm {
                                             EventSetupImpl const& c,
                                             ModuleCallingContext const* mcc) {
     std::conditional_t<workerimpl::has_stream_functions<T>::value,
-                       workerimpl::DoStreamBeginTrans<T, LuminosityBlockPrincipal>, workerimpl::DoNothing>
+                       workerimpl::DoStreamBeginTrans<T, LuminosityBlockPrincipal>,
+                       workerimpl::DoNothing>
         might_call;
     might_call(this, id, lbp, c, mcc);
     return true;
@@ -426,7 +429,8 @@ namespace edm {
                                           EventSetupImpl const& c,
                                           ModuleCallingContext const* mcc) {
     std::conditional_t<workerimpl::has_stream_functions<T>::value,
-                       workerimpl::DoStreamEndTrans<T, LuminosityBlockPrincipal>, workerimpl::DoNothing>
+                       workerimpl::DoStreamEndTrans<T, LuminosityBlockPrincipal>,
+                       workerimpl::DoNothing>
         might_call;
     might_call(this, id, lbp, c, mcc);
 

@@ -287,8 +287,8 @@ namespace edm {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), label, productInstanceName);
     }
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_,
-                                               moduleCallingContext_);
+    BasicHandle bh = provRecorder_.getByLabel_(
+        TypeID(typeid(PROD)), label, productInstanceName, emptyString_, moduleCallingContext_);
     result = convert_handle<PROD>(std::move(bh));  // throws on conversion error
     if (result.failedToGet()) {
       return false;

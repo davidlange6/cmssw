@@ -70,7 +70,10 @@ namespace edm {
       trig_pset->registerIt();
 
       WorkerParams work_args(trig_pset, preg, &iPrealloc, processConfiguration, actions);
-      ModuleDescription md(trig_pset->id(), "TriggerResultInserter", "TriggerResults", processConfiguration.get(),
+      ModuleDescription md(trig_pset->id(),
+                           "TriggerResultInserter",
+                           "TriggerResults",
+                           processConfiguration.get(),
                            ModuleDescription::getUniqueID());
 
       areg->preModuleConstructionSignal_(md);
@@ -115,8 +118,8 @@ namespace edm {
       pathStatusInserters.reserve(pathNames.size());
 
       for (auto const& pathName : pathNames) {
-        ModuleDescription md(pset.id(), moduleTypeName, pathName, processConfiguration.get(),
-                             ModuleDescription::getUniqueID());
+        ModuleDescription md(
+            pset.id(), moduleTypeName, pathName, processConfiguration.get(), ModuleDescription::getUniqueID());
 
         areg->preModuleConstructionSignal_(md);
         bool postCalled = false;
@@ -254,8 +257,15 @@ namespace edm {
                 }
                 match = true;
 
-                checkAndInsertAlias(friendlyClassName, moduleLabel, it->first.productInstanceName(), processName, alias,
-                                    instanceAlias, preg, aliasMap, aliasKeys);
+                checkAndInsertAlias(friendlyClassName,
+                                    moduleLabel,
+                                    it->first.productInstanceName(),
+                                    processName,
+                                    alias,
+                                    instanceAlias,
+                                    preg,
+                                    aliasMap,
+                                    aliasKeys);
               }
               if (!match) {
                 // No product was found matching the alias.
@@ -269,8 +279,15 @@ namespace edm {
                 }
               }
             } else {
-              checkAndInsertAlias(friendlyClassName, moduleLabel, productInstanceName, processName, alias,
-                                  instanceAlias, preg, aliasMap, aliasKeys);
+              checkAndInsertAlias(friendlyClassName,
+                                  moduleLabel,
+                                  productInstanceName,
+                                  processName,
+                                  alias,
+                                  instanceAlias,
+                                  preg,
+                                  aliasMap,
+                                  aliasKeys);
             }
           }
         }
@@ -352,9 +369,12 @@ namespace edm {
               // SwitchProducer branches are not alias branches)
               nonConstItem.second.setTransient(true);
 
-              auto range = std::equal_range(chosenBranches.begin(), chosenBranches.end(),
-                                            BranchKey(item.first.friendlyClassName(), switchLabel,
-                                                      item.first.productInstanceName(), item.first.processName()));
+              auto range = std::equal_range(chosenBranches.begin(),
+                                            chosenBranches.end(),
+                                            BranchKey(item.first.friendlyClassName(),
+                                                      switchLabel,
+                                                      item.first.productInstanceName(),
+                                                      item.first.processName()));
               if (range.first == range.second) {
                 throw Exception(errors::Configuration)
                     << "SwitchProducer " << switchLabel << " has a case " << caseLabel << " with a product "
@@ -440,8 +460,11 @@ namespace edm {
       // the configuration but which are not being used by the system
       std::vector<std::string> labelsToBeDropped;
       labelsToBeDropped.reserve(modulesInConfigSet.size());
-      std::set_difference(modulesInConfigSet.begin(), modulesInConfigSet.end(), usedModuleLabels.begin(),
-                          usedModuleLabels.end(), std::back_inserter(labelsToBeDropped));
+      std::set_difference(modulesInConfigSet.begin(),
+                          modulesInConfigSet.end(),
+                          usedModuleLabels.begin(),
+                          usedModuleLabels.end(),
+                          std::back_inserter(labelsToBeDropped));
 
       const unsigned int sizeBeforeOutputModules = labelsToBeDropped.size();
       for (auto const& modLabel : usedModuleLabels) {
@@ -461,15 +484,16 @@ namespace edm {
         }
       }
       //labelsToBeDropped must be sorted
-      std::inplace_merge(labelsToBeDropped.begin(), labelsToBeDropped.begin() + sizeBeforeOutputModules,
-                         labelsToBeDropped.end());
+      std::inplace_merge(
+          labelsToBeDropped.begin(), labelsToBeDropped.begin() + sizeBeforeOutputModules, labelsToBeDropped.end());
 
       // drop the parameter sets used to configure the modules
       for_all(labelsToBeDropped, std::bind(&ParameterSet::eraseOrSetUntrackedParameterSet, std::ref(proc_pset), _1));
 
       // drop the labels from @all_modules
       vstring::iterator endAfterRemove =
-          std::remove_if(modulesInConfig.begin(), modulesInConfig.end(),
+          std::remove_if(modulesInConfig.begin(),
+                         modulesInConfig.end(),
                          std::bind(binary_search_string, std::ref(labelsToBeDropped), _1));
       modulesInConfig.erase(endAfterRemove, modulesInConfig.end());
       proc_pset.addParameter<vstring>(std::string("@all_modules"), modulesInConfig);
@@ -478,7 +502,8 @@ namespace edm {
       vstring endPathsToBeDropped;
       vstring labels;
       for (vstring::const_iterator iEndPath = end_path_name_list.begin(), endEndPath = end_path_name_list.end();
-           iEndPath != endEndPath; ++iEndPath) {
+           iEndPath != endEndPath;
+           ++iEndPath) {
         labels = proc_pset.getParameter<vstring>(*iEndPath);
         vstring::iterator iSave = labels.begin();
         vstring::iterator iBegin = labels.begin();
@@ -507,14 +532,16 @@ namespace edm {
       sort_all(endPathsToBeDropped);
 
       // remove empty end paths from @paths
-      endAfterRemove = std::remove_if(scheduledPaths.begin(), scheduledPaths.end(),
+      endAfterRemove = std::remove_if(scheduledPaths.begin(),
+                                      scheduledPaths.end(),
                                       std::bind(binary_search_string, std::ref(endPathsToBeDropped), _1));
       scheduledPaths.erase(endAfterRemove, scheduledPaths.end());
       proc_pset.addParameter<vstring>(std::string("@paths"), scheduledPaths);
 
       // remove empty end paths from @end_paths
       vstring scheduledEndPaths = proc_pset.getParameter<vstring>("@end_paths");
-      endAfterRemove = std::remove_if(scheduledEndPaths.begin(), scheduledEndPaths.end(),
+      endAfterRemove = std::remove_if(scheduledEndPaths.begin(),
+                                      scheduledEndPaths.end(),
                                       std::bind(binary_search_string, std::ref(endPathsToBeDropped), _1));
       scheduledEndPaths.erase(endAfterRemove, scheduledEndPaths.end());
       proc_pset.addParameter<vstring>(std::string("@end_paths"), scheduledEndPaths);
@@ -562,19 +589,40 @@ namespace edm {
         endPathNames_(&tns.getEndPaths()),
         wantSummary_(tns.wantSummary()),
         endpathsAreActive_(true) {
-    makePathStatusInserters(pathStatusInserters_, *pathNames_, prealloc, preg, areg, processConfiguration,
+    makePathStatusInserters(pathStatusInserters_,
+                            *pathNames_,
+                            prealloc,
+                            preg,
+                            areg,
+                            processConfiguration,
                             std::string("PathStatusInserter"));
 
-    makePathStatusInserters(endPathStatusInserters_, *endPathNames_, prealloc, preg, areg, processConfiguration,
+    makePathStatusInserters(endPathStatusInserters_,
+                            *endPathNames_,
+                            prealloc,
+                            preg,
+                            areg,
+                            processConfiguration,
                             std::string("EndPathStatusInserter"));
 
     assert(0 < prealloc.numberOfStreams());
     streamSchedules_.reserve(prealloc.numberOfStreams());
     for (unsigned int i = 0; i < prealloc.numberOfStreams(); ++i) {
-      streamSchedules_.emplace_back(make_shared_noexcept_false<StreamSchedule>(
-          resultsInserter(), pathStatusInserters_, endPathStatusInserters_, moduleRegistry(), proc_pset, tns, prealloc,
-          preg, branchIDListHelper, actions, areg, processConfiguration, !hasSubprocesses, StreamID{i},
-          processContext));
+      streamSchedules_.emplace_back(make_shared_noexcept_false<StreamSchedule>(resultsInserter(),
+                                                                               pathStatusInserters_,
+                                                                               endPathStatusInserters_,
+                                                                               moduleRegistry(),
+                                                                               proc_pset,
+                                                                               tns,
+                                                                               prealloc,
+                                                                               preg,
+                                                                               branchIDListHelper,
+                                                                               actions,
+                                                                               areg,
+                                                                               processConfiguration,
+                                                                               !hasSubprocesses,
+                                                                               StreamID{i},
+                                                                               processContext));
     }
 
     //TriggerResults are injected automatically by StreamSchedules and are
@@ -599,9 +647,18 @@ namespace edm {
     }
 
     // propagate_const<T> has no reset() function
-    globalSchedule_ = std::make_unique<GlobalSchedule>(resultsInserter(), pathStatusInserters_, endPathStatusInserters_,
-                                                       moduleRegistry(), modulesToUse, proc_pset, preg, prealloc,
-                                                       actions, areg, processConfiguration, processContext);
+    globalSchedule_ = std::make_unique<GlobalSchedule>(resultsInserter(),
+                                                       pathStatusInserters_,
+                                                       endPathStatusInserters_,
+                                                       moduleRegistry(),
+                                                       modulesToUse,
+                                                       proc_pset,
+                                                       preg,
+                                                       prealloc,
+                                                       actions,
+                                                       areg,
+                                                       processConfiguration,
+                                                       processContext);
 
     //TriggerResults is not in the top level ParameterSet so the call to
     // reduceParameterSet would fail to find it. Just remove it up front.
@@ -694,7 +751,9 @@ namespace edm {
       const auto& workers = allWorkers();
       modDesc.reserve(workers.size());
 
-      std::transform(workers.begin(), workers.end(), std::back_inserter(modDesc),
+      std::transform(workers.begin(),
+                     workers.end(),
+                     std::back_inserter(modDesc),
                      [](const Worker* iWorker) -> const ModuleDescription* { return iWorker->descPtr(); });
 
       // propagate_const<T> has no reset() function
@@ -1092,7 +1151,8 @@ namespace edm {
   bool Schedule::shouldWeCloseOutput() const {
     using std::placeholders::_1;
     // Return true iff at least one output module returns true.
-    return (std::find_if(all_output_communicators_.begin(), all_output_communicators_.end(),
+    return (std::find_if(all_output_communicators_.begin(),
+                         all_output_communicators_.end(),
                          std::bind(&OutputModuleCommunicator::shouldWeCloseFile, _1)) !=
             all_output_communicators_.end());
   }

@@ -66,8 +66,8 @@ void ScheduleInfo::availableModuleLabels(std::vector<std::string>& oLabelsToFill
   std::vector<ModuleDescription const*> desc = schedule_->getAllModuleDescriptions();
 
   oLabelsToFill.reserve(oLabelsToFill.size() + desc.size());
-  std::transform(desc.begin(), desc.end(), std::back_inserter(oLabelsToFill),
-                 std::bind(&ModuleDescription::moduleLabel, _1));
+  std::transform(
+      desc.begin(), desc.end(), std::back_inserter(oLabelsToFill), std::bind(&ModuleDescription::moduleLabel, _1));
 }
 
 const ParameterSet* ScheduleInfo::parametersForModule(const std::string& iLabel) const {
@@ -75,7 +75,8 @@ const ParameterSet* ScheduleInfo::parametersForModule(const std::string& iLabel)
   std::vector<ModuleDescription const*> desc = schedule_->getAllModuleDescriptions();
 
   std::vector<ModuleDescription const*>::iterator itFound =
-      std::find_if(desc.begin(), desc.end(),
+      std::find_if(desc.begin(),
+                   desc.end(),
                    std::bind(std::equal_to<std::string>(), iLabel, std::bind(&ModuleDescription::moduleLabel, _1)));
   if (itFound == desc.end()) {
     return nullptr;

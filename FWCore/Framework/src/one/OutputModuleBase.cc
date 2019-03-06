@@ -72,8 +72,8 @@ namespace edm {
       //need to set wantAllEvents_ in constructor
       // we will make the remaining selectors once we know how many streams
       selectors_.resize(1);
-      wantAllEvents_ = detail::configureEventSelector(selectEvents_, process_name_, getAllTriggerNames(), selectors_[0],
-                                                      consumesCollector());
+      wantAllEvents_ = detail::configureEventSelector(
+          selectEvents_, process_name_, getAllTriggerNames(), selectors_[0], consumesCollector());
     }
 
     void OutputModuleBase::configure(OutputModuleDescription const& desc) {
@@ -118,8 +118,8 @@ namespace edm {
 
       setProcessesWithSelectedMergeableRunProducts(processesWithSelectedMergeableRunProducts);
 
-      thinnedAssociationsHelper.selectAssociationProducts(associationDescriptions, keptProductsInEvent,
-                                                          keepAssociation_);
+      thinnedAssociationsHelper.selectAssociationProducts(
+          associationDescriptions, keptProductsInEvent, keepAssociation_);
 
       for (auto association : associationDescriptions) {
         if (keepAssociation_[association->branchID()]) {
@@ -132,8 +132,8 @@ namespace edm {
       // Now fill in a mapping needed in the case that a branch was dropped while its EDAlias was kept.
       ProductSelector::fillDroppedToKept(preg, trueBranchIDToKeptBranchDesc, droppedBranchIDToKeptBranchID_);
 
-      thinnedAssociationsHelper_->updateFromParentProcess(thinnedAssociationsHelper, keepAssociation_,
-                                                          droppedBranchIDToKeptBranchID_);
+      thinnedAssociationsHelper_->updateFromParentProcess(
+          thinnedAssociationsHelper, keepAssociation_, droppedBranchIDToKeptBranchID_);
     }
 
     void OutputModuleBase::keepThisBranch(BranchDescription const& desc,
@@ -356,9 +356,10 @@ namespace edm {
     void OutputModuleBase::setEventSelectionInfo(
         std::map<std::string, std::vector<std::pair<std::string, int>>> const& outputModulePathPositions,
         bool anyProductProduced) {
-      selector_config_id_ =
-          detail::registerProperSelectionInfo(getParameterSet(selector_config_id_), description().moduleLabel(),
-                                              outputModulePathPositions, anyProductProduced);
+      selector_config_id_ = detail::registerProperSelectionInfo(getParameterSet(selector_config_id_),
+                                                                description().moduleLabel(),
+                                                                outputModulePathPositions,
+                                                                anyProductProduced);
     }
   }  // namespace one
 }  // namespace edm

@@ -403,8 +403,8 @@ namespace edm {
 
     if (historyAppender_ && productRegistry().anyProductProduced()) {
       if ((not processHistoryPtr_) || (processHistoryIDBeforeConfig_ != hist)) {
-        processHistoryPtr_ = historyAppender_->appendToProcessHistory(hist, processHistoryRegistry.getMapped(hist),
-                                                                      *processConfiguration_);
+        processHistoryPtr_ = historyAppender_->appendToProcessHistory(
+            hist, processHistoryRegistry.getMapped(hist), *processConfiguration_);
         processHistoryID_ = processHistoryPtr_->id();
         processHistoryIDBeforeConfig_ = hist;
       }
@@ -547,7 +547,11 @@ namespace edm {
     if (result == nullptr) {
       return BasicHandle(makeHandleExceptionFactory([=]() -> std::shared_ptr<cms::Exception> {
         return makeNotFoundException(
-            "getByLabel", kindOfType, typeID, inputTag.label(), inputTag.instance(),
+            "getByLabel",
+            kindOfType,
+            typeID,
+            inputTag.label(),
+            inputTag.instance(),
             appendCurrentProcessIfAlias(inputTag.process(), processConfiguration_->processName()));
       }));
     }
@@ -721,7 +725,10 @@ namespace edm {
           productLookup().index(kindOfType, typeID, inputTag.label().c_str(), inputTag.instance().c_str(), processName);
 
       if (index == ProductResolverIndexAmbiguous) {
-        throwAmbiguousException("findProductByLabel", typeID, inputTag.label(), inputTag.instance(),
+        throwAmbiguousException("findProductByLabel",
+                                typeID,
+                                inputTag.label(),
+                                inputTag.instance(),
                                 appendCurrentProcessIfAlias(inputTag.process(), processConfiguration_->processName()));
       } else if (index == ProductResolverIndexInvalid) {
         return nullptr;
@@ -729,7 +736,10 @@ namespace edm {
       inputTag.tryToCacheIndex(index, typeID, branchType(), &productRegistry());
     }
     if (UNLIKELY(consumer and (not consumer->registeredToConsume(index, skipCurrentProcess, branchType())))) {
-      failedToRegisterConsumes(kindOfType, typeID, inputTag.label(), inputTag.instance(),
+      failedToRegisterConsumes(kindOfType,
+                               typeID,
+                               inputTag.label(),
+                               inputTag.instance(),
                                appendCurrentProcessIfAlias(inputTag.process(), processConfiguration_->processName()));
     }
 
@@ -737,7 +747,10 @@ namespace edm {
 
     auto resolution = productResolver->resolveProduct(*this, skipCurrentProcess, sra, mcc);
     if (resolution.isAmbiguous()) {
-      throwAmbiguousException("findProductByLabel", typeID, inputTag.label(), inputTag.instance(),
+      throwAmbiguousException("findProductByLabel",
+                              typeID,
+                              inputTag.label(),
+                              inputTag.instance(),
                               appendCurrentProcessIfAlias(inputTag.process(), processConfiguration_->processName()));
     }
     return resolution.data();

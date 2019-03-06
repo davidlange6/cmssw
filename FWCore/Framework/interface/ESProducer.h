@@ -148,13 +148,13 @@ namespace edm {
                                                   TReturn (T ::*iMethod)(const TRecord&),
                                                   const TArg& iDec,
                                                   const es::Label& iLabel = {}) {
-      auto callback =
-          std::make_shared<eventsetup::Callback<T, TReturn, TRecord,
-                                                typename eventsetup::DecoratorFromArg<T, TRecord, TArg>::Decorator_t>>(
-              iThis, iMethod, createDecoratorFrom(iThis, static_cast<const TRecord*>(nullptr), iDec));
+      auto callback = std::make_shared<
+          eventsetup::Callback<T, TReturn, TRecord, typename eventsetup::DecoratorFromArg<T, TRecord, TArg>::Decorator_t>>(
+          iThis, iMethod, createDecoratorFrom(iThis, static_cast<const TRecord*>(nullptr), iDec));
       registerProducts(callback,
                        static_cast<const typename eventsetup::produce::product_traits<TReturn>::type*>(nullptr),
-                       static_cast<const TRecord*>(nullptr), iLabel);
+                       static_cast<const TRecord*>(nullptr),
+                       iLabel);
       return ESConsumesCollectorT<TRecord>{iThis};
     }
 
@@ -189,7 +189,9 @@ namespace edm {
                          const TRecord*,
                          const es::Label& iLabel) {
       if (iLabel.labels_.size() <= IIndex || iLabel.labels_[IIndex] == es::Label::def()) {
-        Exception::throwThis(errors::Configuration, "Unnamed Label\nthe index ", IIndex,
+        Exception::throwThis(errors::Configuration,
+                             "Unnamed Label\nthe index ",
+                             IIndex,
                              " was never assigned a name in the 'setWhatProduced' method");
       }
       typedef eventsetup::CallbackProxy<T, TRecord, es::L<TProduct, IIndex>> ProxyType;

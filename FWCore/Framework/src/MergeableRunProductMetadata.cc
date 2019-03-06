@@ -32,8 +32,8 @@ namespace edm {
 
       std::string const& processName = mergeableRunProductProcesses_->processesWithMergeableRunProducts()[processIndex];
 
-      if (inputStoredMergeableRunProductMetadata.getLumiContent(inputRunEntry, processName, valid,
-                                                                lumisInRunBeingReadBegin, lumisInRunBeingReadEnd)) {
+      if (inputStoredMergeableRunProductMetadata.getLumiContent(
+              inputRunEntry, processName, valid, lumisInRunBeingReadBegin, lumisInRunBeingReadEnd)) {
         // This is a reference to the container accumulating the luminosity
         // block numbers for the run entries read associated with the current
         // run being processed that correspond to the luminosity block content
@@ -190,8 +190,11 @@ namespace edm {
         // OutputModuleBase calculated once early in a job. (? Given how rare
         // mergeable run products are this optimization may not be worth doing)
         if (processesWithMergeableRunProducts[transientProcessIndex] == storedProcesses[storedProcessIndex]) {
-          if (addProcess(storedMetadata, metadataForProcesses_.at(transientProcessIndex), storedProcessIndex,
-                         beginProcess, endProcess)) {
+          if (addProcess(storedMetadata,
+                         metadataForProcesses_.at(transientProcessIndex),
+                         storedProcessIndex,
+                         beginProcess,
+                         endProcess)) {
             ++endProcess;
           }
           break;

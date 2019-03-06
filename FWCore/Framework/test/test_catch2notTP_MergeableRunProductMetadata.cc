@@ -69,45 +69,95 @@ TEST_CASE("test MergeableRunProductMetadata", "[MergeableRunProductMetadata]") {
     dummyPset.registerIt();
 
     // not mergeable
-    edm::BranchDescription prod1(edm::InRun, "label", "PROD", "edmtest::Thing", "edmtestThing", "instance", "aModule",
-                                 dummyPset.id(), edm::TypeWithDict::byName("edmtest::Thing"), false);
+    edm::BranchDescription prod1(edm::InRun,
+                                 "label",
+                                 "PROD",
+                                 "edmtest::Thing",
+                                 "edmtestThing",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::Thing"),
+                                 false);
     productRegistry.copyProduct(prod1);
 
     // This one should be used
-    edm::BranchDescription prod2(edm::InRun, "aLabel", "APROD", "edmtest::ThingWithMerge", "edmtestThingWithMerge",
-                                 "instance", "aModule", dummyPset.id(),
-                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"), false);
+    edm::BranchDescription prod2(edm::InRun,
+                                 "aLabel",
+                                 "APROD",
+                                 "edmtest::ThingWithMerge",
+                                 "edmtestThingWithMerge",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"),
+                                 false);
     productRegistry.copyProduct(prod2);
 
     //not in a Run
-    edm::BranchDescription prod3(edm::InLumi, "bLabel", "BPROD", "edmtest::ThingWithMerge", "edmtestThingWithMerge",
-                                 "instance", "aModule", dummyPset.id(),
-                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"), false);
+    edm::BranchDescription prod3(edm::InLumi,
+                                 "bLabel",
+                                 "BPROD",
+                                 "edmtest::ThingWithMerge",
+                                 "edmtestThingWithMerge",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"),
+                                 false);
     productRegistry.copyProduct(prod3);
 
     // produced
-    edm::BranchDescription prod4(edm::InRun, "cLabel", "CPROD", "edmtest::ThingWithMerge", "edmtestThingWithMerge",
-                                 "instance", "aModule", dummyPset.id(),
-                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"), true);
+    edm::BranchDescription prod4(edm::InRun,
+                                 "cLabel",
+                                 "CPROD",
+                                 "edmtest::ThingWithMerge",
+                                 "edmtestThingWithMerge",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"),
+                                 true);
     productRegistry.addProduct(prod4);
 
     // dropped
-    edm::BranchDescription prod5(edm::InRun, "dLabel", "DPROD", "edmtest::ThingWithMerge", "edmtestThingWithMerge",
-                                 "instance", "aModule", dummyPset.id(),
-                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"), false);
+    edm::BranchDescription prod5(edm::InRun,
+                                 "dLabel",
+                                 "DPROD",
+                                 "edmtest::ThingWithMerge",
+                                 "edmtestThingWithMerge",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"),
+                                 false);
     prod5.setDropped(true);
     productRegistry.copyProduct(prod5);
 
     // Should be used but the same process name
-    edm::BranchDescription prod6(edm::InRun, "eLabel", "APROD", "edmtest::ThingWithMerge", "edmtestThingWithMerge",
-                                 "instance", "aModule", dummyPset.id(),
-                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"), false);
+    edm::BranchDescription prod6(edm::InRun,
+                                 "eLabel",
+                                 "APROD",
+                                 "edmtest::ThingWithMerge",
+                                 "edmtestThingWithMerge",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"),
+                                 false);
     productRegistry.copyProduct(prod6);
 
     // Should be used
-    edm::BranchDescription prod7(edm::InRun, "fLabel", "AAPROD", "edmtest::ThingWithMerge", "edmtestThingWithMerge",
-                                 "instance", "aModule", dummyPset.id(),
-                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"), false);
+    edm::BranchDescription prod7(edm::InRun,
+                                 "fLabel",
+                                 "AAPROD",
+                                 "edmtest::ThingWithMerge",
+                                 "edmtestThingWithMerge",
+                                 "instance",
+                                 "aModule",
+                                 dummyPset.id(),
+                                 edm::TypeWithDict::byName("edmtest::ThingWithMerge"),
+                                 false);
     productRegistry.copyProduct(prod7);
 
     edm::MergeableRunProductProcesses mergeableRunProductProcesses;

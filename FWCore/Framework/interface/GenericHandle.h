@@ -45,7 +45,9 @@ namespace edm {
     ///Throws exception if iName is not a known C++ class type
     Handle(std::string const& iName) : type_(TypeWithDict::byName(iName)), prod_(), prov_(nullptr) {
       if (!bool(type_)) {
-        Exception::throwThis(errors::NotFound, "Handle<GenericObject> told to use uknown type '", iName.c_str(),
+        Exception::throwThis(errors::NotFound,
+                             "Handle<GenericObject> told to use uknown type '",
+                             iName.c_str(),
                              "'.\n Please check spelling or that a module uses this type in the job.");
       }
     }

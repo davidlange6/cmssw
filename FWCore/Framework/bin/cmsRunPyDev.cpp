@@ -184,14 +184,18 @@ int main(int argc, char* argv[]) {
 
       desc.add_options()(kHelpCommandOpt, "produce help message")(
           kParameterSetCommandOpt, boost::program_options::value<std::string>(), "configuration file")(
-          kJobreportCommandOpt, boost::program_options::value<std::string>(),
+          kJobreportCommandOpt,
+          boost::program_options::value<std::string>(),
           "file name to use for a job report file: default extension is .xml")(
           kEnableJobreportCommandOpt, "enable job report files (if any) specified in configuration file")(
-          kJobModeCommandOpt, boost::program_options::value<std::string>(),
+          kJobModeCommandOpt,
+          boost::program_options::value<std::string>(),
           "Job Mode for MessageLogger defaults - default mode is grid")(
-          kNumberOfThreadsCommandOpt, boost::program_options::value<unsigned int>(),
+          kNumberOfThreadsCommandOpt,
+          boost::program_options::value<unsigned int>(),
           "Number of threads to use in job (0 is use all CPUs)")(
-          kSizeOfStackForThreadCommandOpt, boost::program_options::value<unsigned int>(),
+          kSizeOfStackForThreadCommandOpt,
+          boost::program_options::value<unsigned int>(),
           "Size of stack in KB to use for extra threads (0 is use system default size)")(
           kMultiThreadMessageLoggerOpt, "MessageLogger handles multiple threads - default is single-thread")(
           kStrictOpt, "strict parsing");
@@ -206,7 +210,8 @@ int main(int argc, char* argv[]) {
       // state machine code.
       boost::program_options::options_description hidden("hidden options");
       hidden.add_options()("fwk", "For use only by Framework Developers")(
-          kPythonOpt, boost::program_options::value<std::vector<std::string> >(),
+          kPythonOpt,
+          boost::program_options::value<std::vector<std::string> >(),
           "options at the end to be passed to python");
 
       boost::program_options::options_description all_options("All Options");

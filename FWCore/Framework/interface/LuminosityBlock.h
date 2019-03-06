@@ -204,8 +204,8 @@ namespace edm {
   void LuminosityBlock::put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product) {
     if (UNLIKELY(product.get() == 0)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
-      principal_get_adapter_detail::throwOnPutOfNullProduct("LuminosityBlock", typeID,
-                                                            provRecorder_.productInstanceLabel(token));
+      principal_get_adapter_detail::throwOnPutOfNullProduct(
+          "LuminosityBlock", typeID, provRecorder_.productInstanceLabel(token));
     }
     if (UNLIKELY(token.isUninitialized())) {
       principal_get_adapter_detail::throwOnPutOfUninitializedToken("LuminosityBlock", typeid(PROD));
@@ -217,8 +217,8 @@ namespace edm {
   void LuminosityBlock::put(EDPutToken token, std::unique_ptr<PROD> product) {
     if (UNLIKELY(product.get() == 0)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
-      principal_get_adapter_detail::throwOnPutOfNullProduct("LuminosityBlock", typeID,
-                                                            provRecorder_.productInstanceLabel(token));
+      principal_get_adapter_detail::throwOnPutOfNullProduct(
+          "LuminosityBlock", typeID, provRecorder_.productInstanceLabel(token));
     }
     if (UNLIKELY(token.isUninitialized())) {
       principal_get_adapter_detail::throwOnPutOfUninitializedToken("LuminosityBlock", typeid(PROD));
@@ -279,8 +279,8 @@ namespace edm {
       principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)), label, productInstanceName);
     }
     result.clear();
-    BasicHandle bh = provRecorder_.getByLabel_(TypeID(typeid(PROD)), label, productInstanceName, emptyString_,
-                                               moduleCallingContext_);
+    BasicHandle bh = provRecorder_.getByLabel_(
+        TypeID(typeid(PROD)), label, productInstanceName, emptyString_, moduleCallingContext_);
     result = convert_handle<PROD>(std::move(bh));  // throws on conversion error
     if (result.failedToGet()) {
       return false;
