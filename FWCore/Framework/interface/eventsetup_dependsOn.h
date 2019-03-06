@@ -60,7 +60,8 @@ namespace edm {
     //Simple functor that checks to see if a Record has changed since the last time it was called
     // and if so, calls the appropriate member method.  Multiple callers can be chained together using the
     // TCallerChain template argument.
-    template <class T, class TRecord, class TDependsOnRecord, class TCallerChain> struct DependsOnCaller {
+    template <class T, class TRecord, class TDependsOnRecord, class TCallerChain>
+    struct DependsOnCaller {
       DependsOnCaller(T* iCallee, void (T::*iMethod)(const TDependsOnRecord&), const TCallerChain& iChain)
           : callee_(iCallee), method_(iMethod), chain_(iChain), cacheID_(0) {}
 
@@ -89,14 +90,16 @@ namespace edm {
     }
 
     //A 'do nothing' functor that is used to terminate our chain of functors
-    template <class TRecord> struct DependsOnDoNothingCaller {
+    template <class TRecord>
+    struct DependsOnDoNothingCaller {
       void operator()(const TRecord&) {}
     };
 
     //put implementation details used to get the dependsOn method to work into their own namespace
     namespace depends_on {
       //class to hold onto one member method pointer
-      template <class T, class TDependsOnRecord> struct OneHolder {
+      template <class T, class TDependsOnRecord>
+      struct OneHolder {
         typedef T Prod_t;
         typedef TDependsOnRecord DependsOnRecord_t;
 
@@ -105,7 +108,8 @@ namespace edm {
       };
 
       //class to create a linked list of member method pointers
-      template <class T, class U> struct TwoHolder {
+      template <class T, class U>
+      struct TwoHolder {
         typedef T T1_t;
         typedef U T2_t;
         TwoHolder(const T& i1, const U& i2) : h1_(i1), h2_(i2) {}
@@ -114,13 +118,15 @@ namespace edm {
       };
 
       //allows one to create the linked list by applying operator & to member method pointers
-      template <class T, class U> TwoHolder<T, U> operator&(const T& iT, const U& iU) {
+      template <class T, class U>
+      TwoHolder<T, U> operator&(const T& iT, const U& iU) {
         return TwoHolder<T, U>(iT, iU);
       }
 
       //HolderToCaller is used to state how a OneHolder or TwoHolder is converted into the appropriate
       // DependsOnCaller.  This class is needed to define the return value of the makeCaller function
-      template <class TRecord, class THolder> struct HolderToCaller {};
+      template <class TRecord, class THolder>
+      struct HolderToCaller {};
       template <class TRecord, class T, class TDependsOnRecord>
       struct HolderToCaller<TRecord, OneHolder<T, TDependsOnRecord> > {
         typedef DependsOnCaller<T, TRecord, TDependsOnRecord, DependsOnDoNothingCaller<TRecord> > Caller_t;
@@ -145,7 +151,10 @@ namespace edm {
     }  // namespace depends_on
 
     //DecoratorFromArg is used to declare the return type of 'createDecoratorFrom' based on the arguments to the function.
-    template <typename T, typename TRecord, typename TArg> struct DecoratorFromArg { typedef TArg Decorator_t; };
+    template <typename T, typename TRecord, typename TArg>
+    struct DecoratorFromArg {
+      typedef TArg Decorator_t;
+    };
 
     template <typename T, typename TRecord, typename TDependsOnRecord>
     struct DecoratorFromArg<T, TRecord, depends_on::OneHolder<T, TDependsOnRecord> > {

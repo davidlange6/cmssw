@@ -33,7 +33,8 @@ namespace edm {
     void throwIfNotValid(const void*) noexcept(false);
   }
 
-  template <typename T> class ESValidHandle {
+  template <typename T>
+  class ESValidHandle {
   public:
     typedef T value_type;
 
@@ -63,7 +64,8 @@ namespace edm {
    create a edm::ESValidHandle<T>. If the argument is an invalid handle,
    an exception will be thrown.
    */
-  template <typename U> auto makeESValid(const U& iOtherHandleType) noexcept(false) {
+  template <typename U>
+  auto makeESValid(const U& iOtherHandleType) noexcept(false) {
     esvhhelper::throwIfNotValid(iOtherHandleType.product());
     //because of the check, we know this is valid and do not have to check again
     return ESValidHandle<typename U::value_type>(*iOtherHandleType.product(), iOtherHandleType.description());

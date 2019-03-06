@@ -27,7 +27,8 @@ namespace edm {
   class ThinnedAssociationsHelper;
   class WaitingTaskWithArenaHolder;
 
-  template <typename T> class WorkerT : public Worker {
+  template <typename T>
+  class WorkerT : public Worker {
   public:
     typedef T ModuleType;
     typedef WorkerT<T> WorkerType;
@@ -56,8 +57,10 @@ namespace edm {
         std::unordered_multimap<std::string, std::tuple<TypeID const*, const char*, edm::ProductResolverIndex>> const&
             iIndicies) override;
 
-    template <typename D> void callWorkerBeginStream(D, StreamID);
-    template <typename D> void callWorkerEndStream(D, StreamID);
+    template <typename D>
+    void callWorkerBeginStream(D, StreamID);
+    template <typename D>
+    void callWorkerEndStream(D, StreamID);
     template <typename D>
     void callWorkerStreamBegin(
         D, StreamID id, RunPrincipal const& rp, EventSetupImpl const& c, ModuleCallingContext const* mcc);

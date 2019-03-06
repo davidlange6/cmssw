@@ -45,7 +45,8 @@ namespace edm {
 
       const char* name() const { return type().name(); }
       // ---------- static member functions --------------------
-      template <class T> static EventSetupRecordKey makeKey() {
+      template <class T>
+      static EventSetupRecordKey makeKey() {
         return eventsetup::heterocontainer::makeKey<T, EventSetupRecordKey>();
       }
 

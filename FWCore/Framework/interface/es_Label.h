@@ -32,7 +32,8 @@
 
 namespace edm::es {
 
-  template <typename T, int ILabel> struct L {
+  template <typename T, int ILabel>
+  struct L {
     using element_type = T;
 
     L() = default;
@@ -45,7 +46,10 @@ namespace edm::es {
     mutable std::shared_ptr<T> product_{nullptr};
   };
 
-  template <int ILabel, typename T> L<T, ILabel> l(std::shared_ptr<T>& iP) { return L<T, ILabel>{iP}; }
+  template <int ILabel, typename T>
+  L<T, ILabel> l(std::shared_ptr<T>& iP) {
+    return L<T, ILabel>{iP};
+  }
 
   struct Label {
     Label() = default;

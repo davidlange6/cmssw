@@ -39,7 +39,8 @@ namespace edm {
     namespace impl {
       class EmptyType {};
 
-      template <typename T, typename C> class StreamCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class StreamCacheHolder : public virtual T {
       public:
         StreamCacheHolder() = default;
         StreamCacheHolder(StreamCacheHolder<T, C> const&) = delete;
@@ -85,7 +86,8 @@ namespace edm {
         std::vector<C*> caches_;
       };
 
-      template <typename T, typename C> class RunCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class RunCacheHolder : public virtual T {
       public:
         RunCacheHolder() = default;
         RunCacheHolder(RunCacheHolder<T, C> const&) = delete;
@@ -108,7 +110,8 @@ namespace edm {
         edm::propagate_const<std::shared_ptr<C>> cache_;
       };
 
-      template <typename T, typename C> class LuminosityBlockCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class LuminosityBlockCacheHolder : public virtual T {
       public:
         LuminosityBlockCacheHolder() = default;
         LuminosityBlockCacheHolder(LuminosityBlockCacheHolder<T, C> const&) = delete;
@@ -136,9 +139,11 @@ namespace edm {
         std::unique_ptr<std::shared_ptr<C>[]> caches_;
       };
 
-      template <typename T, typename C> class EndRunSummaryProducer;
+      template <typename T, typename C>
+      class EndRunSummaryProducer;
 
-      template <typename T, typename C> class RunSummaryCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class RunSummaryCacheHolder : public virtual T {
       public:
         RunSummaryCacheHolder() = default;
         RunSummaryCacheHolder(RunSummaryCacheHolder<T, C> const&) = delete;
@@ -167,9 +172,11 @@ namespace edm {
         std::mutex mutex_;
       };
 
-      template <typename T, typename C> class EndLuminosityBlockSummaryProducer;
+      template <typename T, typename C>
+      class EndLuminosityBlockSummaryProducer;
 
-      template <typename T, typename C> class LuminosityBlockSummaryCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class LuminosityBlockSummaryCacheHolder : public virtual T {
       public:
         LuminosityBlockSummaryCacheHolder() = default;
         LuminosityBlockSummaryCacheHolder(LuminosityBlockSummaryCacheHolder<T, C> const&) = delete;
@@ -205,7 +212,8 @@ namespace edm {
         std::mutex mutex_;
       };
 
-      template <typename T> class BeginRunProducer : public virtual T {
+      template <typename T>
+      class BeginRunProducer : public virtual T {
       public:
         BeginRunProducer() = default;
         BeginRunProducer(BeginRunProducer const&) = delete;
@@ -218,7 +226,8 @@ namespace edm {
         virtual void globalBeginRunProduce(edm::Run&, edm::EventSetup const&) const = 0;
       };
 
-      template <typename T> class EndRunProducer : public virtual T {
+      template <typename T>
+      class EndRunProducer : public virtual T {
       public:
         EndRunProducer() = default;
         EndRunProducer(EndRunProducer const&) = delete;
@@ -231,7 +240,8 @@ namespace edm {
         virtual void globalEndRunProduce(edm::Run&, edm::EventSetup const&) const = 0;
       };
 
-      template <typename T, typename C> class EndRunSummaryProducer : public RunSummaryCacheHolder<T, C> {
+      template <typename T, typename C>
+      class EndRunSummaryProducer : public RunSummaryCacheHolder<T, C> {
       public:
         EndRunSummaryProducer() = default;
         EndRunSummaryProducer(EndRunSummaryProducer const&) = delete;
@@ -246,7 +256,8 @@ namespace edm {
         virtual void globalEndRunProduce(edm::Run&, edm::EventSetup const&, C const*) const = 0;
       };
 
-      template <typename T> class BeginLuminosityBlockProducer : public virtual T {
+      template <typename T>
+      class BeginLuminosityBlockProducer : public virtual T {
       public:
         BeginLuminosityBlockProducer() = default;
         BeginLuminosityBlockProducer(BeginLuminosityBlockProducer const&) = delete;
@@ -258,7 +269,8 @@ namespace edm {
         virtual void globalBeginLuminosityBlockProduce(edm::LuminosityBlock&, edm::EventSetup const&) const = 0;
       };
 
-      template <typename T> class EndLuminosityBlockProducer : public virtual T {
+      template <typename T>
+      class EndLuminosityBlockProducer : public virtual T {
       public:
         EndLuminosityBlockProducer() = default;
         EndLuminosityBlockProducer(EndLuminosityBlockProducer const&) = delete;
@@ -286,7 +298,8 @@ namespace edm {
         virtual void globalEndLuminosityBlockProduce(edm::LuminosityBlock&, edm::EventSetup const&, S const*) const = 0;
       };
 
-      template <typename T> class ExternalWork : public virtual T {
+      template <typename T>
+      class ExternalWork : public virtual T {
       public:
         ExternalWork() = default;
         ExternalWork(ExternalWork const&) = delete;
@@ -301,7 +314,8 @@ namespace edm {
         virtual void acquire(StreamID, Event const&, edm::EventSetup const&, WaitingTaskWithArenaHolder) const = 0;
       };
 
-      template <typename T> class Accumulator : public virtual T {
+      template <typename T>
+      class Accumulator : public virtual T {
       public:
         Accumulator() = default;
         Accumulator(Accumulator const&) = delete;

@@ -27,9 +27,11 @@ namespace edm {
 
   class ProcessContext;
 
-  template <typename T, BranchActionType B> class OccurrenceTraits;
+  template <typename T, BranchActionType B>
+  class OccurrenceTraits;
 
-  template <> class OccurrenceTraits<EventPrincipal, BranchActionStreamBegin> {
+  template <>
+  class OccurrenceTraits<EventPrincipal, BranchActionStreamBegin> {
   public:
     typedef EventPrincipal MyPrincipal;
     typedef StreamContext Context;
@@ -59,7 +61,8 @@ namespace edm {
     static const char* transitionName() { return "Event"; }
   };
 
-  template <> class OccurrenceTraits<RunPrincipal, BranchActionGlobalBegin> {
+  template <>
+  class OccurrenceTraits<RunPrincipal, BranchActionGlobalBegin> {
   public:
     typedef RunPrincipal MyPrincipal;
     typedef GlobalContext Context;
@@ -94,7 +97,8 @@ namespace edm {
     static const char* transitionName() { return "global begin Run"; }
   };
 
-  template <> class OccurrenceTraits<RunPrincipal, BranchActionStreamBegin> {
+  template <>
+  class OccurrenceTraits<RunPrincipal, BranchActionStreamBegin> {
   public:
     typedef RunPrincipal MyPrincipal;
     typedef StreamContext Context;
@@ -131,7 +135,8 @@ namespace edm {
     static const char* transitionName() { return "stream begin Run"; }
   };
 
-  template <> class OccurrenceTraits<RunPrincipal, BranchActionStreamEnd> {
+  template <>
+  class OccurrenceTraits<RunPrincipal, BranchActionStreamEnd> {
   public:
     typedef RunPrincipal MyPrincipal;
     typedef StreamContext Context;
@@ -168,7 +173,8 @@ namespace edm {
     static const char* transitionName() { return "stream end Run"; }
   };
 
-  template <> class OccurrenceTraits<RunPrincipal, BranchActionGlobalEnd> {
+  template <>
+  class OccurrenceTraits<RunPrincipal, BranchActionGlobalEnd> {
   public:
     typedef RunPrincipal MyPrincipal;
     typedef GlobalContext Context;
@@ -202,7 +208,8 @@ namespace edm {
     static const char* transitionName() { return "global end Run"; }
   };
 
-  template <> class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalBegin> {
+  template <>
+  class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalBegin> {
   public:
     typedef LuminosityBlockPrincipal MyPrincipal;
     typedef GlobalContext Context;
@@ -236,7 +243,8 @@ namespace edm {
     static const char* transitionName() { return "global begin LuminosityBlock"; }
   };
 
-  template <> class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamBegin> {
+  template <>
+  class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamBegin> {
   public:
     typedef LuminosityBlockPrincipal MyPrincipal;
     typedef StreamContext Context;
@@ -273,7 +281,8 @@ namespace edm {
     static const char* transitionName() { return "stream begin LuminosityBlock"; }
   };
 
-  template <> class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamEnd> {
+  template <>
+  class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamEnd> {
   public:
     typedef LuminosityBlockPrincipal MyPrincipal;
     typedef StreamContext Context;
@@ -312,7 +321,8 @@ namespace edm {
     static const char* transitionName() { return "end stream LuminosityBlock"; }
   };
 
-  template <> class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalEnd> {
+  template <>
+  class OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalEnd> {
   public:
     typedef LuminosityBlockPrincipal MyPrincipal;
     typedef GlobalContext Context;

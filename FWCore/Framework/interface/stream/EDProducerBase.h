@@ -30,14 +30,16 @@
 
 // forward declarations
 namespace edm {
-  template <typename T> class WorkerT;
+  template <typename T>
+  class WorkerT;
   class ProductRegistry;
   class ThinnedAssociationsHelper;
   class WaitingTaskWithArenaHolder;
 
   namespace stream {
     class EDProducerAdaptorBase;
-    template <typename> class ProducingModuleAdaptorBase;
+    template <typename>
+    class ProducingModuleAdaptorBase;
 
     class EDProducerBase : public edm::ProducerBase, public edm::EDConsumerBase {
       //This needs access to the parentage cache info

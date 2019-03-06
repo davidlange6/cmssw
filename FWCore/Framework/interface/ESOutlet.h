@@ -31,7 +31,8 @@ from the EDProducer to the object which needs the data.
 // forward declarations
 
 namespace edm {
-  template <class T, class TRec> class ESOutlet : private OutletBase<T> {
+  template <class T, class TRec>
+  class ESOutlet : private OutletBase<T> {
     class Getter : public extensioncord::ECGetterBase<T> {
     public:
       Getter(const edm::EventSetup& iES, const std::string& iLabel = std::string()) : es_(&iES), label_(iLabel) {}

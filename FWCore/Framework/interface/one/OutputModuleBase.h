@@ -55,19 +55,24 @@ namespace edm {
   class SubProcessParentageHelper;
   class WaitingTask;
 
-  template <typename T> class OutputModuleCommunicatorT;
+  template <typename T>
+  class OutputModuleCommunicatorT;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace one {
 
     class OutputModuleBase : public EDConsumerBase {
     public:
-      template <typename U> friend class edm::maker::ModuleHolderT;
-      template <typename T> friend class ::edm::WorkerT;
-      template <typename T> friend class ::edm::OutputModuleCommunicatorT;
+      template <typename U>
+      friend class edm::maker::ModuleHolderT;
+      template <typename T>
+      friend class ::edm::WorkerT;
+      template <typename T>
+      friend class ::edm::OutputModuleCommunicatorT;
       typedef OutputModuleBase ModuleType;
 
       explicit OutputModuleBase(ParameterSet const& pset);

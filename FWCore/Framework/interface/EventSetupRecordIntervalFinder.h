@@ -52,7 +52,10 @@ namespace edm {
   protected:
     virtual void setIntervalFor(const eventsetup::EventSetupRecordKey&, const IOVSyncValue&, ValidityInterval&) = 0;
 
-    template <class T> void findingRecord() { findingRecordWithKey(eventsetup::EventSetupRecordKey::makeKey<T>()); }
+    template <class T>
+    void findingRecord() {
+      findingRecordWithKey(eventsetup::EventSetupRecordKey::makeKey<T>());
+    }
 
     void findingRecordWithKey(const eventsetup::EventSetupRecordKey&);
 

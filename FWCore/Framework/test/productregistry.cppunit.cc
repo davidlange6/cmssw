@@ -99,7 +99,10 @@ void testProductRegistry::setUp() {
 }
 
 namespace {
-  template <class T> void kill_and_clear(std::shared_ptr<T>& p) { p.reset(); }
+  template <class T>
+  void kill_and_clear(std::shared_ptr<T>& p) {
+    p.reset();
+  }
 }  // namespace
 
 void testProductRegistry::tearDown() {

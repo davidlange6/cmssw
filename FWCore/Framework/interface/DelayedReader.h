@@ -22,7 +22,8 @@ namespace edm {
   class StreamContext;
 
   namespace signalslot {
-    template <typename T> class Signal;
+    template <typename T>
+    class Signal;
   }
 
   class DelayedReader {

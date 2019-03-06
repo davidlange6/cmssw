@@ -52,7 +52,8 @@ namespace edm {
       Maker const* m_maker;
     };
 
-    template <typename T> class ModuleHolderT : public ModuleHolder {
+    template <typename T>
+    class ModuleHolderT : public ModuleHolder {
     public:
       ModuleHolderT(std::shared_ptr<T> iModule, Maker const* iMaker) : ModuleHolder(iMaker), m_mod(iModule) {}
       ~ModuleHolderT() override {}

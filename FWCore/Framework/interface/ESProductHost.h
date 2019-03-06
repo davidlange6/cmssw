@@ -89,7 +89,8 @@ namespace edm {
   // selected does not mattter, just that some order exists
   // so we know which cacheID corresponds to which type.
 
-  template <typename Product, typename... RecordTypes> class ESProductHost final : public Product {
+  template <typename Product, typename... RecordTypes>
+  class ESProductHost final : public Product {
   public:
     template <typename... Args>
     ESProductHost(Args&&... args) : Product(std::forward<Args>(args)...), cacheIDs_(numberOfRecordTypes(), 0) {}
@@ -124,12 +125,14 @@ namespace edm {
     // (There must be at least one type after Product if you want to call the
     // "ifRecordChanges" function).
 
-    template <typename U> constexpr static std::size_t index() {
+    template <typename U>
+    constexpr static std::size_t index() {
       static_assert(numberOfRecordTypes() > 0, "no record types in ESProductHost");
       return indexLoop<0, U, RecordTypes...>();
     }
 
-    template <std::size_t I, typename U, typename TST, typename... M> constexpr static std::size_t indexLoop() {
+    template <std::size_t I, typename U, typename TST, typename... M>
+    constexpr static std::size_t indexLoop() {
       if constexpr (std::is_same_v<U, TST>) {
         return I;
       } else {

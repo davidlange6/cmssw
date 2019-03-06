@@ -68,7 +68,8 @@ namespace edm {
 
     //const IOVSyncValue& operator=(const IOVSyncValue&); // stop default
     void throwInvalidComparison() const;
-    template <template <typename> class Op> bool doOp(const IOVSyncValue& iRHS) const {
+    template <template <typename> class Op>
+    bool doOp(const IOVSyncValue& iRHS) const {
       bool returnValue = false;
       if (haveID_ && iRHS.haveID_) {
         if (luminosityBlockNumber() == 0 || iRHS.luminosityBlockNumber() == 0 ||

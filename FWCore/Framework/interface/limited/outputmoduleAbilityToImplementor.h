@@ -47,7 +47,8 @@ namespace edm {
         virtual void respondToCloseInputFile(FileBlock const&) = 0;
       };
 
-      template <typename T, typename C> class RunCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class RunCacheHolder : public virtual T {
       public:
         RunCacheHolder(edm::ParameterSet const& iPSet) : OutputModuleBase(iPSet) {}
         RunCacheHolder(RunCacheHolder<T, C> const&) = delete;
@@ -70,7 +71,8 @@ namespace edm {
         edm::propagate_const<std::shared_ptr<C>> cache_;
       };
 
-      template <typename T, typename C> class LuminosityBlockCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class LuminosityBlockCacheHolder : public virtual T {
       public:
         LuminosityBlockCacheHolder(edm::ParameterSet const& iPSet) : OutputModuleBase(iPSet) {}
         LuminosityBlockCacheHolder(LuminosityBlockCacheHolder<T, C> const&) = delete;
@@ -96,17 +98,21 @@ namespace edm {
         std::unique_ptr<std::shared_ptr<C>[]> caches_;
       };
 
-      template <typename T> struct AbilityToImplementor;
+      template <typename T>
+      struct AbilityToImplementor;
 
-      template <> struct AbilityToImplementor<edm::WatchInputFiles> {
+      template <>
+      struct AbilityToImplementor<edm::WatchInputFiles> {
         typedef edm::limited::outputmodule::InputFileWatcher Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::RunCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::RunCache<C>> {
         typedef edm::limited::outputmodule::RunCacheHolder<edm::limited::OutputModuleBase, C> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::LuminosityBlockCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::LuminosityBlockCache<C>> {
         typedef edm::limited::outputmodule::LuminosityBlockCacheHolder<edm::limited::OutputModuleBase, C> Type;
       };
 

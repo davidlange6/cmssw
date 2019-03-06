@@ -48,7 +48,8 @@ namespace edm {
   class WaitingTask;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace stream {
@@ -56,8 +57,10 @@ namespace edm {
 
     class EDAnalyzerAdaptorBase {
     public:
-      template <typename T> friend class edm::WorkerT;
-      template <typename T> friend class edm::maker::ModuleHolderT;
+      template <typename T>
+      friend class edm::WorkerT;
+      template <typename T>
+      friend class edm::maker::ModuleHolderT;
 
       EDAnalyzerAdaptorBase();
       virtual ~EDAnalyzerAdaptorBase();
@@ -78,7 +81,8 @@ namespace edm {
       void registerProductsAndCallbacks(EDAnalyzerAdaptorBase const*, ProductRegistry* reg);
 
     protected:
-      template <typename T> void createStreamModules(T iFunc) {
+      template <typename T>
+      void createStreamModules(T iFunc) {
         for (auto& m : m_streamModules) {
           m = iFunc();
           setModuleDescriptionPtr(m);

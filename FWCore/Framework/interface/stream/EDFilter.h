@@ -34,7 +34,8 @@ namespace edm {
   class WaitingTaskWithArenaHolder;
 
   namespace stream {
-    template <typename... T> class EDFilter : public AbilityToImplementor<T>::Type..., public EDFilterBase {
+    template <typename... T>
+    class EDFilter : public AbilityToImplementor<T>::Type..., public EDFilterBase {
     public:
       typedef CacheContexts<T...> CacheTypes;
 

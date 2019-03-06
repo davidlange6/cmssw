@@ -63,7 +63,8 @@ namespace edm {
     ProductStatus defaultStatus() const { return defaultStatus_; }
     void setFailedStatus() const { theStatus_ = ProductStatus::ResolveFailed; }
     //Handle the boilerplate code needed for resolveProduct_
-    template <bool callResolver, typename FUNC> Resolution resolveProductImpl(FUNC resolver) const;
+    template <bool callResolver, typename FUNC>
+    Resolution resolveProductImpl(FUNC resolver) const;
     void setMergeableRunProductMetadataInProductData(MergeableRunProductMetadata const*);
 
   private:

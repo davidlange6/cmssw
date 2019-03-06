@@ -77,7 +77,10 @@ namespace edm {
       void resetProxiesIfTransient(const EventSetupRecordKey& iRecordType);
 
     protected:
-      template <class T> void usingRecord() { usingRecordWithKey(EventSetupRecordKey::makeKey<T>()); }
+      template <class T>
+      void usingRecord() {
+        usingRecordWithKey(EventSetupRecordKey::makeKey<T>());
+      }
 
       void usingRecordWithKey(const EventSetupRecordKey&);
 

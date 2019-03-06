@@ -72,7 +72,8 @@ namespace edm {
     std::shared_ptr<ESHandleExceptionFactory> whyFailedFactory_{nullptr};
   };
 
-  template <typename T> class ESHandle : public ESHandleBase {
+  template <typename T>
+  class ESHandle : public ESHandleBase {
   public:
     typedef T value_type;
 

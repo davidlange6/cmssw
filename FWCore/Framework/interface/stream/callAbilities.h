@@ -32,22 +32,27 @@ namespace edm {
     //********************************
     // CallGlobal
     //********************************
-    template <typename T, bool> struct CallGlobalImpl {
-      template <typename B> static void set(B* iProd, typename T::GlobalCache const* iCache) {
+    template <typename T, bool>
+    struct CallGlobalImpl {
+      template <typename B>
+      static void set(B* iProd, typename T::GlobalCache const* iCache) {
         static_cast<T*>(iProd)->setGlobalCache(iCache);
       }
       static void endJob(typename T::GlobalCache* iCache) { T::globalEndJob(iCache); }
     };
-    template <typename T> struct CallGlobalImpl<T, false> {
+    template <typename T>
+    struct CallGlobalImpl<T, false> {
       static void set(void* iProd, void const* iCache) {}
       static void endJob(void* iCache) {}
     };
 
-    template <typename T> using CallGlobal = CallGlobalImpl<T, T::HasAbility::kGlobalCache>;
+    template <typename T>
+    using CallGlobal = CallGlobalImpl<T, T::HasAbility::kGlobalCache>;
     //********************************
     // CallGlobalRun
     //********************************
-    template <typename T, bool> struct CallGlobalRunImpl {
+    template <typename T, bool>
+    struct CallGlobalRunImpl {
       static void beginRun(edm::Run const& iRun,
                            edm::EventSetup const& iES,
                            typename T::GlobalCache const* iGC,
@@ -55,7 +60,8 @@ namespace edm {
         oCache = T::globalBeginRun(iRun, iES, iGC);
       }
 
-      template <typename B> static void set(B* iProd, typename T::RunCache const* iCache) {
+      template <typename B>
+      static void set(B* iProd, typename T::RunCache const* iCache) {
         static_cast<T*>(iProd)->setRunCache(iCache);
       }
 
@@ -64,18 +70,21 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallGlobalRunImpl<T, false> {
+    template <typename T>
+    struct CallGlobalRunImpl<T, false> {
       static void beginRun(edm::Run const&, edm::EventSetup const&, typename T::GlobalCache const*, impl::dummy_ptr) {}
       static void set(void* iProd, typename T::RunCache const* iCache) {}
       static void endRun(edm::Run const&, edm::EventSetup const&, typename T::RunContext const*) {}
     };
 
-    template <typename T> using CallGlobalRun = CallGlobalRunImpl<T, T::HasAbility::kRunCache>;
+    template <typename T>
+    using CallGlobalRun = CallGlobalRunImpl<T, T::HasAbility::kRunCache>;
 
     //********************************
     // CallGlobalRunSummary
     //********************************
-    template <typename T, bool> struct CallGlobalRunSummaryImpl {
+    template <typename T, bool>
+    struct CallGlobalRunSummaryImpl {
       static void beginRun(edm::Run const& iRun,
                            edm::EventSetup const& iES,
                            typename T::RunContext const* iRC,
@@ -98,7 +107,8 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallGlobalRunSummaryImpl<T, false> {
+    template <typename T>
+    struct CallGlobalRunSummaryImpl<T, false> {
       static void beginRun(edm::Run const&, edm::EventSetup const&, typename T::RunContext const*, impl::dummy_ptr) {}
       static void streamEndRunSummary(void* iProd,
                                       edm::Run const&,
@@ -110,12 +120,14 @@ namespace edm {
                                typename T::RunSummaryCache*) {}
     };
 
-    template <typename T> using CallGlobalRunSummary = CallGlobalRunSummaryImpl<T, T::HasAbility::kRunSummaryCache>;
+    template <typename T>
+    using CallGlobalRunSummary = CallGlobalRunSummaryImpl<T, T::HasAbility::kRunSummaryCache>;
 
     //********************************
     // CallGlobalLuminosityBlock
     //********************************
-    template <typename T, bool> struct CallGlobalLuminosityBlockImpl {
+    template <typename T, bool>
+    struct CallGlobalLuminosityBlockImpl {
       static void beginLuminosityBlock(edm::LuminosityBlock const& Lumi,
                                        edm::EventSetup const& iES,
                                        typename T::RunContext const* iRC,
@@ -123,7 +135,8 @@ namespace edm {
         oCache = T::globalBeginLuminosityBlock(Lumi, iES, iRC);
       }
 
-      template <typename B> static void set(B* iProd, typename T::LuminosityBlockCache const* iCache) {
+      template <typename B>
+      static void set(B* iProd, typename T::LuminosityBlockCache const* iCache) {
         static_cast<T*>(iProd)->setLuminosityBlockCache(iCache);
       }
 
@@ -134,7 +147,8 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallGlobalLuminosityBlockImpl<T, false> {
+    template <typename T>
+    struct CallGlobalLuminosityBlockImpl<T, false> {
       static void beginLuminosityBlock(edm::LuminosityBlock const&,
                                        edm::EventSetup const&,
                                        typename T::RunContext const*,
@@ -150,7 +164,8 @@ namespace edm {
     //********************************
     // CallGlobalLuminosityBlockSummary
     //********************************
-    template <typename T, bool> struct CallGlobalLuminosityBlockSummaryImpl {
+    template <typename T, bool>
+    struct CallGlobalLuminosityBlockSummaryImpl {
       static void beginLuminosityBlock(edm::LuminosityBlock const& Lumi,
                                        edm::EventSetup const& iES,
                                        typename T::LuminosityBlockContext const* iRC,
@@ -173,7 +188,8 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallGlobalLuminosityBlockSummaryImpl<T, false> {
+    template <typename T>
+    struct CallGlobalLuminosityBlockSummaryImpl<T, false> {
       static void beginLuminosityBlock(edm::LuminosityBlock const&,
                                        edm::EventSetup const&,
                                        typename T::LuminosityBlockContext const*,
@@ -195,29 +211,34 @@ namespace edm {
     //********************************
     // CallBeginRunProduce
     //********************************
-    template <typename T, bool> struct CallBeginRunProduceImpl {
+    template <typename T, bool>
+    struct CallBeginRunProduceImpl {
       static void produce(edm::Run& iRun, edm::EventSetup const& iES, typename T::RunContext const* iRC) {
         T::globalBeginRunProduce(iRun, iES, iRC);
       }
     };
 
-    template <typename T> struct CallBeginRunProduceImpl<T, false> {
+    template <typename T>
+    struct CallBeginRunProduceImpl<T, false> {
       static void produce(edm::Run& iRun, edm::EventSetup const& iES, typename T::RunContext const* iRC) {}
     };
 
-    template <typename T> using CallBeginRunProduce = CallBeginRunProduceImpl<T, T::HasAbility::kBeginRunProducer>;
+    template <typename T>
+    using CallBeginRunProduce = CallBeginRunProduceImpl<T, T::HasAbility::kBeginRunProducer>;
 
     //********************************
     // CallEndRunProduce
     //********************************
-    template <typename T, bool bProduce, bool bSummary> struct CallEndRunProduceImpl {
+    template <typename T, bool bProduce, bool bSummary>
+    struct CallEndRunProduceImpl {
       static void produce(edm::Run&,
                           edm::EventSetup const&,
                           typename T::RunContext const*,
                           typename T::RunSummaryCache const*) {}
     };
 
-    template <typename T> struct CallEndRunProduceImpl<T, true, false> {
+    template <typename T>
+    struct CallEndRunProduceImpl<T, true, false> {
       static void produce(edm::Run& iRun,
                           edm::EventSetup const& iES,
                           typename T::RunContext const* iRC,
@@ -226,7 +247,8 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallEndRunProduceImpl<T, true, true> {
+    template <typename T>
+    struct CallEndRunProduceImpl<T, true, true> {
       static void produce(edm::Run& iRun,
                           edm::EventSetup const& iES,
                           typename T::RunContext const* iRC,
@@ -241,7 +263,8 @@ namespace edm {
     //********************************
     // CallBeginLuminosityBlockProduce
     //********************************
-    template <typename T, bool> struct CallBeginLuminosityBlockProduceImpl {
+    template <typename T, bool>
+    struct CallBeginLuminosityBlockProduceImpl {
       static void produce(edm::LuminosityBlock& Lumi,
                           edm::EventSetup const& iES,
                           typename T::LuminosityBlockContext const* iRC) {
@@ -249,7 +272,8 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallBeginLuminosityBlockProduceImpl<T, false> {
+    template <typename T>
+    struct CallBeginLuminosityBlockProduceImpl<T, false> {
       static void produce(edm::LuminosityBlock& Lumi,
                           edm::EventSetup const& iES,
                           typename T::LuminosityBlockContext const* iRC) {}
@@ -262,14 +286,16 @@ namespace edm {
     //********************************
     // CallEndLuminosityBlockProduce
     //********************************
-    template <typename T, bool bProduce, bool bSummary> struct CallEndLuminosityBlockProduceImpl {
+    template <typename T, bool bProduce, bool bSummary>
+    struct CallEndLuminosityBlockProduceImpl {
       static void produce(edm::LuminosityBlock&,
                           edm::EventSetup const&,
                           typename T::LuminosityBlockContext const*,
                           typename T::LuminosityBlockSummaryCache const*) {}
     };
 
-    template <typename T> struct CallEndLuminosityBlockProduceImpl<T, true, false> {
+    template <typename T>
+    struct CallEndLuminosityBlockProduceImpl<T, true, false> {
       static void produce(edm::LuminosityBlock& Lumi,
                           edm::EventSetup const& iES,
                           typename T::LuminosityBlockContext const* iRC,
@@ -278,7 +304,8 @@ namespace edm {
       }
     };
 
-    template <typename T> struct CallEndLuminosityBlockProduceImpl<T, true, true> {
+    template <typename T>
+    struct CallEndLuminosityBlockProduceImpl<T, true, true> {
       static void produce(edm::LuminosityBlock& Lumi,
                           edm::EventSetup const& iES,
                           typename T::LuminosityBlockContext const* iRC,

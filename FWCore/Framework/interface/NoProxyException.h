@@ -27,7 +27,8 @@
 // forward declarations
 namespace edm {
   namespace eventsetup {
-    template <class T> class NoProxyException : public NoDataException<T> {
+    template <class T>
+    class NoProxyException : public NoDataException<T> {
       // ---------- friend classes and functions ---------------
 
     public:

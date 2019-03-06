@@ -40,7 +40,8 @@ namespace edm {
   class SharedResourcesAcquirer;
 
   namespace stream {
-    template <typename T> class ProducingModuleAdaptorBase;
+    template <typename T>
+    class ProducingModuleAdaptorBase;
   }
 
   class LuminosityBlock : public LuminosityBlockBase {
@@ -74,40 +75,55 @@ namespace edm {
 
     void setProducer(ProducerBase const* iProducer);
 
-    template <typename PROD> bool getByLabel(std::string const& label, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByLabel(std::string const& label, Handle<PROD>& result) const;
 
     template <typename PROD>
     bool getByLabel(std::string const& label, std::string const& productInstanceName, Handle<PROD>& result) const;
 
     /// same as above, but using the InputTag class
-    template <typename PROD> bool getByLabel(InputTag const& tag, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByLabel(InputTag const& tag, Handle<PROD>& result) const;
 
-    template <typename PROD> bool getByToken(EDGetToken token, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByToken(EDGetToken token, Handle<PROD>& result) const;
 
-    template <typename PROD> bool getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const;
 
-    template <typename PROD> Handle<PROD> getHandle(EDGetTokenT<PROD> token) const;
+    template <typename PROD>
+    Handle<PROD> getHandle(EDGetTokenT<PROD> token) const;
 
-    template <typename PROD> PROD const& get(EDGetTokenT<PROD> token) const noexcept(false);
+    template <typename PROD>
+    PROD const& get(EDGetTokenT<PROD> token) const noexcept(false);
 
-    template <typename PROD> void getManyByType(std::vector<Handle<PROD>>& results) const;
+    template <typename PROD>
+    void getManyByType(std::vector<Handle<PROD>>& results) const;
 
     Run const& getRun() const { return *run_; }
 
     ///Put a new product.
-    template <typename PROD> void put(std::unique_ptr<PROD> product) { put<PROD>(std::move(product), std::string()); }
+    template <typename PROD>
+    void put(std::unique_ptr<PROD> product) {
+      put<PROD>(std::move(product), std::string());
+    }
 
     ///Put a new product with a 'product instance name'
-    template <typename PROD> void put(std::unique_ptr<PROD> product, std::string const& productInstanceName);
+    template <typename PROD>
+    void put(std::unique_ptr<PROD> product, std::string const& productInstanceName);
 
-    template <typename PROD> void put(EDPutToken token, std::unique_ptr<PROD> product);
+    template <typename PROD>
+    void put(EDPutToken token, std::unique_ptr<PROD> product);
 
-    template <typename PROD> void put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product);
+    template <typename PROD>
+    void put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product);
 
     ///puts a new product
-    template <typename PROD, typename... Args> void emplace(EDPutTokenT<PROD> token, Args&&... args);
+    template <typename PROD, typename... Args>
+    void emplace(EDPutTokenT<PROD> token, Args&&... args);
 
-    template <typename PROD, typename... Args> void emplace(EDPutToken token, Args&&... args);
+    template <typename PROD, typename... Args>
+    void emplace(EDPutToken token, Args&&... args);
 
     Provenance getProvenance(BranchID const& theID) const;
 
@@ -131,9 +147,11 @@ namespace edm {
                                std::type_info const& iProductType,
                                InputTag const& iTag) const override;
 
-    template <typename PROD> void putImpl(EDPutToken::value_type token, std::unique_ptr<PROD> product);
+    template <typename PROD>
+    void putImpl(EDPutToken::value_type token, std::unique_ptr<PROD> product);
 
-    template <typename PROD, typename... Args> void emplaceImpl(EDPutToken::value_type token, Args&&... args);
+    template <typename PROD, typename... Args>
+    void emplaceImpl(EDPutToken::value_type token, Args&&... args);
 
     typedef std::vector<edm::propagate_const<std::unique_ptr<WrapperBase>>> ProductPtrVec;
     ProductPtrVec& putProducts() { return putProducts_; }
@@ -145,7 +163,8 @@ namespace edm {
     // public interface is asking for trouble
     friend class RawInputSource;
     friend class ProducerBase;
-    template <typename T> friend class stream::ProducingModuleAdaptorBase;
+    template <typename T>
+    friend class stream::ProducingModuleAdaptorBase;
 
     void commit_(std::vector<edm::ProductResolverIndex> const& iShouldPut);
 
@@ -158,7 +177,8 @@ namespace edm {
     static const std::string emptyString_;
   };
 
-  template <typename PROD> void LuminosityBlock::putImpl(EDPutToken::value_type index, std::unique_ptr<PROD> product) {
+  template <typename PROD>
+  void LuminosityBlock::putImpl(EDPutToken::value_type index, std::unique_ptr<PROD> product) {
     // The following will call post_insert if T has such a function,
     // and do nothing if T has no such function.
     std::conditional_t<detail::has_postinsert<PROD>::value, DoPostInsert<PROD>, DoNotPostInsert<PROD>> maybe_inserter;
@@ -180,7 +200,8 @@ namespace edm {
     putImpl(index, std::move(product));
   }
 
-  template <typename PROD> void LuminosityBlock::put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product) {
+  template <typename PROD>
+  void LuminosityBlock::put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product) {
     if (UNLIKELY(product.get() == 0)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
       principal_get_adapter_detail::throwOnPutOfNullProduct("LuminosityBlock", typeID,
@@ -192,7 +213,8 @@ namespace edm {
     putImpl(token.index(), std::move(product));
   }
 
-  template <typename PROD> void LuminosityBlock::put(EDPutToken token, std::unique_ptr<PROD> product) {
+  template <typename PROD>
+  void LuminosityBlock::put(EDPutToken token, std::unique_ptr<PROD> product) {
     if (UNLIKELY(product.get() == 0)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
       principal_get_adapter_detail::throwOnPutOfNullProduct("LuminosityBlock", typeID,
@@ -209,14 +231,16 @@ namespace edm {
     putImpl(token.index(), std::move(product));
   }
 
-  template <typename PROD, typename... Args> void LuminosityBlock::emplace(EDPutTokenT<PROD> token, Args&&... args) {
+  template <typename PROD, typename... Args>
+  void LuminosityBlock::emplace(EDPutTokenT<PROD> token, Args&&... args) {
     if (UNLIKELY(token.isUninitialized())) {
       principal_get_adapter_detail::throwOnPutOfUninitializedToken("LuminosityBlock", typeid(PROD));
     }
     emplaceImpl<PROD>(token.index(), std::forward<Args>(args)...);
   }
 
-  template <typename PROD, typename... Args> void LuminosityBlock::emplace(EDPutToken token, Args&&... args) {
+  template <typename PROD, typename... Args>
+  void LuminosityBlock::emplace(EDPutToken token, Args&&... args) {
     if (UNLIKELY(token.isUninitialized())) {
       principal_get_adapter_detail::throwOnPutOfUninitializedToken("LuminosityBlock", typeid(PROD));
     }
@@ -242,7 +266,8 @@ namespace edm {
     putProducts()[index] = std::move(wp);
   }
 
-  template <typename PROD> bool LuminosityBlock::getByLabel(std::string const& label, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool LuminosityBlock::getByLabel(std::string const& label, Handle<PROD>& result) const {
     return getByLabel(label, emptyString_, result);
   }
 
@@ -264,7 +289,8 @@ namespace edm {
   }
 
   /// same as above, but using the InputTag class
-  template <typename PROD> bool LuminosityBlock::getByLabel(InputTag const& tag, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool LuminosityBlock::getByLabel(InputTag const& tag, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)), tag.label(), tag.instance());
     }
@@ -277,7 +303,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> bool LuminosityBlock::getByToken(EDGetToken token, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool LuminosityBlock::getByToken(EDGetToken token, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)), token);
     }
@@ -290,7 +317,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> bool LuminosityBlock::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool LuminosityBlock::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)), token);
     }
@@ -303,7 +331,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> Handle<PROD> LuminosityBlock::getHandle(EDGetTokenT<PROD> token) const {
+  template <typename PROD>
+  Handle<PROD> LuminosityBlock::getHandle(EDGetTokenT<PROD> token) const {
     if
       UNLIKELY(!provRecorder_.checkIfComplete<PROD>()) {
         principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)), token);
@@ -312,7 +341,8 @@ namespace edm {
     return convert_handle<PROD>(std::move(bh));
   }
 
-  template <typename PROD> PROD const& LuminosityBlock::get(EDGetTokenT<PROD> token) const noexcept(false) {
+  template <typename PROD>
+  PROD const& LuminosityBlock::get(EDGetTokenT<PROD> token) const noexcept(false) {
     if
       UNLIKELY(!provRecorder_.checkIfComplete<PROD>()) {
         principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)), token);
@@ -321,7 +351,8 @@ namespace edm {
     return *convert_handle<PROD>(std::move(bh));
   }
 
-  template <typename PROD> void LuminosityBlock::getManyByType(std::vector<Handle<PROD>>& results) const {
+  template <typename PROD>
+  void LuminosityBlock::getManyByType(std::vector<Handle<PROD>>& results) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Lumi", TypeID(typeid(PROD)));
     }
@@ -331,21 +362,24 @@ namespace edm {
   // Free functions to retrieve a collection from the LuminosityBlock.
   // Will throw an exception if the collection is not available.
 
-  template <typename T> T const& get(LuminosityBlock const& event, InputTag const& tag) {
+  template <typename T>
+  T const& get(LuminosityBlock const& event, InputTag const& tag) {
     Handle<T> handle;
     event.getByLabel(tag, handle);
     // throw if the handle is not valid
     return *handle.product();
   }
 
-  template <typename T> T const& get(LuminosityBlock const& event, EDGetToken const& token) {
+  template <typename T>
+  T const& get(LuminosityBlock const& event, EDGetToken const& token) {
     Handle<T> handle;
     event.getByToken(token, handle);
     // throw if the handle is not valid
     return *handle.product();
   }
 
-  template <typename T> T const& get(LuminosityBlock const& event, EDGetTokenT<T> const& token) {
+  template <typename T>
+  T const& get(LuminosityBlock const& event, EDGetTokenT<T> const& token) {
     Handle<T> handle;
     event.getByToken(token, handle);
     // throw if the handle is not valid

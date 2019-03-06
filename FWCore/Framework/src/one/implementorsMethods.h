@@ -30,23 +30,30 @@
 namespace edm {
   namespace one {
     namespace impl {
-      template <typename T> void SharedResourcesUser<T>::usesResource(std::string const& iName) {
+      template <typename T>
+      void SharedResourcesUser<T>::usesResource(std::string const& iName) {
         resourceNames_.insert(iName);
         SharedResourcesRegistry::instance()->registerSharedResource(iName);
       }
-      template <typename T> void SharedResourcesUser<T>::usesResource() {
+      template <typename T>
+      void SharedResourcesUser<T>::usesResource() {
         this->usesResource(SharedResourcesRegistry::kLegacyModuleResourceName);
       }
 
-      template <typename T> SharedResourcesAcquirer SharedResourcesUser<T>::createAcquirer() {
+      template <typename T>
+      SharedResourcesAcquirer SharedResourcesUser<T>::createAcquirer() {
         std::vector<std::string> v(resourceNames_.begin(), resourceNames_.end());
         return SharedResourcesRegistry::instance()->createAcquirer(v);
       }
 
-      template <typename T> void RunWatcher<T>::doBeginRun_(Run const& rp, EventSetup const& c) {
+      template <typename T>
+      void RunWatcher<T>::doBeginRun_(Run const& rp, EventSetup const& c) {
         this->beginRun(rp, c);
       }
-      template <typename T> void RunWatcher<T>::doEndRun_(Run const& rp, EventSetup const& c) { this->endRun(rp, c); }
+      template <typename T>
+      void RunWatcher<T>::doEndRun_(Run const& rp, EventSetup const& c) {
+        this->endRun(rp, c);
+      }
 
       template <typename T>
       void LuminosityBlockWatcher<T>::doBeginLuminosityBlock_(LuminosityBlock const& rp, EventSetup const& c) {
@@ -57,11 +64,13 @@ namespace edm {
         this->endLuminosityBlock(rp, c);
       }
 
-      template <typename T> void BeginRunProducer<T>::doBeginRunProduce_(Run& rp, EventSetup const& c) {
+      template <typename T>
+      void BeginRunProducer<T>::doBeginRunProduce_(Run& rp, EventSetup const& c) {
         this->beginRunProduce(rp, c);
       }
 
-      template <typename T> void EndRunProducer<T>::doEndRunProduce_(Run& rp, EventSetup const& c) {
+      template <typename T>
+      void EndRunProducer<T>::doEndRunProduce_(Run& rp, EventSetup const& c) {
         this->endRunProduce(rp, c);
       }
 

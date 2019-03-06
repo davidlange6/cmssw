@@ -117,7 +117,8 @@ namespace edm {
   }
 
   namespace {
-    template <typename T> class StreamScheduleSignalSentry {
+    template <typename T>
+    class StreamScheduleSignalSentry {
     public:
       StreamScheduleSignalSentry(ActivityRegistry* a, typename T::Context const* context)
           : a_(a), context_(context), allowThrow_(false) {

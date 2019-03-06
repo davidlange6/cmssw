@@ -79,19 +79,26 @@ namespace edm {
         virtual void respondToCloseInputFile(FileBlock const&) = 0;
       };
 
-      template <typename T> struct AbilityToImplementor;
+      template <typename T>
+      struct AbilityToImplementor;
 
-      template <> struct AbilityToImplementor<edm::one::SharedResources> {
+      template <>
+      struct AbilityToImplementor<edm::one::SharedResources> {
         typedef edm::one::impl::SharedResourcesUser<edm::one::OutputModuleBase> Type;
       };
 
-      template <> struct AbilityToImplementor<edm::one::WatchRuns> { typedef edm::one::outputmodule::RunWatcher Type; };
+      template <>
+      struct AbilityToImplementor<edm::one::WatchRuns> {
+        typedef edm::one::outputmodule::RunWatcher Type;
+      };
 
-      template <> struct AbilityToImplementor<edm::one::WatchLuminosityBlocks> {
+      template <>
+      struct AbilityToImplementor<edm::one::WatchLuminosityBlocks> {
         typedef edm::one::outputmodule::LuminosityBlockWatcher Type;
       };
 
-      template <> struct AbilityToImplementor<edm::WatchInputFiles> {
+      template <>
+      struct AbilityToImplementor<edm::WatchInputFiles> {
         typedef edm::one::outputmodule::InputFileWatcher Type;
       };
     }  // namespace outputmodule

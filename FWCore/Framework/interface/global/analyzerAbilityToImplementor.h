@@ -29,25 +29,31 @@
 namespace edm {
   namespace global {
     namespace analyzer {
-      template <typename T> struct AbilityToImplementor;
+      template <typename T>
+      struct AbilityToImplementor;
 
-      template <typename C> struct AbilityToImplementor<edm::StreamCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::StreamCache<C>> {
         typedef edm::global::impl::StreamCacheHolder<edm::global::EDAnalyzerBase, C> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::RunCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::RunCache<C>> {
         typedef edm::global::impl::RunCacheHolder<edm::global::EDAnalyzerBase, C> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::RunSummaryCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::RunSummaryCache<C>> {
         typedef edm::global::impl::RunSummaryCacheHolder<edm::global::EDAnalyzerBase, C> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::LuminosityBlockCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::LuminosityBlockCache<C>> {
         typedef edm::global::impl::LuminosityBlockCacheHolder<edm::global::EDAnalyzerBase, C> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::LuminosityBlockSummaryCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::LuminosityBlockSummaryCache<C>> {
         typedef edm::global::impl::LuminosityBlockSummaryCacheHolder<edm::global::EDAnalyzerBase, C> Type;
       };
     }  // namespace analyzer

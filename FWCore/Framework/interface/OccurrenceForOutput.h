@@ -54,11 +54,14 @@ namespace edm {
 
     BasicHandle getByToken(EDGetToken token, TypeID const& typeID) const;
 
-    template <typename PROD> bool getByToken(EDGetToken token, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByToken(EDGetToken token, Handle<PROD>& result) const;
 
-    template <typename PROD> bool getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const;
 
-    template <typename PROD> Handle<PROD> getHandle(EDGetTokenT<PROD> token) const;
+    template <typename PROD>
+    Handle<PROD> getHandle(EDGetTokenT<PROD> token) const;
 
     Provenance getProvenance(BranchID const& theID) const;
 
@@ -82,7 +85,8 @@ namespace edm {
     ModuleCallingContext const* moduleCallingContext_;
   };
 
-  template <typename PROD> bool OccurrenceForOutput::getByToken(EDGetToken token, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool OccurrenceForOutput::getByToken(EDGetToken token, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("RunOrLumi", TypeID(typeid(PROD)), token);
     }
@@ -94,7 +98,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> bool OccurrenceForOutput::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool OccurrenceForOutput::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("RunOrLumi", TypeID(typeid(PROD)), token);
     }
@@ -106,7 +111,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> Handle<PROD> OccurrenceForOutput::getHandle(EDGetTokenT<PROD> token) const {
+  template <typename PROD>
+  Handle<PROD> OccurrenceForOutput::getHandle(EDGetTokenT<PROD> token) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("RunOrLumi", TypeID(typeid(PROD)), token);
     }

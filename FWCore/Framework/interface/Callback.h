@@ -37,7 +37,8 @@ namespace edm {
     };
 
     // The default decorator that does nothing
-    template <typename TRecord> struct CallbackSimpleDecorator {
+    template <typename TRecord>
+    struct CallbackSimpleDecorator {
       void pre(const TRecord&) {}
       void post(const TRecord&) {}
     };
@@ -69,7 +70,8 @@ namespace edm {
         }
       }
 
-      template <class DataT> void holdOntoPointer(DataT* iData) {
+      template <class DataT>
+      void holdOntoPointer(DataT* iData) {
         proxyData_[produce::find_index<TReturn, DataT>::value] = iData;
       }
 
@@ -79,7 +81,8 @@ namespace edm {
         setData<typename type::head_type, typename type::tail_type>(iReturn);
       }
 
-      template <class RemainingContainerT, class DataT, class ProductsT> void setData(ProductsT& iProducts) {
+      template <class RemainingContainerT, class DataT, class ProductsT>
+      void setData(ProductsT& iProducts) {
         DataT* temp = reinterpret_cast<DataT*>(proxyData_[produce::find_index<TReturn, DataT>::value]);
         if (nullptr != temp) {
           moveFromTo(iProducts, *temp);

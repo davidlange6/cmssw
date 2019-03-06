@@ -100,9 +100,11 @@ private:
   edm::EventSetupImpl* m_es = nullptr;
   edm::ModuleDescription m_desc = {"Dummy", "dummy"};
 
-  template <typename T, typename U> void testTransitions(std::shared_ptr<U> iMod, Expectations const& iExpect);
+  template <typename T, typename U>
+  void testTransitions(std::shared_ptr<U> iMod, Expectations const& iExpect);
 
-  template <typename T> void runTest(Expectations const& iExpect);
+  template <typename T>
+  void runTest(Expectations const& iExpect);
 
   class BasicProd : public edm::stream::EDProducer<> {
   public:
@@ -434,7 +436,8 @@ testStreamModule::testStreamModule()
 }
 
 namespace {
-  template <typename T> std::shared_ptr<edm::stream::EDProducerAdaptorBase> createModule() {
+  template <typename T>
+  std::shared_ptr<edm::stream::EDProducerAdaptorBase> createModule() {
     edm::ParameterSet pset;
     std::shared_ptr<edm::stream::EDProducerAdaptorBase> retValue =
         std::make_shared<edm::stream::EDProducerAdaptor<T>>(pset);
@@ -467,7 +470,8 @@ void testStreamModule::testTransitions(std::shared_ptr<U> iMod, Expectations con
     testTransition<T>(&w, keyVal.first, iExpect, keyVal.second);
   }
 }
-template <typename T> void testStreamModule::runTest(Expectations const& iExpect) {
+template <typename T>
+void testStreamModule::runTest(Expectations const& iExpect) {
   auto mod = createModule<T>();
   CPPUNIT_ASSERT(0 == T::m_count);
   testTransitions<T>(mod, iExpect);

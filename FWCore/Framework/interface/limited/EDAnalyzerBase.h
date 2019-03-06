@@ -39,15 +39,18 @@ namespace edm {
   class WaitingTask;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace limited {
 
     class EDAnalyzerBase : public EDConsumerBase {
     public:
-      template <typename T> friend class edm::WorkerT;
-      template <typename T> friend class edm::maker::ModuleHolderT;
+      template <typename T>
+      friend class edm::WorkerT;
+      template <typename T>
+      friend class edm::maker::ModuleHolderT;
       typedef EDAnalyzerBase ModuleType;
 
       EDAnalyzerBase(ParameterSet const& pset);

@@ -27,7 +27,8 @@
 // forward declarations
 
 namespace edm {
-  template <class T> class ESWatcher {
+  template <class T>
+  class ESWatcher {
   public:
     struct NullFunction {
       void operator()(const T&) {}
@@ -35,7 +36,8 @@ namespace edm {
 
     ESWatcher() : callback_(NullFunction()), cacheId_(0) {}
 
-    template <class TFunc> ESWatcher(TFunc iFunctor) : callback_(iFunctor), cacheId_(0) {}
+    template <class TFunc>
+    ESWatcher(TFunc iFunctor) : callback_(iFunctor), cacheId_(0) {}
 
     template <class TObj, class TMemFunc>
     ESWatcher(TObj const& iObj, TMemFunc iFunc)

@@ -98,7 +98,8 @@ private:
   std::shared_ptr<w_TNS> tnsptr_;
   edm::ServiceToken serviceToken_;
 
-  template <typename T> void testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect);
+  template <typename T>
+  void testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect);
 
   class BasicOutputModule : public edm::one::OutputModule<> {
   public:
@@ -323,7 +324,8 @@ namespace {
   }
 }  // namespace
 
-template <typename T> void testOneOutputModule::testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect) {
+template <typename T>
+void testOneOutputModule::testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect) {
   iMod->doPreallocate(m_preallocConfig);
   edm::WorkerT<edm::one::OutputModuleBase> w{iMod, m_desc, m_params.actions_};
   w.beginJob();

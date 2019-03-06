@@ -42,7 +42,8 @@
 namespace edm {
   class ActivityRegistry;
   class ESInputTag;
-  template <class T, class R> class ESGetToken;
+  template <class T, class R>
+  class ESGetToken;
   class PileUp;
 
   namespace eventsetup {
@@ -63,35 +64,49 @@ namespace edm {
     // ---------- const member functions ---------------------
     /** returns the Record of type T.  If no such record available
           a eventsetup::NoRecordException<T> is thrown */
-    template <typename T> T get() const { return m_setup.get<T>(); }
+    template <typename T>
+    T get() const {
+      return m_setup.get<T>();
+    }
 
     /** returns the Record of type T.  If no such record available
        a null pointer is returned */
-    template <typename T> std::optional<T> tryToGet() const { return m_setup.tryToGet<T>(); }
+    template <typename T>
+    std::optional<T> tryToGet() const {
+      return m_setup.tryToGet<T>();
+    }
 
     /** can directly access data if data_default_record_trait<> is defined for this data type **/
-    template <typename T> bool getData(T& iHolder) const { return getData(std::string{}, iHolder); }
+    template <typename T>
+    bool getData(T& iHolder) const {
+      return getData(std::string{}, iHolder);
+    }
 
-    template <typename T> bool getData(const std::string& iLabel, T& iHolder) const {
+    template <typename T>
+    bool getData(const std::string& iLabel, T& iHolder) const {
       auto const& rec = this->get<eventsetup::default_record_t<T>>();
       return rec.get(iLabel, iHolder);
     }
 
-    template <typename T> bool getData(const ESInputTag& iTag, T& iHolder) const {
+    template <typename T>
+    bool getData(const ESInputTag& iTag, T& iHolder) const {
       auto const& rec = this->get<eventsetup::default_record_t<T>>();
       return rec.get(iTag, iHolder);
     }
 
-    template <typename T, typename R> T const& getData(const ESGetToken<T, R>& iToken) const noexcept(false) {
+    template <typename T, typename R>
+    T const& getData(const ESGetToken<T, R>& iToken) const noexcept(false) {
       return this
           ->get<std::conditional_t<std::is_same_v<R, edm::DefaultRecord>, eventsetup::default_record_t<ESHandle<T>>, R>>()
           .get(iToken);
     }
-    template <typename T, typename R> T const& getData(ESGetToken<T, R>& iToken) const noexcept(false) {
+    template <typename T, typename R>
+    T const& getData(ESGetToken<T, R>& iToken) const noexcept(false) {
       return this->getData(const_cast<const ESGetToken<T, R>&>(iToken));
     }
 
-    template <typename T, typename R> ESHandle<T> getHandle(const ESGetToken<T, R>& iToken) const {
+    template <typename T, typename R>
+    ESHandle<T> getHandle(const ESGetToken<T, R>& iToken) const {
       if constexpr (std::is_same_v<R, edm::DefaultRecord>) {
         auto const& rec = this->get<eventsetup::default_record_t<ESHandle<T>>>();
         return rec.getHandle(iToken);

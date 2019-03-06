@@ -101,7 +101,8 @@ namespace edm {
       DataKey dataKey_;
     };
 
-    template <class T> class NoDataException : public NoDataExceptionBase {
+    template <class T>
+    class NoDataException : public NoDataExceptionBase {
     public:
       NoDataException(const EventSetupRecordKey& iRecordKey,
                       const DataKey& iDataKey,

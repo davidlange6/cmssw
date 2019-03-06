@@ -49,7 +49,8 @@ namespace edm {
                                ParameterSet const& iConfiguration,
                                std::shared_ptr<base_type> const& component);
     };
-    template <class TType> struct ModuleMaker : public ComponentMaker<edm::eventsetup::ModuleMakerTraits, TType> {};
+    template <class TType>
+    struct ModuleMaker : public ComponentMaker<edm::eventsetup::ModuleMakerTraits, TType> {};
 
     typedef ComponentFactory<ModuleMakerTraits> ModuleFactory;
     typedef edmplugin::PluginFactory<edm::eventsetup::ComponentMakerBase<ModuleMakerTraits>*()> ModulePluginFactory;

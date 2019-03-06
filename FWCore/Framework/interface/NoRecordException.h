@@ -43,7 +43,8 @@ namespace edm {
     bool recordDoesExist(edm::EventSetupImpl const&, edm::eventsetup::EventSetupRecordKey const&);
 
     //NOTE: when EDM gets own exception hierarchy, will need to change inheritance
-    template <class T> class NoRecordException : public cms::Exception {
+    template <class T>
+    class NoRecordException : public cms::Exception {
     public:
       // ---------- Constructors and destructor ----------------
       explicit NoRecordException(bool iKnownRecord) : cms::Exception("NoRecord") {

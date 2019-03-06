@@ -29,13 +29,16 @@ namespace edm {
   class WaitingTask;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   class EDProducer : public ProducerBase, public EDConsumerBase {
   public:
-    template <typename T> friend class maker::ModuleHolderT;
-    template <typename T> friend class WorkerT;
+    template <typename T>
+    friend class maker::ModuleHolderT;
+    template <typename T>
+    friend class WorkerT;
     typedef EDProducer ModuleType;
 
     EDProducer();

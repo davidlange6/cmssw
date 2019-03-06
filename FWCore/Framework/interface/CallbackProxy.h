@@ -33,7 +33,8 @@
 // forward declarations
 namespace edm::eventsetup {
 
-  template <class CallbackT, class RecordT, class DataT> class CallbackProxy : public DataProxy {
+  template <class CallbackT, class RecordT, class DataT>
+  class CallbackProxy : public DataProxy {
   public:
     using smart_pointer_traits = produce::smart_pointer_traits<DataT>;
     using value_type = typename smart_pointer_traits::type;

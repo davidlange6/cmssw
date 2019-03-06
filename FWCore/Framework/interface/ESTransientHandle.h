@@ -37,7 +37,8 @@ namespace edm {
 
   class ESHandleExceptionFactory;
 
-  template <typename T> class ESTransientHandle : public ESHandleBase {
+  template <typename T>
+  class ESTransientHandle : public ESHandleBase {
   public:
     typedef T value_type;
 

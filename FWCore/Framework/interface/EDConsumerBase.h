@@ -48,7 +48,8 @@ namespace edm {
   class ProductResolverIndexHelper;
   class ProductRegistry;
   class ConsumesCollector;
-  template <typename T> class WillGetIfMatch;
+  template <typename T>
+  class WillGetIfMatch;
 
   class EDConsumerBase {
   public:
@@ -99,7 +100,8 @@ namespace edm {
 
   protected:
     friend class ConsumesCollector;
-    template <typename T> friend class WillGetIfMatch;
+    template <typename T>
+    friend class WillGetIfMatch;
     ///Use a ConsumesCollector to gather consumes information from helper functions
     ConsumesCollector consumesCollector();
 
@@ -113,7 +115,8 @@ namespace edm {
       return EDGetToken{recordConsumes(InEvent, id, checkIfEmpty(tag), true)};
     }
 
-    template <BranchType B> EDGetToken consumes(TypeToGet const& id, edm::InputTag const& tag) {
+    template <BranchType B>
+    EDGetToken consumes(TypeToGet const& id, edm::InputTag const& tag) {
       return EDGetToken{recordConsumes(B, id, checkIfEmpty(tag), true)};
     }
 
@@ -125,21 +128,27 @@ namespace edm {
 
     EDGetToken mayConsume(const TypeToGet& id, edm::InputTag const& tag) { return mayConsume<InEvent>(id, tag); }
 
-    template <BranchType B> EDGetToken mayConsume(const TypeToGet& id, edm::InputTag const& tag) {
+    template <BranchType B>
+    EDGetToken mayConsume(const TypeToGet& id, edm::InputTag const& tag) {
       return EDGetToken{recordConsumes(B, id, checkIfEmpty(tag), false)};
     }
 
-    template <typename ProductType, BranchType B = InEvent> void consumesMany() {
+    template <typename ProductType, BranchType B = InEvent>
+    void consumesMany() {
       TypeToGet tid = TypeToGet::make<ProductType>();
       consumesMany<B>(tid);
     }
 
     void consumesMany(const TypeToGet& id) { consumesMany<InEvent>(id); }
 
-    template <BranchType B> void consumesMany(const TypeToGet& id) { recordConsumes(B, id, edm::InputTag{}, true); }
+    template <BranchType B>
+    void consumesMany(const TypeToGet& id) {
+      recordConsumes(B, id, edm::InputTag{}, true);
+    }
 
     // For consuming event-setup products
-    template <typename ESProduct, typename ESRecord, Transition Tr = Transition::Event> auto esConsumes() {
+    template <typename ESProduct, typename ESRecord, Transition Tr = Transition::Event>
+    auto esConsumes() {
       return esConsumes<ESProduct, ESRecord, Tr>(ESInputTag{});
     }
 

@@ -48,7 +48,8 @@ namespace edm {
                                        edm::ParameterSet const& iPSet,
                                        edm::PreallocationConfiguration const&);
 
-    template <typename F> void forAllModuleHolders(F iFunc) {
+    template <typename F>
+    void forAllModuleHolders(F iFunc) {
       for (auto& labelMod : labelToModule_) {
         maker::ModuleHolder* t = labelMod.second.get();
         iFunc(t);

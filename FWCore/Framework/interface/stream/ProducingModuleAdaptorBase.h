@@ -51,14 +51,18 @@ namespace edm {
   class ThinnedAssociationsHelper;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace stream {
-    template <typename T> class ProducingModuleAdaptorBase {
+    template <typename T>
+    class ProducingModuleAdaptorBase {
     public:
-      template <typename U> friend class edm::WorkerT;
-      template <typename U> friend class edm::maker::ModuleHolderT;
+      template <typename U>
+      friend class edm::WorkerT;
+      template <typename U>
+      friend class edm::maker::ModuleHolderT;
 
       ProducingModuleAdaptorBase();
       virtual ~ProducingModuleAdaptorBase();
@@ -104,7 +108,8 @@ namespace edm {
       std::vector<edm::ProductResolverIndex> const& indiciesForPutProducts(BranchType iBranchType) const;
 
     protected:
-      template <typename F> void createStreamModules(F iFunc) {
+      template <typename F>
+      void createStreamModules(F iFunc) {
         for (auto& m : m_streamModules) {
           m = iFunc();
           m->setModuleDescriptionPtr(&moduleDescription_);
@@ -113,7 +118,8 @@ namespace edm {
 
       void commit(Run& iRun) { iRun.commit_(m_streamModules[0]->indiciesForPutProducts(InRun)); }
       void commit(LuminosityBlock& iLumi) { iLumi.commit_(m_streamModules[0]->indiciesForPutProducts(InLumi)); }
-      template <typename I> void commit(Event& iEvent, I* iID) {
+      template <typename I>
+      void commit(Event& iEvent, I* iID) {
         iEvent.commit_(m_streamModules[0]->indiciesForPutProducts(InEvent), iID);
       }
 

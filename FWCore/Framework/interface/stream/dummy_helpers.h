@@ -45,16 +45,40 @@ namespace edm {
         void unlock() {}
       };
 
-      template <typename T> struct choose_unique_ptr { typedef std::unique_ptr<T> type; };
-      template <> struct choose_unique_ptr<void> { typedef dummy_ptr type; };
+      template <typename T>
+      struct choose_unique_ptr {
+        typedef std::unique_ptr<T> type;
+      };
+      template <>
+      struct choose_unique_ptr<void> {
+        typedef dummy_ptr type;
+      };
 
-      template <> struct choose_unique_ptr<void const> { typedef dummy_ptr type; };
+      template <>
+      struct choose_unique_ptr<void const> {
+        typedef dummy_ptr type;
+      };
 
-      template <typename T> struct choose_shared_vec { typedef std::vector<std::shared_ptr<T>> type; };
-      template <> struct choose_shared_vec<void> { typedef dummy_vec type; };
-      template <> struct choose_shared_vec<void const> { typedef dummy_vec type; };
-      template <typename T> struct choose_mutex { using type = std::mutex; };
-      template <> struct choose_mutex<void> { using type = dummy_mutex; };
+      template <typename T>
+      struct choose_shared_vec {
+        typedef std::vector<std::shared_ptr<T>> type;
+      };
+      template <>
+      struct choose_shared_vec<void> {
+        typedef dummy_vec type;
+      };
+      template <>
+      struct choose_shared_vec<void const> {
+        typedef dummy_vec type;
+      };
+      template <typename T>
+      struct choose_mutex {
+        using type = std::mutex;
+      };
+      template <>
+      struct choose_mutex<void> {
+        using type = dummy_mutex;
+      };
     }  // namespace impl
   }    // namespace stream
 }  // namespace edm

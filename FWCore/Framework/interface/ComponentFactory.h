@@ -38,7 +38,8 @@ namespace edm {
     class EventSetupProvider;
     class EventSetupsController;
 
-    template <typename T> class ComponentFactory {
+    template <typename T>
+    class ComponentFactory {
     public:
       ComponentFactory() : makers_() {}
       //~ComponentFactory();
@@ -111,17 +112,18 @@ namespace edm {
 
   }  // namespace eventsetup
 }  // namespace edm
-#define COMPONENTFACTORY_GET(_type_)                                                                                  \
-  EDM_REGISTER_PLUGINFACTORY(edmplugin::PluginFactory<edm::eventsetup::ComponentMakerBase<_type_>*()>,                \
-                             _type_::name());                                                                         \
-  static edm::eventsetup::ComponentFactory<_type_> const s_dummyfactory;                                              \
-  namespace edm {                                                                                                     \
-    namespace eventsetup {                                                                                            \
-      template <> edm::eventsetup::ComponentFactory<_type_> const* edm::eventsetup::ComponentFactory<_type_>::get() { \
-        return &s_dummyfactory;                                                                                       \
-      }                                                                                                               \
-    }                                                                                                                 \
-  }                                                                                                                   \
+#define COMPONENTFACTORY_GET(_type_)                                                                      \
+  EDM_REGISTER_PLUGINFACTORY(edmplugin::PluginFactory<edm::eventsetup::ComponentMakerBase<_type_>*()>,    \
+                             _type_::name());                                                             \
+  static edm::eventsetup::ComponentFactory<_type_> const s_dummyfactory;                                  \
+  namespace edm {                                                                                         \
+    namespace eventsetup {                                                                                \
+      template <>                                                                                         \
+      edm::eventsetup::ComponentFactory<_type_> const* edm::eventsetup::ComponentFactory<_type_>::get() { \
+        return &s_dummyfactory;                                                                           \
+      }                                                                                                   \
+    }                                                                                                     \
+  }                                                                                                       \
   typedef int componentfactory_get_needs_semicolon
 
 #endif

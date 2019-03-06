@@ -29,13 +29,16 @@ namespace edm {
     namespace impl {
       struct Last {};
 
-      template <typename T, typename... U> struct AbilityToCache : public AbilityToCache<U...> {};
+      template <typename T, typename... U>
+      struct AbilityToCache : public AbilityToCache<U...> {};
 
-      template <typename G, typename... U> struct AbilityToCache<GlobalCache<G>, U...> : public AbilityToCache<U...> {
+      template <typename G, typename... U>
+      struct AbilityToCache<GlobalCache<G>, U...> : public AbilityToCache<U...> {
         typedef G GlobalCache;
       };
 
-      template <typename R, typename... U> struct AbilityToCache<RunCache<R>, U...> : public AbilityToCache<U...> {
+      template <typename R, typename... U>
+      struct AbilityToCache<RunCache<R>, U...> : public AbilityToCache<U...> {
         typedef R RunCache;
       };
 
@@ -54,7 +57,8 @@ namespace edm {
         typedef L LuminosityBlockSummaryCache;
       };
 
-      template <> struct AbilityToCache<Last> {
+      template <>
+      struct AbilityToCache<Last> {
         typedef void GlobalCache;
         typedef void RunCache;
         typedef void LuminosityBlockCache;
@@ -63,7 +67,8 @@ namespace edm {
       };
 
     }  // namespace impl
-    template <typename... T> struct CacheContexts : public impl::AbilityToCache<T..., impl::Last> {};
+    template <typename... T>
+    struct CacheContexts : public impl::AbilityToCache<T..., impl::Last> {};
   }  // namespace stream
 }  // namespace edm
 

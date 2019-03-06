@@ -42,15 +42,18 @@ namespace edm {
   class WaitingTaskWithArenaHolder;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace global {
 
     class EDProducerBase : public ProducerBase, public EDConsumerBase {
     public:
-      template <typename T> friend class edm::maker::ModuleHolderT;
-      template <typename T> friend class edm::WorkerT;
+      template <typename T>
+      friend class edm::maker::ModuleHolderT;
+      template <typename T>
+      friend class edm::WorkerT;
       typedef EDProducerBase ModuleType;
 
       friend class edm::GlobalSchedule;

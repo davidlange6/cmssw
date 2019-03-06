@@ -34,7 +34,8 @@ namespace edm {
   namespace eventsetup {
 
     //If the types are the same, stop the recursion
-    template <typename T> void addRecordToDependencies(const T*, const T*, std::set<EventSetupRecordKey>&) {}
+    template <typename T>
+    void addRecordToDependencies(const T*, const T*, std::set<EventSetupRecordKey>&) {}
 
     //Recursively desend container while adding first type's info to set
     template <typename TFirst, typename TEnd>
@@ -45,7 +46,8 @@ namespace edm {
     }
 
     //Handle the case where a Record has dependencies
-    template <typename T> struct FindDependenciesFromDependentRecord {
+    template <typename T>
+    struct FindDependenciesFromDependentRecord {
       inline static void dependentRecords(std::set<EventSetupRecordKey>& oSet) {
         typedef typename T::list_type list_type;
         const typename boost::mpl::begin<list_type>::type* begin(nullptr);
@@ -59,7 +61,8 @@ namespace edm {
       inline static void dependentRecords(std::set<EventSetupRecordKey>&) {}
     };
 
-    template <typename T> std::set<EventSetupRecordKey> findDependentRecordsFor() {
+    template <typename T>
+    std::set<EventSetupRecordKey> findDependentRecordsFor() {
       typedef typename boost::mpl::if_<typename std::is_base_of<edm::eventsetup::DependentRecordTag, T>::type,
                                        FindDependenciesFromDependentRecord<T>, NoDependenciesForRecord>::type DepFinder;
       std::set<EventSetupRecordKey> returnValue;

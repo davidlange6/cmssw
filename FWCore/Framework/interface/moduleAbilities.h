@@ -32,32 +32,38 @@ namespace edm {
     struct Empty {};
   }  // namespace module
 
-  template <typename T> struct GlobalCache {
+  template <typename T>
+  struct GlobalCache {
     static constexpr module::Abilities kAbilities = module::Abilities::kGlobalCache;
     typedef T Type;
   };
 
-  template <typename T> struct StreamCache {
+  template <typename T>
+  struct StreamCache {
     static constexpr module::Abilities kAbilities = module::Abilities::kStreamCache;
     typedef T Type;
   };
 
-  template <typename T> struct RunCache {
+  template <typename T>
+  struct RunCache {
     static constexpr module::Abilities kAbilities = module::Abilities::kRunCache;
     typedef T Type;
   };
 
-  template <typename T> struct LuminosityBlockCache {
+  template <typename T>
+  struct LuminosityBlockCache {
     static constexpr module::Abilities kAbilities = module::Abilities::kLuminosityBlockCache;
     typedef T Type;
   };
 
-  template <typename T> struct RunSummaryCache {
+  template <typename T>
+  struct RunSummaryCache {
     static constexpr module::Abilities kAbilities = module::Abilities::kRunSummaryCache;
     typedef T Type;
   };
 
-  template <typename T> struct LuminosityBlockSummaryCache {
+  template <typename T>
+  struct LuminosityBlockSummaryCache {
     static constexpr module::Abilities kAbilities = module::Abilities::kLuminosityBlockSummaryCache;
     typedef T Type;
   };
@@ -98,9 +104,11 @@ namespace edm {
   };
 
   //Recursively checks VArgs template arguments looking for the ABILITY
-  template <module::Abilities ABILITY, typename... VArgs> struct CheckAbility;
+  template <module::Abilities ABILITY, typename... VArgs>
+  struct CheckAbility;
 
-  template <module::Abilities ABILITY, typename T, typename... VArgs> struct CheckAbility<ABILITY, T, VArgs...> {
+  template <module::Abilities ABILITY, typename T, typename... VArgs>
+  struct CheckAbility<ABILITY, T, VArgs...> {
     static constexpr bool kHasIt = (T::kAbilities == ABILITY) | CheckAbility<ABILITY, VArgs...>::kHasIt;
     typedef std::
         conditional_t<(T::kAbilities == ABILITY), typename T::Type, typename CheckAbility<ABILITY, VArgs...>::Type>
@@ -108,41 +116,48 @@ namespace edm {
   };
 
   //End of the recursion
-  template <module::Abilities ABILITY> struct CheckAbility<ABILITY> {
+  template <module::Abilities ABILITY>
+  struct CheckAbility<ABILITY> {
     static constexpr bool kHasIt = false;
     typedef edm::module::Empty Type;
   };
 
-  template <typename... VArgs> struct WantsGlobalRunTransitions {
+  template <typename... VArgs>
+  struct WantsGlobalRunTransitions {
     static constexpr bool value = CheckAbility<module::Abilities::kRunCache, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kRunSummaryCache, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kBeginRunProducer, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kEndRunProducer, VArgs...>::kHasIt;
   };
 
-  template <typename... VArgs> struct WantsGlobalLuminosityBlockTransitions {
+  template <typename... VArgs>
+  struct WantsGlobalLuminosityBlockTransitions {
     static constexpr bool value = CheckAbility<module::Abilities::kLuminosityBlockCache, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kLuminosityBlockSummaryCache, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kBeginLuminosityBlockProducer, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kEndLuminosityBlockProducer, VArgs...>::kHasIt;
   };
 
-  template <typename... VArgs> struct WantsStreamRunTransitions {
+  template <typename... VArgs>
+  struct WantsStreamRunTransitions {
     static constexpr bool value = CheckAbility<module::Abilities::kStreamCache, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kRunSummaryCache, VArgs...>::kHasIt;
   };
 
-  template <typename... VArgs> struct WantsStreamLuminosityBlockTransitions {
+  template <typename... VArgs>
+  struct WantsStreamLuminosityBlockTransitions {
     static constexpr bool value = CheckAbility<module::Abilities::kStreamCache, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kLuminosityBlockSummaryCache, VArgs...>::kHasIt;
   };
 
-  template <typename... VArgs> struct HasAbilityToProduceInRuns {
+  template <typename... VArgs>
+  struct HasAbilityToProduceInRuns {
     static constexpr bool value = CheckAbility<module::Abilities::kBeginRunProducer, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kEndRunProducer, VArgs...>::kHasIt;
   };
 
-  template <typename... VArgs> struct HasAbilityToProduceInLumis {
+  template <typename... VArgs>
+  struct HasAbilityToProduceInLumis {
     static constexpr bool value = CheckAbility<module::Abilities::kBeginLuminosityBlockProducer, VArgs...>::kHasIt or
                                   CheckAbility<module::Abilities::kEndLuminosityBlockProducer, VArgs...>::kHasIt;
   };

@@ -35,7 +35,8 @@ namespace edm {
   class ConfigurationDescriptions;
   namespace stream {
 
-    template <typename T, typename M, typename B> class ProducingModuleAdaptor : public B {
+    template <typename T, typename M, typename B>
+    class ProducingModuleAdaptor : public B {
     public:
       ProducingModuleAdaptor(edm::ParameterSet const& iPSet) : m_pset(&iPSet) {
         m_runs.resize(1);

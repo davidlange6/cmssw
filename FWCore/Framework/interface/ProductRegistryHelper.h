@@ -27,7 +27,8 @@ namespace edm {
 
     // has_donotrecordparents<T>::value is true if we should not
     // record parentage for type T, and false otherwise.
-    template <typename T> struct has_donotrecordparents {
+    template <typename T>
+    struct has_donotrecordparents {
       static constexpr bool value = std::is_base_of<DoNotRecordParents, T>::value;
     };
 
@@ -65,7 +66,8 @@ namespace edm {
       operator EDPutToken() { return token_; }
     };
 
-    template <typename T> struct BranchAliasSetterT {
+    template <typename T>
+    struct BranchAliasSetterT {
       BranchAliasSetterT(TypeLabelItem& iItem, EDPutTokenT<T> iToken) : value_(iItem), token_(std::move(iToken)) {}
 
       BranchAliasSetterT(BranchAliasSetter&& iS) : value_(iS.value_), token_(iS.token_.index()) {}
@@ -102,29 +104,35 @@ namespace edm {
         \endcode
         should be added to the producer ctor for every product */
 
-    template <class ProductType> BranchAliasSetterT<ProductType> produces() {
+    template <class ProductType>
+    BranchAliasSetterT<ProductType> produces() {
       return produces<ProductType, InEvent>(std::string());
     }
 
-    template <class ProductType> BranchAliasSetterT<ProductType> produces(std::string instanceName) {
+    template <class ProductType>
+    BranchAliasSetterT<ProductType> produces(std::string instanceName) {
       return produces<ProductType, InEvent>(std::move(instanceName));
     }
 
-    template <typename ProductType, BranchType B> BranchAliasSetterT<ProductType> produces() {
+    template <typename ProductType, BranchType B>
+    BranchAliasSetterT<ProductType> produces() {
       return produces<ProductType, B>(std::string());
     }
 
-    template <typename ProductType, BranchType B> BranchAliasSetterT<ProductType> produces(std::string instanceName) {
+    template <typename ProductType, BranchType B>
+    BranchAliasSetterT<ProductType> produces(std::string instanceName) {
       TypeID tid(typeid(ProductType));
       return BranchAliasSetterT<ProductType>{
           produces<B>(tid, std::move(instanceName), (not has_donotrecordparents<ProductType>::value) and B == InEvent)};
     }
 
-    template <typename ProductType, Transition B> BranchAliasSetterT<ProductType> produces() {
+    template <typename ProductType, Transition B>
+    BranchAliasSetterT<ProductType> produces() {
       return produces<ProductType, B>(std::string());
     }
 
-    template <typename ProductType, Transition B> BranchAliasSetterT<ProductType> produces(std::string instanceName) {
+    template <typename ProductType, Transition B>
+    BranchAliasSetterT<ProductType> produces(std::string instanceName) {
       TypeID tid(typeid(ProductType));
       return BranchAliasSetterT<ProductType>{produces<B>(
           tid, std::move(instanceName), (not has_donotrecordparents<ProductType>::value) and B == Transition::Event)};

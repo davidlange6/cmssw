@@ -26,7 +26,8 @@
 
 namespace edm {
 
-  template <typename T> class FunctorESHandleExceptionFactory : public ESHandleExceptionFactory {
+  template <typename T>
+  class FunctorESHandleExceptionFactory : public ESHandleExceptionFactory {
   public:
     FunctorESHandleExceptionFactory(T&& iFunctor) : m_functor(std::move(iFunctor)) {}
 
@@ -36,7 +37,8 @@ namespace edm {
     T m_functor;
   };
 
-  template <typename T> std::shared_ptr<ESHandleExceptionFactory> makeESHandleExceptionFactory(T&& iFunctor) {
+  template <typename T>
+  std::shared_ptr<ESHandleExceptionFactory> makeESHandleExceptionFactory(T&& iFunctor) {
     return std::make_shared<FunctorESHandleExceptionFactory<T>>(std::move(iFunctor));
   }
 }  // namespace edm

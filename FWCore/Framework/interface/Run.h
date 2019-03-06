@@ -38,7 +38,8 @@ namespace edm {
   class SharedResourcesAcquirer;
 
   namespace stream {
-    template <typename T> class ProducingModuleAdaptorBase;
+    template <typename T>
+    class ProducingModuleAdaptorBase;
   }
 
   class Run : public RunBase {
@@ -77,38 +78,53 @@ namespace edm {
     typedef unsigned long CacheIdentifier_t;
     CacheIdentifier_t cacheIdentifier() const;
 
-    template <typename PROD> bool getByLabel(std::string const& label, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByLabel(std::string const& label, Handle<PROD>& result) const;
 
     template <typename PROD>
     bool getByLabel(std::string const& label, std::string const& productInstanceName, Handle<PROD>& result) const;
 
     /// same as above, but using the InputTag class
-    template <typename PROD> bool getByLabel(InputTag const& tag, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByLabel(InputTag const& tag, Handle<PROD>& result) const;
 
-    template <typename PROD> bool getByToken(EDGetToken token, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByToken(EDGetToken token, Handle<PROD>& result) const;
 
-    template <typename PROD> bool getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const;
+    template <typename PROD>
+    bool getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const;
 
-    template <typename PROD> Handle<PROD> getHandle(EDGetTokenT<PROD> token) const;
+    template <typename PROD>
+    Handle<PROD> getHandle(EDGetTokenT<PROD> token) const;
 
-    template <typename PROD> PROD const& get(EDGetTokenT<PROD> token) const noexcept(false);
+    template <typename PROD>
+    PROD const& get(EDGetTokenT<PROD> token) const noexcept(false);
 
-    template <typename PROD> void getManyByType(std::vector<Handle<PROD>>& results) const;
+    template <typename PROD>
+    void getManyByType(std::vector<Handle<PROD>>& results) const;
 
     ///Put a new product.
-    template <typename PROD> void put(std::unique_ptr<PROD> product) { put<PROD>(std::move(product), std::string()); }
+    template <typename PROD>
+    void put(std::unique_ptr<PROD> product) {
+      put<PROD>(std::move(product), std::string());
+    }
 
     ///Put a new product with a 'product instance name'
-    template <typename PROD> void put(std::unique_ptr<PROD> product, std::string const& productInstanceName);
+    template <typename PROD>
+    void put(std::unique_ptr<PROD> product, std::string const& productInstanceName);
 
-    template <typename PROD> void put(EDPutToken token, std::unique_ptr<PROD> product);
+    template <typename PROD>
+    void put(EDPutToken token, std::unique_ptr<PROD> product);
 
-    template <typename PROD> void put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product);
+    template <typename PROD>
+    void put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product);
 
     ///puts a new product
-    template <typename PROD, typename... Args> void emplace(EDPutTokenT<PROD> token, Args&&... args);
+    template <typename PROD, typename... Args>
+    void emplace(EDPutTokenT<PROD> token, Args&&... args);
 
-    template <typename PROD, typename... Args> void emplace(EDPutToken token, Args&&... args);
+    template <typename PROD, typename... Args>
+    void emplace(EDPutToken token, Args&&... args);
 
     Provenance getProvenance(BranchID const& theID) const;
 
@@ -142,9 +158,11 @@ namespace edm {
                                std::type_info const& iProductType,
                                InputTag const& iTag) const override;
 
-    template <typename PROD> void putImpl(EDPutToken::value_type token, std::unique_ptr<PROD> product);
+    template <typename PROD>
+    void putImpl(EDPutToken::value_type token, std::unique_ptr<PROD> product);
 
-    template <typename PROD, typename... Args> void emplaceImpl(EDPutToken::value_type token, Args&&... args);
+    template <typename PROD, typename... Args>
+    void emplaceImpl(EDPutToken::value_type token, Args&&... args);
 
     typedef std::vector<edm::propagate_const<std::unique_ptr<WrapperBase>>> ProductPtrVec;
     ProductPtrVec& putProducts() { return putProducts_; }
@@ -156,7 +174,8 @@ namespace edm {
     // public interface is asking for trouble
     friend class RawInputSource;
     friend class ProducerBase;
-    template <typename T> friend class stream::ProducingModuleAdaptorBase;
+    template <typename T>
+    friend class stream::ProducingModuleAdaptorBase;
 
     void commit_(std::vector<edm::ProductResolverIndex> const& iShouldPut);
 
@@ -170,7 +189,8 @@ namespace edm {
     static const std::string emptyString_;
   };
 
-  template <typename PROD> void Run::putImpl(EDPutToken::value_type index, std::unique_ptr<PROD> product) {
+  template <typename PROD>
+  void Run::putImpl(EDPutToken::value_type index, std::unique_ptr<PROD> product) {
     // The following will call post_insert if T has such a function,
     // and do nothing if T has no such function.
     std::conditional_t<detail::has_postinsert<PROD>::value, DoPostInsert<PROD>, DoNotPostInsert<PROD>> maybe_inserter;
@@ -182,7 +202,8 @@ namespace edm {
     putProducts()[index] = std::move(wp);
   }
 
-  template <typename PROD> void Run::put(std::unique_ptr<PROD> product, std::string const& productInstanceName) {
+  template <typename PROD>
+  void Run::put(std::unique_ptr<PROD> product, std::string const& productInstanceName) {
     if (UNLIKELY(product.get() == nullptr)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
       principal_get_adapter_detail::throwOnPutOfNullProduct("Run", typeID, productInstanceName);
@@ -191,7 +212,8 @@ namespace edm {
     putImpl(index, std::move(product));
   }
 
-  template <typename PROD> void Run::put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product) {
+  template <typename PROD>
+  void Run::put(EDPutTokenT<PROD> token, std::unique_ptr<PROD> product) {
     if (UNLIKELY(product.get() == 0)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
       principal_get_adapter_detail::throwOnPutOfNullProduct("Run", typeID, provRecorder_.productInstanceLabel(token));
@@ -202,7 +224,8 @@ namespace edm {
     putImpl(token.index(), std::move(product));
   }
 
-  template <typename PROD> void Run::put(EDPutToken token, std::unique_ptr<PROD> product) {
+  template <typename PROD>
+  void Run::put(EDPutToken token, std::unique_ptr<PROD> product) {
     if (UNLIKELY(product.get() == 0)) {  // null pointer is illegal
       TypeID typeID(typeid(PROD));
       principal_get_adapter_detail::throwOnPutOfNullProduct("Run", typeID, provRecorder_.productInstanceLabel(token));
@@ -218,14 +241,16 @@ namespace edm {
     putImpl(token.index(), std::move(product));
   }
 
-  template <typename PROD, typename... Args> void Run::emplace(EDPutTokenT<PROD> token, Args&&... args) {
+  template <typename PROD, typename... Args>
+  void Run::emplace(EDPutTokenT<PROD> token, Args&&... args) {
     if (UNLIKELY(token.isUninitialized())) {
       principal_get_adapter_detail::throwOnPutOfUninitializedToken("Run", typeid(PROD));
     }
     emplaceImpl<PROD>(token.index(), std::forward<Args>(args)...);
   }
 
-  template <typename PROD, typename... Args> void Run::emplace(EDPutToken token, Args&&... args) {
+  template <typename PROD, typename... Args>
+  void Run::emplace(EDPutToken token, Args&&... args) {
     if (UNLIKELY(token.isUninitialized())) {
       principal_get_adapter_detail::throwOnPutOfUninitializedToken("Run", typeid(PROD));
     }
@@ -237,7 +262,8 @@ namespace edm {
     emplaceImpl(token.index(), std::forward<Args>(args)...);
   }
 
-  template <typename PROD, typename... Args> void Run::emplaceImpl(EDPutToken::value_type index, Args&&... args) {
+  template <typename PROD, typename... Args>
+  void Run::emplaceImpl(EDPutToken::value_type index, Args&&... args) {
     assert(index < putProducts().size());
 
     std::unique_ptr<Wrapper<PROD>> wp(new Wrapper<PROD>(WrapperBase::Emplace{}, std::forward<Args>(args)...));
@@ -250,7 +276,8 @@ namespace edm {
     putProducts()[index] = std::move(wp);
   }
 
-  template <typename PROD> bool Run::getByLabel(std::string const& label, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool Run::getByLabel(std::string const& label, Handle<PROD>& result) const {
     return getByLabel(label, emptyString_, result);
   }
 
@@ -270,7 +297,8 @@ namespace edm {
   }
 
   /// same as above, but using the InputTag class
-  template <typename PROD> bool Run::getByLabel(InputTag const& tag, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool Run::getByLabel(InputTag const& tag, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), tag.label(), tag.instance());
     }
@@ -283,7 +311,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> bool Run::getByToken(EDGetToken token, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool Run::getByToken(EDGetToken token, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), token);
     }
@@ -296,7 +325,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> bool Run::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
+  template <typename PROD>
+  bool Run::getByToken(EDGetTokenT<PROD> token, Handle<PROD>& result) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), token);
     }
@@ -309,7 +339,8 @@ namespace edm {
     return true;
   }
 
-  template <typename PROD> Handle<PROD> Run::getHandle(EDGetTokenT<PROD> token) const {
+  template <typename PROD>
+  Handle<PROD> Run::getHandle(EDGetTokenT<PROD> token) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), token);
     }
@@ -317,7 +348,8 @@ namespace edm {
     return convert_handle<PROD>(std::move(bh));
   }
 
-  template <typename PROD> PROD const& Run::get(EDGetTokenT<PROD> token) const noexcept(false) {
+  template <typename PROD>
+  PROD const& Run::get(EDGetTokenT<PROD> token) const noexcept(false) {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)), token);
     }
@@ -325,7 +357,8 @@ namespace edm {
     return *convert_handle<PROD>(std::move(bh));
   }
 
-  template <typename PROD> void Run::getManyByType(std::vector<Handle<PROD>>& results) const {
+  template <typename PROD>
+  void Run::getManyByType(std::vector<Handle<PROD>>& results) const {
     if (!provRecorder_.checkIfComplete<PROD>()) {
       principal_get_adapter_detail::throwOnPrematureRead("Run", TypeID(typeid(PROD)));
     }
@@ -335,21 +368,24 @@ namespace edm {
   // Free functions to retrieve a collection from the Run.
   // Will throw an exception if the collection is not available.
 
-  template <typename T> T const& get(Run const& event, InputTag const& tag) {
+  template <typename T>
+  T const& get(Run const& event, InputTag const& tag) {
     Handle<T> handle;
     event.getByLabel(tag, handle);
     // throw if the handle is not valid
     return *handle.product();
   }
 
-  template <typename T> T const& get(Run const& event, EDGetToken const& token) {
+  template <typename T>
+  T const& get(Run const& event, EDGetToken const& token) {
     Handle<T> handle;
     event.getByToken(token, handle);
     // throw if the handle is not valid
     return *handle.product();
   }
 
-  template <typename T> T const& get(Run const& event, EDGetTokenT<T> const& token) {
+  template <typename T>
+  T const& get(Run const& event, EDGetTokenT<T> const& token) {
     Handle<T> handle;
     event.getByToken(token, handle);
     // throw if the handle is not valid

@@ -55,7 +55,8 @@ namespace edm {
     // transform_into to fill the 'to' sequence with the values
     // calcuated by the callable object, taking care to fill the
     // outupt only if all calls succeed.
-    template <typename FROM, typename TO, typename FUNC> void fill_summary(FROM const& from, TO& to, FUNC func) {
+    template <typename FROM, typename TO, typename FUNC>
+    void fill_summary(FROM const& from, TO& to, FUNC func) {
       if (to.size() != from.size()) {
         TO temp(from.size());
         transform_into(from.begin(), from.end(), temp.begin(), func);

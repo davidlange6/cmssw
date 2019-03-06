@@ -79,7 +79,8 @@ namespace edm {
       static void logInfoWhenSharing(ParameterSet const& iConfiguration);
     };
 
-    template <class TType> struct SourceMaker : public ComponentMaker<edm::eventsetup::SourceMakerTraits, TType> {};
+    template <class TType>
+    struct SourceMaker : public ComponentMaker<edm::eventsetup::SourceMakerTraits, TType> {};
     typedef ComponentFactory<SourceMakerTraits> SourceFactory;
 
     typedef edmplugin::PluginFactory<edm::eventsetup::ComponentMakerBase<edm::eventsetup::SourceMakerTraits>*()>

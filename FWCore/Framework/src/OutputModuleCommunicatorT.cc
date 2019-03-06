@@ -23,19 +23,23 @@
 #include "FWCore/Framework/interface/limited/OutputModuleBase.h"
 
 namespace {
-  template <typename F> void async(edm::OutputModule& iMod, F&& iFunc) {
+  template <typename F>
+  void async(edm::OutputModule& iMod, F&& iFunc) {
     iMod.sharedResourcesAcquirer().serialQueueChain().push(std::move(iFunc));
   }
 
-  template <typename F> void async(edm::one::OutputModuleBase& iMod, F&& iFunc) {
+  template <typename F>
+  void async(edm::one::OutputModuleBase& iMod, F&& iFunc) {
     iMod.sharedResourcesAcquirer().serialQueueChain().push(std::move(iFunc));
   }
 
-  template <typename F> void async(edm::limited::OutputModuleBase& iMod, F&& iFunc) {
+  template <typename F>
+  void async(edm::limited::OutputModuleBase& iMod, F&& iFunc) {
     iMod.queue().push(std::move(iFunc));
   }
 
-  template <typename F> void async(edm::global::OutputModuleBase&, F iFunc) {
+  template <typename F>
+  void async(edm::global::OutputModuleBase&, F iFunc) {
     auto t = edm::make_functor_task(tbb::task::allocate_root(), iFunc);
     tbb::task::spawn(*t);
   }
@@ -43,13 +47,18 @@ namespace {
 
 namespace edm {
 
-  template <typename T> void OutputModuleCommunicatorT<T>::closeFile() { module().doCloseFile(); }
+  template <typename T>
+  void OutputModuleCommunicatorT<T>::closeFile() {
+    module().doCloseFile();
+  }
 
-  template <typename T> bool OutputModuleCommunicatorT<T>::shouldWeCloseFile() const {
+  template <typename T>
+  bool OutputModuleCommunicatorT<T>::shouldWeCloseFile() const {
     return module().shouldWeCloseFile();
   }
 
-  template <typename T> void OutputModuleCommunicatorT<T>::openFile(edm::FileBlock const& fb) {
+  template <typename T>
+  void OutputModuleCommunicatorT<T>::openFile(edm::FileBlock const& fb) {
     module().doOpenFile(fb);
   }
 
@@ -112,15 +121,23 @@ namespace edm {
     async(module(), std::move(t));
   }
 
-  template <typename T> bool OutputModuleCommunicatorT<T>::wantAllEvents() const { return module().wantAllEvents(); }
+  template <typename T>
+  bool OutputModuleCommunicatorT<T>::wantAllEvents() const {
+    return module().wantAllEvents();
+  }
 
-  template <typename T> bool OutputModuleCommunicatorT<T>::limitReached() const { return module().limitReached(); }
+  template <typename T>
+  bool OutputModuleCommunicatorT<T>::limitReached() const {
+    return module().limitReached();
+  }
 
-  template <typename T> void OutputModuleCommunicatorT<T>::configure(OutputModuleDescription const& desc) {
+  template <typename T>
+  void OutputModuleCommunicatorT<T>::configure(OutputModuleDescription const& desc) {
     module().configure(desc);
   }
 
-  template <typename T> edm::SelectedProductsForBranchType const& OutputModuleCommunicatorT<T>::keptProducts() const {
+  template <typename T>
+  edm::SelectedProductsForBranchType const& OutputModuleCommunicatorT<T>::keptProducts() const {
     return module().keptProducts();
   }
 
@@ -137,7 +154,8 @@ namespace edm {
     module().setEventSelectionInfo(outputModulePathPositions, anyProductProduced);
   }
 
-  template <typename T> ModuleDescription const& OutputModuleCommunicatorT<T>::description() const {
+  template <typename T>
+  ModuleDescription const& OutputModuleCommunicatorT<T>::description() const {
     return module().description();
   }
 

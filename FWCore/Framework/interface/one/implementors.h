@@ -37,20 +37,25 @@ namespace edm {
 
   namespace one {
     namespace impl {
-      template <bool V> struct OptionalSerialTaskQueueHolder;
+      template <bool V>
+      struct OptionalSerialTaskQueueHolder;
 
-      template <> struct OptionalSerialTaskQueueHolder<true> {
+      template <>
+      struct OptionalSerialTaskQueueHolder<true> {
         edm::SerialTaskQueue* queue() { return &queue_; }
         edm::SerialTaskQueue queue_;
       };
 
-      template <> struct OptionalSerialTaskQueueHolder<false> {
+      template <>
+      struct OptionalSerialTaskQueueHolder<false> {
         edm::SerialTaskQueue* queue() { return nullptr; }
       };
 
-      template <typename T> class SharedResourcesUser : public virtual T {
+      template <typename T>
+      class SharedResourcesUser : public virtual T {
       public:
-        template <typename... Args> SharedResourcesUser(Args... args) : T(args...) {}
+        template <typename... Args>
+        SharedResourcesUser(Args... args) : T(args...) {}
         SharedResourcesUser(SharedResourcesUser const&) = delete;
         SharedResourcesUser& operator=(SharedResourcesUser const&) = delete;
 
@@ -65,7 +70,8 @@ namespace edm {
         std::set<std::string> resourceNames_;
       };
 
-      template <typename T> class RunWatcher : public virtual T {
+      template <typename T>
+      class RunWatcher : public virtual T {
       public:
         RunWatcher() = default;
         RunWatcher(RunWatcher const&) = delete;
@@ -80,7 +86,8 @@ namespace edm {
         virtual void endRun(edm::Run const&, edm::EventSetup const&) = 0;
       };
 
-      template <typename T> class LuminosityBlockWatcher : public virtual T {
+      template <typename T>
+      class LuminosityBlockWatcher : public virtual T {
       public:
         LuminosityBlockWatcher() = default;
         LuminosityBlockWatcher(LuminosityBlockWatcher const&) = delete;
@@ -95,7 +102,8 @@ namespace edm {
         virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) = 0;
       };
 
-      template <typename T> class BeginRunProducer : public virtual T {
+      template <typename T>
+      class BeginRunProducer : public virtual T {
       public:
         BeginRunProducer() = default;
         BeginRunProducer(BeginRunProducer const&) = delete;
@@ -108,7 +116,8 @@ namespace edm {
         virtual void beginRunProduce(edm::Run&, edm::EventSetup const&) = 0;
       };
 
-      template <typename T> class EndRunProducer : public virtual T {
+      template <typename T>
+      class EndRunProducer : public virtual T {
       public:
         EndRunProducer() = default;
         EndRunProducer(EndRunProducer const&) = delete;
@@ -121,7 +130,8 @@ namespace edm {
         virtual void endRunProduce(edm::Run&, edm::EventSetup const&) = 0;
       };
 
-      template <typename T> class BeginLuminosityBlockProducer : public virtual T {
+      template <typename T>
+      class BeginLuminosityBlockProducer : public virtual T {
       public:
         BeginLuminosityBlockProducer() = default;
         BeginLuminosityBlockProducer(BeginLuminosityBlockProducer const&) = delete;
@@ -134,7 +144,8 @@ namespace edm {
         virtual void beginLuminosityBlockProduce(edm::LuminosityBlock&, edm::EventSetup const&) = 0;
       };
 
-      template <typename T> class EndLuminosityBlockProducer : public virtual T {
+      template <typename T>
+      class EndLuminosityBlockProducer : public virtual T {
       public:
         EndLuminosityBlockProducer() = default;
         EndLuminosityBlockProducer(EndLuminosityBlockProducer const&) = delete;
@@ -147,7 +158,8 @@ namespace edm {
         virtual void endLuminosityBlockProduce(edm::LuminosityBlock&, edm::EventSetup const&) = 0;
       };
 
-      template <typename T, typename C> class RunCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class RunCacheHolder : public virtual T {
       public:
         RunCacheHolder() = default;
         RunCacheHolder(RunCacheHolder<T, C> const&) = delete;
@@ -171,7 +183,8 @@ namespace edm {
         edm::propagate_const<std::shared_ptr<C>> cache_;
       };
 
-      template <typename T, typename C> class LuminosityBlockCacheHolder : public virtual T {
+      template <typename T, typename C>
+      class LuminosityBlockCacheHolder : public virtual T {
       public:
         LuminosityBlockCacheHolder() = default;
         LuminosityBlockCacheHolder(LuminosityBlockCacheHolder<T, C> const&) = delete;
@@ -199,7 +212,8 @@ namespace edm {
         std::unique_ptr<std::shared_ptr<C>[]> caches_;
       };
 
-      template <typename T> class Accumulator : public virtual T {
+      template <typename T>
+      class Accumulator : public virtual T {
       public:
         Accumulator() = default;
         Accumulator(Accumulator const&) = delete;

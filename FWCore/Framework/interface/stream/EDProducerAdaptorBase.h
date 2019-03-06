@@ -39,15 +39,18 @@ namespace edm {
   class WaitingTaskWithArenaHolder;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   namespace stream {
     class EDProducerBase;
     class EDProducerAdaptorBase : public ProducingModuleAdaptorBase<EDProducerBase> {
     public:
-      template <typename T> friend class edm::maker::ModuleHolderT;
-      template <typename T> friend class edm::WorkerT;
+      template <typename T>
+      friend class edm::maker::ModuleHolderT;
+      template <typename T>
+      friend class edm::WorkerT;
 
       EDProducerAdaptorBase();
 

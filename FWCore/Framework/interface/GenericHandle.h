@@ -39,7 +39,8 @@ namespace edm {
   ///This class is just a 'tag' used to allow a specialization of edm::Handle
   struct GenericObject {};
 
-  template <> class Handle<GenericObject> {
+  template <>
+  class Handle<GenericObject> {
   public:
     ///Throws exception if iName is not a known C++ class type
     Handle(std::string const& iName) : type_(TypeWithDict::byName(iName)), prod_(), prov_(nullptr) {
@@ -126,7 +127,8 @@ namespace edm {
                                              std::string const& productInstanceName,
                                              Handle<GenericObject>& result) const;
 
-  template <> bool edm::Event::getByLabel(edm::InputTag const& tag, Handle<GenericObject>& result) const;
+  template <>
+  bool edm::Event::getByLabel(edm::InputTag const& tag, Handle<GenericObject>& result) const;
 
 }  // namespace edm
 #endif

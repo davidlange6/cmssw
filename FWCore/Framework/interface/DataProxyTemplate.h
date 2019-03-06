@@ -29,7 +29,8 @@
 
 namespace edm {
   namespace eventsetup {
-    template <class RecordT, class DataT> class DataProxyTemplate : public DataProxy {
+    template <class RecordT, class DataT>
+    class DataProxyTemplate : public DataProxy {
     public:
       typedef DataT value_type;
       typedef RecordT record_type;

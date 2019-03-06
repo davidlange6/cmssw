@@ -26,7 +26,8 @@ namespace edm {
 
   class EventSetup;
 
-  template <typename Collection, typename Selector> class ThinningProducer : public stream::EDProducer<> {
+  template <typename Collection, typename Selector>
+  class ThinningProducer : public stream::EDProducer<> {
   public:
     explicit ThinningProducer(ParameterSet const& pset);
     virtual ~ThinningProducer();
@@ -56,7 +57,8 @@ namespace edm {
     thinnedOutToken_ = produces<ThinnedAssociation>();
   }
 
-  template <typename Collection, typename Selector> ThinningProducer<Collection, Selector>::~ThinningProducer() {}
+  template <typename Collection, typename Selector>
+  ThinningProducer<Collection, Selector>::~ThinningProducer() {}
 
   template <typename Collection, typename Selector>
   void ThinningProducer<Collection, Selector>::fillDescriptions(ConfigurationDescriptions& descriptions) {

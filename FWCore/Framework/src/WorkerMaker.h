@@ -49,7 +49,8 @@ namespace edm {
     virtual const std::string& baseType() const = 0;
   };
 
-  template <class T> class WorkerMaker : public Maker {
+  template <class T>
+  class WorkerMaker : public Maker {
   public:
     //typedef T worker_type;
     explicit WorkerMaker();
@@ -63,14 +64,17 @@ namespace edm {
     const std::string& baseType() const override;
   };
 
-  template <class T> WorkerMaker<T>::WorkerMaker() {}
+  template <class T>
+  WorkerMaker<T>::WorkerMaker() {}
 
-  template <class T> void WorkerMaker<T>::fillDescriptions(ConfigurationDescriptions& iDesc) const {
+  template <class T>
+  void WorkerMaker<T>::fillDescriptions(ConfigurationDescriptions& iDesc) const {
     T::fillDescriptions(iDesc);
     T::prevalidate(iDesc);
   }
 
-  template <class T> std::shared_ptr<maker::ModuleHolder> WorkerMaker<T>::makeModule(edm::ParameterSet const& p) const {
+  template <class T>
+  std::shared_ptr<maker::ModuleHolder> WorkerMaker<T>::makeModule(edm::ParameterSet const& p) const {
     typedef T UserType;
     typedef typename UserType::ModuleType ModuleType;
     typedef MakeModuleHelper<ModuleType> MakerHelperType;
@@ -91,7 +95,10 @@ namespace edm {
     return std::make_unique<WorkerType>(h->module(), md, actions);
   }
 
-  template <class T> const std::string& WorkerMaker<T>::baseType() const { return T::baseType(); }
+  template <class T>
+  const std::string& WorkerMaker<T>::baseType() const {
+    return T::baseType();
+  }
 
 }  // namespace edm
 

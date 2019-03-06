@@ -52,7 +52,10 @@ namespace edm::eventsetup {
     bool operator<(const DataKey& iRHS) const;
 
     // ---------- static member functions --------------------
-    template <class T> static TypeTag makeTypeTag() { return heterocontainer::HCTypeTag::make<T>(); }
+    template <class T>
+    static TypeTag makeTypeTag() {
+      return heterocontainer::HCTypeTag::make<T>();
+    }
 
     // ---------- member functions ---------------------------
 

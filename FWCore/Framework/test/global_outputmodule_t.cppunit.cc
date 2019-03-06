@@ -90,7 +90,8 @@ private:
   std::shared_ptr<w_TNS> tnsptr_;
   edm::ServiceToken serviceToken_;
 
-  template <typename T> void testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect);
+  template <typename T>
+  void testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect);
 
   class BasicOutputModule : public edm::global::OutputModule<> {
   public:

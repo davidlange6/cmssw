@@ -37,7 +37,8 @@ namespace edm {
     namespace impl {
       class EmptyType {};
 
-      template <typename C> class GlobalCacheHolder {
+      template <typename C>
+      class GlobalCacheHolder {
       public:
         GlobalCacheHolder() = default;
         GlobalCacheHolder(GlobalCacheHolder<C> const&) = delete;
@@ -52,7 +53,8 @@ namespace edm {
         C const* cache_;
       };
 
-      template <typename C> class RunCacheHolder {
+      template <typename C>
+      class RunCacheHolder {
       public:
         RunCacheHolder() = default;
         RunCacheHolder(RunCacheHolder<C> const&) = delete;
@@ -66,7 +68,8 @@ namespace edm {
         C const* cache_;
       };
 
-      template <typename C> class LuminosityBlockCacheHolder {
+      template <typename C>
+      class LuminosityBlockCacheHolder {
       public:
         LuminosityBlockCacheHolder() = default;
         LuminosityBlockCacheHolder(LuminosityBlockCacheHolder<C> const&) = delete;
@@ -80,7 +83,8 @@ namespace edm {
         C const* cache_;
       };
 
-      template <typename C> class RunSummaryCacheHolder {
+      template <typename C>
+      class RunSummaryCacheHolder {
       public:
         RunSummaryCacheHolder() = default;
         RunSummaryCacheHolder(RunSummaryCacheHolder<C> const&) = delete;
@@ -91,7 +95,8 @@ namespace edm {
         virtual void endRunSummary(edm::Run const&, edm::EventSetup const&, C*) const = 0;
       };
 
-      template <typename C> class LuminosityBlockSummaryCacheHolder {
+      template <typename C>
+      class LuminosityBlockSummaryCacheHolder {
       public:
         LuminosityBlockSummaryCacheHolder() = default;
         LuminosityBlockSummaryCacheHolder(LuminosityBlockSummaryCacheHolder<C> const&) = delete;

@@ -174,7 +174,8 @@ namespace edm {
   };
 
   namespace {
-    template <typename T> class PathSignalSentry {
+    template <typename T>
+    class PathSignalSentry {
     public:
       PathSignalSentry(ActivityRegistry* a,
                        int const& nwrwue,

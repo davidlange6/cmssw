@@ -185,7 +185,8 @@ void test_ep::setUp() {
   CPPUNIT_ASSERT(pEvent_->size() == 1);
 }
 
-template <class MAP> void clear_map(MAP& m) {
+template <class MAP>
+void clear_map(MAP& m) {
   for (typename MAP::iterator i = m.begin(), e = m.end(); i != e; ++i)
     i->second.reset();
 }

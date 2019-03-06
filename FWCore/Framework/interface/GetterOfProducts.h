@@ -117,7 +117,8 @@ There are some variants for special cases
 
 namespace edm {
 
-  template <typename T> class GetterOfProducts {
+  template <typename T>
+  class GetterOfProducts {
   public:
     GetterOfProducts() : branchType_(edm::InEvent) {}
 

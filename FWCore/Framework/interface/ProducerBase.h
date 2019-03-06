@@ -40,14 +40,25 @@ namespace edm {
     class EDFilterBase;
   }  // namespace limited
   namespace stream {
-    template <typename T> class ProducingModuleAdaptorBase;
+    template <typename T>
+    class ProducingModuleAdaptorBase;
   }
 
   namespace producerbasehelper {
-    template <typename P> struct PrincipalTraits;
-    template <> struct PrincipalTraits<Run> { static constexpr int kBranchType = InRun; };
-    template <> struct PrincipalTraits<LuminosityBlock> { static constexpr int kBranchType = InLumi; };
-    template <> struct PrincipalTraits<Event> { static constexpr int kBranchType = InEvent; };
+    template <typename P>
+    struct PrincipalTraits;
+    template <>
+    struct PrincipalTraits<Run> {
+      static constexpr int kBranchType = InRun;
+    };
+    template <>
+    struct PrincipalTraits<LuminosityBlock> {
+      static constexpr int kBranchType = InLumi;
+    };
+    template <>
+    struct PrincipalTraits<Event> {
+      static constexpr int kBranchType = InEvent;
+    };
   }  // namespace producerbasehelper
 
   class ProducerBase : private ProductRegistryHelper {
@@ -93,13 +104,16 @@ namespace edm {
     friend class limited::EDProducerBase;
     friend class limited::EDFilterBase;
     friend class PuttableSourceBase;
-    template <typename T> friend class stream::ProducingModuleAdaptorBase;
+    template <typename T>
+    friend class stream::ProducingModuleAdaptorBase;
 
-    template <typename P> void commit_(P& iPrincipal) {
+    template <typename P>
+    void commit_(P& iPrincipal) {
       iPrincipal.commit_(putIndicies_[producerbasehelper::PrincipalTraits<P>::kBranchType]);
     }
 
-    template <typename P, typename I> void commit_(P& iPrincipal, I* iID) {
+    template <typename P, typename I>
+    void commit_(P& iPrincipal, I* iID) {
       iPrincipal.commit_(putIndicies_[producerbasehelper::PrincipalTraits<P>::kBranchType], iID);
     }
 

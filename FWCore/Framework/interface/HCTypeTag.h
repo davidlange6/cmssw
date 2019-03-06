@@ -49,7 +49,8 @@ namespace edm {
         static HCTypeTag findType(char const* iTypeName);
         static HCTypeTag findType(std::string const& iTypeName);
 
-        template <typename T> static HCTypeTag make() {
+        template <typename T>
+        static HCTypeTag make() {
           return HCTypeTag(typelookup::classTypeInfo<T>(), typelookup::className<T>());
         }
 

@@ -222,7 +222,8 @@ namespace edmtest {
     virtual void produce(edm::Event& e, edm::EventSetup const&) override;
 
   private:
-    template <typename PROD> void make_a_product(edm::Event& e);
+    template <typename PROD>
+    void make_a_product(edm::Event& e);
     int size_;
   };
 
@@ -231,7 +232,8 @@ namespace edmtest {
     this->make_a_product<DSVWeirdProduct>(e);
   }
 
-  template <typename PROD> void DSVProducer::make_a_product(edm::Event& e) {
+  template <typename PROD>
+  void DSVProducer::make_a_product(edm::Event& e) {
     typedef PROD product_type;
     typedef typename product_type::value_type detset;
     typedef typename detset::value_type value_type;
@@ -287,7 +289,8 @@ namespace edmtest {
     virtual void produce(edm::Event& e, edm::EventSetup const&) override;
 
   private:
-    template <typename PROD> void make_a_product(edm::Event& e);
+    template <typename PROD>
+    void make_a_product(edm::Event& e);
     void fill_a_data(DSTVSimpleProduct::data_type& d, unsigned int i);
     void fill_a_data(DSTVSimpleDerivedProduct::data_type& d, unsigned int i);
 
@@ -306,7 +309,8 @@ namespace edmtest {
 
   void DSTVProducer::fill_a_data(DSTVSimpleProduct::data_type& d, unsigned int i) { d.data = size_ - i; }
 
-  template <typename PROD> void DSTVProducer::make_a_product(edm::Event& e) {
+  template <typename PROD>
+  void DSTVProducer::make_a_product(edm::Event& e) {
     typedef PROD product_type;
     //FIXME
     typedef typename product_type::FastFiller detset;

@@ -35,9 +35,11 @@
 //
 namespace edm {
   namespace stream {
-    template <typename T> ProducingModuleAdaptorBase<T>::ProducingModuleAdaptorBase() {}
+    template <typename T>
+    ProducingModuleAdaptorBase<T>::ProducingModuleAdaptorBase() {}
 
-    template <typename T> ProducingModuleAdaptorBase<T>::~ProducingModuleAdaptorBase() {
+    template <typename T>
+    ProducingModuleAdaptorBase<T>::~ProducingModuleAdaptorBase() {
       for (auto m : m_streamModules) {
         delete m;
       }
@@ -116,7 +118,8 @@ namespace edm {
       }
     }
 
-    template <typename T> std::vector<edm::ConsumesInfo> ProducingModuleAdaptorBase<T>::consumesInfo() const {
+    template <typename T>
+    std::vector<edm::ConsumesInfo> ProducingModuleAdaptorBase<T>::consumesInfo() const {
       assert(not m_streamModules.empty());
       return m_streamModules[0]->consumesInfo();
     }
@@ -145,12 +148,15 @@ namespace edm {
       return m_streamModules[0]->indiciesForPutProducts(iBranchType);
     }
 
-    template <typename T> void ProducingModuleAdaptorBase<T>::doBeginJob() {}
+    template <typename T>
+    void ProducingModuleAdaptorBase<T>::doBeginJob() {}
 
-    template <typename T> void ProducingModuleAdaptorBase<T>::doBeginStream(StreamID id) {
+    template <typename T>
+    void ProducingModuleAdaptorBase<T>::doBeginStream(StreamID id) {
       m_streamModules[id]->beginStream(id);
     }
-    template <typename T> void ProducingModuleAdaptorBase<T>::doEndStream(StreamID id) {
+    template <typename T>
+    void ProducingModuleAdaptorBase<T>::doEndStream(StreamID id) {
       m_streamModules[id]->endStream();
     }
 
@@ -207,8 +213,10 @@ namespace edm {
       streamEndLuminosityBlockSummary(mod, lb, c);
     }
 
-    template <typename T> void ProducingModuleAdaptorBase<T>::doRespondToOpenInputFile(FileBlock const&) {}
-    template <typename T> void ProducingModuleAdaptorBase<T>::doRespondToCloseInputFile(FileBlock const&) {}
+    template <typename T>
+    void ProducingModuleAdaptorBase<T>::doRespondToOpenInputFile(FileBlock const&) {}
+    template <typename T>
+    void ProducingModuleAdaptorBase<T>::doRespondToCloseInputFile(FileBlock const&) {}
 
     template <typename T>
     void ProducingModuleAdaptorBase<T>::doRegisterThinnedAssociations(ProductRegistry const& registry,

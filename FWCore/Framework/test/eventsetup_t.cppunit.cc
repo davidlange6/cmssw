@@ -148,7 +148,8 @@ class DummyEventSetupProvider : public edm::eventsetup::EventSetupProvider {
 public:
   DummyEventSetupProvider(ActivityRegistry* activityRegistry) : EventSetupProvider(activityRegistry) {}
 
-  template <class T> void insert(std::unique_ptr<T> iRecord) {
+  template <class T>
+  void insert(std::unique_ptr<T> iRecord) {
     edm::eventsetup::EventSetupProvider::insert(std::move(iRecord));
   }
 };

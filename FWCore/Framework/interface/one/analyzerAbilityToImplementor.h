@@ -31,25 +31,31 @@
 namespace edm {
   namespace one {
     namespace analyzer {
-      template <typename T> struct AbilityToImplementor;
+      template <typename T>
+      struct AbilityToImplementor;
 
-      template <> struct AbilityToImplementor<edm::one::SharedResources> {
+      template <>
+      struct AbilityToImplementor<edm::one::SharedResources> {
         typedef edm::one::impl::SharedResourcesUser<edm::one::EDAnalyzerBase> Type;
       };
 
-      template <> struct AbilityToImplementor<edm::one::WatchRuns> {
+      template <>
+      struct AbilityToImplementor<edm::one::WatchRuns> {
         typedef edm::one::impl::RunWatcher<edm::one::EDAnalyzerBase> Type;
       };
 
-      template <> struct AbilityToImplementor<edm::one::WatchLuminosityBlocks> {
+      template <>
+      struct AbilityToImplementor<edm::one::WatchLuminosityBlocks> {
         typedef edm::one::impl::LuminosityBlockWatcher<edm::one::EDAnalyzerBase> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::RunCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::RunCache<C>> {
         typedef edm::one::impl::RunCacheHolder<edm::one::EDAnalyzerBase, C> Type;
       };
 
-      template <typename C> struct AbilityToImplementor<edm::LuminosityBlockCache<C>> {
+      template <typename C>
+      struct AbilityToImplementor<edm::LuminosityBlockCache<C>> {
         typedef edm::one::impl::LuminosityBlockCacheHolder<edm::one::EDAnalyzerBase, C> Type;
       };
     }  // namespace analyzer

@@ -37,14 +37,18 @@
 namespace edm {
   namespace stream {
 
-    template <typename ABase, typename ModType> struct BaseToAdaptor;
+    template <typename ABase, typename ModType>
+    struct BaseToAdaptor;
 
-    template <typename T> class EDAnalyzerAdaptor;
-    template <typename ModType> struct BaseToAdaptor<EDAnalyzerAdaptorBase, ModType> {
+    template <typename T>
+    class EDAnalyzerAdaptor;
+    template <typename ModType>
+    struct BaseToAdaptor<EDAnalyzerAdaptorBase, ModType> {
       typedef EDAnalyzerAdaptor<ModType> Type;
     };
 
-    template <typename T> class EDAnalyzerAdaptor : public EDAnalyzerAdaptorBase {
+    template <typename T>
+    class EDAnalyzerAdaptor : public EDAnalyzerAdaptorBase {
     public:
       EDAnalyzerAdaptor(edm::ParameterSet const& iPSet) : m_pset(&iPSet) {
         m_runs.resize(1);
@@ -177,11 +181,13 @@ namespace edm {
     };
   }  // namespace stream
 
-  template <> class MakeModuleHelper<edm::stream::EDAnalyzerAdaptorBase> {
+  template <>
+  class MakeModuleHelper<edm::stream::EDAnalyzerAdaptorBase> {
     typedef edm::stream::EDAnalyzerAdaptorBase Base;
 
   public:
-    template <typename ModType> static std::unique_ptr<Base> makeModule(ParameterSet const& pset) {
+    template <typename ModType>
+    static std::unique_ptr<Base> makeModule(ParameterSet const& pset) {
       typedef typename stream::BaseToAdaptor<Base, ModType>::Type Adaptor;
       auto module = std::make_unique<Adaptor>(pset);
       return std::unique_ptr<Base>(module.release());

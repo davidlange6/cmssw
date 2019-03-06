@@ -27,7 +27,8 @@
 namespace edm {
   namespace stream {
 
-    template <typename R, typename G> class RunContextT {
+    template <typename R, typename G>
+    class RunContextT {
     public:
       RunContextT(R const* iRun, G const* iGlobal) : m_run(iRun), m_global(iGlobal) {}
       R const* run() const { return m_run; }
@@ -38,7 +39,8 @@ namespace edm {
       G const* m_global;
     };
 
-    template <typename L, typename R, typename G> class LuminosityBlockContextT {
+    template <typename L, typename R, typename G>
+    class LuminosityBlockContextT {
     public:
       LuminosityBlockContextT(L const* iLumi, R const* iRun, G const* iGlobal)
           : m_lumi(iLumi), m_run(iRun), m_global(iGlobal) {}

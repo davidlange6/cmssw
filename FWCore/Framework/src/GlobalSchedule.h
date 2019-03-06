@@ -33,7 +33,8 @@
 namespace edm {
 
   namespace {
-    template <typename T> class GlobalScheduleSignalSentry {
+    template <typename T>
+    class GlobalScheduleSignalSentry {
     public:
       GlobalScheduleSignalSentry(ActivityRegistry* a, typename T::Context const* context)
           : a_(a), context_(context), allowThrow_(false) {

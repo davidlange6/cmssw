@@ -56,10 +56,12 @@ namespace edm {
 
     bool anyProductProduced() const { return reg_->anyProductProduced(); }
 
-    template <class T> void watchProductAdditions(const T& iFunc) {
+    template <class T>
+    void watchProductAdditions(const T& iFunc) {
       serviceregistry::connect_but_block_self(reg_->productAddedSignal_, iFunc);
     }
-    template <class T, class TMethod> void watchProductAdditions(T const& iObj, TMethod iMethod) {
+    template <class T, class TMethod>
+    void watchProductAdditions(T const& iObj, TMethod iMethod) {
       using std::placeholders::_1;
       serviceregistry::connect_but_block_self(reg_->productAddedSignal_, std::bind(iMethod, iObj, _1));
     }

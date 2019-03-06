@@ -210,7 +210,8 @@ namespace edm {
     void putOrMerge(BranchDescription const& bd, std::unique_ptr<WrapperBase> edp) const;
 
     //F must take an argument of type ProductResolverBase*
-    template <typename F> void applyToResolvers(F iFunc) {
+    template <typename F>
+    void applyToResolvers(F iFunc) {
       for (auto& resolver : productResolvers_) {
         iFunc(resolver.get());
       }

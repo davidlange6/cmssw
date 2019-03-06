@@ -30,7 +30,8 @@
 // forward declarations
 
 namespace edm {
-  template <typename T> RefToBaseProd<T> makeRefToBaseProdFrom(RefToBase<T> const& iRef, Event const& iEvent) {
+  template <typename T>
+  RefToBaseProd<T> makeRefToBaseProdFrom(RefToBase<T> const& iRef, Event const& iEvent) {
     Handle<View<T>> view;
     iEvent.get(iRef.id(), view);
 

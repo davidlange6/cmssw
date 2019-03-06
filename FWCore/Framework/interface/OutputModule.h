@@ -45,16 +45,20 @@ namespace edm {
   class WaitingTask;
 
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   typedef detail::TriggerResultsBasedEventSelector::handle_t Trig;
 
   class OutputModule : public EDConsumerBase {
   public:
-    template <typename T> friend class maker::ModuleHolderT;
-    template <typename T> friend class WorkerT;
-    template <typename T> friend class OutputModuleCommunicatorT;
+    template <typename T>
+    friend class maker::ModuleHolderT;
+    template <typename T>
+    friend class WorkerT;
+    template <typename T>
+    friend class OutputModuleCommunicatorT;
     typedef OutputModule ModuleType;
 
     explicit OutputModule(ParameterSet const& pset);

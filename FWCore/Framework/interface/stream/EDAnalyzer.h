@@ -29,7 +29,8 @@
 // forward declarations
 namespace edm {
   namespace stream {
-    template <typename... T> class EDAnalyzer : public AbilityToImplementor<T>::Type..., public EDAnalyzerBase {
+    template <typename... T>
+    class EDAnalyzer : public AbilityToImplementor<T>::Type..., public EDAnalyzerBase {
     public:
       typedef CacheContexts<T...> CacheTypes;
 

@@ -29,7 +29,8 @@ the ESProducer's 'produce' method.
 namespace edm {
   namespace eventsetup {
 
-    template <class TRecord, class TFunctor> class ESPreFunctorDecorator {
+    template <class TRecord, class TFunctor>
+    class ESPreFunctorDecorator {
     public:
       ESPreFunctorDecorator(const TFunctor& iCaller) : caller_(iCaller) {}
       //virtual ~ESPreFunctorDecorator();

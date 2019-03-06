@@ -30,20 +30,25 @@
 namespace edm {
   namespace stream {
 
-    template <typename T> using EDFilterAdaptor = ProducingModuleAdaptor<T, EDFilterBase, EDFilterAdaptorBase>;
+    template <typename T>
+    using EDFilterAdaptor = ProducingModuleAdaptor<T, EDFilterBase, EDFilterAdaptorBase>;
 
-    template <typename ABase, typename ModType> struct BaseToAdaptor;
+    template <typename ABase, typename ModType>
+    struct BaseToAdaptor;
 
-    template <typename ModType> struct BaseToAdaptor<EDFilterAdaptorBase, ModType> {
+    template <typename ModType>
+    struct BaseToAdaptor<EDFilterAdaptorBase, ModType> {
       typedef EDFilterAdaptor<ModType> Type;
     };
   }  // namespace stream
 
-  template <> class MakeModuleHelper<edm::stream::EDFilterAdaptorBase> {
+  template <>
+  class MakeModuleHelper<edm::stream::EDFilterAdaptorBase> {
     typedef edm::stream::EDFilterAdaptorBase Base;
 
   public:
-    template <typename ModType> static std::unique_ptr<Base> makeModule(ParameterSet const& pset) {
+    template <typename ModType>
+    static std::unique_ptr<Base> makeModule(ParameterSet const& pset) {
       typedef typename stream::BaseToAdaptor<Base, ModType>::Type Adaptor;
       auto module = std::make_unique<Adaptor>(pset);
       return std::unique_ptr<Base>(module.release());

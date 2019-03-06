@@ -73,7 +73,8 @@ class testEventsetup;
 class testEventsetupRecord;
 
 namespace edm {
-  template <typename T> class ESHandle;
+  template <typename T>
+  class ESHandle;
   class ESHandleExceptionFactory;
   class ESInputTag;
   class EventSetupImpl;
@@ -101,9 +102,13 @@ namespace edm {
 
       void setImpl(EventSetupRecordImpl const* iImpl) { impl_ = iImpl; }
 
-      template <typename HolderT> bool get(HolderT& iHolder) const { return get("", iHolder); }
+      template <typename HolderT>
+      bool get(HolderT& iHolder) const {
+        return get("", iHolder);
+      }
 
-      template <typename HolderT> bool get(char const* iName, HolderT& iHolder) const {
+      template <typename HolderT>
+      bool get(char const* iName, HolderT& iHolder) const {
         typename HolderT::value_type const* value = nullptr;
         ComponentDescription const* desc = nullptr;
         std::shared_ptr<ESHandleExceptionFactory> whyFailedFactory;
@@ -117,11 +122,13 @@ namespace edm {
           return false;
         }
       }
-      template <typename HolderT> bool get(std::string const& iName, HolderT& iHolder) const {
+      template <typename HolderT>
+      bool get(std::string const& iName, HolderT& iHolder) const {
         return get(iName.c_str(), iHolder);
       }
 
-      template <typename HolderT> bool get(ESInputTag const& iTag, HolderT& iHolder) const {
+      template <typename HolderT>
+      bool get(ESInputTag const& iTag, HolderT& iHolder) const {
         typename HolderT::value_type const* value = nullptr;
         ComponentDescription const* desc = nullptr;
         std::shared_ptr<ESHandleExceptionFactory> whyFailedFactory;
@@ -169,7 +176,8 @@ namespace edm {
       void fillRegisteredDataKeys(std::vector<DataKey>& oToFill) const { impl_->fillRegisteredDataKeys(oToFill); }
 
     protected:
-      template <typename T, typename R> ESHandle<T> getHandleImpl(ESGetToken<T, R> const& iToken) const {
+      template <typename T, typename R>
+      ESHandle<T> getHandleImpl(ESGetToken<T, R> const& iToken) const {
         ESHandle<T> h;
         (void)get(iToken.m_tag, h);
         return h;

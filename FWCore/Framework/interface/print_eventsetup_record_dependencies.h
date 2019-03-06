@@ -38,7 +38,8 @@ namespace edm {
   template <typename RecordT>
   void print_eventsetup_record_dependencies(std::ostream& oStream, std::string const& iIndent = std::string());
 
-  template <typename T> void print_eventsetup_record_dependencies(std::ostream&, std::string, T const*, T const*) {}
+  template <typename T>
+  void print_eventsetup_record_dependencies(std::ostream&, std::string, T const*, T const*) {}
 
   template <typename TFirst, typename TEnd>
   void print_eventsetup_record_dependencies(std::ostream& oStream,

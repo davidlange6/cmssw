@@ -35,7 +35,8 @@ namespace edm {
 
     void addDependencyFunction(EventSetupRecordKey iKey, DepFunction iFunction);
 
-    template <typename T> struct RecordDependencyRegister {
+    template <typename T>
+    struct RecordDependencyRegister {
       RecordDependencyRegister() {
         addDependencyFunction(EventSetupRecordKey::makeKey<T>(), &findDependentRecordsFor<T>);
       }

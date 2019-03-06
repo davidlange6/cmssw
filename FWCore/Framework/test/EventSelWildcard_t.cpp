@@ -41,7 +41,8 @@ std::ostream& operator<<(std::ostream& ost, const Bools& b) {
   return ost;
 }
 
-template <size_t nb> Bools toBools(std::array<bool, nb> const& t) {
+template <size_t nb>
+Bools toBools(std::array<bool, nb> const& t) {
   Bools b;
   b.insert(b.end(), t.begin(), t.end());
   return b;

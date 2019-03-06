@@ -43,7 +43,8 @@ namespace edm {
       ComponentDescription createComponentDescription(ParameterSet const& iConfiguration) const;
     };
 
-    template <class T> class ComponentMakerBase : public ComponentMakerBaseHelper {
+    template <class T>
+    class ComponentMakerBase : public ComponentMakerBaseHelper {
     public:
       typedef typename T::base_type base_type;
       virtual std::shared_ptr<base_type> addTo(EventSetupsController& esController,
@@ -52,7 +53,8 @@ namespace edm {
                                                bool replaceExisting) const = 0;
     };
 
-    template <class T, class TComponent> class ComponentMaker : public ComponentMakerBase<T> {
+    template <class T, class TComponent>
+    class ComponentMaker : public ComponentMakerBase<T> {
     public:
       ComponentMaker() {}
       //virtual ~ComponentMaker();

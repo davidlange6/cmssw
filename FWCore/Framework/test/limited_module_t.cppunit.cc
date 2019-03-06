@@ -111,7 +111,8 @@ private:
   edm::EventSetupImpl* m_es = nullptr;
   edm::ModuleDescription m_desc = {"Dummy", "dummy"};
 
-  template <typename T> void testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect);
+  template <typename T>
+  void testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect);
 
   class BasicProd : public edm::limited::EDProducer<> {
   public:
@@ -441,7 +442,8 @@ namespace {
   }
 }  // namespace
 
-template <typename T> void testLimitedModule::testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect) {
+template <typename T>
+void testLimitedModule::testTransitions(std::shared_ptr<T> iMod, Expectations const& iExpect) {
   edm::maker::ModuleHolderT<edm::limited::EDProducerBase> h(iMod, nullptr);
   h.preallocate(edm::PreallocationConfiguration{});
   edm::WorkerT<edm::limited::EDProducerBase> w{iMod, m_desc, nullptr};

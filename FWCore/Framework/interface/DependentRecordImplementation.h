@@ -46,7 +46,8 @@ namespace edm {
       //virtual ~DependentRecordImplementation();
 
       // ---------- const member functions ---------------------
-      template <class DepRecordT> const DepRecordT getRecord() const {
+      template <class DepRecordT>
+      const DepRecordT getRecord() const {
         //Make sure that DepRecordT is a type in ListT
         typedef typename boost::mpl::end<ListT>::type EndItrT;
         typedef typename boost::mpl::find<ListT, DepRecordT>::type FoundItrT;
@@ -64,7 +65,8 @@ namespace edm {
         }
       }
 
-      template <class DepRecordT> std::optional<DepRecordT> tryToGetRecord() const {
+      template <class DepRecordT>
+      std::optional<DepRecordT> tryToGetRecord() const {
         //Make sure that DepRecordT is a type in ListT
         typedef typename boost::mpl::end<ListT>::type EndItrT;
         typedef typename boost::mpl::find<ListT, DepRecordT>::type FoundItrT;

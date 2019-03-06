@@ -37,7 +37,8 @@ namespace edm {
 
   namespace stream {
     class EDFilterAdaptorBase;
-    template <typename> class ProducingModuleAdaptorBase;
+    template <typename>
+    class ProducingModuleAdaptorBase;
 
     class EDFilterBase : public edm::ProducerBase, public edm::EDConsumerBase {
       //This needs access to the parentage cache info

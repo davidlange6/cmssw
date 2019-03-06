@@ -73,7 +73,8 @@ namespace edm {
   class ThinnedAssociationsHelper;
 
   namespace workerhelper {
-    template <typename O> class CallImpl;
+    template <typename O>
+    class CallImpl;
   }
 
   class Worker {
@@ -90,14 +91,16 @@ namespace edm {
 
       operator bool() { return serial_ != nullptr or limited_ != nullptr; }
 
-      template <class F> void push(F&& iF) {
+      template <class F>
+      void push(F&& iF) {
         if (serial_) {
           serial_->push(iF);
         } else {
           limited_->push(iF);
         }
       }
-      template <class F> void pushAndWait(F&& iF) {
+      template <class F>
+      void pushAndWait(F&& iF) {
         if (serial_) {
           serial_->pushAndWait(iF);
         } else {
@@ -229,7 +232,8 @@ namespace edm {
     virtual bool hasAccumulator() const = 0;
 
   protected:
-    template <typename O> friend class workerhelper::CallImpl;
+    template <typename O>
+    friend class workerhelper::CallImpl;
     virtual std::string workerType() const = 0;
     virtual bool implDo(EventPrincipal const&, EventSetupImpl const& c, ModuleCallingContext const* mcc) = 0;
 
@@ -314,7 +318,8 @@ namespace edm {
       virtual ~TransitionIDValueBase() {}
     };
 
-    template <typename T> class TransitionIDValue : public TransitionIDValueBase {
+    template <typename T>
+    class TransitionIDValue : public TransitionIDValueBase {
     public:
       TransitionIDValue(T const& iP) : p_(iP) {}
       std::string value() const override {
@@ -332,7 +337,8 @@ namespace edm {
                                 bool isEvent,
                                 TransitionIDValueBase const& iID) const;
 
-    template <bool IS_EVENT> bool setPassed() {
+    template <bool IS_EVENT>
+    bool setPassed() {
       if (IS_EVENT) {
         timesPassed_.fetch_add(1, std::memory_order_relaxed);
       }
@@ -340,7 +346,8 @@ namespace edm {
       return true;
     }
 
-    template <bool IS_EVENT> bool setFailed() {
+    template <bool IS_EVENT>
+    bool setFailed() {
       if (IS_EVENT) {
         timesFailed_.fetch_add(1, std::memory_order_relaxed);
       }
@@ -348,7 +355,8 @@ namespace edm {
       return false;
     }
 
-    template <bool IS_EVENT> std::exception_ptr setException(std::exception_ptr iException) {
+    template <bool IS_EVENT>
+    std::exception_ptr setException(std::exception_ptr iException) {
       if (IS_EVENT) {
         timesExcept_.fetch_add(1, std::memory_order_relaxed);
       }
@@ -386,7 +394,8 @@ namespace edm {
 
     std::exception_ptr handleExternalWorkException(std::exception_ptr const* iEPtr, ParentContext const& parentContext);
 
-    template <typename T> class RunModuleTask : public WaitingTask {
+    template <typename T>
+    class RunModuleTask : public WaitingTask {
     public:
       RunModuleTask(Worker* worker,
                     typename T::MyPrincipal const& ep,
@@ -485,7 +494,8 @@ namespace edm {
     // it as a template so all cases will compile.
     // DUMMY exists to work around the C++ Standard prohibition on
     // fully specializing templates nested in other classes.
-    template <typename T, typename DUMMY = void> class AcquireTask : public WaitingTask {
+    template <typename T, typename DUMMY = void>
+    class AcquireTask : public WaitingTask {
     public:
       AcquireTask(Worker* worker,
                   typename T::MyPrincipal const& ep,
@@ -598,7 +608,8 @@ namespace edm {
   };
 
   namespace {
-    template <typename T> class ModuleSignalSentry {
+    template <typename T>
+    class ModuleSignalSentry {
     public:
       ModuleSignalSentry(ActivityRegistry* a,
                          typename T::Context const* context,
@@ -622,7 +633,8 @@ namespace edm {
   }  // namespace
 
   namespace workerhelper {
-    template <> class CallImpl<OccurrenceTraits<EventPrincipal, BranchActionStreamBegin>> {
+    template <>
+    class CallImpl<OccurrenceTraits<EventPrincipal, BranchActionStreamBegin>> {
     public:
       typedef OccurrenceTraits<EventPrincipal, BranchActionStreamBegin> Arg;
       static bool call(Worker* iWorker,
@@ -642,7 +654,8 @@ namespace edm {
       static SerialTaskQueue* enableGlobalQueue(Worker*) { return nullptr; }
     };
 
-    template <> class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionGlobalBegin>> {
+    template <>
+    class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionGlobalBegin>> {
     public:
       typedef OccurrenceTraits<RunPrincipal, BranchActionGlobalBegin> Arg;
       static bool call(Worker* iWorker,
@@ -660,7 +673,8 @@ namespace edm {
       static SerialTaskQueue* pauseGlobalQueue(Worker* iWorker) { return iWorker->globalRunsQueue(); }
       static SerialTaskQueue* enableGlobalQueue(Worker*) { return nullptr; }
     };
-    template <> class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionStreamBegin>> {
+    template <>
+    class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionStreamBegin>> {
     public:
       typedef OccurrenceTraits<RunPrincipal, BranchActionStreamBegin> Arg;
       static bool call(Worker* iWorker,
@@ -678,7 +692,8 @@ namespace edm {
       static SerialTaskQueue* pauseGlobalQueue(Worker* iWorker) { return nullptr; }
       static SerialTaskQueue* enableGlobalQueue(Worker*) { return nullptr; }
     };
-    template <> class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionGlobalEnd>> {
+    template <>
+    class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionGlobalEnd>> {
     public:
       typedef OccurrenceTraits<RunPrincipal, BranchActionGlobalEnd> Arg;
       static bool call(Worker* iWorker,
@@ -696,7 +711,8 @@ namespace edm {
       static SerialTaskQueue* pauseGlobalQueue(Worker* iWorker) { return nullptr; }
       static SerialTaskQueue* enableGlobalQueue(Worker* iWorker) { return iWorker->globalRunsQueue(); }
     };
-    template <> class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionStreamEnd>> {
+    template <>
+    class CallImpl<OccurrenceTraits<RunPrincipal, BranchActionStreamEnd>> {
     public:
       typedef OccurrenceTraits<RunPrincipal, BranchActionStreamEnd> Arg;
       static bool call(Worker* iWorker,
@@ -715,7 +731,8 @@ namespace edm {
       static SerialTaskQueue* enableGlobalQueue(Worker*) { return nullptr; }
     };
 
-    template <> class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalBegin>> {
+    template <>
+    class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalBegin>> {
     public:
       typedef OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalBegin> Arg;
       static bool call(Worker* iWorker,
@@ -733,7 +750,8 @@ namespace edm {
       static SerialTaskQueue* pauseGlobalQueue(Worker* iWorker) { return iWorker->globalLuminosityBlocksQueue(); }
       static SerialTaskQueue* enableGlobalQueue(Worker*) { return nullptr; }
     };
-    template <> class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamBegin>> {
+    template <>
+    class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamBegin>> {
     public:
       typedef OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamBegin> Arg;
       static bool call(Worker* iWorker,
@@ -752,7 +770,8 @@ namespace edm {
       static SerialTaskQueue* enableGlobalQueue(Worker*) { return nullptr; }
     };
 
-    template <> class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalEnd>> {
+    template <>
+    class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalEnd>> {
     public:
       typedef OccurrenceTraits<LuminosityBlockPrincipal, BranchActionGlobalEnd> Arg;
       static bool call(Worker* iWorker,
@@ -770,7 +789,8 @@ namespace edm {
       static SerialTaskQueue* pauseGlobalQueue(Worker* iWorker) { return nullptr; }
       static SerialTaskQueue* enableGlobalQueue(Worker* iWorker) { return iWorker->globalLuminosityBlocksQueue(); }
     };
-    template <> class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamEnd>> {
+    template <>
+    class CallImpl<OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamEnd>> {
     public:
       typedef OccurrenceTraits<LuminosityBlockPrincipal, BranchActionStreamEnd> Arg;
       static bool call(Worker* iWorker,

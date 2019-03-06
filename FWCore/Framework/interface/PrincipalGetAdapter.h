@@ -150,7 +150,8 @@ namespace edm {
 
     bool isComplete() const { return isComplete_; }
 
-    template <typename PROD> bool checkIfComplete() const;
+    template <typename PROD>
+    bool checkIfComplete() const;
 
     Transition transition() const;
 
@@ -243,7 +244,8 @@ namespace edm {
     bool isComplete_;
   };
 
-  template <typename PROD> inline std::ostream& operator<<(std::ostream& os, Handle<PROD> const& h) {
+  template <typename PROD>
+  inline std::ostream& operator<<(std::ostream& os, Handle<PROD> const& h) {
     os << h.product() << " " << h.provenance() << " " << h.id();
     return os;
   }
@@ -268,11 +270,15 @@ namespace edm {
 
     // Definitions forthe following struct and function templates are
     // not needed; we only require the declarations.
-    template <typename T, void (T::*)()> struct postinsert_function;
-    template <typename T> no_tag has_postinsert_helper(...);
-    template <typename T> yes_tag has_postinsert_helper(postinsert_function<T, &T::post_insert>* p);
+    template <typename T, void (T::*)()>
+    struct postinsert_function;
+    template <typename T>
+    no_tag has_postinsert_helper(...);
+    template <typename T>
+    yes_tag has_postinsert_helper(postinsert_function<T, &T::post_insert>* p);
 
-    template <typename T> struct has_postinsert {
+    template <typename T>
+    struct has_postinsert {
       static constexpr bool value = std::is_same<decltype(has_postinsert_helper<T>(nullptr)), yes_tag>::value &&
                                     !std::is_base_of<DoNotSortUponInsertion, T>::value;
     };
@@ -285,11 +291,13 @@ namespace edm {
   // control of a metafunction if, to either call the given object's
   // post_insert function (if it has one), or to do nothing (if it
   // does not have a post_insert function).
-  template <typename T> struct DoPostInsert {
+  template <typename T>
+  struct DoPostInsert {
     void operator()(T* p) const { p->post_insert(); }
   };
 
-  template <typename T> struct DoNotPostInsert {
+  template <typename T>
+  struct DoNotPostInsert {
     void operator()(T*) const {}
   };
 
@@ -297,7 +305,8 @@ namespace edm {
   // implementation of non-template members.
   //
 
-  template <typename PROD> inline bool PrincipalGetAdapter::checkIfComplete() const {
+  template <typename PROD>
+  inline bool PrincipalGetAdapter::checkIfComplete() const {
     return isComplete() || !detail::has_mergeProduct_function<PROD>::value;
   }
 

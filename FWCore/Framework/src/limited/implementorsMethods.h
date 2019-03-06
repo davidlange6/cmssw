@@ -28,11 +28,13 @@
 namespace edm {
   namespace limited {
     namespace impl {
-      template <typename T> void BeginRunProducer<T>::doBeginRunProduce_(Run& rp, EventSetup const& c) {
+      template <typename T>
+      void BeginRunProducer<T>::doBeginRunProduce_(Run& rp, EventSetup const& c) {
         this->globalBeginRunProduce(rp, c);
       }
 
-      template <typename T> void EndRunProducer<T>::doEndRunProduce_(Run& rp, EventSetup const& c) {
+      template <typename T>
+      void EndRunProducer<T>::doEndRunProduce_(Run& rp, EventSetup const& c) {
         this->globalEndRunProduce(rp, c);
       }
 

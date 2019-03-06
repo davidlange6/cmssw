@@ -25,7 +25,8 @@ These products should be informational products about the filter decision.
 
 namespace edm {
   namespace maker {
-    template <typename T> class ModuleHolderT;
+    template <typename T>
+    class ModuleHolderT;
   }
 
   class ModuleCallingContext;
@@ -37,8 +38,10 @@ namespace edm {
 
   class EDFilter : public ProducerBase, public EDConsumerBase {
   public:
-    template <typename T> friend class maker::ModuleHolderT;
-    template <typename T> friend class WorkerT;
+    template <typename T>
+    friend class maker::ModuleHolderT;
+    template <typename T>
+    friend class WorkerT;
     typedef EDFilter ModuleType;
 
     EDFilter();

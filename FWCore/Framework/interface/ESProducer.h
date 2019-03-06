@@ -110,14 +110,17 @@ namespace edm {
         The method determines the Record argument and return value of the 'produce'
         method in order to do the registration with the EventSetup
     */
-    template <typename T> auto setWhatProduced(T* iThis, const es::Label& iLabel = {}) {
+    template <typename T>
+    auto setWhatProduced(T* iThis, const es::Label& iLabel = {}) {
       return setWhatProduced(iThis, &T::produce, iLabel);
     }
 
-    template <typename T> auto setWhatProduced(T* iThis, const char* iLabel) {
+    template <typename T>
+    auto setWhatProduced(T* iThis, const char* iLabel) {
       return setWhatProduced(iThis, es::Label(iLabel));
     }
-    template <typename T> auto setWhatProduced(T* iThis, const std::string& iLabel) {
+    template <typename T>
+    auto setWhatProduced(T* iThis, const std::string& iLabel) {
       return setWhatProduced(iThis, es::Label(iLabel));
     }
 

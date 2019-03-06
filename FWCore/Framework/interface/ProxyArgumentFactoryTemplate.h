@@ -30,7 +30,8 @@
 namespace edm {
   namespace eventsetup {
 
-    template <class T, class ArgT> class ProxyArgumentFactoryTemplate : public ProxyFactoryBase {
+    template <class T, class ArgT>
+    class ProxyArgumentFactoryTemplate : public ProxyFactoryBase {
     public:
       typedef typename T::record_type record_type;
 

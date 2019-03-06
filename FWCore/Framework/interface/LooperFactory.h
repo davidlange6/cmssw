@@ -96,7 +96,8 @@ namespace edm {
                                ParameterSet const& iConfiguration,
                                std::shared_ptr<base_type> const& component);
     };
-    template <class TType> struct LooperMaker : public ComponentMaker<edm::eventsetup::LooperMakerTraits, TType> {};
+    template <class TType>
+    struct LooperMaker : public ComponentMaker<edm::eventsetup::LooperMakerTraits, TType> {};
     typedef ComponentFactory<LooperMakerTraits> LooperFactory;
 
     typedef edmplugin::PluginFactory<edm::eventsetup::ComponentMakerBase<LooperMakerTraits>*()> LooperPluginFactory;
