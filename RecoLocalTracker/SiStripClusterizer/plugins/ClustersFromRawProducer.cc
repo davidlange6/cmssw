@@ -144,7 +144,7 @@ namespace {
 
     bool legacy_;
     bool hybridZeroSuppressed_;
-    
+    std::unique_ptr<StripClusterizerAlgorithm::State> state_;    
     
 #ifdef VIDEBUG
     struct Stat {
@@ -401,7 +401,14 @@ try { // edmNew::CapacityExaustedException
 
   auto const & det = clusterizer.stripByStripBegin(idet);
   if (!det.valid()) return; 
-  StripClusterizerAlgorithm::State state(det);
+
+  if ( state_ != nullptr  ) {
+    state_=std::make_unique<StripClusterizerAlgorithm::State>(det);
+  }
+  else{
+    state_->reset(det);
+  }
+  StripClusterizerAlgorithm::State &state=*state_;
 
   incSet();
 
