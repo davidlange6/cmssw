@@ -4,6 +4,7 @@
 #include "CondFormats/HcalObjects/interface/HcalMappingEntry.h"
 #include "CondFormats/HcalObjects/interface/HcalElectronicsMap.h"
 #include <vector>
+#include <cstdint>
 class HcalTopology;
 
 class HcalLogicalMap {

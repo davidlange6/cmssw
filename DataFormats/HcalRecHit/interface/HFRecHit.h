@@ -3,6 +3,7 @@
 
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/CaloRecHit/interface/CaloRecHit.h"
+#include <cstdint>
 
 /** \class HFRecHit
  *  

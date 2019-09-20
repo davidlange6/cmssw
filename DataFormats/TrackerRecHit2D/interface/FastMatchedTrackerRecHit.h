@@ -3,6 +3,7 @@
 
 #include "DataFormats/TrackerRecHit2D/interface/FastTrackerRecHit.h"
 #include "DataFormats/TrackerRecHit2D/interface/FastSingleTrackerRecHit.h"
+#include <cstdint>
 
 class FastMatchedTrackerRecHit : public FastTrackerRecHit {
 public:

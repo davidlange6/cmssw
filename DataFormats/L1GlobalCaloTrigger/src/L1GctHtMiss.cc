@@ -1,5 +1,6 @@
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctHtMiss.h"
+#include <cstdint>
 
 L1GctHtMiss::L1GctHtMiss() : m_data(0), m_bx(0) {}
 

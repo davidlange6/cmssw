@@ -3,6 +3,7 @@
 #include <sstream>
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
+#include <cstdint>
 
 using namespace std;
 

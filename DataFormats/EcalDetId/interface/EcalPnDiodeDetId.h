@@ -4,6 +4,7 @@
 #include <ostream>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
+#include <cstdint>
 
 /** \class EcalPnDiodeDetId
     

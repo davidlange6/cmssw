@@ -2,6 +2,7 @@
 #include "CondFormats/RPCObjects/interface/DBSpecToDetUnit.h"
 #include "DataFormats/MuonDetId/interface/RPCDetId.h"
 #include <sstream>
+#include <cstdint>
 
 FebConnectorSpec::FebConnectorSpec(int num, const ChamberLocationSpec& chamber, const FebLocationSpec& feb)
     : theLinkBoardInputNum(num), theChamber(chamber), theFeb(feb), theAlgo(0), theRawId(0) {}

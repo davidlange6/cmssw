@@ -16,6 +16,7 @@
 #include <DataFormats/DetId/interface/DetId.h>
 #include <DataFormats/CSCDigi/interface/CSCCorrelatedLCTDigi.h>
 #include <DataFormats/L1CSCTrackFinder/interface/CSCTFConstants.h>
+#include <cstdint>
 
 namespace csctf {
 

@@ -4,6 +4,7 @@
 #include "DataFormats/ForwardDetId/interface/MTDDetId.h"
 #include <ostream>
 #include <array>
+#include <cstdint>
 
 /** 
     @class BTLDetId

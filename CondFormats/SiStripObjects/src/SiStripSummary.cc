@@ -2,6 +2,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include <algorithm>
+#include <cstdint>
 
 SiStripSummary::SiStripSummary(std::vector<std::string>& userDBContent) {
   userDBContent_ = userDBContent;

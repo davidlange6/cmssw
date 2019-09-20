@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGFineGrainConstEB.h"
+#include <cstdint>
 
 EcalTPGFineGrainConstEB::EcalTPGFineGrainConstEB()
     : ThresholdETLow_(0), ThresholdETHigh_(0), RatioLow_(0), RatioHigh_(0), LUT_(0) {}

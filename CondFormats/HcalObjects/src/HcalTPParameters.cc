@@ -4,6 +4,7 @@
 
 #include "CondFormats/HcalObjects/interface/HcalTPParameters.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 HcalTPParameters::HcalTPParameters() : version_(0), adcCut_(0), tdcMask_(0), tbits_(0), auxi1_(0), auxi2_(0) {}
 

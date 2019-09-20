@@ -10,6 +10,7 @@
 #include "CondFormats/EcalObjects/interface/EcalCondObjectContainer.h"
 #include "DataFormats/Provenance/interface/Timestamp.h"
 #include <vector>
+#include <cstdint>
 
 class EcalLaserAPDPNRatios {
 public:

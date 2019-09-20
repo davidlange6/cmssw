@@ -11,6 +11,7 @@
 #include "DataFormats/L1THGCal/interface/HGCalTriggerSums.h"
 
 #include "DataFormats/L1THGCal/interface/ClusterShapes.h"
+#include <cstdint>
 
 namespace DataFormats {
   namespace L1THGCal {

@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGTowerStatus.h"
+#include <cstdint>
 
 EcalTPGTowerStatus::EcalTPGTowerStatus() {}
 

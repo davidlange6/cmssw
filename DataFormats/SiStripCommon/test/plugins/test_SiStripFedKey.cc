@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <time.h>
+#include <cstdint>
 
 using namespace sistrip;
 

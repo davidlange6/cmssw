@@ -1,4 +1,5 @@
 #include "CondFormats/DTObjects/src/headers.h"
+#include <cstdint>
 
 namespace CondFormats_DTObjects {
   struct dictionary {

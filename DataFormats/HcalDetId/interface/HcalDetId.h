@@ -5,6 +5,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 /** \class HcalDetId
  *  Cell identifier class for the HCAL subdetectors, precision readout cells only

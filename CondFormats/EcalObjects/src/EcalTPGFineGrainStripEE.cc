@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGFineGrainStripEE.h"
+#include <cstdint>
 
 EcalTPGFineGrainStripEE::EcalTPGFineGrainStripEE() {}
 

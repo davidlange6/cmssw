@@ -5,6 +5,7 @@
 #include "DataFormats/SiPixelDetId/interface/PXFDetId.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using namespace std;
 

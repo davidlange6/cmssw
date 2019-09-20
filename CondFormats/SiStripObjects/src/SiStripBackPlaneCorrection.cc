@@ -1,6 +1,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripBackPlaneCorrection.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 bool SiStripBackPlaneCorrection::putBackPlaneCorrection(const uint32_t& detid, float value) {
   std::map<unsigned int, float>::const_iterator id = m_BPC.find(detid);

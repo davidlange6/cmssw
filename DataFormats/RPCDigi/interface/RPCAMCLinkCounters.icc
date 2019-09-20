@@ -2,6 +2,7 @@
 #define DataFormats_RPCDigi_RPCAMCLinkCounters_icc
 
 #include "DataFormats/RPCDigi/interface/RPCAMCLinkCounters.h"
+#include <cstdint>
 
 inline void RPCAMCLinkCounters::add(unsigned int event, RPCAMCLink const& link, unsigned int count) {
   type_link_count_[std::pair<unsigned int, std::uint32_t>(event, link.getId())] += count;

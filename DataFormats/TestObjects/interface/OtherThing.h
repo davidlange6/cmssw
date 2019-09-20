@@ -11,6 +11,7 @@
 #include "DataFormats/TestObjects/interface/ThingCollectionfwd.h"
 #include "DataFormats/TestObjects/interface/Thing.h"
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 namespace edmtest {
 

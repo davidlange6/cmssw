@@ -13,6 +13,7 @@
 
 #include <iosfwd>
 #include <iostream>
+#include <cstdint>
 
 class GEMDetId : public DetId {
 public:

@@ -1,5 +1,6 @@
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctHFBitCounts.h"
+#include <cstdint>
 
 /// set static consts
 //static const unsigned L1GctHFBitCounts::N_COUNTS = 4;

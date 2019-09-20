@@ -12,6 +12,7 @@
 #include <FWCore/Utilities/interface/Exception.h>
 
 #include <iosfwd>
+#include <cstdint>
 
 class RPCDetId : public DetId {
 public:

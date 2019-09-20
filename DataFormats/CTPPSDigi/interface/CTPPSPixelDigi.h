@@ -59,6 +59,7 @@ inline bool operator<(const CTPPSPixelDigi& one, const CTPPSPixelDigi& other) {
 }
 
 #include <iostream>
+#include <cstdint>
 inline std::ostream& operator<<(std::ostream& o, const CTPPSPixelDigi& digi) {
   return o << " " << digi.row() << " " << digi.column() << " " << digi.adc();
 }

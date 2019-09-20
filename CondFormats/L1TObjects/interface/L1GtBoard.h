@@ -24,7 +24,6 @@
 #include <vector>
 #include <map>
 
-#include <boost/cstdint.hpp>
 
 // user include files
 #include "CondFormats/L1TObjects/interface/L1GtFwd.h"
@@ -122,7 +121,7 @@ public:
   void setGtInputPsbChannels(const std::map<int, std::vector<L1GtObject> >&);
 
   /// get the board ID
-  const boost::uint16_t gtBoardId() const;
+  const uint16_t gtBoardId() const;
 
   /// return board name - it depends on L1GtBoardType enum!!!
   std::string gtBoardName() const;

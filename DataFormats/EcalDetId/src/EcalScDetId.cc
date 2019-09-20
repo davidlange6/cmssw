@@ -4,6 +4,7 @@
 #include <ostream>
 #include <cassert>
 #include <mutex>
+#include <cstdint>
 
 short EcalScDetId::xyz2HashedIndex[EcalScDetId::IX_MAX][EcalScDetId::IY_MAX][EcalScDetId::nEndcaps];
 

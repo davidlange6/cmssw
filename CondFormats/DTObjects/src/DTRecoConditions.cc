@@ -11,6 +11,7 @@
 #include <algorithm>
 
 #include <TFormula.h>
+#include <cstdint>
 
 using std::cout;
 using std::endl;

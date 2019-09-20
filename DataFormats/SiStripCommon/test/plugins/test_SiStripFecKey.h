@@ -3,6 +3,7 @@
 #define DataFormats_SiStripCommon_testSiStripFecKey_H
 
 #include "FWCore/Framework/interface/EDAnalyzer.h"
+#include <cstdint>
 
 /**
    @class testSiStripFecKey 

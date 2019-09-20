@@ -1,7 +1,6 @@
 #ifndef HCALTRIGGERPRIMITIVESAMPLE_H
 #define HCALTRIGGERPRIMITIVESAMPLE_H 1
 
-#include <boost/cstdint.hpp>
 #include <ostream>
 
 /** \class HcalTriggerPrimitiveSample

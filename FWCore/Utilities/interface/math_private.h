@@ -18,6 +18,7 @@
 #define math_private_h
 
 #include <sys/types.h>
+#include <cstdint>
 
 namespace edm {
   namespace math_private {

@@ -1,6 +1,7 @@
 #include "DataFormats/HcalDetId/interface/HcalCalibDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 HcalCalibDetId::HcalCalibDetId() : HcalOtherDetId() {}
 

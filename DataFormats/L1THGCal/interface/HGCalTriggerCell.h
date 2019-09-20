@@ -5,6 +5,7 @@
 #include "DataFormats/L1Trigger/interface/L1Candidate.h"
 #include "DataFormats/L1Trigger/interface/BXVector.h"
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 namespace l1t {
 

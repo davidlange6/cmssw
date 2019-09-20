@@ -3,6 +3,7 @@
 
 #include "DataFormats/OnlineMetaData/interface/CTPPSRecord.h"
 #include "DataFormats/OnlineMetaData/interface/OnlineMetaDataRaw.h"
+#include <cstdint>
 
 const CTPPSRecord::RomanPotNames CTPPSRecord::romanPotNames_ = {{"RP_45_210_FR_BT",
                                                                  "RP_45_210_FR_HR",

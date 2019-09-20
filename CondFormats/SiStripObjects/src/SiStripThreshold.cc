@@ -4,6 +4,7 @@
 #include <cassert>
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 
 bool SiStripThreshold::put(const uint32_t& DetId, const InputVector& _vect) {
   InputVector vect = _vect;

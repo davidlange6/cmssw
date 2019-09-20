@@ -40,6 +40,7 @@
 #include <vector>
 #include <iosfwd>
 #include <utility>  // for pair
+#include <cstdint>
 
 class CSCIndexer {
 public:

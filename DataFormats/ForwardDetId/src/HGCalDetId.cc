@@ -1,5 +1,6 @@
 #include "DataFormats/ForwardDetId/interface/HGCalDetId.h"
 #include <iostream>
+#include <cstdint>
 
 //#define DebugLog
 

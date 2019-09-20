@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 
 #include <ostream>
+#include <cstdint>
 
 EcalElectronicsId::EcalElectronicsId() { EcalElectronicsId_ = 0xFFFFFFFFu; }
 

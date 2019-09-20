@@ -2,6 +2,7 @@
 
 #include <ostream>
 #include <sstream>
+#include <cstdint>
 
 RPCAMCLink::RPCAMCLink() : id_(0x0) {}
 

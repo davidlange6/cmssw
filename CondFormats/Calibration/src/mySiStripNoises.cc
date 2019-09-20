@@ -1,5 +1,6 @@
 #include "CondFormats/Calibration/interface/mySiStripNoises.h"
 #include <algorithm>
+#include <cstdint>
 bool mySiStripNoises::put(const uint32_t DetId, InputVector& input) {
   // put in SiStripNoises of DetId
   std::vector<unsigned char> Vo_CHAR;

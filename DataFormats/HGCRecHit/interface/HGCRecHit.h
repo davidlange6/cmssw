@@ -3,6 +3,7 @@
 
 #include "DataFormats/CaloRecHit/interface/CaloRecHit.h"
 #include <vector>
+#include <cstdint>
 
 /** \class HGCRecHit
  *  

@@ -4,6 +4,7 @@
 #include <iosfwd>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/ForwardDetId/interface/ForwardSubdetector.h"
+#include <cstdint>
 
 /* \brief description of the bit assigment
    [0:4]   u-coordinate of the cell (measured from the lower left

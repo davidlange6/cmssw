@@ -1,4 +1,5 @@
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctInternJetData.h"
+#include <cstdint>
 
 L1GctInternJetData::L1GctInternJetData() : capBlock_(0), capIndex_(0), bx_(0), type_(null), data_(0) {}
 

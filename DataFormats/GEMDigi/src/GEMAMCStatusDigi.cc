@@ -1,4 +1,5 @@
 #include "DataFormats/GEMDigi/interface/GEMAMCStatusDigi.h"
+#include <cstdint>
 
 GEMAMCStatusDigi::GEMAMCStatusDigi(const uint8_t AMCnum_,
                                    const uint32_t L1A_,

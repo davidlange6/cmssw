@@ -1,5 +1,6 @@
 #include "CondFormats/SiPixelObjects/interface/SiPixelLorentzAngle.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 bool SiPixelLorentzAngle::putLorentzAngle(const uint32_t& detid, float& value) {
   std::map<unsigned int, float>::const_iterator id = m_LA.find(detid);

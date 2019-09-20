@@ -5,6 +5,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalScDetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
+#include <cstdint>
 
 /** \class EEDetId
  *  Crystal/cell identifier class for the ECAL endcap

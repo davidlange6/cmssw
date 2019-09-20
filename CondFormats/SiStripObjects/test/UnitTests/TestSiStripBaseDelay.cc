@@ -8,6 +8,7 @@
 #include <cppunit/CompilerOutputter.h>
 
 #include "CondFormats/SiStripObjects/interface/SiStripBaseDelay.h"
+#include <cstdint>
 
 class TestSiStripBaseDelay : public CppUnit::TestFixture {
 public:

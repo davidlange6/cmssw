@@ -13,6 +13,7 @@
 #include <iomanip>
 #include "DataFormats/MuonDetId/interface/RPCCompDetId.h"
 #include "DataFormats/MuonDetId/interface/MuonSubdetId.h"
+#include <cstdint>
 
 RPCCompDetId::RPCCompDetId() : DetId(DetId::Muon, MuonSubdetId::RPC), _dbname(""), _type(0) {}
 

@@ -6,6 +6,7 @@
 #include "DataFormats/EcalDetId/interface/EcalContainer.h"
 #include "DataFormats/EcalDetId/interface/ESDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 template <typename T>
 class ESCondObjectContainer {

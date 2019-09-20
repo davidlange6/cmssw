@@ -4,6 +4,7 @@
 #include <string>
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
+#include <cstdint>
 
 /// \class L1GctInternJetData
 /// \brief L1 GCT internal jet candidate

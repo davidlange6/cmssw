@@ -9,6 +9,7 @@
 #include <DataFormats/MuonDetId/interface/MuonSubdetId.h>
 
 #include <iostream>
+#include <cstdint>
 
 RPCDetId::RPCDetId() : DetId(DetId::Muon, MuonSubdetId::RPC), trind(0) {}
 

@@ -3,6 +3,7 @@
 
 #include "DataFormats/PatCandidates/interface/CandKinResolution.h"
 #include <string>
+#include <cstdint>
 
 namespace pat {
   namespace helper {

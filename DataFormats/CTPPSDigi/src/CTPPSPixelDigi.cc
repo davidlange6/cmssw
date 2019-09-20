@@ -1,4 +1,5 @@
 #include "DataFormats/CTPPSDigi/interface/CTPPSPixelDigi.h"
+#include <cstdint>
 
 /// row_w 11, column_w 11, adc_w 10 bits
 const uint32_t CTPPSPixelDigi::row_shift = 0;

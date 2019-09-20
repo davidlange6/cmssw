@@ -6,6 +6,7 @@
 #include "DataFormats/CTPPSDetId/interface/CTPPSDiamondDetId.h"
 
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 using namespace std;
 

@@ -5,6 +5,7 @@
 
 #include <DataFormats/CTPPSDetId/interface/CTPPSPixelDetId.h>
 #include <FWCore/Utilities/interface/Exception.h>
+#include <cstdint>
 
 // VeryForward =7, Tracker = 4
 

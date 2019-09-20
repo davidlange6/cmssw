@@ -4,6 +4,7 @@
 #include "CondFormats/RPCObjects/interface/RPCAMCLink.h"
 
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 inline ::uint32_t RPCAMCLink::getId() const { return id_; }
 

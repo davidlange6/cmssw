@@ -1,5 +1,6 @@
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctFibreWord.h"
+#include <cstdint>
 
 L1GctFibreWord::L1GctFibreWord() : data_(0), block_(0), index_(0), bx_(0) {}
 

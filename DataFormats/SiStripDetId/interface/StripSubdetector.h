@@ -8,6 +8,7 @@
 
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/TrackerCommon/interface/SiStripEnums.h"
+#include <cstdint>
 
 class StripSubdetector : public DetId {
 public:

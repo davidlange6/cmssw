@@ -3,6 +3,7 @@
 #include "boost/serialization/export.hpp"
 
 #include "CondFormats/HcalObjects/interface/OOTPileupCorrData.h"
+#include <cstdint>
 
 OOTPileupCorrData::OOTPileupCorrData(const std::vector<OOTPileupCorrDataFcn>& corrs,
                                      const std::vector<uint32_t>& iEtaLimits,

@@ -9,6 +9,7 @@
 #include <ostream>
 #include <cstring>
 #include <iostream>
+#include <cstdint>
 
 CSCDCCStatusDigi::CSCDCCStatusDigi(const uint16_t* header,
                                    const uint16_t* trailer,

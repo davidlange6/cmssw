@@ -1,4 +1,5 @@
 #include "DataFormats/PatCandidates/interface/Flags.h"
+#include <cstdint>
 
 using pat::Flags;
 

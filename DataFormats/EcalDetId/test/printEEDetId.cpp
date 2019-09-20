@@ -6,6 +6,7 @@
 #include <iomanip>
 
 #include "DataFormats/EcalDetId/interface/EEDetId.h"
+#include <cstdint>
 
 using namespace std;
 

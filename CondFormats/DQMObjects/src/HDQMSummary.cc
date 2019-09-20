@@ -2,6 +2,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include <algorithm>
+#include <cstdint>
 
 HDQMSummary::HDQMSummary(std::vector<std::string>& userDBContent) {
   userDBContent_ = userDBContent;

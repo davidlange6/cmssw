@@ -1,6 +1,7 @@
 #include "DataFormats/HcalDetId/interface/HcalCastorDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalGenericDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 HcalCastorDetId::HcalCastorDetId() : DetId() {}
 

@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
 #include <iostream>
+#include <cstdint>
 
 const HGCSiliconDetId HGCSiliconDetId::Undefined(HGCalEE, 0, 0, 0, 0, 0, 0, 0);
 

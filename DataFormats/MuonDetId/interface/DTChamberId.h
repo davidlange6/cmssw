@@ -10,6 +10,7 @@
 #include <DataFormats/DetId/interface/DetId.h>
 
 #include <iosfwd>
+#include <cstdint>
 
 class DTChamberId : public DetId {
 public:

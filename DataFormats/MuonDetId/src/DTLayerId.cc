@@ -8,6 +8,7 @@
 #include <iostream>
 #include <DataFormats/MuonDetId/interface/DTLayerId.h>
 #include <FWCore/Utilities/interface/Exception.h>
+#include <cstdint>
 
 DTLayerId::DTLayerId() : DTSuperLayerId() {}
 

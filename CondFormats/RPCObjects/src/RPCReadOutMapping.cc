@@ -10,6 +10,7 @@
 #include "DataFormats/MuonDetId/interface/RPCDetId.h"
 
 #include <iostream>
+#include <cstdint>
 
 using namespace edm;
 

@@ -12,6 +12,7 @@
 //
 
 #include "CondFormats/RPCObjects/interface/L1RPCConeBuilder.h"
+#include <cstdint>
 
 //
 L1RPCConeBuilder::L1RPCConeBuilder() : m_firstTower(0), m_lastTower(-1) {}

@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGSpike.h"
+#include <cstdint>
 
 EcalTPGSpike::EcalTPGSpike() {}
 

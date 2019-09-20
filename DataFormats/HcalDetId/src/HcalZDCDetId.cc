@@ -1,5 +1,6 @@
 #include "DataFormats/HcalDetId/interface/HcalZDCDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 const int HcalZDCDetId::kZDCChannelMask;
 const int HcalZDCDetId::kZDCSectionMask;

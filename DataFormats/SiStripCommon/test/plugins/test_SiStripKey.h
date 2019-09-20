@@ -5,6 +5,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include <string>
+#include <cstdint>
 
 /**
    @class testSiStripKey 

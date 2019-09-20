@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/HcalLaserDigi.h"
+#include <cstdint>
 
 HcalLaserDigi::HcalLaserDigi() {
   for (int i = 0; i < 32; ++i)

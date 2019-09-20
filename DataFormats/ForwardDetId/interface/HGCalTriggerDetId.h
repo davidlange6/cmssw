@@ -6,6 +6,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/ForwardDetId/interface/ForwardSubdetector.h"
 #include "DataFormats/ForwardDetId/interface/HGCSiliconDetId.h"
+#include <cstdint>
 
 /* \brief description of the bit assigment
    [0:3]   u-coordinate of the cell (measured from the lower left

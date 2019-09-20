@@ -10,6 +10,7 @@
 #include "DataFormats/CTPPSDetId/interface/CTPPSDetId.h"
 
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 using namespace std;
 

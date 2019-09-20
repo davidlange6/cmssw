@@ -1,5 +1,6 @@
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctJetCounts.h"
+#include <cstdint>
 
 using std::endl;
 using std::ostream;

@@ -1,6 +1,7 @@
 #include "CondFormats/RPCObjects/interface/TriggerBoardSpec.h"
 #include <sstream>
 #include <iostream>
+#include <cstdint>
 
 typedef std::vector<LinkConnSpec>::const_iterator IT;
 

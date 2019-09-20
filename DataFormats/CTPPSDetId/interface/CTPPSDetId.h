@@ -16,6 +16,7 @@
 #include <iosfwd>
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 /**
  *\brief Base class for CTPPS detector IDs.

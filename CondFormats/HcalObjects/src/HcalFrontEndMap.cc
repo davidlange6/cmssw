@@ -7,6 +7,7 @@
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalFrontEndId.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 HcalFrontEndMap::HcalFrontEndMap(const HcalFrontEndMapAddons::Helper& helper)
     : mPItems(helper.mPItems.begin(), helper.mPItems.end()) {

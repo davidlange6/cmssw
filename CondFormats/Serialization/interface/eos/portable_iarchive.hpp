@@ -179,7 +179,7 @@ namespace eos {
 	 * care that e.g. a very large int being saved on a 64 bit machine will result
 	 * in a portable_archive_exception if loaded into an int on a 32 bit system.
 	 * A possible workaround to this would be to use fixed types like
-	 * boost::uint64_t in your serialization structures.
+	 * uint64_t in your serialization structures.
 	 *
 	 * \note The class is based on the portable binary example by Robert Ramey and
 	 *	     uses Beman Dawes endian library plus fp_utilities by Johan Rade.

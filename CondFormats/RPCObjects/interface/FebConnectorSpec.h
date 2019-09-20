@@ -9,6 +9,7 @@
 #include "CondFormats/RPCObjects/interface/ChamberLocationSpec.h"
 #include "CondFormats/RPCObjects/interface/FebLocationSpec.h"
 #include <string>
+#include <cstdint>
 
 /** \class FebConnectorSpec 
  * Specifies the input for LinkBoard. In hardware the data goes through

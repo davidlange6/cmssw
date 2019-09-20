@@ -1,5 +1,6 @@
 
 #include "DataFormats/CTPPSDigi/interface/CTPPSPixelDataError.h"
+#include <cstdint>
 
 const std::array<std::string, 14> CTPPSPixelDataError::errorMessages_ = {{
 

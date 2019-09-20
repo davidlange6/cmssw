@@ -7,6 +7,7 @@
 
 #include "CondFormats/SiPixelObjects/interface/SiPixelFedCabling.h"
 #include "CondFormats/SiPixelObjects/interface/PixelFEDCabling.h"
+#include <cstdint>
 
 class SiPixelFedCablingTree final : public SiPixelFedCabling {
 public:

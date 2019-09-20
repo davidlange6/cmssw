@@ -17,6 +17,7 @@
 #include <DataFormats/DetId/interface/DetId.h>
 #include <FWCore/Utilities/interface/Exception.h>
 #include <string>
+#include <cstdint>
 
 class RPCCompDetId : public DetId {
 public:

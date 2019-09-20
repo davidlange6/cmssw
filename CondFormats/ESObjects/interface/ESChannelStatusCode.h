@@ -4,7 +4,6 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include <iostream>
-#include <boost/cstdint.hpp>
 
 class ESChannelStatusCode {
 public:

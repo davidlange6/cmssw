@@ -6,6 +6,7 @@
 #include <string>
 
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 /** \class LTCDigi
  *  Data from the Local Trigger Controller (LTC)

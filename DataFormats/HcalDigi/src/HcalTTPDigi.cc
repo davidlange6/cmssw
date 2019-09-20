@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/HcalTTPDigi.h"
+#include <cstdint>
 
 HcalTTPDigi::HcalTTPDigi() : identifier_(0), samples_(0), presamples_(0), fwVersion_(0), algorithm_(0), lPipe_(0) {
   for (int i = 0; i < 8; i++) {

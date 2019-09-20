@@ -1,3 +1,4 @@
+#include <cstdint>
 #ifndef FWCore_Utilities_typedefs_h
 #define FWCore_Utilities_typedefs_h
 

@@ -8,6 +8,7 @@
  */
 
 #include <DataFormats/MuonDetId/interface/DTLayerId.h>
+#include <cstdint>
 
 class DTWireId : public DTLayerId {
 public:

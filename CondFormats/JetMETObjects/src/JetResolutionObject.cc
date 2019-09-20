@@ -415,5 +415,6 @@ namespace JME {
 
 #ifndef STANDALONE
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 TYPELOOKUP_DATA_REG(JME::JetResolutionObject);
 #endif

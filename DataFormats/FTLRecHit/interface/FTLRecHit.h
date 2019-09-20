@@ -4,6 +4,7 @@
 #include "DataFormats/ForwardDetId/interface/MTDDetId.h"
 #include "DataFormats/CaloRecHit/interface/CaloRecHit.h"
 #include <vector>
+#include <cstdint>
 
 /** \class FTLRecHit
  *  

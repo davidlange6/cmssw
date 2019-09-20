@@ -3,6 +3,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
 #include <iostream>
+#include <cstdint>
 
 const HFNoseTriggerDetId HFNoseTriggerDetId::Undefined(HFNoseTrigger, 0, 0, 0, 0, 0, 0, 0);
 

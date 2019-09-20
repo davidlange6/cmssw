@@ -5,6 +5,7 @@
 
 #include "DataFormats/FEDRawData/interface/FEDTrailer.h"
 #include "DataFormats/FEDRawData/src/fed_trailer.h"
+#include <cstdint>
 
 FEDTrailer::FEDTrailer(const unsigned char* trailer) : theTrailer(reinterpret_cast<const fedt_t*>(trailer)) {}
 

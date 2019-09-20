@@ -1,5 +1,6 @@
 
 #include "FWCore/Utilities/interface/CRC32Calculator.h"
+#include <cstdint>
 
 namespace cms {
 

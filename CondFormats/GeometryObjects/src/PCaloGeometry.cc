@@ -1,5 +1,6 @@
 #include "CondFormats/GeometryObjects/interface/PCaloGeometry.h"
 #include <iostream>
+#include <cstdint>
 
 PCaloGeometry::PCaloGeometry() {}
 

@@ -7,6 +7,7 @@
 #include "DataFormats/EcalRecHit/interface/EcalRecHit.h"
 #include "DataFormats/EcalRecHit/interface/EcalUncalibratedRecHit.h"
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
+#include <cstdint>
 
 class testEcalRecHit : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(testEcalRecHit);

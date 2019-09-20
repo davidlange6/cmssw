@@ -6,6 +6,7 @@
 
 #include <DataFormats/DTDigi/interface/DTDigi.h>
 #include <FWCore/Utilities/interface/Exception.h>
+#include <cstdint>
 
 using namespace std;
 

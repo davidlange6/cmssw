@@ -1,4 +1,5 @@
 #include "DataFormats/PatCandidates/interface/StringMap.h"
+#include <cstdint>
 
 void StringMap::add(const std::string &string, int32_t value) { entries_.push_back(value_type(string, value)); }
 

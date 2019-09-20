@@ -2,6 +2,7 @@
 #define HcalValidationCorr_h
 
 #include "CondFormats/Serialization/interface/Serializable.h"
+#include <cstdint>
 
 /*
 \class HcalValidationCorr

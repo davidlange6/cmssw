@@ -6,6 +6,7 @@
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include <cassert>
 #include <cmath>
+#include <cstdint>
 
 HGCRecHit::HGCRecHit() : CaloRecHit(), flagBits_(0) {}
 

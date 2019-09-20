@@ -14,6 +14,7 @@
 #include <tuple>
 #include <cmath>
 #include <utility>
+#include <cstdint>
 
 namespace std {
   //These functions print a tuple using a provided std::ostream

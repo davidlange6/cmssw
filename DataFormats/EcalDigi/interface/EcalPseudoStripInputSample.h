@@ -1,7 +1,6 @@
 #ifndef ECALPSEUDOSTRIPINPUTSAMPLE_H
 #define ECALPSEUDOSTRIPINPUTSAMPLE_H
 
-#include <boost/cstdint.hpp>
 #include <ostream>
 
 /** \class EcalPseudoStripInputSample

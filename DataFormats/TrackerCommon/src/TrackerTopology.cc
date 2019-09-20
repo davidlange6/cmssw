@@ -3,6 +3,7 @@
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <sstream>
+#include <cstdint>
 
 TrackerTopology::TrackerTopology(const PixelBarrelValues &pxb,
                                  const PixelEndcapValues &pxf,

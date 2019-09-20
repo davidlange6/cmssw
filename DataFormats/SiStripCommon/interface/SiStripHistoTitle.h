@@ -6,6 +6,7 @@
 #include <ostream>
 #include <sstream>
 #include <string>
+#include <cstdint>
 
 class SiStripKey;
 class SiStripHistoTitle;

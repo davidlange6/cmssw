@@ -3,6 +3,7 @@
 
 #include "DataFormats/OnlineMetaData/interface/OnlineLuminosityRecord.h"
 #include "DataFormats/OnlineMetaData/interface/OnlineMetaDataRaw.h"
+#include <cstdint>
 
 OnlineLuminosityRecord::OnlineLuminosityRecord()
     : timestamp_(edm::Timestamp::invalidTimestamp()), instLumi_(0), avgPileUp_(0), lumiSection_(0), lumiNibble_(0) {}

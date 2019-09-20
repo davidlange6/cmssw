@@ -5,6 +5,7 @@
 #include "DataFormats/SiStripCommon/interface/ConstantsForGranularity.h"
 #include "DataFormats/SiStripCommon/interface/SiStripKey.h"
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
+#include <cstdint>
 
 /**
    @class SiStripDetKey

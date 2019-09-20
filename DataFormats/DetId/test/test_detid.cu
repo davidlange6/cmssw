@@ -5,6 +5,7 @@
 #include <assert.h>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
+#include <cstdint>
 
 __global__ void test_gen_detid(DetId* id, uint32_t const rawid) {
   DetId did{rawid};

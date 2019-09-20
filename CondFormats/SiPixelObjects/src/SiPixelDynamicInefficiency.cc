@@ -1,5 +1,6 @@
 #include "CondFormats/SiPixelObjects/interface/SiPixelDynamicInefficiency.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 SiPixelDynamicInefficiency::SiPixelDynamicInefficiency() { theInstLumiScaleFactor_ = -9999; }
 

@@ -18,6 +18,7 @@
 
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/MuonDetId/interface/MuonSubdetId.h"
+#include <cstdint>
 
 class CSCDetId;
 

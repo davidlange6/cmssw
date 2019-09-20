@@ -1,5 +1,6 @@
 #include "DataFormats/HGCRecHit/interface/HGCUncalibratedRecHit.h"
 #include <cmath>
+#include <cstdint>
 
 HGCUncalibratedRecHit::HGCUncalibratedRecHit()
     : amplitude_(0.),

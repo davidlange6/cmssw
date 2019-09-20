@@ -34,6 +34,7 @@
  *******/
 
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 namespace l1t {
   constexpr unsigned char hgcal_bad_codec(0xff);

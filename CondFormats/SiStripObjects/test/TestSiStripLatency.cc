@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
+#include <cstdint>
 
 struct DetIdAndApvs {
   uint32_t detId;

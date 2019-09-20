@@ -4,6 +4,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/ForwardDetId/interface/ForwardSubdetector.h"
 #include <ostream>
+#include <cstdint>
 
 /** 
     @class MTDDetId

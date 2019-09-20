@@ -1,6 +1,7 @@
 #include <algorithm>
 
 #include "CondFormats/HcalObjects/interface/HcalIndexLookup.h"
+#include <cstdint>
 
 void HcalIndexLookup::clear() {
   data_.clear();

@@ -6,6 +6,7 @@
 #include "DataFormats/EcalDetId/interface/EcalContainer.h"
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
 #include "DataFormats/EcalDetId/interface/EEDetId.h"
+#include <cstdint>
 
 template <typename T>
 class EcalCondObjectContainer {

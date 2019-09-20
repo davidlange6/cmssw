@@ -1,4 +1,5 @@
 #include "DataFormats/L1THGCal/interface/HGCalTriggerCell.h"
+#include <cstdint>
 
 using namespace l1t;
 

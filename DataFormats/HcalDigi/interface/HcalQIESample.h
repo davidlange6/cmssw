@@ -2,7 +2,6 @@
 #define DIGIHCAL_HCALQIESAMPLE_H
 
 #include <ostream>
-#include <boost/cstdint.hpp>
 
 static
 #ifdef __CUDA_ARCH__

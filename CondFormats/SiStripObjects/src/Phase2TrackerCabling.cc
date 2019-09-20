@@ -3,6 +3,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <sstream>
+#include <cstdint>
 
 // These functions are used to sort and search the cabling objects
 

@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGPhysicsConst.h"
+#include <cstdint>
 
 EcalTPGPhysicsConst::EcalTPGPhysicsConst() {}
 

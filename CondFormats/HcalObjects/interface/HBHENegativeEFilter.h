@@ -12,6 +12,7 @@
 
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "CondFormats/HcalObjects/interface/PiecewiseScalingPolynomial.h"
+#include <cstdint>
 
 class HBHENegativeEFilter {
 public:

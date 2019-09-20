@@ -11,6 +11,7 @@
 #include <cstdio>
 #include <ctime>
 #include <memory>
+#include <cstdint>
 
 using namespace std;
 

@@ -3,6 +3,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripEnumsAndStrings.h"
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include <iomanip>
+#include <cstdint>
 
 // ----------------------------------------------------------------------------
 //

@@ -17,6 +17,7 @@ Toy EDProducts for testing purposes only.
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace edmtest {
 

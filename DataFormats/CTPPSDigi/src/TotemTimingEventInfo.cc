@@ -5,6 +5,7 @@
  */
 
 #include <DataFormats/CTPPSDigi/interface/TotemTimingEventInfo.h>
+#include <cstdint>
 
 TotemTimingEventInfo::TotemTimingEventInfo(const uint8_t hwId,
                                            const uint64_t l1ATimestamp,

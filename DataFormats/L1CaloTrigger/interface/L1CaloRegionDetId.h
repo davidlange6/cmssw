@@ -2,6 +2,7 @@
 #define L1CALOREGIONDETID_H
 
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 /** \class L1CaloRegionDetId
  *  Cell identifier class for L1 Calo Trigger Regions (4x4 trigger tower sums)

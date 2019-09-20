@@ -4,6 +4,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/TrackerCommon/interface/SiStripEnums.h"
 #include <ostream>
+#include <cstdint>
 
 class SiStripDetId;
 

@@ -11,6 +11,7 @@
 #include <string>
 #include <time.h>
 #include <algorithm>
+#include <cstdint>
 
 using namespace sistrip;
 

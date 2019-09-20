@@ -6,6 +6,7 @@
 #include "DataFormats/HcalDigi/interface/HcalQIESample.h"
 #include <vector>
 #include <ostream>
+#include <cstdint>
 
 /** \class CastorDataFrame
        

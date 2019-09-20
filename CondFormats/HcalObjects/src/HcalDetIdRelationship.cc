@@ -1,4 +1,5 @@
 #include "CondFormats/HcalObjects/interface/HcalDetIdRelationship.h"
+#include <cstdint>
 
 bool hcalEqualDetId(uint32_t id, const DetId& fId) {
   return ((fId.det() == DetId::Hcal && HcalDetId(id) == HcalDetId(fId)) ||

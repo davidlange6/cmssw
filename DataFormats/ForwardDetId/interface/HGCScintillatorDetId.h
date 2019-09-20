@@ -5,6 +5,7 @@
 #include <vector>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/ForwardDetId/interface/ForwardSubdetector.h"
+#include <cstdint>
 
 /* \brief description of the bit assigment
    [0:8]   iphi index wrt x-axis on +z side

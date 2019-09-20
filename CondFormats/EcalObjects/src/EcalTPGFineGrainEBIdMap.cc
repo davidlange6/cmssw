@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGFineGrainEBIdMap.h"
+#include <cstdint>
 
 EcalTPGFineGrainEBIdMap::EcalTPGFineGrainEBIdMap() {}
 

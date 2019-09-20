@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 /** \class HcalZDCDetId
   *  

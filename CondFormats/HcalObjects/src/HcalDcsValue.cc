@@ -1,5 +1,6 @@
 #include "CondFormats/HcalObjects/interface/HcalDcsValue.h"
 #include "DataFormats/HcalDetId/interface/HcalDcsDetId.h"
+#include <cstdint>
 
 HcalDcsValue::HcalDcsValue() : mId(0), mLS(0), mValue(0), mUpperLimit(0), mLowerLimit(0) {}
 

@@ -6,6 +6,7 @@
 #include "CondFormats/SiPixelObjects/interface/PixelROC.h"
 #include "CondFormats/SiPixelObjects/interface/CablingPathToDetUnit.h"
 #include <vector>
+#include <cstdint>
 
 class SiPixelFedCabling {
 public:

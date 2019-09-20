@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <cmath>
+#include <cstdint>
 
 /** \class EcalRecHit
  *  

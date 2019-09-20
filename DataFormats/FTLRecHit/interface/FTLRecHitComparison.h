@@ -2,6 +2,7 @@
 #define DataFormats_FTLRecHitComparison_H
 
 #include "DataFormats/FTLRecHit/interface/FTLRecHit.h"
+#include <cstdint>
 
 //ordering capability mandatory for lazy getter framework
 // Comparison operators

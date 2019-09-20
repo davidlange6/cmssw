@@ -5,6 +5,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include <sstream>
 #include <vector>
+#include <cstdint>
 
 class SiStripEventSummary;
 

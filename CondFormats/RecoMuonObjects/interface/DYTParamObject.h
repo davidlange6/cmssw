@@ -4,6 +4,7 @@
 #include <vector>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "CondFormats/Serialization/interface/Serializable.h"
+#include <cstdint>
 
 class DYTParamObject {
 public:

@@ -8,6 +8,7 @@
 #include "CondFormats/DTObjects/interface/DTRecoUncertainties.h"
 #include "DataFormats/MuonDetId/src/DTWireId.cc"
 #include <iostream>
+#include <cstdint>
 
 using std::cout;
 using std::endl;

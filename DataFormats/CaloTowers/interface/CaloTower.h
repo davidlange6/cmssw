@@ -11,6 +11,7 @@
 #include <cmath>
 
 #include "DataFormats/GeometryVector/interface/GlobalPoint.h"
+#include <cstdint>
 
 /** \class CaloTower
     

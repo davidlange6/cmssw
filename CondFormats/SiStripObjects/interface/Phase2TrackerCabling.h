@@ -5,6 +5,7 @@
 #include <CondFormats/SiStripObjects/interface/Phase2TrackerModule.h>
 #include <vector>
 #include <algorithm>
+#include <cstdint>
 
 class Phase2TrackerCabling {
   typedef std::vector<Phase2TrackerModule> store;

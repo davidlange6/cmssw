@@ -24,6 +24,7 @@
 
 // base class
 #include "DataFormats/L1GlobalTrigger/interface/L1GtfeWord.h"
+#include <cstdint>
 
 // forward declarations
 

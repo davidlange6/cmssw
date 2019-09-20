@@ -1,6 +1,7 @@
 #include "DataFormats/EcalRecHit/interface/EcalUncalibratedRecHit.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <cmath>
+#include <cstdint>
 
 EcalUncalibratedRecHit::EcalUncalibratedRecHit()
     : amplitude_(0.), amplitudeError_(0.), pedestal_(0.), jitter_(0.), chi2_(10000.), flags_(0), aux_(0) {

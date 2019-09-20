@@ -7,6 +7,7 @@
 #include <iostream>
 #include <DataFormats/MuonDetId/interface/DTSuperLayerId.h>
 #include <FWCore/Utilities/interface/Exception.h>
+#include <cstdint>
 
 DTSuperLayerId::DTSuperLayerId() : DTChamberId() {}
 

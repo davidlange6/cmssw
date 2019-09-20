@@ -4,6 +4,7 @@
 #include "DataFormats/HcalRecHit/interface/HBHERecHit.h"
 #include "DataFormats/HcalRecHit/interface/HBHEChannelInfo.h"
 #include "DataFormats/HcalRecHit/interface/CaloRecHitAuxSetter.h"
+#include <cstdint>
 
 //
 // Set rechit "auxiliary words" for the Phase 1 HBHE reco.

@@ -3,6 +3,7 @@
 
 #include "DataFormats/ForwardDetId/interface/MTDDetId.h"
 #include <ostream>
+#include <cstdint>
 
 /** 
     @class ETLDetId

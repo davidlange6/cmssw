@@ -15,6 +15,7 @@
 #include "DataFormats/TrackReco/interface/HitPattern.h"
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/PatCandidates/interface/PFIsolation.h"
+#include <cstdint>
 
 namespace pat {
 

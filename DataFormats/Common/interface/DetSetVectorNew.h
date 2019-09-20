@@ -744,6 +744,7 @@ namespace edmNew {
 }  // namespace edmNew
 
 #include "DataFormats/Common/interface/ContainerMaskTraits.h"
+#include <cstdint>
 
 namespace edm {
   template <typename T>

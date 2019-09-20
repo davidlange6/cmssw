@@ -3,6 +3,7 @@
 // Description: Numbering scheme packing for test beam hadron calorimeter
 ///////////////////////////////////////////////////////////////////////////////
 #include "DataFormats/HcalDetId/interface/HcalTestNumbering.h"
+#include <cstdint>
 
 uint32_t HcalTestNumbering::packHcalIndex(int det, int z, int depth, int eta, int phi, int lay) {
   uint32_t idx = (det & 15) << 28;  //bits 28-31

@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGWeightIdMap.h"
+#include <cstdint>
 
 EcalTPGWeightIdMap::EcalTPGWeightIdMap() {}
 

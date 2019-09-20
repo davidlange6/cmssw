@@ -17,6 +17,7 @@
 #include <iosfwd>
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 /**
  *\brief Detector ID class for TOTEM Si strip detectors.

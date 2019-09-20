@@ -2,6 +2,7 @@
 
 #include <ostream>
 #include <sstream>
+#include <cstdint>
 
 RPCDCCLink::RPCDCCLink() : id_(0x0) {}
 

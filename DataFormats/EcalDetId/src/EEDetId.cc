@@ -476,6 +476,7 @@ int EEDetId::distanceX(const EEDetId& a, const EEDetId& b) { return abs(a.ix() -
 int EEDetId::distanceY(const EEDetId& a, const EEDetId& b) { return abs(a.iy() - b.iy()); }
 
 #include <ostream>
+#include <cstdint>
 std::ostream& operator<<(std::ostream& s, const EEDetId& id) {
   return s << "(EE iz " << ((id.zside() > 0) ? ("+ ") : ("- ")) << " ix " << id.ix() << " , iy " << id.iy() << ')';
 }

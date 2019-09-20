@@ -8,6 +8,7 @@
 #include "DataFormats/HcalDetId/interface/HcalTrigTowerDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalZDCDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalFrontEndId.h"
+#include <cstdint>
 
 /*****************************Classes****************************/
 

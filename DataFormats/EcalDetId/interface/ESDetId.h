@@ -5,6 +5,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 /** \class ESDetId
 

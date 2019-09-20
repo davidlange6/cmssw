@@ -1,4 +1,5 @@
 #include "FWCore/Utilities/interface/Adler32Calculator.h"
+#include <cstdint>
 
 namespace cms {
 

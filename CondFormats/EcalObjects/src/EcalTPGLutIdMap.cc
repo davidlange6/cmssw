@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGLutIdMap.h"
+#include <cstdint>
 
 EcalTPGLutIdMap::EcalTPGLutIdMap() {}
 

@@ -2,7 +2,6 @@
 #define DATAFORMATS_HCALDIGI_HCALHISTOGRAMDIGI_H 1
 
 #include <ostream>
-#include <boost/cstdint.hpp>
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 
 /** \class HcalHistogramDigi

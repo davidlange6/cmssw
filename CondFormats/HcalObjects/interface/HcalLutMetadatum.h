@@ -2,6 +2,7 @@
 #define HcalLutMetadatum_h
 
 #include "CondFormats/Serialization/interface/Serializable.h"
+#include <cstdint>
 
 /*
 \class HcalLutMetadatum

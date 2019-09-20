@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 using namespace sipixelobjects;

@@ -4,6 +4,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripDetSummary.h"
 
 #include <algorithm>
+#include <cstdint>
 
 bool SiStripApvGain::put(const uint32_t& DetId, Range input) {
   // put in SiStripApvGain of DetId

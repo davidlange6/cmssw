@@ -1,4 +1,5 @@
 #include "CondFormats/CTPPSReadoutObjects/src/headers.h"
+#include <cstdint>
 
 namespace CondFormats_CTPPSPixelObjects {
   struct dictionary {

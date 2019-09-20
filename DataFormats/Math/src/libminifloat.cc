@@ -1,4 +1,5 @@
 #include "DataFormats/Math/interface/libminifloat.h"
+#include <cstdint>
 
 namespace {
   MiniFloatConverter dummy;  // so the constructor is called

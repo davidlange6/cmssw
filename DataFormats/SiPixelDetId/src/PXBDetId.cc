@@ -1,4 +1,5 @@
 #include "DataFormats/SiPixelDetId/interface/PXBDetId.h"
+#include <cstdint>
 
 PXBDetId::PXBDetId() : DetId() {}
 

@@ -21,6 +21,7 @@
 #include "CondFormats/SiPixelObjects/interface/PixelROC.h"
 #include "CondFormats/SiPixelObjects/interface/LocalPixel.h"
 #include "CondFormats/SiStripObjects/interface/SiStripDetVOff.h"
+#include <cstdint>
 
 namespace edm {
   class EventSetup;

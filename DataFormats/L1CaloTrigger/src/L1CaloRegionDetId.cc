@@ -1,6 +1,7 @@
 
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
+#include <cstdint>
 
 // default constructor - null DetId
 L1CaloRegionDetId::L1CaloRegionDetId() : DetId() {}

@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/ZDCDataFrame.h"
+#include <cstdint>
 
 ZDCDataFrame::ZDCDataFrame() : id_(0), size_(0), hcalPresamples_(0) {}
 

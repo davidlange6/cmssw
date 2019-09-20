@@ -4,7 +4,6 @@
 #define __l1t_emtf_MTF7Trailer_h__
 
 #include <vector>
-#include <boost/cstdint.hpp>
 
 namespace l1t {
   namespace emtf {

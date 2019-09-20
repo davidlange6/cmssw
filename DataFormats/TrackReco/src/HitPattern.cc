@@ -13,6 +13,7 @@
 #include "FWCore/Utilities/interface/Likely.h"
 
 #include <bitset>
+#include <cstdint>
 
 using namespace reco;
 

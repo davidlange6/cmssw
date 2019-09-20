@@ -1,4 +1,5 @@
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 // Will fail compilation if any assert is violated.
 int main() {

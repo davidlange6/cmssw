@@ -1,6 +1,7 @@
 #include "DataFormats/HcalDetId/interface/HcalTrigTowerDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 const HcalTrigTowerDetId HcalTrigTowerDetId::Undefined(0x4a000000u);
 

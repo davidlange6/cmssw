@@ -4,6 +4,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include "CondFormats/EcalObjects/interface/EcalCondObjectContainer.h"
+#include <cstdint>
 
 struct EcalTPGLinearizationConstant {
   EcalTPGLinearizationConstant() : mult_x12(0), mult_x6(0), mult_x1(0), shift_x12(0), shift_x6(0), shift_x1(0) {}

@@ -4,6 +4,7 @@
 #include <cmath>
 #include <sys/types.h>
 #include "math_private.h"
+#include <cstdint>
 
 namespace edm 
 {

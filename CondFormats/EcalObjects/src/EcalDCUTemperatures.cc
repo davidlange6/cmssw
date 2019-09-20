@@ -5,6 +5,7 @@
  **/
 
 #include "CondFormats/EcalObjects/interface/EcalDCUTemperatures.h"
+#include <cstdint>
 
 EcalDCUTemperatures::EcalDCUTemperatures() {}
 

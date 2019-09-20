@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
 #include <iostream>
+#include <cstdint>
 
 const uint32_t HGCTriggerDetId::cell_shift;
 const uint32_t HGCTriggerDetId::cell_mask;

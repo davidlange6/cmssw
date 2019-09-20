@@ -1,6 +1,7 @@
 #include "CondFormats/CTPPSReadoutObjects/interface/CTPPSPixelGainCalibrations.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 void CTPPSPixelGainCalibrations::setGainCalibration(const uint32_t& detid, const CTPPSPixelGainCalibration& PixGains) {
   if (detid != PixGains.getDetId()) {                  // if no detid set in the pixgains

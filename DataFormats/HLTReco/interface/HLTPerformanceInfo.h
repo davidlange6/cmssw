@@ -7,6 +7,7 @@
 
 #include "FWCore/Utilities/interface/typedefs.h"
 #include "DataFormats/Common/interface/HLTPathStatus.h"
+#include <cstdint>
 
 class HLTPerformanceInfo {
 public:

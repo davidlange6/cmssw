@@ -134,6 +134,7 @@
 #include <iostream>
 #include <ostream>
 #include <memory>
+#include <cstdint>
 
 class TrackerTopology;
 

@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
 #include <iostream>
+#include <cstdint>
 
 const HGCScintillatorDetId HGCScintillatorDetId::Undefined(0, 0, 0, 0, false);
 

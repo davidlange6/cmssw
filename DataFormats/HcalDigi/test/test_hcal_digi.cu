@@ -10,6 +10,7 @@
 #include "DataFormats/HcalDigi/interface/QIE11DataFrame.h"
 #include "DataFormats/HcalDigi/interface/HcalDigiCollections.h"
 #include "DataFormats/Common/interface/DataFrame.h"
+#include <cstdint>
 
 __global__ void kernel_test_hcal_qiesample(HcalQIESample *sample, uint16_t value) {
   printf("kernel: testing hcal qie sampel\n");

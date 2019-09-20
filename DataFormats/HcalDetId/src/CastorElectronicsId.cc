@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDetId/interface/CastorElectronicsId.h"
+#include <cstdint>
 
 CastorElectronicsId::CastorElectronicsId() { castorElectronicsId_ = 0xffffffffu; }
 

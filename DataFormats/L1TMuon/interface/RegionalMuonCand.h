@@ -3,6 +3,7 @@
 
 #include "RegionalMuonCandFwd.h"
 #include <map>
+#include <cstdint>
 
 namespace l1t {
   class RegionalMuonCand {

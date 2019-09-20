@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGStripStatus.h"
+#include <cstdint>
 
 EcalTPGStripStatus::EcalTPGStripStatus() {}
 

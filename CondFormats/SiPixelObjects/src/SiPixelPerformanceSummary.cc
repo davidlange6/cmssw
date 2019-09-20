@@ -3,6 +3,7 @@
 #include "CondFormats/SiPixelObjects/interface/SiPixelPerformanceSummary.h"
 
 #include <algorithm>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

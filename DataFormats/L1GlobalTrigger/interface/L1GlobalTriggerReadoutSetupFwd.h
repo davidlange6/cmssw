@@ -25,6 +25,7 @@
 //
 //   for compatibility reasons; L1GtObject moved to separate file
 #include "DataFormats/L1GlobalTrigger/interface/L1GtObject.h"
+#include <cstdint>
 
 // forward declarations
 

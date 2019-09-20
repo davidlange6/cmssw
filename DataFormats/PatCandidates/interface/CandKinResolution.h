@@ -5,6 +5,7 @@
 #include "DataFormats/Math/interface/LorentzVector.h"
 #include "DataFormats/Candidate/interface/CandidateFwd.h"
 #include "DataFormats/Common/interface/ValueMap.h"
+#include <cstdint>
 
 namespace pat {
   class CandKinResolution {

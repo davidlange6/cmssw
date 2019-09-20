@@ -25,6 +25,7 @@
 #include <map>
 #include <algorithm>
 #include <iosfwd>
+#include <cstdint>
 
 /** DCC identifier type */
 typedef int32_t DCCIdType;

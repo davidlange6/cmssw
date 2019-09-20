@@ -20,6 +20,7 @@
 
 // user include files
 #include "FWCore/Utilities/interface/EDMException.h"
+#include <cstdint>
 
 // constructors
 

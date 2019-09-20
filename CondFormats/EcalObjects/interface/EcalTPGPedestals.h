@@ -4,6 +4,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include "CondFormats/EcalObjects/interface/EcalCondObjectContainer.h"
+#include <cstdint>
 
 struct EcalTPGPedestal {
   EcalTPGPedestal() : mean_x12(0), mean_x6(0), mean_x1(0) {}

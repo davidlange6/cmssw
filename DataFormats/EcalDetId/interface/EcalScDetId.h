@@ -9,6 +9,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
 #include "FWCore/Utilities/interface/thread_safety_macros.h"
+#include <cstdint>
 
 /** \class EcalScDetId
  *  Supercrystal identifier class for the ECAL endcap.

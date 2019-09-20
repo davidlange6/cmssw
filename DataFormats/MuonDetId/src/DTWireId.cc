@@ -8,6 +8,7 @@
 #include <iostream>
 #include <DataFormats/MuonDetId/interface/DTWireId.h>
 #include <FWCore/Utilities/interface/Exception.h>
+#include <cstdint>
 
 DTWireId::DTWireId() : DTLayerId() {}
 

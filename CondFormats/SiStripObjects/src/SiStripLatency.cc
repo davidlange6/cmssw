@@ -6,6 +6,7 @@
 #include <iterator>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 bool SiStripLatency::put(const uint32_t detId, const uint16_t apv, const uint16_t latency, const uint16_t mode) {
   if (detId > 536870911) {

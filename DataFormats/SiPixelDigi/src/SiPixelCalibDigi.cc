@@ -2,6 +2,7 @@
 #include "DataFormats/SiPixelDigi/interface/SiPixelCalibDigi.h"
 
 #include <algorithm>
+#include <cstdint>
 
 // the actual data container is a simply a collection of SiPixelCalibDigi objects
 

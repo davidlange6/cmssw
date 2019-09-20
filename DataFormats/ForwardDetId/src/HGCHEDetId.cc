@@ -1,6 +1,7 @@
 #include "DataFormats/ForwardDetId/interface/HGCHEDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
+#include <cstdint>
 
 const HGCHEDetId HGCHEDetId::Undefined(ForwardEmpty, 0, 0, 0, 0, 0);
 

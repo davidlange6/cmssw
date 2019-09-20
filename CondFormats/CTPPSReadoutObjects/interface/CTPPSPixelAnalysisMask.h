@@ -12,6 +12,7 @@
 
 #include "CondFormats/Serialization/interface/Serializable.h"
 #include "CondFormats/CTPPSReadoutObjects/interface/CTPPSPixelIndices.h"
+#include <cstdint>
 
 /**
  *\brief Contains data on masked channels of a ROC

@@ -12,6 +12,7 @@
 
 #include <iosfwd>
 #include <iostream>
+#include <cstdint>
 
 class CTPPSPixelDetId : public CTPPSDetId {
 public:

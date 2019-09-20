@@ -2,6 +2,7 @@
 
 #include <ostream>
 #include <sstream>
+#include <cstdint>
 
 RPCLBLink::RPCLBLink() : id_(0x0) {}
 

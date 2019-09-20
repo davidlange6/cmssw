@@ -3,6 +3,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripDetSummary.h"
 
 #include <algorithm>
+#include <cstdint>
 
 void SiStripDetVOff::setBits(uint32_t& enDetId, const int HVoff, const int LVoff) {
   if (LVoff != -1) {

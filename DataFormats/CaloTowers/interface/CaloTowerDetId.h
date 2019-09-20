@@ -2,6 +2,7 @@
 #define DATAFORMATS_CALOTOWERS_CALOTOWERDETID_H 1
 
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 /** \class CaloTowerDetId
  *   

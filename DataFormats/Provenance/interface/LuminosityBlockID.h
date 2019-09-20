@@ -31,7 +31,7 @@ namespace edm {
   class LuminosityBlockID {
   public:
     LuminosityBlockID() : run_(invalidRunNumber), luminosityBlock_(invalidLuminosityBlockNumber) {}
-    explicit LuminosityBlockID(boost::uint64_t id);
+    explicit LuminosityBlockID(uint64_t id);
     LuminosityBlockID(RunNumber_t iRun, LuminosityBlockNumber_t iLuminosityBlock)
         : run_(iRun), luminosityBlock_(iLuminosityBlock) {}
 
@@ -41,7 +41,7 @@ namespace edm {
     RunNumber_t run() const { return run_; }
     LuminosityBlockNumber_t luminosityBlock() const { return luminosityBlock_; }
 
-    boost::uint64_t value() const;
+    uint64_t value() const;
 
     //moving from one LuminosityBlockID to another one
     LuminosityBlockID next() const {

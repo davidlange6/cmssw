@@ -11,6 +11,7 @@
 #include <ostream>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
+#include <cstdint>
 
 class HcalGenericDetId : public DetId {
 public:

@@ -4,6 +4,7 @@
 #include <iosfwd>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/ForwardDetId/interface/ForwardSubdetector.h"
+#include <cstdint>
 
 class HGCHEDetId : public DetId {
 public:

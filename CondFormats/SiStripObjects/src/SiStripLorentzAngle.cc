@@ -1,6 +1,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripLorentzAngle.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
+#include <cstdint>
 
 bool SiStripLorentzAngle::putLorentzAngle(const uint32_t& detid, float value) {
   std::map<unsigned int, float>::const_iterator id = m_LA.find(detid);

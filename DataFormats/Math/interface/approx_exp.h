@@ -34,6 +34,7 @@ Not sure it makes that much sense in the vector context.
 // see the comments in the code for the accuracy you get from a given degree
 
 #include "DataFormats/Math/interface/approx_math.h"
+#include <cstdint>
 
 template <int DEGREE>
 constexpr float approx_expf_P(float p);

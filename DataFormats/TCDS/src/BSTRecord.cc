@@ -1,5 +1,6 @@
 #include "DataFormats/TCDS/interface/BSTRecord.h"
 #include "DataFormats/TCDS/interface/TCDSRaw.h"
+#include <cstdint>
 
 BSTRecord::BSTRecord()
     : m_gpstime(0),

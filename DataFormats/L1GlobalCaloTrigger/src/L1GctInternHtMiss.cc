@@ -1,4 +1,5 @@
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctInternHtMiss.h"
+#include <cstdint>
 
 // PUBLIC METHODS
 

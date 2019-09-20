@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGGroups.h"
+#include <cstdint>
 
 EcalTPGGroups::EcalTPGGroups() {}
 

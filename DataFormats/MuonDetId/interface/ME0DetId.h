@@ -12,6 +12,7 @@
 
 #include <iosfwd>
 #include <iostream>
+#include <cstdint>
 
 class ME0DetId : public DetId {
 public:

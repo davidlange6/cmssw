@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGFineGrainTowerEE.h"
+#include <cstdint>
 
 EcalTPGFineGrainTowerEE::EcalTPGFineGrainTowerEE() {}
 

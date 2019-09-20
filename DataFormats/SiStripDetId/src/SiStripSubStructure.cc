@@ -14,6 +14,7 @@
 #include <algorithm>
 
 #include "DataFormats/SiStripDetId/interface/SiStripSubStructure.h"
+#include <cstdint>
 
 void SiStripSubStructure::getTIBDetectors(const std::vector<uint32_t> &inputDetRawIds,
                                           std::vector<uint32_t> &tibDetRawIds,

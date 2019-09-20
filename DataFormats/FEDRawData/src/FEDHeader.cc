@@ -5,6 +5,7 @@
 
 #include "DataFormats/FEDRawData/interface/FEDHeader.h"
 #include "DataFormats/FEDRawData/src/fed_header.h"
+#include <cstdint>
 
 FEDHeader::FEDHeader(const unsigned char* header) : theHeader(reinterpret_cast<const fedh_t*>(header)) {}
 

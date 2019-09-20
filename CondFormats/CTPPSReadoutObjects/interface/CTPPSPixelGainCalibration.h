@@ -23,6 +23,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <vector>
+#include <cstdint>
 
 class CTPPSPixelGainCalibration {
   friend class CTPPSPixelGainCalibrations;

@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <cmath>
+#include <cstdint>
 
 namespace l1t {
   class BxBlockHeader {

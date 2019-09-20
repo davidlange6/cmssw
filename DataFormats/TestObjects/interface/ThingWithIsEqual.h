@@ -2,6 +2,7 @@
 #define DataFormats_TestObjects_ThingWithIsEqual_h
 
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 namespace edmtest {
 

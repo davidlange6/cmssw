@@ -4,6 +4,7 @@
 #include <ostream>
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
 #include "DataFormats/HcalDetId/interface/HcalOtherDetId.h"
+#include <cstdint>
 
 /** \class HcalCalibDetId
   *  

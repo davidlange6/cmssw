@@ -13,6 +13,7 @@
 #include <iosfwd>
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 /**
  *\brief Detector ID class for CTPPS Totem Timing detectors.

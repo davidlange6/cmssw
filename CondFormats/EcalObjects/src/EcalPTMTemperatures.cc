@@ -5,6 +5,7 @@
  **/
 
 #include "CondFormats/EcalObjects/interface/EcalPTMTemperatures.h"
+#include <cstdint>
 
 EcalPTMTemperatures::EcalPTMTemperatures() {}
 

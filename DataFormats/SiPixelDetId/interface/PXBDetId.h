@@ -4,6 +4,7 @@
 #include <ostream>
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
+#include <cstdint>
 
 /** 
  *  Det identifier class for the PixelBarrel

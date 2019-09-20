@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <cstdint>
 
 using namespace std;
 

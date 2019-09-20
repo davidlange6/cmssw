@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cmath>
 #include <limits>
+#include <cstdint>
 
 namespace {
   constexpr float timereso_max = 10000;

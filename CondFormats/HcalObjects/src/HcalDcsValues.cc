@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <set>
 #include "CondFormats/HcalObjects/interface/HcalDcsValues.h"
+#include <cstdint>
 
 HcalDcsValues::HcalDcsValues()
     : mHBsorted(false), mHEsorted(false), mHO0sorted(false), mHO12sorted(false), mHFsorted(false) {}

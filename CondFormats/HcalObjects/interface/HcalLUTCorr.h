@@ -2,6 +2,7 @@
 #define HcalLUTCorr_h
 
 #include "CondFormats/Serialization/interface/Serializable.h"
+#include <cstdint>
 
 /*
 \class HcalLUTCorr

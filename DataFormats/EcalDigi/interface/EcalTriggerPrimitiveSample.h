@@ -1,7 +1,6 @@
 #ifndef ECALTRIGGERPRIMITIVESAMPLE_H
 #define ECALTRIGGERPRIMITIVESAMPLE_H 1
 
-#include <boost/cstdint.hpp>
 #include <ostream>
 
 /** \class EcalTriggerPrimitiveSample

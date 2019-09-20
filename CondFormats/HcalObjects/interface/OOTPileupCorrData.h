@@ -10,6 +10,7 @@
 
 #include "CondFormats/HcalObjects/interface/AbsOOTPileupCorrection.h"
 #include "CondFormats/HcalObjects/interface/OOTPileupCorrDataFcn.h"
+#include <cstdint>
 
 class OOTPileupCorrData : public AbsOOTPileupCorrection {
 public:

@@ -1,4 +1,5 @@
 #include "DataFormats/GEMDigi/interface/GEMGEBStatusDigi.h"
+#include <cstdint>
 
 GEMGEBStatusDigi::GEMGEBStatusDigi(uint32_t ZeroSup,
                                    uint16_t Vwh,

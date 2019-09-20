@@ -2,6 +2,7 @@
 #include <climits>
 
 #include "CondFormats/HcalObjects/interface/HBHENegativeEFilter.h"
+#include <cstdint>
 
 HBHENegativeEFilter::HBHENegativeEFilter(const std::vector<PiecewiseScalingPolynomial>& a1vec,
                                          const std::vector<PiecewiseScalingPolynomial>& a2vec,

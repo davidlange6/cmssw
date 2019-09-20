@@ -1,6 +1,7 @@
 #include "CondFormats/Serialization/interface/Test.h"
 
 #include "CondFormats/EcalObjects/src/headers.h"
+#include <cstdint>
 
 int main() {
   testSerialization<EcalADCToGeVConstant>();

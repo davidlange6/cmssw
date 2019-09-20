@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdint>
 
 //knower of all things tracker geometry
 //flexible replacement for PXBDetId and friends

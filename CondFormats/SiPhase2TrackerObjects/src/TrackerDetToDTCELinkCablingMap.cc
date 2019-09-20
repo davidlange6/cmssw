@@ -4,6 +4,7 @@
 #include <utility>
 #include <algorithm>
 #include <iostream>
+#include <cstdint>
 
 TrackerDetToDTCELinkCablingMap::TrackerDetToDTCELinkCablingMap() {}
 

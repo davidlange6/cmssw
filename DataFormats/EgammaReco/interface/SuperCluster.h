@@ -13,6 +13,7 @@
 #include "DataFormats/CaloRecHit/interface/CaloCluster.h"
 #include "DataFormats/CaloRecHit/interface/CaloClusterFwd.h"
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 namespace reco {
   class SuperCluster : public CaloCluster {

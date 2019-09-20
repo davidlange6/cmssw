@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
+#include <cstdint>
 
 namespace test {
   namespace TestHitPattern {

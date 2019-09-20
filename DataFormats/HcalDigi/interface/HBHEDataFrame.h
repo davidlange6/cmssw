@@ -5,6 +5,7 @@
 #include "DataFormats/HcalDetId/interface/HcalElectronicsId.h"
 #include "DataFormats/HcalDigi/interface/HcalQIESample.h"
 #include <ostream>
+#include <cstdint>
 
 /** \class HBHEDataFrame
       

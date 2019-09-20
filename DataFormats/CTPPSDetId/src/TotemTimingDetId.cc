@@ -5,6 +5,7 @@
 
 #include "DataFormats/CTPPSDetId/interface/TotemTimingDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

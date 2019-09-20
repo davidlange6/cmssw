@@ -4,6 +4,7 @@
 #include "DataFormats/TrackerRecHit2D/interface/FastTrackerRecHit.h"
 #include "DataFormats/TrackerRecHit2D/interface/FastSingleTrackerRecHit.h"
 #include "DataFormats/TrackerRecHit2D/interface/ProjectedSiStripRecHit2D.h"
+#include <cstdint>
 
 class FastProjectedTrackerRecHit : public FastTrackerRecHit {
 public:

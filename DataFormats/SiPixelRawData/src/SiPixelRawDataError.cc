@@ -1,4 +1,5 @@
 #include "DataFormats/SiPixelRawData/interface/SiPixelRawDataError.h"
+#include <cstdint>
 
 //---------------------------------------------------------------------------
 //!  \class SiPixelRawDataError

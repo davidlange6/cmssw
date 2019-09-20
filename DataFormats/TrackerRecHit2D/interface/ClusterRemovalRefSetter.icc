@@ -1,4 +1,5 @@
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
+#include <cstdint>
 
 ClusterRemovalRefSetter::ClusterRemovalRefSetter(const edm::Event &iEvent, const edm::InputTag &tag) {
   edm::Handle<reco::ClusterRemovalInfo> hCRI;

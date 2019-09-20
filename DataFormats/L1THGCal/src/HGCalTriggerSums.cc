@@ -1,4 +1,5 @@
 #include "DataFormats/L1THGCal/interface/HGCalTriggerSums.h"
+#include <cstdint>
 
 using namespace l1t;
 

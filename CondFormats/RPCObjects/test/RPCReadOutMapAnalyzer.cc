@@ -12,6 +12,7 @@
 #include "CondFormats/DataRecord/interface/RPCReadOutMappingRcd.h"
 #include "CondFormats/RPCObjects/interface/RPCEMap.h"
 #include "CondFormats/DataRecord/interface/RPCEMapRcd.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

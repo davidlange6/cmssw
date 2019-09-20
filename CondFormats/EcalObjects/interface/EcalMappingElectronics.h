@@ -8,6 +8,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include "CondFormats/EcalObjects/interface/EcalCondObjectContainer.h"
+#include <cstdint>
 
 struct EcalMappingElement {
   EcalMappingElement() : electronicsid(0), triggerid(0) {}

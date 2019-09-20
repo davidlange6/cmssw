@@ -22,6 +22,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <cstdint>
 
 using namespace sipixelobjects;
 

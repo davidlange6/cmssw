@@ -7,6 +7,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripEnumsAndStrings.h"
 #include <iostream>
 #include <iomanip>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 //

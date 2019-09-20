@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/CastorDataFrame.h"
+#include <cstdint>
 
 CastorDataFrame::CastorDataFrame() : id_(0), size_(0), hcalPresamples_(0) {}
 

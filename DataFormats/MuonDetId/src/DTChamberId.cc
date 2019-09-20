@@ -8,6 +8,7 @@
 #include "DataFormats/MuonDetId/interface/MuonSubdetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
+#include <cstdint>
 
 using namespace std;
 

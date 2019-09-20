@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iomanip>
 #include "CondFormats/SiStripObjects/interface/SiStripDetSummary.h"
+#include <cstdint>
 
 SiStripNoises::SiStripNoises(const SiStripNoises& input) {
   v_noises.clear();

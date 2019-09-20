@@ -6,6 +6,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

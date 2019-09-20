@@ -8,6 +8,7 @@
  */
 
 #include <DataFormats/MuonDetId/interface/DTChamberId.h>
+#include <cstdint>
 
 class DTSuperLayerId : public DTChamberId {
 public:

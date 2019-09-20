@@ -1,4 +1,5 @@
 #include "CondFormats/HcalObjects/src/headers.h"
+#include <cstdint>
 
 namespace CondFormats_HcalObjects {
   struct dictionary {

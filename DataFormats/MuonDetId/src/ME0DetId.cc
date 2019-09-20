@@ -4,6 +4,7 @@
 
 #include <DataFormats/MuonDetId/interface/ME0DetId.h>
 #include <DataFormats/MuonDetId/interface/MuonSubdetId.h>
+#include <cstdint>
 
 ME0DetId::ME0DetId() : DetId(DetId::Muon, MuonSubdetId::ME0) {}
 

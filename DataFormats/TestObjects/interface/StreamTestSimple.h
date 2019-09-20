@@ -3,6 +3,7 @@
 
 #include "DataFormats/Common/interface/SortedCollection.h"
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 namespace edmtestprod {
   struct Simple {

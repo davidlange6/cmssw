@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <cstring>
 #include <algorithm>
+#include <cstdint>
 
 //
 // Constructors

@@ -5,6 +5,7 @@
 #include <algorithm>
 
 #include "CondFormats/Serialization/interface/Serializable.h"
+#include <cstdint>
 
 class Phase2TrackerModule {
 public:

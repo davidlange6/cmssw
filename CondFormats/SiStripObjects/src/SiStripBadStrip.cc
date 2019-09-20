@@ -3,6 +3,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripDetSummary.h"
 
 #include <algorithm>
+#include <cstdint>
 
 bool SiStripBadStrip::put(const uint32_t& DetId, Range input) {
   // put in SiStripBadStrip::v_badstrips of DetId

@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/HcalCalibDataFrame.h"
+#include <cstdint>
 
 HcalCalibDataFrame::HcalCalibDataFrame() : id_(0), size_(0), hcalPresamples_(0) {}
 

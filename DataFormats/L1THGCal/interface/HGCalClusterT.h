@@ -15,6 +15,7 @@
 #include "Math/Vector3D.h"
 
 #include <unordered_map>
+#include <cstdint>
 
 namespace l1t {
   template <class C>

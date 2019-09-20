@@ -1,4 +1,5 @@
 #include "DataFormats/LTCDigi/interface/LTCDigi.h"
+#include <cstdint>
 
 LTCDigi::LTCDigi(const unsigned char *data) {
   // six 64 bit words

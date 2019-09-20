@@ -3,6 +3,7 @@
 
 #include "DataFormats/Math/interface/libminifloat.h"
 #include "FWCore/Utilities/interface/isFinite.h"
+#include <cstdint>
 
 class testMiniFloat : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(testMiniFloat);

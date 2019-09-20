@@ -2,6 +2,7 @@
 #define CondFormatsRPCObjectsDBSpecToDetUnit_H
 
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 struct ChamberLocationSpec;
 struct FebLocationSpec;
 

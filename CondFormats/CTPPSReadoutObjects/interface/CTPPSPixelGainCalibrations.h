@@ -4,6 +4,7 @@
 #include "CondFormats/CTPPSReadoutObjects/interface/CTPPSPixelGainCalibration.h"
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class CTPPSPixelGainCalibrations {
 public:

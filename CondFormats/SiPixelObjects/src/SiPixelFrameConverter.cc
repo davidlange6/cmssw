@@ -7,6 +7,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include <sstream>
+#include <cstdint>
 
 using namespace std;
 using namespace sipixelobjects;

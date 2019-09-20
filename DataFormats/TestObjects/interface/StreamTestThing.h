@@ -4,6 +4,7 @@
 #include "FWCore/Utilities/interface/typedefs.h"
 
 #include <vector>
+#include <cstdint>
 
 namespace edmtestprod {
 

@@ -1,6 +1,7 @@
 #include "DataFormats/HcalDetId/interface/HcalOtherDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include <iostream>
+#include <cstdint>
 HcalOtherDetId::HcalOtherDetId() {}
 
 HcalOtherDetId::HcalOtherDetId(uint32_t rawid) : DetId(rawid) {}

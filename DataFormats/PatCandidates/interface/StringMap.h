@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>  // for std::pair
+#include <cstdint>
 
 class StringMap {
 public:

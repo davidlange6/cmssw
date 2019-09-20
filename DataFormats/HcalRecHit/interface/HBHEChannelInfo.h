@@ -5,6 +5,7 @@
 
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/HcalRecHit/interface/HcalSpecialTimes.h"
+#include <cstdint>
 
 /** \class HBHEChannelInfo
  *

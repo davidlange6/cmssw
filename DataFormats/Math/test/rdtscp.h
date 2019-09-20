@@ -5,6 +5,7 @@
     !defined(__powerpc__)
 #include <x86intrin.h>
 #include <cpuid.h>
+#include <cstdint>
 #ifdef __clang__
 bool has_rdtscp() { return true; }
 /** CPU cycles since processor startup */

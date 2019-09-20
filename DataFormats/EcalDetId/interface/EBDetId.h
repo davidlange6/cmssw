@@ -7,6 +7,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
 #include "DataFormats/EcalDetId/interface/EcalTrigTowerDetId.h"
+#include <cstdint>
 
 /** \class EBDetId
  *  Crystal identifier class for the ECAL barrel

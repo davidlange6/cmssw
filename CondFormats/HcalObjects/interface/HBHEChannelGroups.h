@@ -8,6 +8,7 @@
 #include "boost/serialization/vector.hpp"
 
 #include "CondFormats/HcalObjects/interface/HBHELinearMap.h"
+#include <cstdint>
 
 class HBHEChannelGroups {
 public:

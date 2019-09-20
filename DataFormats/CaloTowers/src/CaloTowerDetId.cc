@@ -1,6 +1,7 @@
 #include "DataFormats/CaloTowers/interface/CaloTowerDetId.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include <iostream>
+#include <cstdint>
 
 CaloTowerDetId::CaloTowerDetId() : DetId() {}
 

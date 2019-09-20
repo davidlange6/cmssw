@@ -3,6 +3,7 @@
 
 #include "DataFormats/OnlineMetaData/interface/DCSRecord.h"
 #include "DataFormats/OnlineMetaData/interface/OnlineMetaDataRaw.h"
+#include <cstdint>
 
 const DCSRecord::ParitionNames DCSRecord::partitionNames_ = {
     {"EBp",  "EBm",  "EEp",    "EEm", "HBHEa",  "HBHEb", "HBHEc", "HF",   "HO",   "RPC",  "DT0", "DTp", "DTm",

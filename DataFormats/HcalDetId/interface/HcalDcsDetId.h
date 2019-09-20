@@ -6,6 +6,7 @@
 //#include <string>
 #include "DataFormats/HcalDetId/interface/HcalOtherDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
+#include <cstdint>
 
 /** \class HcalDcsDetId
 

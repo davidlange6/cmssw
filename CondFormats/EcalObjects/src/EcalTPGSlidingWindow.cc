@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGSlidingWindow.h"
+#include <cstdint>
 
 EcalTPGSlidingWindow::EcalTPGSlidingWindow() {}
 

@@ -6,6 +6,7 @@
 #include "DataFormats/HcalDetId/interface/HcalCastorDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalZDCDetId.h"
 #include <vector>
+#include <cstdint>
 
 template <class Item>
 bool hcalEqualDetId(Item* cell, const DetId& fId) {

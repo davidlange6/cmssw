@@ -22,6 +22,7 @@
 #include "DataFormats/L1GlobalTrigger/interface/L1GlobalTriggerReadoutSetupFwd.h"
 #include "DataFormats/L1GlobalTrigger/interface/L1GlobalTriggerReadoutSetup.h"
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 // forward declarations
 

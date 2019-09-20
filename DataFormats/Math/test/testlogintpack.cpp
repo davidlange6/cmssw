@@ -4,6 +4,7 @@
 #include <limits>
 
 #include "DataFormats/Math/interface/liblogintpack.h"
+#include <cstdint>
 
 class testlogintpack : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(testlogintpack);

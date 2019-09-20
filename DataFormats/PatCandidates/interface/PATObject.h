@@ -36,6 +36,7 @@
 #include "DataFormats/PatCandidates/interface/throwMissingLabel.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 namespace pat {
 

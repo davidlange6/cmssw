@@ -1,6 +1,7 @@
 #include "CondFormats/Serialization/interface/Test.h"
 
 #include "CondFormats/Alignment/src/headers.h"
+#include <cstdint>
 
 int main() {
   testSerialization<AlignTransform>();

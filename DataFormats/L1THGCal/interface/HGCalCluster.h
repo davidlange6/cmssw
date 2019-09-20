@@ -5,6 +5,7 @@
 #include "DataFormats/L1Trigger/interface/BXVector.h"
 #include "DataFormats/L1THGCal/interface/HGCalTriggerCell.h"
 #include "DataFormats/L1THGCal/interface/HGCalClusterT.h"
+#include <cstdint>
 
 namespace l1t {
 

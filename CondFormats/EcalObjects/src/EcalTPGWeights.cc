@@ -1,4 +1,5 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGWeights.h"
+#include <cstdint>
 
 EcalTPGWeights::EcalTPGWeights() : w0_(0), w1_(0), w2_(0), w3_(0), w4_(0) {}
 

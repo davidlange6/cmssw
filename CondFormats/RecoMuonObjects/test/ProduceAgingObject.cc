@@ -31,6 +31,7 @@
 
 #include "CondFormats/RecoMuonObjects/interface/MuonSystemAging.h"
 #include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
+#include <cstdint>
 
 //
 // Class declaration
