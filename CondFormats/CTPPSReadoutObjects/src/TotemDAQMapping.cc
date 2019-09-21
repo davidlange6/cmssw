@@ -9,6 +9,7 @@
 #include "FWCore/Utilities/interface/typelookup.h"
 
 #include "CondFormats/CTPPSReadoutObjects/interface/TotemDAQMapping.h"
+#include <cstdint>
 
 using namespace std;
 

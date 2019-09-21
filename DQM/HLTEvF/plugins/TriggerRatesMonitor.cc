@@ -388,4 +388,5 @@ void TriggerRatesMonitor::dqmAnalyze(edm::Event const &event,
 
 //define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(TriggerRatesMonitor);

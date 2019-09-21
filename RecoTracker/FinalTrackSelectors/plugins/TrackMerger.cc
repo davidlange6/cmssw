@@ -13,6 +13,7 @@
 #define HIT_SORT 0    // sort hits using global position of hit
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // #define VI_DEBUG
 

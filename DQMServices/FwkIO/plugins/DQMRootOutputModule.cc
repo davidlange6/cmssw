@@ -44,6 +44,7 @@
 #include "FWCore/ParameterSet/interface/Registry.h"
 
 #include "format.h"
+#include <cstdint>
 
 namespace {
   typedef dqm::legacy::MonitorElement MonitorElement;

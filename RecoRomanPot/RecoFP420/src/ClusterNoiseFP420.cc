@@ -5,6 +5,7 @@
 // Modifications:
 ///////////////////////////////////////////////////////////////////////////////
 #include "RecoRomanPot/RecoFP420/interface/ClusterNoiseFP420.h"
+#include <cstdint>
 using namespace std;
 
 ClusterNoiseFP420::ClusterNoiseFP420() {}

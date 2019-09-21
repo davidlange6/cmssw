@@ -2,6 +2,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <SimCalorimetry/EcalTrigPrimAlgos/interface/EcalFenixTcpFgvbEE.h>
 #include <iostream>
+#include <cstdint>
 
 //---------------------------------------------------------------
 EcalFenixTcpFgvbEE::EcalFenixTcpFgvbEE(int maxNrSamples) {

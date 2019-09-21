@@ -21,6 +21,7 @@
 #include "L1Trigger/GlobalCaloTrigger/test/gctTestHfEtSums.h"
 
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GlobalCaloTrigger.h"
+#include <cstdint>
 
 //=================================================================================================================
 //

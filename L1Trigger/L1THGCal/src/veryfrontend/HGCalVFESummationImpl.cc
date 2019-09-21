@@ -1,4 +1,5 @@
 #include "L1Trigger/L1THGCal/interface/veryfrontend/HGCalVFESummationImpl.h"
+#include <cstdint>
 
 HGCalVFESummationImpl::HGCalVFESummationImpl(const edm::ParameterSet& conf)
     : thickness_corrections_(conf.getParameter<std::vector<double>>("ThicknessCorrections")),

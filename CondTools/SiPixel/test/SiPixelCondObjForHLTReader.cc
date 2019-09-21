@@ -10,6 +10,7 @@
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelGainCalibrationForHLTService.h"
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelGainCalibrationForHLTSimService.h"
+#include <cstdint>
 
 namespace cms {
   SiPixelCondObjForHLTReader::SiPixelCondObjForHLTReader(const edm::ParameterSet& conf) : conf_(conf) {

@@ -103,4 +103,5 @@ void MTDRecHitProducer::produce(edm::Event& evt, const edm::EventSetup& es) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(MTDRecHitProducer);

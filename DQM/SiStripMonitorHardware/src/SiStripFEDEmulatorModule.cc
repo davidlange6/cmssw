@@ -271,5 +271,6 @@ namespace sistrip {
 //
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 typedef sistrip::FEDEmulatorModule SiStripFEDEmulatorModule;
 DEFINE_FWK_MODULE(SiStripFEDEmulatorModule);

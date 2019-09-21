@@ -3,6 +3,7 @@
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
 #include "TCanvas.h"
+#include <cstdint>
 using namespace std;
 // -----
 

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdio>
 #include <sys/time.h>
+#include <cstdint>
 
 SiStripDetVOffReader::SiStripDetVOffReader(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<bool>("printDebug", true)) {}

@@ -1,4 +1,5 @@
 #include "L1Trigger/L1THGCal/interface/veryfrontend/HGCalVFECompressionImpl.h"
+#include <cstdint>
 
 HGCalVFECompressionImpl::HGCalVFECompressionImpl(const edm::ParameterSet& conf)
     : exponentBits_(conf.getParameter<uint32_t>("exponentBits")),

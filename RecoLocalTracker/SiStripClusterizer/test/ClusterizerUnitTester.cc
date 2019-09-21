@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 void ClusterizerUnitTester::analyze(const edm::Event&, const edm::EventSetup& es) {
   detId = 0;

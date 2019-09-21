@@ -30,6 +30,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <cstdint>
 
 //
 // class decleration

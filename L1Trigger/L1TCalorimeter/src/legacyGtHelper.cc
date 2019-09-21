@@ -6,6 +6,7 @@
 // Et scales and eta coordinates.
 
 #include "L1Trigger/L1TCalorimeter/interface/legacyGtHelper.h"
+#include <cstdint>
 
 namespace l1t {
 

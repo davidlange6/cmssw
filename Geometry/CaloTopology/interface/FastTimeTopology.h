@@ -7,6 +7,7 @@
 #include "Geometry/HGCalCommonData/interface/FastTimeDDDConstants.h"
 #include <vector>
 #include <iostream>
+#include <cstdint>
 
 class FastTimeTopology : public CaloSubdetectorTopology {
 public:

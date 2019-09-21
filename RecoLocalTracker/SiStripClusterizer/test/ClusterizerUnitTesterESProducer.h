@@ -14,6 +14,7 @@
 #include "CalibFormats/SiStripObjects/interface/SiStripQuality.h"
 
 #include <memory>
+#include <cstdint>
 
 class ClusterizerUnitTesterESProducer : public edm::ESProducer {
   typedef edm::ParameterSet PSet;

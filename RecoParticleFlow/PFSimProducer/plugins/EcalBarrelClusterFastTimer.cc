@@ -31,6 +31,7 @@
 #include "SimTracker/TrackAssociation/interface/ResolutionModel.h"
 #include "CLHEP/Units/SystemOfUnits.h"
 #include "FWCore/Utilities/interface/isFinite.h"
+#include <cstdint>
 
 class EcalBarrelClusterFastTimer : public edm::global::EDProducer<> {
 public:

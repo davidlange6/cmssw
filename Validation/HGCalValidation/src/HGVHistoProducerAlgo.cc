@@ -7,6 +7,7 @@
 #include "TMath.h"
 #include "TLatex.h"
 #include "TF1.h"
+#include <cstdint>
 
 using namespace std;
 

@@ -4,6 +4,7 @@
 #include "UCTGeometry.hh"
 
 #include <array>
+#include <cstdint>
 
 namespace l1tcalo {
   constexpr uint32_t etInputMax{0xFF};

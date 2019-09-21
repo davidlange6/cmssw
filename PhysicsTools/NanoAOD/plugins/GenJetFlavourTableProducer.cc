@@ -95,5 +95,6 @@ void GenJetFlavourTableProducer::produce(edm::Event& iEvent, const edm::EventSet
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 //define this as a plug-in
 DEFINE_FWK_MODULE(GenJetFlavourTableProducer);

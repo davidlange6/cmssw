@@ -9,6 +9,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "EventFilter/HcalRawToDigi/interface/HcalTTPUnpacker.h"
 #include "EventFilter/HcalRawToDigi/plugins/HcalRawToDigi.h"
+#include <cstdint>
 
 //#define DebugLog
 

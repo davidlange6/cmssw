@@ -30,6 +30,7 @@
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/Common/interface/AtomicPtrCache.h"
+#include <cstdint>
 
 // Define typedefs for convenience
 namespace pat {

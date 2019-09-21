@@ -14,6 +14,7 @@
 #include "L1Trigger/L1TCalorimeter/interface/JetFinderMethods.h"
 #include "L1Trigger/L1TCalorimeter/interface/JetCalibrationMethods.h"
 #include "L1Trigger/L1TCalorimeter/interface/HardwareSortingMethods.h"
+#include <cstdint>
 
 l1t::Stage1Layer2EtSumAlgorithmImpPP::Stage1Layer2EtSumAlgorithmImpPP(CaloParamsHelper const* params)
     : params_(params) {

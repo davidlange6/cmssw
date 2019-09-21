@@ -4,6 +4,7 @@
 #include <ostream>
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
+#include <cstdint>
 
 /*! \class L1CaloEmCand
  * \brief Level-1 Region Calorimeter Trigger EM candidate

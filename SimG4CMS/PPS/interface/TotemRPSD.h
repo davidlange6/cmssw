@@ -15,6 +15,7 @@
 #include "SimG4Core/Notification/interface/EndOfEvent.h"
 
 #include <string>
+#include <cstdint>
 
 class G4Step;
 class G4HCofThisEvent;

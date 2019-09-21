@@ -1,4 +1,5 @@
 #include "DQM/HcalCommon/interface/DQClient.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace constants;

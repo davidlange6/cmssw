@@ -27,6 +27,7 @@ class TrajectoryFilter;
 
 #include <map>
 #include <boost/unordered_map.hpp>
+#include <cstdint>
 
 class TransientTrackingRecHitBuilder;
 class TrajectoryFilter;

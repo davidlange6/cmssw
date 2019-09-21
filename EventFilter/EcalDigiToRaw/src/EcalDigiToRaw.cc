@@ -50,6 +50,7 @@
 
 #include "Geometry/EcalMapping/interface/EcalElectronicsMapping.h"
 #include "Geometry/EcalMapping/interface/EcalMappingRcd.h"
+#include <cstdint>
 
 class EcalDigiToRaw : public edm::global::EDProducer<> {
 public:

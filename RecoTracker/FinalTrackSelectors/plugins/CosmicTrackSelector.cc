@@ -320,5 +320,6 @@ bool CosmicTrackSelector::select(const reco::BeamSpot &vertexBeamSpot, const rec
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(CosmicTrackSelector);

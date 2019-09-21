@@ -11,6 +11,7 @@
 #include "DataFormats/SiPixelDigi/interface/SiPixelCalibDigiError.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include <sstream>
+#include <cstdint>
 
 // initialize static members
 std::vector<float> SiPixelSCurveCalibrationAnalysis::efficiencies_(0);

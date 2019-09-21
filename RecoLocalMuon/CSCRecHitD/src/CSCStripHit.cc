@@ -1,5 +1,6 @@
 #include "RecoLocalMuon/CSCRecHitD/src/CSCStripHit.h"
 #include <iostream>
+#include <cstdint>
 
 CSCStripHit::CSCStripHit(const CSCDetId& id,
                          const float& sHitPos,

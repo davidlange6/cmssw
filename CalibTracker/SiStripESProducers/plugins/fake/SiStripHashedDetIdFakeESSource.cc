@@ -48,4 +48,5 @@ std::unique_ptr<SiStripHashedDetId> SiStripHashedDetIdFakeESSource::produce(cons
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/Framework/interface/ModuleFactory.h"
+#include <cstdint>
 DEFINE_FWK_EVENTSETUP_MODULE(SiStripHashedDetIdFakeESSource);

@@ -22,6 +22,7 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "EgammaAnalysis/ElectronTools/interface/ElectronEnergyRegressionEvaluate.h"
+#include <cstdint>
 
 //
 // class declaration

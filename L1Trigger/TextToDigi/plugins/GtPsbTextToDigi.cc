@@ -10,6 +10,7 @@
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctEmCand.h"
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctEtSums.h"
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctJetCand.h"
+#include <cstdint>
 //#include "DataFormats/L1GlobalCaloTrigger/interface/L1GctJetCounts.h"
 
 GtPsbTextToDigi::GtPsbTextToDigi(const edm::ParameterSet &iConfig)

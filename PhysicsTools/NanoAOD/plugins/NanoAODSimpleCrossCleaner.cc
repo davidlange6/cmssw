@@ -1,4 +1,5 @@
 #include "PhysicsTools/NanoAOD/plugins/NanoAODBaseCrossCleaner.h"
+#include <cstdint>
 
 class NanoAODSimpleCrossCleaner : public NanoAODBaseCrossCleaner {
 public:

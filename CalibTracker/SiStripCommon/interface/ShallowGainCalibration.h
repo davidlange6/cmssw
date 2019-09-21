@@ -49,6 +49,7 @@
 #include "DataFormats/TrackReco/interface/TrackDeDxHits.h"
 
 #include <ext/hash_map>
+#include <cstdint>
 
 class ShallowGainCalibration : public edm::EDProducer {
 public:

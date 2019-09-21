@@ -627,4 +627,5 @@ void StandaloneTrackMonitor::addClusterToMap(uint32_t detid, const SiStripCluste
 }
 // Define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(StandaloneTrackMonitor);

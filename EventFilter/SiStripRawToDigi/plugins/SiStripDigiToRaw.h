@@ -11,6 +11,7 @@
 
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBufferGenerator.h"
 #include "WarningSummary.h"
+#include <cstdint>
 
 class SiStripFedCabling;
 class FEDRawDataCollection;

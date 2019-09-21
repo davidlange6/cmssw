@@ -4,6 +4,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include <cassert>
 #include <ostream>
+#include <cstdint>
 
 template <class Ttype>
 class CaloTSamplesBase {

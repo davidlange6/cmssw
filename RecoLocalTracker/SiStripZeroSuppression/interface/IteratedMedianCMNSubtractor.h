@@ -4,6 +4,7 @@
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripCommonModeNoiseSubtractor.h"
 
 #include "FWCore/Framework/interface/ESHandle.h"
+#include <cstdint>
 
 class SiStripNoises;
 class SiStripQuality;

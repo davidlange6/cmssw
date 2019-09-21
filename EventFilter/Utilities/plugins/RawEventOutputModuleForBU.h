@@ -19,6 +19,7 @@
 #include "EventFilter/Utilities/interface/crc32c.h"
 
 #include "boost/shared_array.hpp"
+#include <cstdint>
 
 class FRDEventMsgView;
 template <class Consumer>

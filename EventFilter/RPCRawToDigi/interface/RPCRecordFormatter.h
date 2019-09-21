@@ -11,6 +11,7 @@
 
 class RPCReadOutMapping;
 #include <vector>
+#include <cstdint>
 
 class RPCRecordFormatter {
 public:

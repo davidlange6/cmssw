@@ -14,6 +14,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 CompareClusters::CompareClusters(const edm::ParameterSet& conf)
     : clusters1(conf.getParameter<edm::InputTag>("Clusters1")),

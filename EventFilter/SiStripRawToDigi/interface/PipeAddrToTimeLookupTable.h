@@ -14,6 +14,7 @@
 #define EventFilter_SiStripRawToDigi_PipeAddrToTimeLookupTable_H
 
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBufferComponents.h"
+#include <cstdint>
 
 namespace sistrip {
 

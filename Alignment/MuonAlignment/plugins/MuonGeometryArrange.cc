@@ -38,6 +38,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 MuonGeometryArrange::MuonGeometryArrange(const edm::ParameterSet& cfg)
     : theSurveyIndex(0),

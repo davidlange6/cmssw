@@ -6,6 +6,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/ForwardDetId/interface/ForwardSubdetector.h"
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

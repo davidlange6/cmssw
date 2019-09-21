@@ -34,6 +34,7 @@
 #include "G4VHit.hh"
 #include "G4ThreeVector.hh"
 #include <iostream>
+#include <cstdint>
 
 class PPSPixelG4Hit : public G4VHit {
 public:

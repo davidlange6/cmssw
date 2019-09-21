@@ -20,6 +20,7 @@
 #include "G4VPhysicalVolume.hh"
 #include "G4VTouchable.hh"
 #include "globals.hh"
+#include <cstdint>
 
 //
 // constructors and destructor

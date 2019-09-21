@@ -19,6 +19,7 @@
 #include "DataFormats/GeometryCommonDetAlgo/interface/MeasurementError.h"
 #include "DataFormats/GeometrySurface/interface/GloballyPositioned.h"
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

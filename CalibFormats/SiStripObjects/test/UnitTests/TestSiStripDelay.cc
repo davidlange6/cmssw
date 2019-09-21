@@ -13,6 +13,7 @@
 #include <iterator>
 
 #include "CalibFormats/SiStripObjects/interface/SiStripDelay.h"
+#include <cstdint>
 
 #ifndef TestSiStripDelay_cc
 #define TestSiStripDelay_cc

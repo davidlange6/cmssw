@@ -58,6 +58,7 @@ Implementation:
 #include "FWCore/Utilities/interface/RandomNumberGenerator.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //
 // class declaration

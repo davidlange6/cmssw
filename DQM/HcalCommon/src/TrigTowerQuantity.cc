@@ -1,4 +1,5 @@
 #include "DQM/HcalCommon/interface/TrigTowerQuantity.h"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace quantity {

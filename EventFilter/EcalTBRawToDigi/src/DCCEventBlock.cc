@@ -11,6 +11,7 @@
 
 #include <iomanip>
 #include <sstream>
+#include <cstdint>
 
 DCCTBEventBlock::DCCTBEventBlock(DCCTBDataParser *parser,
                                  const uint32_t *buffer,

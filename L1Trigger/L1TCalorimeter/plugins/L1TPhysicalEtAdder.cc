@@ -18,6 +18,7 @@
 
 #include "FWCore/Framework/interface/ESHandle.h"
 #include <vector>
+#include <cstdint>
 
 namespace {
 

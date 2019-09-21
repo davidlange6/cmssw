@@ -51,4 +51,5 @@ FTLUncalibratedRecHit ETLUncalibRecHitAlgo::makeRecHit(const ETLDataFrame& dataF
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(ETLUncalibratedRecHitAlgoFactory, ETLUncalibRecHitAlgo, "ETLUncalibRecHitAlgo");

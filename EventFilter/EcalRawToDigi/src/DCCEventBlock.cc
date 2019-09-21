@@ -10,6 +10,7 @@
 
 #include <iomanip>
 #include <sstream>
+#include <cstdint>
 
 DCCEventBlock::DCCEventBlock(DCCDataUnpacker* u,
                              EcalElectronicsMapper* m,

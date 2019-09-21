@@ -105,6 +105,7 @@ PATH=/afs/cern.ch/work/r/rovere/protocolbuf/bin
 #include <sys/prctl.h>
 #include <sys/wait.h>
 #include <csignal>
+#include <cstdint>
 
 #define DEBUG(x, msg) \
   if (debug >= x)     \

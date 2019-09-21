@@ -27,6 +27,7 @@
 #include <sstream>
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

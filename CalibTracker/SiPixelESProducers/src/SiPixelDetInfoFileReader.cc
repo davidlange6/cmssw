@@ -7,6 +7,7 @@
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelDetInfoFileReader.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 //#include "FWCore/ParameterSet/interface/FileInPath.h"
 
 using namespace cms;

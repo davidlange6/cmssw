@@ -3,6 +3,7 @@
 
 #include "DataFormats/DetId/interface/DetId.h"
 #include <ostream>
+#include <cstdint>
 
 /** \class IntegerCaloSamples
 

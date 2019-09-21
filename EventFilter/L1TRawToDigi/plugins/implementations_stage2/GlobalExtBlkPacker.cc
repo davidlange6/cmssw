@@ -3,6 +3,7 @@
 
 #include "GTTokens.h"
 #include "GlobalExtBlkPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

@@ -21,6 +21,7 @@
 #include "TFile.h"
 #include "TDirectory.h"
 #include "TTree.h"
+#include <cstdint>
 
 class SiStripApvGainReader : public edm::EDAnalyzer {
 public:

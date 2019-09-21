@@ -20,6 +20,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Framework/interface/Event.h"
 #include <algorithm>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

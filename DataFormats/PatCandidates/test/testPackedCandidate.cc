@@ -5,6 +5,7 @@
 #include <iomanip>
 
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
+#include <cstdint>
 
 class testPackedCandidate : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(testPackedCandidate);

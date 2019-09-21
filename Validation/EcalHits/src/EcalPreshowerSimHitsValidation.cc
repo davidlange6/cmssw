@@ -10,6 +10,7 @@
 #include "Validation/EcalHits/interface/EcalPreshowerSimHitsValidation.h"
 #include <DataFormats/EcalDetId/interface/EEDetId.h>
 #include <DataFormats/EcalDetId/interface/ESDetId.h>
+#include <cstdint>
 
 using namespace cms;
 using namespace edm;

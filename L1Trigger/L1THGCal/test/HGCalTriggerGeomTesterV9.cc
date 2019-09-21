@@ -31,6 +31,7 @@
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerGeometryBase.h"
 
 #include <cstdlib>
+#include <cstdint>
 
 namespace {
   template <typename T>

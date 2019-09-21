@@ -12,6 +12,7 @@
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
 
 #include <algorithm>
+#include <cstdint>
 
 GEMGeometryBuilderFromCondDB::GEMGeometryBuilderFromCondDB() {}
 

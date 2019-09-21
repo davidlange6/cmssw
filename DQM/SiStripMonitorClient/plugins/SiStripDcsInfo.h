@@ -35,6 +35,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <cstdint>
 
 class SiStripDetVOff;
 class SiStripDetCabling;

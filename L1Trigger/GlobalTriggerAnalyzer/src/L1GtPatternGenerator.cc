@@ -32,6 +32,7 @@
 #include "L1Trigger/GlobalTriggerAnalyzer/interface/L1GtUtils.h"
 #include "L1Trigger/GlobalTriggerAnalyzer/interface/L1GtPatternMap.h"
 #include "L1Trigger/GlobalTriggerAnalyzer/interface/L1GtPatternWriter.h"
+#include <cstdint>
 
 // constructor
 L1GtPatternGenerator::L1GtPatternGenerator(const edm::ParameterSet& parSet) {

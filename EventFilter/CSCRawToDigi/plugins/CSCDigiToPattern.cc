@@ -2,6 +2,7 @@
 #include "EventFilter/CSCRawToDigi/src/CSCDigiToPattern.h"
 #include "DataFormats/CSCDigi/interface/CSCCorrelatedLCTDigi.h"
 #include "DataFormats/MuonDetId/interface/CSCDetId.h"
+#include <cstdint>
 
 CSCDigiToPattern::CSCDigiToPattern(edm::ParameterSet const& conf) {
   d_token = consumes<CSCCorrelatedLCTDigiCollection>(conf.getParameter<edm::InputTag>("corrlctDigiTag"));

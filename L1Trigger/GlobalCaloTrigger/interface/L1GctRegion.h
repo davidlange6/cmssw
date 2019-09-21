@@ -13,6 +13,7 @@
  */
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegion.h"
+#include <cstdint>
 
 class L1GctRegion : public L1CaloRegion {
 public:

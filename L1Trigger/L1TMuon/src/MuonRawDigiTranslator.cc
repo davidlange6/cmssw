@@ -1,5 +1,6 @@
 #include "TMath.h"
 #include "L1Trigger/L1TMuon/interface/MuonRawDigiTranslator.h"
+#include <cstdint>
 
 void l1t::MuonRawDigiTranslator::fillMuon(
     Muon& mu, uint32_t raw_data_00_31, uint32_t raw_data_32_63, int fed, unsigned int fw) {

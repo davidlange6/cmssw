@@ -1,4 +1,5 @@
 #include "EventFilter/RPCRawToDigi/interface/RPCCPPFRecord.h"
+#include <cstdint>
 
 namespace rpccppf {
 

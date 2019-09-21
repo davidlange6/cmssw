@@ -5,6 +5,7 @@
 
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/HcalDigi/interface/QIE10DataFrame.h"
+#include <cstdint>
 
 /** \class HFQIE10Info
 *

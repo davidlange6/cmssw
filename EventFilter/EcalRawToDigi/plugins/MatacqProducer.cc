@@ -27,6 +27,7 @@
 #include <csignal>
 #include <sys/stat.h>
 #include <glob.h>
+#include <cstdint>
 
 using namespace std;
 using namespace boost;

@@ -30,6 +30,7 @@ typedef edm::SortedCollection<HOTriggerPrimitiveDigi> HOTrigPrimDigiCollection;
 typedef edm::SortedCollection<HcalTTPDigi> HcalTTPDigiCollection;
 
 #include "DataFormats/Common/interface/DataFrameContainer.h"
+#include <cstdint>
 
 template <class Digi>
 class HcalDataFrameContainer : public edm::DataFrameContainer {

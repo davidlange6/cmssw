@@ -123,5 +123,6 @@ SiStripPedestals* SiStripPopConPedestalsHandlerFromDQM::getObj() const { return 
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "DQMOffline/CalibTracker/plugins/SiStripPopConDQMEDHarvester.h"
+#include <cstdint>
 using SiStripPopConPedestalsDQM = SiStripPopConDQMEDHarvester<SiStripPopConPedestalsHandlerFromDQM>;
 DEFINE_FWK_MODULE(SiStripPopConPedestalsDQM);

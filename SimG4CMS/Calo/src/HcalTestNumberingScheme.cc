@@ -7,6 +7,7 @@
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
 
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

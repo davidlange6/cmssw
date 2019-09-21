@@ -20,6 +20,7 @@
 #include <fstream>
 #include <sstream>
 #include <memory>
+#include <cstdint>
 
 class TrackerTopology;
 class SiStripDetCabling;

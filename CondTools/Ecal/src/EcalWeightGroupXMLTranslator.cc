@@ -13,6 +13,7 @@
 #include "CondTools/Ecal/interface/EcalWeightGroupXMLTranslator.h"
 #include "CondFormats/EcalObjects/interface/EcalXtalGroupId.h"
 #include "CondTools/Ecal/interface/DOMHelperFunctions.h"
+#include <cstdint>
 
 using namespace XERCES_CPP_NAMESPACE;
 using namespace xuti;

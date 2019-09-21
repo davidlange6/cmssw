@@ -31,6 +31,7 @@
 
 #include "Geometry/Records/interface/MTDDigiGeometryRecord.h"
 #include "Geometry/MTDGeometryBuilder/interface/MTDGeometry.h"
+#include <cstdint>
 
 struct MTDHit {
   float energy;

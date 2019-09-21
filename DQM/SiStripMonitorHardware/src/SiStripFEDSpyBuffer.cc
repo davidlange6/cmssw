@@ -1,5 +1,6 @@
 #include "DQM/SiStripMonitorHardware/interface/SiStripFEDSpyBuffer.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 namespace sistrip {
 

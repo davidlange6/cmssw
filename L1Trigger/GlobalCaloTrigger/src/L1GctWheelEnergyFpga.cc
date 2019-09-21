@@ -4,6 +4,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctJetLeafCard.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using std::endl;
 using std::ostream;

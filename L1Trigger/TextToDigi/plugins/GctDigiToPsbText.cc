@@ -2,6 +2,7 @@
 #include "GctDigiToPsbText.h"
 
 #include <iomanip>
+#include <cstdint>
 using std::setfill;
 using std::setw;
 

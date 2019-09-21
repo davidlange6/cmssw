@@ -10,6 +10,7 @@
 #include "RecoEgamma/EgammaIsolationAlgos/interface/EgammaTowerIsolation.h"
 #include <cassert>
 #include <memory>
+#include <cstdint>
 
 #ifdef ETISTATDEBUG
 // #include<iostream>

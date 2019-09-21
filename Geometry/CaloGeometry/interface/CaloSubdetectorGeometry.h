@@ -13,6 +13,7 @@
 #include "DataFormats/Math/interface/deltaR.h"
 
 #include "FWCore/Utilities/interface/GCC11Compatibility.h"
+#include <cstdint>
 
 /** \class CaloSubdetectorGeometry
       

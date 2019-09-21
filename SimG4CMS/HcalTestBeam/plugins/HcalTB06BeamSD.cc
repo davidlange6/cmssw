@@ -22,6 +22,7 @@
 #include "G4Track.hh"
 #include "G4Material.hh"
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

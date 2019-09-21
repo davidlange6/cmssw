@@ -58,6 +58,7 @@
 
 #include "Histograms.h"
 #include "MuScleFitUtils.h"
+#include <cstdint>
 //
 // class decleration
 //

@@ -1,4 +1,5 @@
 #include "DataFormats/EcalDigi/interface/ESSample.h"
+#include <cstdint>
 
 ESSample::ESSample(int adc) { theSample = (int16_t)adc; }
 

@@ -1,4 +1,5 @@
 #include "DCCDataMapper.h"
+#include <cstdint>
 
 /*--------------------------------------------*/
 /* DCCTBDataMapper::DCCTBDataMapper               */

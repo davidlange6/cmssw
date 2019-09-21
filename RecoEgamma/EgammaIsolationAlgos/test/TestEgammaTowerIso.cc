@@ -24,6 +24,7 @@ private:
 DEFINE_FWK_MODULE(TestEgammaTowerIsolation);
 
 #include <iostream>
+#include <cstdint>
 void TestEgammaTowerIsolation::analyze(const edm::Event& iEvent, const edm::EventSetup&) {
   edm::Handle<CaloTowerCollection> towerHandle;
   iEvent.getByLabel(towerLabel, towerHandle);

@@ -5,6 +5,7 @@
 
 #include "L1TStage2Layer2Constants.h"
 #include "EtSumPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

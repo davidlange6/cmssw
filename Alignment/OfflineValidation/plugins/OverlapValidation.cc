@@ -78,6 +78,7 @@
 
 #include <vector>
 #include <utility>
+#include <cstdint>
 
 using namespace std;
 //

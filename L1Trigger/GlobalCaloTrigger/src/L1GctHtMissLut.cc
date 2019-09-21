@@ -3,6 +3,7 @@
 #include "CondFormats/L1TObjects/interface/L1CaloEtScale.h"
 
 #include <cmath>
+#include <cstdint>
 
 //DEFINE STATICS
 const int L1GctHtMissLut::NAddress = 2 * L1GctHtMissLut::kHxOrHyMissComponentNBits;

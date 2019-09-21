@@ -9,6 +9,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 
 #include "DQM/SiStripMonitorHardware/interface/SiStripSpyUtilities.h"
+#include <cstdint>
 
 // Forward define other classes
 class SiStripFedCabling;

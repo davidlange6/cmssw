@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
+#include <cstdint>
 
 using std::dec;
 using std::hex;

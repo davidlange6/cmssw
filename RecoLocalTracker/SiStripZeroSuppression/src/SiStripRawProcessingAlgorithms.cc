@@ -10,6 +10,7 @@
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingFactory.h"
 #include <memory>
+#include <cstdint>
 
 SiStripRawProcessingAlgorithms::SiStripRawProcessingAlgorithms(std::unique_ptr<SiStripPedestalsSubtractor> ped,
                                                                std::unique_ptr<SiStripCommonModeNoiseSubtractor> cmn,

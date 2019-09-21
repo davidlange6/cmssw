@@ -10,6 +10,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripPedestals.h"
 #include "DQM/SiStripMonitorSummary/interface/SiStripBaseCondObjDQM.h"
 #include "FWCore/Framework/interface/ESHandle.h"
+#include <cstdint>
 
 class SiStripCablingDQM : public SiStripBaseCondObjDQM {
 public:

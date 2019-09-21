@@ -23,6 +23,7 @@
 #include <FWCore/Framework/interface/Frameworkfwd.h>
 #include <vector>
 #include <map>
+#include <cstdint>
 
 class GEMCSCSegmentAlgorithm {
 public:

@@ -9,6 +9,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include <iostream>
+#include <cstdint>
 
 class EcalTPGCrystalStatusCode {
 public:

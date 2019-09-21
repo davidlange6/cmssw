@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/HcalTriggerPrimitiveSample.h"
+#include <cstdint>
 
 HcalTriggerPrimitiveSample::HcalTriggerPrimitiveSample() : theSample(0) {}
 HcalTriggerPrimitiveSample::HcalTriggerPrimitiveSample(uint16_t data) : theSample(data) {}

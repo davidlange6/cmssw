@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <set>
+#include <cstdint>
 
 class RPixCalibDigi : public CTPPSPixelDigi {
 public:

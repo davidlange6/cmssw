@@ -2,6 +2,7 @@
 #define GEOMETRY_TRACKERNUMBERINGBUILDER_UTILS_H
 
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDet.h"
+#include <cstdint>
 
 namespace TrackerGeometryUtils {
 

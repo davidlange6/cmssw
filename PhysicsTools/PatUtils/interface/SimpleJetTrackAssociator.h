@@ -1,6 +1,7 @@
 #include "DataFormats/TrackReco/interface/TrackFwd.h"
 #include "DataFormats/Math/interface/Vector3D.h"
 #include "DataFormats/Common/interface/View.h"
+#include <cstdint>
 
 namespace helper {
   class SimpleJetTrackAssociator {

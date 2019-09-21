@@ -38,6 +38,7 @@
 #include "DataFormats/JetReco/interface/PFJetCollection.h"
 
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
+#include <cstdint>
 
 namespace reco {
 

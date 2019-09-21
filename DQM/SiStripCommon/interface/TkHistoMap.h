@@ -8,6 +8,7 @@
 #include "CalibTracker/SiStripCommon/interface/TkDetMap.h"
 #include "CommonTools/TrackerMap/interface/TrackerMap.h"
 #include <string>
+#include <cstdint>
 
 class TkHistoMap {
 protected:

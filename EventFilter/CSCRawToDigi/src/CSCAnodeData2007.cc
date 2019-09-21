@@ -3,6 +3,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <cstring>  // for bzero
 #include <iostream>
+#include <cstdint>
 
 CSCAnodeData2007::CSCAnodeData2007(const CSCALCTHeader &header)
     : nAFEBs_(header.nLCTChipRead()), nTimeBins_(header.NTBins()) {

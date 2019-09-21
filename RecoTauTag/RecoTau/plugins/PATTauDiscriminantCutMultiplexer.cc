@@ -35,6 +35,7 @@
 #include "TGraph.h"
 #include "TFormula.h"
 #include "TFile.h"
+#include <cstdint>
 
 class PATTauDiscriminantCutMultiplexer : public PATTauDiscriminationProducerBase {
 public:

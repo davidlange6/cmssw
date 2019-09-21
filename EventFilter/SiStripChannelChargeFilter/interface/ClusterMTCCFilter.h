@@ -15,6 +15,7 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "DataFormats/SiStripCluster/interface/SiStripCluster.h"
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 namespace cms {
   class ClusterMTCCFilter : public edm::EDFilter {

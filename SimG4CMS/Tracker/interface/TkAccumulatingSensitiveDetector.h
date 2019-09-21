@@ -16,6 +16,7 @@
 #include "G4Track.hh"
 
 #include <string>
+#include <cstdint>
 
 class TrackInformation;
 class SimTrackManager;

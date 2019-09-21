@@ -4,6 +4,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 #include <string>
 #include <vector>
+#include <cstdint>
 
 class GEMROMapping;
 

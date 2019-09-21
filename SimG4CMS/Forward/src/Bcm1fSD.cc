@@ -29,6 +29,7 @@
 #include <iostream>
 
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
+#include <cstdint>
 
 Bcm1fSD::Bcm1fSD(const std::string& name,
                  const edm::EventSetup& es,

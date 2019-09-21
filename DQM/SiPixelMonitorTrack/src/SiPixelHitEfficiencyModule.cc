@@ -32,6 +32,7 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
+#include <cstdint>
 
 using namespace std;
 

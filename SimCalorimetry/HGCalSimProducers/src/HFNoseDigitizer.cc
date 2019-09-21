@@ -1,4 +1,5 @@
 #include "SimCalorimetry/HGCalSimProducers/interface/HFNoseDigitizer.h"
+#include <cstdint>
 
 using namespace hgc_digi;
 

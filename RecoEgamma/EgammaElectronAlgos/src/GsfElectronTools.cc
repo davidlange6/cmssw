@@ -5,6 +5,7 @@
 #include "DataFormats/EgammaReco/interface/ElectronSeedFwd.h"
 #include "DataFormats/EgammaReco/interface/ElectronSeed.h"
 #include "RecoEgamma/EgammaElectronAlgos/interface/GsfElectronTools.h"
+#include <cstdint>
 
 namespace gsfElectronTools {
 

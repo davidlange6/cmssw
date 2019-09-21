@@ -9,6 +9,7 @@
 
 #include "RecoLocalCalo/HGCalRecAlgos/interface/RecHitTools.h"
 #include "RecoLocalCalo/HGCalRecAlgos/interface/ClusterTools.h"
+#include <cstdint>
 
 class HGCalDepthPreClusterer {
 public:

@@ -9,6 +9,7 @@
 #include "CondTools/Ecal/interface/XMLTags.h"
 #include "Utilities/Xerces/interface/Xerces.h"
 #include "Utilities/Xerces/interface/XercesStrUtils.h"
+#include <cstdint>
 
 using namespace XERCES_CPP_NAMESPACE;
 using namespace xuti;

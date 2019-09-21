@@ -147,6 +147,7 @@ namespace HGCalTriggerFE {
 }  // namespace HGCalTriggerFE
 
 #include "FWCore/PluginManager/interface/PluginFactory.h"
+#include <cstdint>
 typedef edmplugin::PluginFactory<HGCalTriggerFECodecBase*(const edm::ParameterSet&)> HGCalTriggerFECodecFactory;
 
 #endif

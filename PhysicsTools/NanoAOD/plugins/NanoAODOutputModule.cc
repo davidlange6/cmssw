@@ -41,6 +41,7 @@
 #include "PhysicsTools/NanoAOD/plugins/SummaryTableOutputBranches.h"
 
 #include <iostream>
+#include <cstdint>
 
 class NanoAODOutputModule : public edm::one::OutputModule<> {
 public:

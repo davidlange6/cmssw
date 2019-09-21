@@ -10,6 +10,7 @@
 #include "TMath.h"
 
 #include "DataFormats/CTPPSReco/interface/CTPPSPixelLocalTrackRecoInfo.h"
+#include <cstdint>
 
 //------------------------------------------------------------------------------------------------//
 

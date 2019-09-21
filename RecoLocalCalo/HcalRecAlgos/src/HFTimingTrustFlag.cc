@@ -1,5 +1,6 @@
 #include "RecoLocalCalo/HcalRecAlgos/interface/HFTimingTrustFlag.h"
 #include "DataFormats/METReco/interface/HcalCaloFlagLabels.h"
+#include <cstdint>
 
 namespace HFTimingTrust {
   // Template class checks HF timing, sets rechit

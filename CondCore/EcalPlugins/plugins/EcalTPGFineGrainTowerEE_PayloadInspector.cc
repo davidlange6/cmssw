@@ -16,6 +16,7 @@
 #include "TLatex.h"
 
 #include <string>
+#include <cstdint>
 
 namespace {
 

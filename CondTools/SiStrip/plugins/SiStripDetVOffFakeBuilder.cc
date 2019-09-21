@@ -14,6 +14,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 
 #include "CondTools/SiStrip/plugins/SiStripDetVOffFakeBuilder.h"
+#include <cstdint>
 
 using namespace std;
 using namespace cms;

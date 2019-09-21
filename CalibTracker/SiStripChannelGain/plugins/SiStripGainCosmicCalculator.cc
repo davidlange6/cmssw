@@ -31,6 +31,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "TrackingTools/PatternTools/interface/Trajectory.h"
+#include <cstdint>
 //#include "DQM/SiStripCommon/interface/SiStripGenerateKey.h"
 
 //---------------------------------------------------------------------------------------------------------

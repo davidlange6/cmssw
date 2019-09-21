@@ -17,6 +17,7 @@
 #include "DataFormats/ForwardDetId/interface/HGCSiliconDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include <iostream>
+#include <cstdint>
 
 class HGCalRecHitSimpleAlgo : public HGCalRecHitAbsAlgo {
 public:

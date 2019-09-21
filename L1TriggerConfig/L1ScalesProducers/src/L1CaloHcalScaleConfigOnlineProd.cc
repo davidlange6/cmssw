@@ -31,6 +31,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <cstdint>
 
 //
 // class declaration

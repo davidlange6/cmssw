@@ -17,6 +17,7 @@
 
 #include "XrdRequest.h"
 #include "XrdSource.h"
+#include <cstdint>
 
 namespace XrdCl {
   class File;

@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //
 // input stream from a gz file

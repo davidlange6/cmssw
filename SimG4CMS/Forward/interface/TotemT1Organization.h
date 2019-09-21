@@ -24,6 +24,7 @@
 // user include files
 
 #include "SimG4CMS/Forward/interface/TotemVDetectorOrganization.h"
+#include <cstdint>
 
 class TotemT1Organization : public TotemVDetectorOrganization {
 public:

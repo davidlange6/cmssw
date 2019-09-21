@@ -4,6 +4,7 @@
 #include "DQM/SiStripCommissioningClients/interface/CommissioningHistograms.h"
 #include "DQM/SiStripCommissioningSummary/interface/FedTimingSummaryFactory.h"
 #include "CondFormats/SiStripObjects/interface/FedTimingAnalysis.h"
+#include <cstdint>
 
 class FedTimingHistograms : public CommissioningHistograms {
 public:

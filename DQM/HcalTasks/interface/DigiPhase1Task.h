@@ -25,6 +25,7 @@
 #include "DQM/HcalCommon/interface/ContainerSingle2D.h"
 #include "DQM/HcalCommon/interface/ContainerSingleProf2D.h"
 #include "DQM/HcalCommon/interface/ContainerXXX.h"
+#include <cstdint>
 
 class DigiPhase1Task : public hcaldqm::DQTask {
 public:

@@ -15,6 +15,7 @@
 #include "TCanvas.h"
 #include "TLine.h"
 #include "TLatex.h"
+#include <cstdint>
 
 namespace {
   enum { kEBChannels = 61200, kEEChannels = 14648, NRGBs = 5, NCont = 255 };

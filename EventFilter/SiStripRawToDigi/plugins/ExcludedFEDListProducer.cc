@@ -18,6 +18,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ext/algorithm>
+#include <cstdint>
 
 namespace sistrip {
 

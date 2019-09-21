@@ -13,6 +13,7 @@
 #include "Geometry/MTDGeometryBuilder/interface/MTDGeometry.h"
 
 #include <tuple>
+#include <cstdint>
 
 namespace CLHEP {
   class HepRandomEngine;

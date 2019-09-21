@@ -11,6 +11,7 @@
 #include "G4String.hh"
 
 #include <string>
+#include <cstdint>
 
 class G4Step;
 class G4Material;

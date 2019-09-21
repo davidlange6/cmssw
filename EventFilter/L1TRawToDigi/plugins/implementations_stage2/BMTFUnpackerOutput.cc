@@ -3,6 +3,7 @@
 #include "L1Trigger/L1TMuon/interface/RegionalMuonRawDigiTranslator.h"
 
 #include "BMTFUnpackerOutput.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

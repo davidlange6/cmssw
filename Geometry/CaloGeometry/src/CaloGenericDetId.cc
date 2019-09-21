@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 CaloGenericDetId::CaloGenericDetId(DetId::Detector iDet, int iSub, uint32_t iDin) : DetId(iDet, iSub) {
   if (isHcal()) {

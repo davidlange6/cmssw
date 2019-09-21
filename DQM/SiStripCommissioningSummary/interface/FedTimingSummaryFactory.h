@@ -3,6 +3,7 @@
 
 #include "DQM/SiStripCommissioningSummary/interface/SummaryHistogramFactory.h"
 #include "CondFormats/SiStripObjects/interface/FedTimingAnalysis.h"
+#include <cstdint>
 
 class SummaryGenerator;
 

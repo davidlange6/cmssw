@@ -37,6 +37,7 @@
 #include <TH2F.h>
 #include <TH3F.h>
 #include <TProfile.h>
+#include <cstdint>
 using namespace std;
 using namespace edm;
 

@@ -42,6 +42,7 @@
 
 #include "SimDataFormats/Track/interface/SimTrack.h"
 #include "SimDataFormats/Vertex/interface/SimVertex.h"
+#include <cstdint>
 
 class HTrackAssociator {
 public:

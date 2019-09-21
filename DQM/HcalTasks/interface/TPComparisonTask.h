@@ -16,6 +16,7 @@
 #include "DQM/HcalCommon/interface/ContainerSingle2D.h"
 #include "DQM/HcalCommon/interface/HashFilter.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
+#include <cstdint>
 
 class TPComparisonTask : public hcaldqm::DQTask {
 public:

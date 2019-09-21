@@ -26,6 +26,7 @@ class Phase2StripCPE;
 
 #ifdef VISTAT
 #include <iostream>
+#include <cstdint>
 #define COUT std::cout
 #else
 #define COUT LogDebug("")

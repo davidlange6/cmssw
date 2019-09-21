@@ -11,6 +11,7 @@
 
 #include "DataFormats/Common/interface/DetSet.h"
 #include "DataFormats/Common/interface/DetSetVector.h"
+#include <cstdint>
 
 class SiStripRawProcessingAlgorithms {
   friend class SiStripRawProcessingFactory;

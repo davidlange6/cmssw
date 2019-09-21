@@ -2,6 +2,7 @@
 #define EventFilter_GEMRawToDigi_AMC13Event_h
 #include <vector>
 #include "AMCdata.h"
+#include <cstdint>
 
 namespace gem {
 

@@ -17,6 +17,7 @@
 
 #include "CondFormats/SiPixelObjects/interface/SiPixelGainCalibration.h"
 #include "CondFormats/DataRecord/interface/SiPixelGainCalibrationRcd.h"
+#include <cstdint>
 
 class SiPixelGainCalibrationService
     : public SiPixelGainCalibrationServicePayloadGetter<SiPixelGainCalibration, SiPixelGainCalibrationRcd> {

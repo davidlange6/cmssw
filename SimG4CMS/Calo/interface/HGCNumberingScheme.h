@@ -9,6 +9,7 @@
 #include "Geometry/HGCalCommonData/interface/HGCalDDDConstants.h"
 
 #include "G4ThreeVector.hh"
+#include <cstdint>
 
 class HGCNumberingScheme {
 public:

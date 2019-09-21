@@ -31,6 +31,7 @@
 #include "DataFormats/SiStripCluster/interface/SiStripClusterCollection.h"
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 #include <DataFormats/SiStripCommon/interface/SiStripEventSummary.h>
+#include <cstdint>
 
 //
 // class decleration

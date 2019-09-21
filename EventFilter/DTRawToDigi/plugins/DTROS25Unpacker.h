@@ -12,6 +12,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <EventFilter/DTRawToDigi/plugins/DTUnpacker.h>
+#include <cstdint>
 
 class DTROS25Data;
 

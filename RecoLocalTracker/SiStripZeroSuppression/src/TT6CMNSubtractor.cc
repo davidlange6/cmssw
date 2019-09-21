@@ -5,6 +5,7 @@
 #include "CondFormats/DataRecord/interface/SiStripNoisesRcd.h"
 #include "CalibTracker/Records/interface/SiStripQualityRcd.h"
 #include <cmath>
+#include <cstdint>
 
 void TT6CMNSubtractor::init(const edm::EventSetup& es) {
   uint32_t n_cache_id = es.get<SiStripNoisesRcd>().cacheIdentifier();

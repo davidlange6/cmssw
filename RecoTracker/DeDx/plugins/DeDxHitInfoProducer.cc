@@ -16,6 +16,7 @@
 //
 
 #include "RecoTracker/DeDx/plugins/DeDxHitInfoProducer.h"
+#include <cstdint>
 
 // system include files
 

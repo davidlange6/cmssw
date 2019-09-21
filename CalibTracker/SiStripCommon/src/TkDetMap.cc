@@ -3,6 +3,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include "CalibTracker/SiStripCommon/interface/TkDetMap.h"
+#include <cstdint>
 
 // TkLayerMap
 

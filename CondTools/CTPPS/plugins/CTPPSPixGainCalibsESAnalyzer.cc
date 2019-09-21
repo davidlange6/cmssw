@@ -11,6 +11,7 @@
 #include "CondFormats/DataRecord/interface/CTPPSPixelGainCalibrationsRcd.h"
 #include "TH2D.h"
 #include "TFile.h"
+#include <cstdint>
 
 class CTPPSPixGainCalibsESAnalyzer : public edm::one::EDAnalyzer<> {
 public:

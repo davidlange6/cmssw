@@ -1,4 +1,5 @@
 #include "EventFilter/RPCRawToDigi/interface/RPCMP7Record.h"
+#include <cstdint>
 
 namespace rpcmp7 {
 

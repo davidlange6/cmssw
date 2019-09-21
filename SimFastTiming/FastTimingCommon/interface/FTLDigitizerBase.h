@@ -84,6 +84,7 @@ private:
 };
 
 #include "FWCore/PluginManager/interface/PluginFactory.h"
+#include <cstdint>
 typedef edmplugin::PluginFactory<FTLDigitizerBase*(
     const edm::ParameterSet&, edm::ConsumesCollector&, edm::ProducerBase&)>
     FTLDigitizerFactory;

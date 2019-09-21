@@ -23,6 +23,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 /**
  *  Constructor

@@ -15,6 +15,7 @@
  */
 
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelGainCalibrationForHLTSimService.h"
+#include <cstdint>
 
 float SiPixelGainCalibrationForHLTSimService::getPedestal(const uint32_t& detID, const int& col, const int& row) {
   bool isDead = false;

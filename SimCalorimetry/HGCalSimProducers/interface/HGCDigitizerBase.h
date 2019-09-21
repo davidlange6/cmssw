@@ -22,6 +22,7 @@
 #include "Geometry/HcalTowerAlgo/interface/HcalGeometry.h"
 
 #include "SimCalorimetry/HGCalSimAlgos/interface/HGCalSiNoiseMap.h"
+#include <cstdint>
 
 namespace hgc = hgc_digi;
 

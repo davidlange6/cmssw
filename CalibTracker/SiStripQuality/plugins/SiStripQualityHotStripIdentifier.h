@@ -16,6 +16,7 @@
 #include "CalibTracker/SiStripQuality/interface/SiStripQualityHistos.h"
 
 #include <vector>
+#include <cstdint>
 
 class TrackerTopology;
 

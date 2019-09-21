@@ -20,6 +20,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include <memory>
+#include <cstdint>
 
 // Class declaration
 

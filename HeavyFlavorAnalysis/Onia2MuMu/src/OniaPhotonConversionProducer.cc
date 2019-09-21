@@ -16,6 +16,7 @@
 
 #include <TMath.h>
 #include <vector>
+#include <cstdint>
 
 // to order from high to low ProbChi2
 bool ConversionLessByChi2(const reco::Conversion& c1, const reco::Conversion& c2) {

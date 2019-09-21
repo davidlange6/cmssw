@@ -19,6 +19,7 @@
 
 #include "CaloCollections.h"
 #include "RCTEmRegionUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

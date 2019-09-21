@@ -37,6 +37,7 @@
 #include "TFile.h"
 #include "TSystem.h"
 #include <iostream>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

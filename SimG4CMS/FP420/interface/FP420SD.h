@@ -25,6 +25,7 @@
 #include "G4VPhysicalVolume.hh"
 
 #include <string>
+#include <cstdint>
 
 class TrackingSlaveSD;
 //AZ:

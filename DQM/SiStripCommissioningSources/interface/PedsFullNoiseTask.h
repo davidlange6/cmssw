@@ -6,6 +6,7 @@
 #include "DataFormats/Common/interface/DetSet.h"
 #include "DQM/SiStripCommissioningSources/interface/CommissioningTask.h"
 #include "DQMServices/Core/interface/DQMStore.h"
+#include <cstdint>
 
 // Forward Declarations
 namespace edm {

@@ -22,6 +22,7 @@
 #include "L1Trigger/L1THGCal/interface/backend/HGCalClusteringDummyImpl.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
 #include "Geometry/Records/interface/CaloGeometryRecord.h"
+#include <cstdint>
 
 class CaloTruthCellsProducer : public edm::stream::EDProducer<> {
 public:

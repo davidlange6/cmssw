@@ -29,6 +29,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "DataFormats/SiPixelDigi/interface/SiPixelCalibDigi.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 //
 // class decleration

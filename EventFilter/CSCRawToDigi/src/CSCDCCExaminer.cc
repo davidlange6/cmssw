@@ -24,6 +24,7 @@
 #endif
 
 #include <iomanip>
+#include <cstdint>
 using namespace std;
 
 void CSCDCCExaminer::crcALCT(bool enable) {

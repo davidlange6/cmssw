@@ -2,6 +2,7 @@
 #define ETLNumberingScheme_h
 
 #include "Geometry/MTDCommonData/interface/MTDNumberingScheme.h"
+#include <cstdint>
 
 class ETLNumberingScheme : public MTDNumberingScheme {
 public:

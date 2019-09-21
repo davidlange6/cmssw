@@ -2,6 +2,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctJetEtCalibrationLut.h"
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctJetCand.h"
+#include <cstdint>
 
 L1GctJet::L1GctJet(const uint16_t rawsum,
                    const unsigned eta,

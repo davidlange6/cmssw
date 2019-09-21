@@ -4,6 +4,7 @@
 #include "DQM/SiStripCommissioningSummary/interface/SummaryPlotFactory.h"
 #include "DQM/SiStripCommissioningSummary/interface/SummaryPlotFactoryBase.h"
 #include "CondFormats/SiStripObjects/interface/FedCablingAnalysis.h"
+#include <cstdint>
 
 template <>
 class SummaryPlotFactory<FedCablingAnalysis*> : public SummaryPlotFactoryBase {

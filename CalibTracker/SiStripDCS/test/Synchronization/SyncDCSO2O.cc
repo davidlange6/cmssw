@@ -13,6 +13,7 @@
 
 #include "TFile.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 SyncDCSO2O::SyncDCSO2O(const edm::ParameterSet& iConfig) {
   // get all digi collections

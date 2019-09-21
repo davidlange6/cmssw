@@ -11,6 +11,7 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
+#include <cstdint>
 /* #include "DataFormats/Math/interface/PtEtaPhiMass.h" */
 
 class testPackedGenParticle;

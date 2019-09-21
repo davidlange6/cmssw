@@ -1,4 +1,5 @@
 #include "DQMOffline/CalibTracker/plugins/SiStripPopConHistoryDQMBase.h"
+#include <cstdint>
 
 SiStripPopConHistoryDQMBase::SiStripPopConHistoryDQMBase(const edm::ParameterSet& iConfig)
     : SiStripDQMPopConSourceHandler<HDQMSummary>(iConfig),

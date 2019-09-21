@@ -5,6 +5,7 @@
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/CaloTowers/interface/CaloTowerDetId.h"
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
+#include <cstdint>
 
 /** \class CaloTowerTopology
   *  

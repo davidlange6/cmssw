@@ -10,6 +10,7 @@
 #include "Geometry/Records/interface/PCastorRcd.h"
 
 #include <vector>
+#include <cstdint>
 
 class CastorGeometry : public CaloSubdetectorGeometry {
 public:

@@ -8,6 +8,7 @@
 
 // Phase 1 rechit status bit assignments
 #include "DataFormats/METReco/interface/HcalPhase1FlagLabels.h"
+#include <cstdint>
 
 namespace {
   inline float build_rechit_time(const float weightedEnergySum,

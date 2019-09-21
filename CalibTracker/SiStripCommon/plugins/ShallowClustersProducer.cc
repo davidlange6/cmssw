@@ -9,6 +9,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
+#include <cstdint>
 
 ShallowClustersProducer::ShallowClustersProducer(const edm::ParameterSet& iConfig)
     : Prefix(iConfig.getParameter<std::string>("Prefix")) {

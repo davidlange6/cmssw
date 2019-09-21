@@ -12,6 +12,7 @@
 
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

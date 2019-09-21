@@ -15,6 +15,7 @@
 #include "DQM/HcalCommon/interface/ContainerProf2D.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
 #include "DQM/HcalCommon/interface/HashFilter.h"
+#include <cstdint>
 
 class DigiComparisonTask : public hcaldqm::DQTask {
 public:

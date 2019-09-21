@@ -11,6 +11,7 @@
 #include "SimG4CMS/Calo/interface/HGCalNumberingScheme.h"
 
 #include <string>
+#include <cstdint>
 
 class HGCalDDDConstants;
 class G4LogicalVolume;

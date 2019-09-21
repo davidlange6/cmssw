@@ -6,6 +6,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <cstdint>
 
 gctTestSingleEvent::gctTestSingleEvent() {}
 gctTestSingleEvent::~gctTestSingleEvent() {}

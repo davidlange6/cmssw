@@ -9,6 +9,7 @@
 #include "SimGeneral/MixingModule/interface/DigiAccumulatorMixMod.h"
 #include "SimDataFormats/PileupSummaryInfo/interface/PileupMixingContent.h"
 #include "FWCore/Framework/interface/ESHandle.h"
+#include <cstdint>
 
 class TrackerTopology;
 

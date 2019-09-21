@@ -10,6 +10,7 @@
 #include "CalibFormats/SiStripObjects/interface/SiStripRegionCabling.h"
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
+#include <cstdint>
 
 using namespace sistrip;
 

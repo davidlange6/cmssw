@@ -18,6 +18,7 @@
 #include <string>
 
 #include <string>
+#include <cstdint>
 
 using reco::isodeposit::Direction;
 

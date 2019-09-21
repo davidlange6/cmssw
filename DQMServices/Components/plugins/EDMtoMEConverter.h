@@ -47,6 +47,7 @@
 
 #include "classlib/utils/StringList.h"
 #include "classlib/utils/StringOps.h"
+#include <cstdint>
 
 class EDMtoMEConverter : public edm::one::EDProducer<edm::one::WatchRuns,
                                                      edm::one::WatchLuminosityBlocks,

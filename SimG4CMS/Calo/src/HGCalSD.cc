@@ -24,6 +24,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

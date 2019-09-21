@@ -46,6 +46,7 @@
 #include "EventFilter/L1TRawToDigi/interface/MP7PacketReader.h"
 #include "EventFilter/L1TRawToDigi/interface/Block.h"
 #include "EventFilter/L1TRawToDigi/interface/AMC13Spec.h"
+#include <cstdint>
 //#include "EventFilter/L1TRawToDigi/interface/PackingSetup.h"
 //
 // class declaration

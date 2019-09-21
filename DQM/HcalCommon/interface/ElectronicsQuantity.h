@@ -8,6 +8,7 @@
 
 #include "DQM/HcalCommon/interface/Quantity.h"
 #include "boost/unordered_map.hpp"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace quantity {

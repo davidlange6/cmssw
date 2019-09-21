@@ -11,6 +11,7 @@
 #include "G4Track.hh"
 
 #include <map>
+#include <cstdint>
 
 class G4Step;
 class G4HCofThisEvent;

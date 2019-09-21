@@ -37,6 +37,7 @@
 #include "FWCore/Utilities/interface/isFinite.h"
 #include "FWCore/Utilities/interface/transform.h"
 #include "SimTracker/TrackAssociation/interface/ResolutionModel.h"
+#include <cstdint>
 
 class TrackTimeValueMapProducer : public edm::global::EDProducer<> {
 public:

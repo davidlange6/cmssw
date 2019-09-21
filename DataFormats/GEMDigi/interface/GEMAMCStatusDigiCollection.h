@@ -3,6 +3,7 @@
 
 #include "DataFormats/GEMDigi/interface/GEMAMCStatusDigi.h"
 #include "DataFormats/MuonData/interface/MuonDigiCollection.h"
+#include <cstdint>
 
 typedef MuonDigiCollection<uint16_t, GEMAMCStatusDigi> GEMAMCStatusDigiCollection;
 

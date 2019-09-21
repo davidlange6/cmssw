@@ -1,5 +1,6 @@
 
 #include "DQM/HcalTasks/interface/DigiComparisonTask.h"
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

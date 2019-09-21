@@ -37,6 +37,7 @@
 #include "DataFormats/OnlineMetaData/interface/DCSRecord.h"
 #include "DataFormats/OnlineMetaData/interface/OnlineLuminosityRecord.h"
 #include "DataFormats/OnlineMetaData/interface/OnlineMetaDataRaw.h"
+#include <cstdint>
 
 //
 // class declaration

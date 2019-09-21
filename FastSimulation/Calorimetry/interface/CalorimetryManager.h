@@ -20,6 +20,7 @@
 //#include <boost/cstdint.hpp>
 #include <map>
 #include <algorithm>
+#include <cstdint>
 
 class FSimEvent;
 class FSimTrack;

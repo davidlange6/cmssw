@@ -19,6 +19,7 @@
 #include "TTree.h"
 #include "TBranch.h"
 #include "TH2F.h"
+#include <cstdint>
 
 class SiPixelBadModuleReader : public edm::EDAnalyzer {
 public:

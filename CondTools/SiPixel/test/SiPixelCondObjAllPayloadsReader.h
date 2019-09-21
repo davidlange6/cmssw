@@ -39,6 +39,7 @@
 #include "TBranch.h"
 #include "TH1F.h"
 #include <string>
+#include <cstdint>
 
 namespace cms {
   class SiPixelCondObjAllPayloadsReader : public edm::EDAnalyzer {

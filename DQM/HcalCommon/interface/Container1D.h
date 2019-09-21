@@ -20,6 +20,7 @@
 #include "boost/unordered_map.hpp"
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace hcaldqm {
   class Container1D : public Container {

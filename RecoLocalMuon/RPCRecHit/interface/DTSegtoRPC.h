@@ -9,6 +9,7 @@
 #include "DataFormats/RPCRecHit/interface/RPCRecHitCollection.h"
 
 #include <memory>
+#include <cstdint>
 
 class DTSegtoRPC {
 public:

@@ -3,6 +3,7 @@
 #include "EventFilter/EcalRawToDigi/interface/DCCDataUnpacker.h"
 #include <cstdio>
 #include "EventFilter/EcalRawToDigi/interface/EcalElectronicsMapper.h"
+#include <cstdint>
 
 DCCSCBlock::DCCSCBlock(
     DCCDataUnpacker *u, EcalElectronicsMapper *m, DCCEventBlock *e, bool unpack, bool forceToKeepFRdata)

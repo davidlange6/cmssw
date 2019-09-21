@@ -1,4 +1,5 @@
 #include "DQM/HcalTasks/interface/RecoRunSummary.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace constants;

@@ -2,6 +2,7 @@
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/CaloRecHit/interface/CaloCluster.h"
 #include "CLHEP/Units/GlobalPhysicalConstants.h"
+#include <cstdint>
 
 using namespace reco;
 

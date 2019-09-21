@@ -70,6 +70,7 @@
 #include "TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHitBuilder.h"
 #include <TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHit.h>
 #include "TrackingTools/Records/interface/TransientRecHitRecord.h"
+#include <cstdint>
 
 //#define SIM // use for single muon simulations
 

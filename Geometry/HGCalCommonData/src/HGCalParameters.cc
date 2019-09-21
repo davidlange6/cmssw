@@ -167,5 +167,6 @@ std::array<int, 4> HGCalParameters::getID(unsigned int k) const {
 }
 
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 
 TYPELOOKUP_DATA_REG(HGCalParameters);

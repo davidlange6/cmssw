@@ -58,6 +58,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <cstdint>
 //
 // class decleration
 //

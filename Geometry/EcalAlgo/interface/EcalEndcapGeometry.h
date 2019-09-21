@@ -14,6 +14,7 @@
 #include <vector>
 #include <map>
 #include <atomic>
+#include <cstdint>
 
 class TruncatedPyramid;
 

@@ -13,6 +13,7 @@
 #include "TList.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 namespace AlignmentPI {
 

@@ -1126,4 +1126,5 @@ void NVProfilerService::postSourceConstruction(edm::ModuleDescription const& des
 }
 
 #include "FWCore/ServiceRegistry/interface/ServiceMaker.h"
+#include <cstdint>
 DEFINE_FWK_SERVICE(NVProfilerService);

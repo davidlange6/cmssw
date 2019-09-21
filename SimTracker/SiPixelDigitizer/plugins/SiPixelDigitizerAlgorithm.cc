@@ -108,6 +108,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 
 #include "CondFormats/SiPixelObjects/interface/PixelROC.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace sipixelobjects;

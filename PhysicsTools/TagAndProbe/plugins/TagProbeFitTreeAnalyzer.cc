@@ -7,6 +7,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "PhysicsTools/TagAndProbe/interface/TagProbeFitter.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

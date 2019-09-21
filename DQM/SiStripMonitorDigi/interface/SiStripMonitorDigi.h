@@ -23,6 +23,7 @@
 #include "DQM/SiStripCommon/interface/SiStripFolderOrganizer.h"
 
 #include <DQMServices/Core/interface/oneDQMEDAnalyzer.h>
+#include <cstdint>
 
 class SiStripDCSStatus;
 class SiStripDetCabling;

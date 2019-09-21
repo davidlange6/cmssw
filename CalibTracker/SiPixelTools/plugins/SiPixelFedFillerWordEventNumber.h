@@ -17,6 +17,7 @@
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 #include "DataFormats/FEDRawData/interface/FEDTrailer.h"
+#include <cstdint>
 
 //===== class decleration
 class SiPixelFedFillerWordEventNumber : public edm::EDProducer {

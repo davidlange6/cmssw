@@ -13,6 +13,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "CondFormats/SiPixelObjects/interface/SiPixel2DTemplateDBObject.h"
+#include <cstdint>
 
 class SiPixel2DTemplateDBObjectUploader : public edm::EDAnalyzer {
 public:

@@ -3,6 +3,7 @@
 
 #include "CaloCollections.h"
 #include "CaloSpareHFUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

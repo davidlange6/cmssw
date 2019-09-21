@@ -22,6 +22,7 @@
 #include <TLegend.h>
 #include <TGraph.h>
 #include <TH1.h>
+#include <cstdint>
 
 class SiStripDetVOffPrinter : public edm::one::EDAnalyzer<> {
 public:

@@ -16,6 +16,7 @@
 
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelGainCalibrationForHLTService.h"
 #include <tuple>
+#include <cstdint>
 
 void SiPixelGainCalibrationForHLTService::calibrate(
     uint32_t detID, DigiIterator b, DigiIterator e, float conversionFactor, float offset, int* electron) {

@@ -22,6 +22,7 @@
 #endif
 #include <string>
 #include <map>
+#include <cstdint>
 
 class EcalBaseNumber;
 class G4LogicalVolume;

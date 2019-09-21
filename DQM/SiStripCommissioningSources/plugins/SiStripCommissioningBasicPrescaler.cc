@@ -21,6 +21,7 @@
 
 // user include files
 #include "DQM/SiStripCommissioningSources/interface/SiStripCommissioningBasicPrescaler.h"
+#include <cstdint>
 
 //
 // constructors and destructor

@@ -15,6 +15,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace hcaldqm {
   namespace mapper {

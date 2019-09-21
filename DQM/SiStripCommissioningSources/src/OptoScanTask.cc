@@ -8,6 +8,7 @@
 
 #include "DataFormats/SiStripCommon/interface/SiStripFedKey.h"
 #include <iomanip>
+#include <cstdint>
 
 using namespace sistrip;
 

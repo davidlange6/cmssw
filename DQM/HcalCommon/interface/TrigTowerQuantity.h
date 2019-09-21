@@ -7,6 +7,7 @@
  */
 
 #include "DQM/HcalCommon/interface/Quantity.h"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace quantity {

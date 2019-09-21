@@ -56,6 +56,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdint>
 
 TrackerGeometryCompare::TrackerGeometryCompare(const edm::ParameterSet& cfg)
     : referenceTracker(nullptr),

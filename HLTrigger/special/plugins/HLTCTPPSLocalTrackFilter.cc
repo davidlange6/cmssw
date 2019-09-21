@@ -189,4 +189,5 @@ bool HLTCTPPSLocalTrackFilter::filter(edm::StreamID, edm::Event& iEvent, const e
 
 // define as a framework module
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(HLTCTPPSLocalTrackFilter);

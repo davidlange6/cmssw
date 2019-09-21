@@ -25,6 +25,7 @@
 #include "CLHEP/Units/GlobalPhysicalConstants.h"
 #include "Randomize.hh"
 #include "G4Poisson.hh"
+#include <cstdint>
 
 //#define debugLog
 

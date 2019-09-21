@@ -15,6 +15,7 @@
 
 #include "Geometry/HGCalGeometry/interface/HGCalGeometry.h"
 #include "RecoLocalCalo/HGCalRecAlgos/interface/RecHitTools.h"
+#include <cstdint>
 
 class HGCalRecHitWorkerSimple : public HGCalRecHitWorkerBaseClass {
 public:

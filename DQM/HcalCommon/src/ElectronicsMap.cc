@@ -1,5 +1,6 @@
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
 #include <iomanip>
+#include <cstdint>
 
 namespace hcaldqm {
   namespace electronicsmap {

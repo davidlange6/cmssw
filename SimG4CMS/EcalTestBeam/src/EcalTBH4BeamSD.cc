@@ -18,6 +18,7 @@
 #include "G4VProcess.hh"
 
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 EcalTBH4BeamSD::EcalTBH4BeamSD(const std::string &name,
                                const edm::EventSetup &es,

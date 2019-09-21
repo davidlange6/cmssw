@@ -16,6 +16,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "Geometry/HGCalGeometry/interface/HGCalGeometry.h"
+#include <cstdint>
 
 template <class C>
 class HGCalUncalibRecHitRecWeightsAlgo {

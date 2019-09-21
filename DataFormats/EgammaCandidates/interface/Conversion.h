@@ -18,6 +18,7 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/CaloRecHit/interface/CaloCluster.h"
 #include "DataFormats/CaloRecHit/interface/CaloClusterFwd.h"
+#include <cstdint>
 
 namespace reco {
   class Conversion {

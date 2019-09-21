@@ -13,6 +13,7 @@
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
+#include <cstdint>
 
 class TrackWithVertexSelector {
 public:

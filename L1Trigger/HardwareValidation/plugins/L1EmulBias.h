@@ -31,6 +31,7 @@
 // random generation
 #include "CLHEP/Random/RandomEngine.h"
 #include "CLHEP/Random/RandGaussQ.h"
+#include <cstdint>
 
 class L1EmulBias : public edm::EDProducer {
 public:

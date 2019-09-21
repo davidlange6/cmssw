@@ -943,6 +943,7 @@ void SeedForPhotonConversionFromQuadruplets::stupidPrint(const char* s, GlobalPo
 }
 
 #include "DataFormats/Math/interface/deltaPhi.h"
+#include <cstdint>
 
 void SeedForPhotonConversionFromQuadruplets::bubbleSortVsPhi(GlobalPoint arr[], int n, GlobalPoint vtx) {
   bool swapped = true;

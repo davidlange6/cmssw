@@ -27,6 +27,7 @@ ________________________________________________________________**/
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
+#include <cstdint>
 
 class SiPixelStatusProducer
     : public edm::one::EDProducer<edm::EndLuminosityBlockProducer, edm::one::WatchLuminosityBlocks, edm::Accumulator> {

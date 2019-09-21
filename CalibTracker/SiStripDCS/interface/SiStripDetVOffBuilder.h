@@ -24,6 +24,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <cstdint>
 
 /**	
    \class SiStripDetVOffBuilder

@@ -2,6 +2,7 @@
 
 #include <ostream>
 #include <sstream>
+#include <cstdint>
 
 RPCFebConnector::RPCFebConnector(RPCDetId const& rpc_det_id, unsigned int first_strip, int slope, std::uint16_t channels)
     : first_strip_(1), slope_(slope < 0 ? -1 : 1), channels_(channels), rpc_det_id_(rpc_det_id.rawId()) {

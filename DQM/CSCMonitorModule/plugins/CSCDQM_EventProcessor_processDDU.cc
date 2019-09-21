@@ -17,6 +17,7 @@
  */
 
 #include "CSCDQM_EventProcessor.h"
+#include <cstdint>
 
 namespace cscdqm {
 

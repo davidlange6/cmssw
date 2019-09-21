@@ -48,6 +48,7 @@
 //ROOT inclusion
 #include "TH1F.h"
 #include "TProfile.h"
+#include <cstdint>
 
 //
 // class decleration

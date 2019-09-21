@@ -2,6 +2,7 @@
 
 #include "CondFormats/DataRecord/interface/SiStripPedestalsRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripPedestals.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

@@ -5,6 +5,7 @@
 
 #include <DataFormats/MuonDetId/interface/CSCDetId.h>
 #include <vector>
+#include <cstdint>
 
 class CSCBadChambers {
 public:

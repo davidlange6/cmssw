@@ -9,6 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <cstdint>
 
 popcon::EcalLaser_weekly_Linearization::EcalLaser_weekly_Linearization(const edm::ParameterSet &ps)
     : m_name(ps.getUntrackedParameter<std::string>("name", "EcalLaser_weekly_Handler")) {

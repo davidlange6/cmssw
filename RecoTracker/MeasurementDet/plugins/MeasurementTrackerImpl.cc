@@ -41,6 +41,7 @@
 #include <typeinfo>
 #include <map>
 #include <algorithm>
+#include <cstdint>
 
 //
 

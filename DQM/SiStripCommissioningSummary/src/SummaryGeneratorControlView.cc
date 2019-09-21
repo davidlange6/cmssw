@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <cmath>
+#include <cstdint>
 
 using namespace sistrip;
 

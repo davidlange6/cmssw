@@ -5,6 +5,7 @@
 #include "RecoTauTag/RecoTau/interface/RecoTauQualityCuts.h"
 #include "RecoTauTag/RecoTau/interface/RecoTauVertexAssociator.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
+#include <cstdint>
 
 /* class PFRecoTauDiscriminationByNProngs
  * created : August 30 2010,

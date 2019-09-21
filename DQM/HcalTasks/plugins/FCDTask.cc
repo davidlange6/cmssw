@@ -1,5 +1,6 @@
 
 #include "DQM/HcalTasks/interface/FCDTask.h"
+#include <cstdint>
 
 bool operator==(const FCDTask::FCDChannel& lhs, const FCDTask::FCDChannel& rhs) {
   return ((lhs.crate == rhs.crate) && (lhs.slot == rhs.slot) && (lhs.fiber == rhs.fiber) &&

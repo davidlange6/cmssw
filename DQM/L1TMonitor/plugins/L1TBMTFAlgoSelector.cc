@@ -4,6 +4,7 @@
 */
 
 #include "L1TBMTFAlgoSelector.h"
+#include <cstdint>
 
 //The Constructor defines what to be consumed and produced
 dqmBmtfAlgoSelector::L1TBMTFAlgoSelector::L1TBMTFAlgoSelector(const edm::ParameterSet &ps) {

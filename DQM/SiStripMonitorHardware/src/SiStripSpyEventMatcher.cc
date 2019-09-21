@@ -24,6 +24,7 @@
 #include <algorithm>
 #include <limits>
 #include <memory>
+#include <cstdint>
 
 using edm::LogError;
 using edm::LogInfo;

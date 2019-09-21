@@ -18,6 +18,7 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <cstdint>
 
 class ApvAnalysisFactory {
 public:

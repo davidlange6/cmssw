@@ -8,6 +8,7 @@
 #include "DataFormats/HcalDetId/interface/HcalZDCDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalCastorDetId.h"
 #include "DataFormats/CaloTowers/interface/CaloTowerDetId.h"
+#include <cstdint>
 
 class CaloGenericDetId : public DetId {
 public:

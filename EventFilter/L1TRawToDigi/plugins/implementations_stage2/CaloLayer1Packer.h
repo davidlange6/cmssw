@@ -4,6 +4,7 @@
 #include "EventFilter/L1TRawToDigi/interface/Packer.h"
 #include "CaloLayer1Tokens.h"
 #include "UCTCTP7RawData.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

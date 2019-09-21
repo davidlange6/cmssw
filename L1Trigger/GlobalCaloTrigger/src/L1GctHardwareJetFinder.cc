@@ -1,4 +1,5 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctHardwareJetFinder.h"
+#include <cstdint>
 
 //DEFINE STATICS
 const unsigned int L1GctHardwareJetFinder::N_COLS = 2;

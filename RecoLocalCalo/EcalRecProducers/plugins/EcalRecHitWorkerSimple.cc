@@ -158,4 +158,5 @@ EcalRecHitWorkerSimple::~EcalRecHitWorkerSimple() { delete rechitMaker_; }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "RecoLocalCalo/EcalRecProducers/interface/EcalRecHitWorkerFactory.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(EcalRecHitWorkerFactory, EcalRecHitWorkerSimple, "EcalRecHitWorkerSimple");

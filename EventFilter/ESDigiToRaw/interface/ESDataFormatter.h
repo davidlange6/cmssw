@@ -12,6 +12,7 @@
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include "DataFormats/FEDRawData/interface/FEDRawData.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 class ESDataFormatter {
 public:

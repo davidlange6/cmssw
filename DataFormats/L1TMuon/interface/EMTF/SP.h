@@ -5,6 +5,7 @@
 
 
 #include <vector>
+#include <cstdint>
 
 namespace l1t {
   namespace emtf {

@@ -64,6 +64,7 @@
 #include "TrackingTools/KalmanUpdators/interface/Chi2MeasurementEstimator.h"
 #include "TrackingTools/MeasurementDet/interface/LayerMeasurements.h"
 #include "TrackingTools/Records/interface/TrackingComponentsRecord.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

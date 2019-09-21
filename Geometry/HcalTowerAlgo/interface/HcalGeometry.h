@@ -10,6 +10,7 @@
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
 #include "CondFormats/AlignmentRecord/interface/HcalAlignmentRcd.h"
 #include "Geometry/Records/interface/HcalGeometryRecord.h"
+#include <cstdint>
 
 class HcalFlexiHardcodeGeometryLoader;
 class HcalHardcodeGeometryLoader;

@@ -15,6 +15,7 @@
 
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 HFWedgeSD::HFWedgeSD(const std::string& iname,
                      const edm::EventSetup& es,

@@ -5,6 +5,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
+#include <cstdint>
 
 SiStripCorrelateBadStripAndNoise::SiStripCorrelateBadStripAndNoise(const edm::ParameterSet &iConfig)
     : cacheID_quality(0xFFFFFFFF), cacheID_noise(0xFFFFFFFF) {

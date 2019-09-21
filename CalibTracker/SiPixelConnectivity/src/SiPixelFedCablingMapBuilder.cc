@@ -26,6 +26,7 @@
 #include <bitset>
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using namespace std;
 using namespace sipixelobjects;

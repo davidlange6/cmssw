@@ -4,6 +4,7 @@
 
 #include "DataFormats/ForwardDetId/interface/BTLDetId.h"
 #include "DataFormats/ForwardDetId/interface/ETLDetId.h"
+#include <cstdint>
 
 void CmsMTDConstruction::buildComponent(DDFilteredView& fv, GeometricTimingDet* mother, std::string attribute) {
   //

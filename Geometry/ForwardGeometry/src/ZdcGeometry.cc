@@ -4,6 +4,7 @@
 #include "Geometry/ForwardGeometry/interface/IdealZDCTrapezoid.h"
 #include "ZdcHardcodeGeometryData.h"
 #include <algorithm>
+#include <cstdint>
 
 typedef CaloCellGeometry::CCGFloat CCGFloat;
 typedef CaloCellGeometry::Pt3D Pt3D;

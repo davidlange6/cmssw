@@ -6,6 +6,7 @@
 #include <functional>
 
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 namespace hgc_digi {
 

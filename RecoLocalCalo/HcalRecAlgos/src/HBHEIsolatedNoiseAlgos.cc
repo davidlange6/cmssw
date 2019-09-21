@@ -33,6 +33,7 @@ Original Author: John Paul Chou (Brown University)
 #include "CondFormats/HcalObjects/interface/HcalChannelQuality.h"
 #include "RecoLocalCalo/HcalRecAlgos/interface/HcalSeverityLevelComputer.h"
 #include "RecoLocalCalo/EcalRecAlgos/interface/EcalSeverityLevelAlgo.h"
+#include <cstdint>
 
 ////////////////////////////////////////////////////////////
 //

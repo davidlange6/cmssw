@@ -2,6 +2,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripQualityDQM::SiStripQualityDQM(const edm::EventSetup &eSetup,

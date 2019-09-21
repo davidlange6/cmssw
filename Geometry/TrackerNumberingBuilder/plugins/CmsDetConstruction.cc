@@ -3,6 +3,7 @@
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsDetConstruction.h"
 #include "Geometry/TrackerNumberingBuilder/plugins/ExtractStringFromDDD.h"
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 template <class FilteredView>
 void CmsDetConstruction<FilteredView>::buildSmallDetsforGlued(FilteredView& fv,

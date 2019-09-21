@@ -7,6 +7,7 @@
 #include "EventFilter/L1TRawToDigi/interface/Block.h"
 #include "DataFormats/L1TMuon/interface/RegionalMuonCand.h"
 #include "FWCore/Framework/interface/Event.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

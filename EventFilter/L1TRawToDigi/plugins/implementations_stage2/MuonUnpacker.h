@@ -4,6 +4,7 @@
 #include "EventFilter/L1TRawToDigi/interface/Unpacker.h"
 #include "EventFilter/L1TRawToDigi/interface/Block.h"
 #include "L1TObjectCollections.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

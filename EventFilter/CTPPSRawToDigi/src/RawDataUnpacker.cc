@@ -10,6 +10,7 @@
 #include "EventFilter/CTPPSRawToDigi/interface/RawDataUnpacker.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

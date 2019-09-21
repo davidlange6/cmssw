@@ -1,5 +1,6 @@
 
 #include "DQM/HcalTasks/interface/UMNioTask.h"
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

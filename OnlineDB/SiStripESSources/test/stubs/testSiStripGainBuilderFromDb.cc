@@ -10,6 +10,7 @@
 #include <sstream>
 #include <math.h>
 #include <iomanip>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 //

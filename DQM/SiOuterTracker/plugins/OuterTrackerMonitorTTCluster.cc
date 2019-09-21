@@ -35,6 +35,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 
 #include "DQM/SiOuterTracker/interface/OuterTrackerMonitorTTCluster.h"
+#include <cstdint>
 
 //
 // constructors and destructor

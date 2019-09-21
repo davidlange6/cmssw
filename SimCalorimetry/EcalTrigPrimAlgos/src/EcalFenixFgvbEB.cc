@@ -2,6 +2,7 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGFineGrainEBIdMap.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <SimCalorimetry/EcalTrigPrimAlgos/interface/EcalFenixFgvbEB.h>
+#include <cstdint>
 
 EcalFenixFgvbEB::EcalFenixFgvbEB(int maxNrSamples) { add_out_8_.resize(maxNrSamples); }
 

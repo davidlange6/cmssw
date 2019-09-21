@@ -18,6 +18,7 @@
 #include "DataFormats/EcalDigi/interface/EcalDigiCollections.h"
 
 #include "Geometry/CaloTopology/interface/EcalTrigTowerConstituentsMap.h"
+#include <cstdint>
 
 class EcalTPSkimmer : public edm::stream::EDProducer<> {
 public:

@@ -6,6 +6,7 @@
 #include "DataFormats/ParticleFlowReco/interface/HGCalMultiCluster.h"
 
 #include "Fireworks/Core/interface/FWProxyBuilderConfiguration.h"
+#include <cstdint>
 
 class FWHGCalMultiClusterProxyBuilder : public FWHeatmapProxyBuilderTemplate<reco::HGCalMultiCluster> {
 public:

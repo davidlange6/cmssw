@@ -21,6 +21,7 @@
 #include <map>
 #include <vector>
 #include "CondFormats/RPCObjects/interface/L1RPCConeBuilder.h"
+#include <cstdint>
 
 class RPCRoll;
 

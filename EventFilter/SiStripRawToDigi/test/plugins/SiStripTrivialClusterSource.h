@@ -13,6 +13,7 @@
 #include "CalibFormats/SiStripObjects/interface/SiStripDetCabling.h"
 #include "TRandom.h"
 #include <vector>
+#include <cstdint>
 
 /**
     @file EventFilter/SiStripRawToDigi/test/plugins/SiStripTrivialClusterSource.h

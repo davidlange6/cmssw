@@ -1,6 +1,7 @@
 #include "RecoTauTag/RecoTau/interface/RecoTauMuonTools.h"
 
 #include "DataFormats/TrackReco/interface/HitPattern.h"
+#include <cstdint>
 
 namespace reco {
   namespace tau {

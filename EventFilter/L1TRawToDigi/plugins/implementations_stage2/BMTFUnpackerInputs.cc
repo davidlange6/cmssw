@@ -4,6 +4,7 @@
 
 #include "DataFormats/L1DTTrackFinder/interface/L1MuDTChambPhContainer.h"
 #include "DataFormats/L1DTTrackFinder/interface/L1MuDTChambThContainer.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

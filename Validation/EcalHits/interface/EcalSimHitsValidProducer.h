@@ -12,6 +12,7 @@
 #include "SimG4Core/Watcher/interface/SimProducer.h"
 
 #include "DataFormats/Math/interface/LorentzVector.h"
+#include <cstdint>
 
 class BeginOfEvent;
 class G4Step;

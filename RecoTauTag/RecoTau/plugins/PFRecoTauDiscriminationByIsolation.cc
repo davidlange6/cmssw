@@ -12,6 +12,7 @@
 
 #include "TMath.h"
 #include "TFormula.h"
+#include <cstdint>
 
 /* class PFRecoTauDiscriminationByIsolation
  * created : Jul 23 2007,

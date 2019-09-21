@@ -13,6 +13,7 @@
 #include "RecoLocalCalo/EcalRecAlgos/interface/EcalSeverityLevelAlgo.h"
 
 #include "SUSYBSMAnalysis/HSCP/interface/BetaCalculatorECAL.h"
+#include <cstdint>
 
 using namespace susybsm;
 

@@ -51,6 +51,7 @@
 
 // severity level assignment for ECAL
 #include "RecoLocalCalo/EcalRecAlgos/interface/EcalSeverityLevelAlgo.h"
+#include <cstdint>
 
 class HcalRecHitsValidation : public DQMEDAnalyzer {
 public:

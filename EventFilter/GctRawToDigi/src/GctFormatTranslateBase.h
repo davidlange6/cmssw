@@ -11,6 +11,7 @@
 #include "L1Trigger/TextToDigi/src/SourceCardRouting.h"
 #include "EventFilter/GctRawToDigi/src/GctBlockHeader.h"
 #include "EventFilter/GctRawToDigi/src/GctUnpackCollections.h"
+#include <cstdint>
 
 /*!
 * \class GctFormatTranslateBase

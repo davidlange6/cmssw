@@ -1,6 +1,7 @@
 #include "CalibTracker/SiStripCommon/interface/ShallowGainCalibration.h"
 #include "CalibFormats/SiStripObjects/interface/SiStripGain.h"
 #include "CalibTracker/Records/interface/SiStripGainRcd.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace reco;

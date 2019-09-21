@@ -26,6 +26,7 @@ track residuals on each detector module
 #include <DQMServices/Core/interface/DQMEDAnalyzer.h>
 #include <fstream>
 #include <memory>
+#include <cstdint>
 
 class GenericTriggerEventFlag;
 namespace edm {

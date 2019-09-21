@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "UCTTower.hh"
+#include <cstdint>
 
 namespace l1tcalo {
   constexpr uint32_t RegionETMask{0x000003FF};

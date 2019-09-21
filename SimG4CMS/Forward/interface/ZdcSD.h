@@ -9,6 +9,7 @@
 #include "SimG4CMS/Calo/interface/CaloSD.h"
 #include "SimG4CMS/Forward/interface/ZdcShowerLibrary.h"
 #include "SimG4CMS/Forward/interface/ZdcNumberingScheme.h"
+#include <cstdint>
 
 class ZdcSD : public CaloSD {
 public:

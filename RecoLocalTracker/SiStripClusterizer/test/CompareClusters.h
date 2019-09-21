@@ -14,6 +14,7 @@ class SiStripDigi;
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <sstream>
+#include <cstdint>
 
 class CompareClusters : public edm::EDAnalyzer {
   typedef edmNew::DetSetVector<SiStripCluster> input_t;

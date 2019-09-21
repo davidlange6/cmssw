@@ -20,6 +20,7 @@
 #include "DataFormats/SiPixelDetId/interface/PixelFEDChannel.h"
 #include "CalibTracker/Records/interface/SiPixelFEDChannelContainerESProducerRcd.h"
 #include "boost/multi_array.hpp"
+#include <cstdint>
 
 typedef boost::multi_array<float, 2> array_2d;
 

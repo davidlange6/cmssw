@@ -5,6 +5,7 @@
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
 
 #include "DataFormats/Math/interface/liblogintpack.h"
+#include <cstdint>
 using namespace logintpack;
 
 CovarianceParameterization pat::PackedCandidate::covarianceParameterization_;

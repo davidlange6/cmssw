@@ -14,6 +14,7 @@
 #include "CLHEP/Units/GlobalPhysicalConstants.h"
 
 #include <iostream>
+#include <cstdint>
 
 PltSD::PltSD(const std::string& name,
              const edm::EventSetup& es,

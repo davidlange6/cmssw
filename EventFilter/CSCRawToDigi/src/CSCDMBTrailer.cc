@@ -3,6 +3,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCDMBTrailer2013.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 CSCDMBTrailer::CSCDMBTrailer(uint16_t firmware_version) : theTrailerFormat(), theFirmwareVersion(firmware_version) {
   if (theFirmwareVersion == 2013) {

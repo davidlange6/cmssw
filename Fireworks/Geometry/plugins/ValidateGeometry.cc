@@ -58,6 +58,7 @@
 #include <TGeoArb8.h>
 #include <TFile.h>
 #include <TH1.h>
+#include <cstdint>
 
 class ValidateGeometry : public edm::EDAnalyzer {
 public:

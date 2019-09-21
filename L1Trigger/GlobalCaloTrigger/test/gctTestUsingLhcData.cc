@@ -13,6 +13,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GlobalCaloTrigger.h"
 
 #include <iostream>
+#include <cstdint>
 
 gctTestUsingLhcData::gctTestUsingLhcData() {}
 gctTestUsingLhcData::~gctTestUsingLhcData() {}

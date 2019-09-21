@@ -13,6 +13,7 @@
 #include "RecoParticleFlow/PFClusterProducer/plugins/SimMappers/RealisticHitToClusterAssociator.h"
 #include "RecoParticleFlow/PFClusterProducer/plugins/SimMappers/ComputeClusterTime.h"
 #include "RecoParticleFlow/PFClusterProducer/plugins/SimMappers/RealisticCluster.h"
+#include <cstdint>
 
 #ifdef PFLOW_DEBUG
 #define LOGVERB(x) edm::LogVerbatim(x)

@@ -2,6 +2,7 @@
 #define GctFormatTranslateV35_h_
 
 #include "EventFilter/GctRawToDigi/src/GctFormatTranslateBase.h"
+#include <cstdint>
 
 /*!
 * \class GctFormatTranslateV35

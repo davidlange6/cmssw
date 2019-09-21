@@ -19,6 +19,7 @@
 #include "Geometry/MTDNumberingBuilder/interface/GeometricTimingDetExtra.h"
 
 #include <memory>
+#include <cstdint>
 
 class MTDGeometricTimingDetExtraESModule : public edm::ESProducer {
 public:

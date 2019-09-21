@@ -630,5 +630,6 @@ DetId HGCalTopology::changeXY(const DetId& id, int nrStepsX, int nrStepsY) const
 DetId HGCalTopology::changeZ(const DetId& id, int nrStepsZ) const { return DetId(); }
 
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 
 TYPELOOKUP_DATA_REG(HGCalTopology);

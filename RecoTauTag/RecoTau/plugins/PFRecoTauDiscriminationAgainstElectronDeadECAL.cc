@@ -32,6 +32,7 @@
 #include "DataFormats/TauReco/interface/PFTauDiscriminator.h"
 
 #include <TMath.h>
+#include <cstdint>
 
 using namespace reco;
 

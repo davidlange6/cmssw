@@ -2,6 +2,7 @@
 #define MuonRawDigiTranslator_h
 
 #include "DataFormats/L1Trigger/interface/Muon.h"
+#include <cstdint>
 
 namespace l1t {
   class MuonRawDigiTranslator {

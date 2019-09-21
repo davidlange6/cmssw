@@ -40,6 +40,7 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 
 #include "Alignment/HIPAlignmentAlgorithm/interface/HIPAlignmentAlgorithm.h"
+#include <cstdint>
 
 // Constructor ----------------------------------------------------------------
 HIPAlignmentAlgorithm::HIPAlignmentAlgorithm(const edm::ParameterSet& cfg)

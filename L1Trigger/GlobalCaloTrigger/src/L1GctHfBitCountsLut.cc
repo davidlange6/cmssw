@@ -1,4 +1,5 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctHfBitCountsLut.h"
+#include <cstdint>
 
 //DEFINE STATICS
 const int L1GctHfBitCountsLut::NAddress = 5;

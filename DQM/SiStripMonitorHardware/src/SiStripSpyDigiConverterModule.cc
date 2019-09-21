@@ -169,5 +169,6 @@ namespace sistrip {
 }  // namespace sistrip
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 typedef sistrip::SpyDigiConverterModule SiStripSpyDigiConverterModule;
 DEFINE_FWK_MODULE(SiStripSpyDigiConverterModule);

@@ -22,6 +22,7 @@
 #include "CLHEP/Units/GlobalPhysicalConstants.h"
 #include "Randomize.hh"
 #include "G4Poisson.hh"
+#include <cstdint>
 
 ZdcSD::ZdcSD(const std::string& name,
              const edm::EventSetup& es,

@@ -21,6 +21,7 @@
 // user include files
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // constructors
 L1GlobalTriggerReadoutRecord::L1GlobalTriggerReadoutRecord() {

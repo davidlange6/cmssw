@@ -9,6 +9,7 @@
 #include "DataFormats/L1THGCal/interface/HGCalCluster.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
+#include <cstdint>
 
 bool distanceSorter(pair<edm::Ptr<l1t::HGCalTriggerCell>, float> i, pair<edm::Ptr<l1t::HGCalTriggerCell>, float> j) {
   return (i.second < j.second);

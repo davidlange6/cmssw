@@ -10,6 +10,7 @@
 #include <vector>
 #include "DataFormats/EcalRecHit/interface/EcalRecHit.h"
 #include "DataFormats/EcalRecHit/interface/EcalUncalibratedRecHit.h"
+#include <cstdint>
 
 class EcalRecHitAbsAlgo {
 public:

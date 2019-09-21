@@ -29,6 +29,7 @@
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Utilities/interface/InputTag.h"
+#include <cstdint>
 
 // class declaration
 class L1GtPatternWriter;

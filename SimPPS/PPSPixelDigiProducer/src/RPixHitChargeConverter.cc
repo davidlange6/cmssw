@@ -3,6 +3,7 @@
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixLinearChargeDivider.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixLinearChargeCollectionDrifter.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixChargeShare.h"
+#include <cstdint>
 
 RPixHitChargeConverter::RPixHitChargeConverter(const edm::ParameterSet &params,
                                                CLHEP::HepRandomEngine &eng,

@@ -14,6 +14,7 @@
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
 
 #include "DQMServices/Core/interface/DQMEDAnalyzer.h"
+#include <cstdint>
 
 class L1THIonImp : public DQMEDAnalyzer {
 public:

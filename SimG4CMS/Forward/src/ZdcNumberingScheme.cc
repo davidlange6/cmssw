@@ -8,6 +8,7 @@
 #include "DataFormats/HcalDetId/interface/HcalZDCDetId.h"
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
 #include <iostream>
+#include <cstdint>
 #undef debug
 
 ZdcNumberingScheme::ZdcNumberingScheme(int iv) {

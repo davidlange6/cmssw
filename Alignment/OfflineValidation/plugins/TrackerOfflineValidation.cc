@@ -71,6 +71,7 @@
 
 #include "Alignment/OfflineValidation/interface/TrackerValidationVariables.h"
 #include "Alignment/OfflineValidation/interface/TkOffTreeVariables.h"
+#include <cstdint>
 
 //
 // class declaration

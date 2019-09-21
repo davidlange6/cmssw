@@ -7,6 +7,7 @@
 #include <DataFormats/EcalDigi/interface/EcalMGPASample.h>
 
 #include <vector>
+#include <cstdint>
 
 /**
  \class EcalFenixLinearizer

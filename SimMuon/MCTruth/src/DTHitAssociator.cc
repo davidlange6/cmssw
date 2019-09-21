@@ -10,6 +10,7 @@
 #include "SimMuon/MCTruth/interface/DTHitAssociator.h"
 #include <sstream>
 #include <string>
+#include <cstdint>
 
 using namespace std;
 

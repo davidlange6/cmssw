@@ -3,6 +3,7 @@
 #include "FWCore/ParameterSet/interface/Registry.h"
 
 #include <iostream>
+#include <cstdint>
 
 void TriggerOutputBranches::updateTriggerNames(TTree& tree,
                                                const edm::TriggerNames& names,

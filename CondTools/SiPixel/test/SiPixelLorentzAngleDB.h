@@ -17,6 +17,7 @@
 // Magnetic field
 #include "MagneticField/Engine/interface/MagneticField.h"
 #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+#include <cstdint>
 
 class SiPixelLorentzAngleDB : public edm::EDAnalyzer {
 public:

@@ -113,4 +113,5 @@ bool HGCalUncalibRecHitWorkerWeights::runHGCHFNose(const HGCalDigiCollection::co
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "RecoLocalCalo/HGCalRecProducers/interface/HGCalUncalibRecHitWorkerFactory.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(HGCalUncalibRecHitWorkerFactory, HGCalUncalibRecHitWorkerWeights, "HGCalUncalibRecHitWorkerWeights");

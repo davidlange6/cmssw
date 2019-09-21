@@ -18,6 +18,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <iomanip>
+#include <cstdint>
 
 SiStripQualityChecker::SiStripQualityChecker(edm::ParameterSet const& ps) : pSet_{ps} {
   edm::LogInfo("SiStripQualityChecker") << " Creating SiStripQualityChecker "

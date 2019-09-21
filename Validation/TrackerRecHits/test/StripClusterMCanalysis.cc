@@ -69,6 +69,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"  // PR#7802
+#include <cstdint>
 
 //
 //  Particle interaction process codes are found in

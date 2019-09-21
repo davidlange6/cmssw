@@ -10,6 +10,7 @@
 #include "DataFormats/EcalDigi/interface/EcalDataFrame.h"
 #include "DataFormats/EcalDigi/interface/EBDataFrame.h"
 #include "DataFormats/EcalDigi/interface/EEDataFrame.h"
+#include <cstdint>
 
 class EcalHitResponse;
 

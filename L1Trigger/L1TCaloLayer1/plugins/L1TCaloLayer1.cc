@@ -47,6 +47,7 @@
 #include "L1Trigger/L1TCalorimeter/interface/CaloTools.h"
 
 #include "L1Trigger/L1TCaloLayer1/src/L1TCaloLayer1FetchLUTs.hh"
+#include <cstdint>
 
 using namespace l1t;
 using namespace l1tcalo;

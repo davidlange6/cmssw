@@ -116,5 +116,6 @@ DetId FastTimeTopology::changeXY(const DetId& id, int nrStepsX, int nrStepsY) co
 }
 
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 
 TYPELOOKUP_DATA_REG(FastTimeTopology);

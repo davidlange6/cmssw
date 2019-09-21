@@ -1,6 +1,7 @@
 #include "RecoLocalTracker/SiStripClusterizer/test/ClusterRefinerTagMCmerged.h"
 #include "DataFormats/SiStripCluster/interface/SiStripCluster.h"
 #include "FWCore/Framework/interface/Event.h"
+#include <cstdint>
 
 ClusterRefinerTagMCmerged::ClusterRefinerTagMCmerged(const edm::ParameterSet& conf)
     : inputTag(conf.getParameter<edm::InputTag>("UntaggedClusterProducer")),

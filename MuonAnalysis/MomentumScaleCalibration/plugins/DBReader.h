@@ -20,6 +20,7 @@
 #include "MuonAnalysis/MomentumScaleCalibration/interface/MomentumScaleCorrector.h"
 #include "MuonAnalysis/MomentumScaleCalibration/interface/ResolutionFunction.h"
 #include "MuonAnalysis/MomentumScaleCalibration/interface/BackgroundFunction.h"
+#include <cstdint>
 
 class DBReader : public edm::EDAnalyzer {
 public:

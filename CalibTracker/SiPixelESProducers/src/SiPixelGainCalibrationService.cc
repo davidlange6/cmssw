@@ -15,6 +15,7 @@
  */
 
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelGainCalibrationService.h"
+#include <cstdint>
 
 void SiPixelGainCalibrationServiceBase::calibrate(
     uint32_t detID, DigiIterator b, DigiIterator e, float conversionFactor, float offset, int* electron) {

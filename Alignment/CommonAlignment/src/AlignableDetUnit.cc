@@ -10,6 +10,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 //__________________________________________________________________________________________________
 AlignableDetUnit::AlignableDetUnit(const GeomDetUnit* geomDetUnit)

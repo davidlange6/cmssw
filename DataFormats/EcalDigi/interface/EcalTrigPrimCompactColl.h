@@ -7,6 +7,7 @@
 
 #include "DataFormats/EcalDigi/interface/EcalTriggerPrimitiveDigi.h"
 #include "DataFormats/Common/interface/SortedCollection.h"
+#include <cstdint>
 typedef edm::SortedCollection<EcalTriggerPrimitiveDigi> EcalTrigPrimDigiCollection;
 
 /** \class EcalTrigPrimCompactColl

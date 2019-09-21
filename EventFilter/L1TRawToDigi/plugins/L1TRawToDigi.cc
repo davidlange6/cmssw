@@ -40,6 +40,7 @@
 #include "PackingSetupFactory.h"
 
 #include "EventFilter/L1TRawToDigi/plugins/implementations_stage2/L1TStage2Layer2Constants.h"
+#include <cstdint>
 
 namespace l1t {
   class L1TRawToDigi : public edm::stream::EDProducer<> {

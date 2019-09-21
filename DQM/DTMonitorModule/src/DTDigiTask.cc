@@ -35,6 +35,7 @@
 
 #include <sstream>
 #include <cmath>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

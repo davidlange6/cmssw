@@ -29,6 +29,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
 namespace edm {
 

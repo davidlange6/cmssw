@@ -18,6 +18,7 @@
 #include <boost/format.hpp>
 #include <ext/algorithm>
 #include "FWCore/Utilities/interface/RunningAverage.h"
+#include <cstdint>
 
 namespace sistrip {
 

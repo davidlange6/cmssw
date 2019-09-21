@@ -9,6 +9,7 @@
 #include <algorithm>  // for "max"
 #include <cmath>
 #include <iostream>
+#include <cstdint>
 
 HcalHF_S9S1algorithm::HcalHF_S9S1algorithm() {
   // Default settings:  Energy > 50 GeV, slope = 0, ET = 0

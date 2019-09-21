@@ -26,6 +26,7 @@
 #include "DataFormats/EcalDigi/interface/EcalDigiCollections.h"
 #include "DataFormats/TCDS/interface/BSTRecord.h"
 #include "DataFormats/TCDS/interface/TCDSRecord.h"
+#include <cstdint>
 //
 // class declaration
 //

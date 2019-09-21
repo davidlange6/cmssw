@@ -553,4 +553,5 @@ void RegressionEnergyPatElectronProducer::produce(edm::Event& event, const edm::
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/Framework/interface/ESProducer.h"
 #include "FWCore/Framework/interface/ModuleFactory.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(RegressionEnergyPatElectronProducer);

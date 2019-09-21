@@ -149,4 +149,5 @@ namespace {
 }  // namespace
 
 #include "FWCore/Framework/interface/ModuleFactory.h"
+#include <cstdint>
 DEFINE_FWK_EVENTSETUP_MODULE(Chi2ChargeMeasurementEstimatorESProducer);

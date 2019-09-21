@@ -21,6 +21,7 @@
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
+#include <cstdint>
 
 using namespace edm;
 

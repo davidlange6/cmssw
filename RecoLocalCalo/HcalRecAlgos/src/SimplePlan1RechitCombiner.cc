@@ -10,6 +10,7 @@
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
 
 #include "RecoLocalCalo/HcalRecAlgos/interface/SimplePlan1RechitCombiner.h"
+#include <cstdint>
 
 SimplePlan1RechitCombiner::SimplePlan1RechitCombiner() : topo_(nullptr) {}
 

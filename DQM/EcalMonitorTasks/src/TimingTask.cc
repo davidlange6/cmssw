@@ -8,6 +8,7 @@
 #include "DataFormats/EcalRawData/interface/EcalDCCHeaderBlock.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 namespace ecaldqm {
   TimingTask::TimingTask()

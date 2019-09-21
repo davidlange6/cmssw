@@ -17,6 +17,7 @@
 
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 void CheckHitPattern::init(const edm::EventSetup& iSetup) {
   //Retrieve tracker topology from geometry

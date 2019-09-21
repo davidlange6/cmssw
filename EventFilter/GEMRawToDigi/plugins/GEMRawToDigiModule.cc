@@ -13,6 +13,7 @@
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 
 #include "EventFilter/GEMRawToDigi/plugins/GEMRawToDigiModule.h"
+#include <cstdint>
 
 using namespace gem;
 

@@ -21,6 +21,7 @@
 
 #include <boost/ptr_container/ptr_vector.hpp>
 #include <functional>
+#include <cstdint>
 
 class TrackerTopology;
 

@@ -43,6 +43,7 @@
 #include "TString.h"
 #include "TList.h"
 #include <memory>
+#include <cstdint>
 //
 // class decleration
 //

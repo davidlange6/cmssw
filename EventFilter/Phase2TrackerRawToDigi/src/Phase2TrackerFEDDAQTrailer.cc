@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <ostream>
 #include "EventFilter/Phase2TrackerRawToDigi/interface/Phase2TrackerFEDDAQTrailer.h"
+#include <cstdint>
 
 namespace Phase2Tracker {
 

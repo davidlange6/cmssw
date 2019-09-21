@@ -2,6 +2,7 @@
 #define CALOTSAMPLES_H 1
 
 #include "CalibFormats/CaloObjects/interface/CaloTSamplesBase.h"
+#include <cstdint>
 
 /** \class CaloTSamples
 

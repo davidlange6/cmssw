@@ -5,6 +5,7 @@
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 SiStripCorrelateNoise::SiStripCorrelateNoise(const edm::ParameterSet &iConfig)
     : refNoise(nullptr), oldGain(nullptr), newGain(nullptr), cacheID_noise(0xFFFFFFFF), cacheID_gain(0xFFFFFFFF) {

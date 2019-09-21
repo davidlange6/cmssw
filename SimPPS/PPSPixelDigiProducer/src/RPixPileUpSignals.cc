@@ -1,5 +1,6 @@
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixPileUpSignals.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 RPixPileUpSignals::RPixPileUpSignals(const edm::ParameterSet &params, uint32_t det_id) : det_id_(det_id) {
   links_persistence_ = params.getParameter<bool>("CTPPSPixelDigiSimHitRelationsPersistence");

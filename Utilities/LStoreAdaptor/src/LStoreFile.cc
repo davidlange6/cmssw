@@ -9,6 +9,7 @@
 #include <dlfcn.h>
 #include <iostream>
 #include <cstring>
+#include <cstdint>
 
 // dlsym isn't reentrant, need a locak around it
 pthread_mutex_t LStoreFile::m_dlopen_lock = PTHREAD_MUTEX_INITIALIZER;

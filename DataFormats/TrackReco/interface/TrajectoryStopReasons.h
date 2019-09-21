@@ -2,6 +2,7 @@
 #define TRAJECTORYSTOPREASONS_H
 
 #include <string>
+#include <cstdint>
 
 enum class StopReason {
   UNINITIALIZED = 0,

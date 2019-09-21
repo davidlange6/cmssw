@@ -15,6 +15,7 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 SiStripActionExecutor::SiStripActionExecutor(edm::ParameterSet const& ps) : pSet_{ps} {
   edm::LogInfo("SiStripActionExecutor") << " Creating SiStripActionExecutor "

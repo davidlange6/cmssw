@@ -15,6 +15,7 @@ typedef edmtestprod::IntArray WriteThis;
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <sstream>
+#include <cstdint>
 
 using namespace edmtestprod;
 

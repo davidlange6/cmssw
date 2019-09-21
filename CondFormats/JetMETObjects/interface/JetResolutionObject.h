@@ -24,6 +24,7 @@
 #include "CommonTools/Utils/interface/FormulaEvaluator.h"
 #else
 #include <TFormula.h>
+#include <cstdint>
 #endif
 
 enum class Variation { NOMINAL = 0, DOWN = 1, UP = 2 };

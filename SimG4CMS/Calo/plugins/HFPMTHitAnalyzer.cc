@@ -31,6 +31,7 @@
 
 #include "TH1F.h"
 #include "TProfile.h"
+#include <cstdint>
 
 class HFPMTHitAnalyzer : public edm::one::EDAnalyzer<edm::one::WatchRuns, edm::one::SharedResources> {
 public:

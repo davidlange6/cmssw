@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <bitset>
+#include <cstdint>
 
 void CmsMTDTrayBuilder::buildComponent(DDFilteredView& fv, GeometricTimingDet* g, std::string side) {
   CmsMTDModuleBuilder theCmsMTDModuleBuilder;

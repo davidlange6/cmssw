@@ -1,4 +1,5 @@
 #include <SimDataFormats/DigiSimLinks/interface/DTDigiSimLink.h>
+#include <cstdint>
 
 using namespace std;
 

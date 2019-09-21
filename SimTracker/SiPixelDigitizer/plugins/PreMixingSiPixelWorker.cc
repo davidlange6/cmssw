@@ -37,6 +37,7 @@
 
 #include <map>
 #include <memory>
+#include <cstdint>
 
 class PreMixingSiPixelWorker : public PreMixingWorker {
 public:

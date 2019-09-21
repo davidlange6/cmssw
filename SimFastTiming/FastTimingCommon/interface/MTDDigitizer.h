@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include <memory>
 #include <tuple>
+#include <cstdint>
 
 namespace mtd_digitizer {
 

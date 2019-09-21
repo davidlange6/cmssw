@@ -17,6 +17,7 @@
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
 
 #include "CLHEP/Vector/LorentzVector.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

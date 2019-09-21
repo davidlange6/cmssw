@@ -12,6 +12,7 @@
 #include "DataFormats/L1TMuon/interface/EMTFHit.h"
 #include "DataFormats/L1TMuon/interface/EMTFTrack.h"
 #include "L1Trigger/L1TMuonEndCap/interface/TrackTools.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

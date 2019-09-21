@@ -13,6 +13,7 @@
 #include "DataFormats/CTPPSDetId/interface/CTPPSPixelDetId.h"
 #include "G4VPhysicalVolume.hh"
 #include "G4VTouchable.hh"
+#include <cstdint>
 
 //
 // constructors and destructor

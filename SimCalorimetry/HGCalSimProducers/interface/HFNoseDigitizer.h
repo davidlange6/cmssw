@@ -3,6 +3,7 @@
 
 #include "SimCalorimetry/HGCalSimProducers/interface/HGCDigitizerBase.h"
 #include "DataFormats/HGCDigi/interface/HGCDigiCollections.h"
+#include <cstdint>
 
 class HFNoseDigitizer : public HGCDigitizerBase<HGCalDataFrame> {
 public:

@@ -6,6 +6,7 @@
 #define _PPS_VDetectorOrganization_h
 
 #include "G4Step.hh"
+#include <cstdint>
 
 class PPSVDetectorOrganization {
 public:

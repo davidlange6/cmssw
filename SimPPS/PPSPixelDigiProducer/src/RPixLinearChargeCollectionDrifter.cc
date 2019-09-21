@@ -2,6 +2,7 @@
 #include "Geometry/VeryForwardGeometry/interface/CTPPSPixelTopology.h"
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
 RPixLinearChargeCollectionDrifter::RPixLinearChargeCollectionDrifter(const edm::ParameterSet &params, uint32_t det_id) {
   verbosity_ = params.getParameter<int>("RPixVerbosity");

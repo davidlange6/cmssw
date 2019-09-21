@@ -39,6 +39,7 @@
 #include "DetectorDescription/Core/interface/DDRoot.h"
 
 #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+#include <cstdint>
 
 class PerfectGeometryAnalyzer : public edm::one::EDAnalyzer<> {
 public:

@@ -4,6 +4,7 @@
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/Common/interface/DataFrame.h"
 #include <ostream>
+#include <cstdint>
 
 /** Precision readout digi from QIE11 including TDC information
 

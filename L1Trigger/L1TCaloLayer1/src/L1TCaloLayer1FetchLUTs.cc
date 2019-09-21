@@ -23,6 +23,7 @@
 
 #include "L1TCaloLayer1FetchLUTs.hh"
 #include "UCTLogging.hh"
+#include <cstdint>
 
 using namespace l1tcalo;
 

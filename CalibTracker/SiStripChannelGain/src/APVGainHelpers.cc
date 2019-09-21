@@ -2,6 +2,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
+#include <cstdint>
 
 /** Brief Extract from the DetId the subdetector type.
  * Return an integer which is associated to the subdetector type. The integer

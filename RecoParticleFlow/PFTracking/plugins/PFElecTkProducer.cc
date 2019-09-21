@@ -33,6 +33,7 @@
 #include "RecoParticleFlow/PFTracking/interface/PFTrackAlgoTools.h"
 
 #include "TMath.h"
+#include <cstdint>
 using namespace std;
 using namespace edm;
 using namespace reco;

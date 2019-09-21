@@ -7,6 +7,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <sstream>
 #include <limits>
+#include <cstdint>
 
 MTDTopology::MTDTopology(const int &topologyMode, const BTLValues &btl, const ETLValues &etl)
     : mtdTopologyMode_(topologyMode),

@@ -1527,6 +1527,7 @@ void SiStripMonitorTrack::return2DME(MonitorElement* input1, MonitorElement* inp
 
 //------------------------------------------------------------------------
 #include "DataFormats/SiStripCluster/interface/SiStripClusterTools.h"
+#include <cstdint>
 bool SiStripMonitorTrack::clusterInfos(SiStripClusterInfo* cluster,
                                        const uint32_t detid,
                                        enum ClusterFlags flag,

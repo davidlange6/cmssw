@@ -4,6 +4,7 @@
 #include "DQM/HcalCommon/interface/DQClient.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
+#include <cstdint>
 
 namespace hcaldqm {
   class DigiRunSummary : public DQClient {

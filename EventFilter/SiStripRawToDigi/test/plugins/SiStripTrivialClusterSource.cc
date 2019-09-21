@@ -1,5 +1,6 @@
 #include "EventFilter/SiStripRawToDigi/test/plugins/SiStripTrivialClusterSource.h"
 #include "CalibTracker/Records/interface/SiStripDetCablingRcd.h"
+#include <cstdint>
 
 SiStripTrivialClusterSource::SiStripTrivialClusterSource(const edm::ParameterSet& pset)
     :

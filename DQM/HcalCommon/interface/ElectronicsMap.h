@@ -17,6 +17,7 @@
 
 #include "boost/unordered_map.hpp"
 #include "string"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace electronicsmap {

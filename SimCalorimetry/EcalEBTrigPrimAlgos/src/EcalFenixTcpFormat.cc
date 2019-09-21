@@ -5,6 +5,7 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGSpike.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 using  namespace std;
 

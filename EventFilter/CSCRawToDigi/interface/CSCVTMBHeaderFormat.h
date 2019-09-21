@@ -8,6 +8,7 @@
 #include <vector>
 #include <iosfwd>
 #include <strings.h>
+#include <cstdint>
 class CSCDMBHeader;
 
 class CSCVTMBHeaderFormat {

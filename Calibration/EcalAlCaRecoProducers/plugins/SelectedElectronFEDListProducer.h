@@ -31,6 +31,7 @@ class HcalElectronicsMap;
 
 // Hcal rec hit: this is a Fwd file defining typedefs
 #include "DataFormats/HcalRecHit/interface/HcalRecHitCollections.h"
+#include <cstdint>
 
 // Pixel region class
 class PixelRegion {

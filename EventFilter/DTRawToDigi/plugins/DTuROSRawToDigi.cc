@@ -429,4 +429,5 @@ int DTuROSRawToDigi::theROB(int slot, int link) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(DTuROSRawToDigi);

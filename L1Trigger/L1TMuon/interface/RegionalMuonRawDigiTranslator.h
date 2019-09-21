@@ -2,6 +2,7 @@
 #define RegionalMuonRawDigiTranslator_h
 
 #include "DataFormats/L1TMuon/interface/RegionalMuonCand.h"
+#include <cstdint>
 
 namespace l1t {
   class RegionalMuonRawDigiTranslator {

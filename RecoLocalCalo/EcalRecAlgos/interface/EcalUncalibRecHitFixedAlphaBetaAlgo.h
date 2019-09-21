@@ -21,6 +21,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdint>
 
 //#include "TROOT.h"
 //#include "TMinuit.h"

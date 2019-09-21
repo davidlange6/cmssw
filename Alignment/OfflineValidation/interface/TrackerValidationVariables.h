@@ -6,6 +6,7 @@
 
 #include "FWCore/Utilities/interface/EDGetToken.h"
 #include "TrackingTools/PatternTools/interface/TrajTrackAssociation.h"
+#include <cstdint>
 
 class MagneticField;
 class Trajectory;

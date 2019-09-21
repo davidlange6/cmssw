@@ -10,6 +10,7 @@
 #include "DataFormats/FEDRawData/interface/FEDRawData.h"
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include "DataFormats/Provenance/interface/Timestamp.h"
+#include <cstdint>
 
 class LmfSource : public edm::ProducerSourceBase {
 private:

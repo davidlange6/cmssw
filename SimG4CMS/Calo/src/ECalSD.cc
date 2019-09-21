@@ -33,6 +33,7 @@
 #include "G4SystemOfUnits.hh"
 
 #include <algorithm>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

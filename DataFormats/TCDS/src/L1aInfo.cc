@@ -1,5 +1,6 @@
 #include "DataFormats/TCDS/interface/L1aInfo.h"
 #include "DataFormats/TCDS/interface/TCDSRaw.h"
+#include <cstdint>
 
 L1aInfo::L1aInfo() : orbitNr_(0), bxid_(0), index_(0), eventType_(0) {}
 

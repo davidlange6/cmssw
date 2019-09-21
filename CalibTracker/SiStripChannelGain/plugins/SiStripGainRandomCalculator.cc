@@ -16,6 +16,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 
 #include "CLHEP/Random/RandGauss.h"
+#include <cstdint>
 
 using namespace cms;
 using namespace std;

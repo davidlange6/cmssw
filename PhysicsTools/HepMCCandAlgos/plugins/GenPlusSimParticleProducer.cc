@@ -34,6 +34,7 @@ process.genParticlePlusGEANT = cms.EDProducer("GenPlusSimParticleProducer",
 #include "SimGeneral/HepPDTRecord/interface/PdtEntry.h"
 
 #include <ext/algorithm>
+#include <cstdint>
 
 namespace pat {
   class GenPlusSimParticleProducer : public edm::EDProducer {

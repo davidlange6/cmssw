@@ -13,6 +13,7 @@
 
 #include <cfloat>
 #include <cassert>
+#include <cstdint>
 using std::string;
 using std::vector;
 

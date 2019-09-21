@@ -9,6 +9,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Validation/GlobalDigis/interface/GlobalDigisAnalyzer.h"
+#include <cstdint>
 
 GlobalDigisAnalyzer::GlobalDigisAnalyzer(const edm::ParameterSet &iPSet)
     : fName(""),

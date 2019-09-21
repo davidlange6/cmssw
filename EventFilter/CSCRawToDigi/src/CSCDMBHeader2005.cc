@@ -1,5 +1,6 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCDMBHeader2005.h"
 #include <iostream>
+#include <cstdint>
 
 CSCDMBHeader2005::CSCDMBHeader2005() {
   bzero(data(), sizeInWords() * 2);

@@ -37,6 +37,7 @@
 #include <iostream>
 
 #include <utility>
+#include <cstdint>
 
 namespace l1tcalo {
   constexpr uint32_t NCrates{3};

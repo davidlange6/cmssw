@@ -1,6 +1,7 @@
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctEmCand.h"
 
 #include <iostream>
+#include <cstdint>
 
 using std::dec;
 using std::hex;

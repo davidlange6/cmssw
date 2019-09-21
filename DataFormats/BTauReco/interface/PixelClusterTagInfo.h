@@ -4,6 +4,7 @@
 #include "DataFormats/Common/interface/CMS_CLASS_VERSION.h"
 
 #include "DataFormats/BTauReco/interface/BaseTagInfo.h"
+#include <cstdint>
 
 namespace reco {
 

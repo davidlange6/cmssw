@@ -8,6 +8,7 @@
 
 #include <numeric>
 #include <fstream>
+#include <cstdint>
 
 using namespace std;
 using namespace reco;

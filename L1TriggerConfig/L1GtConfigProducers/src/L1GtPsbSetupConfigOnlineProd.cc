@@ -22,6 +22,7 @@
 
 // user include files
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // constructor
 L1GtPsbSetupConfigOnlineProd::L1GtPsbSetupConfigOnlineProd(const edm::ParameterSet& parSet)

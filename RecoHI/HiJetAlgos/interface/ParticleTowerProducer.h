@@ -21,6 +21,7 @@
 
 #include "TMath.h"
 #include "TRandom.h"
+#include <cstdint>
 
 class ParticleTowerProducer : public edm::EDProducer {
 public:

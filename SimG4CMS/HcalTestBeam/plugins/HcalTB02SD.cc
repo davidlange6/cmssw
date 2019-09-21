@@ -31,6 +31,7 @@
 #include "G4VProcess.hh"
 
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 //
 // constructors and destructor

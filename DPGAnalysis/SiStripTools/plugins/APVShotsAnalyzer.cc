@@ -461,6 +461,7 @@ void APVShotsAnalyzer::endJob() {
   edm::LogInfo("EndOfJob") << _nevents << " analyzed events";
 
 #include "CommonTools/TrackerMap/interface/TrackerMap.h"
+#include <cstdint>
   TrackerMap tkmap, tkmap2;
 
   tkmap.setPalette(1);

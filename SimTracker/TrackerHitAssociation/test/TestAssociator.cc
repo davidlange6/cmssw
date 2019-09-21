@@ -33,6 +33,7 @@
 //--- for SimHits
 #include "SimDataFormats/TrackingHit/interface/PSimHit.h"
 #include "SimDataFormats/TrackingHit/interface/PSimHitContainer.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

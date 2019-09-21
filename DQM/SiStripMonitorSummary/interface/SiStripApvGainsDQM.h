@@ -7,6 +7,7 @@
 
 #include "CondFormats/DataRecord/interface/SiStripApvGainRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripApvGain.h"
+#include <cstdint>
 
 class SiStripApvGainsDQM : public SiStripBaseCondObjDQM {
 public:

@@ -17,6 +17,7 @@
 
 #include <ctime>
 #include <TMath.h>
+#include <cstdint>
 
 bool TracktoRPC::ValidRPCSurface(RPCDetId rpcid, LocalPoint LocalP, const edm::EventSetup &iSetup) {
   edm::ESHandle<RPCGeometry> rpcGeo;

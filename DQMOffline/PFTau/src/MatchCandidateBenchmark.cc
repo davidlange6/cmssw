@@ -7,6 +7,7 @@
 #include <TH2.h>
 #include <TProfile.h>
 #include <TROOT.h>
+#include <cstdint>
 
 using namespace std;
 

@@ -7,6 +7,7 @@
 #include <map>
 
 #include "MESet.h"
+#include <cstdint>
 
 namespace ecaldqm
 {

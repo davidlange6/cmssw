@@ -2,6 +2,7 @@
 #define BTLNumberingScheme_h
 
 #include "Geometry/MTDCommonData/interface/MTDNumberingScheme.h"
+#include <cstdint>
 
 class BTLNumberingScheme : public MTDNumberingScheme {
 public:

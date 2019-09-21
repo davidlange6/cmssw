@@ -11,6 +11,7 @@
 
 #include "DQM/HcalCommon/interface/Constants.h"
 #include "DQM/HcalCommon/interface/HcalCommonHeaders.h"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace hashfunctions {

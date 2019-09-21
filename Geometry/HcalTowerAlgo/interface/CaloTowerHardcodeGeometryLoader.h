@@ -7,6 +7,7 @@
 #include "Geometry/HcalCommonData/interface/HcalDDDRecConstants.h"
 #include <memory>
 #include <vector>
+#include <cstdint>
 
 /** \class CaloTowerHardcodeGeometryLoader
   *  

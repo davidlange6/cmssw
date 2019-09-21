@@ -15,6 +15,7 @@
 #include <CondFormats/SiStripObjects/interface/FedChannelConnection.h>
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 using namespace sistrip;
 

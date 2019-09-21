@@ -18,6 +18,7 @@
 
 #include "SimTracker/SiPhase2Digitizer/plugins/DigitizerUtility.h"
 #include "SimTracker/SiPhase2Digitizer/plugins/Phase2TrackerDigitizerFwd.h"
+#include <cstdint>
 
 // forward declarations
 // For the random numbers

@@ -8,6 +8,7 @@
 #include "Geometry/ForwardGeometry/interface/ZdcTopology.h"
 #include "Geometry/Records/interface/ZDCGeometryRecord.h"
 #include "Geometry/Records/interface/PZdcRcd.h"
+#include <cstdint>
 
 class ZdcGeometry : public CaloSubdetectorGeometry {
 public:

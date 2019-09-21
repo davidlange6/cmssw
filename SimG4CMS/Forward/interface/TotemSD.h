@@ -36,6 +36,7 @@
 #include "G4Track.hh"
 
 #include <string>
+#include <cstdint>
 
 class TrackingSlaveSD;
 class SimTrackManager;

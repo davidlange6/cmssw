@@ -282,5 +282,6 @@ ClusterTPAssociationProducer::getSimTrackId(const edm::Handle<edm::DetSetVector<
 }
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(ClusterTPAssociationProducer);

@@ -4,6 +4,7 @@
 #include "DataFormats/FEDRawData/interface/FEDTrailer.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using namespace edm;
 

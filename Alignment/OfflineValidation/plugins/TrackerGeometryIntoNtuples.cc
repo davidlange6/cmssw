@@ -66,6 +66,7 @@
 #include "Geometry/CommonTopologies/interface/SurfaceDeformation.h"
 
 #include "CLHEP/Matrix/SymMatrix.h"
+#include <cstdint>
 
 //
 // class decleration

@@ -15,6 +15,7 @@
 #include "DataFormats/Candidate/interface/Candidate.h"
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
 #include "DataFormats/Common/interface/ValueMap.h"
+#include <cstdint>
 
 // ------------------------------------------------------------------------------------------
 class PuppiPhoton : public edm::stream::EDProducer<> {

@@ -15,6 +15,7 @@
 
 #include "L1Trigger/L1TCalorimeter/interface/Stage2Layer2JetSumAlgorithm.h"
 #include "L1Trigger/L1TCalorimeter/interface/CaloParamsHelper.h"
+#include <cstdint>
 
 namespace l1t {
 

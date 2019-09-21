@@ -6,6 +6,7 @@
 #include <sstream>
 #include <vector>
 #include "DataFormats/RPCDigi/interface/RPCDigiCollection.h"
+#include <cstdint>
 
 namespace rpcrawtodigi {
   class DebugDigisPrintout {

@@ -27,6 +27,7 @@
 #include <fstream>
 #include <string>
 #include "TFile.h"
+#include <cstdint>
 
 class SiStripHotStripAlgorithmFromClusterOccupancy;
 class SiStripBadAPVAlgorithmFromClusterOccupancy;

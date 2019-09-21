@@ -8,6 +8,7 @@
 #include "CondFormats/DataRecord/interface/EcalTPGLutIdMapRcd.h"
 #include "CondFormats/DataRecord/interface/EcalTPGLutGroupRcd.h"
 #include "CondFormats/DataRecord/interface/EcalTPGPhysicsConstRcd.h"
+#include <cstdint>
 
 EcalTPGScale::EcalTPGScale() {}
 

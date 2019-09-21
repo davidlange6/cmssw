@@ -12,6 +12,7 @@
 
 #include "G4UImanager.hh"
 #include "G4TrackingManager.hh"
+#include <cstdint>
 
 //#define DebugLog
 

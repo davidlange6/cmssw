@@ -43,6 +43,7 @@
 // mkFit indludes
 #include "LayerNumberConverter.h"
 #include "Track.h"
+#include <cstdint>
 
 namespace {
   template <typename T>

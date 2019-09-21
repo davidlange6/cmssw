@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <map>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

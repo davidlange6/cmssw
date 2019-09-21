@@ -17,6 +17,7 @@ bool CSCDDUEventData::debug = false;
 uint32_t CSCDDUEventData::errMask = 0xFFFFFFFF;
 #else
 #include <atomic>
+#include <cstdint>
 std::atomic<bool> CSCDDUEventData::debug{false};
 std::atomic<uint32_t> CSCDDUEventData::errMask{0xFFFFFFFF};
 #endif

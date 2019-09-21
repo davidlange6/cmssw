@@ -38,6 +38,7 @@ using namespace edm;
 #include "TBranch.h"
 #include "TH1.h"
 #include "TH2.h"
+#include <cstdint>
 class TFile;
 
 //Constructor

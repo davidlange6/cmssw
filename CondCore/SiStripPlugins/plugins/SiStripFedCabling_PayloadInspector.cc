@@ -24,6 +24,7 @@
 #include <TCanvas.h>
 #include <TH2D.h>
 #include <TLatex.h>
+#include <cstdint>
 
 namespace {
 

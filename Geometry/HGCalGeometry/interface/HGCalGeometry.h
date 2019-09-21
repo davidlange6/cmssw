@@ -26,6 +26,7 @@
 #include "Geometry/Records/interface/HGCalGeometryRecord.h"
 #include "MagneticField/Engine/interface/MagneticField.h"
 #include <vector>
+#include <cstdint>
 
 class HGCalGeometry final : public CaloSubdetectorGeometry {
 public:

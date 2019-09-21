@@ -5,6 +5,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <algorithm>
+#include <cstdint>
 
 using namespace sistrip;
 

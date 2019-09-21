@@ -3,6 +3,7 @@
 #include <vector>
 #include "TRandom.h"
 #include <iostream>
+#include <cstdint>
 
 RPixDummyROCSimulator::RPixDummyROCSimulator(const edm::ParameterSet &params, uint32_t det_id) : det_id_(det_id) {
   threshold_ = params.getParameter<double>("RPixDummyROCThreshold");

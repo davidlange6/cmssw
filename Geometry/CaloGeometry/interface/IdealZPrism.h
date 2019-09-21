@@ -3,6 +3,7 @@
 
 #include "Geometry/CaloGeometry/interface/CaloCellGeometry.h"
 #include <memory>
+#include <cstdint>
 
 /** \class IdealZPrism
     

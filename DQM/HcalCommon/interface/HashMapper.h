@@ -11,6 +11,7 @@
 
 #include "DQM/HcalCommon/interface/HashFunctions.h"
 #include "DQM/HcalCommon/interface/Mapper.h"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace mapper {

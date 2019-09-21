@@ -10,6 +10,7 @@
 #include "Geometry/CaloTopology/interface/EcalEndcapTopology.h"
 #include "Geometry/CaloTopology/interface/EcalBarrelTopology.h"
 #include "RecoEcal/EgammaCoreTools/interface/ClusterEtLess.h"
+#include <cstdint>
 
 // Return a vector of clusters from a collection of EcalRecHits:
 //

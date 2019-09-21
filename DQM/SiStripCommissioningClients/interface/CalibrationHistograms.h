@@ -3,6 +3,7 @@
 
 #include "DQM/SiStripCommissioningClients/interface/CommissioningHistograms.h"
 #include "DQMServices/Core/interface/DQMStore.h"
+#include <cstdint>
 
 class CalibrationHistograms : virtual public CommissioningHistograms {
 public:

@@ -4,6 +4,7 @@
 
 #include "DataFormats/TrackerRecHit2D/interface/FastTrackerRecHitCollection.h"
 #include "DataFormats/TrackerRecHit2D/interface/FastTrackerRecHit.h"
+#include <cstdint>
 
 namespace fastTrackingUtilities {
 

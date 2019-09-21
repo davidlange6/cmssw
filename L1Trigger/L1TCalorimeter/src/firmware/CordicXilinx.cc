@@ -30,6 +30,7 @@
 #include <cassert>
 #include <cmath>
 #include <cmath>
+#include <cstdint>
 
 CordicXilinx::CordicXilinx(int inputBits, int outputBits, bool debug)
     : inputBits_(inputBits), outputBits_(outputBits), debug_(debug) {

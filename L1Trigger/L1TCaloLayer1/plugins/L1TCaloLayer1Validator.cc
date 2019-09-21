@@ -36,6 +36,7 @@
 #include "L1Trigger/L1TCaloLayer1/src/UCTGeometry.hh"
 
 #include "L1Trigger/L1TCaloLayer1/src/UCTLogging.hh"
+#include <cstdint>
 
 using namespace l1t;
 

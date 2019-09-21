@@ -48,4 +48,5 @@ FTLUncalibratedRecHit FTLSimpleUncalibRecHitAlgo::makeRecHit(const FTLDataFrame&
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(FTLUncalibratedRecHitAlgoFactory, FTLSimpleUncalibRecHitAlgo, "FTLSimpleUncalibRecHitAlgo");

@@ -18,6 +18,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 //
 // -- Constructor

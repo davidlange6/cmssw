@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "DataFormats/L1TMuon/interface/OMTF/OmtfDataWord64.h"
+#include <cstdint>
 
 namespace omtf {
 

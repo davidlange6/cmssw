@@ -2,6 +2,7 @@
 #include "FWCore/Framework/interface/global/EDFilter.h"
 
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
+#include <cstdint>
 
 class SiStripFedCabling;
 

@@ -10,6 +10,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingAlgorithms.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingFactory.h"
+#include <cstdint>
 
 class SiStripMergeZeroSuppression : public edm::stream::EDProducer<> {
 public:

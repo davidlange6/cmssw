@@ -41,6 +41,7 @@
 //
 #include <cstdlib>
 #include <string>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

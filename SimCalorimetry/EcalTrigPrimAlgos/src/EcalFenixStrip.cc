@@ -6,6 +6,7 @@
 #include "Geometry/EcalMapping/interface/EcalElectronicsMapping.h"
 
 #include <DataFormats/EcalDigi/interface/EcalTriggerPrimitiveSample.h>
+#include <cstdint>
 
 //-------------------------------------------------------------------------------------
 EcalFenixStrip::EcalFenixStrip(const edm::EventSetup &setup,

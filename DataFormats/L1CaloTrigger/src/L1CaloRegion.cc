@@ -1,6 +1,7 @@
 
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegion.h"
+#include <cstdint>
 
 using std::dec;
 using std::endl;

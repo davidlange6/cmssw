@@ -36,6 +36,7 @@
 #include "DataFormats/EcalDetId/interface/EcalTrigTowerDetId.h"
 #include "DataFormats/EcalDetId/interface/EcalScDetId.h"
 #include "DataFormats/Provenance/interface/Timestamp.h"
+#include <cstdint>
 
 namespace edm {
   class ParameterSet;

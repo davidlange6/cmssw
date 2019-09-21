@@ -2,6 +2,7 @@
 // Negative energy filter parameters developed by Alexander Toropin for Run 2 data
 //
 #include "CondTools/Hcal/interface/make_HBHENegativeEFilter.h"
+#include <cstdint>
 
 #define make_poly /**/                                                                    \
   std::vector<std::vector<double> > coeffs;                                               \

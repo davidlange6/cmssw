@@ -10,6 +10,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "SimMuon/MCTruth/interface/MuonAssociatorByHitsHelper.h"
 #include <sstream>
+#include <cstdint>
 
 using namespace reco;
 using namespace std;

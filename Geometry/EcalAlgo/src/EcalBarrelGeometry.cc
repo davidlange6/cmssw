@@ -11,6 +11,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <cstdint>
 
 typedef CaloCellGeometry::CCGFloat CCGFloat;
 typedef CaloCellGeometry::Pt3D Pt3D;

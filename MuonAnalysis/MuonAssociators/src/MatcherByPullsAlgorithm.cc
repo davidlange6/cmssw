@@ -2,6 +2,7 @@
 
 // user include files
 #include "DataFormats/Math/interface/deltaR.h"
+#include <cstdint>
 
 /*     ____                _                   _             
  *    / ___|___  _ __  ___| |_ _ __ _   _  ___| |_ ___  _ __ 

@@ -49,6 +49,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/ParameterSet/interface/ConfigurationDescriptions.h"
 #include "FWCore/Utilities/interface/InputTag.h"
+#include <cstdint>
 
 class dso_hidden SiPixelClusterProducer final : public edm::stream::EDProducer<> {
 public:

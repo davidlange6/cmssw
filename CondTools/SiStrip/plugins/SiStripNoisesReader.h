@@ -21,6 +21,7 @@
 #include <iostream>
 #include <cstdio>
 #include <sys/time.h>
+#include <cstdint>
 
 class SiStripNoisesReader : public edm::EDAnalyzer {
 public:

@@ -5,6 +5,7 @@
 #include "FWCore/Utilities/interface/typelookup.h"
 #include <iomanip>
 #include <iostream>
+#include <cstdint>
 
 using namespace sistrip;
 

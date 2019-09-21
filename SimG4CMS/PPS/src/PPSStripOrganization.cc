@@ -8,6 +8,7 @@
 #include "G4Step.hh"
 
 #include <iostream>
+#include <cstdint>
 
 uint32_t PPSStripOrganization::unitID(const G4Step* aStep) {
   G4VPhysicalVolume* physVol;

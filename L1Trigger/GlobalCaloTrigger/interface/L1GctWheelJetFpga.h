@@ -25,6 +25,7 @@
 class L1GctJetSorter;
 
 #include <vector>
+#include <cstdint>
 
 class L1GctWheelJetFpga : public L1GctProcessor {
 public:

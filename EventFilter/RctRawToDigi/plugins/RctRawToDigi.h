@@ -32,6 +32,7 @@
 #include "EventFilter/RctRawToDigi/src/CTP7Format.hh"
 #include "EventFilter/L1TRawToDigi/interface/AMCSpec.h"
 #include "EventFilter/RctRawToDigi/src/RctDataDecoder.hh"
+#include <cstdint>
 
 // *******************************************************************
 // ***  THE UNPACK PROCESS MUST NEVER THROW ANY KIND OF EXCEPTION! ***

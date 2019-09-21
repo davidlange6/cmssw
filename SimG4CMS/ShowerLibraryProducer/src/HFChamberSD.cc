@@ -15,6 +15,7 @@
 
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 HFChamberSD::HFChamberSD(const std::string& name,
                          const edm::EventSetup& es,

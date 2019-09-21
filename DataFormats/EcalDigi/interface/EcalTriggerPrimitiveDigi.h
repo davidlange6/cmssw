@@ -6,6 +6,7 @@
 
 #include "DataFormats/EcalDetId/interface/EcalTrigTowerDetId.h"
 #include "DataFormats/EcalDigi/interface/EcalTriggerPrimitiveSample.h"
+#include <cstdint>
 
 /** \class EcalTriggerPrimitiveDigi
 

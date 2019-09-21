@@ -20,6 +20,7 @@
 #include "EventFilter/L1TRawToDigi/interface/AMCSpec.h"
 #include "EventFilter/L1TRawToDigi/interface/Block.h"
 #include "EventFilter/L1TRawToDigi/interface/PackingSetup.h"
+#include <cstdint>
 
 // Namespace resolution
 using edm::LogError;

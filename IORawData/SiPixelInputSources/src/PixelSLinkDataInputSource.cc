@@ -27,6 +27,7 @@ Implementation:
 #include "Utilities/StorageFactory/interface/StorageFactory.h"
 #include <iostream>
 #include <memory>
+#include <cstdint>
 
 using namespace edm;
 

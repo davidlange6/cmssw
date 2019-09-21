@@ -6,6 +6,7 @@
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerGeometryBase.h"
 #include "L1Trigger/L1THGCalUtilities/interface/HGCalTriggerNtupleBase.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
+#include <cstdint>
 
 class HGCalTriggerNtupleHGCClusters : public HGCalTriggerNtupleBase {
 public:

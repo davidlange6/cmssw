@@ -15,6 +15,7 @@
 #include "DataFormats/RPCDigi/interface/RecordBX.h"
 #include "DataFormats/RPCDigi/interface/RecordSLD.h"
 #include "DataFormats/RPCDigi/interface/RecordCD.h"
+#include <cstdint>
 
 namespace omtf {
 

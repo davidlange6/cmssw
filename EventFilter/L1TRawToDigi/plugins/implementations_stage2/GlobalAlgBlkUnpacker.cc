@@ -3,6 +3,7 @@
 
 #include "GTCollections.h"
 #include "GlobalAlgBlkUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

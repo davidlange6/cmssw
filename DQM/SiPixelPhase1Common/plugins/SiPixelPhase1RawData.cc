@@ -13,6 +13,7 @@
 
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "DataFormats/GeometryVector/interface/LocalPoint.h"
+#include <cstdint>
 
 namespace {
 

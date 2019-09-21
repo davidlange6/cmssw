@@ -28,6 +28,7 @@
 #include <tbb/concurrent_hash_map.h>
 #include <boost/filesystem.hpp>
 #include <boost/asio.hpp>
+#include <cstdint>
 
 class SystemBounds;
 class GlobalContext;

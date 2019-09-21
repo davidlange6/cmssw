@@ -1,5 +1,6 @@
 #include "SpikeAndDoubleSpikeCleaner.h"
 #include <cmath>
+#include <cstdint>
 
 namespace {
   std::pair<double, double> dCrack(double phi, double eta) {

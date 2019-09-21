@@ -9,6 +9,7 @@
 #include <sstream>
 #include <string>
 #include <bitset>
+#include <cstdint>
 
 CmsMTDDetIdBuilder::CmsMTDDetIdBuilder(std::vector<int> detidShifts) : m_detidshifts() {
   if (detidShifts.size() != nSubDet * maxLevels)

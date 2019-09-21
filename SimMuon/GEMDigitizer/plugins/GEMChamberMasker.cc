@@ -23,6 +23,7 @@
 #include "DataFormats/MuonDetId/interface/GEMDetId.h"
 #include "CondFormats/RecoMuonObjects/interface/MuonSystemAging.h"
 #include "CondFormats/DataRecord/interface/MuonSystemAgingRcd.h"
+#include <cstdint>
 
 //
 // class declaration

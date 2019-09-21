@@ -27,6 +27,7 @@
 #include "DataFormats/RecoCandidate/interface/RecoCandidate.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 #include "DataFormats/CLHEP/interface/AlgebraicObjects.h"
+#include <cstdint>
 
 //
 // class decleration

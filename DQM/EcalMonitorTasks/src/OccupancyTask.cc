@@ -4,6 +4,7 @@
 #include "DataFormats/EcalRawData/interface/EcalDCCHeaderBlock.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 namespace ecaldqm {
   OccupancyTask::OccupancyTask() : DQWorkerTask(), recHitThreshold_(0.), tpThreshold_(0.) {}

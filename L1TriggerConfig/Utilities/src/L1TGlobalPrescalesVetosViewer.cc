@@ -186,5 +186,6 @@ void L1TGlobalPrescalesVetosViewer::analyze(const edm::Event& iEvent, const edm:
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/Framework/interface/ModuleFactory.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(L1TGlobalPrescalesVetosViewer);

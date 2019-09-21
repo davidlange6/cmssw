@@ -744,5 +744,6 @@ void SelectedElectronFEDListProducer<TEle, TCand>::fillDescriptions(edm::Configu
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 typedef SelectedElectronFEDListProducer<reco::Electron, reco::RecoEcalCandidate> SelectedElectronFEDListProducerGsf;
 DEFINE_FWK_MODULE(SelectedElectronFEDListProducerGsf);

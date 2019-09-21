@@ -3,6 +3,7 @@
 
 #include "DataFormats/PatCandidates/interface/Photon.h"
 #include "DataFormats/Common/interface/RefToPtr.h"
+#include <cstdint>
 
 using pat::Photon;
 

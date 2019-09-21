@@ -54,6 +54,7 @@
 #include <iosfwd>
 #include <utility>  // for pair
 #include <vector>
+#include <cstdint>
 
 class CSCIndexerOldPostls1 {
 public:

@@ -17,6 +17,7 @@
 #include "DataFormats/TrackReco/interface/HitPattern.h"
 #include <utility>
 #include <map>
+#include <cstdint>
 
 class DetId;
 

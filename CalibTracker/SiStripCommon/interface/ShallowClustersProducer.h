@@ -9,6 +9,7 @@
 #include "DataFormats/Common/interface/DetSetVectorNew.h"
 
 #include "DataFormats/SiStripCluster/interface/SiStripCluster.h"
+#include <cstdint>
 
 class SiStripClusterInfo;
 class SiStripProcessedRawDigi;

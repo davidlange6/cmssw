@@ -20,6 +20,7 @@
 
 #include "CalibFormats/SiStripObjects/interface/SiStripQuality.h"
 #include "CalibTracker/Records/interface/SiStripQualityRcd.h"
+#include <cstdint>
 
 class SiStripQualityDQM : public SiStripBaseCondObjDQM {
 public:

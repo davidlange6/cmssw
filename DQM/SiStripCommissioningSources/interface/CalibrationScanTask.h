@@ -3,6 +3,7 @@
 
 #include "DQM/SiStripCommissioningSources/interface/CommissioningTask.h"
 #include <string>
+#include <cstdint>
 
 /**
    @class CalibrationScanTask

@@ -17,6 +17,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdint>
 
 class L1GlobalCaloTrigger;
 class L1GctElectronSorter;

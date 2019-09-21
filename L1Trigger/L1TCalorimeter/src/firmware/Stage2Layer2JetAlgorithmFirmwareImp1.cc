@@ -17,6 +17,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 
 namespace l1t {
   bool operator>(const l1t::Jet& a, const l1t::Jet& b) { return a.hwPt() > b.hwPt(); }

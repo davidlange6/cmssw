@@ -9,6 +9,7 @@
 #include <sstream>
 #include <string>
 #include <bitset>
+#include <cstdint>
 
 CmsTrackerDetIdBuilder::CmsTrackerDetIdBuilder(const std::vector<int>& detidShifts) : m_detidshifts() {
   if (detidShifts.size() != nSubDet * maxLevels)

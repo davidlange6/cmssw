@@ -5,6 +5,7 @@
 #include "SimG4CMS/Calo/interface/HcalNumberingScheme.h"
 #include "SimG4CMS/Calo/interface/HcalTestNumberingScheme.h"
 #include "SimG4CMS/Calo/interface/HcalTestNS.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

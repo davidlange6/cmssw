@@ -18,6 +18,7 @@
 #include "Geometry/CaloTopology/interface/FastTimeTopology.h"
 #include "Geometry/Records/interface/FastTimeGeometryRecord.h"
 #include <vector>
+#include <cstdint>
 
 class FlatTrd;
 

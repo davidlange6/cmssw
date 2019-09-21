@@ -1,5 +1,6 @@
 #include "SimDataFormats/CaloTest/interface/HGCalTestNumbering.h"
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

@@ -7,6 +7,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 #include "Geometry/CommonTopologies/interface/StripTopology.h"
 #include "CalibFormats/SiStripObjects/interface/SiStripQuality.h"
+#include <cstdint>
 
 SiStripBadAPVAlgorithmFromClusterOccupancy::SiStripBadAPVAlgorithmFromClusterOccupancy(const edm::ParameterSet& iConfig,
                                                                                        const TrackerTopology* theTopo)

@@ -39,6 +39,7 @@
 #include "PhysicsTools/TagAndProbe/interface/TagProbePairMaker.h"
 
 #include <set>
+#include <cstdint>
 
 //
 // class decleration

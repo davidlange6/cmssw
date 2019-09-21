@@ -3,6 +3,7 @@
 
 #include "CaloTokens.h"
 #include "MissHtPacker.h"
+#include <cstdint>
 
 // Implementation
 

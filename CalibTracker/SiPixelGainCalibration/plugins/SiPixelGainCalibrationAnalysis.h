@@ -40,6 +40,7 @@ Implementation:
 #include "TLinearFitter.h"
 #include "TGraphErrors.h"
 #include <fstream>
+#include <cstdint>
 //
 // class decleration
 //

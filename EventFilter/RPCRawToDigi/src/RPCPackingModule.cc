@@ -22,6 +22,7 @@
 
 #include <string>
 #include <sstream>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

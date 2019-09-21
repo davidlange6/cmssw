@@ -4,6 +4,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSetfwd.h"
 
 #include <iostream>
+#include <cstdint>
 
 //  maps from EcalElectronicsMapping
 // iphiEB and ietaEB[FedId - 610][towerId - 1]

@@ -23,6 +23,7 @@
 
 #include <Math/Transform3D.h>
 #include <Math/EulerAngles.h>
+#include <cstdint>
 
 //Forward declaration
 

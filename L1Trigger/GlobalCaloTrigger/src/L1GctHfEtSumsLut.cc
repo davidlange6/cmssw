@@ -1,6 +1,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctHfEtSumsLut.h"
 
 #include "CondFormats/L1TObjects/interface/L1CaloEtScale.h"
+#include <cstdint>
 
 //DEFINE STATICS
 const int L1GctHfEtSumsLut::NAddress = 8;

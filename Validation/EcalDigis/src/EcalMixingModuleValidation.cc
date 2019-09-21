@@ -15,6 +15,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "FWCore/Utilities/interface/RandomNumberGenerator.h"
 #include "FWCore/Utilities/interface/StreamID.h"
+#include <cstdint>
 
 EcalMixingModuleValidation::EcalMixingModuleValidation(const edm::ParameterSet& ps)
     : HepMCToken_(consumes<edm::HepMCProduct>(edm::InputTag(ps.getParameter<std::string>("moduleLabelMC")))),

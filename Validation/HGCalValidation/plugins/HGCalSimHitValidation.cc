@@ -471,5 +471,6 @@ void HGCalSimHitValidation::bookHistograms(DQMStore::IBooker& iB, edm::Run const
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 //define this as a plug-in
 DEFINE_FWK_MODULE(HGCalSimHitValidation);

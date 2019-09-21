@@ -41,6 +41,7 @@ Description: Create monitorElements for the Errors in created in the reduction o
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 
 #include "CondFormats/SiPixelObjects/interface/SiPixelFedCablingMap.h"
+#include <cstdint>
 
 //
 // class declaration

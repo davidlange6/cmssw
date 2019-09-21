@@ -3,6 +3,7 @@
 
 #include "CaloCollections.h"
 #include "LegacyHFRingUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

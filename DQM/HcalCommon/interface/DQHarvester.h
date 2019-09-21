@@ -12,6 +12,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace hcaldqm {
   class DQHarvester : public DQMEDHarvester, public DQModule {

@@ -4,6 +4,7 @@
 #include "EventFilter/EcalRawToDigi/interface/DCCEventBlock.h"
 #include "EventFilter/EcalRawToDigi/interface/DCCDataUnpacker.h"
 #include "EventFilter/EcalRawToDigi/interface/EcalElectronicsMapper.h"
+#include <cstdint>
 
 DCCTowerBlock::DCCTowerBlock(
     DCCDataUnpacker *u, EcalElectronicsMapper *m, DCCEventBlock *e, bool unpack, bool forceToKeepFRdata)

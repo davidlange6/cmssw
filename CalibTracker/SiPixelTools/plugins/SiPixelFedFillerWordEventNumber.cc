@@ -19,6 +19,7 @@ Implementation:
 // system include files
 #include <memory>
 #include "SiPixelFedFillerWordEventNumber.h"
+#include <cstdint>
 
 //======= constructors and destructor
 SiPixelFedFillerWordEventNumber ::SiPixelFedFillerWordEventNumber(const edm::ParameterSet& iConfig) {

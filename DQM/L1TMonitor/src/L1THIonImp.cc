@@ -1,4 +1,5 @@
 #include "DQM/L1TMonitor/interface/L1THIonImp.h"
+#include <cstdint>
 
 using namespace edm;
 

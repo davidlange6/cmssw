@@ -80,6 +80,7 @@
 #include "TEfficiency.h"
 
 #include <memory>
+#include <cstdint>
 
 using namespace edm;
 using namespace reco;

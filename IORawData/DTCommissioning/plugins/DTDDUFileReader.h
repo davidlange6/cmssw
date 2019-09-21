@@ -17,7 +17,6 @@
 
 #include <ostream>
 #include <fstream>
-#include <boost/cstdint.hpp>
 
 class DTDDUFileReader : public edm::EDProducer {
 public:

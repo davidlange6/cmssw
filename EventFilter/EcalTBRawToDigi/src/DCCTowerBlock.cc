@@ -5,6 +5,7 @@
 #include "DCCDataMapper.h"
 #include "ECALParserBlockException.h"
 #include <cstdio>
+#include <cstdint>
 
 DCCTBTowerBlock::DCCTBTowerBlock(DCCTBEventBlock *dccBlock,
                                  DCCTBDataParser *parser,

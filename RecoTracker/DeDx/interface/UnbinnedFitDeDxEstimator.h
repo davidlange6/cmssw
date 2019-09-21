@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdint>
 
 class UnbinnedFitDeDxEstimator : public BaseDeDxEstimator {
 public:

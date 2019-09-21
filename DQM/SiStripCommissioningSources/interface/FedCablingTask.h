@@ -3,6 +3,7 @@
 
 #include "DQM/SiStripCommissioningSources/interface/CommissioningTask.h"
 #include <vector>
+#include <cstdint>
 
 /**
    @class FedCablingTask

@@ -6,6 +6,7 @@
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
 #include "DataFormats/EcalDetId/interface/EcalDetIdCollections.h"
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
+#include <cstdint>
 
 using namespace std;
 

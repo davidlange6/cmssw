@@ -11,6 +11,7 @@
 #include <FWCore/Framework/interface/ESHandle.h>
 #include <DataFormats/DTDigi/interface/DTDigiCollection.h>
 #include <DataFormats/DTDigi/interface/DTLocalTriggerCollection.h>
+#include <cstdint>
 
 class DTReadOutMapping;
 

@@ -25,6 +25,7 @@
 #include "G4String.hh"
 #include <map>
 #include <string>
+#include <cstdint>
 
 class DDFilteredView;
 class G4LogicalVolume;

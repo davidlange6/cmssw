@@ -2,6 +2,7 @@
 
 #include "EventFilter/Utilities/interface/AuxiliaryMakers.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 namespace evf {
   namespace evtn {

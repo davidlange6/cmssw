@@ -6,6 +6,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "DataFormats/EcalRawData/interface/EcalDCCHeaderBlock.h"
+#include <cstdint>
 
 namespace ecaldqm {
   EnergyTask::EnergyTask() : DQWorkerTask(), isPhysicsRun_(false) {}

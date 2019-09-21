@@ -13,6 +13,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Utilities/interface/typelookup.h"
 #include <sstream>
+#include <cstdint>
 
 void SiStripGain::multiply(const SiStripApvGain &apvgain,
                            const double &factor,

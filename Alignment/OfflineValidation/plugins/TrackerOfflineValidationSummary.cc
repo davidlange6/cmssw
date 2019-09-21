@@ -50,6 +50,7 @@
 
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
+#include <cstdint>
 
 //
 // class decleration

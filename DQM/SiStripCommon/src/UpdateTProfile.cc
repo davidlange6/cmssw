@@ -2,6 +2,7 @@
 #include "TProfile.h"
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 /** */

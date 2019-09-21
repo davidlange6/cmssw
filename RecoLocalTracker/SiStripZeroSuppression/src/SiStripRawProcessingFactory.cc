@@ -9,6 +9,7 @@
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/IteratedMedianCMNSubtractor.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/FastLinearCMNSubtractor.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/TT6CMNSubtractor.h"
+#include <cstdint>
 
 std::unique_ptr<SiStripRawProcessingAlgorithms> SiStripRawProcessingFactory::create(const edm::ParameterSet& conf) {
   return std::unique_ptr<SiStripRawProcessingAlgorithms>(

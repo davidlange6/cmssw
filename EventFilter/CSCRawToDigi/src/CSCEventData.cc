@@ -7,6 +7,7 @@
 #include <iterator>
 #include "EventFilter/CSCRawToDigi/src/bitset_append.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 #ifdef LOCAL_UNPACK
 bool CSCEventData::debug = false;

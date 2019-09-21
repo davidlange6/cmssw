@@ -2,6 +2,7 @@
 #include "Validation/HcalHits/test/HcalHitValidation.h"
 
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 HcalHitValidation::HcalHitValidation(const edm::ParameterSet &ps) {
   g4Label = ps.getUntrackedParameter<std::string>("moduleLabel", "g4SimHits");

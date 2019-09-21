@@ -8,6 +8,7 @@
 #include "L1Trigger/L1TMuonEndCap/interface/EMTFGEMDetIdImpl.h"
 
 #include "helper.h"  // merge_map_into_map, assert_no_abort
+#include <cstdint>
 
 // 18 in ME1; 9x3 in ME2,3,4; 9 from neighbor sector.
 // Arranged in FW as 6 stations, 9 chambers per station.

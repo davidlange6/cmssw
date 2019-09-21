@@ -15,6 +15,7 @@
 #include "OnlineDBqueryHelper.h"
 
 #include "xercesc/util/PlatformUtils.hpp"
+#include <cstdint>
 using namespace XERCES_CPP_NAMESPACE;
 
 class L1TCaloParamsOnlineProd : public L1ConfigOnlineProdBaseExt<L1TCaloParamsO2ORcd, l1t::CaloParams> {

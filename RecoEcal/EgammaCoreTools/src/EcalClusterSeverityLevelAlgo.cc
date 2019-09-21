@@ -6,6 +6,7 @@
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
 #include "Geometry/CaloTopology/interface/CaloTopology.h"
+#include <cstdint>
 
 float EcalClusterSeverityLevelAlgo::goodFraction(const reco::CaloCluster& cluster,
                                                  const EcalRecHitCollection& recHits,

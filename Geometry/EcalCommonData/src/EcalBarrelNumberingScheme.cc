@@ -6,6 +6,7 @@
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
 
 #include <iostream>
+#include <cstdint>
 
 EcalBarrelNumberingScheme::EcalBarrelNumberingScheme() : EcalNumberingScheme() {
   edm::LogInfo("EcalGeom") << "Creating EcalBarrelNumberingScheme";

@@ -19,6 +19,7 @@
 #include <cmath>
 #include <sys/time.h>
 #include <cstring>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

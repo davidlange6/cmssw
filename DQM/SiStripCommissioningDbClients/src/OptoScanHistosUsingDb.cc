@@ -5,6 +5,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripFecKey.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 using namespace sistrip;
 

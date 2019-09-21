@@ -1,5 +1,6 @@
 #include "RecoLocalTracker/SiStripClusterizer/interface/SiStripApvShotCleaner.h"
 #include <algorithm>
+#include <cstdint>
 
 //Uncomment the following #define to have print debug
 //#define DEBUGME

@@ -5,6 +5,7 @@
 
 #include "RecoLocalCalo/HcalRecAlgos/interface/HFAnodeStatus.h"
 #include "RecoLocalCalo/HcalRecAlgos/interface/HFRecHitAuxSetter.h"
+#include <cstdint>
 
 void HFRecHitAuxSetter::setAux(const HFPreRecHit& prehit,
                                const unsigned anodeStates[2],

@@ -40,6 +40,7 @@
 
 #include <iostream>
 #include "TMath.h"
+#include <cstdint>
 
 //--------------------------------------------------------------------------------------------
 SiStripMonitorCluster::SiStripMonitorCluster(const edm::ParameterSet& iConfig)

@@ -2,6 +2,7 @@
 #include "EventFilter/EcalRawToDigi/interface/DCCDataBlockPrototype.h"
 #include "EventFilter/EcalRawToDigi/interface/DCCDataUnpacker.h"
 #include "EventFilter/EcalRawToDigi/interface/EcalElectronicsMapper.h"
+#include <cstdint>
 
 DCCEESRPBlock::DCCEESRPBlock(DCCDataUnpacker *u, EcalElectronicsMapper *m, DCCEventBlock *e, bool unpack)
     : DCCSRPBlock(u, m, e, unpack) {}

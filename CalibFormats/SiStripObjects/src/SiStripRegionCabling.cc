@@ -1,6 +1,7 @@
 #include "CalibFormats/SiStripObjects/interface/SiStripRegionCabling.h"
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 
 using namespace sistrip;
 

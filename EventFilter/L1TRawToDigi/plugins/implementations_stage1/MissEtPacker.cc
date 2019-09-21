@@ -3,6 +3,7 @@
 
 #include "CaloTokens.h"
 #include "MissEtPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

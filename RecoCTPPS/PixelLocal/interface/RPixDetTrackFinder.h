@@ -21,6 +21,7 @@
 
 #include <vector>
 #include <map>
+#include <cstdint>
 
 class RPixDetTrackFinder {
 public:

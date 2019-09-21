@@ -9,6 +9,7 @@
 #include <string>
 #include <ostream>
 #include <sstream>
+#include <cstdint>
 
 class SiStripConfigDb;
 class SiStripPartition;

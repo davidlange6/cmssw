@@ -10,6 +10,7 @@
 #include "RecoEcal/EgammaCoreTools/interface/ClusterEtLess.h"
 #include "DataFormats/CaloRecHit/interface/CaloID.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //temporary sorter, I'm sure this must exist already in CMSSW
 template <class T1, class T2, typename Comp = std::less<T1> >

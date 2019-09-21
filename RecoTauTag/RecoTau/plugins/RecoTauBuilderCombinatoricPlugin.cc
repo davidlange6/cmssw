@@ -501,6 +501,7 @@ namespace reco {
 }  // namespace reco
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(RecoTauBuilderPluginFactory,
                   reco::tau::RecoTauBuilderCombinatoricPlugin,
                   "RecoTauBuilderCombinatoricPlugin");

@@ -47,6 +47,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include <iomanip>
 #include <string>
+#include <cstdint>
 
 class ApvAnalysisFactory;
 class SiStripDetCabling;

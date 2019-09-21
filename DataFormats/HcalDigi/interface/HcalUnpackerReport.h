@@ -6,6 +6,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/HcalDetId/interface/HcalElectronicsId.h"
 #include "DataFormats/HcalDigi/interface/HcalCalibrationEventTypes.h"
+#include <cstdint>
 
 /** \class HcalUnpackerReport
   *  

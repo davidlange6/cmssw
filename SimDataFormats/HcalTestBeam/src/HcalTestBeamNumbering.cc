@@ -1,5 +1,6 @@
 #include "SimDataFormats/HcalTestBeam/interface/HcalTestBeamNumbering.h"
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

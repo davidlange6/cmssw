@@ -16,6 +16,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/ParameterSet/interface/ParameterSetfwd.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 // constructor
 SiStripCoralIface::SiStripCoralIface(std::string connectionString, std::string authenticationPath, const bool debug)

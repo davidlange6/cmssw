@@ -10,6 +10,7 @@
 #include "FWCore/Utilities/interface/typelookup.h"
 
 #include <iostream>
+#include <cstdint>
 
 //---- default constructor / destructor
 SiStripDetCabling::SiStripDetCabling(const TrackerTopology *const topology) : fedCabling_(nullptr), tTopo(topology) {}

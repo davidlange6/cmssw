@@ -11,6 +11,7 @@
 
 #include "DQM/SiStripMonitorHardware/interface/SiStripFEDSpyBuffer.h"
 #include "DQM/SiStripMonitorHardware/interface/SiStripSpyUtilities.h"
+#include <cstdint>
 
 using edm::LogError;
 using edm::LogInfo;

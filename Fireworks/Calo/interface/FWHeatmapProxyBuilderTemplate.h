@@ -27,6 +27,7 @@
 #include "Fireworks/Core/interface/FWEventItem.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "DataFormats/HGCRecHit/interface/HGCRecHitCollections.h"
+#include <cstdint>
 
 // forward declarations
 

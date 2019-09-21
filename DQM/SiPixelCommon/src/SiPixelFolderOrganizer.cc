@@ -12,6 +12,7 @@
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
 #include <cstdio>
 #include <sstream>
+#include <cstdint>
 
 /// Constructor
 SiPixelFolderOrganizer::SiPixelFolderOrganizer(bool getStore) : topFolderName("Pixel") {

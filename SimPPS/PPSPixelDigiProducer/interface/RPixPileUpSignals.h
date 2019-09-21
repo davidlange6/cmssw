@@ -3,6 +3,7 @@
 
 #include <map>
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 class RPixPileUpSignals {
 public:

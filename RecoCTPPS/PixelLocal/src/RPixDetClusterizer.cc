@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 
 #include "RecoCTPPS/PixelLocal/interface/RPixDetClusterizer.h"
+#include <cstdint>
 
 namespace {
   constexpr int maxCol = CTPPSPixelCluster::MAXCOL;

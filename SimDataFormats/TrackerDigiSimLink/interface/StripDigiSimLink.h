@@ -3,6 +3,7 @@
 
 #include "boost/cstdint.hpp"
 #include "SimDataFormats/EncodedEventId/interface/EncodedEventId.h"
+#include <cstdint>
 
 class StripDigiSimLink {
 public:

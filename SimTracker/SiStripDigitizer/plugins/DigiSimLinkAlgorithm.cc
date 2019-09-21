@@ -13,6 +13,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include "CLHEP/Random/RandFlat.h"
+#include <cstdint>
 
 #define CBOLTZ (1.38E-23)
 #define e_SI (1.6E-19)

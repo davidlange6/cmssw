@@ -57,6 +57,7 @@
 #include "UCTDAQRawData.h"
 #include "UCTAMCRawData.h"
 #include "UCTCTP7RawData.h"
+#include <cstdint>
 
 using namespace edm;
 

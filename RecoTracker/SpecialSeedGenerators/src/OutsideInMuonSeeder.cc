@@ -319,4 +319,5 @@ void OutsideInMuonSeeder::doDebug(const reco::Track &tk) const {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(OutsideInMuonSeeder);

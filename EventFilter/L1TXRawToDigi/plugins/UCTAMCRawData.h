@@ -1,3 +1,4 @@
+#include <cstdint>
 #ifndef UCTAMCRawData_hh
 #define UCTAMCRawData_hh
 

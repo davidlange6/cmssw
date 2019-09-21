@@ -14,6 +14,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 
 #include <string>
+#include <cstdint>
 
 template <typename TObject, typename TObjectO, typename TRecord>
 class DummyCondDBWriter : public edm::EDAnalyzer {

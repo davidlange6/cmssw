@@ -38,6 +38,7 @@
 #include "CLHEP/Random/RandGaussQ.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 RPCSimModelTiming::RPCSimModelTiming(const edm::ParameterSet& config) : RPCSim(config) {
   aveEff = config.getParameter<double>("averageEfficiency");

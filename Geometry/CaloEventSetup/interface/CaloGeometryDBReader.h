@@ -2,6 +2,7 @@
 #define GEOMETRY_CALOEVENTSETUP_CALOGEOMETRYDBREADER_H 1
 
 #include "Geometry/CaloGeometry/interface/CaloSubdetectorGeometry.h"
+#include <cstdint>
 
 class CaloGeometryDBReader {
 public:

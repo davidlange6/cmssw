@@ -6,6 +6,7 @@
 #include <boost/lexical_cast.hpp>
 #include <TChain.h>
 #include <TFile.h>
+#include <cstdint>
 
 namespace sistrip {
 

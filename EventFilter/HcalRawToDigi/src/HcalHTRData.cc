@@ -11,6 +11,7 @@ const int HcalHTRData::MAXIMUM_SAMPLES_PER_CHANNEL = 20;
 #endif
 #include <cstring>
 #include <cstdio>
+#include <cstdint>
 
 HcalHTRData::HcalHTRData() : m_formatVersion(-2), m_rawLength(0), m_rawConst(nullptr), m_ownData(nullptr) {}
 HcalHTRData::HcalHTRData(const unsigned short* data, int length) {

@@ -10,6 +10,7 @@
 #include "DataFormats/TauReco/interface/PFRecoTauChargedHadron.h"
 #include "DataFormats/TauReco/interface/PFRecoTauChargedHadronFwd.h"
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
+#include <cstdint>
 
 namespace {
   // Apply a hypothesis on the mass of the strips.

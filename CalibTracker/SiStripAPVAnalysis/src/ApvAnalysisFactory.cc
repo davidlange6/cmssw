@@ -2,6 +2,7 @@
 //#include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 
 #include "CalibTracker/SiStripAPVAnalysis/interface/TT6NTPedestalCalculator.h"
+#include <cstdint>
 
 using namespace std;
 ApvAnalysisFactory::ApvAnalysisFactory(string theAlgorithmType,

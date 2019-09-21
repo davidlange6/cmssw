@@ -1,6 +1,7 @@
 #include "SimG4CMS/HGCalTestBeam/interface/AHCalDetId.h"
 #include <ostream>
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 const AHCalDetId AHCalDetId::Undefined(0, 0, 0);
 

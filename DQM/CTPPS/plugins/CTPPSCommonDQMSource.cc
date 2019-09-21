@@ -23,6 +23,7 @@
 #include "DataFormats/OnlineMetaData/interface/CTPPSRecord.h"
 
 #include <string>
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

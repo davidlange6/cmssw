@@ -18,6 +18,7 @@
 
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class CaloGeometry;
 class IntegerCaloSamples;

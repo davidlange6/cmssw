@@ -97,6 +97,7 @@
 #include <vector>
 
 #include "TString.h"
+#include <cstdint>
 
 class PGlobalDigi;
 

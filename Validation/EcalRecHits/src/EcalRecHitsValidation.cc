@@ -15,6 +15,7 @@
 #include <DataFormats/EcalDetId/interface/ESDetId.h>
 #include <Validation/EcalRecHits/interface/EcalRecHitsValidation.h>
 #include <string>
+#include <cstdint>
 
 using namespace cms;
 using namespace edm;

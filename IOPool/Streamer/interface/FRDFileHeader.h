@@ -2,6 +2,7 @@
 #define IOPool_Streamer_FRDFileHeader_h
 
 #include <array>
+#include <cstdint>
 
 /*
  * FRD File Header optionally found at the beginning of the FRD RAW file

@@ -25,6 +25,7 @@
 #include "CaloOnlineTools/HcalOnlineDb/interface/HcalAssistant.h"
 #include "CaloOnlineTools/HcalOnlineDb/interface/HcalChannelIterator.h"
 #include "SimCalorimetry/HcalTrigPrimAlgos/interface/HcalFinegrainBit.h"
+#include <cstdint>
 
 class XMLDOMBlock;
 

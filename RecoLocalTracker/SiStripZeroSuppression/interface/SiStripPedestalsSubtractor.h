@@ -8,6 +8,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 #include "CondFormats/SiStripObjects/interface/SiStripPedestals.h"
 #include <vector>
+#include <cstdint>
 
 class SiStripPedestalsSubtractor {
   friend class SiStripRawProcessingFactory;

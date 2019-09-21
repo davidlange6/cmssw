@@ -20,6 +20,7 @@
 // system include files
 #include <iostream>
 #include <iomanip>
+#include <cstdint>
 
 // user include files
 

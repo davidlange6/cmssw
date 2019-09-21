@@ -5,6 +5,7 @@
 
 #include "SimDataFormats/CaloAnalysis/interface/SimCluster.h"
 #include "DataFormats/ForwardDetId/interface/HGCalDetId.h"
+#include <cstdint>
 
 #ifdef PFLOW_DEBUG
 #define LOGVERB(x) edm::LogVerbatim(x)

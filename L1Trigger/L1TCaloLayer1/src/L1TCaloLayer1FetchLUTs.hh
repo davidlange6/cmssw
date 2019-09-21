@@ -5,6 +5,7 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 #include <vector>
 #include <array>
+#include <cstdint>
 
 // External function declaration
 

@@ -8,6 +8,7 @@
 #include "boost/cstdint.hpp"
 #include <vector>
 #include <string>
+#include <cstdint>
 
 class SiStripFedCablingRcd;
 class SiStripFedCabling;

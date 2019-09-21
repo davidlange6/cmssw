@@ -16,6 +16,7 @@
 #include "SimG4CMS/Calo/interface/HcalTestNumberingScheme.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "HcalTB04XtalNumberingScheme.h"
+#include <cstdint>
 
 //
 // constructors and destructor

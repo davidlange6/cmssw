@@ -23,6 +23,7 @@
 #include "boost/range/iterator_range.hpp"
 #include <sstream>
 #include <string>
+#include <cstdint>
 
 namespace edm {
   class Event;

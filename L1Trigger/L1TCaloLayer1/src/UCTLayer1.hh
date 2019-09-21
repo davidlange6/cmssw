@@ -8,6 +8,7 @@ class UCTRegion;
 class UCTTower;
 
 #include "UCTGeometry.hh"
+#include <cstdint>
 
 class UCTLayer1 {
 public:

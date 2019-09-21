@@ -12,6 +12,7 @@
 #include "Geometry/HGCalCommonData/interface/HGCalGeometryMode.h"
 
 #include "G4ThreeVector.hh"
+#include <cstdint>
 
 class HGCalNumberingScheme {
 public:

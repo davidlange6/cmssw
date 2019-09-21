@@ -8,6 +8,7 @@
 #include "CLHEP/Random/RandGaussQ.h"
 
 #include "SimCalorimetry/HGCalSimProducers/interface/HGCDigitizerTypes.h"
+#include <cstdint>
 
 /**
    @class HGCFEElectronics

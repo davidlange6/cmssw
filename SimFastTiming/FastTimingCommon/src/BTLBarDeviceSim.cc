@@ -10,6 +10,7 @@
 #include "Geometry/MTDNumberingBuilder/interface/GeometricTimingDet.h"
 
 #include "CLHEP/Random/RandGaussQ.h"
+#include <cstdint>
 
 BTLBarDeviceSim::BTLBarDeviceSim(const edm::ParameterSet& pset)
     : geom_(nullptr),

@@ -31,6 +31,7 @@
 
 // Raw data collection
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
+#include <cstdint>
 
 using std::cout;
 using std::endl;

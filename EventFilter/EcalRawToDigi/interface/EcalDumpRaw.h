@@ -19,6 +19,7 @@
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/stream/EDAnalyzer.h"
 #include "FWCore/Utilities/interface/InputTag.h"
+#include <cstdint>
 
 /**
  * Utility to dump ECAL Raw data. Hexadecimal dump is accompagned with a side by

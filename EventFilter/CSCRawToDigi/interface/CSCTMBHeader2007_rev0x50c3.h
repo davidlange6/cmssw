@@ -2,6 +2,7 @@
 #define CSCTMBHeader2007_rev0x50c3_h
 #include "EventFilter/CSCRawToDigi/interface/CSCVTMBHeaderFormat.h"
 #include "DataFormats/MuonDetId/interface/CSCDetId.h"
+#include <cstdint>
 
 struct CSCTMBHeader2007_rev0x50c3 : public CSCVTMBHeaderFormat {
   enum { NWORDS = 43 };

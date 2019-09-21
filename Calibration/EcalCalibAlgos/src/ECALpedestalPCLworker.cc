@@ -8,6 +8,7 @@
 #include "CondFormats/DataRecord/interface/EcalPedestalsRcd.h"
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 ECALpedestalPCLworker::ECALpedestalPCLworker(const edm::ParameterSet& iConfig)
 

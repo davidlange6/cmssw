@@ -15,6 +15,7 @@
 #include "FWCore/Utilities/interface/thread_safety_macros.h"
 #include <vector>
 #include <atomic>
+#include <cstdint>
 
 class EcalBarrelGeometry final : public CaloSubdetectorGeometry {
 public:

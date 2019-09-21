@@ -20,6 +20,7 @@
 
 // user include files
 #include "Geometry/EcalCommonData/interface/EcalNumberingScheme.h"
+#include <cstdint>
 
 class HcalTB04XtalNumberingScheme : public EcalNumberingScheme {
 public:

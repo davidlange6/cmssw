@@ -54,6 +54,7 @@
 #include "CLHEP/Random/RandomEngine.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "FWCore/Utilities/interface/RandomNumberGenerator.h"
+#include <cstdint>
 
 //
 // class declaration

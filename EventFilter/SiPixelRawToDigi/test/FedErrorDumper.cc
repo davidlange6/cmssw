@@ -873,4 +873,5 @@ void FedErrorDumper::analyze(const edm::Event &ev, const edm::EventSetup &es) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(FedErrorDumper);

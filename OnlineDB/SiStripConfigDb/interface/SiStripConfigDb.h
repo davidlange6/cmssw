@@ -28,6 +28,7 @@
 #include <atomic>
 
 #include "DbClient.h"
+#include <cstdint>
 
 namespace sistrip {
   static const uint16_t FEC_CRATE_OFFSET = 0;  //@@ temporary

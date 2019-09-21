@@ -8,6 +8,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCTMBMiniScope.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 CSCTMBMiniScope::CSCTMBMiniScope(const uint16_t *buf, int Line6b07, int Line6E07) {
   size_ = UnpackMiniScope(buf, Line6b07, Line6E07);

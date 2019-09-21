@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cstdint>
 
 class G4Step;
 class G4HCofThisEvent;

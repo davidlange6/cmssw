@@ -14,6 +14,7 @@
 
 // user include files
 #include "SimG4CMS/Forward/interface/TotemG4Hit.h"
+#include <cstdint>
 
 //
 // constructors and destructor

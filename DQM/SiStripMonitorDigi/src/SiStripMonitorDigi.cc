@@ -38,6 +38,7 @@
 #include "DataFormats/L1GlobalTrigger/interface/L1GlobalTriggerReadoutRecord.h"
 #include "CondFormats/RunInfo/interface/RunInfo.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
+#include <cstdint>
 
 /* mia: but is there not a smarter way ?!?!?! */
 namespace {

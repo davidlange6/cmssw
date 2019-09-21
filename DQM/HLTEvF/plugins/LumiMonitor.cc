@@ -296,4 +296,5 @@ void LumiMonitor::fillDescriptions(edm::ConfigurationDescriptions& descriptions)
 
 // Define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(LumiMonitor);

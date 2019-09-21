@@ -36,6 +36,7 @@
 #include "RecoTracker/SpecialSeedGenerators/interface/ClusterChecker.h"
 
 #include <map>
+#include <cstdint>
 
 class CtfSpecialSeedGenerator : public edm::stream::EDProducer<> {
 public:

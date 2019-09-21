@@ -3,6 +3,7 @@
 
 #include "CaloTokens.h"
 #include "PhysCandPacker.h"
+#include <cstdint>
 
 template <typename T, typename F>
 l1t::Blocks process(unsigned int id1, unsigned int id2, const BXVector<T>& coll, F filter) {

@@ -15,6 +15,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <cstdint>
 
 class RPCDigitizer;
 class RPCGeometry;

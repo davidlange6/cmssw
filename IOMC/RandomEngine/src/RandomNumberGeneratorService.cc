@@ -48,6 +48,7 @@
 #include <ostream>
 #include <sstream>
 #include <unistd.h>
+#include <cstdint>
 
 namespace edm {
   namespace service {

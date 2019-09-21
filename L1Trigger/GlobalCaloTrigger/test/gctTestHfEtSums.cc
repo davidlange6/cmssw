@@ -10,6 +10,7 @@
 #include <math.h>
 #include <iostream>
 #include <cassert>
+#include <cstdint>
 
 using namespace std;
 

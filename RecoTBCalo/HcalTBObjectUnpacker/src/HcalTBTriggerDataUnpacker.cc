@@ -2,6 +2,7 @@
 #include "TBDataFormats/HcalTBObjects/interface/HcalTBTriggerData.h"
 #include "DataFormats/FEDRawData/interface/FEDRawData.h"
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 

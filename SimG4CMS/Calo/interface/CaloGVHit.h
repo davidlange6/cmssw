@@ -26,6 +26,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/Math/interface/Point3D.h"
 #include <iostream>
+#include <cstdint>
 
 class CaloGVHit {
 public:

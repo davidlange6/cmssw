@@ -5,6 +5,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include <CLHEP/Geometry/Point3D.h>
 #include <CLHEP/Geometry/Plane3D.h>
+#include <cstdint>
 
 typedef CaloCellGeometry::CCGFloat CCGFloat;
 typedef CaloCellGeometry::Pt3D Pt3D;

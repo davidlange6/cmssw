@@ -6,6 +6,7 @@
 #include "TrackingTools/GsfTools/interface/MultiTrajectoryStateTransform.h"
 
 #include <algorithm>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

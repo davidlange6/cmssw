@@ -8,6 +8,7 @@
 #include <list>
 #include <utility>
 #include <memory>
+#include <cstdint>
 
 namespace sistrip {
 

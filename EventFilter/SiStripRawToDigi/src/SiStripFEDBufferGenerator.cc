@@ -3,6 +3,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <cmath>
+#include <cstdint>
 
 namespace sistrip {
 

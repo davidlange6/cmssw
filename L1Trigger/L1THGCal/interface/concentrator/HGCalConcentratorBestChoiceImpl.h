@@ -5,6 +5,7 @@
 #include "DataFormats/L1THGCal/interface/HGCalTriggerCell.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
 #include <vector>
+#include <cstdint>
 
 class HGCalConcentratorBestChoiceImpl {
 public:

@@ -5,6 +5,7 @@
 #include "Geometry/TrackerNumberingBuilder/interface/GeometricDetExtra.h"
 
 #include <vector>
+#include <cstdint>
 
 class GeometricDet;
 /**

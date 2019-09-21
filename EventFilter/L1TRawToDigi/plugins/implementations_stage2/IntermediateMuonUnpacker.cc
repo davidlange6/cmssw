@@ -6,6 +6,7 @@
 
 #include "GMTCollections.h"
 #include "IntermediateMuonUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

@@ -46,6 +46,7 @@ using std::cout;
 using std::endl;
 
 #include <string>
+#include <cstdint>
 
 int main(){
 

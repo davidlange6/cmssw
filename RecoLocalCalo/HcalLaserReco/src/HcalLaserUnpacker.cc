@@ -3,6 +3,7 @@
 #include "RecoLocalCalo/HcalLaserReco/src/HcalLaserUnpacker.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include <ostream>
+#include <cstdint>
 
 HcalLaserUnpacker::HcalLaserUnpacker() {}
 

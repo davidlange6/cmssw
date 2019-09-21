@@ -532,4 +532,5 @@ void RPCTwinMuxRawToDigi::putCounters(edm::Event &event, std::unique_ptr<RPCAMCL
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(RPCTwinMuxRawToDigi);

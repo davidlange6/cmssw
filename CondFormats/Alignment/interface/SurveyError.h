@@ -19,6 +19,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include "CondFormats/Alignment/interface/Definitions.h"
+#include <cstdint>
 
 class SurveyError {
   typedef align::ErrorMatrix ErrorMatrix;

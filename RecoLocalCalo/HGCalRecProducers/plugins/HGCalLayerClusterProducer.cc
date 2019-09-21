@@ -29,6 +29,7 @@
 
 #include "DataFormats/ParticleFlowReco/interface/PFCluster.h"
 #include "DataFormats/Common/interface/ValueMap.h"
+#include <cstdint>
 
 using Density = hgcal_clustering::Density;
 

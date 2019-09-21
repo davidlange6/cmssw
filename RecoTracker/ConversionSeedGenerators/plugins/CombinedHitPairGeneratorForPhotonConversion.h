@@ -19,6 +19,7 @@ namespace edm {
 }  // namespace edm
 
 #include "ConversionRegion.h"
+#include <cstdint>
 
 /** \class CombinedHitPairGeneratorForPhotonConversion
  * Hides set of HitPairGeneratorFromLayerPairForPhotonConversion generators.

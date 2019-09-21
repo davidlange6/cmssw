@@ -7,6 +7,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripNoises.h"
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 using namespace std;
 using namespace sistrip;

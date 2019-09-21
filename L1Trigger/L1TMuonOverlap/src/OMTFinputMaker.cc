@@ -15,6 +15,7 @@
 #include "L1Trigger/CSCCommonTrigger/interface/CSCConstants.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 ///////////////////////////////////////
 ///////////////////////////////////////

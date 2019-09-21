@@ -9,6 +9,7 @@
 #include "DataFormats/Common/interface/DetSetVector.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingAlgorithms.h"
 #include "DataFormats/SiStripDigi/interface/SiStripProcessedRawDigi.h"
+#include <cstdint>
 
 class SiStripDigi;
 class SiStripRawDigi;

@@ -11,6 +11,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <cstdint>
 
 typedef unsigned long long TimeValue_t;
 

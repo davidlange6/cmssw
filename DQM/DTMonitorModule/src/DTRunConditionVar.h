@@ -37,6 +37,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include <vector>
 #include <string>
+#include <cstdint>
 
 class DetLayer;
 class DetId;

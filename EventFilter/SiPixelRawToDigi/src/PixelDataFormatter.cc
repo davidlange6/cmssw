@@ -19,6 +19,7 @@
 #include <bitset>
 #include <sstream>
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

@@ -21,6 +21,7 @@
 #include <TH2D.h>
 #include <TH1D.h>
 #include <fstream>
+#include <cstdint>
 
 //////////////////////////////
 //                          //

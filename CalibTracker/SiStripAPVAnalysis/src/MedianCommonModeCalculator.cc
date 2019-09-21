@@ -1,5 +1,6 @@
 #include "CalibTracker/SiStripAPVAnalysis/interface/MedianCommonModeCalculator.h"
 #include <cmath>
+#include <cstdint>
 
 using namespace std;
 MedianCommonModeCalculator::MedianCommonModeCalculator()

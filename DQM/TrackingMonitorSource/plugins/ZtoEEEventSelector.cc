@@ -140,4 +140,5 @@ bool ZtoEEEventSelector::filter(edm::Event& iEvent, edm::EventSetup const& iSetu
 }
 // Define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(ZtoEEEventSelector);

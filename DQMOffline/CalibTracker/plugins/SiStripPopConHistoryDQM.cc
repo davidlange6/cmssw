@@ -118,5 +118,6 @@ bool SiStripPopConHistoryDQM::setDBValuesForUser(const MonitorElement* me,
 
 #include "DQMOffline/CalibTracker/plugins/SiStripPopConDQMEDHarvester.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 using SiStripDQMHistoryPopCon = SiStripPopConDQMEDHarvester<SiStripPopConHistoryDQM>;
 DEFINE_FWK_MODULE(SiStripDQMHistoryPopCon);

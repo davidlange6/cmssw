@@ -5,6 +5,7 @@
 #include "Geometry/EcalMapping/interface/EcalElectronicsMapping.h"
 #include "EventFilter/EcalRawToDigi/interface/EcalElectronicsMapper.h"
 #include <set>
+#include <cstdint>
 
 std::atomic<bool> DCCDataUnpacker::silentMode_(false);
 

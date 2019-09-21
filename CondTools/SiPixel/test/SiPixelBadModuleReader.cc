@@ -27,6 +27,7 @@
 #include <sys/time.h>
 #include <math.h>
 #include <string>
+#include <cstdint>
 
 SiPixelBadModuleReader::SiPixelBadModuleReader(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<uint32_t>("printDebug", 1)),

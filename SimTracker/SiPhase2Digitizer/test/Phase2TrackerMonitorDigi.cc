@@ -38,6 +38,7 @@
 
 // DQM Histograming
 #include "DQMServices/Core/interface/DQMStore.h"
+#include <cstdint>
 
 //
 // constructors

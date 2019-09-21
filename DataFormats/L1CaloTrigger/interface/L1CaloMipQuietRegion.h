@@ -4,6 +4,7 @@
 #include <ostream>
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
+#include <cstdint>
 
 /*!
 * \class L1CaloMipQuietRegion

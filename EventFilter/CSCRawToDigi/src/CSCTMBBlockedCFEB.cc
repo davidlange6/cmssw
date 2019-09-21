@@ -7,6 +7,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCTMBBlockedCFEB.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 CSCTMBBlockedCFEB::CSCTMBBlockedCFEB(const uint16_t *buf, int Line6BCB, int Line6ECB) {
   size_ = UnpackBlockedCFEB(buf, Line6BCB, Line6ECB);

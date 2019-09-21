@@ -35,6 +35,7 @@
 
 #include <memory>
 #include <random>
+#include <cstdint>
 
 namespace pat {
   class GenJetMatcher {

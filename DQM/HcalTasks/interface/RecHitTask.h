@@ -22,6 +22,7 @@
 #include "DQM/HcalCommon/interface/ContainerSingle2D.h"
 #include "DQM/HcalCommon/interface/ContainerSingleProf2D.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
+#include <cstdint>
 
 class RecHitTask : public hcaldqm::DQTask {
 public:

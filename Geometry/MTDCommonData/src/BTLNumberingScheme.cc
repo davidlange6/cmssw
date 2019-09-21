@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

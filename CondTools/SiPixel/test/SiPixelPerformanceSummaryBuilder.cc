@@ -15,6 +15,7 @@
 #include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
 #include "CondFormats/SiPixelObjects/interface/SiPixelPerformanceSummary.h"
 #include "CondTools/SiPixel/test/SiPixelPerformanceSummaryBuilder.h"
+#include <cstdint>
 
 using namespace cms;
 

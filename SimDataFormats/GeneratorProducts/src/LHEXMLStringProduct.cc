@@ -5,6 +5,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "SimDataFormats/GeneratorProducts/interface/LHEXMLStringProduct.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

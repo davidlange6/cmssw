@@ -5,6 +5,7 @@
 
 #include "CondFormats/DataRecord/interface/SiStripPedestalsRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripPedestals.h"
+#include <cstdint>
 
 class SiStripPedestalsDQM : public SiStripBaseCondObjDQM {
 public:

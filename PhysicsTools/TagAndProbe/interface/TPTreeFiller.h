@@ -2,6 +2,7 @@
 #define PhysicsTools_TagAndProbe_TreeFiller_h
 
 #include "PhysicsTools/TagAndProbe/interface/BaseTreeFiller.h"
+#include <cstdint>
 
 namespace tnp {
   class TPTreeFiller : public BaseTreeFiller {

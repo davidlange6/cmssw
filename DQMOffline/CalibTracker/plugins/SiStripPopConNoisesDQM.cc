@@ -121,5 +121,6 @@ SiStripNoises* SiStripPopConNoisesHandlerFromDQM::getObj() const { return new Si
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "DQMOffline/CalibTracker/plugins/SiStripPopConDQMEDHarvester.h"
+#include <cstdint>
 using SiStripPopConNoisesDQM = SiStripPopConDQMEDHarvester<SiStripPopConNoisesHandlerFromDQM>;
 DEFINE_FWK_MODULE(SiStripPopConNoisesDQM);

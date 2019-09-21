@@ -15,6 +15,7 @@
 #include "G4Step.hh"
 
 #include <iostream>
+#include <cstdint>
 
 EcalSimHitsValidProducer::EcalSimHitsValidProducer(const edm::ParameterSet &iPSet)
     : ee1(0.0),

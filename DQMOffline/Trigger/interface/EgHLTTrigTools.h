@@ -6,6 +6,7 @@
 #include "DataFormats/Common/interface/Handle.h"
 #include "DataFormats/Math/interface/deltaR.h"
 #include <vector>
+#include <cstdint>
 
 class HLTConfigProvider;
 

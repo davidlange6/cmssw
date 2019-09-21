@@ -7,6 +7,7 @@
 XERCES_CPP_NAMESPACE_USE
 #include "IORawData/CaloPatterns/interface/HcalPatternXMLParser.h"
 #include <ostream>
+#include <cstdint>
 
 class HcalPatternXMLParserImpl {
 public:

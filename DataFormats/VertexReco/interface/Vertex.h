@@ -26,6 +26,7 @@
 #include <Math/GenVector/PxPyPzE4D.h>
 #include <Math/GenVector/PxPyPzM4D.h>
 #include "DataFormats/Math/interface/LorentzVector.h"
+#include <cstdint>
 
 namespace reco {
 

@@ -14,6 +14,7 @@
 #include "FWCore/Utilities/interface/typelookup.h"
 #include <cassert>
 #include <sstream>
+#include <cstdint>
 
 void SiStripDelay::fillNewDelay(const SiStripBaseDelay &baseDelay,
                                 const int sumSign,

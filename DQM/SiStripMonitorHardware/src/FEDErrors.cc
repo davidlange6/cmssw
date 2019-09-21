@@ -10,6 +10,7 @@
 #include "DQM/SiStripMonitorHardware/interface/HistogramBase.hh"
 #include "DQM/SiStripMonitorHardware/interface/FEDErrors.hh"
 #include "DQM/SiStripCommon/interface/TkHistoMap.h"
+#include <cstdint>
 
 FEDErrors::FEDErrors() {
   //initialiseLumiBlock();

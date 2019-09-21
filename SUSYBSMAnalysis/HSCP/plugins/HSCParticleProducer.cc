@@ -18,6 +18,7 @@
 
 // user include files
 #include "SUSYBSMAnalysis/HSCP/plugins/HSCParticleProducer.h"
+#include <cstdint>
 
 using namespace susybsm;
 using namespace reco;

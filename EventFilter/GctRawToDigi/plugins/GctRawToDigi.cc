@@ -22,6 +22,7 @@
 
 // Unpack collections class
 #include "EventFilter/GctRawToDigi/src/GctUnpackCollections.h"
+#include <cstdint>
 
 // Namespace resolution
 using std::cout;

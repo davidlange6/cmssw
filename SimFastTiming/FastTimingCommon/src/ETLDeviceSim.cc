@@ -6,6 +6,7 @@
 
 #include "Geometry/CommonDetUnit/interface/GeomDetType.h"
 #include "Geometry/CommonTopologies/interface/PixelTopology.h"
+#include <cstdint>
 
 ETLDeviceSim::ETLDeviceSim(const edm::ParameterSet& pset)
     : geom_(nullptr),

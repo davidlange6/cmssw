@@ -5,6 +5,7 @@
 #define DCCTBTRAILERBLOCK_HH
 
 #include "DCCBlockPrototype.h"
+#include <cstdint>
 class DCCDataParser;
 
 class DCCTBTrailerBlock : public DCCTBBlockPrototype {

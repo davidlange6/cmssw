@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <sstream>
+#include <cstdint>
 
 testSiStripQualityESProducer::testSiStripQualityESProducer(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<bool>("printDebug", false)),

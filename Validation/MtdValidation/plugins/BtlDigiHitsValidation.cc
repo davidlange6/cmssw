@@ -32,6 +32,7 @@
 
 #include "Geometry/MTDGeometryBuilder/interface/ProxyMTDTopology.h"
 #include "Geometry/MTDGeometryBuilder/interface/RectangularMTDTopology.h"
+#include <cstdint>
 
 class BtlDigiHitsValidation : public DQMEDAnalyzer {
 public:

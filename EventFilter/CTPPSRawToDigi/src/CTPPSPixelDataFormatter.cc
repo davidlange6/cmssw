@@ -12,6 +12,7 @@
 #include <bitset>
 #include <sstream>
 #include <iostream>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

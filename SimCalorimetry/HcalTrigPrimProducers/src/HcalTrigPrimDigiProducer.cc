@@ -21,6 +21,7 @@
 #include "Geometry/Records/interface/CaloGeometryRecord.h"
 
 #include <algorithm>
+#include <cstdint>
 
 HcalTrigPrimDigiProducer::HcalTrigPrimDigiProducer(const edm::ParameterSet& ps)
     : theAlgo_(ps.getParameter<bool>("peakFilter"),

@@ -1,6 +1,7 @@
 #ifndef RECOLOCALTRACKER_SISTRIPZEROSUPPRESSION_SISTRIPPERCENTILECOMMONMODENOISESUBTRACTION_H
 #define RECOLOCALTRACKER_SISTRIPZEROSUPPRESSION_SISTRIPPERCENTILECOMMONMODENOISESUBTRACTION_H
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripCommonModeNoiseSubtractor.h"
+#include <cstdint>
 
 class PercentileCMNSubtractor : public SiStripCommonModeNoiseSubtractor {
   friend class SiStripRawProcessingFactory;

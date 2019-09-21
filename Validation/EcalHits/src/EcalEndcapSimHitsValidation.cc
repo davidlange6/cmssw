@@ -9,6 +9,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include "Validation/EcalHits/interface/EcalEndcapSimHitsValidation.h"
 #include <DataFormats/EcalDetId/interface/EEDetId.h>
+#include <cstdint>
 
 using namespace cms;
 using namespace edm;

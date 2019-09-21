@@ -13,6 +13,7 @@
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBuffer.h"
 
 #include <algorithm>
+#include <cstdint>
 
 // make a sorted copy of a vector, optionally of a different type
 template <typename T, typename U>

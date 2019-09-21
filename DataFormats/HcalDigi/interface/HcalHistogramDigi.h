@@ -3,6 +3,7 @@
 
 #include <ostream>
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
+#include <cstdint>
 
 /** \class HcalHistogramDigi
   *  

@@ -336,4 +336,5 @@ void SiStripCertificationInfo::fillSiStripCertificationMEsAtLumi(DQMStore& dqm_s
   SiStripCertification->Fill(fminf(dqm_flag, dcs_flag));
 }
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripCertificationInfo);

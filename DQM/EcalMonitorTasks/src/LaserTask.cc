@@ -3,6 +3,7 @@
 #include "DQM/EcalCommon/interface/MESetMulti.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 namespace ecaldqm {
   LaserTask::LaserTask() : DQWorkerTask(), wlToME_(), pnAmp_(), emptyLS_(0), emptyLSLimit_(0), maxPedestal_(0) {

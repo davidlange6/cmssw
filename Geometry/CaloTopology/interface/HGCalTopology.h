@@ -8,6 +8,7 @@
 #include "Geometry/HGCalCommonData/interface/HGCalGeometryMode.h"
 #include <vector>
 #include <iostream>
+#include <cstdint>
 
 class HGCalTopology : public CaloSubdetectorTopology {
 public:

@@ -5,6 +5,7 @@
 #include <TMatrixDSym.h>
 #include <TMatrixDSymEigen.h>
 #include <TVectorD.h>
+#include <cstdint>
 
 using namespace edm;
 using namespace reco;

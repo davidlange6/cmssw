@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdio>
 #include <sys/time.h>
+#include <cstdint>
 
 using namespace cms;
 

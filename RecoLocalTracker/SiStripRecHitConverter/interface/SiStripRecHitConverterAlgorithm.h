@@ -11,6 +11,7 @@
 #include "RecoLocalTracker/SiStripRecHitConverter/interface/SiStripRecHitMatcher.h"
 #include "RecoLocalTracker/ClusterParameterEstimator/interface/StripClusterParameterEstimator.h"
 #include "CalibFormats/SiStripObjects/interface/SiStripQuality.h"
+#include <cstdint>
 
 namespace edm {
   class ParameterSet;

@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 

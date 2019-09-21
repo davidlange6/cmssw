@@ -184,6 +184,7 @@ namespace dqmservices {
 
 #include "EventFilter/Utilities/plugins/RecoEventWriterForFU.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 typedef dqmservices::DQMStreamerOutputRepackerTest DQMStreamerOutputRepackerTest;
 DEFINE_FWK_MODULE(DQMStreamerOutputRepackerTest);

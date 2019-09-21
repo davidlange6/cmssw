@@ -9,6 +9,7 @@
 #include "DataFormats/CSCDigi/interface/CSCCorrelatedLCTDigi.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 /// Constructors
 CSCCorrelatedLCTDigi::CSCCorrelatedLCTDigi(const int itrknmb,

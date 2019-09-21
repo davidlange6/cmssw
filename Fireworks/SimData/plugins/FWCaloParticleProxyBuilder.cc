@@ -14,6 +14,7 @@
 #include "SimDataFormats/CaloAnalysis/interface/SimCluster.h"
 
 #include "TEveBoxSet.h"
+#include <cstdint>
 
 class FWCaloParticleProxyBuilder : public FWHeatmapProxyBuilderTemplate<CaloParticle> {
 public:

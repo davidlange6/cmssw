@@ -21,6 +21,7 @@ class CSCStripDigi;
 #include "DataFormats/CSCDigi/interface/CSCRPCDigi.h"
 #include "DataFormats/MuonDetId/interface/CSCDetId.h"
 #include <boost/dynamic_bitset.hpp>
+#include <cstdint>
 
 /// Maximum available CFEBs per chamber (for old system 5, for new ME11 should be 7)
 #define MAX_CFEB 7

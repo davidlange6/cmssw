@@ -15,6 +15,7 @@
 #include "SimG4CMS/Forward/interface/BscG4HitCollection.h"
 
 #include <string>
+#include <cstdint>
 
 class G4Step;
 class G4StepPoint;

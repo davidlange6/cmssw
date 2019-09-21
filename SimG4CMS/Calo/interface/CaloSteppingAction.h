@@ -48,6 +48,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <cstdint>
 
 class CaloSteppingAction : public SimProducer,
                            public Observer<const BeginOfJob *>,

@@ -16,6 +16,7 @@
 #include "CondTools/Ecal/interface/EcalPulseSymmCovariancesXMLTranslator.h"
 #include "CondTools/Ecal/interface/DOMHelperFunctions.h"
 #include "CondTools/Ecal/interface/XMLTags.h"
+#include <cstdint>
 
 using namespace XERCES_CPP_NAMESPACE;
 using namespace xuti;

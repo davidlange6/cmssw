@@ -1,6 +1,7 @@
 #include "L1Trigger/L1TCalorimeter/interface/CaloTools.h"
 
 #include "L1Trigger/L1TCalorimeter/interface/CaloStage2Nav.h"
+#include <cstdint>
 
 const l1t::CaloTower l1t::CaloTools::nullTower_;
 const l1t::CaloCluster l1t::CaloTools::nullCluster_;

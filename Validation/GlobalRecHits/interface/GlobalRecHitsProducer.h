@@ -142,6 +142,7 @@
 #include <cmath>
 
 #include "TString.h"
+#include <cstdint>
 
 class PGlobalRecHit;
 

@@ -36,6 +36,7 @@
 #include "Geometry/Records/interface/VeryForwardRealGeometryRecord.h"
 
 #include <string>
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

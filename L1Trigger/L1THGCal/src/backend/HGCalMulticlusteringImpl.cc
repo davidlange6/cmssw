@@ -1,6 +1,7 @@
 #include "L1Trigger/L1THGCal/interface/backend/HGCalMulticlusteringImpl.h"
 #include "L1Trigger/L1THGCal/interface/backend/HGCalShowerShape.h"
 #include "DataFormats/Math/interface/deltaR.h"
+#include <cstdint>
 
 HGCalMulticlusteringImpl::HGCalMulticlusteringImpl(const edm::ParameterSet& conf)
     : dr_(conf.getParameter<double>("dR_multicluster")),

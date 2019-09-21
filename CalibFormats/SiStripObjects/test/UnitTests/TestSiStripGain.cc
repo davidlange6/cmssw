@@ -12,6 +12,7 @@
 #include <iterator>
 
 #include "CalibFormats/SiStripObjects/interface/SiStripGain.h"
+#include <cstdint>
 
 #ifndef TestSiStripGain_cc
 #define TestSiStripGain_cc

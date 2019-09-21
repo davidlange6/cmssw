@@ -309,4 +309,5 @@ std::unique_ptr<TkDetMap> TkDetMapESProducer::produce(const TrackerTopologyRcd& 
 }
 
 #include "FWCore/Framework/interface/ModuleFactory.h"
+#include <cstdint>
 DEFINE_FWK_EVENTSETUP_MODULE(TkDetMapESProducer);

@@ -1,4 +1,5 @@
 #include "DQM/HcalTasks/interface/DigiPhase1Task.h"
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

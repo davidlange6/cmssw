@@ -1,5 +1,6 @@
 #include "GeneratorInterface/GenFilters/interface/HighETPhotonsFilterAlgo.h"
 #include "DataFormats/Math/interface/deltaR.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

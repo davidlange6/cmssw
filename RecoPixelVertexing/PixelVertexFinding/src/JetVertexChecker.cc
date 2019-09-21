@@ -38,6 +38,7 @@
 #include "DataFormats/VertexReco/interface/Vertex.h"
 
 #include "DataFormats/BeamSpot/interface/BeamSpot.h"
+#include <cstdint>
 
 //
 // class declaration

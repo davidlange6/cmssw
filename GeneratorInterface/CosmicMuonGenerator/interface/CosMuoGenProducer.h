@@ -16,6 +16,7 @@
 #include "GeneratorInterface/CosmicMuonGenerator/interface/CosmicMuonGenerator.h"
 
 #include <memory>
+#include <cstdint>
 
 namespace edm {
   class CosMuoGenProducer : public one::EDProducer<EndRunProducer, one::WatchLuminosityBlocks> {

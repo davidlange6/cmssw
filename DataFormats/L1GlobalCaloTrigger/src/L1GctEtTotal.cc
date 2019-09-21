@@ -1,5 +1,6 @@
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctEtTotal.h"
+#include <cstdint>
 
 L1GctEtTotal::L1GctEtTotal() : m_data(0), m_bx(0) {}
 

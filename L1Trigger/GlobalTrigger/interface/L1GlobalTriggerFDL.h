@@ -27,6 +27,7 @@
 
 #include "CondFormats/L1TObjects/interface/L1GtBoard.h"
 #include "CondFormats/L1TObjects/interface/L1GtFwd.h"
+#include <cstdint>
 
 // forward declarations
 class L1GlobalTriggerReadoutRecord;

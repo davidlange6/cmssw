@@ -9,6 +9,7 @@
 #include "Geometry/TrackerNumberingBuilder/interface/trackerStablePhiSort.h"
 
 #include <vector>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerPixelPhase2RingBuilder<FilteredView>::buildComponent(FilteredView& fv,

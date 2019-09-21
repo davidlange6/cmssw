@@ -1,4 +1,5 @@
 #include "DataFormats/HcalDigi/interface/HcalUnpackerReport.h"
+#include <cstdint>
 
 HcalUnpackerReport::HcalUnpackerReport()
     : unmappedDigis_(0),

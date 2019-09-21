@@ -2,6 +2,7 @@
 #include "Geometry/CaloTopology/interface/CaloTowerTopology.h"
 #include <cassert>
 #include <algorithm>
+#include <cstdint>
 
 //#define DebugLog
 

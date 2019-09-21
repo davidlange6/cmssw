@@ -285,4 +285,5 @@ int OffsetAnalyzerDQM::getEtaIndex(float eta) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(OffsetAnalyzerDQM);

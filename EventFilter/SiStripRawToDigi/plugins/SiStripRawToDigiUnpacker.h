@@ -8,6 +8,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBuffer.h"
 #include "WarningSummary.h"
+#include <cstdint>
 
 /// sistrip classes
 namespace sistrip {

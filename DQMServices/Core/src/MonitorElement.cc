@@ -14,6 +14,7 @@
 
 #if !WITHOUT_CMS_FRAMEWORK
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 #endif
 
 namespace dqm::impl {

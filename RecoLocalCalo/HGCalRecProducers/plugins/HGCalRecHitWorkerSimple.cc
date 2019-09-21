@@ -189,4 +189,5 @@ HGCalRecHitWorkerSimple::~HGCalRecHitWorkerSimple() {}
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "RecoLocalCalo/HGCalRecProducers/interface/HGCalRecHitWorkerFactory.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(HGCalRecHitWorkerFactory, HGCalRecHitWorkerSimple, "HGCalRecHitWorkerSimple");

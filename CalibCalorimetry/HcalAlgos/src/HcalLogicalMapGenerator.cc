@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <iostream>
 #include <cstring>
+#include <cstdint>
 
 using namespace std;
 

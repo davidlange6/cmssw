@@ -3,6 +3,7 @@
 
 #include "GTCollections.h"
 #include "GlobalExtBlkUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

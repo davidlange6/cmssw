@@ -978,6 +978,7 @@ namespace reco {
 // ========= MODULE DEF ==============
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 using reco::modules::TrackerTrackHitFilter;
 DEFINE_FWK_MODULE(TrackerTrackHitFilter);

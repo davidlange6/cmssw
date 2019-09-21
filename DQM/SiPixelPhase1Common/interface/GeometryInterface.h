@@ -20,6 +20,7 @@
 #include <map>
 #include <string>
 #include <array>
+#include <cstdint>
 
 class GeometryInterface {
 public:

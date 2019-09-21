@@ -4,6 +4,7 @@
 #include "DataFormats/HcalIsolatedTrack/interface/IsolatedPixelTrackCandidateFwd.h"
 #include "DataFormats/HcalIsolatedTrack/interface/IsolatedPixelTrackCandidate.h"
 #include "DataFormats/Math/interface/RectangularEtaPhiRegion.h"
+#include <cstdint>
 
 ECALRegFEDSelector::ECALRegFEDSelector(const edm::ParameterSet& iConfig) {
   tok_seed_ = consumes<trigger::TriggerFilterObjectWithRefs>(iConfig.getParameter<edm::InputTag>("regSeedLabel"));

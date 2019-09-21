@@ -5,6 +5,7 @@
 #include <FWCore/MessageLogger/interface/MessageLogger.h>
 
 #include "SimDataFormats/CaloAnalysis/interface/SimCluster.h"
+#include <cstdint>
 
 const unsigned int CaloParticle::longLivedTag = 65536;
 

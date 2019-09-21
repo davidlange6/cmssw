@@ -43,4 +43,5 @@ FTLRecHit FTLSimpleRecHitAlgo::makeRecHit(const FTLUncalibratedRecHit& uRecHit, 
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(FTLRecHitAlgoFactory, FTLSimpleRecHitAlgo, "FTLSimpleRecHitAlgo");

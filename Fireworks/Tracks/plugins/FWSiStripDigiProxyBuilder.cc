@@ -19,6 +19,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripDigi.h"
 #include "DataFormats/Common/interface/DetSetVector.h"
 #include "DataFormats/DetId/interface/DetId.h"
+#include <cstdint>
 
 class FWSiStripDigiProxyBuilder : public FWProxyBuilderBase {
 public:

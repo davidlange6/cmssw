@@ -3,6 +3,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripNoisesDQM::SiStripNoisesDQM(const edm::EventSetup &eSetup,

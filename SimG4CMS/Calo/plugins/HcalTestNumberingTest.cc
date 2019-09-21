@@ -44,6 +44,7 @@
 #include "Geometry/HcalCommonData/interface/HcalHitRelabeller.h"
 #include "SimG4CMS/Calo/interface/HcalNumberingScheme.h"
 #include "SimG4CMS/Calo/interface/HcalTestNumberingScheme.h"
+#include <cstdint>
 
 class HcalTestNumberingTester : public edm::one::EDAnalyzer<> {
 public:

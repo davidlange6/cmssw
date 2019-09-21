@@ -5,6 +5,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cassert>
+#include <cstdint>
 
 #define PTLUT_SIZE (1 << 30)
 

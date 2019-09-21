@@ -15,6 +15,7 @@
 #include "CondFormats/EcalObjects/interface/EcalChannelStatus.h"
 
 #include <vector>
+#include <cstdint>
 
 /**
      Combine information from EcalRecHit::Flag and

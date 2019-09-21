@@ -9,6 +9,7 @@
 #include "FWCore/Common/interface/TriggerNames.h"
 #include "DataFormats/Provenance/interface/BranchDescription.h"
 #include "FWCore/Utilities/interface/EDGetToken.h"
+#include <cstdint>
 
 class TriggerOutputBranches {
 public:

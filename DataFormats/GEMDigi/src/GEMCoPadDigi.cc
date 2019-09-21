@@ -1,5 +1,6 @@
 #include "DataFormats/GEMDigi/interface/GEMCoPadDigi.h"
 #include <iostream>
+#include <cstdint>
 
 GEMCoPadDigi::GEMCoPadDigi(uint8_t roll, GEMPadDigi f, GEMPadDigi s) : roll_(roll), first_(f), second_(s) {}
 

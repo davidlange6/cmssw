@@ -7,6 +7,7 @@
 
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class SimHitSelectorFromDB {
 public:

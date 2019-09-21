@@ -1,5 +1,6 @@
 
 #include "DataFormats/SiStripCluster/interface/SiStripCluster.h"
+#include <cstdint>
 
 SiStripCluster::SiStripCluster(const SiStripDigiRange& range) : firstStrip_(range.first->strip()), error_x(-99999.9) {
   amplitudes_.reserve(range.second - range.first);

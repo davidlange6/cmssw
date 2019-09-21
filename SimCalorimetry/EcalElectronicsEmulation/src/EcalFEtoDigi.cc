@@ -3,6 +3,7 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGLutGroup.h"
 #include "CondFormats/EcalObjects/interface/EcalTPGLutIdMap.h"
 #include "SimCalorimetry/EcalElectronicsEmulation/interface/EcalFEtoDigi.h"
+#include <cstdint>
 
 EcalFEtoDigi::EcalFEtoDigi(const edm::ParameterSet &iConfig) {
   basename_ = iConfig.getUntrackedParameter<std::string>("FlatBaseName", "ecal_tcc_");

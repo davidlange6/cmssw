@@ -8,6 +8,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctNullJetFinder.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //DEFINE STATICS
 const int L1GctJetLeafCard::MAX_JET_FINDERS = 3;

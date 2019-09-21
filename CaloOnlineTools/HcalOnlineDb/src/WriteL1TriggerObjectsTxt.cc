@@ -35,6 +35,7 @@
 #include "CondFormats/HcalObjects/interface/HcalL1TriggerObject.h"
 #include "CalibCalorimetry/HcalAlgos/interface/HcalDbASCIIIO.h"
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
+#include <cstdint>
 
 class WriteL1TriggerObjectsTxt : public edm::one::EDAnalyzer<edm::one::SharedResources> {
 public:

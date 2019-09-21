@@ -150,6 +150,7 @@ private:
 };
 
 #include "RecoTracker/TrackProducer/interface/TrackProducerAlgorithm.icc"
+#include <cstdint>
 
 template <>
 bool TrackProducerAlgorithm<reco::Track>::buildTrack(const TrajectoryFitter *,

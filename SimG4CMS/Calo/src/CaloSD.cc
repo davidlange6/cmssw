@@ -21,6 +21,7 @@
 #include "G4PhysicalConstants.hh"
 
 #include <fstream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

@@ -32,6 +32,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include <memory>
+#include <cstdint>
 
 class TrackerTopology;
 

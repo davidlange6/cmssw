@@ -24,6 +24,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <MuonAnalysis/MomentumScaleCalibration/interface/RootTreeHandler.h>
+#include <cstdint>
 
 class TreeSplitter : public edm::EDAnalyzer {
 public:

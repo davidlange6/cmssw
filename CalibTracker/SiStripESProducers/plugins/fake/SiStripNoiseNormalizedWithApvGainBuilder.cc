@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <cstdint>
 
 SiStripNoiseNormalizedWithApvGainBuilder::SiStripNoiseNormalizedWithApvGainBuilder(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<uint32_t>("printDebug", 1)),

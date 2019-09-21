@@ -412,4 +412,5 @@ void L1TGlobalPrescaler::fillDescriptions(edm::ConfigurationDescriptions& descri
 
 // register as a framework plugin
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(L1TGlobalPrescaler);

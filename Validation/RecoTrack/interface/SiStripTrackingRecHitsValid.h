@@ -67,6 +67,7 @@
 #include "TrackingTools/PatternTools/interface/TrajectoryMeasurement.h"
 
 #include <string>
+#include <cstdint>
 
 class SiStripDetCabling;
 class SiStripDCSStatus;

@@ -231,4 +231,5 @@ void TrackCandidateProducer::produce(edm::Event& e, const edm::EventSetup& es) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(TrackCandidateProducer);

@@ -34,6 +34,7 @@
 #include "TTree.h"
 #include "TBranch.h"
 #include "TH1F.h"
+#include <cstdint>
 
 namespace cms {
   class SiPixelCondObjForHLTReader : public edm::EDAnalyzer {

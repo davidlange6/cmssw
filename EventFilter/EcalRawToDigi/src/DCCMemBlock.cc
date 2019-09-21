@@ -3,6 +3,7 @@
 #include "EventFilter/EcalRawToDigi/interface/DCCDataUnpacker.h"
 #include <cstdio>
 #include "EventFilter/EcalRawToDigi/interface/EcalElectronicsMapper.h"
+#include <cstdint>
 
 DCCMemBlock::DCCMemBlock(DCCDataUnpacker* u, EcalElectronicsMapper* m, DCCEventBlock* e)
     : DCCDataBlockPrototype(u, m, e) {

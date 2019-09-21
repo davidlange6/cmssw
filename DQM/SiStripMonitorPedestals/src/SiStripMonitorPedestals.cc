@@ -45,6 +45,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <numeric>
+#include <cstdint>
 
 const std::string SiStripMonitorPedestals::RunMode1 = "ConDBPlotsOnly";
 const std::string SiStripMonitorPedestals::RunMode2 = "CalculatedPlotsOnly";

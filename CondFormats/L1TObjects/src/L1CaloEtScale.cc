@@ -14,6 +14,7 @@
 
 #include "FWCore/Utilities/interface/Exception.h"
 #include <stdexcept>
+#include <cstdint>
 
 using std::endl;
 using std::ostream;

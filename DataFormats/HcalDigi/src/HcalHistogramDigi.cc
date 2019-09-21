@@ -1,5 +1,6 @@
 #include "DataFormats/HcalDigi/interface/HcalHistogramDigi.h"
 #include <iomanip>
+#include <cstdint>
 
 HcalHistogramDigi::HcalHistogramDigi() : id_(0) {
   for (int i = 0; i < BINS_PER_HISTOGRAM * 4; i++)

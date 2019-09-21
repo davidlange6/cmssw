@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
+#include <cstdint>
 
 using namespace sistrip;
 

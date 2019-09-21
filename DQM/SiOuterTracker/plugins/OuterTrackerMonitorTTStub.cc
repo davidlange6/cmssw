@@ -35,6 +35,7 @@
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
+#include <cstdint>
 
 // constructors and destructor
 OuterTrackerMonitorTTStub::OuterTrackerMonitorTTStub(const edm::ParameterSet &iConfig) : conf_(iConfig) {

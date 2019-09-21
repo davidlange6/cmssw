@@ -39,6 +39,7 @@
 #include <array>
 #include <string>
 #include <numeric>
+#include <cstdint>
 
 class HGCalShowerSeparation : public DQMEDAnalyzer {
 public:

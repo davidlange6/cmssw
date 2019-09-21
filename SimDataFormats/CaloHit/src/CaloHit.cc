@@ -5,6 +5,7 @@
 #include "SimDataFormats/CaloHit/interface/CaloHit.h"
 
 #include <iomanip>
+#include <cstdint>
 
 CaloHit::CaloHit(int deti, int layi, double ei, double etai, double fi, double timi, uint32_t idi)
     : deth(deti), layerh(layi), eh(ei), etah(etai), phih(fi), timeh(timi), idh(idi) {}

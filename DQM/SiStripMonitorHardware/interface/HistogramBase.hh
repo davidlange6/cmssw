@@ -23,6 +23,7 @@
 #include "DQM/SiStripCommon/interface/TkHistoMap.h"
 
 #include "DQMServices/Core/interface/DQMStore.h"
+#include <cstdint>
 
 class HistogramBase {
 public:

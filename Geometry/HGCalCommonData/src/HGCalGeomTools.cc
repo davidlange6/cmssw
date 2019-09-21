@@ -3,6 +3,7 @@
 #include "Geometry/HGCalCommonData/interface/HGCalParameters.h"
 
 #include <string>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 HGCalGeomTools::HGCalGeomTools() : factor_(1.0 / std::sqrt(3.0)) {}

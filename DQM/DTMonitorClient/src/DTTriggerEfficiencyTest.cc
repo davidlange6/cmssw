@@ -29,6 +29,7 @@
 //C++ headers
 #include <iostream>
 #include <sstream>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

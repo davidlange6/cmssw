@@ -29,6 +29,7 @@
 #include <iomanip>
 #include <string>
 #include <stdexcept>
+#include <cstdint>
 
 using namespace edm;
 using namespace cms;

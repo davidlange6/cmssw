@@ -5,6 +5,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include <numeric>
+#include <cstdint>
 
 const unsigned int SimCluster::longLivedTag = 65536;
 

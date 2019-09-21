@@ -16,6 +16,7 @@
 #include "DCCDataParser.h"
 #include "DCCDataMapper.h"
 #include "DCCEventBlock.h"
+#include <cstdint>
 
 class DCCTBEventBlock;
 class DCCTBDataParser;

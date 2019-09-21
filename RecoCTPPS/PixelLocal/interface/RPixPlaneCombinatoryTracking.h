@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <map>
+#include <cstdint>
 
 class RPixPlaneCombinatoryTracking : public RPixDetTrackFinder {
 public:

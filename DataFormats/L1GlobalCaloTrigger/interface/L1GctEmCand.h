@@ -8,6 +8,7 @@
 
 #include "DataFormats/L1CaloTrigger/interface/L1CaloRegionDetId.h"
 #include "DataFormats/L1CaloTrigger/interface/L1CaloEmCand.h"
+#include <cstdint>
 
 /*! \class L1GctEmCand
  * \brief Level-1 Trigger EM candidate at output of GCT

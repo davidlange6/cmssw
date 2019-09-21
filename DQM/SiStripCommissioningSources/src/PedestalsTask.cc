@@ -7,6 +7,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 
 using namespace sistrip;
 

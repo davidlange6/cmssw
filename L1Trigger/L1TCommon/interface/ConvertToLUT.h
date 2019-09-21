@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include "CondFormats/L1TObjects/interface/LUT.h"
+#include <cstdint>
 
 namespace l1t {
 

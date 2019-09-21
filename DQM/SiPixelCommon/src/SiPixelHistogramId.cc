@@ -15,6 +15,7 @@
 
 #include "DQM/SiPixelCommon/interface/SiPixelHistogramId.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using namespace edm;
 

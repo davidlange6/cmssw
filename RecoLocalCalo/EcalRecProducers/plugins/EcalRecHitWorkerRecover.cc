@@ -447,4 +447,5 @@ bool EcalRecHitWorkerRecover::checkChannelStatus(const DetId& id, const std::vec
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "RecoLocalCalo/EcalRecProducers/interface/EcalRecHitWorkerFactory.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(EcalRecHitWorkerFactory, EcalRecHitWorkerRecover, "EcalRecHitWorkerRecover");

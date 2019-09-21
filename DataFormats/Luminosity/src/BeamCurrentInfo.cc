@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <ostream>
 #include <iostream>
+#include <cstdint>
 
 const float BeamCurrentInfo::scaleFactor = 1e10;
 

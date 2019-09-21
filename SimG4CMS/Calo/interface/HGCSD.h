@@ -14,6 +14,7 @@
 
 #include <string>
 #include <TTree.h>
+#include <cstdint>
 
 class G4LogicalVolume;
 class G4Material;

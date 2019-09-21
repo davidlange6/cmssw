@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "boost/ptr_container/ptr_map.hpp"
+#include <cstdint>
 
 namespace ecaldqm {
   /*

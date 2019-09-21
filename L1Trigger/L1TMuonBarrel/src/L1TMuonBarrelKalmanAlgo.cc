@@ -1,5 +1,6 @@
 #include <cmath>
 #include "L1Trigger/L1TMuonBarrel/interface/L1TMuonBarrelKalmanAlgo.h"
+#include <cstdint>
 
 L1TMuonBarrelKalmanAlgo::L1TMuonBarrelKalmanAlgo(const edm::ParameterSet& settings)
     : verbose_(settings.getParameter<bool>("verbose")),

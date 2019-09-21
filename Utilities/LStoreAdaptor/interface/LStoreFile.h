@@ -5,6 +5,7 @@
 #include "Utilities/StorageFactory/interface/IOFlags.h"
 #include <string>
 #include <pthread.h>
+#include <cstdint>
 class LStoreFile : public Storage {
 public:
   LStoreFile(void);

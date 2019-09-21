@@ -39,6 +39,7 @@
 #include <array>
 #include <string>
 #include <numeric>
+#include <cstdint>
 
 class HGCalHitCalibration : public DQMEDAnalyzer {
 public:

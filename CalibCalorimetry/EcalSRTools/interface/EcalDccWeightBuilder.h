@@ -17,6 +17,7 @@
 #include <vector>
 #include <map>
 #include <cinttypes>
+#include <cstdint>
 
 // Forward declarations:
 class EcalElectronicsMapping;

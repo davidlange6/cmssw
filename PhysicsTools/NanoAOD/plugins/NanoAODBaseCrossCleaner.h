@@ -40,6 +40,7 @@
 
 #include "DataFormats/Common/interface/View.h"
 #include "CommonTools/Utils/interface/StringCutObjectSelector.h"
+#include <cstdint>
 
 //
 // class declaration

@@ -1,6 +1,7 @@
 #include "EventFilter/SiStripRawToDigi/test/plugins/SiStripClusterValidator.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/Common/interface/Handle.h"
+#include <cstdint>
 
 SiStripClusterValidator::SiStripClusterValidator(const edm::ParameterSet& conf)
     : collection1Tag_(conf.getUntrackedParameter<edm::InputTag>("Collection1")),

@@ -34,6 +34,7 @@
 #include "DataFormats/Common/interface/RefProd.h"
 
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 // forward declarations
 namespace edm {

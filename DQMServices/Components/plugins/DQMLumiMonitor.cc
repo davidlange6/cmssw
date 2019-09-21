@@ -145,4 +145,5 @@ void DQMLumiMonitor::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup)
 void DQMLumiMonitor::endJob() {}
 // Define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(DQMLumiMonitor);

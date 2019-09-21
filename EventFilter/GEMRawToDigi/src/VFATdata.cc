@@ -1,5 +1,6 @@
 #include "EventFilter/GEMRawToDigi/interface/VFATdata.h"
 #include <iostream>
+#include <cstdint>
 using namespace gem;
 
 VFATdata::VFATdata() : ver_(0), phiPos_(0), fw_(0), sw_(0), tw_(0) {}

@@ -24,6 +24,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 // Abstract base class provides common interface to different payload getters
 class SiPixelGainCalibrationServiceBase {

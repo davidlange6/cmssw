@@ -25,6 +25,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "HcalHardcodeCalibrations.h"
+#include <cstdint>
 
 //#define DebugLog
 

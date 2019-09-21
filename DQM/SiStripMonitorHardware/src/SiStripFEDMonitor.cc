@@ -489,4 +489,5 @@ void SiStripFEDMonitorPlugin::updateCabling(const edm::EventSetup& eventSetup) {
 //
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripFEDMonitorPlugin);

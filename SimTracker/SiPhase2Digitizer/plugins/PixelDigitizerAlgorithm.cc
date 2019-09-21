@@ -42,6 +42,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 #include "Geometry/CommonTopologies/interface/PixelTopology.h"
 #include "Geometry/Records/interface/IdealGeometryRecord.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace sipixelobjects;

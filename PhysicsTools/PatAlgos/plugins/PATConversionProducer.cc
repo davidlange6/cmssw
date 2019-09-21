@@ -107,5 +107,6 @@ void PATConversionProducer::produce(edm::StreamID, edm::Event &iEvent, const edm
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(PATConversionProducer);

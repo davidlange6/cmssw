@@ -38,6 +38,7 @@
 
 #include <memory>
 #include <sstream>
+#include <cstdint>
 
 //#define DEBUG 1
 

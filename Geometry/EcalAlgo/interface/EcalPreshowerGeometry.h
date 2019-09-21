@@ -11,6 +11,7 @@
 #include "Geometry/Records/interface/PEcalPreshowerRcd.h"
 #include "Geometry/CaloGeometry/interface/CaloGenericDetId.h"
 #include <vector>
+#include <cstdint>
 
 class EcalPreshowerGeometry final : public CaloSubdetectorGeometry {
 public:

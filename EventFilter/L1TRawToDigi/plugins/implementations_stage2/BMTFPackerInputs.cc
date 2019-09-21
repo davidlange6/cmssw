@@ -1,6 +1,7 @@
 #include "BMTFPackerInputs.h"
 
 #include <vector>
+#include <cstdint>
 //#include <bitset>//debug
 
 namespace l1t {

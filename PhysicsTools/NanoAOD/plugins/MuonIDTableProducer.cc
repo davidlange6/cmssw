@@ -114,5 +114,6 @@ bool MuonIDTableProducer::isTrackerHighPt(const pat::Muon& mu, const reco::Verte
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 //define this as a plug-in
 DEFINE_FWK_MODULE(MuonIDTableProducer);

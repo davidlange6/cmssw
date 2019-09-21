@@ -15,6 +15,7 @@
 #include "DataFormats/PatCandidates/interface/Electron.h"
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
+#include <cstdint>
 
 class RegressionEnergyPatElectronProducer : public edm::EDProducer {
 public:

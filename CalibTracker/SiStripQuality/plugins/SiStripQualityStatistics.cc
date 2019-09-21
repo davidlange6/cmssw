@@ -27,6 +27,7 @@
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 
 #include "CalibTracker/SiStripQuality/plugins/SiStripQualityStatistics.h"
+#include <cstdint>
 
 SiStripQualityStatistics::SiStripQualityStatistics(const edm::ParameterSet& iConfig)
     : m_cacheID_(0),

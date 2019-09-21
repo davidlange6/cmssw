@@ -4,6 +4,7 @@
 
 #include "CaloCollections.h"
 #include "LegacyPhysCandUnpacker.h"
+#include <cstdint>
 
 template <typename T, typename F>
 bool process(const l1t::Block& block, BXVector<T>* coll, F modify) {

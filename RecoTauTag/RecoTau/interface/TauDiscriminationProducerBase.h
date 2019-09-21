@@ -46,6 +46,7 @@
 
 #include "DataFormats/PatCandidates/interface/Tau.h"
 #include "DataFormats/PatCandidates/interface/PATTauDiscriminator.h"
+#include <cstdint>
 
 template <class TauType, class TauDiscriminator>
 class TauDiscriminationProducerBase : public edm::stream::EDProducer<> {

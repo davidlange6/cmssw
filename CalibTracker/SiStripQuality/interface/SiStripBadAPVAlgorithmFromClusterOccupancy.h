@@ -34,6 +34,7 @@
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "CalibTracker/SiStripQuality/interface/SiStripQualityHistos.h"
+#include <cstdint>
 
 class SiStripQuality;
 class TrackerTopology;

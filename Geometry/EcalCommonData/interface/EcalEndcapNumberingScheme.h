@@ -6,6 +6,7 @@
 #define EcalEndcapNumberingScheme_h
 
 #include "Geometry/EcalCommonData/interface/EcalNumberingScheme.h"
+#include <cstdint>
 
 class EcalEndcapNumberingScheme : public EcalNumberingScheme {
 public:

@@ -1,5 +1,6 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCChamberDataItr.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDCCEventData.h"
+#include <cstdint>
 
 CSCChamberDataItr::CSCChamberDataItr(const char *buf) : theDCCData(nullptr), theCurrentDDU(0) {
   // first try if it's DCC data.

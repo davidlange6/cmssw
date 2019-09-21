@@ -5,6 +5,7 @@
  */
 
 #include <DataFormats/DTDigi/interface/DTLocalTrigger.h>
+#include <cstdint>
 
 using namespace std;
 

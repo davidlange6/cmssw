@@ -8,6 +8,7 @@
 #include "RecoLocalCalo/EcalRecAlgos/interface/EcalSeverityLevelAlgo.h"
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 class testEcalSeverityLevelAlgo : public CppUnit::TestFixture {
   CPPUNIT_TEST_SUITE(testEcalSeverityLevelAlgo);

@@ -3,6 +3,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCDMBHeader2013.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 CSCDMBHeader::CSCDMBHeader(uint16_t firmware_version) : theHeaderFormat(), theFirmwareVersion(firmware_version) {
   if (theFirmwareVersion == 2013) {

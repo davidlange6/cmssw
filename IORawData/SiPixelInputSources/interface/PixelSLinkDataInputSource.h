@@ -33,6 +33,7 @@
 #include "Utilities/StorageFactory/interface/Storage.h"
 #include "Utilities/StorageFactory/interface/StorageAccount.h"
 #include "Utilities/StorageFactory/interface/StorageFactory.h"
+#include <cstdint>
 
 class FEDRawDataCollection;
 

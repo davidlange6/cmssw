@@ -33,6 +33,7 @@
 #include "SimG4Core/Notification/interface/SimTrackManager.h"
 
 #include <string>
+#include <cstdint>
 
 class TrackingSlaveSD;
 class SimTrackManager;

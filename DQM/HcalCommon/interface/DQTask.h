@@ -11,6 +11,7 @@
 #include "DQM/HcalCommon/interface/ContainerS.h"
 #include "DQM/HcalCommon/interface/ContainerXXX.h"
 #include "DQM/HcalCommon/interface/DQModule.h"
+#include <cstdint>
 
 namespace hcaldqm {
   enum UpdateFreq { fEvent = 0, f1LS = 1, f10LS = 2, f50LS = 3, f100LS = 4, nUpdateFreq = 5 };

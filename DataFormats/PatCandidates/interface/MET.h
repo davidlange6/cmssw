@@ -25,6 +25,7 @@
 #include "DataFormats/METReco/interface/GenMET.h"
 #include "DataFormats/PatCandidates/interface/PATObject.h"
 #include <cmath>
+#include <cstdint>
 
 // Define typedefs for convenience
 namespace pat {

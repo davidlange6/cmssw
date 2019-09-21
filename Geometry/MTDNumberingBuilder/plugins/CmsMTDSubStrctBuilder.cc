@@ -30,6 +30,7 @@ void CmsMTDSubStrctBuilder::buildComponent(DDFilteredView& fv, GeometricTimingDe
 }
 
 #include "DataFormats/ForwardDetId/interface/BTLDetId.h"
+#include <cstdint>
 void CmsMTDSubStrctBuilder::sortNS(DDFilteredView& fv, GeometricTimingDet* det) {
   GeometricTimingDet::ConstGeometricTimingDetContainer& comp = det->components();
 

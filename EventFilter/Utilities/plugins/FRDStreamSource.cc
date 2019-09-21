@@ -15,6 +15,7 @@
 
 #include "EventFilter/Utilities/plugins/FRDStreamSource.h"
 #include "EventFilter/Utilities/interface/crc32c.h"
+#include <cstdint>
 
 FRDStreamSource::FRDStreamSource(edm::ParameterSet const& pset, edm::InputSourceDescription const& desc)
     : ProducerSourceFromFiles(pset, desc, true),

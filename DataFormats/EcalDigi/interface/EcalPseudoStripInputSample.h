@@ -2,6 +2,7 @@
 #define ECALPSEUDOSTRIPINPUTSAMPLE_H
 
 #include <ostream>
+#include <cstdint>
 
 /** \class EcalPseudoStripInputSample
       

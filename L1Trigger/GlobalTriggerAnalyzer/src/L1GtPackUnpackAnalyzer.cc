@@ -25,6 +25,7 @@
 #include "DataFormats/L1GlobalMuonTrigger/interface/L1MuGMTReadoutCollection.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // constructor(s)
 L1GtPackUnpackAnalyzer::L1GtPackUnpackAnalyzer(const edm::ParameterSet& parSet) {
@@ -163,7 +164,7 @@ void L1GtPackUnpackAnalyzer::analyzeGT(const edm::Event& iEvent, const edm::Even
     // TODO can be fixed?
     for (int iPsb = 0; iPsb < gtPsbVectorInitialSize; ++iPsb) {
       const L1GtPsbWord& psbWordInitial = gtPsbVectorInitial[iPsb];
-      const boost::uint16_t boardIdInitial = psbWordInitial.boardId();
+      const uint16_t boardIdInitial = psbWordInitial.boardId();
       const int bxInEventInitial = psbWordInitial.bxInEvent();
 
       // search the corresponding PSB in the final record using the
@@ -173,7 +174,7 @@ void L1GtPackUnpackAnalyzer::analyzeGT(const edm::Event& iEvent, const edm::Even
 
       for (int iPsbF = 0; iPsbF < gtPsbVectorFinalSize; ++iPsbF) {
         const L1GtPsbWord& psbWordFinal = gtPsbVectorFinal[iPsbF];
-        const boost::uint16_t boardIdFinal = psbWordFinal.boardId();
+        const uint16_t boardIdFinal = psbWordFinal.boardId();
         const int bxInEventFinal = psbWordFinal.bxInEvent();
 
         if ((boardIdFinal == boardIdInitial) && (bxInEventInitial == bxInEventFinal)) {

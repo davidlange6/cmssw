@@ -10,6 +10,7 @@
 #include "DataFormats/HcalDigi/interface/HcalDigiCollections.h"
 #include <wordexp.h>
 #include <cstdio>
+#include <cstdint>
 
 HcalPatternSource::HcalPatternSource(const edm::ParameterSet& pset)
     : bunches_(pset.getUntrackedParameter<std::vector<int> >("Bunches", std::vector<int>())),

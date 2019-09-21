@@ -25,6 +25,7 @@ Implementation:
 #include <cmath>
 #include "TGraphErrors.h"
 #include "TMath.h"
+#include <cstdint>
 
 using std::cout;
 using std::endl;

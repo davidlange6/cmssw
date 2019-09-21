@@ -38,6 +38,7 @@
 #include "DataFormats/CSCDigi/interface/CSCDMBStatusDigi.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDMBHeader.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCVDMBTrailerFormat.h"
+#include <cstdint>
 
 struct CSCDMBTrailer2013 : public CSCVDMBTrailerFormat {
   // public:

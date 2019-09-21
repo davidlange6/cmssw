@@ -19,6 +19,7 @@
 
 #include "DataFormats/Common/interface/RangeMap.h"
 #include "DataFormats/Common/interface/OwnVector.h"
+#include <cstdint>
 
 typedef CollectionMerger<edmNew::DetSetVector<SiPixelCluster>, SiPixelCluster> PixelColMerger;
 typedef CollectionMerger<edmNew::DetSetVector<SiStripCluster>, SiStripCluster> StripColMerger;

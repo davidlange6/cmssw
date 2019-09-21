@@ -14,6 +14,7 @@
 
 #include "DQM/DTMonitorClient/src/DTLocalTriggerBaseTest.h"
 #include "CondFormats/DTObjects/interface/DTTPGParameters.h"
+#include <cstdint>
 
 class DTTrigGeomUtils;
 

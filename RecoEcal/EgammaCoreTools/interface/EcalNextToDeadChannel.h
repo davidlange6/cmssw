@@ -6,6 +6,7 @@
 **/
 
 #include "CondFormats/EcalObjects/interface/EcalCondObjectContainer.h"
+#include <cstdint>
 
 typedef EcalCondObjectContainer<uint8_t> EcalNextToDeadChannel;
 

@@ -63,6 +63,7 @@ private:
 };
 
 #include <iostream>
+#include <cstdint>
 inline std::ostream& operator<<(std::ostream& o, const DTDigiSimLink& digisimlink) {
   return o << "wire:" << digisimlink.wire() << " digi:" << digisimlink.number() << " time:" << digisimlink.time()
            << " SimTrack:" << digisimlink.SimTrackId() << " eventId:" << digisimlink.eventId().rawId();

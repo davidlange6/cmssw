@@ -10,6 +10,7 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <cstdint>
 
 using namespace sistrip;
 

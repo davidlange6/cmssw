@@ -48,6 +48,7 @@
 // DQM Histograming
 #include "DQMServices/Core/interface/DQMStore.h"
 #include <cmath>
+#include <cstdint>
 class TBeamTest : public DQMEDAnalyzer {
 public:
   explicit TBeamTest(const edm::ParameterSet&);

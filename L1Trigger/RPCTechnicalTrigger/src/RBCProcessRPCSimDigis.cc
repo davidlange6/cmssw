@@ -5,6 +5,7 @@
 #include "L1Trigger/RPCTechnicalTrigger/interface/RBCLinkBoardGLSignal.h"
 #include "DataFormats/Common/interface/Handle.h"
 #include "GeometryConstants.h"
+#include <cstdint>
 
 //-----------------------------------------------------------------------------
 // Implementation file for class : RBCProcessRPCSimDigis

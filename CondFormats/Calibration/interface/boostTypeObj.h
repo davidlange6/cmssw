@@ -1,6 +1,7 @@
 #ifndef BOOSTTYPEOBJ_H
 #define BOOSTTYPEOBJ_H
 #include "CondFormats/Serialization/interface/Serializable.h"
+#include <cstdint>
 
 
 class boostTypeObj {

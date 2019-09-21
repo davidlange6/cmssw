@@ -5,6 +5,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/CommonTopologies/interface/PixelTopology.h"
+#include <cstdint>
 namespace cms {
   SiPixelFakeGainReader::SiPixelFakeGainReader(const edm::ParameterSet& conf)
       : conf_(conf), SiPixelGainCalibrationService_(conf), filename_(conf.getParameter<std::string>("fileName")) {}

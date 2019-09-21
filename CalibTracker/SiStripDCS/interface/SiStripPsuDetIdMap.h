@@ -21,6 +21,7 @@
 #include <fstream>
 #include <sstream>
 #include <ostream>
+#include <cstdint>
 
 class SiStripConfigDb;
 

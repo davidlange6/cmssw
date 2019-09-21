@@ -3,6 +3,7 @@
 
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
+#include <cstdint>
 
 //
 // Get a list of MEs in a folder

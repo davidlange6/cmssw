@@ -24,6 +24,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

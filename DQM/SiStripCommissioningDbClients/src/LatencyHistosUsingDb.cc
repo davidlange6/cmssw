@@ -5,6 +5,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/DetId/interface/DetId.h"
 #include <iostream>
+#include <cstdint>
 
 #define MAXFEDCOARSE 15
 

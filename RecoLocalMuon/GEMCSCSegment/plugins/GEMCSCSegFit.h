@@ -43,6 +43,7 @@
 #include <Math/SMatrix.h>
 
 #include <vector>
+#include <cstdint>
 
 class GEMCSCSegFit {
 public:

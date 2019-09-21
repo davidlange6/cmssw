@@ -9,6 +9,7 @@
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsTrackerPixelPhase2EndcapBuilder.h"
 
 #include <bitset>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerBuilder<FilteredView>::buildComponent(FilteredView& fv, GeometricDet* g, const std::string& s) {

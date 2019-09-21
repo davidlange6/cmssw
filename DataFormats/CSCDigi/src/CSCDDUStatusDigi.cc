@@ -9,6 +9,7 @@
 #include <ostream>
 #include <cstring>
 #include <iostream>
+#include <cstdint>
 
 CSCDDUStatusDigi::CSCDDUStatusDigi(const uint16_t* header, const uint16_t* trailer, uint16_t tts) {
   uint16_t headerSizeInBytes = 24;

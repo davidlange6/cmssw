@@ -22,6 +22,7 @@
 #include <sstream>
 #include <iomanip>
 #include "Fed9UUtils.hh"
+#include <cstdint>
 
 using namespace std;
 using namespace sistrip;

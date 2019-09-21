@@ -1,4 +1,5 @@
 #include "DCCDataParser.h"
+#include <cstdint>
 
 /*----------------------------------------------*/
 /* DCCTBDataParser::DCCTBDataParser                 */

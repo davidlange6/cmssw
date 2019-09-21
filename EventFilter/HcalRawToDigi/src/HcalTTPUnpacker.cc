@@ -1,4 +1,5 @@
 #include "EventFilter/HcalRawToDigi/interface/HcalTTPUnpacker.h"
+#include <cstdint>
 
 bool HcalTTPUnpacker::unpack(const HcalHTRData& theData, HcalTTPDigi& theDigi) {
   // Get the base information for the TTP Digi

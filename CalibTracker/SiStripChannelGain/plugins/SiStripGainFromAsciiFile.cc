@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdint>
 
 SiStripGainFromAsciiFile::SiStripGainFromAsciiFile(const edm::ParameterSet& iConfig)
     : ConditionDBWriter<SiStripApvGain>(iConfig) {

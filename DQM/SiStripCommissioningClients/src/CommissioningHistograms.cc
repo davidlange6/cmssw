@@ -7,6 +7,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iomanip>
+#include <cstdint>
 
 using namespace std;
 using namespace sistrip;

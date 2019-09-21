@@ -20,6 +20,7 @@
 #include "CLHEP/Random/RandGauss.h"
 
 #include "CalibTracker/SiStripQuality/plugins/SiStripBadStripFromASCIIFile.h"
+#include <cstdint>
 
 using namespace std;
 

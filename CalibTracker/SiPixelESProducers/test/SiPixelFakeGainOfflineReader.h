@@ -33,6 +33,7 @@
 #include "TTree.h"
 #include "TBranch.h"
 #include "TH1F.h"
+#include <cstdint>
 
 namespace cms {
   class SiPixelFakeGainOfflineReader : public edm::EDAnalyzer {

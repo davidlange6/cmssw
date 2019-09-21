@@ -34,6 +34,7 @@
 
 #include "RecoCTPPS/PixelLocal/interface/RPixRoadFinder.h"
 #include "RecoCTPPS/PixelLocal/interface/RPixPlaneCombinatoryTracking.h"
+#include <cstdint>
 
 class CTPPSPixelLocalTrackProducer : public edm::stream::EDProducer<> {
 public:

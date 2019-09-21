@@ -12,6 +12,7 @@
 #include "SimDataFormats/CaloHit/interface/PCaloHit.h"
 #include "SimDataFormats/CaloHit/interface/PCaloHitContainer.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
+#include <cstdint>
 
 class HGCalTriggerNtupleHGCDigis : public HGCalTriggerNtupleBase {
 public:

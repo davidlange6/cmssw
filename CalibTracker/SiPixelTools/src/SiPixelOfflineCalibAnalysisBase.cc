@@ -28,6 +28,7 @@
 #include "CondFormats/SiPixelObjects/interface/DetectorIndex.h"
 #include "CondFormats/SiPixelObjects/interface/LocalPixel.h"
 #include "TList.h"
+#include <cstdint>
 
 TF1* SiPixelOfflineCalibAnalysisBase::fitFunction_ = nullptr;
 std::vector<short> SiPixelOfflineCalibAnalysisBase::vCalValues_(0);

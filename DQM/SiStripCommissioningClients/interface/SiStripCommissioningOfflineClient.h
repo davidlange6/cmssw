@@ -14,6 +14,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cstdint>
 
 class CommissioningHistograms;
 class TH1;

@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
+#include <cstdint>
 class SiStripRawDigi;
 class SiStripDigi;
 

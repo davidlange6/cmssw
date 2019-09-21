@@ -7,6 +7,7 @@
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include "DataFormats/RPCDigi/interface/RPCAMCLinkCounters.h"
 #include "EventFilter/RPCRawToDigi/interface/RPCAMC13Record.h"
+#include <cstdint>
 
 namespace edm {
   class ConfigurationDescriptions;

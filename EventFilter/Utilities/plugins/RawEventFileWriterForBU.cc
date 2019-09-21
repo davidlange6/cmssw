@@ -18,6 +18,7 @@
 #include <cerrno>
 #include <cstring>
 #include <boost/filesystem/fstream.hpp>
+#include <cstdint>
 
 using namespace jsoncollector;
 

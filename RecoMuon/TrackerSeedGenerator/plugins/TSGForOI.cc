@@ -8,6 +8,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include <memory>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

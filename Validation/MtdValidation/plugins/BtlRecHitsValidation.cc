@@ -37,6 +37,7 @@
 
 #include "Geometry/MTDGeometryBuilder/interface/ProxyMTDTopology.h"
 #include "Geometry/MTDGeometryBuilder/interface/RectangularMTDTopology.h"
+#include <cstdint>
 
 struct MTDHit {
   float energy;

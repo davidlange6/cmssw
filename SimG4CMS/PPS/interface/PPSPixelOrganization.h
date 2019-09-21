@@ -21,6 +21,7 @@
 
 #include "SimG4CMS/PPS/interface/PPSVDetectorOrganization.h"
 #include "globals.hh"
+#include <cstdint>
 
 class PPSPixelOrganization : public PPSVDetectorOrganization {
 public:

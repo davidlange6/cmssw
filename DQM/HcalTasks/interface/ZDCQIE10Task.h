@@ -9,6 +9,7 @@
  */
 
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
+#include <cstdint>
 
 class ZDCQIE10Task : public DQMEDAnalyzer {
 public:

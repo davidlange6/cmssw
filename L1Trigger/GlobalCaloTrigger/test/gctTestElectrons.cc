@@ -8,6 +8,7 @@
 #include <fstream>  //for file IO
 #include <iostream>
 #include <sstream>  //for int->char conversion
+#include <cstdint>
 
 using std::cout;
 using std::endl;

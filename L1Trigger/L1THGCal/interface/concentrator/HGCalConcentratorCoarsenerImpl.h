@@ -4,6 +4,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
 #include "L1Trigger/L1THGCal/interface/HGCalCoarseTriggerCellMapping.h"
+#include <cstdint>
 
 class HGCalConcentratorCoarsenerImpl {
 public:

@@ -5,6 +5,7 @@
 #include "Geometry/CaloGeometry/interface/PreshowerStrip.h"
 
 #include <vector>
+#include <cstdint>
 
 class EcalTBHodoscopeGeometry : public CaloSubdetectorGeometry {
 public:

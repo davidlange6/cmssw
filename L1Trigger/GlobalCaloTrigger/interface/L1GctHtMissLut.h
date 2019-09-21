@@ -4,6 +4,7 @@
 #include "L1Trigger/GlobalCaloTrigger/src/L1GctLut.h"
 
 #include <vector>
+#include <cstdint>
 
 /*!
  * \author Greg Heath

@@ -22,6 +22,7 @@
 #include "CaloOnlineTools/HcalOnlineDb/interface/ConfigurationDatabaseImplXMLFile.hh"
 #include "CaloOnlineTools/HcalOnlineDb/interface/ConfigurationItemNotFoundException.hh"
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
+#include <cstdint>
 
 using namespace std;
 using namespace oracle::occi;

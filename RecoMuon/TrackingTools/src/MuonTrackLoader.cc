@@ -38,6 +38,7 @@
 
 #include "TrackingTools/Records/interface/TransientRecHitRecord.h"
 #include "RecoTracker/TransientTrackingRecHit/interface/Traj2TrackHits.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

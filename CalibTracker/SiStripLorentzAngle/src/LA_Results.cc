@@ -8,6 +8,7 @@
 #include <TF1.h>
 #include <TGraphErrors.h>
 #include <TProfile.h>
+#include <cstdint>
 
 LA_Filler_Fitter::Result LA_Filler_Fitter::result(Method m, const std::string name, const Book& book) {
   Result p;

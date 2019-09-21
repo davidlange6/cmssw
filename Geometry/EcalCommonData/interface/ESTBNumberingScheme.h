@@ -2,6 +2,7 @@
 #define ESTBNumberingScheme_h
 
 #include "Geometry/EcalCommonData/interface/EcalNumberingScheme.h"
+#include <cstdint>
 
 class ESTBNumberingScheme : public EcalNumberingScheme {
 public:

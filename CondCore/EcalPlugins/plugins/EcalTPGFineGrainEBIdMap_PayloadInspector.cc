@@ -17,6 +17,7 @@
 
 #include <string>
 #include <cstring>
+#include <cstdint>
 
 namespace {
   enum { TEMPLATESAMPLES = 5 };

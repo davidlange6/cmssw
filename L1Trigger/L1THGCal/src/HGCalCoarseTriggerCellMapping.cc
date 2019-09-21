@@ -1,5 +1,6 @@
 #include "L1Trigger/L1THGCal/interface/HGCalCoarseTriggerCellMapping.h"
 #include "DataFormats/ForwardDetId/interface/HGCalTriggerDetId.h"
+#include <cstdint>
 
 HGCalCoarseTriggerCellMapping::HGCalCoarseTriggerCellMapping(const std::vector<unsigned>& ctcSize)
     : ctcSize_(!ctcSize.empty() ? ctcSize : std::vector<unsigned>{2, 2, 2, 2}) {

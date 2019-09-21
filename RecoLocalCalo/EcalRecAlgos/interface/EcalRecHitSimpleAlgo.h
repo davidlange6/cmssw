@@ -11,6 +11,7 @@
 #include "DataFormats/EcalDigi/interface/EcalDataFrame.h"
 #include "TMath.h"
 #include <iostream>
+#include <cstdint>
 
 class EcalRecHitSimpleAlgo : public EcalRecHitAbsAlgo {
 public:

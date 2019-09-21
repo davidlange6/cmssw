@@ -14,6 +14,7 @@
 #include <string>
 #include <cstdlib>
 #include <utility>
+#include <cstdint>
 
 class RPCDigitizer;
 class RPCGeometry;

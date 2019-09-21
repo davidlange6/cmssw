@@ -52,5 +52,6 @@ void DBReader::analyze(const edm::Event& e, const edm::EventSetup& iSetup) {
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(DBReader);

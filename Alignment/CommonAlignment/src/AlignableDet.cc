@@ -9,6 +9,7 @@
 
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //__________________________________________________________________________________________________
 AlignableDet::AlignableDet(const GeomDet* geomDet, bool addComponents)

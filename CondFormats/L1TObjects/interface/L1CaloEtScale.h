@@ -24,6 +24,7 @@
 
 #include <vector>
 #include <ostream>
+#include <cstdint>
 
 class L1CaloEtScale {
 public:

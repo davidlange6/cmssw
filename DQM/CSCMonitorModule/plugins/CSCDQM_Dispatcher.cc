@@ -17,6 +17,7 @@
  */
 
 #include "CSCDQM_Dispatcher.h"
+#include <cstdint>
 
 namespace cscdqm {
 

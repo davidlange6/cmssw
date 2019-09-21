@@ -10,6 +10,7 @@
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingFactory.h"
 #include "FWCore/Utilities/interface/transform.h"
 #include <memory>
+#include <cstdint>
 
 SiStripZeroSuppression::SiStripZeroSuppression(edm::ParameterSet const& conf)
     : algorithms(SiStripRawProcessingFactory::create(conf.getParameter<edm::ParameterSet>("Algorithms"))),

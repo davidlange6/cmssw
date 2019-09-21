@@ -11,6 +11,7 @@
 #include "Geometry/Records/interface/HcalGeometryRecord.h"
 #include "FWCore/Utilities/interface/thread_safety_macros.h"
 #include <atomic>
+#include <cstdint>
 
 class HcalDDDGeometryLoader;
 

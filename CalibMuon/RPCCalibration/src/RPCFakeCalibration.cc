@@ -18,6 +18,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <cstdint>
 
 RPCFakeCalibration::RPCFakeCalibration(const edm::ParameterSet &pset) : RPCPerformanceESSource(pset) {
   edm::LogInfo("RPCFakeCalibration::RPCFakeCalibration");

@@ -27,6 +27,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

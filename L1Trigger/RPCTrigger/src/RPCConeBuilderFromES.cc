@@ -14,6 +14,7 @@
 
 // user include files
 #include "L1Trigger/RPCTrigger/interface/RPCConeBuilderFromES.h"
+#include <cstdint>
 
 //
 // constants, enums and typedefs

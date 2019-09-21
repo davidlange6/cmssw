@@ -8,6 +8,7 @@
 #include <vector>
 #include "DataFormats/SiStripCommon/interface/ConstantsForHardwareSystems.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 namespace sistrip {
 

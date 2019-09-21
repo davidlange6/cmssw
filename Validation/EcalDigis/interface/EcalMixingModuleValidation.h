@@ -62,6 +62,7 @@
 #include <vector>
 #include <map>
 #include "DQMServices/Core/interface/DQMEDAnalyzer.h"
+#include <cstdint>
 
 namespace edm {
   class StreamID;

@@ -8,6 +8,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <vector>
 #include <algorithm>
+#include <cstdint>
 
 using namespace std;
 

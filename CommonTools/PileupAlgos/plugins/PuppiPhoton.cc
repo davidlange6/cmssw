@@ -22,6 +22,7 @@
 #include "DataFormats/Math/interface/deltaR.h"
 //Main File
 #include "CommonTools/PileupAlgos/plugins/PuppiPhoton.h"
+#include <cstdint>
 
 // ------------------------------------------------------------------------------------------
 PuppiPhoton::PuppiPhoton(const edm::ParameterSet &iConfig) {

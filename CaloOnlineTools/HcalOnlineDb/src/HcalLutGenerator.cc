@@ -11,6 +11,7 @@
 #include "CaloOnlineTools/HcalOnlineDb/interface/LMap.h"
 
 #include <iostream>
+#include <cstdint>
 using std::cerr;
 using std::cout;
 using std::endl;

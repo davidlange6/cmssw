@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 SiStripBadChannelBuilder::SiStripBadChannelBuilder(const edm::ParameterSet& iConfig)
     : ConditionDBWriter<SiStripBadStrip>(iConfig) {

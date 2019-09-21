@@ -6,6 +6,7 @@
 #include "DataFormats/Common/interface/RefToPtr.h"
 
 #include <limits>
+#include <cstdint>
 
 using namespace pat;
 

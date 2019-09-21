@@ -7,6 +7,7 @@
 #include "DataFormats/EcalDetId/interface/ESDetId.h"
 
 #include <iostream>
+#include <cstdint>
 using namespace std;
 
 EcalPreshowerNumberingScheme::EcalPreshowerNumberingScheme() : EcalNumberingScheme() {

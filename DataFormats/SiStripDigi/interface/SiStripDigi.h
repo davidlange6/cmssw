@@ -3,6 +3,7 @@
 
 #include "boost/cstdint.hpp"
 #include <iosfwd>
+#include <cstdint>
 
 /**  
      @brief A Digi for the silicon strip detector, containing both

@@ -22,6 +22,7 @@
 #include "DataFormats/CTPPSReco/interface/CTPPSLocalTrackLiteFwd.h"
 
 #include "DataFormats/Math/interface/libminifloat.h"
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

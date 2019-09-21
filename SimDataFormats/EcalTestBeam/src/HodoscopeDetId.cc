@@ -2,6 +2,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 
 #include <iostream>
+#include <cstdint>
 HodoscopeDetId::HodoscopeDetId() : EBDetId() {}
 
 HodoscopeDetId::HodoscopeDetId(uint32_t rawid) : EBDetId(rawid) {}

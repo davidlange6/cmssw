@@ -41,6 +41,7 @@
 #include <string>
 #include "TTree.h"
 #include "TH1D.h"
+#include <cstdint>
 
 class AlignTransform;
 class TrackerTopology;

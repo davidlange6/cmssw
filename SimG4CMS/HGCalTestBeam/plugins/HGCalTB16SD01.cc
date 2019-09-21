@@ -133,6 +133,7 @@ void HGCalTB16SD01::initialize(const G4StepPoint* point) {
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "SimG4Core/SensitiveDetector/interface/SensitiveDetectorPluginFactory.h"
+#include <cstdint>
 
 typedef HGCalTB16SD01 HGCalTB1601SensitiveDetector;
 DEFINE_SENSITIVEDETECTOR(HGCalTB1601SensitiveDetector);

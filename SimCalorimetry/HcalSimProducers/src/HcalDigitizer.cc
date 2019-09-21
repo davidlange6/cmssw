@@ -31,6 +31,7 @@
 #include "SimDataFormats/CrossingFrame/interface/MixCollection.h"
 #include "SimGeneral/MixingModule/interface/PileUpEventPrincipal.h"
 #include <boost/foreach.hpp>
+#include <cstdint>
 
 //#define DebugLog
 

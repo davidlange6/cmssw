@@ -1,5 +1,6 @@
 #include "DQMOffline/CalibTracker/plugins/SiStripDQMHistoryHelper.h"
 #include <boost/regex.hpp>
+#include <cstdint>
 
 SiStripDQMHistoryHelper::~SiStripDQMHistoryHelper() {}
 

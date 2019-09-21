@@ -8,6 +8,7 @@
 #include <set>
 
 #include "DCCDataParser.h"
+#include <cstdint>
 
 /*----------------------------------------------------------*/
 /* DCC DATA FIELD                                           */

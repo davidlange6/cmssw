@@ -29,6 +29,7 @@
 //for the zero suppression algorithm(s)
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingFactory.h"
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/SiStripRawProcessingAlgorithms.h"
+#include <cstdint>
 
 namespace sistrip {
 

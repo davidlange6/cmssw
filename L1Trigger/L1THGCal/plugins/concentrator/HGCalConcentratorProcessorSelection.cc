@@ -2,6 +2,7 @@
 #include <limits>
 
 #include "DataFormats/HGCDigi/interface/HGCDigiCollections.h"
+#include <cstdint>
 
 DEFINE_EDM_PLUGIN(HGCalConcentratorFactory, HGCalConcentratorProcessorSelection, "HGCalConcentratorProcessorSelection");
 

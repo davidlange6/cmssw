@@ -17,6 +17,7 @@
 #include "TFile.h"
 #include "TMultiGraph.h"
 #include "TGraph.h"
+#include <cstdint>
 
 using namespace std;
 using namespace sistrip;

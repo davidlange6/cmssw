@@ -13,6 +13,7 @@
 #include "DataFormats/HGCRecHit/interface/HGCRecHit.h"
 #include "DataFormats/HGCRecHit/interface/HGCUncalibratedRecHit.h"
 #include "RecoLocalCalo/HGCalRecAlgos/interface/RecHitTools.h"
+#include <cstdint>
 
 class HGCalRecHitAbsAlgo {
 public:

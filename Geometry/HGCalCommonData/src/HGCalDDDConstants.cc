@@ -1496,5 +1496,6 @@ bool HGCalDDDConstants::waferInLayerTest(int wafer, int lay, bool full) const {
 }
 
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 
 TYPELOOKUP_DATA_REG(HGCalDDDConstants);

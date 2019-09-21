@@ -32,6 +32,7 @@
 
 #include "SiPixelCalibDigiProducer.h"
 #include <sstream>
+#include <cstdint>
 
 //
 // constants, enums and typedefs

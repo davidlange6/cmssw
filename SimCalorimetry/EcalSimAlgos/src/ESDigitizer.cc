@@ -9,6 +9,7 @@
 
 #include <gsl/gsl_sf_erf.h>
 #include <gsl/gsl_sf_result.h>
+#include <cstdint>
 
 ESDigitizer::ESDigitizer(EcalHitResponse* hitResponse, ESElectronicsSimFast* electronicsSim, bool addNoise)
     : EcalTDigitizer<ESDigitizerTraits>(hitResponse, electronicsSim, addNoise),

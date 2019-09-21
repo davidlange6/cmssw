@@ -6,6 +6,7 @@
 #define EcalHodoscopeNumberingScheme_h
 
 #include "Geometry/EcalCommonData/interface/EcalNumberingScheme.h"
+#include <cstdint>
 
 class EcalHodoscopeNumberingScheme : public EcalNumberingScheme {
 public:

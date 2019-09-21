@@ -38,6 +38,7 @@ Original Author: John Paul Chou (Brown University)
 #include <vector>
 #include <set>
 #include <map>
+#include <cstdint>
 
 // forward declarations
 class HBHERecHit;

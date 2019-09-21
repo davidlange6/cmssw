@@ -167,6 +167,7 @@ void PixelVTXMonitor::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup
 void PixelVTXMonitor::endJob() {}
 // Define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(PixelVTXMonitor);
 
 // Local Variables:

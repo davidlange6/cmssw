@@ -54,6 +54,7 @@
 //#include <cmath>
 //#include <numeric>
 #include <algorithm>
+#include <cstdint>
 
 //
 // ----- Constructor

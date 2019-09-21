@@ -11,6 +11,7 @@
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 
 #include "AreaSeededTrackingRegionsBuilder.h"
+#include <cstdint>
 
 class SiPixelQuality;
 class TrackerGeometry;

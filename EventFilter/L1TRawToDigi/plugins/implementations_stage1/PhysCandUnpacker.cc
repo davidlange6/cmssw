@@ -3,6 +3,7 @@
 
 #include "CaloCollections.h"
 #include "PhysCandUnpacker.h"
+#include <cstdint>
 
 template <typename T, typename F>
 bool process(const l1t::Block& block, BXVector<T>* coll, F modify, bool isleft, bool isfirst, bool istau) {

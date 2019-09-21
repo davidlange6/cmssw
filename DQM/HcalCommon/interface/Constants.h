@@ -4,6 +4,7 @@
 #include "DQM/HcalCommon/interface/HcalCommonHeaders.h"
 
 #include <vector>
+#include <cstdint>
 
 namespace hcaldqm {
   namespace constants {

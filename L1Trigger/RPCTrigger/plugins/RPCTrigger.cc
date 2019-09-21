@@ -16,6 +16,7 @@
 //#define ML_DEBUG
 
 #include "L1Trigger/RPCTrigger/interface/MuonsGrabber.h"
+#include <cstdint>
 
 RPCTrigger::RPCTrigger(const edm::ParameterSet& iConfig)
     : m_trigConfig(),

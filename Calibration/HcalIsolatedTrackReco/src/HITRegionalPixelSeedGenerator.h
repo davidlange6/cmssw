@@ -31,6 +31,7 @@
 
 #include "DataFormats/Common/interface/Ref.h"
 #include "DataFormats/JetReco/interface/Jet.h"
+#include <cstdint>
 
 class HITRegionalPixelSeedGenerator : public TrackingRegionProducer {
 public:

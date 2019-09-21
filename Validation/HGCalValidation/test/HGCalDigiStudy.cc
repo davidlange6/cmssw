@@ -52,6 +52,7 @@
 #include "Geometry/HGCalGeometry/interface/HGCalGeometry.h"
 
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
+#include <cstdint>
 
 class HGCalDigiStudy : public edm::one::EDAnalyzer<edm::one::WatchRuns, edm::one::SharedResources> {
 public:

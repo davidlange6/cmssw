@@ -10,6 +10,7 @@
 
 #include <array>
 #include <vector>
+#include <cstdint>
 
 class HGCalVFESummationImpl {
 public:

@@ -38,6 +38,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <numeric>
+#include <cstdint>
 
 SiStripMonitorRawData::SiStripMonitorRawData(edm::ParameterSet const &iConfig)
     : BadFedNumber(nullptr),

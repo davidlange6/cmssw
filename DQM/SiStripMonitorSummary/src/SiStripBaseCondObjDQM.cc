@@ -4,6 +4,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 

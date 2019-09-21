@@ -58,6 +58,7 @@
 
 // Fetcher for reco algorithm data
 #include "RecoLocalCalo/HcalRecAlgos/interface/fetchHcalAlgoData.h"
+#include <cstdint>
 
 // Some helper functions
 namespace {

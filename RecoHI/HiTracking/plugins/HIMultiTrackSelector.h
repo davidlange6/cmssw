@@ -31,6 +31,7 @@
 #include "DataFormats/TrackerRecHit2D/interface/SiStripRecHit1D.h"
 #include "CommonTools/Utils/interface/StringCutObjectSelector.h"
 #include "CondFormats/EgammaObjects/interface/GBRForest.h"
+#include <cstdint>
 
 enum MVAVARIABLES {
   chi2perdofperlayer = 0,

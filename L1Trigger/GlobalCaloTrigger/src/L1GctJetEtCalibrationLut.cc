@@ -3,6 +3,7 @@
 
 #include "CondFormats/L1TObjects/interface/L1GctJetFinderParams.h"
 #include "CondFormats/L1TObjects/interface/L1CaloEtScale.h"
+#include <cstdint>
 
 //DEFINE STATICS
 const int L1GctJetEtCalibrationLut::NAddress = JET_ET_CAL_LUT_ADD_BITS;

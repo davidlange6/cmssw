@@ -10,6 +10,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 
 #include <fstream>
+#include <cstdint>
 
 SiPixelGenErrorDBObjectUploader::SiPixelGenErrorDBObjectUploader(const edm::ParameterSet& iConfig)
     : theGenErrorCalibrations(iConfig.getParameter<vstring>("siPixelGenErrorCalibrations")),

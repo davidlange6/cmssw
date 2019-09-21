@@ -52,4 +52,5 @@ void writeBlob::analyze(const edm::Event& evt, const edm::EventSetup& evtSetup) 
     }*/
 }
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(writeBlob);

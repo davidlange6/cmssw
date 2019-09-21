@@ -1,6 +1,7 @@
 #include "DCCXtalBlock.h"
 #include "DCCDataParser.h"
 #include "DCCDataMapper.h"
+#include <cstdint>
 
 DCCTBXtalBlock::DCCTBXtalBlock(DCCTBDataParser *parser,
                                const uint32_t *buffer,

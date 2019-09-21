@@ -17,6 +17,7 @@
 #include "CondFormats/DataRecord/interface/L1JetEtScaleRcd.h"
 #include "CondFormats/DataRecord/interface/L1EmEtScaleRcd.h"
 #include "FWCore/Framework/interface/ESHandle.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

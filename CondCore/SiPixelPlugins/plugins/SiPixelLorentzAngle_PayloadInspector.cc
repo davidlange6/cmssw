@@ -28,6 +28,7 @@
 #include "TPave.h"
 #include "TPaveStats.h"
 #include "TGaxis.h"
+#include <cstdint>
 
 namespace {
 

@@ -7,6 +7,7 @@
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "DataFormats/Common/interface/ValueMap.h"
 #include <vector>
+#include <cstdint>
 
 namespace susybsm {
 

@@ -36,6 +36,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cstdint>
 
 class DTGeometry;
 class DTSuperLayerId;

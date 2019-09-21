@@ -41,6 +41,7 @@ private:
 };
 
 #include "FWCore/PluginManager/interface/PluginFactory.h"
+#include <cstdint>
 typedef edmplugin::PluginFactory<FTLRecHitAlgoBase*(const edm::ParameterSet&, edm::ConsumesCollector&)>
     FTLRecHitAlgoFactory;
 

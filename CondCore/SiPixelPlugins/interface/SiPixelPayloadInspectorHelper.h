@@ -24,6 +24,7 @@
 //#define MMDEBUG
 #ifdef MMDEBUG
 #include <iostream>
+#include <cstdint>
 #define COUT std::cout << "MM "
 #else
 #define COUT edm::LogVerbatim("")

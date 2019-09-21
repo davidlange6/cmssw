@@ -6,6 +6,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "Geometry/HcalCommonData/interface/HcalDDDRecConstants.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 class HcalHitRelabeller {
 public:

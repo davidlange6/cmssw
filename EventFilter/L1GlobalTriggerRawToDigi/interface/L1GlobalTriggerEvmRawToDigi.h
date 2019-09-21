@@ -29,6 +29,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Utilities/interface/InputTag.h"
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 // forward declarations
 class L1GtfeWord;

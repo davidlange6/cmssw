@@ -28,6 +28,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <cstdint>
 
 HcalTestAnalysis::HcalTestAnalysis(const edm::ParameterSet& p)
     : addTower_(3), tuples_(nullptr), hcons_(nullptr), org_(nullptr) {

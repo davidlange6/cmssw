@@ -42,6 +42,7 @@
 #include <TNtuple.h>
 #include <iomanip>
 #include <fstream>
+#include <cstdint>
 
 using namespace std;
 

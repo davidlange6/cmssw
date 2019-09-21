@@ -1,6 +1,7 @@
 #include "RecoEgamma/EgammaTools/interface/EgammaRandomSeeds.h"
 
 #include "DataFormats/EgammaReco/interface/SuperCluster.h"
+#include <cstdint>
 
 uint32_t egamma::getRandomSeedFromSC(const edm::Event& iEvent, const reco::SuperClusterRef scRef) {
   const int offset = 0;  //for future expansion

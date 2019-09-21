@@ -12,6 +12,7 @@
 #include <EventFilter/DTRawToDigi/plugins/DTUnpacker.h>
 #include <EventFilter/DTRawToDigi/plugins/DTROS25Unpacker.h>
 #include "DataFormats/DTDigi/interface/DTControlData.h"
+#include <cstdint>
 // class DTROS25Unpacker;
 
 class DTDDUUnpacker : public DTUnpacker {

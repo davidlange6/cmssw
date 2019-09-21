@@ -30,6 +30,7 @@
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "CondFormats/DataRecord/interface/SiPixelCalibConfigurationRcd.h"
 #include <iostream>
+#include <cstdint>
 //
 // class decleration
 //

@@ -145,6 +145,7 @@ void testTkHistoMap::endJob(void) {
 
   /* test Dump in TkMap*/
 #include "CommonTools/TrackerMap/interface/TrackerMap.h"
+#include <cstdint>
   TrackerMap tkmap, tkmapZ, tkmapPhi, tkmapR;
 
   tkmap.setPalette(1);

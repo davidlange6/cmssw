@@ -2,6 +2,7 @@
 #define DIGIECAL_ESSAMPLE_H
 
 #include <ostream>
+#include <cstdint>
 
 class ESSample {
 public:

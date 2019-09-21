@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <bitset>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerOTLayerBuilder<FilteredView>::buildComponent(FilteredView& fv, GeometricDet* g, const std::string& s) {

@@ -28,6 +28,7 @@
 
 #include "CalibTracker/SiStripCommon/interface/SiStripDetInfoFileReader.h"
 #include "FWCore/ParameterSet/interface/FileInPath.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

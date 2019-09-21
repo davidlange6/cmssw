@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
 void HcalTestHistoClass::setCounters() {
   nLayers = 0;

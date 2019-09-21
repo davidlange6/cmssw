@@ -4,6 +4,7 @@
 
 #include "CondFormats/EcalObjects/interface/EcalPedestals.h"
 #include "CondFormats/EcalObjects/interface/EcalGainRatios.h"
+#include <cstdint>
 
 EcalUncalibRecHitMultiFitAlgo::EcalUncalibRecHitMultiFitAlgo()
     : _computeErrors(true),

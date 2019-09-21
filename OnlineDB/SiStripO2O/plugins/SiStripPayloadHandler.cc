@@ -24,6 +24,7 @@
 #include "CoralBase/TimeStamp.h"
 
 #include "OnlineDB/SiStripESSources/interface/SiStripCondObjBuilderFromDb.h"
+#include <cstdint>
 
 template <typename SiStripPayload>
 class SiStripPayloadHandler : public edm::EDAnalyzer {

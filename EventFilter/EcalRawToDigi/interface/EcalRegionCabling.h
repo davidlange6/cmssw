@@ -9,6 +9,7 @@
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 class EcalRegionCabling {
 public:

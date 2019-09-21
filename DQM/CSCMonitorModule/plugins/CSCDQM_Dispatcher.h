@@ -33,6 +33,7 @@
 #include "CSCDQM_Cache.h"
 #include "CSCDQM_Logger.h"
 #include "CSCDQM_Lock.h"
+#include <cstdint>
 
 namespace cscdqm {
 

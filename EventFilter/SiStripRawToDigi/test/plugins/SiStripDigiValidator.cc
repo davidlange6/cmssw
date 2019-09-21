@@ -1,6 +1,7 @@
 #include "EventFilter/SiStripRawToDigi/test/plugins/SiStripDigiValidator.h"
 #include "DataFormats/Common/interface/Handle.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 SiStripDigiValidator::SiStripDigiValidator(const edm::ParameterSet& conf)
     : tag1_(conf.getUntrackedParameter<edm::InputTag>("TagCollection1")),

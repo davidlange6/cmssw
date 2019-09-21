@@ -4,6 +4,7 @@
 #include "DataFormats/Math/interface/deltaPhi.h"
 
 #include <unordered_map>
+#include <cstdint>
 
 HGCalShowerShape::HGCalShowerShape(const edm::ParameterSet& conf)
     : threshold_(conf.getParameter<double>("shape_threshold")) {}

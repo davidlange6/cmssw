@@ -7,6 +7,7 @@
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
 
 #include <algorithm>
+#include <cstdint>
 
 void CachingSeedCleanerBySharedInput::init(const std::vector<Trajectory> *vect) {
   theVault.clear();

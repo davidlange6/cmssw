@@ -53,6 +53,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 
 #include <vector>
+#include <cstdint>
 
 class dso_hidden PixelThresholdClusterizer final : public PixelClusterizerBase {
 public:

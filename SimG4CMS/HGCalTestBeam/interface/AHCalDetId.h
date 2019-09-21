@@ -5,6 +5,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
+#include <cstdint>
 
 /** \class AHCalDetId
  *  Cell identifier class for the HCAL subdetectors, precision readout cells

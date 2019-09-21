@@ -13,6 +13,7 @@
 #include "DataFormats/EgammaReco/interface/SuperClusterFwd.h"
 
 #include <random>
+#include <cstdint>
 
 namespace egamma {
 

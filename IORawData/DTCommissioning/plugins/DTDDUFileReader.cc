@@ -24,6 +24,7 @@
 #include <iosfwd>
 #include <iostream>
 #include <algorithm>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

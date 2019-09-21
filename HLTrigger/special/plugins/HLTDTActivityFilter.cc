@@ -275,4 +275,5 @@ bool HLTDTActivityFilter::matchChamber(uint32_t rawId,
 
 // define as a framework module
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(HLTDTActivityFilter);

@@ -5,6 +5,7 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 SiPixelBadModuleByHandBuilder::SiPixelBadModuleByHandBuilder(const edm::ParameterSet& iConfig)
     : ConditionDBWriter<SiPixelQuality>(iConfig) {

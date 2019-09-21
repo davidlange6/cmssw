@@ -22,6 +22,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "G4VProcess.hh"
+#include <cstdint>
 
 //#define DebugLog
 

@@ -24,6 +24,7 @@
 
 #include "DataFormats/ForwardDetId/interface/BTLDetId.h"
 #include "DataFormats/ForwardDetId/interface/ETLDetId.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

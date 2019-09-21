@@ -27,6 +27,7 @@ void CmsMTDDiscBuilder::buildComponent(DDFilteredView& fv, GeometricTimingDet* g
 }
 
 #include "DataFormats/ForwardDetId/interface/ETLDetId.h"
+#include <cstdint>
 void CmsMTDDiscBuilder::sortNS(DDFilteredView& fv, GeometricTimingDet* det) {
   GeometricTimingDet::ConstGeometricTimingDetContainer& comp = det->components();
 

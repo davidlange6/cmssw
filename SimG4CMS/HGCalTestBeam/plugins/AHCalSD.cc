@@ -130,6 +130,7 @@ bool AHCalSD::filterHit(CaloG4Hit* aHit, double time) {
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "SimG4Core/SensitiveDetector/interface/SensitiveDetectorPluginFactory.h"
+#include <cstdint>
 
 typedef AHCalSD AHcalSensitiveDetector;
 DEFINE_SENSITIVEDETECTOR(AHcalSensitiveDetector);

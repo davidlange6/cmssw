@@ -10,6 +10,7 @@
 #include <TROOT.h>
 
 #include <TProfile.h>
+#include <cstdint>
 
 //
 // -- Constructor

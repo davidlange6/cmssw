@@ -22,6 +22,7 @@
 #include "DataFormats/PatCandidates/interface/PATObject.h"
 #include "DataFormats/PatCandidates/interface/Isolation.h"
 #include "DataFormats/PatCandidates/interface/PFIsolation.h"
+#include <cstdint>
 
 namespace pat {
 

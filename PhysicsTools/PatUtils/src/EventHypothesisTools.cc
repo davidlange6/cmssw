@@ -1,4 +1,5 @@
 #include "PhysicsTools/PatUtils/interface/EventHypothesisTools.h"
+#include <cstdint>
 
 using namespace pat::eventhypothesis;
 

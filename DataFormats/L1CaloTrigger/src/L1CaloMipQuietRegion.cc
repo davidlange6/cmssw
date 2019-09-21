@@ -1,4 +1,5 @@
 #include "DataFormats/L1CaloTrigger/interface/L1CaloMipQuietRegion.h"
+#include <cstdint>
 
 // Namespace resolution
 using std::dec;

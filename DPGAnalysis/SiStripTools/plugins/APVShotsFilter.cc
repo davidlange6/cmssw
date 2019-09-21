@@ -225,6 +225,7 @@ bool APVShotsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) {
 void APVShotsFilter::endJob() { edm::LogInfo("APVShotsFilter") << _nevents << " analyzed events"; }
 
 #include "FWCore/Framework/interface/ESHandle.h"
+#include <cstdint>
 void APVShotsFilter::updateDetCabling(const edm::EventSetup& setup) {
   if (_useCabling) {
     uint32_t cache_id = setup.get<SiStripDetCablingRcd>().cacheIdentifier();  //.get( cabling_ );

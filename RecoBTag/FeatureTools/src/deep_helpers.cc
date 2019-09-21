@@ -1,5 +1,6 @@
 #include "RecoBTag/FeatureTools/interface/deep_helpers.h"
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
+#include <cstdint>
 
 namespace btagbtvdeep {
 

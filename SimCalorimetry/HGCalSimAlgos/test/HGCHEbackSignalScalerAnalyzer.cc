@@ -34,6 +34,7 @@
 #include <iomanip>
 
 #include "vdt/vdtMath.h"
+#include <cstdint>
 
 //
 // class declaration

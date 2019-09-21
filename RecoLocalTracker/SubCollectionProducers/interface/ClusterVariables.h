@@ -8,6 +8,7 @@
 #include "DataFormats/SiPixelCluster/interface/SiPixelCluster.h"
 #include "DataFormats/Common/interface/DetSetVectorNew.h"
 #include <numeric>
+#include <cstdint>
 
 // never seen a more useless class...
 class ClusterVariables {

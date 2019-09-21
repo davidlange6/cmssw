@@ -1,6 +1,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <CondFormats/EcalObjects/interface/EcalTPGSlidingWindow.h>
 #include <SimCalorimetry/EcalTrigPrimAlgos/interface/EcalFenixStripFormatEB.h>
+#include <cstdint>
 
 EcalFenixStripFormatEB::EcalFenixStripFormatEB() : shift_(0) {}
 

@@ -30,6 +30,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 EcalTB07DaqFormatter::EcalTB07DaqFormatter(std::string tbName,
                                            int cryIcMap[68][5][5],

@@ -24,6 +24,7 @@
 #include "DataFormats/Candidate/interface/Candidate.h"
 #include "PhysicsTools/TagAndProbe/interface/BaseTreeFiller.h"
 #include <set>
+#include <cstdint>
 
 class ProbeTreeProducer : public edm::EDFilter {
 public:

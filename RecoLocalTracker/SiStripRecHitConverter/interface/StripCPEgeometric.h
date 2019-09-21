@@ -3,6 +3,7 @@
 
 #include "RecoLocalTracker/SiStripRecHitConverter/interface/StripCPE.h"
 #include "RecoLocalTracker/SiStripRecHitConverter/interface/ErrorPropogationTypes.h"
+#include <cstdint>
 
 class StripCPEgeometric : public StripCPE {
 public:

@@ -1,4 +1,5 @@
 #include "CondTools/SiStrip/plugins/SiStripNoisesReader.h"
+#include <cstdint>
 
 using namespace cms;
 

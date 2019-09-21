@@ -2,6 +2,7 @@
 #include "DataFormats/ForwardDetId/interface/ETLDetId.h"
 
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

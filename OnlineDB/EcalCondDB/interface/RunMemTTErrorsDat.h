@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <stdexcept>
-#include <boost/cstdint.hpp>
 
 #include "OnlineDB/EcalCondDB/interface/IDataItem.h"
 #include "OnlineDB/EcalCondDB/interface/RunIOV.h"

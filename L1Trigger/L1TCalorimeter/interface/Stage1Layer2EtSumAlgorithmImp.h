@@ -23,6 +23,7 @@
 #include "L1Trigger/L1TCalorimeter/interface/CordicXilinx.h"
 #include <array>
 #include <vector>
+#include <cstdint>
 
 namespace l1t {
 

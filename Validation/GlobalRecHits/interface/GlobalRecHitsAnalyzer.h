@@ -136,6 +136,7 @@
 
 #include "TString.h"
 #include "DQMServices/Core/interface/DQMEDAnalyzer.h"
+#include <cstdint>
 
 class GlobalRecHitsAnalyzer : public DQMEDAnalyzer {
 public:

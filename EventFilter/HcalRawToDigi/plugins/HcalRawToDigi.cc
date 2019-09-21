@@ -10,6 +10,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
 #include <unordered_set>
+#include <cstdint>
 
 HcalRawToDigi::HcalRawToDigi(edm::ParameterSet const& conf)
     : unpacker_(conf.getUntrackedParameter<int>("HcalFirstFED", int(FEDNumbering::MINHCALFEDID)),

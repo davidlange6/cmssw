@@ -33,6 +33,7 @@
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
 #include "Geometry/CommonDetUnit/interface/GeomDet.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
+#include <cstdint>
 
 class ConversionSeedFilterCharge : public edm::global::EDProducer<> {
 public:

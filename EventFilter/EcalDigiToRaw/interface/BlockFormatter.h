@@ -9,6 +9,7 @@
 #include <DataFormats/FEDRawData/interface/FEDRawDataCollection.h>
 #include <DataFormats/FEDRawData/interface/FEDRawData.h>
 #include <DataFormats/FEDRawData/interface/FEDRawDataCollection.h>
+#include <cstdint>
 
 class BlockFormatter {
 public:

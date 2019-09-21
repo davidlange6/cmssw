@@ -3,6 +3,7 @@
 
 #include "DataFormats/MuonData/interface/MuonDigiCollection.h"
 #include "EventFilter/GEMRawToDigi/interface/AMCdata.h"
+#include <cstdint>
 
 typedef MuonDigiCollection<uint16_t, gem::AMCdata> GEMAMCdataCollection;
 

@@ -3,6 +3,7 @@
 
 #include "boost/cstdint.hpp"
 #include "SimDataFormats/EncodedEventId/interface/EncodedEventId.h"
+#include <cstdint>
 
 //typedef std::pair<unsigned int ,unsigned int > PixelDigiSimLink;
 class PixelDigiSimLink {

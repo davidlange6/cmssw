@@ -2,6 +2,7 @@
 #include "DataFormats/TrackReco/interface/TrackBase.h"
 #include "DataFormats/TrackReco/interface/fillCovariance.h"
 #include <algorithm>
+#include <cstdint>
 
 using namespace reco;
 

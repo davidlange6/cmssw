@@ -15,6 +15,7 @@ namespace {
 using namespace reco;
 
 #include <iomanip>
+#include <cstdint>
 bool CompareTime(const HBHERecHit* x, const HBHERecHit* y) { return x->time() < y->time(); }
 bool CompareTowers(const CaloTower* x, const CaloTower* y) {
   return x->iphi() * 1000 + x->ieta() < y->iphi() * 1000 + y->ieta();

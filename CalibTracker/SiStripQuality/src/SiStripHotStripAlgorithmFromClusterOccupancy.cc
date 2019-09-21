@@ -1,6 +1,7 @@
 #include "CalibTracker/SiStripQuality/interface/SiStripHotStripAlgorithmFromClusterOccupancy.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
+#include <cstdint>
 
 SiStripHotStripAlgorithmFromClusterOccupancy::SiStripHotStripAlgorithmFromClusterOccupancy(
     const edm::ParameterSet& iConfig, const TrackerTopology* theTopo)

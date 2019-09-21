@@ -59,6 +59,7 @@
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "TH1S.h"
 #include "TH1D.h"
+#include <cstdint>
 
 //
 // constants, enums and typedefs

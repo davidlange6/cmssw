@@ -10,6 +10,7 @@
 #include <tbb/spin_mutex.h>
 
 #include "DQMServices/Core/interface/MonitorElement.h"
+#include <cstdint>
 
 class ConcurrentMonitorElement {
 public:

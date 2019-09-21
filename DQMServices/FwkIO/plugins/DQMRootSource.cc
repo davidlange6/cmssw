@@ -63,6 +63,7 @@
 #include "FWCore/Utilities/interface/InputType.h"
 
 #include "format.h"
+#include <cstdint>
 
 namespace {
   typedef dqm::legacy::MonitorElement MonitorElement;

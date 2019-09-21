@@ -4,6 +4,7 @@
 
 #include "EMTFCollections.h"
 #include "EMTFUnpackerTools.h"
+#include <cstdint>
 
 // This is the "header" - no EMTFBlockTrailers.h file is needed
 namespace l1t {

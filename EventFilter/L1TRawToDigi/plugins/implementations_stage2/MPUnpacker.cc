@@ -8,6 +8,7 @@
 
 #include "CaloCollections.h"
 #include "MPUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

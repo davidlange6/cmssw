@@ -18,6 +18,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <sys/time.h>
+#include <cstdint>
 
 using namespace cms;
 

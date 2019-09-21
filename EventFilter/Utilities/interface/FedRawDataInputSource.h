@@ -21,6 +21,7 @@
 #include "IOPool/Streamer/interface/FRDEventMessage.h"
 
 #include "DataFormats/Provenance/interface/LuminosityBlockAuxiliary.h"
+#include <cstdint>
 
 class FEDRawDataCollection;
 class InputSourceDescription;

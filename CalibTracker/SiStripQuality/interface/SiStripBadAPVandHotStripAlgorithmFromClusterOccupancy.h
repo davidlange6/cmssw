@@ -36,6 +36,7 @@
 #include "CalibTracker/SiStripQuality/interface/SiStripQualityHistos.h"
 
 #include "DQMServices/Core/interface/DQMStore.h"
+#include <cstdint>
 
 class SiStripQuality;
 class TrackerTopology;

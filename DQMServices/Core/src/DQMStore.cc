@@ -25,6 +25,7 @@
 #include <fstream>
 #include <sstream>
 #include <utility>
+#include <cstdint>
 
 /** @var DQMStore::verbose_
     Universal verbose flag for DQM. */

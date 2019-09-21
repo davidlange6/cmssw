@@ -5,6 +5,7 @@
 
 #include "TH2F.h"
 #include <string>
+#include <cstdint>
 
 enum { kEBChannels = 61200, kEEChannels = 14648 };
 enum {

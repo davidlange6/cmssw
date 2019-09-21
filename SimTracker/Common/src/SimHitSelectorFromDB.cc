@@ -1,4 +1,5 @@
 #include "SimTracker/Common/interface/SimHitSelectorFromDB.h"
+#include <cstdint>
 
 SimHitSelectorFromDB::SimHitSelectorFromDB() : theNewSimHitList(0) {}
 

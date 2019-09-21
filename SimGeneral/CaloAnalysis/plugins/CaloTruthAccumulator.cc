@@ -55,6 +55,7 @@
 #include "Geometry/HcalCommonData/interface/HcalHitRelabeller.h"
 #include "Geometry/HcalTowerAlgo/interface/HcalGeometry.h"
 #include "Geometry/Records/interface/CaloGeometryRecord.h"
+#include <cstdint>
 
 namespace {
   using Index_t = unsigned;

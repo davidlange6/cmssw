@@ -4,6 +4,7 @@
 
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 #include "DataFormats/SiStripCommon/interface/Constants.h"
+#include <cstdint>
 
 /**
    @file ConstantsForHardwareSystems.h

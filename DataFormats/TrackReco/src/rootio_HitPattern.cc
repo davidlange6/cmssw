@@ -1,4 +1,5 @@
 #include "DataFormats/TrackReco/interface/HitPattern.h"
+#include <cstdint>
 
 /* This file contains the function used to read back v12 versions of HitPatterns from a ROOT file.
    The function is called by a ROOT IO rule.

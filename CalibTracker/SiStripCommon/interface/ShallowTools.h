@@ -7,6 +7,7 @@
 #include "DataFormats/SiStripCluster/interface/SiStripCluster.h"
 #include "DataFormats/Common/interface/DetSetVectorNew.h"
 #include "FWCore/Utilities/interface/EDGetToken.h"
+#include <cstdint>
 
 class StripGeomDetUnit;
 class MagneticField;

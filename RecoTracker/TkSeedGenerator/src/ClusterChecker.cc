@@ -6,6 +6,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 ClusterChecker::ClusterChecker(const edm::ParameterSet& conf, edm::ConsumesCollector&& iC) : ClusterChecker(conf, iC) {}
 

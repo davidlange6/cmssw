@@ -4,6 +4,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripNoises.h"
 #include "CondFormats/DataRecord/interface/SiStripThresholdRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripThreshold.h"
+#include <cstdint>
 
 //#define DEBUG_SiStripZeroSuppression_
 //#define ML_DEBUG

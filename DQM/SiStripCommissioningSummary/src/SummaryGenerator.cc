@@ -8,6 +8,7 @@
 #include <cmath>
 #include "TH2F.h"
 #include "TProfile.h"
+#include <cstdint>
 
 using namespace sistrip;
 

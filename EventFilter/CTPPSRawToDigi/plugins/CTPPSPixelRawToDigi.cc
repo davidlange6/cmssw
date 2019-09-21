@@ -18,6 +18,7 @@
 #include "EventFilter/CTPPSRawToDigi/interface/CTPPSPixelDataFormatter.h"
 
 #include "FWCore/Framework/interface/ConsumesCollector.h"
+#include <cstdint>
 
 using namespace std;
 

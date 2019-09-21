@@ -8,6 +8,7 @@
 #include <TH1.h>
 #include <TH2.h>
 #include <TROOT.h>
+#include <cstdint>
 
 //
 // -- Constructor

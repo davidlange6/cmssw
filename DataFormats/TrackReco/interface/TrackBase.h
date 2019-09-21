@@ -56,6 +56,7 @@
 #include "DataFormats/Math/interface/Point3D.h"
 #include "DataFormats/Math/interface/Error.h"
 #include <bitset>
+#include <cstdint>
 
 namespace reco {
 

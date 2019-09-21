@@ -9,6 +9,7 @@
 
 #include "DataFormats/FTLDigi/interface/FTLDigiCollections.h"
 #include "SimFastTiming/FastTimingCommon/interface/FTLDigitizerTypes.h"
+#include <cstdint>
 
 namespace ftl = ftl_digitizer;
 

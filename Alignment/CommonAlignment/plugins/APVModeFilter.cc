@@ -48,6 +48,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include "CondFormats/SiStripObjects/interface/SiStripLatency.h"
 #include "CondFormats/DataRecord/interface/SiStripCondDataRecords.h"
+#include <cstdint>
 
 //
 // class declaration

@@ -8,6 +8,7 @@
 #include <CLHEP/Geometry/Transform3D.h>
 #include <cmath>
 #include <vector>
+#include <cstdint>
 
 /**
 

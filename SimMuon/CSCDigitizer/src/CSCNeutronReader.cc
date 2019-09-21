@@ -2,6 +2,7 @@
 #include "Geometry/CSCGeometry/interface/CSCChamberSpecs.h"
 #include "SimDataFormats/TrackingHit/interface/PSimHit.h"
 #include "SimMuon/CSCDigitizer/src/CSCNeutronReader.h"
+#include <cstdint>
 
 void CSCNeutronReader::addHits(std::map<int, edm::PSimHitContainer> &hitMap, CLHEP::HepRandomEngine *engine) {
   std::vector<int> chambersDone;

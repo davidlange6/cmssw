@@ -82,6 +82,7 @@ private:
 };
 
 #include "DataFormats/GeometryVector/interface/VectorUtil.h"
+#include <cstdint>
 template <class VTX>
 TrackVertexArbitration<VTX>::TrackVertexArbitration(const edm::ParameterSet &params)
     : primaryVertexCollection(params.getParameter<edm::InputTag>("primaryVertices")),

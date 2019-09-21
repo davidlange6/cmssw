@@ -60,6 +60,7 @@ protected:
 };
 
 #include "DQMOffline/PFTau/interface/Matchers.h"
+#include <cstdint>
 
 template <class T, class C>
 void PFJetMonitor::fill(const T &jetCollection,

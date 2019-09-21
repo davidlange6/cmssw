@@ -1,4 +1,5 @@
 #include "EventFilter/L1TRawToDigi/interface/OmtfLinkMappingCsc.h"
+#include <cstdint>
 
 namespace omtf {
 

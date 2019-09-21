@@ -15,6 +15,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 #include <sstream>
 #include <iomanip>
+#include <cstdint>
 
 using namespace std;
 

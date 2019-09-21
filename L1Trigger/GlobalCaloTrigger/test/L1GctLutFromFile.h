@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <cassert>
+#include <cstdint>
 
 template <int NAddressBits, int NDataBits>
 class L1GctLutFromFile : public L1GctLut<NAddressBits, NDataBits> {

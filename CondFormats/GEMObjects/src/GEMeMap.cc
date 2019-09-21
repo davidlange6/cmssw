@@ -2,6 +2,7 @@
 #include "CondFormats/GEMObjects/interface/GEMROMapping.h"
 #include "DataFormats/MuonDetId/interface/GEMDetId.h"
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
+#include <cstdint>
 
 GEMeMap::GEMeMap() : theVersion("") {}
 

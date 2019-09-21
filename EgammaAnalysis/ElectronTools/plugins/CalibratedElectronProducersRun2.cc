@@ -95,6 +95,7 @@ typedef CalibratedElectronProducerRun2T<reco::GsfElectron> CalibratedElectronPro
 typedef CalibratedElectronProducerRun2T<pat::Electron> CalibratedPatElectronProducerRun2;
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(CalibratedElectronProducerRun2);
 DEFINE_FWK_MODULE(CalibratedPatElectronProducerRun2);

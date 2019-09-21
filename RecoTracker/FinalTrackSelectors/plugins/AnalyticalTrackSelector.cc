@@ -396,5 +396,6 @@ void AnalyticalTrackSelector::run(edm::Event& evt, const edm::EventSetup& es) co
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(AnalyticalTrackSelector);

@@ -6,6 +6,7 @@
 // This Class's Header --
 //-----------------------
 #include "L1Trigger/DTTraco/interface/Lut.h"
+#include <cstdint>
 
 //----------------
 // Constructors --

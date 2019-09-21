@@ -39,6 +39,7 @@
 
 #include <map>
 #include <memory>
+#include <cstdint>
 
 class PreMixingSiStripWorker : public PreMixingWorker {
 public:

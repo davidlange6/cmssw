@@ -470,5 +470,6 @@ void HGCalSimHitStudy::beginJob() {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 //define this as a plug-in
 DEFINE_FWK_MODULE(HGCalSimHitStudy);

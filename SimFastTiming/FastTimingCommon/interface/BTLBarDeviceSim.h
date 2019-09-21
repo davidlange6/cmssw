@@ -15,6 +15,7 @@
 #include "Geometry/MTDNumberingBuilder/interface/MTDTopology.h"
 
 #include <tuple>
+#include <cstdint>
 
 namespace CLHEP {
   class HepRandomEngine;

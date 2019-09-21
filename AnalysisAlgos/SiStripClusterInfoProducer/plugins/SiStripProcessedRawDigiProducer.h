@@ -15,6 +15,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 #include <memory>
 #include <string>
+#include <cstdint>
 
 class SiStripGain;
 class SiStripProcessedRawDigi;

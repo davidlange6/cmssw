@@ -34,6 +34,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <cstdint>
 
 class EcalLocalRecoTask : public edm::EDAnalyzer {
 public:

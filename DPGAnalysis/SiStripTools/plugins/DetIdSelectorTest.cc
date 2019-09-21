@@ -48,6 +48,7 @@
 //******** Single include for the TkMap *************
 #include "DQM/SiStripCommon/interface/TkHistoMap.h"
 #include "CommonTools/TrackerMap/interface/TrackerMap.h"
+#include <cstdint>
 //***************************************************
 
 //

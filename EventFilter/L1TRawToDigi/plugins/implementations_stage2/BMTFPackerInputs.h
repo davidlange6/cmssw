@@ -7,6 +7,7 @@
 #include "DataFormats/L1DTTrackFinder/interface/L1MuDTChambThContainer.h"
 
 #include "BMTFTokens.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

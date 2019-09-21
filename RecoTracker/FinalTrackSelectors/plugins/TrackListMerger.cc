@@ -879,5 +879,6 @@ void TrackListMerger::produce(edm::Event& e, const edm::EventSetup& es) {
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(TrackListMerger);

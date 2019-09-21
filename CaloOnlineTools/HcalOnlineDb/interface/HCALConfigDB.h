@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cstring>
 #include "CaloOnlineTools/HcalOnlineDb/interface/ConfigurationDatabaseImpl.hh"
+#include <cstdint>
 
 /**
 

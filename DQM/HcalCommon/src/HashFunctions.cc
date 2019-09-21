@@ -1,5 +1,6 @@
 #include "DQM/HcalCommon/interface/HashFunctions.h"
 #include "DQM/HcalCommon/interface/Utilities.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace constants;

@@ -8,6 +8,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctStaticParameters.h"
+#include <cstdint>
 
 using std::ios;
 

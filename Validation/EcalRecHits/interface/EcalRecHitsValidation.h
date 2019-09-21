@@ -39,6 +39,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class EcalRecHitsValidation : public DQMEDAnalyzer {
   typedef std::map<uint32_t, float, std::less<uint32_t>> MapType;

@@ -19,6 +19,7 @@
 
 // system include files
 #include <iomanip>
+#include <cstdint>
 
 // user include files
 //   base class

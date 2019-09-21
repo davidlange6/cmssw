@@ -5,6 +5,7 @@
 #include <vector>
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
 #include "DataFormats/EcalDigi/interface/EcalEBTriggerPrimitiveSample.h"
+#include <cstdint>
 
 
 

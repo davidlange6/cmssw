@@ -10,6 +10,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "iostream"
+#include <cstdint>
 
 std::vector<int32_t> SeedMatcher::matchRecHitCombinations(
     const TrajectorySeed& seed,

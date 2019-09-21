@@ -1,5 +1,6 @@
 #include "DQM/HcalCommon/interface/DQHarvester.h"
 #include "FWCore/Framework/interface/Run.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace constants;

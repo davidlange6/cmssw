@@ -1,5 +1,6 @@
 
 #include "DQM/HcalTasks/interface/LEDTask.h"
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

@@ -21,6 +21,7 @@
 #include "TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHit.h"
 #include "TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHitBuilder.h"
 #include "RecoPixelVertexing/PixelTriplets/interface/CosmicHitTripletGenerator.h"
+#include <cstdint>
 class PixelSeedLayerPairs;
 
 class SeedGeneratorForCosmics {

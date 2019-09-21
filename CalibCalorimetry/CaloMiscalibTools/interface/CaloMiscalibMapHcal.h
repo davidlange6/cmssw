@@ -13,6 +13,7 @@
 #include <iomanip>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class CaloMiscalibMapHcal : public CaloMiscalibMap {
 public:

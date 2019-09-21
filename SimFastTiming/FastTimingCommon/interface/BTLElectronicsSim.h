@@ -11,6 +11,7 @@
 #include "SimFastTiming/FastTimingCommon/interface/MTDDigitizerTypes.h"
 
 #include "SimFastTiming/FastTimingCommon/interface/BTLPulseShape.h"
+#include <cstdint>
 
 namespace mtd = mtd_digitizer;
 

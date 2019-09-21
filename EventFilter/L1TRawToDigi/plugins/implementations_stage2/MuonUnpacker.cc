@@ -5,6 +5,7 @@
 #include "L1Trigger/L1TMuon/interface/MuonRawDigiTranslator.h"
 
 #include "MuonUnpacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

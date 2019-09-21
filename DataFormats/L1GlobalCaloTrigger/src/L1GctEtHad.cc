@@ -1,5 +1,6 @@
 
 #include "DataFormats/L1GlobalCaloTrigger/interface/L1GctEtHad.h"
+#include <cstdint>
 
 L1GctEtHad::L1GctEtHad() : m_data(0), m_bx(0) {}
 

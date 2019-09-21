@@ -5,6 +5,7 @@
 #include <vector>
 #include "Geometry/VeryForwardGeometry/interface/CTPPSPixelSimTopology.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixSignalPoint.h"
+#include <cstdint>
 
 class RPixChargeShare {
 public:

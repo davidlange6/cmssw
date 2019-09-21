@@ -18,6 +18,7 @@
 #include "DQM/HcalCommon/interface/Flag.h"
 #include "DQM/HcalCommon/interface/HashFilter.h"
 #include "DQM/HcalCommon/interface/Utilities.h"
+#include <cstdint>
 
 namespace hcaldqm {
   class DQClient : public DQModule {

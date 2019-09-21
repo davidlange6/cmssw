@@ -7,6 +7,7 @@
 #include "Geometry/CommonTopologies/interface/PixelTopology.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include <cstdint>
 
 namespace cms {
   SiPixelCondObjAllPayloadsReader::SiPixelCondObjAllPayloadsReader(const edm::ParameterSet& conf) : conf_(conf) {

@@ -23,6 +23,7 @@
 #include "DataFormats/PatCandidates/interface/Isolation.h"
 #include "DataFormats/PatCandidates/interface/Vertexing.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+#include <cstdint>
 
 // Define typedefs for convenience
 namespace pat {

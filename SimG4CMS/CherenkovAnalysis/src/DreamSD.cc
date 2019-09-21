@@ -26,6 +26,7 @@
 
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 //________________________________________________________________________________________
 DreamSD::DreamSD(const std::string &name,

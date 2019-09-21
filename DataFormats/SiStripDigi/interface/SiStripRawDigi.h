@@ -29,6 +29,7 @@ private:
 };
 
 #include <iostream>
+#include <cstdint>
 inline std::ostream& operator<<(std::ostream& o, const SiStripRawDigi& digi) { return o << " " << digi.adc(); }
 
 // inline methods

@@ -1,5 +1,6 @@
 
 #include "DQM/HcalCommon/interface/DetectorQuantity.h"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace quantity {

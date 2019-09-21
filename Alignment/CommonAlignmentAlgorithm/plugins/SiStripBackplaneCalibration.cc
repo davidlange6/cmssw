@@ -552,5 +552,6 @@ SiStripBackPlaneCorrection *SiStripBackplaneCalibration::createFromTree(const ch
 // Plugin definition
 
 #include "Alignment/CommonAlignmentAlgorithm/interface/IntegratedCalibrationPluginFactory.h"
+#include <cstdint>
 
 DEFINE_EDM_PLUGIN(IntegratedCalibrationPluginFactory, SiStripBackplaneCalibration, "SiStripBackplaneCalibration");

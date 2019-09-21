@@ -4,6 +4,7 @@
 #include <cstring>
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBufferComponents.h"
 #include "FWCore/Utilities/interface/CRC16.h"
+#include <cstdint>
 
 namespace sistrip {
 

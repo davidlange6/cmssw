@@ -7,6 +7,7 @@
 #include "globals.hh"
 #include "SimG4CMS/PPS/interface/PPSVDetectorOrganization.h"
 #include "G4Step.hh"
+#include <cstdint>
 
 class PPSDiamondOrganization : public PPSVDetectorOrganization {
 public:

@@ -2,6 +2,7 @@
 #include "OnlineDB/SiStripConfigDb/interface/SiStripConfigDb.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <ostream>
+#include <cstdint>
 
 using namespace std;
 using namespace sistrip;

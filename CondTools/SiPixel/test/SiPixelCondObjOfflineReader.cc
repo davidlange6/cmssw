@@ -10,6 +10,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
+#include <cstdint>
 
 namespace cms {
   SiPixelCondObjOfflineReader::SiPixelCondObjOfflineReader(const edm::ParameterSet& conf) : conf_(conf) {

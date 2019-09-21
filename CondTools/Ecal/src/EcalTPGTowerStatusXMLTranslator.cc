@@ -20,6 +20,7 @@
 
 #include "CondFormats/DataRecord/interface/EcalTPGTowerStatusRcd.h"
 #include "CondFormats/EcalObjects/interface/EcalTPGTowerStatus.h"
+#include <cstdint>
 
 using namespace XERCES_CPP_NAMESPACE;
 using namespace xuti;

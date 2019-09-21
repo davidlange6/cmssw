@@ -4,6 +4,7 @@
 #include "FWCore/Utilities/interface/EDMException.h"
 
 #include <algorithm>
+#include <cstdint>
 
 namespace edm {
 

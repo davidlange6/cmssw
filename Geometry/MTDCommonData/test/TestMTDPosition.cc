@@ -20,6 +20,7 @@
 #include "DetectorDescription/Core/interface/DDFilteredView.h"
 #include "DetectorDescription/Core/interface/DDSolid.h"
 #include "DetectorDescription/Core/interface/DDSolidShapes.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

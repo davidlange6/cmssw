@@ -430,6 +430,7 @@ void HGCalDigiValidation::bookHistograms(DQMStore::IBooker& iB, edm::Run const&,
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 //define this as a plug-in
 DEFINE_FWK_MODULE(HGCalDigiValidation);

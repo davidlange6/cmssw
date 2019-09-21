@@ -274,4 +274,5 @@ void PFJetAnalyzerDQM::analyze(const edm::Event& iEvent, const edm::EventSetup&)
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(PFJetAnalyzerDQM);

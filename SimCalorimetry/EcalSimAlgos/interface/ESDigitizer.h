@@ -10,6 +10,7 @@ namespace CLHEP {
 }  // namespace CLHEP
 
 #include <vector>
+#include <cstdint>
 
 class ESDigitizer : public EcalTDigitizer<ESDigitizerTraits> {
 public:

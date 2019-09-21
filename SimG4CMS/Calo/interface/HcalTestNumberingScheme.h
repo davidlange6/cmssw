@@ -7,6 +7,7 @@
 
 #include "SimG4CMS/Calo/interface/HcalNumberingScheme.h"
 #include "DataFormats/HcalDetId/interface/HcalTestNumbering.h"
+#include <cstdint>
 
 class HcalTestNumberingScheme : public HcalNumberingScheme {
 public:

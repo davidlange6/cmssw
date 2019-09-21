@@ -26,6 +26,7 @@ Toy EDProducers of Ints for testing purposes only.
 #include <cassert>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace edmtest {
 

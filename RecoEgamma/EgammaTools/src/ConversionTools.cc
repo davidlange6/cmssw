@@ -8,6 +8,7 @@
 #include "DataFormats/Common/interface/RefToPtr.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
 #include "DataFormats/Math/interface/deltaR.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace reco;

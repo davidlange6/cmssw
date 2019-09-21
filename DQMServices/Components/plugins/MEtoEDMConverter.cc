@@ -14,6 +14,7 @@
 #include "classlib/utils/StringOps.h"
 #include "DataFormats/Histograms/interface/DQMToken.h"
 #include "DataFormats/Histograms/interface/MEtoEDMFormat.h"
+#include <cstdint>
 
 using namespace lat;
 

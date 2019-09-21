@@ -7,6 +7,7 @@
 
 #ifndef LOCAL_UNPACK
 #include <atomic>
+#include <cstdint>
 #endif
 
 struct CSCCLCTDataWord {

@@ -8,6 +8,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Validation/GlobalDigis/interface/GlobalDigisProducer.h"
+#include <cstdint>
 
 GlobalDigisProducer::GlobalDigisProducer(const edm::ParameterSet &iPSet)
     : fName(""),

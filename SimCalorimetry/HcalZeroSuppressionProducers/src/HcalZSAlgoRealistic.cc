@@ -1,5 +1,6 @@
 #include "HcalZSAlgoRealistic.h"
 #include <iostream>
+#include <cstdint>
 
 HcalZSAlgoRealistic::HcalZSAlgoRealistic(bool mp,
                                          int levelHB,

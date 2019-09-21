@@ -423,5 +423,6 @@ void SiStripPopConFEDErrorsHandlerFromDQM::addErrors() {
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "DQMOffline/CalibTracker/plugins/SiStripPopConDQMEDHarvester.h"
+#include <cstdint>
 using SiStripPopConFEDErrorsDQM = SiStripPopConDQMEDHarvester<SiStripPopConFEDErrorsHandlerFromDQM>;
 DEFINE_FWK_MODULE(SiStripPopConFEDErrorsDQM);

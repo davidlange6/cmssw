@@ -1,5 +1,6 @@
 
 #include "CSCDQM_StripClusterFinder.h"
+#include <cstdint>
 
 namespace cscdqm {
 

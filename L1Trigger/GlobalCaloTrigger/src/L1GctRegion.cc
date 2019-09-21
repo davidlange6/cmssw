@@ -1,4 +1,5 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctRegion.h"
+#include <cstdint>
 
 L1GctRegion::L1GctRegion() : L1CaloRegion() {}
 

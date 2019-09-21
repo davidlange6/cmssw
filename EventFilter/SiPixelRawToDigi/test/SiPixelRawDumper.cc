@@ -1472,4 +1472,5 @@ void SiPixelRawDumper::analyze(const edm::Event &ev, const edm::EventSetup &es) 
 // 17 - reset/resync NOT INCLUDED YET
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiPixelRawDumper);

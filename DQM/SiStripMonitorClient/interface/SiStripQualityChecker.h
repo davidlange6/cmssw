@@ -12,6 +12,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <cstdint>
 
 class TkDetMap;
 class SiStripDetCabling;

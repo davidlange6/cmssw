@@ -11,6 +11,7 @@
 // #include "L1Trigger/L1THGCal/plugins/geometries/HGCalTriggerGeometryV9Imp2.cc"
 
 #include "TEveBoxSet.h"
+#include <cstdint>
 
 class FWHGCalTriggerCellProxyBuilder : public FWL1THGCalProxyTemplate<l1t::HGCalTriggerCell> {
 public:

@@ -2,6 +2,7 @@
 
 // Framework headers
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // INITIALISE STATICS
 const std::string GctFormatTranslateBase::INVALID_BLOCK_HEADER_STR = "UNKNOWN/INVALID BLOCK HEADER";

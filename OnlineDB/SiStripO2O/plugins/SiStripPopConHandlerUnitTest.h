@@ -26,6 +26,7 @@
 
 #include "CondFormats/SiStripObjects/interface/SiStripNoises.h"
 #include "CalibTracker/SiStripCommon/interface/SiStripDetInfoFileReader.h"
+#include <cstdint>
 
 
 namespace popcon{

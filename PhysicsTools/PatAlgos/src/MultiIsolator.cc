@@ -3,6 +3,7 @@
 #include "PhysicsTools/PatAlgos/interface/IsoDepositIsolator.h"
 #include "DataFormats/PatCandidates/interface/Flags.h"
 #include <sstream>
+#include <cstdint>
 
 using namespace pat::helper;
 

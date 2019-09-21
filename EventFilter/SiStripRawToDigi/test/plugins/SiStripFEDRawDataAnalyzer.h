@@ -7,6 +7,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <utility>
 #include <vector>
+#include <cstdint>
 
 /**
    @class SiStripFEDRawDataAnalyzer 

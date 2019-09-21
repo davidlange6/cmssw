@@ -6,6 +6,7 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include <cstdint>
 
 //#define DebugLog
 

@@ -5,6 +5,7 @@
 #include "Fireworks/Core/interface/FWGeometry.h"
 
 #include "TEveBoxSet.h"
+#include <cstdint>
 
 class FWHGCRecHitProxyBuilder : public FWSimpleProxyBuilderTemplate<HGCRecHit> {
 public:

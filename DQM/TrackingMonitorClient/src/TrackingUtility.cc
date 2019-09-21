@@ -2,6 +2,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
+#include <cstdint>
 //
 // Get a list of MEs in a folder
 //

@@ -4,6 +4,7 @@
 #include "L1Trigger/L1TCalorimeter/interface/CaloTools.h"
 
 #include "CaloLayer1Packer.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

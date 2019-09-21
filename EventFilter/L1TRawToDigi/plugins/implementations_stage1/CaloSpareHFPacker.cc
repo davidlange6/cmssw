@@ -3,6 +3,7 @@
 
 #include "CaloSpareHFPacker.h"
 #include "CaloTokens.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

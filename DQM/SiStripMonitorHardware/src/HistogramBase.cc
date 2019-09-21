@@ -3,6 +3,7 @@
 #include "DataFormats/SiStripCommon/interface/ConstantsForHardwareSystems.h"
 
 #include "DQM/SiStripMonitorHardware/interface/HistogramBase.hh"
+#include <cstdint>
 
 void HistogramBase::fillHistogram(HistogramConfig& histogram, double value, double weight) {
   if (histogram.monitorEle)

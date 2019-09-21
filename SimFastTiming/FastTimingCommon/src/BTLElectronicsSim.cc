@@ -4,6 +4,7 @@
 
 #include "CLHEP/Random/RandPoissonQ.h"
 #include "CLHEP/Random/RandGaussQ.h"
+#include <cstdint>
 
 using namespace mtd;
 

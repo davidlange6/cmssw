@@ -39,6 +39,7 @@
 #include "Geometry/CaloGeometry/interface/CaloGeometry.h"
 #include "Geometry/Records/interface/CaloGeometryRecord.h"
 #include "Geometry/HcalCommonData/interface/HcalHitRelabeller.h"
+#include <cstdint>
 
 //
 // class declaration

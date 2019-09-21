@@ -773,4 +773,5 @@ void pat::PATIsolatedTrackProducer::getCaloJetEnergy(const LorentzVector& p4,
 
 using pat::PATIsolatedTrackProducer;
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(PATIsolatedTrackProducer);

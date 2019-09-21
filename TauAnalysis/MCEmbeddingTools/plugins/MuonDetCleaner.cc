@@ -8,6 +8,7 @@
 #include "DataFormats/CSCRecHit/interface/CSCRecHit2D.h"
 #include "DataFormats/MuonDetId/interface/RPCDetId.h"
 #include "DataFormats/RPCRecHit/interface/RPCRecHit.h"
+#include <cstdint>
 
 typedef MuonDetCleaner<CSCDetId, CSCRecHit2D> CSCRecHitColCleaner;
 typedef MuonDetCleaner<DTLayerId, DTRecHit1DPair> DTRecHitColCleaner;

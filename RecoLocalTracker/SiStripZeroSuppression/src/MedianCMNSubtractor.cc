@@ -1,4 +1,5 @@
 #include "RecoLocalTracker/SiStripZeroSuppression/interface/MedianCMNSubtractor.h"
+#include <cstdint>
 
 void MedianCMNSubtractor::subtract(uint32_t detId, uint16_t firstAPV, std::vector<int16_t>& digis) {
   subtract_(detId, firstAPV, digis);

@@ -67,5 +67,6 @@ void SimHitTPAssociationProducer::produce(edm::StreamID, edm::Event &iEvent, con
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/PluginManager/interface/ModuleDef.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(SimHitTPAssociationProducer);

@@ -17,6 +17,7 @@
 #include "Fireworks/Core/interface/FWModelId.h"
 #include "Fireworks/Core/interface/fwLog.h"
 #include "Fireworks/Tracks/plugins/FWTrackResidualDetailView.h"
+#include <cstdint>
 
 using reco::HitPattern;
 using reco::Track;

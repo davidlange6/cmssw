@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "CondFormats/L1TObjects/interface/L1TMuonOverlapParams.h"
+#include <cstdint>
 
 namespace edm {
   class ParameterSet;

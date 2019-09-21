@@ -1,5 +1,6 @@
 #include "CondTools/SiStrip/plugins/SiStripThresholdReader.h"
 #include "CondFormats/DataRecord/interface/SiStripThresholdRcd.h"
+#include <cstdint>
 
 using namespace std;
 using namespace cms;

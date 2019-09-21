@@ -4,6 +4,7 @@
 #define __l1t_emtf_MTF7Header_h__
 
 #include <vector>
+#include <cstdint>
 
 namespace l1t {
   namespace emtf {

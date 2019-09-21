@@ -22,6 +22,7 @@
 
 #include "TFile.h"
 #include "TTree.h"
+#include <cstdint>
 
 //using namespace edm;
 

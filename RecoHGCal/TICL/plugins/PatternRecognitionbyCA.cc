@@ -7,6 +7,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "PatternRecognitionbyCA.h"
 #include "HGCGraph.h"
+#include <cstdint>
 
 using namespace ticl;
 

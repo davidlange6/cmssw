@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "CalibTracker/SiStripDCS/interface/SiStripDetVOffBuilder.h"
+#include <cstdint>
 
 std::vector<int> vectorDate(const int year,
                             const int month,

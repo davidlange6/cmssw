@@ -30,6 +30,7 @@
 #include "TLatex.h"
 #include "TProfile.h"
 #include "TPaveLabel.h"
+#include <cstdint>
 
 //functions for correct representation of data in summary and plot
 namespace HcalObjRepresent {

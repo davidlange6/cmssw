@@ -1,4 +1,5 @@
 #include "CondTools/SiStrip/plugins/SiStripPedestalsReader.h"
+#include <cstdint>
 
 using namespace std;
 using namespace cms;

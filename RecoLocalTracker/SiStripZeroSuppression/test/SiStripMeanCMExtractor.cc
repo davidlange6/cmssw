@@ -44,6 +44,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripRawDigi.h"
 #include "CondFormats/SiStripObjects/interface/SiStripPedestals.h"
 #include "CondFormats/DataRecord/interface/SiStripPedestalsRcd.h"
+#include <cstdint>
 
 typedef std::map<uint32_t, std::vector<float>> CMMap;
 

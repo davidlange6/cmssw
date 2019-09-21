@@ -22,7 +22,6 @@
 #include <string>
 #include <vector>
 
-#include <boost/cstdint.hpp>
 
 // user include files
 
@@ -148,7 +147,7 @@ const bool L1GtConditionEvaluation::checkThreshold(const Type1 &threshold,
 // check if a bit with a given number is set in a mask
 template <class Type1>
 const bool L1GtConditionEvaluation::checkBit(const Type1 &mask, const unsigned int bitNumber) const {
-  boost::uint64_t oneBit = 1ULL;
+  uint64_t oneBit = 1ULL;
 
   if (bitNumber >= (sizeof(oneBit) * 8)) {
     if (m_verbosity) {

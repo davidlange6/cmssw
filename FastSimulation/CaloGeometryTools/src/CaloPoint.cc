@@ -1,5 +1,6 @@
 //FAMOS headers
 #include "FastSimulation/CaloGeometryTools/interface/CaloPoint.h"
+#include <cstdint>
 
 std::ostream& operator<<(std::ostream& ost, const CaloPoint& cid) {
   ost << " DetId ";

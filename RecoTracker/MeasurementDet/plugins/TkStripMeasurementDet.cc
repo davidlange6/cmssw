@@ -12,6 +12,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
 #include <cassert>
+#include <cstdint>
 
 TkStripMeasurementDet::TkStripMeasurementDet(const GeomDet* gdet, StMeasurementConditionSet& conditions)
     : MeasurementDet(gdet), index_(-1), theDetConditions(&conditions) {

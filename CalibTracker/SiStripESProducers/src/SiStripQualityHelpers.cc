@@ -4,6 +4,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripFedCabling.h"
 
 #include "CalibTracker/SiStripESProducers/interface/SiStripQualityHelpers.h"
+#include <cstdint>
 
 using dqm::harvesting::DQMStore;
 using dqm::harvesting::MonitorElement;

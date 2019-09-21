@@ -19,6 +19,7 @@
 #include "Geometry/HGCalCommonData/interface/HGCalParameters.h"
 
 #include <unordered_map>
+#include <cstdint>
 
 class HGCalDDDConstants {
 public:

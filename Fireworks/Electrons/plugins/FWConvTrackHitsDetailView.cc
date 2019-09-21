@@ -39,6 +39,7 @@
 #include "Fireworks/Electrons/plugins/FWConvTrackHitsDetailView.h"
 #include "DataFormats/EgammaCandidates/interface/Conversion.h"
 #include "Fireworks/Tracks/interface/TrackUtils.h"
+#include <cstdint>
 
 namespace {
   void (FWConvTrackHitsDetailView::*foo)();

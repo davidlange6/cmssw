@@ -15,6 +15,7 @@
 #include "CondFormats/CTPPSReadoutObjects/interface/TotemSymbId.h"
 
 #include <map>
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

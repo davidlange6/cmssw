@@ -5,6 +5,7 @@
 #include "DataFormats/HGCDigi/interface/HGCDigiCollections.h"
 #include "DataFormats/ForwardDetId/interface/HGCScintillatorDetId.h"
 #include "SimCalorimetry/HGCalSimAlgos/interface/HGCalSciNoiseMap.h"
+#include <cstdint>
 
 class HGCHEbackDigitizer : public HGCDigitizerBase<HGCalDataFrame> {
 public:

@@ -18,6 +18,7 @@
 
 #include "CondFormats/SiPixelObjects/interface/SiPixelGainCalibrationForHLT.h"
 #include "CondFormats/DataRecord/interface/SiPixelGainCalibrationForHLTSimRcd.h"
+#include <cstdint>
 
 class SiPixelGainCalibrationForHLTSimService
     : public SiPixelGainCalibrationServicePayloadGetter<SiPixelGainCalibrationForHLT,

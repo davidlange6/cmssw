@@ -8,6 +8,7 @@
 #include <algorithm>
 
 #include "SiStripFakeAPVParameters.h"
+#include <cstdint>
 
 SiStripApvGainBuilderFromTag::SiStripApvGainBuilderFromTag(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<uint32_t>("printDebug", 1)), pset_(iConfig) {

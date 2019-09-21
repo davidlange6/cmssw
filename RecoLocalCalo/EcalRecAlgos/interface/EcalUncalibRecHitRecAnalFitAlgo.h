@@ -18,6 +18,7 @@
 #include "TMinuit.h"
 #include "TGraph.h"
 #include "TF1.h"
+#include <cstdint>
 
 template <class C>
 class EcalUncalibRecHitRecAnalFitAlgo : public EcalUncalibRecHitRecAbsAlgo<C> {

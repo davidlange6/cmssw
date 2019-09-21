@@ -1,6 +1,7 @@
 #include "SimDataFormats/TrackerDigiSimLink/interface/StripCompactDigiSimLinks.h"
 
 #include <algorithm>
+#include <cstdint>
 
 StripCompactDigiSimLinks::Links StripCompactDigiSimLinks::getLinks(const StripCompactDigiSimLinks::key_type &key) const {
   std::vector<TrackRecord>::const_iterator last = trackRecords_.end();

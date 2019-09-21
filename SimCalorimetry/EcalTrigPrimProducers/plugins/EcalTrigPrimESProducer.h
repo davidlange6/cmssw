@@ -42,6 +42,7 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGWeightIdMap.h"
 
 #include "zlib.h"
+#include <cstdint>
 
 //
 // class declaration

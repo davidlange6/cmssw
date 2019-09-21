@@ -46,6 +46,7 @@
 #include <cstdlib>
 #include <utility>
 #include <map>
+#include <cstdint>
 
 using namespace edm;
 

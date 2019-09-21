@@ -4,6 +4,7 @@
 #include "boost/ptr_container/ptr_vector.hpp"
 #include "DataFormats/PatCandidates/interface/EventHypothesis.h"
 #include "CommonTools/Utils/interface/StringCutObjectSelector.h"
+#include <cstdint>
 
 namespace pat {
   namespace eventhypothesis {

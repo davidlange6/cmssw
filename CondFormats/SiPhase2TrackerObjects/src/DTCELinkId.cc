@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include <limits>
+#include <cstdint>
 
 DTCELinkId::DTCELinkId() noexcept
     : elink_id_(std::numeric_limits<decltype(elink_id())>::max()),

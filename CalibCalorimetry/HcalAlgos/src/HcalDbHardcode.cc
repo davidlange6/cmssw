@@ -13,6 +13,7 @@
 #include "CalibFormats/HcalObjects/interface/HcalSiPMType.h"
 #include "DataFormats/HcalDigi/interface/HcalQIENum.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 HcalDbHardcode::HcalDbHardcode()
     :                                              //"generic" set of conditions

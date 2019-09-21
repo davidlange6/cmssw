@@ -15,6 +15,7 @@
 #include "DataFormats/TrackerRecHit2D/interface/FastMatchedTrackerRecHit.h"
 
 #include "DataFormats/SiStripDetId/interface/SiStripDetId.h"
+#include <cstdint>
 
 namespace helper {
 

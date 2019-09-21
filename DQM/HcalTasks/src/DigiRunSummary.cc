@@ -1,4 +1,5 @@
 #include "DQM/HcalTasks/interface/DigiRunSummary.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace constants;

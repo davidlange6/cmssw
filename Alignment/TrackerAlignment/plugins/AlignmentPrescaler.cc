@@ -248,4 +248,5 @@ int AlignmentPrescaler::layerFromId(const DetId& id, const TrackerTopology* tTop
 // ========= MODULE DEF ==============
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(AlignmentPrescaler);

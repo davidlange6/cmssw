@@ -2,6 +2,7 @@
 #define DQM_SiStripCommissioningSources_ApvTimingTask_h
 
 #include "DQM/SiStripCommissioningSources/interface/CommissioningTask.h"
+#include <cstdint>
 
 /**
    @class ApvTimingTask

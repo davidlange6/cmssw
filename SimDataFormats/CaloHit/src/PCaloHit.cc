@@ -1,5 +1,6 @@
 #include "SimDataFormats/CaloHit/interface/PCaloHit.h"
 #include <iostream>
+#include <cstdint>
 
 PCaloHit::PCaloHit(float eEM, float eHad, float t, int i, uint16_t d) : myTime(t), myItra(i), myDepth(d) {
   myEnergy = eEM + eHad;

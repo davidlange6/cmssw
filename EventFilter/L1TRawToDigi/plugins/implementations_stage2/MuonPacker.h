@@ -3,6 +3,7 @@
 
 #include <map>
 #include "EventFilter/L1TRawToDigi/interface/Packer.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

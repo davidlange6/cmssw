@@ -20,6 +20,7 @@
 #include <vector>
 #include <ctime>
 #include <cmath>
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 //

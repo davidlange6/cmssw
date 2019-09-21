@@ -261,5 +261,6 @@ void FastTimeGeometry::getSummary(CaloSubdetectorGeometry::TrVec& trVector,
 }
 
 #include "FWCore/Utilities/interface/typelookup.h"
+#include <cstdint>
 
 TYPELOOKUP_DATA_REG(FastTimeGeometry);

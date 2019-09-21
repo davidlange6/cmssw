@@ -6,6 +6,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
 #include "DataFormats/EcalDetId/interface/EBDetId.h"
+#include <cstdint>
 
 /** \class HodoscopeDetId
  *  Hodoscope fiber identifier class for the ECAL TBH4 setup

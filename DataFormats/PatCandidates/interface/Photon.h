@@ -25,6 +25,7 @@
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
 #include "DataFormats/Common/interface/AtomicPtrCache.h"
+#include <cstdint>
 
 // Define typedefs for convenience
 namespace pat {

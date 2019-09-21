@@ -19,6 +19,7 @@
 #include "DQM/SiStripMonitorClient/interface/SiStripTrackerMapCreator.h"
 
 #include <iostream>
+#include <cstdint>
 
 SiStripTrackerMapCreator::SiStripTrackerMapCreator(const edm::EventSetup& eSetup) : eSetup_{eSetup} {
   eSetup_.get<SiStripDetCablingRcd>().get(detCabling_);

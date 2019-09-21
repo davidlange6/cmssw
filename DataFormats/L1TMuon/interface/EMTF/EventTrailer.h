@@ -1,3 +1,4 @@
+#include <cstdint>
 // Class for Event Record Trailer
 
 #ifndef __l1t_emtf_EventTrailer_h__

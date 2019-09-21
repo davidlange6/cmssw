@@ -2,6 +2,7 @@
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticleFwd.h"
 #include "PhysicsTools/HepMCCandAlgos/interface/GenParticlesHelper.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

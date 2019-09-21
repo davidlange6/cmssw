@@ -11,6 +11,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cstdint>
 
 //max collected updates per lumi
 #define MAXUPDATES 0xffffffff

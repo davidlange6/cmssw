@@ -1,4 +1,5 @@
 #include "EventFilter/RPCRawToDigi/interface/RPCTwinMuxRecord.h"
+#include <cstdint>
 
 namespace rpctwinmux {
 

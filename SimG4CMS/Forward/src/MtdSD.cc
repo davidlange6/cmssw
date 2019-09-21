@@ -22,6 +22,7 @@
 #include "G4StepPoint.hh"
 
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 //-------------------------------------------------------------------

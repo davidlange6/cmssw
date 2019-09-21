@@ -10,6 +10,7 @@
 #include "DataFormats/MuonDetId/interface/MuonSubdetId.h"
 
 #include "L1Trigger/L1TMuonOverlap/interface/OMTFConfiguration.h"
+#include <cstdint>
 
 ///////////////////////////////////////////////
 ///////////////////////////////////////////////

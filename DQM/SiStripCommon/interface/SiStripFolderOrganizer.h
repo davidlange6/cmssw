@@ -22,6 +22,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include <string>
+#include <cstdint>
 
 class TrackerTopology;
 class SiStripFolderOrganizer {

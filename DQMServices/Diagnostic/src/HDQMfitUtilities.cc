@@ -1,4 +1,5 @@
 #include "DQMServices/Diagnostic/interface/HDQMfitUtilities.h"
+#include <cstdint>
 
 namespace HDQMUtil {
   //-----------------------------------------------------------------------------------------------

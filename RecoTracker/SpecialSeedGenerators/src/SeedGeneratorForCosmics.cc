@@ -4,6 +4,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "TrackingTools/Records/interface/TransientRecHitRecord.h"
 #include "RecoTracker/TkSeedGenerator/interface/FastHelix.h"
+#include <cstdint>
 void SeedGeneratorForCosmics::init(const SiStripRecHit2DCollection& collstereo,
                                    const SiStripRecHit2DCollection& collrphi,
                                    const SiStripMatchedRecHit2DCollection& collmatched,

@@ -1,4 +1,5 @@
 #include "DQM/L1TMonitor/interface/L1TMP7ZeroSupp.h"
+#include <cstdint>
 
 const unsigned int L1TMP7ZeroSupp::maxMasks_ = 16;
 

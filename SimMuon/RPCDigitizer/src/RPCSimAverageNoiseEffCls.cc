@@ -37,6 +37,7 @@
 #include "CLHEP/Random/RandPoissonQ.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using namespace std;
 

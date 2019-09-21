@@ -5,6 +5,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "CalibFormats/SiStripObjects/interface/SiStripGain.h"
+#include <cstdint>
 
 class SiStripGainFactor {
 public:

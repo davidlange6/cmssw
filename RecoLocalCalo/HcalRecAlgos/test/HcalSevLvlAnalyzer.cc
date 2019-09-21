@@ -33,6 +33,7 @@
 #include "DataFormats/HcalDetId/interface/HcalGenericDetId.h"
 #include "RecoLocalCalo/HcalRecAlgos/interface/HcalSeverityLevelComputer.h"
 #include "RecoLocalCalo/HcalRecAlgos/interface/HcalSeverityLevelComputerRcd.h"
+#include <cstdint>
 //
 // class decleration
 //

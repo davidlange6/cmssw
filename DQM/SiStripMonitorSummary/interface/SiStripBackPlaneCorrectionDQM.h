@@ -5,6 +5,7 @@
 
 #include "CondFormats/DataRecord/interface/SiStripCondDataRecords.h"
 #include "CondFormats/SiStripObjects/interface/SiStripBackPlaneCorrection.h"
+#include <cstdint>
 
 class SiStripBackPlaneCorrectionDQM : public SiStripBaseCondObjDQM {
 public:

@@ -1,4 +1,5 @@
 #include "L1Trigger/L1THGCal/interface/concentrator/HGCalConcentratorBestChoiceImpl.h"
+#include <cstdint>
 
 constexpr unsigned HGCalConcentratorBestChoiceImpl::kNDataSize_;
 constexpr uint32_t HGCalConcentratorBestChoiceImpl::kWaferOffset_;

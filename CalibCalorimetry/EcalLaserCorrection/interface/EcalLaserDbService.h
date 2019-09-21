@@ -20,6 +20,7 @@
 #include "CondFormats/EcalObjects/interface/EcalLaserAPDPNRatiosRef.h"
 #include "CondFormats/EcalObjects/interface/EcalLaserAPDPNRatios.h"
 #include "CondFormats/EcalObjects/interface/EcalLinearCorrections.h"
+#include <cstdint>
 
 class EcalLaserDbService {
 public:

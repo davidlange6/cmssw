@@ -36,6 +36,7 @@
 #include "RecoTracker/Record/interface/CkfComponentsRecord.h"
 #include "TrackingTools/MeasurementDet/interface/LayerMeasurements.h"
 #include "RecoLocalTracker/ClusterParameterEstimator/interface/PixelClusterParameterEstimator.h"
+#include <cstdint>
 
 ///commnet
 

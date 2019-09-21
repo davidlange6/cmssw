@@ -5,6 +5,7 @@
 #include <CondFormats/EcalObjects/interface/EcalTPGPedestals.h>
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 EcalFenixLinearizer::EcalFenixLinearizer(bool famos) : famos_(famos), init_(false) {}
 

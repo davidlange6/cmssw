@@ -13,6 +13,7 @@
 
 #include "CondFormats/EcalObjects/interface/EcalTPGTowerStatus.h"
 #include "CondFormats/EcalObjects/interface/EcalTPGStripStatus.h"
+#include <cstdint>
 
 namespace ecaldqm {
 

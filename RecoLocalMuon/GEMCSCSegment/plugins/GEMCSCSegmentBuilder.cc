@@ -27,6 +27,7 @@
 #include <DataFormats/CSCRecHit/interface/CSCSegment.h>
 #include <DataFormats/GEMRecHit/interface/GEMRecHit.h>
 #include <DataFormats/GEMRecHit/interface/GEMRecHitCollection.h>
+#include <cstdint>
 
 GEMCSCSegmentBuilder::GEMCSCSegmentBuilder(const edm::ParameterSet& ps)
     :  // Ask factory to build this algorithm, giving it appropriate ParameterSet

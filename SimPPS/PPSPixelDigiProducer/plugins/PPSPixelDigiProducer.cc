@@ -69,6 +69,7 @@
 #include "FWCore/Utilities/interface/RandomNumberGenerator.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include "CLHEP/Random/RandomEngine.h"
+#include <cstdint>
 
 namespace CLHEP {
   class HepRandomEngine;

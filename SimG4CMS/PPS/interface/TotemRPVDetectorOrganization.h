@@ -2,6 +2,7 @@
 #define TotemRPVDetectorOrganization_h
 
 #include "G4Step.hh"
+#include <cstdint>
 
 class TotemRPVDetectorOrganization {
 public:

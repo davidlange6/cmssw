@@ -6,6 +6,7 @@
 #include "DataFormats/SiStripCluster/interface/SiStripCluster.h"
 #include <algorithm>
 #include <numeric>
+#include <cstdint>
 
 class SiStripNoises;
 class SiStripGain;

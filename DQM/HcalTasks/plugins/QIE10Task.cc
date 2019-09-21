@@ -2,6 +2,7 @@
 #include "DQM/HcalTasks/interface/QIE10Task.h"
 #include "FWCore/Framework/interface/Run.h"
 #include <map>
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

@@ -16,6 +16,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "SimG4CMS/PPS/interface/PPSPixelG4Hit.h"
 #include <iostream>
+#include <cstdint>
 
 //
 // constructors and destructor

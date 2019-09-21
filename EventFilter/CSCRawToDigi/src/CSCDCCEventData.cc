@@ -16,6 +16,7 @@
 bool CSCDCCEventData::debug = false;
 #else
 #include <atomic>
+#include <cstdint>
 std::atomic<bool> CSCDCCEventData::debug{false};
 #endif
 

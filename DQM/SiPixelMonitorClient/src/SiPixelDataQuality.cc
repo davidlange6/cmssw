@@ -55,6 +55,7 @@
 
 #include <cstdlib>  // for free() - Root can allocate with malloc() - sigh...
 #include <fstream>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

@@ -11,6 +11,7 @@
 
 #include "CLHEP/Random/RandFlat.h"
 #include "CLHEP/Random/RandGauss.h"
+#include <cstdint>
 
 class SiStripNoisesBuilder : public edm::EDAnalyzer {
 public:

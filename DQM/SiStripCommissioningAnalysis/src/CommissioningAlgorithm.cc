@@ -5,6 +5,7 @@
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include "TProfile.h"
 #include <iomanip>
+#include <cstdint>
 
 // ----------------------------------------------------------------------------
 //

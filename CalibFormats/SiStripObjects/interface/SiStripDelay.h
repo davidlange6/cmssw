@@ -29,6 +29,7 @@
 #include <boost/unordered_map.hpp>
 #include <memory>
 #include <vector>
+#include <cstdint>
 
 class SiStripDelay {
 public:

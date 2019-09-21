@@ -25,6 +25,7 @@
 
 #include "SimDataFormats/GeneratorProducts/interface/HepMCProduct.h"
 #include "HepMC/GenEvent.h"
+#include <cstdint>
 
 STFilter::STFilter(const edm::ParameterSet& iConfig)
     : hepMCProductTag_(

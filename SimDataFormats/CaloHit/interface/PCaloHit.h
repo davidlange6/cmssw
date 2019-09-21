@@ -73,6 +73,7 @@ protected:
 };
 
 #include <iosfwd>
+#include <cstdint>
 std::ostream &operator<<(std::ostream &, const PCaloHit &);
 
 #endif  // _SimDataFormats_SimCaloHit_PCaloHit_h_

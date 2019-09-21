@@ -9,6 +9,7 @@
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
 #include "G4LogicalVolumeStore.hh"
 #include <iostream>
+#include <cstdint>
 
 //#define castornumschemedebug
 

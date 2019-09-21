@@ -8,6 +8,7 @@
 #include "DQM/EcalCommon/interface/FEFlags.h"
 
 #include "DataFormats/EcalDetId/interface/EcalElectronicsId.h"
+#include <cstdint>
 
 namespace ecaldqm {
 

@@ -10,6 +10,7 @@
 #include <DataFormats/EcalDetId/interface/EEDetId.h>
 #include <DataFormats/EcalDetId/interface/ESDetId.h>
 #include "CalibCalorimetry/EcalTrivialCondModules/interface/EcalTrivialConditionRetriever.h"
+#include <cstdint>
 
 EcalDigisValidation::EcalDigisValidation(const edm::ParameterSet& ps)
     : HepMCToken_(consumes<edm::HepMCProduct>(edm::InputTag(ps.getParameter<std::string>("moduleLabelMC")))),

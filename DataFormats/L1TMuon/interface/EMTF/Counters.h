@@ -3,6 +3,7 @@
 #ifndef __l1t_emtf_Counters_h__
 #define __l1t_emtf_Counters_h__
 
+#include <cstdint>
 
 namespace l1t {
   namespace emtf {

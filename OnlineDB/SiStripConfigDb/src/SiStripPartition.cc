@@ -5,6 +5,7 @@
 #include "OnlineDB/SiStripConfigDb/interface/SiStripConfigDb.h"
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
 using namespace sistrip;
 

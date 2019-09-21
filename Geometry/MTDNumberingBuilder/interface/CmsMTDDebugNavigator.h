@@ -5,6 +5,7 @@
 #include "Geometry/MTDNumberingBuilder/interface/GeometricTimingDetExtra.h"
 
 #include <vector>
+#include <cstdint>
 
 class GeometricTimingDet;
 /**

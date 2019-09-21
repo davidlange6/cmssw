@@ -11,6 +11,7 @@
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBufferComponents.h"
 
 #include "FWCore/Utilities/interface/GCC11Compatibility.h"
+#include <cstdint>
 
 namespace sistrip {
   constexpr uint16_t BITS_PER_BYTE = 8;

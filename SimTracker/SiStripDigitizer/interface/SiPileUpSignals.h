@@ -5,6 +5,7 @@
 #include <vector>
 #include "SimDataFormats/TrackingHit/interface/PSimHit.h"
 #include "FWCore/Utilities/interface/Map.h"
+#include <cstdint>
 
 class SimHit;
 /**

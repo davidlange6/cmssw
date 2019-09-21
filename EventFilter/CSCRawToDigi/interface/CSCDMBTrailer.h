@@ -9,6 +9,7 @@
 #include "DataFormats/CSCDigi/interface/CSCDMBStatusDigi.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCVDMBTrailerFormat.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDMBHeader.h"
+#include <cstdint>
 
 struct CSCDMBTrailer2005;
 struct CSCDMBTrailer2013;

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <cstdint>
 
 using namespace std;
 using namespace sistrip;

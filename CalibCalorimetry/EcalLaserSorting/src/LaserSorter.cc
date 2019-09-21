@@ -31,6 +31,7 @@
 #include "DataFormats/Provenance/interface/LuminosityBlockID.h"
 #include "DataFormats/Provenance/interface/Timestamp.h"
 #include "EventFilter/EcalRawToDigi/interface/MatacqRawEvent.h"
+#include <cstdint>
 
 using namespace std;
 

@@ -10,6 +10,7 @@
 bool CSCCLCTData::debug = false;
 #else
 #include <atomic>
+#include <cstdint>
 std::atomic<bool> CSCCLCTData::debug{false};
 #endif
 

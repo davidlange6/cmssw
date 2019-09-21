@@ -2,6 +2,7 @@
 #define HcalLogicalMapGenerator_h
 
 #include "CondFormats/HcalObjects/interface/HcalLogicalMap.h"
+#include <cstdint>
 class HcalTopology;
 
 class HcalLogicalMapGenerator {

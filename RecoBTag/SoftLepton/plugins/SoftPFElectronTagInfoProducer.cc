@@ -24,6 +24,7 @@
 #include <cmath>
 #include "RecoEgamma/EgammaTools/interface/ConversionTools.h"
 #include "DataFormats/PatCandidates/interface/Electron.h"
+#include <cstdint>
 
 SoftPFElectronTagInfoProducer::SoftPFElectronTagInfoProducer(const edm::ParameterSet& conf) {
   token_jets = consumes<edm::View<reco::Jet> >(conf.getParameter<edm::InputTag>("jets"));

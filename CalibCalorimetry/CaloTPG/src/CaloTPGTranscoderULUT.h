@@ -7,6 +7,7 @@
 #include "CalibFormats/CaloTPG/interface/CaloTPGTranscoder.h"
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
 #include "CondFormats/HcalObjects/interface/HcalLutMetadata.h"
+#include <cstdint>
 
 /** \class CaloTPGTranscoderULUT
   *  

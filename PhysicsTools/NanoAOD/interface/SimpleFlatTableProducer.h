@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <boost/ptr_container/ptr_vector.hpp>
+#include <cstdint>
 
 template <typename T, typename TProd>
 class SimpleFlatTableProducerBase : public edm::stream::EDProducer<> {

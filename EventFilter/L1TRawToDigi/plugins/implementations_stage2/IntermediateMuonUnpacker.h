@@ -4,6 +4,7 @@
 #include "EventFilter/L1TRawToDigi/interface/Unpacker.h"
 #include <map>
 #include "DataFormats/L1Trigger/interface/Muon.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

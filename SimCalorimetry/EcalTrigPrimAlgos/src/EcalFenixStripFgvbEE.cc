@@ -3,6 +3,7 @@
 #include <DataFormats/EcalDigi/interface/EEDataFrame.h>
 #include <SimCalorimetry/EcalTrigPrimAlgos/interface/EcalFenixStripFgvbEE.h>
 #include <iostream>
+#include <cstdint>
 
 EcalFenixStripFgvbEE::EcalFenixStripFgvbEE() {
   identif_ = 0;

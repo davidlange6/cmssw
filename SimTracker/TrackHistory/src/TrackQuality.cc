@@ -32,6 +32,7 @@
 #include "SimTracker/TrackerHitAssociation/interface/TrackerHitAssociator.h"
 
 #include "SimTracker/TrackHistory/interface/TrackQuality.h"
+#include <cstdint>
 
 // #define DEBUG_TRACK_QUALITY
 

@@ -53,6 +53,7 @@
 //***************************************************/
 
 #include <DQMServices/Core/interface/DQMEDAnalyzer.h>
+#include <cstdint>
 
 class SiStripDCSStatus;
 class GenericTriggerEventFlag;

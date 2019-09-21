@@ -81,6 +81,7 @@ typedef CalibratedPhotonProducerRun2T<reco::Photon> CalibratedPhotonProducerRun2
 typedef CalibratedPhotonProducerRun2T<pat::Photon> CalibratedPatPhotonProducerRun2;
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(CalibratedPhotonProducerRun2);
 DEFINE_FWK_MODULE(CalibratedPatPhotonProducerRun2);

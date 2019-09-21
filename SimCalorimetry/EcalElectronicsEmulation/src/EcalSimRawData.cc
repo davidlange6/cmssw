@@ -14,6 +14,7 @@
 #include <fstream>  //used for debugging
 #include <iomanip>
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

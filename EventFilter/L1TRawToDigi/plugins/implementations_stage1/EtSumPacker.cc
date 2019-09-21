@@ -3,6 +3,7 @@
 
 #include "CaloTokens.h"
 #include "EtSumPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

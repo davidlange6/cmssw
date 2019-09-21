@@ -6,6 +6,7 @@
 #include "CaloCollections.h"
 #include "CaloTowerUnpacker.h"
 #include "L1TStage2Layer2Constants.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

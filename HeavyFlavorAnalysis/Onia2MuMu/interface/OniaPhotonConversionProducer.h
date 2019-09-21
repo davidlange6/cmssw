@@ -28,6 +28,7 @@
 #include "CommonTools/Utils/interface/StringCutObjectSelector.h"
 
 #include <vector>
+#include <cstdint>
 
 /**
    Select photon conversions and produce a conversion candidate collection

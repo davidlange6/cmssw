@@ -3,6 +3,7 @@
 #include "TrackingTools/TransientTrackingRecHit/interface/RecHitComparatorByPosition.h"
 
 #include "TrackingTools/TrajectoryCleaning/src/OtherHashMaps.h"
+#include <cstdint>
 
 //#define DEBUG_PRINT(X) X
 #define DEBUG_PRINT(X)

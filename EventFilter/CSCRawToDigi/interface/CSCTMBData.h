@@ -19,6 +19,7 @@
 #include <boost/dynamic_bitset.hpp>
 #ifndef LOCAL_UNPACK
 #include <atomic>
+#include <cstdint>
 #endif
 
 class CSCTMBData {

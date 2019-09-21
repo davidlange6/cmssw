@@ -35,6 +35,7 @@ Description: Filter to select events with activity in the muon barrel system
 // c++ header files
 #include <bitset>
 #include <string>
+#include <cstdint>
 
 class DTGeometry;
 class L1MuRegionalCand;

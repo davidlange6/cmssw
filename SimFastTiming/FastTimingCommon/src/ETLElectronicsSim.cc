@@ -2,6 +2,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "CLHEP/Random/RandGaussQ.h"
+#include <cstdint>
 
 using namespace mtd;
 

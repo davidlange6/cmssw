@@ -18,6 +18,7 @@
 #include <limits>
 #include <stdexcept>
 #include "EventFilter/EcalTBRawToDigi/src/MatacqRawEvent.h"
+#include <cstdint>
 
 const MatacqTBRawEvent::field32spec_t MatacqTBRawEvent::fov32 = {0, 0x000000F0};
 const MatacqTBRawEvent::field32spec_t MatacqTBRawEvent::fedId32 = {0, 0x000FFF00};

@@ -7,6 +7,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctHfEtSumsLut.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 L1GctGlobalHfSumAlgos::L1GctGlobalHfSumAlgos(const std::vector<L1GctWheelJetFpga*>& wheelJetFpga)
     : L1GctProcessor(),

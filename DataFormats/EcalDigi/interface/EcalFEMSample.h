@@ -2,6 +2,7 @@
 #define DIGIECAL_ECALFEMSAMPLE_H
 
 #include <ostream>
+#include <cstdint>
 
 /** \class EcalFEMSample
  *  Simple container packer/unpacker for a single sample from the FEM electronics

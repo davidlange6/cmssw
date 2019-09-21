@@ -33,6 +33,7 @@
 #include "CondFormats/L1TObjects/interface/L1GtTriggerMask.h"
 #include "CondFormats/DataRecord/interface/L1GtTriggerMaskAlgoTrigRcd.h"
 #include "CondFormats/DataRecord/interface/L1GtTriggerMaskTechTrigRcd.h"
+#include <cstdint>
 
 // constructor(s)
 L1GlobalTriggerRecordProducer::L1GlobalTriggerRecordProducer(const edm::ParameterSet& parSet) {

@@ -29,6 +29,7 @@
 #include "TFile.h"
 #include "TH1F.h"
 #include "TH1.h"
+#include <cstdint>
 
 template <typename T>
 class ExpressionHisto {

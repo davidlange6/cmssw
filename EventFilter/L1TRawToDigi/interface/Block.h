@@ -6,6 +6,7 @@
 
 #include "EventFilter/L1TRawToDigi/interface/AMCSpec.h"
 #include "DataFormats/L1Trigger/interface/BxBlock.h"
+#include <cstdint>
 
 namespace l1t {
   enum block_t { MP7 = 0, CTP7, MTF7 };

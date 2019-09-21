@@ -47,6 +47,7 @@
 
 #include "CondFormats/L1TObjects/interface/L1GtBoardMaps.h"
 #include "CondFormats/DataRecord/interface/L1GtBoardMapsRcd.h"
+#include <cstdint>
 
 // constructor(s)
 L1GTEvmDigiToRaw::L1GTEvmDigiToRaw(const edm::ParameterSet& pSet)

@@ -58,6 +58,7 @@
 #include "CalibTracker/Records/interface/SiStripDetCablingRcd.h"
 #include "CondFormats/SiStripObjects/interface/FedChannelConnection.h"
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
+#include <cstdint>
 //
 // class decleration
 //

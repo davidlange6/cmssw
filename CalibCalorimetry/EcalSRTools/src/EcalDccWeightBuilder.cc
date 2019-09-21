@@ -33,6 +33,7 @@
 #endif  //DB_WRITE_SUPPORT defined
 
 #include "CalibCalorimetry/EcalSRTools/src/PasswordReader.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

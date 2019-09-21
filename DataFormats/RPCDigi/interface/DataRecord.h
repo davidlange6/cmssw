@@ -4,6 +4,7 @@
 #include <string>
 #include <bitset>
 #include <sstream>
+#include <cstdint>
 
 namespace rpcrawtodigi {
   class DataRecord {

@@ -2,6 +2,7 @@
 #include <cassert>
 
 #include <iostream>
+#include <cstdint>
 
 GsfCombinedMaterialEffectsUpdator::GsfCombinedMaterialEffectsUpdator(GsfMaterialEffectsUpdator& msUpdator,
                                                                      GsfMaterialEffectsUpdator& elUpdator)

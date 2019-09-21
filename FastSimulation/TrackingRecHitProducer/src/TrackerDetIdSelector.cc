@@ -1,6 +1,7 @@
 #include "FastSimulation/TrackingRecHitProducer/interface/TrackerDetIdSelector.h"
 
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
+#include <cstdint>
 
 #define DETIDFCT(NAME) NAME, [](const TrackerTopology& trackerTopology, const DetId& detId) -> int
 

@@ -14,6 +14,7 @@
 
 #include "FWCore/ParameterSet/interface/ConfigurationDescriptions.h"
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
+#include <cstdint>
 
 EcalRawToDigi::EcalRawToDigi(edm::ParameterSet const& conf)
     :

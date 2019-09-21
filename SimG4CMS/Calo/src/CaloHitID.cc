@@ -5,6 +5,7 @@
 #include "SimG4CMS/Calo/interface/CaloHitID.h"
 
 #include <iomanip>
+#include <cstdint>
 
 CaloHitID::CaloHitID(uint32_t unitID, double timeSlice, int trackID, uint16_t depth, float tSlice, bool ignoreTkID)
     : timeSliceUnit(tSlice), ignoreTrackID(ignoreTkID) {

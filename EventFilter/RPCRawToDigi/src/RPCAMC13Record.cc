@@ -1,4 +1,5 @@
 #include "EventFilter/RPCRawToDigi/interface/RPCAMC13Record.h"
+#include <cstdint>
 
 namespace rpcamc13 {
 

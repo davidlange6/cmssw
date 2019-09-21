@@ -1,6 +1,7 @@
 #include "DataFormats/FTLRecHit/interface/FTLUncalibratedRecHit.h"
 #include <cmath>
 #include <limits>
+#include <cstdint>
 
 FTLUncalibratedRecHit::FTLUncalibratedRecHit()
     : amplitude_(-1.f, -1.f),

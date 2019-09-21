@@ -9,6 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <cstdint>
 
 popcon::EcalTPGLinPed::EcalTPGLinPed(const edm::ParameterSet& ps)
     : m_name(ps.getUntrackedParameter<std::string>("name", "EcalTPGLinPedHandler")) {

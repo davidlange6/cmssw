@@ -30,6 +30,7 @@
 #include "FWCore/Framework/interface/Event.h"
 
 #include "FWCore/Framework/interface/EventSetup.h"
+#include <cstdint>
 // Constructors
 //
 SiPixelRecHitModule::SiPixelRecHitModule() : id_(0) {}

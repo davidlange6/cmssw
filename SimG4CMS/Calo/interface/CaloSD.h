@@ -28,6 +28,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <cstdint>
 
 class G4Step;
 class G4HCofThisEvent;

@@ -136,4 +136,5 @@ void ClusterSummaryProducer::beginStream(edm::StreamID) {
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(ClusterSummaryProducer);

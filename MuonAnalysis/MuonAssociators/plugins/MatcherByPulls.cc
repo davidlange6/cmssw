@@ -35,6 +35,7 @@
 #include "CommonTools/Utils/interface/StringCutObjectSelector.h"
 
 #include "MuonAnalysis/MuonAssociators/interface/MatcherByPullsAlgorithm.h"
+#include <cstdint>
 
 /*     ____ _                     _           _                 _   _
  *    / ___| | __ _ ___ ___    __| | ___  ___| | __ _ _ __ __ _| |_(_) ___  _ __

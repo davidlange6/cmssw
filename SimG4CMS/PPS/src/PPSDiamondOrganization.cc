@@ -11,6 +11,7 @@
 #include "G4Step.hh"
 
 #include <iostream>
+#include <cstdint>
 
 //******************************************************************** Constructor and destructor
 

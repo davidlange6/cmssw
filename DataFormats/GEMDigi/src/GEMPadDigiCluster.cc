@@ -1,5 +1,6 @@
 #include "DataFormats/GEMDigi/interface/GEMPadDigiCluster.h"
 #include <iostream>
+#include <cstdint>
 
 GEMPadDigiCluster::GEMPadDigiCluster(std::vector<uint16_t> pads, int bx) : v_(pads), bx_(bx) {}
 

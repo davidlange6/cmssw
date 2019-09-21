@@ -36,6 +36,7 @@
 #include <stdlib.h>
 #include <map>
 #include "TH2.h"
+#include <cstdint>
 
 class HGCalTriggerBestChoiceTriggerCellTester : public edm::EDAnalyzer {
 public:

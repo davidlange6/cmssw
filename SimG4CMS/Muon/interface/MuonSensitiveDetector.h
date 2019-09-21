@@ -21,6 +21,7 @@
 #include "DataFormats/GeometryVector/interface/LocalPoint.h"
 
 #include <string>
+#include <cstdint>
 
 class MuonSlaveSD;
 class MuonSimHitNumberingScheme;

@@ -15,6 +15,7 @@
 #include "DQM/DTMonitorClient/src/DTLocalTriggerBaseTest.h"
 
 #include <string>
+#include <cstdint>
 
 class DTTrigGeomUtils;
 

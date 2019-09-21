@@ -13,6 +13,7 @@
 #include "Geometry/EcalMapping/interface/EcalElectronicsMapping.h"
 #include <DataFormats/EcalDigi/interface/EBDataFrame.h>
 #include <DataFormats/EcalDigi/interface/EEDataFrame.h>
+#include <cstdint>
 
 class EBDataFrame;
 class EcalTriggerPrimitiveSample;

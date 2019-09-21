@@ -26,6 +26,7 @@
 #include <vector>
 
 #include "FWCore/Utilities/interface/GCC11Compatibility.h"
+#include <cstdint>
 
 class SiStripDetCabling;
 class SiStripDetInfoFileReader;

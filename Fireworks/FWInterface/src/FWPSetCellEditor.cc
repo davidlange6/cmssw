@@ -19,6 +19,7 @@
 #include "Fireworks/Core/interface/fwLog.h"
 
 #include "FWCore/Utilities/interface/Parse.h"
+#include <cstdint>
 
 //______________________________________________________________________________
 

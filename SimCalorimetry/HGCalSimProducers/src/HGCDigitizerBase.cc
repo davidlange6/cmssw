@@ -160,6 +160,7 @@ void HGCDigitizerBase<DFr>::updateOutput(std::unique_ptr<HGCDigitizerBase::DColl
 
 // cause the compiler to generate the appropriate code
 #include "DataFormats/HGCDigi/interface/HGCDigiCollections.h"
+#include <cstdint>
 template class HGCDigitizerBase<HGCEEDataFrame>;
 template class HGCDigitizerBase<HGCBHDataFrame>;
 template class HGCDigitizerBase<HGCalDataFrame>;

@@ -28,6 +28,7 @@
 #include "CalibCalorimetry/HcalAlgos/interface/HcalPulseContainmentCorrection.h"
 #include "CalibCalorimetry/HcalTPGAlgos/interface/XMLProcessor.h"
 #include "CalibCalorimetry/HcalTPGAlgos/interface/LutXml.h"
+#include <cstdint>
 
 const float HcaluLUTTPGCoder::lsb_ = 1. / 16;
 

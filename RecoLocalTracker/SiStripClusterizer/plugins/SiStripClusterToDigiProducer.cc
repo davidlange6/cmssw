@@ -124,4 +124,5 @@ inline uint16_t SiStripClusterToDigiProducer::applyGain(const uint16_t& strip, c
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripClusterToDigiProducer);

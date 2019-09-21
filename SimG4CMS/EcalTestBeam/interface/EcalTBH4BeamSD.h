@@ -14,6 +14,7 @@
 
 //#include "G4String.hh"
 #include <map>
+#include <cstdint>
 
 class EcalBaseNumber;
 

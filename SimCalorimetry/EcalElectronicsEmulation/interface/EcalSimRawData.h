@@ -10,6 +10,7 @@
 #include "SimCalorimetry/EcalSelectiveReadoutAlgos/src/EcalSelectiveReadout.h"
 #include <fstream>
 #include <string>
+#include <cstdint>
 
 /** The EcalSimRawData CMSSW module produces raw data from digis. The raw data
  * are written into files which can be loaded into the TCC DCC and SRP boards

@@ -4,6 +4,7 @@
 
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"
 #include <string>
+#include <cstdint>
 
 /** */
 class SiStripEnumsAndStrings {

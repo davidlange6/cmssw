@@ -21,6 +21,7 @@ Calibration/HcalIsolatedTrackReco/src/SubdetFEDSelector.cc
 #include "DataFormats/Math/interface/deltaR.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 AlCaHcalNoiseProducer::AlCaHcalNoiseProducer(const edm::ParameterSet& iConfig) {
   tok_jets_ = consumes<reco::CaloJetCollection>(iConfig.getParameter<edm::InputTag>("JetSource"));

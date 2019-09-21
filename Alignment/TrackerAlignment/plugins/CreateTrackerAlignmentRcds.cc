@@ -61,6 +61,7 @@
 #include "Geometry/Records/interface/PTrackerParametersRcd.h"
 
 #include "CLHEP/Vector/RotationInterfaces.h"
+#include <cstdint>
 
 //
 // class declaration

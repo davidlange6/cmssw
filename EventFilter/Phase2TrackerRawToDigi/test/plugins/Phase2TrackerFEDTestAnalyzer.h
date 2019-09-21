@@ -8,6 +8,7 @@
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include <utility>
 #include <vector>
+#include <cstdint>
 
 /**
    @class Phase2TrackerFEDTestAnalyzer 

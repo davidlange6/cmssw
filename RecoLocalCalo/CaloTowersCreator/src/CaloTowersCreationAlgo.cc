@@ -8,6 +8,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "Math/Interpolator.h"
 #include <cmath>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

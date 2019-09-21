@@ -19,6 +19,7 @@
 #include "DataFormats/MuonDetId/interface/RPCDetId.h"
 #include "Geometry/RPCGeometry/interface/RPCGeometry.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 RPCStripsRing::RPCStripsRing()
     : m_hwPlane(-1),

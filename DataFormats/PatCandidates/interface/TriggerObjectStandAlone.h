@@ -23,6 +23,7 @@
 #include "DataFormats/PatCandidates/interface/TriggerObject.h"
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "FWCore/Common/interface/EventBase.h"
+#include <cstdint>
 namespace edm {
   class TriggerNames;
 }

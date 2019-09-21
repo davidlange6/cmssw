@@ -678,5 +678,6 @@ MultiTrackSelector::Point MultiTrackSelector::getBestVertex(TrackBaseRef track, 
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(MultiTrackSelector);

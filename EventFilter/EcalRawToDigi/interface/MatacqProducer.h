@@ -29,6 +29,7 @@
 #include <memory>
 
 #include <sys/time.h>
+#include <cstdint>
 
 struct NullOut {
   NullOut& operator<<(std::ostream& (*pf)(std::ostream&)) { return *this; }

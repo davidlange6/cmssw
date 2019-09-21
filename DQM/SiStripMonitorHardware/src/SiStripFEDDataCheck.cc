@@ -454,4 +454,5 @@ void SiStripFEDCheckPlugin::fillDescriptions(edm::ConfigurationDescriptions& des
 //
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripFEDCheckPlugin);

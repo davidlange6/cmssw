@@ -18,6 +18,7 @@
 #include "ECALParserException.h"  //DATA DECODER
 #include "DCCEventBlock.h"
 #include "DCCDataMapper.h"
+#include <cstdint>
 
 class DCCTBDataMapper;
 class DCCTBEventBlock;

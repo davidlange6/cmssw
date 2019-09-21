@@ -6,6 +6,7 @@
  */
 
 #include "DataFormats/CTPPSDigi/interface/TotemTimingDigi.h"
+#include <cstdint>
 
 TotemTimingDigi::TotemTimingDigi(const uint8_t hwId,
                                  const uint64_t fpgaTimestamp,

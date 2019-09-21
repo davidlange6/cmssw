@@ -22,6 +22,7 @@
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include <TH1.h>
 #include <TProfile.h>
+#include <cstdint>
 
 class CandIsoComparer : public edm::EDAnalyzer {
 public:

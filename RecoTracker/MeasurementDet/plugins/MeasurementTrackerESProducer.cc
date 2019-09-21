@@ -33,6 +33,7 @@
 
 #include <string>
 #include <memory>
+#include <cstdint>
 
 class dso_hidden MeasurementTrackerESProducer : public edm::ESProducer {
 public:

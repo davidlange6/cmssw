@@ -269,4 +269,5 @@ void SiStripDaqInfo::findExcludedModule(DQMStore& dqm_store,
   dqm_store.cd();
 }
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripDaqInfo);

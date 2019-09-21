@@ -30,6 +30,7 @@
 #include "TrackingTools/TransientTrackingRecHit/interface/TransientTrackingRecHit.h"
 
 #include "CondFormats/SiPixelObjects/interface/SiPixelFedCablingMap.h"
+#include <cstdint>
 
 class SiPixelCoordinates {
 public:

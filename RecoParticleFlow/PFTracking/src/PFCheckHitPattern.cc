@@ -13,6 +13,7 @@
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
 
 #include <map>
+#include <cstdint>
 
 using namespace reco;
 using namespace std;

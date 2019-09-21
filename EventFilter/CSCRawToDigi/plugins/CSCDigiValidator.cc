@@ -21,6 +21,7 @@
 
 #include "DataFormats/Common/interface/Handle.h"
 #include "DataFormats/MuonDetId/interface/CSCDetId.h"
+#include <cstdint>
 
 CSCDigiValidator::CSCDigiValidator(const edm::ParameterSet& iConfig) {
   wd1_token = consumes<CSCWireDigiCollection>(iConfig.getParameter<edm::InputTag>("inputWire"));

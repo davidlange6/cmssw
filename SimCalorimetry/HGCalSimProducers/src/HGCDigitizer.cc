@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <boost/foreach.hpp>
 #include "FWCore/Utilities/interface/transform.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

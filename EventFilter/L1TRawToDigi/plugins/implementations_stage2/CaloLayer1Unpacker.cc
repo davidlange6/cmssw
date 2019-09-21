@@ -2,6 +2,7 @@
 #include "EventFilter/L1TRawToDigi/plugins/UnpackerFactory.h"
 
 #include "CaloLayer1Unpacker.h"
+#include <cstdint>
 
 using namespace edm;
 

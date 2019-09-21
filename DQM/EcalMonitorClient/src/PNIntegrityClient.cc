@@ -7,6 +7,7 @@
 #include "CondFormats/EcalObjects/interface/EcalDQMStatusHelper.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 namespace ecaldqm {
   PNIntegrityClient::PNIntegrityClient() : DQWorkerClient(), errFractionThreshold_(0.) {

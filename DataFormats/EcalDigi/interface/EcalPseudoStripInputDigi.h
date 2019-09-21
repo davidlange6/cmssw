@@ -5,6 +5,7 @@
 #include <vector>
 #include "DataFormats/EcalDetId/interface/EcalTriggerElectronicsId.h"
 #include "DataFormats/EcalDigi/interface/EcalPseudoStripInputSample.h"
+#include <cstdint>
 
 /** \class EcalPseudoStripInputDigi
       

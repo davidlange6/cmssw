@@ -11,6 +11,7 @@
 #include <utility>
 
 #include "DCCBlockPrototype.h"
+#include <cstdint>
 
 class DCCTBEventBlock;
 class DCCTBXtalBlock;

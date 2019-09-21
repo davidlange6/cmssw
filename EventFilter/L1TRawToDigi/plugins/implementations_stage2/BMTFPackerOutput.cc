@@ -1,6 +1,7 @@
 #include "BMTFPackerOutput.h"
 
 #include <vector>
+#include <cstdint>
 //#include <bitset>//debug
 
 // Implementation

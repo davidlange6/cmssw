@@ -116,6 +116,7 @@ int CSCAnodeData2006::index(int afeb, int tbin, int layer) const {
 }
 
 #include <iostream>
+#include <cstdint>
 void CSCAnodeData2006::selfTest() {
   CSCAnodeDataFrame2006 frame(2, 15, 32);
   assert(frame.chip() == 2);

@@ -1,4 +1,5 @@
 #include "FastSimDataFormats/External/interface/FastTrackerCluster.h"
+#include <cstdint>
 
 FastTrackerCluster::FastTrackerCluster(const LocalPoint& pos,
                                        const LocalError& err,

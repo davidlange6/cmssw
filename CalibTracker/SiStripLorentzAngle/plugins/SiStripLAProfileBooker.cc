@@ -45,6 +45,7 @@
 #include <TF1.h>
 
 #include <list>
+#include <cstdint>
 
 class DetIdLess {
 public:

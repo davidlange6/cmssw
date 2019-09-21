@@ -45,6 +45,7 @@
 #endif
 
 #include "RecoTracker/CkfPattern/interface/PrintoutHelper.h"
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

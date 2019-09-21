@@ -35,6 +35,7 @@
 #include <TFile.h>
 
 #include <iostream>
+#include <cstdint>
 
 using namespace reco;
 

@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

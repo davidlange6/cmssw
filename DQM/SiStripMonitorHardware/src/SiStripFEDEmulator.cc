@@ -3,6 +3,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "boost/bind.hpp"
+#include <cstdint>
 
 using edm::LogError;
 using edm::LogInfo;

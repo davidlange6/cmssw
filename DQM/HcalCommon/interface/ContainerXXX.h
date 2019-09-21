@@ -10,6 +10,7 @@
 
 #include "DQM/HcalCommon/interface/Container1D.h"
 #include <cmath>
+#include <cstdint>
 
 namespace hcaldqm {
   typedef boost::unordered_map<uint32_t, double> doubleCompactMap;

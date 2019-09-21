@@ -34,6 +34,7 @@
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
+#include <cstdint>
 
 SiStripDigitizerAlgorithm::SiStripDigitizerAlgorithm(const edm::ParameterSet& conf)
     : lorentzAngleName(conf.getParameter<std::string>("LorentzAngle")),

@@ -24,6 +24,7 @@
 #include "Geometry/VeryForwardGeometryBuilder/interface/CTPPSGeometry.h"
 
 #include "RecoCTPPS/TotemRPLocal/interface/FastLineRecognition.h"
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

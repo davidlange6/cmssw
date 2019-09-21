@@ -7,6 +7,7 @@
 #include "Geometry/CommonDetUnit/interface/GeomDet.h"
 #include "DataFormats/TrajectoryState/interface/LocalTrajectoryParameters.h"
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
+#include <cstdint>
 
 template <class T>
 class ClusterParameterEstimator {

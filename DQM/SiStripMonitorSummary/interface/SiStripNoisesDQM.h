@@ -7,6 +7,7 @@
 #include "CondFormats/DataRecord/interface/SiStripNoisesRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripApvGain.h"
 #include "CondFormats/SiStripObjects/interface/SiStripNoises.h"
+#include <cstdint>
 
 class SiStripNoisesDQM : public SiStripBaseCondObjDQM {
 public:

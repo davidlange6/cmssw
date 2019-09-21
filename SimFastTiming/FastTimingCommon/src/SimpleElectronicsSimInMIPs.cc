@@ -1,6 +1,7 @@
 #include "SimFastTiming/FastTimingCommon/interface/SimpleElectronicsSimInMIPs.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using namespace ftl;
 

@@ -1,6 +1,7 @@
 
 #include "DQM/HcalTasks/interface/ZDCTask.h"
 #include <map>
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

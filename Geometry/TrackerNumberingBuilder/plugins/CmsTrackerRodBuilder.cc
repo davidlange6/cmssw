@@ -7,6 +7,7 @@
 #include "Geometry/TrackerNumberingBuilder/plugins/CmsDetConstruction.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <vector>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerRodBuilder<FilteredView>::buildComponent(FilteredView& fv, GeometricDet* g, const std::string& s) {

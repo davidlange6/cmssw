@@ -22,6 +22,7 @@
 //#include "HepMC/GenEvent.h"
 
 #include <iostream>
+#include <cstdint>
 using namespace std;
 
 //

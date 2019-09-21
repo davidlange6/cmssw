@@ -21,6 +21,7 @@
 #include <string>
 
 #include "FWCore/Framework/interface/Event.h"
+#include <cstdint>
 
 class L1CaloEmCand;
 class L1CaloRegion;

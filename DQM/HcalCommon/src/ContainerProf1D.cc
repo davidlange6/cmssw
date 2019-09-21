@@ -1,4 +1,5 @@
 #include "DQM/HcalCommon/interface/ContainerProf1D.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace mapper;

@@ -31,6 +31,7 @@
 #include "FWCore/Utilities/interface/typedefs.h"
 
 #include "DataFormats/L1GlobalTrigger/interface/L1GlobalTriggerReadoutRecord.h"
+#include <cstdint>
 
 // forward declarations
 class FEDRawDataCollection;

@@ -7,6 +7,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <algorithm>
+#include <cstdint>
 
 namespace ecaldqm {
   SummaryClient::SummaryClient() : DQWorkerClient(), towerBadFraction_(0.), fedBadFraction_(0.) {

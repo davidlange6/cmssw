@@ -19,6 +19,7 @@
 #include <string>
 #include <iostream>
 #include <typeinfo>
+#include <cstdint>
 
 namespace popcon {
 

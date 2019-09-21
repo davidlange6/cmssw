@@ -9,6 +9,7 @@
 #include "DataFormats/Math/interface/deltaR.h"
 
 #include <memory>
+#include <cstdint>
 
 TSGForOIFromL2::TSGForOIFromL2(const edm::ParameterSet& iConfig)
     : src_(consumes<reco::TrackCollection>(iConfig.getParameter<edm::InputTag>("src"))),

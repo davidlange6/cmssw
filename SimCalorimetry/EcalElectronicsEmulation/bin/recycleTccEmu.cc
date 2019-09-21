@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <cstdint>
 using namespace std;
 
 const int nChs = 68;

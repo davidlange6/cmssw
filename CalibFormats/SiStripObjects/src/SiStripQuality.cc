@@ -16,6 +16,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <cstdint>
 
 SiStripQuality::SiStripQuality()
     : toCleanUp(false),

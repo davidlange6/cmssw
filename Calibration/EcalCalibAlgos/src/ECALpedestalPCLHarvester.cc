@@ -14,6 +14,7 @@
 #include "CommonTools/Utils/interface/StringToEnumValue.h"
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 ECALpedestalPCLHarvester::ECALpedestalPCLHarvester(const edm::ParameterSet& ps)
     : currentPedestals_(nullptr), channelStatus_(nullptr) {

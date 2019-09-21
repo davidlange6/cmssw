@@ -1,4 +1,5 @@
 #include "DataFormats/EcalDigi/interface/EcalPseudoStripInputSample.h"
+#include <cstdint>
 
 EcalPseudoStripInputSample::EcalPseudoStripInputSample() : theSample(0) {}
 EcalPseudoStripInputSample::EcalPseudoStripInputSample(uint16_t data) : theSample(data) {}

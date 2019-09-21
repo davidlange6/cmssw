@@ -9,6 +9,7 @@
 #include "SimDataFormats/SimHitMaker/interface/CaloSlaveSD.h"
 
 #include <iostream>
+#include <cstdint>
 
 CaloSlaveSD::CaloSlaveSD(std::string n) : name_(n) {
   LogDebug("HitBuildInfo") << "CaloSlaveSD Called with name " << n << "\n";

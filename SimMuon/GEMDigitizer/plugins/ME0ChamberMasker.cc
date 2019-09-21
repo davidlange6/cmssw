@@ -26,6 +26,7 @@
 #include "DataFormats/GEMDigi/interface/ME0DigiPreRecoCollection.h"
 #include "CondFormats/RecoMuonObjects/interface/MuonSystemAging.h"
 #include "CondFormats/DataRecord/interface/MuonSystemAgingRcd.h"
+#include <cstdint>
 //
 // class declaration
 //

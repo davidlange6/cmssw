@@ -5,6 +5,7 @@
 
 #include <cstdio>
 #include <sstream>
+#include <cstdint>
 
 DCCTBBlockPrototype::DCCTBBlockPrototype(DCCTBDataParser *parser,
                                          std::string name,

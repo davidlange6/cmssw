@@ -68,6 +68,7 @@
 #include "DQM/SiStripCommissioningSources/plugins/tracking/SiStripFineDelayTOF.h"
 
 #include "TMath.h"
+#include <cstdint>
 
 //
 // constructors and destructor

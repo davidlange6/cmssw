@@ -11,6 +11,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <cstdint>
 
 using namespace std;
 

@@ -117,6 +117,7 @@
 #include "DataFormats/BeamSpot/interface/BeamSpot.h"
 #include "DataFormats/Math/interface/Point3D.h"
 #include "FWCore/Utilities/interface/EDMException.h"
+#include <cstdint>
 
 //
 // class decleration

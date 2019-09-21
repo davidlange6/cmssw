@@ -5,6 +5,7 @@
 #include "FWCore/Framework/interface/EDFilter.h"
 
 #include <utility>
+#include <cstdint>
 
 class EcalMonitorPrescaler : public edm::EDFilter {
 public:

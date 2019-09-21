@@ -13,6 +13,7 @@
 
 #include <boost/unordered_set.hpp>
 #include <vector>
+#include <cstdint>
 
 namespace hcaldqm {
   namespace filter {

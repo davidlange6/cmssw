@@ -30,6 +30,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <cstdint>
 
 template <typename T1, typename T2>
 class MuonDetCleaner : public edm::stream::EDProducer<> {

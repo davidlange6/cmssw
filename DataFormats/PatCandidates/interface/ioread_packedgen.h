@@ -1,5 +1,6 @@
 #include "DataFormats/Math/interface/libminifloat.h"
 #include "DataFormats/Candidate/interface/Candidate.h"
+#include <cstdint>
 int16_t convertPackedEtaToPackedY(int16_t packedPt_, int16_t packedEta_, int16_t packedM_) {
   reco::Candidate::PolarLorentzVector p4(MiniFloatConverter::float16to32(packedPt_),
                                          int16_t(packedEta_) * 6.0f / std::numeric_limits<int16_t>::max(),

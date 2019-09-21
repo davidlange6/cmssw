@@ -1,6 +1,7 @@
 #include "DQM/SiStripCommissioningSummary/interface/SummaryPlotFactory.h"
 #include "DQM/SiStripCommissioningSummary/interface/SummaryGenerator.h"
 #include <iostream>
+#include <cstdint>
 
 using namespace sistrip;
 

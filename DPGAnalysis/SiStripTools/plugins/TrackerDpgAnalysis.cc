@@ -100,6 +100,7 @@
 
 // topology
 #include "DPGAnalysis/SiStripTools/interface/EventShape.h"
+#include <cstdint>
 
 //
 // class decleration

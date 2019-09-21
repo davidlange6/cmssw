@@ -10,6 +10,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <iomanip>
+#include <cstdint>
 
 namespace ecaldqm {
   TestPulseClient::TestPulseClient()

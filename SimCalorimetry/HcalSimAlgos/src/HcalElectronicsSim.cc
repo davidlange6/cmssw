@@ -7,6 +7,7 @@
 #include "DataFormats/HcalDigi/interface/QIE11DataFrame.h"
 #include "CLHEP/Random/RandFlat.h"
 #include <cmath>
+#include <cstdint>
 
 HcalElectronicsSim::HcalElectronicsSim(HcalAmplifier* amplifier, const HcalCoderFactory* coderFactory, bool PreMixing)
     : theAmplifier(amplifier),

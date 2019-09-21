@@ -2,6 +2,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
 #include <cassert>
+#include <cstdint>
 
 CSCTMBTrailer::CSCTMBTrailer(int wordCount, int firmwareVersion) : theFirmwareVersion(firmwareVersion) {
   //FIXME do firmware version

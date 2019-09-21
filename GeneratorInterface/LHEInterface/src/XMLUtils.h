@@ -15,6 +15,7 @@
 #include <xercesc/sax2/DefaultHandler.hpp>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <lzma.h>
+#include <cstdint>
 
 class Storage;
 

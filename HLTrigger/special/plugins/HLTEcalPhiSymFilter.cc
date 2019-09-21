@@ -166,4 +166,5 @@ bool HLTEcalPhiSymFilter::filter(edm::StreamID, edm::Event& event, const edm::Ev
 
 // declare this class as a framework plugin
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(HLTEcalPhiSymFilter);

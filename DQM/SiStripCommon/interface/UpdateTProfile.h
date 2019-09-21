@@ -2,6 +2,7 @@
 #define DQM_SiStripCommon_UpdateTProfile_H
 
 #include "boost/cstdint.hpp"
+#include <cstdint>
 
 class TProfile;
 

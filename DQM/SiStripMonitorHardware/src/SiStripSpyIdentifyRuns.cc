@@ -148,5 +148,6 @@ namespace sistrip {
 }  // namespace sistrip
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 typedef sistrip::SpyIdentifyRunsModule SiStripSpyIdentifyRuns;
 DEFINE_FWK_MODULE(SiStripSpyIdentifyRuns);

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdio>
 #include <sys/time.h>
+#include <cstdint>
 
 SiStripBadStripReader::SiStripBadStripReader(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<uint32_t>("printDebug", 1)) {}

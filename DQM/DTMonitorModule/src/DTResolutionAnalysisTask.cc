@@ -26,6 +26,7 @@
 #include "DataFormats/DTRecHit/interface/DTRecHitCollection.h"
 
 #include <iterator>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

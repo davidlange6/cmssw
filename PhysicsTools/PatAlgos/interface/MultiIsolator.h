@@ -9,6 +9,7 @@
 #include "boost/ptr_container/ptr_vector.hpp"
 
 #include "DataFormats/PatCandidates/interface/Isolation.h"
+#include <cstdint>
 
 namespace pat {
   namespace helper {

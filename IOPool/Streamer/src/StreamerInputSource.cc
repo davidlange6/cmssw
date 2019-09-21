@@ -36,6 +36,7 @@
 #include <string>
 #include <iostream>
 #include <set>
+#include <cstdint>
 
 namespace edm {
   namespace {

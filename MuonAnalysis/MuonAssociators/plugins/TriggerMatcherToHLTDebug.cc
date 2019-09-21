@@ -61,6 +61,7 @@
 #include "CommonTools/Utils/interface/StringCutObjectSelector.h"
 #include "MuonAnalysis/MuonAssociators/interface/PropagateToMuon.h"
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
+#include <cstdint>
 
 class TriggerMatcherToHLTDebug : public edm::EDProducer {
 public:

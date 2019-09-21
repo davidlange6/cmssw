@@ -3,6 +3,7 @@
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

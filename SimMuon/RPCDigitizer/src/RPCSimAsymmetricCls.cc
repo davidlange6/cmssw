@@ -35,6 +35,7 @@
 
 #include "CLHEP/Random/RandFlat.h"
 #include "CLHEP/Random/RandPoissonQ.h"
+#include <cstdint>
 
 using namespace std;
 

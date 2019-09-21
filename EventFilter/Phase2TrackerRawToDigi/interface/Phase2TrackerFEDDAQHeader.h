@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include "EventFilter/Phase2TrackerRawToDigi/interface/utils.h"
+#include <cstdint>
 
 namespace Phase2Tracker {
 

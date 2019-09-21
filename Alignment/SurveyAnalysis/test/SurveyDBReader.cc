@@ -12,6 +12,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "Alignment/SurveyAnalysis/test/SurveyDBReader.h"
+#include <cstdint>
 
 SurveyDBReader::SurveyDBReader(const edm::ParameterSet& cfg)
     : theFileName(cfg.getParameter<std::string>("fileName")), theFirstEvent(true) {}

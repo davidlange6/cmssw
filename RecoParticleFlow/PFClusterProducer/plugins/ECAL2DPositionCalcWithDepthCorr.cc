@@ -11,6 +11,7 @@
 #include "Geometry/CaloGeometry/interface/TruncatedPyramid.h"
 
 #include "vdt/vdtMath.h"
+#include <cstdint>
 
 // faithful reimplementation of RecoEcal/EgammaCoreTools PositionCalc
 // sorry Stefano

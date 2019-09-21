@@ -14,6 +14,7 @@
 typedef SeedingHitSet::ConstRecHitPointer SeedingHit;
 
 #include <numeric>
+#include <cstdint>
 
 namespace {
   std::string seedingLayersToString(const SeedingLayerSetsHits::SeedingLayerSet &layer) {

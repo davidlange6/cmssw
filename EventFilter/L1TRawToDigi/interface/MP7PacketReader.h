@@ -9,6 +9,7 @@
 #define EventFilter_L1TRawToDigi_MP7PacketReader_h
 
 #include "EventFilter/L1TRawToDigi/interface/MP7FileReader.h"
+#include <cstdint>
 
 typedef std::pair<uint32_t, uint32_t> PacketRange;
 

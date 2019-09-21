@@ -16,6 +16,7 @@
 #include "boost/bind.hpp"
 
 #include <functional>
+#include <cstdint>
 
 SiStripProcessedRawDigiProducer::SiStripProcessedRawDigiProducer(edm::ParameterSet const& conf)
     : inputTags(conf.getParameter<std::vector<edm::InputTag> >("DigiProducersList")),

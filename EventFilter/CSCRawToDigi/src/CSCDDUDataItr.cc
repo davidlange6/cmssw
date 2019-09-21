@@ -1,6 +1,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCDDUDataItr.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDDUEventData.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // theCurrentCSC starts at -1, since user is expected to next() before he dereferences
 // for the first time

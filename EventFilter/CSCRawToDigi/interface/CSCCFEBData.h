@@ -8,6 +8,7 @@ class CSCCFEBStatusDigi;
 #include <vector>
 #include <iosfwd>
 #include <iostream>
+#include <cstdint>
 //#include <boost/cstdint.hpp>
 
 class CSCCFEBData {

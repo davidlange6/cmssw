@@ -13,6 +13,7 @@
 #include <vector>
 #include <iomanip>
 #include <cmath>
+#include <cstdint>
 
 using namespace std;
 using namespace jpt;

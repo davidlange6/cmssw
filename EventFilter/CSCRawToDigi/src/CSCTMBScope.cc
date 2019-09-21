@@ -7,6 +7,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCTMBScope.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 #ifdef LOCAL_UNPACK
 bool CSCTMBScope::debug = false;

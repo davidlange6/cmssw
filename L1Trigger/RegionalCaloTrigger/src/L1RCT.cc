@@ -19,6 +19,7 @@ using std::ostream;
 #include "CondFormats/L1TObjects/interface/L1CaloEtScale.h"
 #include "CondFormats/L1TObjects/interface/L1RCTParameters.h"
 #include "L1Trigger/RegionalCaloTrigger/interface/L1RCTLookupTables.h"
+#include <cstdint>
 
 // Main method to process a single event, hence the name.
 // First it sets up all the neighbors, sharing the pointers to the proper

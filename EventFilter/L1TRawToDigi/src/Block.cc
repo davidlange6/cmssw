@@ -3,6 +3,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "EventFilter/L1TRawToDigi/interface/Block.h"
+#include <cstdint>
 
 #define EDM_ML_DEBUG 1
 

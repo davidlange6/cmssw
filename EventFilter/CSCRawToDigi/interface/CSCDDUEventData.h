@@ -15,6 +15,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCDCCTrailer.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDCCExaminer.h"
 #include <boost/dynamic_bitset.hpp>
+#include <cstdint>
 
 class CSCDDUEventData {
 public:

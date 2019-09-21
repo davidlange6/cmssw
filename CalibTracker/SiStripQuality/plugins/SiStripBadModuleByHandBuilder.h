@@ -13,6 +13,7 @@
 #include <vector>
 
 #include <ext/hash_map>
+#include <cstdint>
 
 class SiStripBadModuleByHandBuilder : public ConditionDBWriter<SiStripBadStrip> {
 public:

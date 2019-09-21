@@ -13,6 +13,7 @@
 #include "RecoLocalCalo/HGCalRecProducers/interface/HGCalClusteringAlgoBase.h"
 
 #include "CommonTools/RecoAlgos/interface/KDTreeLinkerAlgo.h"
+#include <cstdint>
 
 class HGCal3DClustering {
 public:

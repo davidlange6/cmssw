@@ -7,6 +7,7 @@
 
 #include "TEveBoxSet.h"
 #include "TEveStraightLineSet.h"
+#include <cstdint>
 
 class FWCaloClusterProxyBuilder : public FWHeatmapProxyBuilderTemplate<reco::CaloCluster> {
 public:

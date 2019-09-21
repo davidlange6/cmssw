@@ -34,6 +34,7 @@
 #include "SimTracker/TrackTriggerAssociation/interface/TTClusterAssociationMap.h"
 #include "SimTracker/TrackTriggerAssociation/interface/TTStubAssociationMap.h"
 #include "SimTracker/TrackTriggerAssociation/interface/TTTrackAssociationMap.h"
+#include <cstdint>
 
 // constructors and destructor
 OuterTrackerMonitorTTTrack::OuterTrackerMonitorTTTrack(const edm::ParameterSet &iConfig) : conf_(iConfig) {

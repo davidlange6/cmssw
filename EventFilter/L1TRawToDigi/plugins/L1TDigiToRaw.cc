@@ -42,6 +42,7 @@
 #include "EventFilter/L1TRawToDigi/interface/AMC13Spec.h"
 
 #include "PackingSetupFactory.h"
+#include <cstdint>
 
 namespace l1t {
   class L1TDigiToRaw : public edm::stream::EDProducer<> {

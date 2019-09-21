@@ -21,6 +21,7 @@
 #include "CondFormats/L1TObjects/interface/L1TGlobalParameters.h"
 #include "L1Trigger/L1TGlobal/interface/GlobalParamsHelper.h"
 #include "L1Trigger/L1TGlobal/interface/PrescalesVetosHelper.h"
+#include <cstdint>
 
 class L1TGlobalParameters;
 class L1GtParameters;

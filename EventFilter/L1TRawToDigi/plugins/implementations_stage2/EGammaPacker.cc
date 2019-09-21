@@ -5,6 +5,7 @@
 
 #include "L1TStage2Layer2Constants.h"
 #include "EGammaPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

@@ -12,6 +12,7 @@
 #include "CondFormats/CastorObjects/interface/AllObjects.h"
 #include "CalibCalorimetry/CastorCalib/interface/CastorDbASCIIIO.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 namespace CastorDbASCIIIO {
   class DetIdLess {

@@ -20,6 +20,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

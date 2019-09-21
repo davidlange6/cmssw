@@ -17,6 +17,7 @@
 #include "DQM/HcalCommon/interface/ContainerXXX.h"
 #include "DQM/HcalCommon/interface/HashFilter.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
+#include <cstdint>
 
 class PedestalTask : public hcaldqm::DQTask {
 public:

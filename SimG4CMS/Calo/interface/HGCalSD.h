@@ -12,6 +12,7 @@
 #include "SimG4CMS/Calo/interface/HGCMouseBite.h"
 
 #include <string>
+#include <cstdint>
 
 class HGCalDDDConstants;
 class G4LogicalVolume;

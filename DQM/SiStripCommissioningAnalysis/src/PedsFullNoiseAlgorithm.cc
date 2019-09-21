@@ -18,6 +18,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <cstdint>
 
 using namespace sistrip;
 using namespace std;

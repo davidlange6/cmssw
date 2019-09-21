@@ -9,6 +9,7 @@
 #include "CaloCollections.h"
 #include "L1TStage2Layer2Constants.h"
 #include "MPUnpacker_0x10010010.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

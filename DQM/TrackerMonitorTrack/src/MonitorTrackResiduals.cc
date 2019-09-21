@@ -14,6 +14,7 @@
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
+#include <cstdint>
 
 template <TrackerType pixel_or_strip>
 MonitorTrackResidualsBase<pixel_or_strip>::MonitorTrackResidualsBase(const edm::ParameterSet &iConfig)

@@ -28,6 +28,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 namespace CLHEP {
   class HepRandomEngine;

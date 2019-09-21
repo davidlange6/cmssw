@@ -490,4 +490,5 @@ void TrackTypeMonitor::fillHistograms(const reco::Track& track, int indx) {
 }
 // Define this as a plug-in
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(TrackTypeMonitor);

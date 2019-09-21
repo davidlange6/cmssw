@@ -11,6 +11,7 @@
 #include <sys/time.h>
 
 #include <boost/lexical_cast.hpp>
+#include <cstdint>
 
 using namespace std;
 

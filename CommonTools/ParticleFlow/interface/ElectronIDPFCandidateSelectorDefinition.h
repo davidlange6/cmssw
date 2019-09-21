@@ -18,6 +18,7 @@
 #include "DataFormats/EgammaCandidates/interface/GsfElectron.h"
 #include "CommonTools/ParticleFlow/interface/PFCandidateSelectorDefinition.h"
 #include <algorithm>
+#include <cstdint>
 
 namespace pf2pat {
 

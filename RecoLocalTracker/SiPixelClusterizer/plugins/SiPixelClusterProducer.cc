@@ -201,5 +201,6 @@ void SiPixelClusterProducer::run(const T& input,
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 
 DEFINE_FWK_MODULE(SiPixelClusterProducer);

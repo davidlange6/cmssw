@@ -2,6 +2,7 @@
 #include "DataFormats/EcalDetId/interface/ESDetId.h"
 
 #include <iostream>
+#include <cstdint>
 
 ESTBNumberingScheme::ESTBNumberingScheme() : EcalNumberingScheme() {
   int ix[30] = {3, 2, 4, 3, 2, 1, 4, 3, 2, 1, 4, 3, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4};

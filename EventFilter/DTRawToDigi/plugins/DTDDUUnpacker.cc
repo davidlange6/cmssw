@@ -12,6 +12,7 @@
 #include "EventFilter/DTRawToDigi/plugins/DTDDUUnpacker.h"
 
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

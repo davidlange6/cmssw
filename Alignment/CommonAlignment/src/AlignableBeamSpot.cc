@@ -16,6 +16,7 @@
 
 #include "FWCore/Utilities/interface/Exception.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //__________________________________________________________________________________________________
 AlignableBeamSpot::AlignableBeamSpot()

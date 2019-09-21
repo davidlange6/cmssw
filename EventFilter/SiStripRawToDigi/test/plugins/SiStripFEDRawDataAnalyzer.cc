@@ -12,6 +12,7 @@
 #include <sstream>
 #include <string>
 #include <map>
+#include <cstdint>
 
 using namespace sistrip;
 using namespace std;

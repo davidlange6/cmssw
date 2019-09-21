@@ -20,6 +20,7 @@
 #include <sys/stat.h>
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
+#include <cstdint>
 
 namespace evf {
 

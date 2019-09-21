@@ -404,4 +404,5 @@ void LogErrorEventFilter::print(const Collection &errors) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(LogErrorEventFilter);

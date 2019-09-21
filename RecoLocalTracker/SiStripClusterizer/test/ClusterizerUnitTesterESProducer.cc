@@ -1,4 +1,5 @@
 #include "RecoLocalTracker/SiStripClusterizer/test/ClusterizerUnitTesterESProducer.h"
+#include <cstdint>
 
 ClusterizerUnitTesterESProducer::ClusterizerUnitTesterESProducer(const edm::ParameterSet& conf) {
   edm::FileInPath testInfo(("RecoLocalTracker/SiStripClusterizer/test/ClusterizerUnitTestDetInfo.dat"));

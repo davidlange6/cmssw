@@ -31,6 +31,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class ME0PadDigiClusterProducer : public edm::stream::EDProducer<> {
 public:

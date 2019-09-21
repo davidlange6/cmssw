@@ -19,6 +19,7 @@
 #include "CondFormats/EcalObjects/interface/EcalChannelStatus.h"
 
 #include "CalibCalorimetry/EcalLaserCorrection/interface/EcalLaserDbService.h"
+#include <cstdint>
 
 class EcalRecHitWorkerSimple : public EcalRecHitWorkerBaseClass {
 public:

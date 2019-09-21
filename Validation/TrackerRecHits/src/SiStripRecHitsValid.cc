@@ -20,6 +20,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include "CommonTools/TriggerUtils/interface/GenericTriggerEventFlag.h"
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

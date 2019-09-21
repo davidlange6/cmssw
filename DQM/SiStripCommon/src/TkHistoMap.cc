@@ -284,6 +284,7 @@ void TkHistoMap::dumpInTkMap(TrackerMap* tkmap, bool dumpEntries) {
 
 #include "TCanvas.h"
 #include "TFile.h"
+#include <cstdint>
 void TkHistoMap::saveAsCanvas(const std::string& filename, const std::string& options, const std::string& mode) {
   //  TCanvas C(MapName_,MapName_,200,10,900,700);
   TCanvas* CTIB =

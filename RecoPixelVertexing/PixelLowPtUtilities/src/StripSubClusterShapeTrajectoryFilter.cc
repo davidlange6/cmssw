@@ -33,6 +33,7 @@
 
 #include "CondFormats/SiStripObjects/interface/SiStripNoises.h"
 #include "CondFormats/DataRecord/interface/SiStripNoisesRcd.h"
+#include <cstdint>
 
 #ifdef StripSubClusterShapeFilterBase_COUNTERS
 #define INC_COUNTER(X) X++;

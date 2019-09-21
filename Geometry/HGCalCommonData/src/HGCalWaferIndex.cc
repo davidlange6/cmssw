@@ -1,4 +1,5 @@
 #include "Geometry/HGCalCommonData/interface/HGCalWaferIndex.h"
+#include <cstdint>
 
 const int kHGCalWaferUOffset = 0;
 const int kHGCalWaferUMask = 0x1F;

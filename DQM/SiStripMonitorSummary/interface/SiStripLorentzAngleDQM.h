@@ -5,6 +5,7 @@
 
 #include "CondFormats/DataRecord/interface/SiStripLorentzAngleRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripLorentzAngle.h"
+#include <cstdint>
 
 class SiStripLorentzAngleDQM : public SiStripBaseCondObjDQM {
 public:

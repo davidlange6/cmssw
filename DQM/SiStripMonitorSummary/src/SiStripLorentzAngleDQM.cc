@@ -4,6 +4,7 @@
 #include "DataFormats/SiStripDetId/interface/SiStripSubStructure.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripLorentzAngleDQM::SiStripLorentzAngleDQM(const edm::EventSetup &eSetup,

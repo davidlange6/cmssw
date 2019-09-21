@@ -38,6 +38,7 @@
 
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
+#include <cstdint>
 
 template <typename T>
 class TTStubBuilder : public edm::EDProducer {

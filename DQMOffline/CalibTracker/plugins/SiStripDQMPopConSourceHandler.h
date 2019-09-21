@@ -62,6 +62,7 @@ private:
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include <sstream>
+#include <cstdint>
 
 template <typename T>
 void SiStripDQMPopConSourceHandler<T>::getNewObjects() {

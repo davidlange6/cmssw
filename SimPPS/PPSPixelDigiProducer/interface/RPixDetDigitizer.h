@@ -24,6 +24,7 @@
 #include "RecoCTPPS/PixelLocal/interface/CTPPSPixelGainCalibrationDBService.h"
 
 #include "CondFormats/CTPPSReadoutObjects/interface/CTPPSPixelAnalysisMask.h"
+#include <cstdint>
 
 namespace CLHEP {
   class HepRandomEngine;

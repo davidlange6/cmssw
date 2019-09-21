@@ -23,6 +23,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "CondTools/Ecal/interface/EcalIntercalibConstantsXMLTranslator.h"
 #include "CondTools/Ecal/interface/EcalIntercalibConstantsMCXMLTranslator.h"
+#include <cstdint>
 
 using namespace edm;
 

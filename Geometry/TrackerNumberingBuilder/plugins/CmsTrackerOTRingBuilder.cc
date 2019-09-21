@@ -9,6 +9,7 @@
 #include "Geometry/TrackerNumberingBuilder/interface/trackerStablePhiSort.h"
 
 #include <vector>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerOTRingBuilder<FilteredView>::buildComponent(FilteredView& fv, GeometricDet* g, const std::string& s) {

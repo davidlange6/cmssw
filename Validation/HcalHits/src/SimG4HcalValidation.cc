@@ -30,6 +30,7 @@
 #include "G4Step.hh"
 #include "G4Track.hh"
 #include "G4VProcess.hh"
+#include <cstdint>
 
 using namespace geant_units::operators;
 

@@ -5,6 +5,7 @@
 
 #include <limits>
 #include <sstream>
+#include <cstdint>
 
 namespace ecaldqm {
   MESetEcal::MESetEcal(std::string const &_fullPath,

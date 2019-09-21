@@ -13,6 +13,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <cstdint>
 
 using namespace XERCES_CPP_NAMESPACE;
 using namespace xuti;

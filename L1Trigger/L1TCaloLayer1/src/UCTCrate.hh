@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "UCTGeometry.hh"
+#include <cstdint>
 
 class UCTCard;
 

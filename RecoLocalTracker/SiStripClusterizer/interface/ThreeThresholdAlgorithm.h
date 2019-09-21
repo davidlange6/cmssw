@@ -2,6 +2,7 @@
 #define RecoLocalTracker_SiStripClusterizer_ThreeThresholdAlgorithm_h
 #include "RecoLocalTracker/SiStripClusterizer/interface/StripClusterizerAlgorithm.h"
 #include "RecoLocalTracker/SiStripClusterizer/interface/SiStripApvShotCleaner.h"
+#include <cstdint>
 
 class ThreeThresholdAlgorithm final : public StripClusterizerAlgorithm {
   friend class StripClusterizerAlgorithmFactory;

@@ -80,4 +80,5 @@ void SiStripFEDDumpPlugin::bookHistograms(DQMStore::IBooker& ibooker,
 //
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripFEDDumpPlugin);

@@ -9,6 +9,7 @@
 #include "Geometry/MTDGeometryBuilder/interface/RectangularMTDTopology.h"
 
 #include "CLHEP/Random/RandGaussQ.h"
+#include <cstdint>
 
 BTLTileDeviceSim::BTLTileDeviceSim(const edm::ParameterSet& pset)
     : geom_(nullptr),

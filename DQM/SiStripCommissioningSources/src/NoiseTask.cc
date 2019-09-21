@@ -16,6 +16,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 
 #include "DQM/SiStripCommissioningSources/interface/NoiseTask.h"
+#include <cstdint>
 
 using namespace sistrip;
 

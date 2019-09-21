@@ -2,6 +2,7 @@
 #define MESetMulti_H
 
 #include "MESet.h"
+#include <cstdint>
 
 namespace ecaldqm {
   /* class MESetMulti

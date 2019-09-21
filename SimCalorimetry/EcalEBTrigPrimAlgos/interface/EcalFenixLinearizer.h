@@ -7,6 +7,7 @@
 #include <CondFormats/EcalObjects/interface/EcalTPGCrystalStatus.h>
 
 #include <vector>
+#include <cstdint>
 
 /** 
    \class EcalFenixLinearizer

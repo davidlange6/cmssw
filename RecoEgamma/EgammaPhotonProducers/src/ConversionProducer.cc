@@ -63,6 +63,7 @@ Implementation:
 #include "RecoVertex/KinematicFit/interface/KinematicParticleFitter.h"
 #include "RecoVertex/KinematicFit/interface/MassKinematicConstraint.h"
 #include "RecoVertex/KinematicFit/interface/ColinearityKinematicConstraint.h"
+#include <cstdint>
 
 ConversionProducer::ConversionProducer(const edm::ParameterSet& iConfig)
     : theVertexFinder_(nullptr)

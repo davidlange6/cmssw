@@ -15,6 +15,7 @@
 
 #include "CaloTokens.h"
 #include "RCTEmRegionPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage1 {

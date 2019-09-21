@@ -29,6 +29,7 @@
 
 #include <algorithm>
 #include "TTree.h"
+#include <cstdint>
 
 class AlignTransform;
 class MuonAlignment;

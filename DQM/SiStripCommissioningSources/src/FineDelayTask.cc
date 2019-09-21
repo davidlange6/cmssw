@@ -3,6 +3,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/SiStripCommon/interface/SiStripDetKey.h"
+#include <cstdint>
 
 #define NBINS (500)
 #define LOWBIN (-125)

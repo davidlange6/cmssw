@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <iomanip>
+#include <cstdint>
 
 class TAxis;
 namespace edm {

@@ -10,6 +10,7 @@
 #include "RecoCTPPS/TotemRPLocal/interface/TotemRPClusterProducerAlgorithm.h"
 
 #include <iostream>
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

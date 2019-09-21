@@ -25,6 +25,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "Geometry/EcalAlgo/interface/EcalPreshowerGeometry.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
+#include <cstdint>
 
 class PositionCalc {
 public:

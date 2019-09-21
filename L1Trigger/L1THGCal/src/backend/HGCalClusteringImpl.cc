@@ -3,6 +3,7 @@
 #include "L1Trigger/L1THGCal/interface/backend/HGCalClusteringImpl.h"
 #include "DataFormats/Common/interface/PtrVector.h"
 #include "DataFormats/Common/interface/OrphanHandle.h"
+#include <cstdint>
 
 //class constructor
 HGCalClusteringImpl::HGCalClusteringImpl(const edm::ParameterSet& conf)

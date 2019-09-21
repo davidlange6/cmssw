@@ -26,6 +26,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 class SiStripPedestalsDQM;
 class SiStripNoisesDQM;

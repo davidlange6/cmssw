@@ -17,6 +17,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "CommonTools/Utils/interface/StringToEnumValue.h"
+#include <cstdint>
 
 EcalSeverityLevelAlgo::EcalSeverityLevelAlgo(const edm::ParameterSet& p) {
   timeThresh_ = p.getParameter<double>("timeThresh");

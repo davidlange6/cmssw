@@ -1,6 +1,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCTMBHeader2006.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDMBHeader.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 CSCTMBHeader2006::CSCTMBHeader2006() {
   bzero(data(), sizeInWords() * 2);

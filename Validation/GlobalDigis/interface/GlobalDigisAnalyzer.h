@@ -101,6 +101,7 @@
 
 #include "DQMServices/Core/interface/DQMEDAnalyzer.h"
 #include "TString.h"
+#include <cstdint>
 
 class PGlobalDigi;
 

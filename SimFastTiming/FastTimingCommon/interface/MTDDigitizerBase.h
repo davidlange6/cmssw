@@ -108,6 +108,7 @@ private:
 };
 
 #include "FWCore/PluginManager/interface/PluginFactory.h"
+#include <cstdint>
 typedef edmplugin::PluginFactory<MTDDigitizerBase*(
     const edm::ParameterSet&, edm::ConsumesCollector&, edm::ProducerBase&)>
     MTDDigitizerFactory;

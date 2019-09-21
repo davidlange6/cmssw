@@ -24,6 +24,7 @@
 #include "G4VPhysicalVolume.hh"
 
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 //-------------------------------------------------------------------

@@ -2,6 +2,7 @@
 #define SIMCALORIMETRY_HCALZEROSUPPRESSIONALGOS_HCALZSALGOREALISTIC_H 1
 
 #include "HcalZeroSuppressionAlgo.h"
+#include <cstdint>
 
 /** \class HcalZSAlgoRealistic
  *

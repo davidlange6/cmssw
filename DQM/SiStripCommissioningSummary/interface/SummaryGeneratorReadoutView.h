@@ -2,6 +2,7 @@
 #define DQM_SiStripCommissioningSummary_SummaryGeneratorReadoutView_H
 
 #include "DQM/SiStripCommissioningSummary/interface/SummaryGenerator.h"
+#include <cstdint>
 
 /**
    @class SummaryGeneratorReadoutView

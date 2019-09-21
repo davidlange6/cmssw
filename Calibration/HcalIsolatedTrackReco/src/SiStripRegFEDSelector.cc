@@ -4,6 +4,7 @@
 #include "CondFormats/SiStripObjects/interface/FedChannelConnection.h"
 #include "DataFormats/HcalIsolatedTrack/interface/IsolatedPixelTrackCandidate.h"
 #include "DataFormats/HcalIsolatedTrack/interface/IsolatedPixelTrackCandidateFwd.h"
+#include <cstdint>
 
 SiStripRegFEDSelector::SiStripRegFEDSelector(const edm::ParameterSet& iConfig) {
   tok_seed_ = consumes<trigger::TriggerFilterObjectWithRefs>(iConfig.getParameter<edm::InputTag>("regSeedLabel"));

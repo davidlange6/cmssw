@@ -16,6 +16,7 @@
 #include "RecoMuon/MeasurementDet/interface/MuonDetLayerMeasurements.h"
 
 #include <vector>
+#include <cstdint>
 
 class MuonDetLayerGeometry;
 

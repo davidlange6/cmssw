@@ -38,6 +38,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
 #include "FWCore/Framework/interface/EventSetup.h"
+#include <cstdint>
 
 //
 // class declaration

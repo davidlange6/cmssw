@@ -13,6 +13,7 @@
 #include "RecoLocalMuon/RPCRecHit/src/DTStationIndex.h"
 
 #include <ctime>
+#include <cstdint>
 
 int distsector(int sector1, int sector2) {
   if (sector1 == 13)

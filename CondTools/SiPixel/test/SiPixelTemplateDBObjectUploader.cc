@@ -10,6 +10,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 
 #include <fstream>
+#include <cstdint>
 
 SiPixelTemplateDBObjectUploader::SiPixelTemplateDBObjectUploader(const edm::ParameterSet& iConfig)
     : theTemplateCalibrations(iConfig.getParameter<vstring>("siPixelTemplateCalibrations")),

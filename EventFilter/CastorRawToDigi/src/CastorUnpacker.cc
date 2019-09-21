@@ -8,6 +8,7 @@
 #include "DataFormats/HcalDigi/interface/HcalTriggerPrimitiveSample.h"
 #include <iostream>
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 namespace CastorUnpacker_impl {
   template <class DigiClass>

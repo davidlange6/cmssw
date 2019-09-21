@@ -31,6 +31,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class EcalEndcapSimHitsValidation : public edm::EDAnalyzer {
   typedef std::map<uint32_t, float, std::less<uint32_t>> MapType;

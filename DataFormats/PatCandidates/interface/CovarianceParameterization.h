@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <array>
 #include <TKey.h>
+#include <cstdint>
 class CompressionElement {
 public:
   enum Method { float16 = 0, reduceMantissa = 1, logPack = 2, tanLogPack = 3, zero = 4, one = 5 };

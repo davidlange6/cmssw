@@ -5,6 +5,7 @@
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <algorithm>
+#include <cstdint>
 
 MTDMapDDDtoID::MTDMapDDDtoID(const GeometricTimingDet* iDet) {
   buildAll(iDet);

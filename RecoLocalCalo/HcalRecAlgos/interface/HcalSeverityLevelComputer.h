@@ -20,6 +20,7 @@
 #include "DataFormats/HcalDetId/interface/HcalGenericDetId.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/Framework/interface/ModuleFactory.h"
+#include <cstdint>
 
 class HcalSeverityLevelComputer {
 public:

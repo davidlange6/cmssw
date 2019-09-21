@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "DataFormats/HcalDigi/interface/HcalCalibrationEventTypes.h"
+#include <cstdint>
 class HcalHTRData;
 
 /**  \class HcalDCCHeader

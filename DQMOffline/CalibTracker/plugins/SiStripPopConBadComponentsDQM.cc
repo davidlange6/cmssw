@@ -150,5 +150,6 @@ SiStripBadStrip* SiStripPopConBadComponentsHandlerFromDQM::getObj() const { retu
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "DQMOffline/CalibTracker/plugins/SiStripPopConDQMEDHarvester.h"
+#include <cstdint>
 using SiStripPopConBadComponentsDQM = SiStripPopConDQMEDHarvester<SiStripPopConBadComponentsHandlerFromDQM>;
 DEFINE_FWK_MODULE(SiStripPopConBadComponentsDQM);

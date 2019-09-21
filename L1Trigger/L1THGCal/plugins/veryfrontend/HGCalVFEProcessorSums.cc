@@ -3,6 +3,7 @@
 
 #include "DataFormats/Candidate/interface/LeafCandidate.h"
 #include "DataFormats/L1THGCal/interface/HGCalTriggerCell.h"
+#include <cstdint>
 
 DEFINE_EDM_PLUGIN(HGCalVFEProcessorBaseFactory, HGCalVFEProcessorSums, "HGCalVFEProcessorSums");
 

@@ -11,6 +11,7 @@
 //
 //
 #include "DataMixingSiPixelWorker.h"
+#include <cstdint>
 
 using namespace std;
 

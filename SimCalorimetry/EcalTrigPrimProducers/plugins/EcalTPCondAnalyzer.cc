@@ -50,6 +50,7 @@
 #include "Geometry/Records/interface/CaloGeometryRecord.h"
 
 #include "SimCalorimetry/EcalTrigPrimProducers/plugins/EcalTPCondAnalyzer.h"
+#include <cstdint>
 
 EcalTPCondAnalyzer::EcalTPCondAnalyzer(const edm::ParameterSet &iConfig)
 

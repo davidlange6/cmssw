@@ -15,6 +15,7 @@
 #include "TTree.h"
 
 #include "RawDataConverter.h"
+#include <cstdint>
 
 ///
 /// constructors and destructor

@@ -5,6 +5,7 @@
 #include <Math/EulerAngles.h>
 
 #include <algorithm>
+#include <cstdint>
 
 typedef CaloCellGeometry::Pt3D Pt3D;
 typedef CaloCellGeometry::Pt3DVec Pt3DVec;

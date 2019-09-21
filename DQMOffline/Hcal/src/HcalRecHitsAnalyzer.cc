@@ -2,6 +2,7 @@
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
 #include "Geometry/Records/interface/CaloGeometryRecord.h"
 #include "Geometry/Records/interface/HcalRecNumberingRecord.h"
+#include <cstdint>
 
 HcalRecHitsAnalyzer::HcalRecHitsAnalyzer(edm::ParameterSet const &conf)
     : topFolderName_(conf.getParameter<std::string>("TopFolderName")) {

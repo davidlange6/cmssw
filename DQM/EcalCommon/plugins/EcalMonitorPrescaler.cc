@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <cstdint>
 
 uint32_t EcalMonitorPrescaler::filterBits_[EcalMonitorPrescaler::nPrescalers] = {
     (1 << EcalDCCHeaderBlock::MTCC) | (1 << EcalDCCHeaderBlock::PHYSICS_GLOBAL) |

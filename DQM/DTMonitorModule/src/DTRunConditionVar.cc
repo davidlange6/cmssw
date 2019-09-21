@@ -38,6 +38,7 @@
 
 #include <TMath.h>
 #include <cmath>
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

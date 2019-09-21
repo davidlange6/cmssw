@@ -8,6 +8,7 @@
 #include "CondFormats/Serialization/interface/Serializable.h"
 
 #include <iostream>
+#include <cstdint>
 
 /**
    

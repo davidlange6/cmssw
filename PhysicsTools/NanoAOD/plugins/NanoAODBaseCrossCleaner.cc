@@ -18,6 +18,7 @@
 
 #include "PhysicsTools/NanoAOD/plugins/NanoAODBaseCrossCleaner.h"
 #include "DataFormats/NanoAOD/interface/FlatTable.h"
+#include <cstdint>
 
 //
 // constructors and destructor

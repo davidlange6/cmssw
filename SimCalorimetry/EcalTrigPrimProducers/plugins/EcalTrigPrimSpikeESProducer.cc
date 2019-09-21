@@ -3,6 +3,7 @@
 
 #include "DataFormats/EcalDetId/interface/EcalTrigTowerDetId.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //
 // constructors and destructor

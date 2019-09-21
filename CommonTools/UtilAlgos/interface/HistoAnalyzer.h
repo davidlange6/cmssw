@@ -17,6 +17,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "CommonTools/UtilAlgos/interface/ExpressionHisto.h"
+#include <cstdint>
 
 template <typename C>
 class HistoAnalyzer : public edm::EDAnalyzer {

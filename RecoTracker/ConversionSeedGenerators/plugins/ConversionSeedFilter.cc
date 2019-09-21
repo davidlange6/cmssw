@@ -37,6 +37,7 @@
 #include "DataFormats/TrackReco/interface/Track.h"
 #include "TrackingTools/PatternTools/interface/Trajectory.h"
 #include "TrackingTools/PatternTools/interface/TrajTrackAssociation.h"
+#include <cstdint>
 
 class ConversionSeedFilter : public edm::stream::EDProducer<> {
 public:

@@ -21,6 +21,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <cstdint>
 
 constexpr int tccNum[12][12] = {
     /* EE- */

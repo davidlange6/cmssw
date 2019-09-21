@@ -24,6 +24,7 @@
 #include "L1Trigger/GlobalTriggerAnalyzer/interface/L1GtPatternMap.h"
 #include "L1Trigger/GlobalTriggerAnalyzer/interface/L1GtPatternWriter.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 L1GtPatternWriter::L1GtPatternWriter(std::ostream& destination,
                                      const std::string& header,

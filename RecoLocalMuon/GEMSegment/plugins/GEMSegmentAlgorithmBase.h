@@ -19,6 +19,7 @@
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class GEMSegmentAlgorithmBase {
 public:

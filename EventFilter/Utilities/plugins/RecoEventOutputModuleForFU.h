@@ -19,6 +19,7 @@
 #include "EventFilter/Utilities/interface/FileIO.h"
 #include "EventFilter/Utilities/interface/FastMonitoringService.h"
 #include "FWCore/Utilities/interface/Adler32Calculator.h"
+#include <cstdint>
 
 namespace evf {
   template <typename Consumer>

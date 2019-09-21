@@ -5,6 +5,7 @@
 
 #include "CaloCollections.h"
 #include "MPUnpacker_0x1001000b.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

@@ -1,5 +1,6 @@
 #include "CommonTools/RecoAlgos/interface/TrackWithVertexSelector.h"
 #include "FWCore/Utilities/interface/isFinite.h"
+#include <cstdint>
 //
 // constructors and destructor
 //

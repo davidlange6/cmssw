@@ -9,6 +9,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 
 #include "DQM/SiStripCommissioningSources/interface/PedsOnlyTask.h"
+#include <cstdint>
 
 using namespace sistrip;
 

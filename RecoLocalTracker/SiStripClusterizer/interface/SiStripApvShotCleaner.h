@@ -7,6 +7,7 @@
 #include "DataFormats/SiStripDigi/interface/SiStripDigi.h"
 #include <vector>
 #include <memory>
+#include <cstdint>
 
 class SiStripApvShotCleaner {
 public:

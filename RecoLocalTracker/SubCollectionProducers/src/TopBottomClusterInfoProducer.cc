@@ -164,4 +164,5 @@ void TopBottomClusterInfoProducer::produce(edm::StreamID, Event& iEvent, const E
 
 #include "FWCore/PluginManager/interface/ModuleDef.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(TopBottomClusterInfoProducer);

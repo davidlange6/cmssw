@@ -14,6 +14,7 @@ class SiStripDigi;
 #include "CalibFormats/SiStripObjects/interface/SiStripQuality.h"
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBuffer.h"
 #include <limits>
+#include <cstdint>
 
 class FedChannelConnection;
 

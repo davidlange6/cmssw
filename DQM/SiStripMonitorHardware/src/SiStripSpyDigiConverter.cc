@@ -17,6 +17,7 @@
 
 #include "DQM/SiStripMonitorHardware/interface/SiStripFEDSpyBuffer.h"
 #include "DQM/SiStripMonitorHardware/interface/SiStripSpyDigiConverter.h"
+#include <cstdint>
 
 namespace sistrip {
 

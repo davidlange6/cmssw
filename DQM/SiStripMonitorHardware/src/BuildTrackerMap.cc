@@ -376,4 +376,5 @@ void BuildTrackerMapPlugin::subtractMap(TkHistoMap* aResult, const TkHistoMap* a
 //
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(BuildTrackerMapPlugin);

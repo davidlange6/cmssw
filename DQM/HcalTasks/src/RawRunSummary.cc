@@ -1,4 +1,5 @@
 #include "DQM/HcalTasks/interface/RawRunSummary.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace constants;

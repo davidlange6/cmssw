@@ -32,6 +32,7 @@
 #include "SimDataFormats/Associations/interface/TrackToTrackingParticleAssociator.h"
 #include "QuickTrackAssociatorByHitsImpl.h"
 #include "SimTracker/TrackerHitAssociation/interface/TrackerHitAssociator.h"
+#include <cstdint>
 
 //
 // class declaration

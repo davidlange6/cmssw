@@ -1,4 +1,5 @@
 #include "L1Trigger/L1THGCal/interface/veryfrontend/HGCalVFELinearizationImpl.h"
+#include <cstdint>
 
 HGCalVFELinearizationImpl::HGCalVFELinearizationImpl(const edm::ParameterSet& conf)
     : linLSB_(conf.getParameter<double>("linLSB")),

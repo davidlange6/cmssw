@@ -8,6 +8,7 @@
 #include "DataFormats/TrajectorySeed/interface/TrajectorySeed.h"
 
 #include <utility>
+#include <cstdint>
 
 /** A track candidate is
     - a TSOS or equivalent (here a PTrajectoryStateOnDet)

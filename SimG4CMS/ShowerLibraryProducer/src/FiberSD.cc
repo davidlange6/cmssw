@@ -20,6 +20,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4SDManager.hh"
 #include "G4ios.hh"
+#include <cstdint>
 
 FiberSD::FiberSD(const std::string& iname,
                  const edm::EventSetup& es,

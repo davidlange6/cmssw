@@ -6,6 +6,7 @@
 
 // Framework headers
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 // Namespace resolution
 using std::cout;

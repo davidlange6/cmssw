@@ -9,6 +9,7 @@
 #include "EventFilter/CSCRawToDigi/interface/CSCDCCHeader.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDCCTrailer.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCDCCExaminer.h"
+#include <cstdint>
 
 class CSCDCCEventData {
 public:

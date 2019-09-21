@@ -4,6 +4,7 @@
 #include "SimG4CMS/Forward/interface/TimingSD.h"
 
 #include <string>
+#include <cstdint>
 
 class SimTrackManager;
 class G4Step;

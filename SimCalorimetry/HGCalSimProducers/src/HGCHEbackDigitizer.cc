@@ -7,6 +7,7 @@
 #include "Geometry/HcalTowerAlgo/interface/HcalGeometry.h"
 
 #include "vdt/vdtMath.h"
+#include <cstdint>
 
 using namespace hgc_digi;
 using namespace hgc_digi_utils;

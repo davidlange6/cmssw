@@ -10,6 +10,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include <cmath>
+#include <cstdint>
 
 namespace ecaldqm {
   LedClient::LedClient()

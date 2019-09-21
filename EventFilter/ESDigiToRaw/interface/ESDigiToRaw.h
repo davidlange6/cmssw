@@ -16,6 +16,7 @@
 #include "FWCore/ParameterSet/interface/FileInPath.h"
 
 #include "EventFilter/ESDigiToRaw/interface/ESDataFormatter.h"
+#include <cstdint>
 
 class ESDigiToRaw : public edm::global::EDProducer<> {
 public:

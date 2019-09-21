@@ -9,6 +9,7 @@
 #include <vector>
 
 #include <bitset>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerPixelPhase1EndcapBuilder<FilteredView>::buildComponent(FilteredView& fv,

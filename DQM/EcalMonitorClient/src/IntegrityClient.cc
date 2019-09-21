@@ -9,6 +9,7 @@
 #include "CondFormats/DataRecord/interface/EcalChannelStatusRcd.h"
 
 #include "DQM/EcalCommon/interface/EcalDQMCommonUtils.h"
+#include <cstdint>
 
 namespace ecaldqm {
   IntegrityClient::IntegrityClient() : DQWorkerClient(), errFractionThreshold_(0.) {

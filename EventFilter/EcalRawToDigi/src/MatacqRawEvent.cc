@@ -30,6 +30,7 @@ static inline void throwExcept(const std::string &s) { throw cms::Exception("Mat
 
 #include "MatacqRawEvent.h"
 #include <stdexcept>
+#include <cstdint>
 static inline void throwExcept(const std::string &s) { throw std::runtime_error(s.c_str()); }
 
 #endif  //CMSSW not defined

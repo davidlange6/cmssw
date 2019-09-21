@@ -9,6 +9,7 @@
 #include "FWCore/Utilities/interface/EDGetToken.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "RecoTracker/TkSeedingLayers/interface/SeedComparitor.h"
+#include <cstdint>
 
 class ClusterShapeHitFilter;
 class TrackerTopology;

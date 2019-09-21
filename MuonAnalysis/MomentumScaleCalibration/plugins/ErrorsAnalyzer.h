@@ -40,6 +40,7 @@
 #include "MuonAnalysis/MomentumScaleCalibration/interface/Functions.h"
 #include "MuonAnalysis/MomentumScaleCalibration/interface/RootTreeHandler.h"
 #include "MuScleFitUtils.h"
+#include <cstdint>
 
 //
 // class declaration

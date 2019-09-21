@@ -3,6 +3,7 @@
 #include "DataFormats/EcalDetId/interface/EcalPnDiodeDetId.h"
 
 #include <mutex>
+#include <cstdint>
 
 namespace ecaldqm {
   unsigned memarr[] = {kEEm07, kEEm08, kEEm02, kEEm03, kEBm01, kEBm02, kEBm03, kEBm04, kEBm05, kEBm06, kEBm07,

@@ -20,6 +20,7 @@
 #include <string>
 #include <algorithm>
 #include <cassert>
+#include <cstdint>
 
 void StripClusterizerAlgorithm::initialize(const edm::EventSetup& es) {
   uint32_t n_cache_id = es.get<SiStripNoisesRcd>().cacheIdentifier();

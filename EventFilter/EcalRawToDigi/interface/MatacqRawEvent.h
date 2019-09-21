@@ -23,6 +23,7 @@
 #endif
 
 #include <sys/time.h>  //for timeval definition
+#include <cstdint>
 
 /** Wrapper for matacq raw event fragments. This class provides the
  * method to interpret the data. 

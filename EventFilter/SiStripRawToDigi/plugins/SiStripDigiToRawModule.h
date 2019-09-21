@@ -10,6 +10,7 @@
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include "boost/cstdint.hpp"
 #include <string>
+#include <cstdint>
 namespace edm {
   class ConfigurationDescriptions;
 }

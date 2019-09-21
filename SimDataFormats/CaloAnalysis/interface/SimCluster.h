@@ -8,6 +8,7 @@
 #include "SimDataFormats/CaloHit/interface/PCaloHit.h"
 #include "SimDataFormats/Track/interface/SimTrack.h"
 #include <vector>
+#include <cstdint>
 
 //
 // Forward declarations

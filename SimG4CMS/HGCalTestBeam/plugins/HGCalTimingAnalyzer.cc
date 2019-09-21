@@ -39,6 +39,7 @@
 #include "TROOT.h"
 #include "TSystem.h"
 #include "TTree.h"
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

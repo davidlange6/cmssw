@@ -40,6 +40,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 
 #include "FastSimulation/Tracking/interface/FastTrackingUtilities.h"
+#include <cstdint>
 
 using namespace std;
 

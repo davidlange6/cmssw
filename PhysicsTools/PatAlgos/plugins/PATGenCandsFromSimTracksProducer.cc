@@ -24,6 +24,7 @@
 #include "SimGeneral/HepPDTRecord/interface/PdtEntry.h"
 
 #include <ext/algorithm>
+#include <cstdint>
 
 namespace pat {
   class PATGenCandsFromSimTracksProducer : public edm::stream::EDProducer<> {

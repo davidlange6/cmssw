@@ -10,6 +10,7 @@
 
 #include "DataFormats/Provenance/interface/Timestamp.h"
 #include <iostream>
+#include <cstdint>
 
 EcalMappingElectronicsHandler::EcalMappingElectronicsHandler(const edm::ParameterSet &ps)
     : txtFileSource_(ps.getUntrackedParameter<std::string>("txtFile")),

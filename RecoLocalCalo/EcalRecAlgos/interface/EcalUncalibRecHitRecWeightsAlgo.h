@@ -19,6 +19,7 @@
 #include "SimCalorimetry/EcalSimAlgos/interface/EcalShapeBase.h"
 
 #include <vector>
+#include <cstdint>
 
 template <class C>
 class EcalUncalibRecHitRecWeightsAlgo {

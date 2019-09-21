@@ -42,6 +42,7 @@
 #include "TPave.h"
 #include "TGaxis.h"
 #include "TPaveStats.h"
+#include <cstdint>
 
 namespace {
 

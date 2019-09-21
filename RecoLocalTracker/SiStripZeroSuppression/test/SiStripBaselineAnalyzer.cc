@@ -66,6 +66,7 @@
 #include "TGraph.h"
 #include "TMultiGraph.h"
 #include "THStack.h"
+#include <cstdint>
 
 //
 // class decleration

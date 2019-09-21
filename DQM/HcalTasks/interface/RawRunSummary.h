@@ -3,6 +3,7 @@
 
 #include "DQM/HcalCommon/interface/DQClient.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
+#include <cstdint>
 
 namespace hcaldqm {
   class RawRunSummary : public DQClient {

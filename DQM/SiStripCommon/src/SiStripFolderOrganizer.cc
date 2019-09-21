@@ -29,6 +29,7 @@
 #define SEP "/"
 
 #include <cstring>
+#include <cstdint>
 
 SiStripFolderOrganizer::SiStripFolderOrganizer() {
   TopFolderName = "SiStrip";

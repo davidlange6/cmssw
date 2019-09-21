@@ -6,6 +6,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "DataFormats/SiStripCluster/interface/SiStripClusterTools.h"
+#include <cstdint>
 
 ThreeThresholdAlgorithm::ThreeThresholdAlgorithm(float chan,
                                                  float seed,

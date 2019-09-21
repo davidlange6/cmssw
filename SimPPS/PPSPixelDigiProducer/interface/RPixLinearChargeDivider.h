@@ -5,6 +5,7 @@
 #include "SimTracker/Common/interface/SiG4UniversalFluctuation.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixEnergyDepositUnit.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 namespace CLHEP {
   class HepRandomEngine;

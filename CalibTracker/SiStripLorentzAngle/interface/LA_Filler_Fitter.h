@@ -9,6 +9,7 @@
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include <TTree.h>
 #include "SymmetryFit.h"
+#include <cstdint>
 class TProfile;
 
 class LA_Filler_Fitter {

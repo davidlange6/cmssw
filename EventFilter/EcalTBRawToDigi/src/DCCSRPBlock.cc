@@ -2,6 +2,7 @@
 #include "DCCDataParser.h"
 #include "DCCDataMapper.h"
 #include "DCCEventBlock.h"
+#include <cstdint>
 
 DCCTBSRPBlock::DCCTBSRPBlock(DCCTBEventBlock* dccBlock,
                              DCCTBDataParser* parser,

@@ -18,6 +18,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/EcalDetId/interface/EcalSubdetector.h"
 #include "DataFormats/Common/interface/DataFrameContainer.h"
+#include <cstdint>
 
 class EcalDigiCollection : public edm::DataFrameContainer {
 public:

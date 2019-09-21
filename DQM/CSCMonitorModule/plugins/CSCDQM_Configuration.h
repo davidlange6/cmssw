@@ -60,6 +60,7 @@
 #include "CSCDQM_Exception.h"
 #include "CSCDQM_Utility.h"
 #include "CSCDQM_Logger.h"
+#include <cstdint>
 
 /** Length of Global Parameter sequence */
 #define CONFIG_PARAMETERS_SEQ_LEN 4

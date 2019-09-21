@@ -50,6 +50,7 @@
 
 #include "DataFormats/CSCDigi/interface/CSCDCCFormatStatusDigi.h"
 #include "DataFormats/CSCDigi/interface/CSCDCCFormatStatusDigiCollection.h"
+#include <cstdint>
 
 namespace cscdqm {
 

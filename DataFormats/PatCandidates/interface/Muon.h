@@ -28,6 +28,7 @@
 #include "DataFormats/ParticleFlowCandidate/interface/IsolatedPFCandidateFwd.h"
 #include "DataFormats/ParticleFlowCandidate/interface/IsolatedPFCandidate.h"
 #include "DataFormats/MuonReco/interface/MuonSimInfo.h"
+#include <cstdint>
 
 // Define typedefs for convenience
 namespace pat {

@@ -1,4 +1,5 @@
 #include "DataFormats/SiStripCommon/interface/SiStripEnumsAndStrings.h"
+#include <cstdint>
 
 // -----------------------------------------------------------------------------
 //

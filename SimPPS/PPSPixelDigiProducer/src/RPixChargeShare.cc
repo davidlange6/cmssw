@@ -1,6 +1,7 @@
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixChargeShare.h"
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 RPixChargeShare::RPixChargeShare(const edm::ParameterSet &params, uint32_t det_id)
     : det_id_(det_id), theRPixDetTopology_() {

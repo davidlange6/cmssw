@@ -5,6 +5,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSetfwd.h"
 
 #include <iostream>
+#include <cstdint>
 
 popcon::EcalDCSHandler::EcalDCSHandler(const edm::ParameterSet& ps)
     : m_name(ps.getUntrackedParameter<std::string>("name", "EcalDCSHandler")) {

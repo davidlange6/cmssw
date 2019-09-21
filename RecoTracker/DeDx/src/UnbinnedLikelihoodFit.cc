@@ -1,5 +1,6 @@
 #include "RecoTracker/DeDx/interface/UnbinnedLikelihoodFit.h"
 #include <TMath.h>
+#include <cstdint>
 
 // a class to perform a likelihood fit
 // Author: Christophe Delaere

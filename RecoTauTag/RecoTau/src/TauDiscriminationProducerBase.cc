@@ -1,6 +1,7 @@
 #include "RecoTauTag/RecoTau/interface/TauDiscriminationProducerBase.h"
 
 #include <string>
+#include <cstdint>
 
 using namespace reco;
 

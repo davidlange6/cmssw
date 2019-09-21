@@ -11,6 +11,7 @@
 
 #include <limits>
 #include <iomanip>
+#include <cstdint>
 
 namespace ecaldqm
 {

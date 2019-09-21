@@ -3,6 +3,7 @@
 #include "tinyxml2.h"
 #include "FWCore/Utilities/interface/Exception.h"
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
+#include <cstdint>
 
 namespace {
   // split into tokens and convert them to uint32_t

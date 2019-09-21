@@ -13,6 +13,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctElectronFinalSort.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 using std::vector;
 

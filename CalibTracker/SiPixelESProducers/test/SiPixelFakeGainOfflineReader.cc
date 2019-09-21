@@ -5,6 +5,7 @@
 #include "Geometry/TrackerGeometryBuilder/interface/PixelGeomDetUnit.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "Geometry/CommonTopologies/interface/PixelTopology.h"
+#include <cstdint>
 namespace cms {
   SiPixelFakeGainOfflineReader::SiPixelFakeGainOfflineReader(const edm::ParameterSet& conf)
       : conf_(conf),

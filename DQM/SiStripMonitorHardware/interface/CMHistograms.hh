@@ -24,6 +24,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include "DQM/SiStripMonitorHardware/interface/HistogramBase.hh"
+#include <cstdint>
 
 class CMHistograms : public HistogramBase {
 public:

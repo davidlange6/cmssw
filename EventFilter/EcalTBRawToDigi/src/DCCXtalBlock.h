@@ -5,6 +5,7 @@
 #define DCCTBXTALBLOCK_HH
 
 #include "DCCBlockPrototype.h"
+#include <cstdint>
 class DCCTBDataParser;
 
 class DCCTBXtalBlock : public DCCTBBlockPrototype {

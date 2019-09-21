@@ -58,6 +58,7 @@ https://twiki.cern.ch/twiki/bin/view/CMS/ValidIsoTrkCalib
 
 #include <fstream>
 #include <map>
+#include <cstdint>
 
 using namespace edm;
 using namespace std;

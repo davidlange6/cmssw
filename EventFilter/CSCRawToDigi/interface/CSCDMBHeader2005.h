@@ -6,6 +6,7 @@
 #include <cstring>  // bzero
 #include "DataFormats/CSCDigi/interface/CSCDMBStatusDigi.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCVDMBHeaderFormat.h"
+#include <cstdint>
 
 struct CSCDMBHeader2005 : public CSCVDMBHeaderFormat {
   // public:

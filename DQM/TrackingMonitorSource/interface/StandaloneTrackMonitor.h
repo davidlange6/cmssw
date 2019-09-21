@@ -22,6 +22,7 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/BeamSpot/interface/BeamSpot.h"
 #include "DataFormats/Common/interface/DetSetVectorNew.h"
+#include <cstdint>
 
 class TrackingRecHit;
 class SiStripCluster;

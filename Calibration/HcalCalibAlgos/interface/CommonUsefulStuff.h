@@ -35,6 +35,7 @@
 #include "TTree.h"
 #include "TH1F.h"
 #include "TString.h"
+#include <cstdint>
 
 /* getDist functions by Jim:
 /uscms/home/jhirsch/IsoTracks_314/CMSSW_3_1_4/src/JetMETCorrections/IsolatedParticles/interface/FindCaloHit.icc

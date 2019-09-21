@@ -12,6 +12,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/Framework/interface/ConsumesCollector.h"
+#include <cstdint>
 
 using namespace ctfseeding;
 

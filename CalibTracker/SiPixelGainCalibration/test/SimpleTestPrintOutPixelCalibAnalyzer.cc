@@ -29,6 +29,7 @@
 #include "DataFormats/SiPixelDigi/interface/SiPixelCalibDigi.h"
 
 #include "CalibTracker/SiPixelGainCalibration/test/SimpleTestPrintOutPixelCalibAnalyzer.h"
+#include <cstdint>
 
 //
 // constants, enums and typedefs

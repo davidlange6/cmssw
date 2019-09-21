@@ -68,5 +68,6 @@ namespace dqmservices {
 }  // namespace dqmservices
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 using dqmservices::JsonWritingTimeoutPoolOutputModule;
 DEFINE_FWK_MODULE(JsonWritingTimeoutPoolOutputModule);

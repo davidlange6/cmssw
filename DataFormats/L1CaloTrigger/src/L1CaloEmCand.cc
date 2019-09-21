@@ -1,6 +1,7 @@
 #include "DataFormats/L1CaloTrigger/interface/L1CaloEmCand.h"
 
 #include <iostream>
+#include <cstdint>
 
 using std::dec;
 using std::endl;

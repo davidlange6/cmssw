@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "RecoEgamma/EgammaPhotonAlgos/interface/ConversionHitChecker.h"
+#include <cstdint>
 // Framework
 //
 

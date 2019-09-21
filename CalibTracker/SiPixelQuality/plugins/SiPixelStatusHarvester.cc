@@ -51,6 +51,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <cstdint>
 
 using namespace edm;
 //class MonitorElement;

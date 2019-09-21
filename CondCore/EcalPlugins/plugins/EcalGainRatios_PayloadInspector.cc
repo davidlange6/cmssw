@@ -17,6 +17,7 @@
 #include "TPaveStats.h"
 #include <string>
 #include <fstream>
+#include <cstdint>
 
 namespace {
   enum { kEBChannels = 61200, kEEChannels = 14648 };

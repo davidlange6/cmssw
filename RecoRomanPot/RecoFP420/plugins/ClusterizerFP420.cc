@@ -36,6 +36,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <cstdint>
 using namespace std;
 
 namespace cms {

@@ -2,6 +2,7 @@
 #define PhysicsTools_PatUtils_interface_PatSelectorByFlags_h
 
 #include "DataFormats/PatCandidates/interface/Flags.h"
+#include <cstdint>
 
 namespace pat {
     class SelectorByFlags {

@@ -1,4 +1,5 @@
 #include "DQM/HcalCommon/interface/HashFilter.h"
+#include <cstdint>
 
 namespace hcaldqm {
   using namespace mapper;

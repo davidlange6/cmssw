@@ -40,6 +40,7 @@
 
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 //
 // constructors and destructor

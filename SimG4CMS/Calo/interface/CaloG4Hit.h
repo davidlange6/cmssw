@@ -28,6 +28,7 @@
 
 #include "G4Allocator.hh"
 #include "G4VHit.hh"
+#include <cstdint>
 
 class CaloG4Hit : public G4VHit {
 public:

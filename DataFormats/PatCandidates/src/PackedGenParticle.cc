@@ -1,6 +1,7 @@
 #include "DataFormats/PatCandidates/interface/PackedGenParticle.h"
 #include "DataFormats/Math/interface/libminifloat.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
+#include <cstdint>
 
 void pat::PackedGenParticle::pack(bool unpackAfterwards) {
   packedPt_ = MiniFloatConverter::float32to16(p4_.load()->Pt());

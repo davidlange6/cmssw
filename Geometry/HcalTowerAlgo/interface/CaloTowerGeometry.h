@@ -6,6 +6,7 @@
 #include "DataFormats/CaloTowers/interface/CaloTowerDetId.h"
 #include "Geometry/Records/interface/CaloTowerGeometryRecord.h"
 #include "Geometry/CaloTopology/interface/CaloTowerTopology.h"
+#include <cstdint>
 
 /** \class CaloTowerGeometry
   *  

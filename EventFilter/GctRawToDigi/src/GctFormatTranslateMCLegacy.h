@@ -2,6 +2,7 @@
 #define GctFormatTranslateMCLegacy_h_
 
 #include "EventFilter/GctRawToDigi/src/GctFormatTranslateBase.h"
+#include <cstdint>
 
 /*!
 * \class GctFormatTranslateMCLegacy

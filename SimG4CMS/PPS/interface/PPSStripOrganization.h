@@ -4,6 +4,7 @@
 #include "globals.hh"
 #include "SimG4CMS/PPS/interface/TotemRPVDetectorOrganization.h"
 #include "G4Step.hh"
+#include <cstdint>
 
 class PPSStripOrganization : public TotemRPVDetectorOrganization {
 public:

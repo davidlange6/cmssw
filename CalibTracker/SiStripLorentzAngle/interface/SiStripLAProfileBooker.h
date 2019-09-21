@@ -20,6 +20,7 @@
 #include <TFile.h>
 #include <TH1D.h>
 #include <TDirectory.h>
+#include <cstdint>
 
 class TrackerTopology;
 

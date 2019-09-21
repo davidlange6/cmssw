@@ -7,6 +7,7 @@
 #include <array>
 #include <vector>
 #include "DataFormats/Provenance/interface/ProductID.h"
+#include <cstdint>
 
 // A Trackster is a Direct Acyclic Graph created when
 // pattern recognition algorithms connect hits or

@@ -18,6 +18,7 @@
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "HcalTBNumberingScheme.h"
+#include <cstdint>
 
 //
 // member functions

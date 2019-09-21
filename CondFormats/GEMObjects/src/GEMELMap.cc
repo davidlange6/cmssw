@@ -1,6 +1,7 @@
 #include "CondFormats/GEMObjects/interface/GEMELMap.h"
 #include "CondFormats/GEMObjects/interface/GEMROmap.h"
 #include "DataFormats/MuonDetId/interface/GEMDetId.h"
+#include <cstdint>
 
 GEMELMap::GEMELMap() : theVersion("") {}
 

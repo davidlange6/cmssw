@@ -12,6 +12,7 @@
 #include <iostream>
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <map>
+#include <cstdint>
 
 namespace ZdcUnpacker_impl {
   template <class DigiClass>

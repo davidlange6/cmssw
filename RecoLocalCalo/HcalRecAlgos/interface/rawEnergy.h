@@ -2,6 +2,7 @@
 #define RecoLocalCalo_HcalRecAlgos_rawEnergy_h
 
 #include "boost/cstdint.hpp"
+#include <cstdint>
 
 namespace HcalRecAlgosPrivate {
   template <typename T>

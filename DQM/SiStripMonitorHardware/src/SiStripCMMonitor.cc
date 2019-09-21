@@ -464,4 +464,5 @@ void SiStripCMMonitorPlugin::fillMaps(uint32_t aDetId,
 //
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripCMMonitorPlugin);

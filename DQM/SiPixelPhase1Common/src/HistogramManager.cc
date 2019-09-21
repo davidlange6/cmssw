@@ -15,6 +15,7 @@
 
 // Logger
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 HistogramManager::HistogramManager(const edm::ParameterSet& iconfig, GeometryInterface& geo)
     : iConfig(iconfig),

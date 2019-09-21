@@ -39,6 +39,7 @@ typedef NativeArrayTableProducer<std::vector<int>, int, nanoaod::FlatTable::IntC
 typedef NativeArrayTableProducer<std::vector<bool>, uint8_t, nanoaod::FlatTable::UInt8Column> BoolArrayTableProducer;
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(FloatArrayTableProducer);
 DEFINE_FWK_MODULE(DoubleArrayTableProducer);
 DEFINE_FWK_MODULE(IntArrayTableProducer);

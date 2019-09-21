@@ -34,6 +34,7 @@
 #include <iostream>
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //#define FAKEFRAMEROTATION
 

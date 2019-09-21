@@ -1,5 +1,6 @@
 #include "SimTracker/SiStripDigitizer/interface/SiPileUpSignals.h"
 #include "SimDataFormats/TrackingHit/interface/PSimHit.h"
+#include <cstdint>
 
 void SiPileUpSignals::resetSignals() { signal_.clear(); }
 

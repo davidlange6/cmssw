@@ -9,6 +9,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctJetEtCalibrationLut.h"
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 //DEFINE STATICS
 const unsigned int L1GctJetFinderBase::MAX_JETS_OUT = 6;

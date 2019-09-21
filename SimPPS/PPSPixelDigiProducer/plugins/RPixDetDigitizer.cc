@@ -3,6 +3,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixDetDigitizer.h"
 #include "Geometry/VeryForwardGeometry/interface/CTPPSPixelTopology.h"
+#include <cstdint>
 
 RPixDetDigitizer::RPixDetDigitizer(const edm::ParameterSet &params,
                                    CLHEP::HepRandomEngine &eng,

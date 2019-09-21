@@ -15,6 +15,7 @@
 #include "DataFormats/CSCDigi/interface/CSCCLCTPreTriggerCollection.h"
 #include "DataFormats/CSCDigi/interface/CSCCorrelatedLCTDigiCollection.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCEventData.h"
+#include <cstdint>
 
 class FEDRawDataCollection;
 class CSCReadoutMappingFromFile;

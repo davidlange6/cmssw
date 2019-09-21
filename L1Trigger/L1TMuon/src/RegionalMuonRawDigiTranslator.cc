@@ -1,5 +1,6 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "L1Trigger/L1TMuon/interface/RegionalMuonRawDigiTranslator.h"
+#include <cstdint>
 
 void l1t::RegionalMuonRawDigiTranslator::fillRegionalMuonCand(
     RegionalMuonCand& mu, uint32_t raw_data_00_31, uint32_t raw_data_32_63, int proc, tftype tf) {

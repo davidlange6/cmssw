@@ -22,6 +22,7 @@
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 #include "DataFormats/FEDRawData/interface/FEDRawDataCollection.h"
 #include "DataFormats/Scalers/interface/L1AcceptBunchCrossing.h"
+#include <cstdint>
 
 // FE BX counter starts at 0, while OD BX starts at 1.
 // For some reason, I do not understand myself,

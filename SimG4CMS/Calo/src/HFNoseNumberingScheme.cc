@@ -5,6 +5,7 @@
 #include "SimG4CMS/Calo/interface/HFNoseNumberingScheme.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

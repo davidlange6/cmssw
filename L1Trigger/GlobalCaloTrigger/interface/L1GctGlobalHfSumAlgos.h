@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <map>
+#include <cstdint>
 
 class L1GctWheelJetFpga;
 class L1GctHfLutSetup;

@@ -23,6 +23,7 @@
 #include "DataFormats/L1Trigger/interface/EtSum.h"
 
 #include "DataFormats/Math/interface/LorentzVector.h"
+#include <cstdint>
 
 namespace l1t {
 

@@ -23,6 +23,7 @@
 #include <unordered_set>
 #include <memory>
 #include <tuple>
+#include <cstdint>
 
 class PCaloHit;
 class PileUpEventPrincipal;

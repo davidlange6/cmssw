@@ -24,6 +24,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdint>
 
 PPSDiamondSD::PPSDiamondSD(const std::string& name_,
                            const edm::EventSetup& es,

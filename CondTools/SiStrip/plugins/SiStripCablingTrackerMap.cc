@@ -2,6 +2,7 @@
 #include "CommonTools/TrackerMap/interface/TrackerMap.h"
 
 #include <sstream>
+#include <cstdint>
 
 SiStripCablingTrackerMap::SiStripCablingTrackerMap(edm::ParameterSet const& conf) : conf_(conf) {}
 

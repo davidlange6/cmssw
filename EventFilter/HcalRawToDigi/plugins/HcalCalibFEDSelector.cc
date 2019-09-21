@@ -13,6 +13,7 @@
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 #include "EventFilter/HcalRawToDigi/interface/HcalDCCHeader.h"
 #include "EventFilter/HcalRawToDigi/interface/HcalFEDList.h"
+#include <cstdint>
 
 class HcalCalibFEDSelector : public edm::EDProducer {
 public:

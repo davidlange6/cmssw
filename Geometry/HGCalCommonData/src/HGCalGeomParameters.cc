@@ -19,6 +19,7 @@
 
 #include <algorithm>
 #include <unordered_set>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 using namespace geant_units::operators;

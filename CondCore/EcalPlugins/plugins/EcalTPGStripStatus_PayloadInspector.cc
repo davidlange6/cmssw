@@ -15,6 +15,7 @@
 #include "TLatex.h"
 
 #include <string>
+#include <cstdint>
 
 namespace {
   enum { NTCC = 108, NTower = 28, NStrip = 5, NXtal = 5 };

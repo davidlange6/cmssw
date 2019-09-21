@@ -1,4 +1,5 @@
 #include "L1Trigger/L1THGCal/interface/concentrator/HGCalConcentratorCoarsenerImpl.h"
+#include <cstdint>
 
 HGCalConcentratorCoarsenerImpl::HGCalConcentratorCoarsenerImpl(const edm::ParameterSet& conf)
     : fixedDataSizePerHGCROC_(conf.getParameter<bool>("fixedDataSizePerHGCROC")),

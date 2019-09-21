@@ -8,6 +8,7 @@
 #include "SimTracker/TrackerHitAssociation/interface/ClusterTPAssociation.h"
 
 #include "FWCore/Utilities/interface/IndexSet.h"
+#include <cstdint>
 
 // Forward declarations
 class TrackerHitAssociator;

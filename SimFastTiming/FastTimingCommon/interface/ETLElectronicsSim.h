@@ -11,6 +11,7 @@
 
 #include "DataFormats/FTLDigi/interface/FTLDigiCollections.h"
 #include "SimFastTiming/FastTimingCommon/interface/MTDDigitizerTypes.h"
+#include <cstdint>
 
 namespace mtd = mtd_digitizer;
 

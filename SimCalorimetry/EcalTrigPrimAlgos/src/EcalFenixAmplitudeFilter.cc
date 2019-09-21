@@ -4,6 +4,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <SimCalorimetry/EcalTrigPrimAlgos/interface/EcalFenixAmplitudeFilter.h>
 #include <iostream>
+#include <cstdint>
 
 EcalFenixAmplitudeFilter::EcalFenixAmplitudeFilter() : inputsAlreadyIn_(0), shift_(6) {}
 

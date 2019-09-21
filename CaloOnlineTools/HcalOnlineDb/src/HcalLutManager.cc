@@ -30,6 +30,7 @@
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
+#include <cstdint>
 XERCES_CPP_NAMESPACE_USE
 using namespace std;
 using namespace oracle::occi;

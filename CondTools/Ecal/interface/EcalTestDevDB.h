@@ -30,6 +30,7 @@
 
 #include <string>
 #include <map>
+#include <cstdint>
 
 namespace edm {
   class ParameterSet;

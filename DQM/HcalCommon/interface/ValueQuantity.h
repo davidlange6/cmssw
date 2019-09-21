@@ -4,6 +4,7 @@
 #include "DQM/HcalCommon/interface/Flag.h"
 #include "DQM/HcalCommon/interface/Quantity.h"
 #include "boost/unordered_map.hpp"
+#include <cstdint>
 
 namespace hcaldqm {
   namespace quantity {

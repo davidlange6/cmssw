@@ -3,6 +3,7 @@
 #include "DQM/EcalCommon/interface/MESetMulti.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include <cstdint>
 
 namespace ecaldqm {
 

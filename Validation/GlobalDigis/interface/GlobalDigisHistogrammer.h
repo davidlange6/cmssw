@@ -44,6 +44,7 @@
 #include <vector>
 
 #include "TString.h"
+#include <cstdint>
 
 class GlobalDigisHistogrammer : public DQMEDAnalyzer {
 public:

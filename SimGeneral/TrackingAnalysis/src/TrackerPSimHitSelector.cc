@@ -11,6 +11,7 @@
 #include "SimGeneral/TrackingAnalysis/interface/TrackerPSimHitSelector.h"
 
 #include "SimTracker/Common/interface/SimHitSelectorFromDB.h"
+#include <cstdint>
 
 void TrackerPSimHitSelector::select(PSimHitCollection &selection,
                                     edm::Event const &event,

@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <sstream>
 #include <boost/format.hpp>
+#include <cstdint>
 
 namespace sistrip {
 

@@ -5,6 +5,7 @@
 #include "DataFormats/HcalDetId/interface/HcalGenericDetId.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
+#include <cstdint>
 
 bool HcalSeverityLevelComputer::getChStBit(HcalSeverityDefinition& mydef, const std::string& mybit) {
   if (mybit == "HcalCellOff")

@@ -1,4 +1,5 @@
 #include "SimMuon/MCTruth/interface/RPCHitAssociator.h"
+#include <cstdint>
 
 using namespace std;
 

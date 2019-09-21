@@ -5,6 +5,7 @@
 #include <ostream>
 #include <vector>
 #include <array>
+#include <cstdint>
 
 class GeometricTimingDet;
 

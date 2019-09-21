@@ -3,6 +3,7 @@
 
 #include "DataFormats/EcalDigi/interface/EcalTriggerPrimitiveSample.h"
 #include <vector>
+#include <cstdint>
 
 class EcalTPGLutGroup;
 class EcalTPGLutIdMap;

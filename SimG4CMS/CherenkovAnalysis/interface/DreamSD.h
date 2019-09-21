@@ -7,6 +7,7 @@
 #include "G4PhysicsOrderedFreeVector.hh"
 
 #include <map>
+#include <cstdint>
 
 const int MAXPHOTONS = 500;  // Maximum number of photons we can store
 

@@ -253,4 +253,5 @@ void SiStripBadComponentInfo::createSummary(MonitorElement* me, const std::map<s
   }
 }
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripBadComponentInfo);

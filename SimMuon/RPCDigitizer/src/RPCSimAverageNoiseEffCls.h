@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "SimMuon/RPCDigitizer/src/RPCSimSetUp.h"
+#include <cstdint>
 
 class RPCGeometry;
 //class RPCSimSetUp;

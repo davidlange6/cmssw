@@ -24,6 +24,7 @@
 #include "CalibCalorimetry/HcalTPGAlgos/interface/HcalEmap.h"
 #include "DataFormats/HcalDetId/interface/HcalDetId.h"
 #include "DataFormats/HcalDetId/interface/HcalTrigTowerDetId.h"
+#include <cstdint>
 
 using namespace std;
 XERCES_CPP_NAMESPACE_USE

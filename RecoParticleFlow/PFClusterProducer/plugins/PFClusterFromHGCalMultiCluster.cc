@@ -4,6 +4,7 @@
 #include "FWCore/Framework/interface/Event.h"
 
 #include "DataFormats/ForwardDetId/interface/HGCalDetId.h"
+#include <cstdint>
 
 void PFClusterFromHGCalMultiCluster::updateEvent(const edm::Event& ev) { ev.getByToken(clusterToken_, clusterH_); }
 

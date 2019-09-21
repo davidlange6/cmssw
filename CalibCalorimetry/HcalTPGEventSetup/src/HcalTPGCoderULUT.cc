@@ -33,6 +33,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "Geometry/CaloTopology/interface/HcalTopology.h"
 #include "CalibFormats/HcalObjects/interface/HcalDbService.h"
+#include <cstdint>
 
 //
 // class decleration

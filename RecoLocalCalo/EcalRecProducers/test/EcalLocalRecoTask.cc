@@ -27,6 +27,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 
 #include "SimDataFormats/CaloHit/interface/PCaloHitContainer.h"
+#include <cstdint>
 
 EcalLocalRecoTask::EcalLocalRecoTask(const edm::ParameterSet& ps) {
   // DQM ROOT output

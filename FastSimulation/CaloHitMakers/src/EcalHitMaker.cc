@@ -25,6 +25,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 
 typedef ROOT::Math::Plane3D::Vector Vector;
 typedef ROOT::Math::Plane3D::Point Point;

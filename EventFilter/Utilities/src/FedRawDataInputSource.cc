@@ -49,6 +49,7 @@
 #include "EventFilter/Utilities/interface/reader.h"
 
 #include <boost/lexical_cast.hpp>
+#include <cstdint>
 
 FedRawDataInputSource::FedRawDataInputSource(edm::ParameterSet const& pset, edm::InputSourceDescription const& desc)
     : edm::RawInputSource(pset, desc),

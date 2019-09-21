@@ -4,6 +4,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixSignalPoint.h"
 #include "SimPPS/PPSPixelDigiProducer/interface/RPixEnergyDepositUnit.h"
+#include <cstdint>
 
 class RPixLinearChargeCollectionDrifter {
 public:

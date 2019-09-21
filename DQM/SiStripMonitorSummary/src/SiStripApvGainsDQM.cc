@@ -3,6 +3,7 @@
 
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripApvGainsDQM::SiStripApvGainsDQM(const edm::EventSetup &eSetup,

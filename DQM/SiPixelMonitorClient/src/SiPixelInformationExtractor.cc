@@ -56,6 +56,7 @@
 #include <map>
 
 #include <cstdlib>  // for free() - Root can allocate with malloc() - sigh...
+#include <cstdint>
 
 using namespace std;
 using namespace edm;

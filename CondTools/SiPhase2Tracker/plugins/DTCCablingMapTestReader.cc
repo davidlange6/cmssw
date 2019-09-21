@@ -38,6 +38,7 @@ Implementation:
 #include "CondFormats/SiPhase2TrackerObjects/interface/TrackerDetToDTCELinkCablingMap.h"
 #include "CondFormats/SiPhase2TrackerObjects/interface/DTCELinkId.h"
 #include "CondFormats/DataRecord/interface/TrackerDetToDTCELinkCablingMapRcd.h"
+#include <cstdint>
 
 class DTCCablingMapTestReader : public edm::one::EDAnalyzer<> {
 public:

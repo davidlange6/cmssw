@@ -4,6 +4,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <iostream>
+#include <cstdint>
 
 //-----------------------------------------------------------------------------------------
 EcalFenixStripFormatEE::EcalFenixStripFormatEE() : shift_(0) {}

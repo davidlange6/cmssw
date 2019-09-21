@@ -17,6 +17,7 @@
 
 #include "CondFormats/SiPixelObjects/interface/SiPixelGainCalibrationOffline.h"
 #include "CondFormats/DataRecord/interface/SiPixelGainCalibrationOfflineRcd.h"
+#include <cstdint>
 
 class SiPixelGainCalibrationOfflineService
     : public SiPixelGainCalibrationServicePayloadGetter<SiPixelGainCalibrationOffline, SiPixelGainCalibrationOfflineRcd> {

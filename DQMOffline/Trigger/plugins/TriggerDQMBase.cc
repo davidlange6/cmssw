@@ -1,4 +1,5 @@
 #include "DQMOffline/Trigger/plugins/TriggerDQMBase.h"
+#include <cstdint>
 
 void TriggerDQMBase::setMETitle(ObjME& me, const std::string& titleX, const std::string& titleY) {
   me.numerator->setAxisTitle(titleX, 1);

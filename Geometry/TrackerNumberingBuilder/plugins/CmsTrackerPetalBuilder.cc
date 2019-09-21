@@ -7,6 +7,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <vector>
+#include <cstdint>
 
 template <class FilteredView>
 void CmsTrackerPetalBuilder<FilteredView>::buildComponent(FilteredView& fv, GeometricDet* g, const std::string& s) {

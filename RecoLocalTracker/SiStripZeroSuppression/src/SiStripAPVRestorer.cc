@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <cstdint>
 
 SiStripAPVRestorer::SiStripAPVRestorer(const edm::ParameterSet& conf)
     : quality_cache_id(-1),

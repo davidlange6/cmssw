@@ -1,5 +1,6 @@
 #include "DQM/HcalTasks/interface/TPTask.h"
 #include "DQM/L1TMonitor/interface/L1TStage2CaloLayer1.h"  // For ComparisonHelper::zip
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

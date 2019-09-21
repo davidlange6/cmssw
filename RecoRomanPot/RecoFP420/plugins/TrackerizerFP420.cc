@@ -19,6 +19,7 @@
 #include "DataFormats/FP420Cluster/interface/TrackCollectionFP420.h"
 
 #include <iostream>
+#include <cstdint>
 using namespace std;
 
 //

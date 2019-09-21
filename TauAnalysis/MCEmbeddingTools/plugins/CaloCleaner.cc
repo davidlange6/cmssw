@@ -6,6 +6,7 @@
 #include "DataFormats/HcalRecHit/interface/HORecHit.h"
 #include "DataFormats/HcalRecHit/interface/ZDCRecHit.h"
 #include "DataFormats/HcalRecHit/interface/CastorRecHit.h"
+#include <cstdint>
 
 typedef CaloCleaner<EcalRecHit> EcalRecHitColCleaner;
 typedef CaloCleaner<HBHERecHit> HBHERecHitColCleaner;

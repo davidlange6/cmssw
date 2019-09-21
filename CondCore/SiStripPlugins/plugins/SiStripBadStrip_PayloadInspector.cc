@@ -43,6 +43,7 @@
 #include "TLatex.h"
 #include "TPave.h"
 #include "TPaveStats.h"
+#include <cstdint>
 
 namespace {
 

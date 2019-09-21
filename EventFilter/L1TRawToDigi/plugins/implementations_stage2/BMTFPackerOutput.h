@@ -5,6 +5,7 @@
 
 #include "L1Trigger/L1TMuon/interface/RegionalMuonRawDigiTranslator.h"
 #include "BMTFTokens.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

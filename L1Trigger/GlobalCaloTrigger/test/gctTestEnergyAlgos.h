@@ -15,6 +15,7 @@
 #include <vector>
 #include <fstream>
 #include <stdint.h>
+#include <cstdint>
 
 class L1GlobalCaloTrigger;
 class L1CaloRegion;

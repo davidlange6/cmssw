@@ -3,6 +3,7 @@
 
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/MessageLogger/interface/MessageDrop.h"
+#include <cstdint>
 
 class UCTCTP7RawData {
 public:

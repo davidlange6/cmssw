@@ -12,6 +12,7 @@
 #include "CondFormats/EcalObjects/interface/EcalTPGSpike.h"
 
 #include <vector>
+#include <cstdint>
 
 //
 // class declaration

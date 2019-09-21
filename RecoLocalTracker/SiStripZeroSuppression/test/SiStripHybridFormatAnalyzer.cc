@@ -52,6 +52,7 @@
 
 //ROOT inclusion
 #include "TH1F.h"
+#include <cstdint>
 
 //
 // class decleration

@@ -28,6 +28,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripFedCabling.h"
 
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBuffer.h"
+#include <cstdint>
 
 class TkHistoMap;
 class TrackerTopology;

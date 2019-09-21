@@ -15,6 +15,7 @@
  */
 
 #include "CalibTracker/SiPixelESProducers/interface/SiPixelGainCalibrationOfflineSimService.h"
+#include <cstdint>
 
 float SiPixelGainCalibrationOfflineSimService::getPedestal(const uint32_t& detID, const int& col, const int& row) {
   bool isDead = false;

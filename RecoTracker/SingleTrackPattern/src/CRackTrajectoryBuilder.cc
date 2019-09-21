@@ -22,6 +22,7 @@
 #include "TrackingTools/Records/interface/TrackingComponentsRecord.h"
 #include "TrackingTools/Records/interface/TransientRecHitRecord.h"
 #include "TrackingTools/TrackFitters/interface/TrajectoryStateWithArbitraryError.h"
+#include <cstdint>
 
 //#include "RecoTracker/CkfPattern/interface/TransientInitialStateEstimator.h"
 

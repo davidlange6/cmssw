@@ -29,6 +29,7 @@
 #include "Geometry/Records/interface/MuonGeometryRecord.h"
 #include "SimDataFormats/CrossingFrame/interface/CrossingFrame.h"
 #include "SimDataFormats/CrossingFrame/interface/MixCollection.h"
+#include <cstdint>
 
 class GEMHitAssociator {
 public:

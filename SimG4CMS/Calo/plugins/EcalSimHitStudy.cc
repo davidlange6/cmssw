@@ -39,6 +39,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 //#define EDM_ML_DEBUG
 

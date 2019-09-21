@@ -1,5 +1,6 @@
 #include "IORawData/CaloPatterns/interface/HcalFiberPattern.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 static inline int setIf(const std::string& name, const std::map<std::string, std::string>& params) {
   std::map<std::string, std::string>::const_iterator j = params.find(name);

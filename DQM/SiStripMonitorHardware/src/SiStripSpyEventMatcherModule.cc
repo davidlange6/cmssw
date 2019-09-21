@@ -184,6 +184,7 @@ namespace sistrip {
 }  // namespace sistrip
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 typedef sistrip::SpyEventMatcherModule SiStripSpyEventMatcherModule;
 DEFINE_FWK_MODULE(SiStripSpyEventMatcherModule);
 

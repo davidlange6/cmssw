@@ -9,6 +9,7 @@
 
 #include <bitset>
 #include <vector>
+#include <cstdint>
 
 class HcalDbService;
 

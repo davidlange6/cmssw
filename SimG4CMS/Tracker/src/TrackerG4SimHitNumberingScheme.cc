@@ -12,6 +12,7 @@
 #include "G4VTouchable.hh"
 #include "G4TouchableHistory.hh"
 #include "G4VSensitiveDetector.hh"
+#include <cstdint>
 
 //#define DEBUG
 

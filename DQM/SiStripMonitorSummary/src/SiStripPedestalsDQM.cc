@@ -2,6 +2,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripPedestalsDQM::SiStripPedestalsDQM(const edm::EventSetup &eSetup,

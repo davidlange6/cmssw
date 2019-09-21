@@ -2,6 +2,7 @@
 #define HCALTRIGGERPRIMITIVESAMPLE_H 1
 
 #include <ostream>
+#include <cstdint>
 
 /** \class HcalTriggerPrimitiveSample
     

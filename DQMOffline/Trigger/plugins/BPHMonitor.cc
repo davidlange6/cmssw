@@ -1458,4 +1458,5 @@ double BPHMonitor::Prescale(const std::string hltpath1,
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(BPHMonitor);

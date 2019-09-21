@@ -3,6 +3,7 @@
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripThresholdDQM::SiStripThresholdDQM(const edm::EventSetup &eSetup,

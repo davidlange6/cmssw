@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 SiStripBadModuleByHandBuilder::SiStripBadModuleByHandBuilder(const edm::ParameterSet& iConfig)
     : ConditionDBWriter<SiStripBadStrip>(iConfig) {

@@ -13,6 +13,7 @@
 #include "DataFormats/CaloTowers/interface/CaloTowerDetId.h"
 #include "DataFormats/METReco/interface/HaloClusterCandidateHCAL.h"
 #include "DataFormats/VertexReco/interface/Vertex.h"
+#include <cstdint>
 struct HaloTowerStrip {
   std::vector<std::pair<uint8_t, CaloTowerDetId> > cellTowerIds;
   float hadEt;

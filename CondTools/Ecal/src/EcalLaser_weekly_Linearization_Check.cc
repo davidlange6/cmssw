@@ -12,6 +12,7 @@
 #include <sstream>
 #include "TFile.h"
 #include <string>
+#include <cstdint>
 
 popcon::EcalLaser_weekly_Linearization_Check::EcalLaser_weekly_Linearization_Check(const edm::ParameterSet& ps)
     : m_name(ps.getUntrackedParameter<std::string>("name", "EcalLaser_weekly_Handler")) {

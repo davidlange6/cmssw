@@ -5,6 +5,7 @@
 #include <string>
 #include <ostream>
 #include "EventFilter/SiStripRawToDigi/interface/SiStripFEDBufferComponents.h"
+#include <cstdint>
 
 namespace sistrip {
 

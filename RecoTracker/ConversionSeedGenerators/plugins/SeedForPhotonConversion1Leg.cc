@@ -15,6 +15,7 @@
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateTransform.h"
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
 #include "TrackingTools/Records/interface/TransientRecHitRecord.h"
+#include <cstdint>
 
 //#define mydebug_seed
 namespace {

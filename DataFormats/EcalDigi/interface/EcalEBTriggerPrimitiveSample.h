@@ -2,6 +2,7 @@
 #define ECALEBTRIGGERPRIMITIVESAMPLE_H 1
 
 #include <ostream>
+#include <cstdint>
 
 
 

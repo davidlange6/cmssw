@@ -7,6 +7,7 @@
 
 #include "EventFilter/SiPixelRawToDigi/interface/ErrorCheckerBase.h"
 #include "FWCore/Utilities/interface/typedefs.h"
+#include <cstdint>
 
 class ErrorCheckerPhase0 : public ErrorCheckerBase {
 public:

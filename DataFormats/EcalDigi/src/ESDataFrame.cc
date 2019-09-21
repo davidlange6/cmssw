@@ -1,4 +1,5 @@
 #include "DataFormats/EcalDigi/interface/ESDataFrame.h"
+#include <cstdint>
 
 ESDataFrame::ESDataFrame() : id_(0), size_(0) {}
 

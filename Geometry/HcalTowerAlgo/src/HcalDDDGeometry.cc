@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <mutex>
+#include <cstdint>
 
 static std::mutex s_fillLock;
 

@@ -3,6 +3,7 @@
 #include <CondFormats/EcalObjects/interface/EcalTPGFineGrainStripEE.h>
 
 #include <vector>
+#include <cstdint>
 
 class EEDataFrame;
 // class EcalTPGFineGrainStripEE;

@@ -35,6 +35,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class GEMPadDigiClusterProducer : public edm::stream::EDProducer<> {
 public:

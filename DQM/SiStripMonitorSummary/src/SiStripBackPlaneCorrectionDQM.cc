@@ -3,6 +3,7 @@
 #include "DataFormats/SiStripDetId/interface/SiStripSubStructure.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
 #include "TCanvas.h"
+#include <cstdint>
 
 // -----
 SiStripBackPlaneCorrectionDQM::SiStripBackPlaneCorrectionDQM(const edm::EventSetup &eSetup,

@@ -17,6 +17,7 @@
 #include "G4Step.hh"
 
 #include <iostream>
+#include <cstdint>
 
 #define debug
 //-------------------------------------------------------------------

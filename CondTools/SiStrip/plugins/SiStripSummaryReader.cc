@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cstdio>
 #include <sys/time.h>
+#include <cstdint>
 
 SiStripSummaryReader::SiStripSummaryReader(const edm::ParameterSet& iConfig)
     : printdebug_(iConfig.getUntrackedParameter<uint32_t>("printDebug", 1)) {}

@@ -21,6 +21,7 @@
 
 // user include files
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 void L1GtPatternLine::push(const std::string& prefix, uint32_t value) {
   std::string colName = nextName(prefix);

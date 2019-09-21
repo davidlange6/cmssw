@@ -11,6 +11,7 @@
 #include "CalibTracker/SiStripCommon/interface/Book.h"
 
 #include <memory>
+#include <cstdint>
 
 namespace sistrip {
 

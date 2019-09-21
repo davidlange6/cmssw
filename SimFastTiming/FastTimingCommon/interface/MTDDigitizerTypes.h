@@ -4,6 +4,7 @@
 #include "DataFormats/DetId/interface/DetId.h"
 #include <unordered_map>
 #include <array>
+#include <cstdint>
 
 namespace mtd_digitizer {
 

@@ -3,6 +3,7 @@
 #include "DataFormats/MuonDetId/interface/GEMDetId.h"
 #include <map>
 #include <vector>
+#include <cstdint>
 
 class GEMROMapping {
 public:

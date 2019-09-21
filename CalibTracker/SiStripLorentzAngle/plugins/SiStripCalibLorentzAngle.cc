@@ -17,6 +17,7 @@
 #include "DQM/SiStripCommon/interface/ExtractTObject.h"
 #include "DataFormats/TrackerCommon/interface/TrackerTopology.h"
 #include "Geometry/Records/interface/TrackerTopologyRcd.h"
+#include <cstdint>
 
 SiStripCalibLorentzAngle::SiStripCalibLorentzAngle(edm::ParameterSet const& conf)
     : ConditionDBWriter<SiStripLorentzAngle>(conf), tTopo(nullptr), conf_(conf) {}

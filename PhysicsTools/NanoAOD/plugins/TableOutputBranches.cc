@@ -1,6 +1,7 @@
 #include "PhysicsTools/NanoAOD/plugins/TableOutputBranches.h"
 
 #include <iostream>
+#include <cstdint>
 
 namespace {
   std::string makeBranchName(const std::string &baseName, const std::string &leafName) {

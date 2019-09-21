@@ -4,6 +4,7 @@
 #include "CondFormats/DataRecord/interface/SiStripFedCablingRcd.h"
 #include <fstream>
 #include <iostream>
+#include <cstdint>
 
 SiStripFedCablingManipulator::SiStripFedCablingManipulator(const edm::ParameterSet& iConfig) : iConfig_(iConfig) {
   edm::LogInfo("SiStripFedCablingManipulator") << "SiStripFedCablingManipulator constructor " << std::endl;

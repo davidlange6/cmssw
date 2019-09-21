@@ -7,6 +7,7 @@
 #include <TParameter.h>
 #include <TVector.h>
 #include <TFolder.h>
+#include <cstdint>
 
 uint16_t CompressionElement::pack(float value, float ref) const {
   float toCompress = 0;

@@ -39,6 +39,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <numeric>
+#include <cstdint>
 
 SiStripMonitorQuality::SiStripMonitorQuality(edm::ParameterSet const &iConfig)
     : dqmStore_(edm::Service<DQMStore>().operator->()),

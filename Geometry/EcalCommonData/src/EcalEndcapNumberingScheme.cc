@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdint>
 
 EcalEndcapNumberingScheme::EcalEndcapNumberingScheme() : EcalNumberingScheme() {
   edm::LogInfo("EcalGeom") << "Creating EcalEndcapNumberingScheme";

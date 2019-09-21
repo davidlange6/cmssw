@@ -1,4 +1,5 @@
 #include "DataFormats/GEMDigi/interface/GEMVfatStatusDigi.h"
+#include <cstdint>
 
 GEMVfatStatusDigi::GEMVfatStatusDigi(uint64_t lsData,
                                      uint64_t msData,

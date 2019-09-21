@@ -65,6 +65,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include <cstdint>
 
 using namespace edm;
 using namespace reco;

@@ -6,6 +6,7 @@
 #define EcalPreshowerNumberingScheme_h
 
 #include "Geometry/EcalCommonData/interface/EcalNumberingScheme.h"
+#include <cstdint>
 
 class EcalPreshowerNumberingScheme : public EcalNumberingScheme {
 public:

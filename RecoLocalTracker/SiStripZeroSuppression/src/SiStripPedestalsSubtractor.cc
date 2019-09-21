@@ -2,6 +2,7 @@
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "CondFormats/DataRecord/interface/SiStripPedestalsRcd.h"
 #include "FWCore/Utilities/interface/Exception.h"
+#include <cstdint>
 
 void SiStripPedestalsSubtractor::init(const edm::EventSetup& es) {
   uint32_t p_cache_id = es.get<SiStripPedestalsRcd>().cacheIdentifier();

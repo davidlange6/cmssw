@@ -15,6 +15,7 @@
 
 #ifndef LOCAL_UNPACK
 #include <atomic>
+#include <cstdint>
 #endif
 class CSCDMBHeader;
 struct CSCTMBHeader2006;

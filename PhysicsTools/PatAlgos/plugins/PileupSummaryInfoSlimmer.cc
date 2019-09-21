@@ -75,4 +75,5 @@ void PileupSummaryInfoSlimmer::produce(edm::StreamID, edm::Event& evt, const edm
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(PileupSummaryInfoSlimmer);

@@ -19,6 +19,7 @@
 
 #include <deque>
 #include <vector>
+#include <cstdint>
 
 class GEMCSCSegFit;
 

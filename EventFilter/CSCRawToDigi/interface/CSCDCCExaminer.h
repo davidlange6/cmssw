@@ -11,6 +11,7 @@
 #endif
 
 #include "DataFormats/CSCDigi/interface/CSCDCCFormatStatusDigi.h"
+#include <cstdint>
 
 class CSCDCCExaminer {
 public:

@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "boost/cstdint.hpp"
+#include <cstdint>
 
 /** \class HcalTBTriggerData
 

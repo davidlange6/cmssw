@@ -15,6 +15,7 @@
 #include "RecoVertex/VertexPrimitives/interface/TransientVertex.h"
 #include "Geometry/CommonDetUnit/interface/TrackingGeometry.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
+#include <cstdint>
 
 #define DEBUG_CHECKHITPATTERN
 

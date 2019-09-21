@@ -20,6 +20,7 @@
 #include "CondDBCmsTrackerConstruction.h"
 
 #include <memory>
+#include <cstdint>
 
 class TrackerGeometricDetExtraESModule : public edm::ESProducer {
 public:

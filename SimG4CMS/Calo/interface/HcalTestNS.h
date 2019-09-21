@@ -4,6 +4,7 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "Geometry/HcalCommonData/interface/HcalNumberingFromDDD.h"
 #include "Geometry/HcalCommonData/interface/HcalDDDRecConstants.h"
+#include <cstdint>
 
 class HcalTestNS {
 public:

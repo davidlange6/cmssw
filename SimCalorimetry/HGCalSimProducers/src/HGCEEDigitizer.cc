@@ -1,4 +1,5 @@
 #include "SimCalorimetry/HGCalSimProducers/interface/HGCEEDigitizer.h"
+#include <cstdint>
 
 using namespace hgc_digi;
 

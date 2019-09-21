@@ -5,6 +5,7 @@
 #include "CLHEP/Units/GlobalSystemOfUnits.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include <algorithm>
+#include <cstdint>
 
 TrackerMapDDDtoID::TrackerMapDDDtoID(const GeometricDet* iDet) {
   buildAll(iDet);

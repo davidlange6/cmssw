@@ -43,6 +43,7 @@
 #include <vector>
 #include <map>
 #include "DQMServices/Core/interface/DQMEDAnalyzer.h"
+#include <cstdint>
 
 class EcalDigisValidation : public DQMEDAnalyzer {
   typedef std::map<uint32_t, float, std::less<uint32_t> > MapType;

@@ -19,6 +19,7 @@
 #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
 
 #include <cmath>  // for pi
+#include <cstdint>
 
 using namespace L1TMuon;
 

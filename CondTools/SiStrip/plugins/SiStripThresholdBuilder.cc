@@ -2,6 +2,7 @@
 #include "CalibTracker/SiStripCommon/interface/SiStripDetInfoFileReader.h"
 #include <iostream>
 #include <fstream>
+#include <cstdint>
 
 SiStripThresholdBuilder::SiStripThresholdBuilder(const edm::ParameterSet& iConfig)
     : fp_(iConfig.getUntrackedParameter<edm::FileInPath>(

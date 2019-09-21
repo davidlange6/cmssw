@@ -2,6 +2,7 @@
 #define EventFilter_GEMRawToDigi_GEBdata_h
 #include "VFATdata.h"
 #include <vector>
+#include <cstdint>
 
 namespace gem {
   // Input status 1 bit for each

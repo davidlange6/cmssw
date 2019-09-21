@@ -8,6 +8,7 @@
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "DataFormats/SiPixelDetId/interface/PixelSubdetector.h"
+#include <cstdint>
 
 namespace cms {
   SiPixelCondObjReader::SiPixelCondObjReader(const edm::ParameterSet& conf)

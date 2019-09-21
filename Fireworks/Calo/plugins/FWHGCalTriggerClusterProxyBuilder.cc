@@ -14,6 +14,7 @@
 #include "TEveBoxSet.h"
 #include "TColor.h"
 #include "TROOT.h"
+#include <cstdint>
 
 class FWHGCalTriggerClusterProxyBuilder : public FWL1THGCalProxyTemplate<l1t::HGCalMulticluster> {
 public:

@@ -5,6 +5,7 @@
 #include "DataFormats/L1THGCal/interface/HGCalTriggerCell.h"
 #include "DataFormats/ForwardDetId/interface/HGCSiliconDetIdToROC.h"
 #include "L1Trigger/L1THGCal/interface/HGCalTriggerTools.h"
+#include <cstdint>
 
 class HGCalCoarseTriggerCellMapping {
 public:

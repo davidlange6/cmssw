@@ -253,4 +253,5 @@ void pat::PATLostTracks::addPackedCandidate(std::vector<pat::PackedCandidate>& c
 
 using pat::PATLostTracks;
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(PATLostTracks);

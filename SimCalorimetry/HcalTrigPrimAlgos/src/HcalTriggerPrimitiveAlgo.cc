@@ -17,6 +17,7 @@
 #include "Geometry/HcalTowerAlgo/interface/HcalTrigTowerGeometry.h"
 
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 

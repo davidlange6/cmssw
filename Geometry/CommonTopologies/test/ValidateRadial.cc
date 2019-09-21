@@ -85,6 +85,7 @@ std::vector<const TkRadialStripTopology*> ValidateRadial::get_list_of_radial_top
 }
 
 #include "Geometry/CommonTopologies/interface/CSCRadialStripTopology.h"
+#include <cstdint>
 
 void compare(const TkRadialStripTopology& t,
              const CSCRadialStripTopology& ot,

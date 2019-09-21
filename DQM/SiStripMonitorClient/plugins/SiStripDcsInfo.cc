@@ -312,4 +312,5 @@ void SiStripDcsInfo::addBadModules(DQMStore& dqm_store) {
 }
 
 #include "FWCore/Framework/interface/MakerMacros.h"
+#include <cstdint>
 DEFINE_FWK_MODULE(SiStripDcsInfo);

@@ -10,6 +10,7 @@
 
 #include <fstream>
 #include "Randomize.hh"
+#include <cstdint>
 
 EventAction::EventAction(const edm::ParameterSet& p,
                          SimRunInterface* rm,

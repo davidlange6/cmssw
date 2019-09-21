@@ -2,6 +2,7 @@
 #define DQMServices_StreamerIO_JsonWritingTimeoutPoolOutputModule_h
 
 #include "IOPool/Output/interface/TimeoutPoolOutputModule.h"
+#include <cstdint>
 
 namespace dqmservices {
 

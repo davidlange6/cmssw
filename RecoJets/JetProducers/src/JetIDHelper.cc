@@ -20,6 +20,7 @@
 #include <vector>
 #include <numeric>
 #include <iostream>
+#include <cstdint>
 
 using namespace std;
 

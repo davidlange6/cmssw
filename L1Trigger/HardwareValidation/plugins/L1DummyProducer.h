@@ -33,6 +33,7 @@
 // random # generator
 #include "CLHEP/Random/RandomEngine.h"
 #include "CLHEP/Random/RandGaussQ.h"
+#include <cstdint>
 
 class L1DummyProducer : public edm::EDProducer {
 public:

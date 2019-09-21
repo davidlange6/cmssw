@@ -2,6 +2,7 @@
 #define TREESPLITTER_CC
 
 #include "TreeSplitter.h"
+#include <cstdint>
 
 TreeSplitter::TreeSplitter(const edm::ParameterSet& iConfig)
     : treeFileName_(iConfig.getParameter<std::string>("InputFileName")),

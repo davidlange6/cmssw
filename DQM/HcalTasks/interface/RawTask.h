@@ -20,6 +20,7 @@
 #include "DQM/HcalCommon/interface/ContainerSingleProf2D.h"
 #include "DQM/HcalCommon/interface/ElectronicsMap.h"
 #include "DQM/HcalCommon/interface/Flag.h"
+#include <cstdint>
 
 class RawTask : public hcaldqm::DQTask {
 public:

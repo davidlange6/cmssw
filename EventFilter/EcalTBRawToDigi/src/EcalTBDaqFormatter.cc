@@ -26,6 +26,7 @@
 #include "DCCDataMapper.h"
 
 #include <iostream>
+#include <cstdint>
 
 EcalTBDaqFormatter::EcalTBDaqFormatter() {
   LogDebug("EcalTBRawToDigi") << "@SUB=EcalTBDaqFormatter";

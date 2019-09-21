@@ -1,4 +1,5 @@
 #include "DQM/HcalTasks/interface/HcalOfflineHarvesting.h"
+#include <cstdint>
 
 using namespace hcaldqm;
 using namespace hcaldqm::constants;

@@ -2,6 +2,7 @@
 #define ECALTRIGGERPRIMITIVESAMPLE_H 1
 
 #include <ostream>
+#include <cstdint>
 
 /** \class EcalTriggerPrimitiveSample
       

@@ -25,6 +25,7 @@
 #include "CalibTracker/SiPixelTools/interface/SiPixelOfflineCalibAnalysisBase.h"
 #include "TMinuit.h"
 #include <iomanip>
+#include <cstdint>
 //
 enum sCurveHistogramType {
   kSigmaSummary,      // 1d

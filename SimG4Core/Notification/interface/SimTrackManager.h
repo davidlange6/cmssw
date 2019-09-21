@@ -27,6 +27,7 @@
 #include "SimG4Core/Notification/interface/TrackContainer.h"
 
 #include "SimDataFormats/Forward/interface/LHCTransportLinkContainer.h"
+#include <cstdint>
 
 // forward declarations
 

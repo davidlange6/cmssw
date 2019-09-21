@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <cstdint>
 
 class ClusterizerUnitTester : public edm::EDAnalyzer {
   typedef edm::ParameterSet PSet;

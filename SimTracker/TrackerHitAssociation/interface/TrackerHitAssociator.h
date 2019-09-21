@@ -50,6 +50,7 @@
 
 #include <string>
 #include <vector>
+#include <cstdint>
 
 typedef std::pair<uint32_t, EncodedEventId> SimHitIdpr;
 class TrackerHitAssociator {

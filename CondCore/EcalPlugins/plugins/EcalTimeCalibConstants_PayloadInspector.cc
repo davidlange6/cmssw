@@ -16,6 +16,7 @@
 
 #include <memory>
 #include <sstream>
+#include <cstdint>
 
 namespace {
 

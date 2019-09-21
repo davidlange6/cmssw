@@ -1,6 +1,7 @@
 #include "DCCTrailerBlock.h"
 #include "DCCDataParser.h"
 #include "DCCDataMapper.h"
+#include <cstdint>
 DCCTBTrailerBlock::DCCTBTrailerBlock(DCCTBDataParser* parser,
                                      const uint32_t* buffer,
                                      uint32_t numbBytes,

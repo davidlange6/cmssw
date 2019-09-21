@@ -13,6 +13,7 @@
 #include "DataFormats/Common/interface/DetSetVector.h"
 #include "SimDataFormats/TrackerDigiSimLink/interface/StripCompactDigiSimLinks.h"
 #include "SimDataFormats/TrackerDigiSimLink/interface/StripDigiSimLink.h"
+#include <cstdint>
 
 #ifdef SCDSL_DEBUG
 #define DEBUG(X) X

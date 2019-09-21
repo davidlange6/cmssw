@@ -35,6 +35,7 @@
 #include "Geometry/VeryForwardGeometryBuilder/interface/CTPPSGeometry.h"
 
 #include <string>
+#include <cstdint>
 
 //----------------------------------------------------------------------------------------------------
 

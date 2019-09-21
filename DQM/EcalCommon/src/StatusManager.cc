@@ -14,6 +14,7 @@
 #include "TObjArray.h"
 #include "TPRegexp.h"
 #include "TString.h"
+#include <cstdint>
 
 namespace ecaldqm {
 

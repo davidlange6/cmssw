@@ -17,6 +17,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ext/algorithm>
+#include <cstdint>
 
 using namespace std;
 

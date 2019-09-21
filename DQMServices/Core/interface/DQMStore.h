@@ -24,6 +24,7 @@
 
 #include "DQMServices/Core/interface/DQMDefinitions.h"
 #include "DQMServices/Core/interface/ConcurrentMonitorElement.h"
+#include <cstdint>
 
 namespace edm {
   class DQMHttpSource;

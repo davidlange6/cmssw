@@ -13,6 +13,7 @@
 #include "CondFormats/SiPixelObjects/interface/LocalPixel.h"
 
 #include <algorithm>
+#include <cstdint>
 
 MeasurementTrackerEventProducer::MeasurementTrackerEventProducer(const edm::ParameterSet& iConfig)
     : measurementTrackerLabel_(iConfig.getParameter<std::string>("measurementTracker")),

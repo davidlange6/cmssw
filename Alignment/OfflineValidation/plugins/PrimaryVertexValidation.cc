@@ -64,6 +64,7 @@
 #include "TrackingTools/Records/interface/TransientTrackRecord.h"
 #include "TrackingTools/TransientTrack/interface/TransientTrack.h"
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateClosestToPoint.h"
+#include <cstdint>
 
 const int PrimaryVertexValidation::nMaxtracks_;
 

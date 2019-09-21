@@ -54,6 +54,7 @@
 #include "CondTools/SiPixel/test/SiPixelGainCalibrationReadDQMFile.h"
 #include "CommonTools/UtilAlgos/interface/TFileService.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
+#include <cstdint>
 //
 // class decleration
 //

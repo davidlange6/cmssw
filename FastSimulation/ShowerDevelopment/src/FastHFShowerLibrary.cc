@@ -35,6 +35,7 @@
 #include <vector>
 #include <iostream>
 #include <mutex>
+#include <cstdint>
 
 //#define DebugLog
 

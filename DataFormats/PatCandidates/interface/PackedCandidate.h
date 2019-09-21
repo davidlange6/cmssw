@@ -12,6 +12,7 @@
 #include "FWCore/Utilities/interface/thread_safety_macros.h"
 #include <atomic>
 #include <mutex>
+#include <cstdint>
 
 /* #include "DataFormats/Math/interface/PtEtaPhiMass.h" */
 

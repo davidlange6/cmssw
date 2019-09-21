@@ -7,6 +7,7 @@
 #include "RecoLocalTracker/SiStripClusterizer/interface/StripClusterizerAlgorithmFactory.h"
 #include "RecoLocalTracker/SiStripClusterizer/interface/StripClusterizerAlgorithm.h"
 #include <cmath>
+#include <cstdint>
 
 SiStripClusterInfo::SiStripClusterInfo(const SiStripCluster& cluster,
                                        const edm::EventSetup& setup,

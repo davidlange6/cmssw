@@ -33,6 +33,7 @@
 
 #include "G4PhysicalConstants.hh"
 #include "G4SystemOfUnits.hh"
+#include <cstdint>
 
 PPSPixelSD::PPSPixelSD(const std::string& name_,
                        const edm::EventSetup& es,

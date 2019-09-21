@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <array>
+#include <cstdint>
 
 namespace ftl_digitizer {
 

@@ -4,6 +4,7 @@
 #include "Geometry/ForwardGeometry/interface/IdealCastorTrapezoid.h"
 #include "CastorGeometryData.h"
 #include <algorithm>
+#include <cstdint>
 
 typedef CaloCellGeometry::CCGFloat CCGFloat;
 typedef CaloCellGeometry::Pt3D Pt3D;

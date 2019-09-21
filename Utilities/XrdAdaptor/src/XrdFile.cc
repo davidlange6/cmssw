@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cassert>
 #include <chrono>
+#include <cstdint>
 
 using namespace XrdAdaptor;
 

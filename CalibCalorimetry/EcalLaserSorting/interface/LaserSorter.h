@@ -21,6 +21,7 @@
 #include <sys/time.h>
 #include <ctime>
 #include <map>
+#include <cstdint>
 
 /**
  * This module is used to classify events of laser sequence acquired in 

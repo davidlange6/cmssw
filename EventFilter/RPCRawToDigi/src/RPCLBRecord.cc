@@ -1,4 +1,5 @@
 #include "EventFilter/RPCRawToDigi/interface/RPCLBRecord.h"
+#include <cstdint>
 
 RPCLBRecord::RPCLBRecord(std::uint32_t const record) : record_(record) {}
 

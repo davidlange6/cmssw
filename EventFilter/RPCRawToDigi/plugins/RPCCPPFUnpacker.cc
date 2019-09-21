@@ -299,4 +299,5 @@ void RPCCPPFUnpacker::putRPCDigis(edm::Event& event, std::set<std::pair<RPCDetId
 
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "EventFilter/RPCRawToDigi/plugins/RPCAMCUnpackerFactory.h"
+#include <cstdint>
 DEFINE_EDM_PLUGIN(RPCAMCUnpackerFactory, RPCCPPFUnpacker, "RPCCPPFUnpacker");

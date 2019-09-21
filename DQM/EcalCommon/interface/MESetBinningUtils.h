@@ -4,6 +4,7 @@
 #include "DQMServices/Core/interface/DQMStore.h"
 
 #include <string>
+#include <cstdint>
 
 class DetId;
 class EcalElectronicsId;

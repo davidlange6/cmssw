@@ -1,5 +1,6 @@
 
 #include "Calibration/HcalIsolatedTrackReco/interface/SubdetFEDSelector.h"
+#include <cstdint>
 
 SubdetFEDSelector::SubdetFEDSelector(const edm::ParameterSet& iConfig) {
   getEcal_ = iConfig.getParameter<bool>("getECAL");

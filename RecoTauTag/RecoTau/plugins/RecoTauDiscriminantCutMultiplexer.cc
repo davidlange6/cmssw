@@ -33,6 +33,7 @@
 #include "TGraph.h"
 #include "TFormula.h"
 #include "TFile.h"
+#include <cstdint>
 
 class RecoTauDiscriminantCutMultiplexer : public PFTauDiscriminationProducerBase {
 public:

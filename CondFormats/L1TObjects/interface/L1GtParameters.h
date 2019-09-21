@@ -22,6 +22,7 @@
 
 #include <ostream>
 #include <vector>
+#include <cstdint>
 
 
 // user include files

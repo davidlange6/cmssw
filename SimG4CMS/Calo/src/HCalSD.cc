@@ -43,6 +43,7 @@
 
 #ifdef plotDebug
 #include <TH1F.h>
+#include <cstdint>
 #endif
 
 HCalSD::HCalSD(const std::string& name,

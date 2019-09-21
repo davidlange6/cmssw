@@ -11,6 +11,7 @@
 #include <cstdio>
 #include "EventFilter/CSCRawToDigi/src/bitset_append.h"
 #include "EventFilter/CSCRawToDigi/src/cscPackerCompare.h"
+#include <cstdint>
 
 #ifdef LOCAL_UNPACK
 bool CSCTMBData::debug = false;

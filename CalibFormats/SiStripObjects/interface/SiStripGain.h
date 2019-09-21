@@ -38,6 +38,7 @@
 #include "CondFormats/SiStripObjects/interface/SiStripApvGain.h"
 #include <memory>
 #include <vector>
+#include <cstdint>
 
 class TrackerTopology;
 

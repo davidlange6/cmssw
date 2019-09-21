@@ -5,6 +5,7 @@
 
 #include "CaloTokens.h"
 #include "CaloTowerPacker.h"
+#include <cstdint>
 
 namespace l1t {
   namespace stage2 {

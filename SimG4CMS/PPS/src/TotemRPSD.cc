@@ -29,6 +29,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdint>
 
 TotemRPSD::TotemRPSD(const std::string& name_,
                      const edm::EventSetup& es,

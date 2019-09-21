@@ -43,6 +43,7 @@
 #include "TCanvas.h"
 #include "TGaxis.h"
 #include "TColor.h"
+#include <cstdint>
 
 popcon::EcalChannelStatusHandler::EcalChannelStatusHandler(const edm::ParameterSet& ps) {
   std::cout << "EcalChannelStatus Source handler constructor\n" << std::endl;

@@ -5,6 +5,7 @@
 
 #include "CondFormats/DataRecord/interface/SiStripThresholdRcd.h"
 #include "CondFormats/SiStripObjects/interface/SiStripThreshold.h"
+#include <cstdint>
 
 class SiStripThresholdDQM : public SiStripBaseCondObjDQM {
 public:

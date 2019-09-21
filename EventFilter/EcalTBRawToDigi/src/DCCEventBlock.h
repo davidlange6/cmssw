@@ -6,6 +6,7 @@
 #define DCCTBEVENTBLOCK_HH
 
 #include "DCCBlockPrototype.h"
+#include <cstdint>
 
 class DCCTBTowerBlock;
 class DCCTBDataParser;

@@ -8,6 +8,7 @@
 #include "FWCore/Utilities/interface/Exception.h"
 #include "DataFormats/CSCDigi/interface/CSCDMBStatusDigi.h"
 #include "EventFilter/CSCRawToDigi/interface/CSCVDMBHeaderFormat.h"
+#include <cstdint>
 
 struct CSCDMBHeader2005;
 struct CSCDMBHeader2013;

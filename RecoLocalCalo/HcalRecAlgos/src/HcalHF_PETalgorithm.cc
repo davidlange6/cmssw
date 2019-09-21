@@ -9,6 +9,7 @@
 #include <algorithm>  // for "max"
 #include <cmath>
 #include <iostream>
+#include <cstdint>
 
 HcalHF_PETalgorithm::HcalHF_PETalgorithm() {
   // no params given; revert to old 'algo 1' fixed settings

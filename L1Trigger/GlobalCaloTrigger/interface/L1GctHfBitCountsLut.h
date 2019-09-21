@@ -5,6 +5,7 @@
 #include "L1Trigger/GlobalCaloTrigger/interface/L1GctHfEtSumsLut.h"
 
 #include <vector>
+#include <cstdint>
 
 /*!
  * \author Greg Heath

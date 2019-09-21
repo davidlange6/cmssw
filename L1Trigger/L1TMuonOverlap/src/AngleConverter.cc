@@ -18,6 +18,7 @@
 #include "DataFormats/RPCDigi/interface/RPCDigi.h"
 
 #include <cmath>
+#include <cstdint>
 
 namespace {
   template <typename T>
