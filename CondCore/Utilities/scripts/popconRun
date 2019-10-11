@@ -8,7 +8,7 @@ from CondCore.Utilities import popcon2dropbox
 
 import optparse
 import argparse
-    
+
 def main( argv ):
 
     parser = argparse.ArgumentParser()
@@ -32,7 +32,7 @@ def main( argv ):
     if args.destTag is None:
         print('ERROR: the destination tag has not been provided.')
         return -1        
-    
+
     return popcon2dropbox.run( args )
 
 if __name__ == '__main__':
