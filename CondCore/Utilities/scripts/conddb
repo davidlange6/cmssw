@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 '''CMS Conditions DB command-line tool.
 '''
+from __future__ import print_function
 
 import argparse
 import datetime
@@ -63,7 +64,7 @@ def _dump_payload(session, payload, loadonly):
         filter(Payload.hash == payload).\
         one()[0]
     logging.info('Loading %spayload %s of length %s ...', '' if loadonly else 'and dumping ', payload, len(data))
-    print 'Data (TODO: Replace with the call to the actual compiled C++ tool):', repr(data)
+    print('Data (TODO: Replace with the call to the actual compiled C++ tool):', repr(data))
 
 
 def _identify_object(session, objtype, name):
@@ -371,10 +372,10 @@ def output(args, string, *parameters, **kwargs):
 
     output_file = kwargs.get('output_file', sys.stdout)
 
-    print >>output_file, string % parameters + colors.end,
+    print(string % parameters + colors.end, end=' ', file=output_file)
 
     if kwargs.get('newline', True):
-        print >>output_file
+        print(file=output_file)
 
 
 def _strip_colors(args, string):
@@ -688,7 +689,7 @@ def _get_prompt_fcsr( session, timeType ):
                                   tier0proxy, False )
         try:
             fcsr = t0DataSvc.getFirstSafeRun()
-        except ValueError, e:
+        except ValueError as e:
             logging.error('ValueError for firstConditionSafeRun from Tier-0 %s ' % (str(e),) )
             # We got an answer but it is invalid. So far this usually means
             # "None" which is not JSON, when the Tier0 is stopped.
@@ -697,7 +698,7 @@ def _get_prompt_fcsr( session, timeType ):
             # Impossible to get anything from the server after retries,
             # i.e. unreachable, so no data.
             raise Exception('Tier-0 is unreachable, i.e. no firstConditionSafeRun')
-    except Exception, e:
+    except Exception as e:
         raise Exception('Error setting up Tier-0 data service: %s' %str(e))
     ret = _convert_time( session, timeType, fcsr )
     if timeType == 'Run':
