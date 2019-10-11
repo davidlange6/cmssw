@@ -2238,10 +2238,9 @@ def main():
     parser_fromTimestamp.set_defaults(func=fromTimestamp_)
 
     args = parser.parse_args()
-
     logging.basicConfig(
         format = '[%(asctime)s] %(levelname)s: %(message)s',
-        level = logging.DEBUG if args.verbose >= 1 else logging.INFO,
+        level = logging.DEBUG if args.verbose is not None and args.verbose >= 1 else logging.INFO,
     )
 
     colors = Colors(args)
@@ -2250,7 +2249,7 @@ def main():
         args.limit = None
         logging.info("noLimit specified, setting limit to %s" % str(args.limit))
 
-    if args.verbose >= 1:
+    if args.verbose is not None and args.verbose >= 1:
         # Include the traceback
         return args.func(args)
     else:
