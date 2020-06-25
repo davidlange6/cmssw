@@ -13,6 +13,13 @@
 <use name="RecoTracker/TransientTrackingRecHit"/>
 <use name="TrackingTools/DetLayers"/>
 <use name="TrackingTools/TransientTrackingRecHit"/>
+<use name="TrackingTools/Records"/>
+<use name="DataFormats/TrackingRecHit"/>
+<use name="DataFormats/TrackerCommon"/>
+<use name="FWCore/Utilities"/>
+<use name="RecoLocalTracker/SiStripClusterizer"/>
+<use name="DataFormats/SiStripCluster"/>
+<use name="DataFormats/Common"/>
 <export>
   <lib name="1"/>
 </export>
