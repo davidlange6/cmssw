@@ -17,6 +17,13 @@
 <use name="rootx11"/>
 <use name="boost_python"/>
 <use name="FWCore/PythonParameterSet"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="FWCore/Utilities"/>
+<use name="FWCore/Common"/>
+<use name="FWCore/ParameterSet"/>
+<use name="DataFormats/FWLite"/>
+<use name="Fireworks/TableWidget"/>
+<use name="DataFormats/Common"/>
 <export>
   <lib name="1"/>
 </export>
