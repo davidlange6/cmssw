@@ -8,6 +8,9 @@
 <use name="FWCore/Utilities"/>
 <use name="SimDataFormats/GeneratorProducts"/>
 <use name="RecoParticleFlow/PFTracking"/>
+<use name="DataFormats/TrackReco"/>
+<use name="DataFormats/METReco"/>
+<use name="CommonTools/UtilAlgos"/>
 <export>
   <lib name="1"/>
 </export>
