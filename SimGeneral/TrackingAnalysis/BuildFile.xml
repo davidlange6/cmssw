@@ -10,6 +10,14 @@
 <use name="SimDataFormats/TrackingAnalysis"/>
 <use name="SimDataFormats/TrackingHit"/>
 <use name="SimTracker/Common"/>
+<use name="DataFormats/L1TrackTrigger"/>
+<use name="SimDataFormats/CrossingFrame"/>
+<use name="Geometry/Records"/>
+<use name="SimDataFormats/EncodedEventId"/>
+<use name="FWCore/Utilities"/>
+<use name="DataFormats/TrackerCommon"/>
+<use name="CondFormats/DataRecord"/>
+<use name="DataFormats/Common"/>
 <export>
   <lib name="1"/>
 </export>
