@@ -10,6 +10,22 @@
 <use name="TrackingTools/TransientTrack"/>
 <use name="Utilities/General"/>
 <use name="PhysicsTools/UtilAlgos"/>
+<use name="FWCore/MessageLogger"/>
+<use name="PhysicsTools/SelectorUtils"/>
+<use name="JetMETCorrections/Type1MET"/>
+<use name="DataFormats/EgammaCandidates"/>
+<use name="TrackingTools/TrajectoryState"/>
+<use name="JetMETCorrections/Objects"/>
+<use name="FWCore/Framework"/>
+<use name="DataFormats/JetReco"/>
+<use name="JetMETCorrections/JetCorrector"/>
+<use name="DataFormats/GeometryVector"/>
+<use name="FWCore/Utilities"/>
+<use name="CondFormats/JetMETObjects"/>
+<use name="FWCore/ParameterSet"/>
+<use name="DataFormats/CaloTowers"/>
+<use name="JetMETCorrections/Modules"/>
+<use name="DataFormats/Common"/>
 <use name="root"/>
 <use name="rootmlp"/>
 <export>
