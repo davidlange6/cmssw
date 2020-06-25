@@ -25,6 +25,12 @@
 <use name="TrackingTools/TrajectoryParametrization"/>
 <use name="TrackingTools/TrajectoryState"/>
 <use name="TrackingTools/TransientTrackingRecHit"/>
+<use name="RecoTracker/TkSeedingLayers"/>
+<use name="DataFormats/TrackerCommon"/>
+<use name="TrackingTools/TrajectoryFiltering"/>
+<use name="DataFormats/BeamSpot"/>
+<use name="DataFormats/GeometryCommonDetAlgo"/>
+<use name="DataFormats/Common"/>
 <export>
   <lib name="1"/>
 </export>
