@@ -5,6 +5,10 @@
 <use name="DataFormats/FWLite"/>
 <use name="DataFormats/PatCandidates"/>
 <use name="PhysicsTools/SelectorUtils"/>
+<use name="FWCore/Utilities"/>
+<use name="FWCore/FWLite"/>
+<use name="DataFormats/Common"/>
+<use name="FWCore/Reflection"/>
 <export>
   <lib name="1"/>
 </export>
