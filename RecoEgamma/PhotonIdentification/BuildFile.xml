@@ -8,6 +8,21 @@
 <use name="Geometry/CaloGeometry"/>
 <use name="RecoEgamma/EgammaIsolationAlgos"/>
 <use name="PhysicsTools/SelectorUtils"/>
+<use name="FWCore/Utilities"/>
+<use name="Geometry/Records"/>
+<use name="DataFormats/EgammaCandidates"/>
+<use name="CommonTools/Utils"/>
+<use name="DataFormats/TrackReco"/>
+<use name="DataFormats/EcalDetId"/>
+<use name="DataFormats/DetId"/>
+<use name="CondFormats/EcalObjects"/>
+<use name="FWCore/ParameterSet"/>
+<use name="Geometry/CaloEventSetup"/>
+<use name="CondFormats/DataRecord"/>
+<use name="RecoLocalCalo/EcalRecAlgos"/>
+<use name="Geometry/CaloTopology"/>
+<use name="DataFormats/Common"/>
+<use name="DataFormats/EcalRecHit"/>
 <export>
   <lib name="1"/>
 </export>
