@@ -8,6 +8,24 @@
 <use name="RecoTracker/TkSeedingLayers"/>
 <use name="TrackingTools/TransientTrackingRecHit"/>
 <use name="RecoTracker/TkSeedGenerator"/>
+<use name="RecoTracker/TkTrackingRegions"/>
+<use name="DataFormats/GeometryVector"/>
+<use name="TrackingTools/Records"/>
+<use name="DataFormats/GeometrySurface"/>
+<use name="RecoTracker/TransientTrackingRecHit"/>
+<use name="DataFormats/TrackerCommon"/>
+<use name="DataFormats/SiPixelDetId"/>
+<use name="CommonTools/Utils"/>
+<use name="RecoTracker/TkMSParametrization"/>
+<use name="RecoTracker/Record"/>
+<use name="FWCore/MessageLogger"/>
+<use name="FWCore/Utilities"/>
+<use name="TrackingTools/DetLayers"/>
+<use name="DataFormats/Math"/>
+<use name="RecoPixelVertexing/PixelTrackFitting"/>
+<use name="RecoTracker/TkDetLayers"/>
+<use name="DataFormats/Common"/>
+<use name="DataFormats/TrackerRecHit2D"/>
 <use name="vdt_headers"/>
 <export>
   <lib name="1"/>
