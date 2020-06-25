@@ -8,6 +8,15 @@
 <use name="CondFormats/SiStripObjects"/>
 <use name="root"/>
 <use name="Geometry/TrackerGeometryBuilder"/>
+<use name="DataFormats/GeometryVector"/>
+<use name="Geometry/Records"/>
+<use name="Geometry/CommonDetUnit"/>
+<use name="FWCore/Framework"/>
+<use name="FWCore/MessageLogger"/>
+<use name="CondFormats/External"/>
+<use name="Geometry/CommonTopologies"/>
+<use name="FWCore/ParameterSet"/>
+<use name="DataFormats/Common"/>
 <export>
   <lib name="1"/>
 </export>
