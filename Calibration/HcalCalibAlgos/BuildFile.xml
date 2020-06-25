@@ -13,6 +13,12 @@
 <use name="Geometry/HcalTowerAlgo"/>
 <use name="Geometry/Records"/>
 <use name="CondTools/Hcal"/>
+<use name="Geometry/CaloGeometry"/>
+<use name="DataFormats/GeometryVector"/>
+<use name="Calibration/Tools"/>
+<use name="Utilities/Xerces"/>
+<use name="Geometry/CaloTopology"/>
+<use name="DataFormats/EcalRecHit"/>
 <export>
   <lib name="1"/>
 </export>
