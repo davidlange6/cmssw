@@ -28,6 +28,23 @@
 <use name="RecoMuon/TrackingTools"/>
 <use name="DataFormats/CSCRecHit"/>
 <use name="PhysicsTools/SelectorUtils"/>
+<use name="DataFormats/DTDigi"/>
+<use name="SimDataFormats/TrackingHit"/>
+<use name="RecoMuon/MeasurementDet"/>
+<use name="MagneticField/Engine"/>
+<use name="DataFormats/EcalDetId"/>
+<use name="RecoTracker/Record"/>
+<use name="DataFormats/DTRecHit"/>
+<use name="TrackingTools/TrackAssociator"/>
+<use name="DataFormats/PatCandidates"/>
+<use name="DataFormats/CSCDigi"/>
+<use name="DataFormats/TrackingRecHit"/>
+<use name="TrackingTools/TransientTrack"/>
+<use name="RecoMuon/DetLayers"/>
+<use name="SimDataFormats/Track"/>
+<use name="MagneticField/Records"/>
+<use name="DataFormats/Common"/>
+<use name="FWCore/PluginManager"/>
 <export>
   <lib name="1"/>
 </export>
