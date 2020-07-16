@@ -60,7 +60,7 @@ TrackletEngineDisplaced::TrackletEngineDisplaced(string name,
   readTables();
 }
 
-TrackletEngineDisplaced::~TrackletEngineDisplaced() { tableInd_.clear(); table_.clear(); }
+TrackletEngineDisplaced::~TrackletEngineDisplaced() { }
 
 void TrackletEngineDisplaced::addOutput(MemoryBase* memory, string output) {
   if (settings_.writetrace()) {
@@ -172,8 +172,9 @@ void TrackletEngineDisplaced::execute() {
 
 	    auto tInd = std::lower_bound(tableInd_.begin(),tableInd_.end(),index);
 	    auto tableIndex = tInd - tableInd_.begin();
+	    auto hasIndex = tInd != tableInd_.end() && tableInd_[tableIndex] == index; 
 
-            if ( tInd == tableInd_.end() ) {
+            if ( hasIndex ) {
               if (settings_.debugTracklet()) {
                 edm::LogVerbatim("Tracklet") << "Stub pair rejected because of stub pt cut bends : "
                                              << benddecode(firstvmstub.bend().value(), firstvmstub.isPSmodule()) << " "
@@ -186,7 +187,7 @@ void TrackletEngineDisplaced::execute() {
             if (settings_.debugTracklet())
               edm::LogVerbatim("Tracklet") << "Adding layer-layer pair in " << getName();
             for (unsigned int isp = 0; isp < stubpairs_.size(); ++isp) {
-              if (settings_.writeTripletTables() || ( tInd != tableInd_.end() && table_.at(tableIndex).count(stubpairs_.at(isp)->getName())) ) {
+              if (settings_.writeTripletTables() || ( hasIndex && table_.at(tableIndex).count(stubpairs_.at(isp)->getName())) ) {
                 if (settings_.writeMonitorData("Seeds")) {
                   ofstream fout("seeds.txt", ofstream::app);
                   fout << __FILE__ << ":" << __LINE__ << " " << name_ << "_" << iSector_ << " " << iSeed_ << endl;
@@ -254,8 +255,10 @@ void TrackletEngineDisplaced::execute() {
 
 	    auto tInd = std::lower_bound(tableInd_.begin(),tableInd_.end(),index);
 	    auto tableIndex = tInd - tableInd_.begin();
+	    auto hasIndex = tInd != tableInd_.end() && tableInd_[tableIndex] == index; 
 
-            if (tInd == tableInd_.end() ) {
+
+            if (hasIndex ) {
               if (settings_.debugTracklet()) {
                 edm::LogVerbatim("Tracklet") << "Stub pair rejected because of stub pt cut bends : "
                                              << benddecode(firstvmstub.bend().value(), firstvmstub.isPSmodule()) << " "
@@ -266,7 +269,7 @@ void TrackletEngineDisplaced::execute() {
             if (settings_.debugTracklet())
               edm::LogVerbatim("Tracklet") << "Adding layer-layer pair in " << getName();
             for (unsigned int isp = 0; isp < stubpairs_.size(); ++isp) {
-              if (settings_.writeTripletTables() || ( tInd != tableInd_.end() && table_.at(tableIndex).count(stubpairs_.at(isp)->getName())) || true) {
+              if (settings_.writeTripletTables() || ( hasIndex && table_.at(tableIndex).count(stubpairs_.at(isp)->getName())) || true) {
                 if (settings_.writeMonitorData("Seeds")) {
                   ofstream fout("seeds.txt", ofstream::app);
                   fout << __FILE__ << ":" << __LINE__ << " " << name_ << "_" << iSector_ << " " << iSeed_ << endl;
@@ -334,8 +337,9 @@ void TrackletEngineDisplaced::execute() {
 
 	    auto tInd = std::lower_bound(tableInd_.begin(),tableInd_.end(),index);
 	    auto tableIndex = tInd - tableInd_.begin();
+	    auto hasIndex = tInd != tableInd_.end() && tableInd_[tableIndex] == index; 
 
-            if (tInd == tableInd_.end() ) {
+            if (hasIndex ) {
               if (settings_.debugTracklet()) {
                 edm::LogVerbatim("Tracklet") << "Stub pair rejected because of stub pt cut bends : "
                                              << benddecode(firstvmstub.bend().value(), firstvmstub.isPSmodule()) << " "
@@ -347,7 +351,7 @@ void TrackletEngineDisplaced::execute() {
               edm::LogVerbatim("Tracklet") << "Adding disk-disk pair in " << getName();
 
             for (unsigned int isp = 0; isp < stubpairs_.size(); ++isp) {
-              if (settings_.writeTripletTables() || (tInd != tableInd_.end() && table_.at(tableIndex).count(stubpairs_.at(isp)->getName())) || true) {
+              if (settings_.writeTripletTables() || (hasIndex && table_.at(tableIndex).count(stubpairs_.at(isp)->getName())) || true) {
                 if (settings_.writeMonitorData("Seeds")) {
                   ofstream fout("seeds.txt", ofstream::app);
                   fout << __FILE__ << ":" << __LINE__ << " " << name_ << "_" << iSector_ << " " << iSeed_ << endl;
