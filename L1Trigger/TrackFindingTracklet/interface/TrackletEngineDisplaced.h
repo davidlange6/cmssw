@@ -42,6 +42,7 @@ namespace trklet {
     std::vector<StubPairsMemory*> stubpairs_;
 
     std::vector<std::set<std::string> > table_;
+    std::vector<unsigned int> tableInd_;
 
     int firstphibits_;
     int secondphibits_;
