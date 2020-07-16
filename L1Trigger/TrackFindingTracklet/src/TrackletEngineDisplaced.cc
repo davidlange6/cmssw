@@ -174,7 +174,7 @@ void TrackletEngineDisplaced::execute() {
 	    auto tableIndex = tInd - tableInd_.begin();
 	    auto hasIndex = tInd != tableInd_.end() && tableInd_[tableIndex] == index; 
 
-            if ( hasIndex ) {
+            if ( !hasIndex ) {
               if (settings_.debugTracklet()) {
                 edm::LogVerbatim("Tracklet") << "Stub pair rejected because of stub pt cut bends : "
                                              << benddecode(firstvmstub.bend().value(), firstvmstub.isPSmodule()) << " "
@@ -258,7 +258,7 @@ void TrackletEngineDisplaced::execute() {
 	    auto hasIndex = tInd != tableInd_.end() && tableInd_[tableIndex] == index; 
 
 
-            if (hasIndex ) {
+            if (!hasIndex ) {
               if (settings_.debugTracklet()) {
                 edm::LogVerbatim("Tracklet") << "Stub pair rejected because of stub pt cut bends : "
                                              << benddecode(firstvmstub.bend().value(), firstvmstub.isPSmodule()) << " "
@@ -339,7 +339,7 @@ void TrackletEngineDisplaced::execute() {
 	    auto tableIndex = tInd - tableInd_.begin();
 	    auto hasIndex = tInd != tableInd_.end() && tableInd_[tableIndex] == index; 
 
-            if (hasIndex ) {
+            if (!hasIndex ) {
               if (settings_.debugTracklet()) {
                 edm::LogVerbatim("Tracklet") << "Stub pair rejected because of stub pt cut bends : "
                                              << benddecode(firstvmstub.bend().value(), firstvmstub.isPSmodule()) << " "
