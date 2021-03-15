@@ -17,7 +17,6 @@
 #include "DataFormats/RecoCandidate/interface/RecoEcalCandidateIsolation.h"
 #include "DataFormats/RecoCandidate/interface/FitResult.h"
 #include "DataFormats/RecoCandidate/interface/CaloRecHitCandidate.h"
-#include "DataFormats/RecoCandidate/interface/TrackAssociation.h"
 #include "DataFormats/HcalRecHit/interface/HcalRecHitCollections.h"
 #include "DataFormats/RecoCandidate/interface/TrackCandidateAssociation.h"
 #include "DataFormats/HcalDetId/interface/HcalSubdetector.h"
